@@ -1,5 +1,7 @@
 import { useId } from 'react'
 
+import { IconePausa } from '../Icone'
+
 /** Pausar esconde a questão até retomar (P1.8, D3, CR-001): o relógio parado não pode virar tempo extra de leitura. */
 export function TelaPausa({ onRetomar }: { onRetomar: () => void }) {
   const idTitulo = useId()
@@ -9,10 +11,7 @@ export function TelaPausa({ onRetomar }: { onRetomar: () => void }) {
       className="flex flex-1 flex-col items-center justify-center gap-3 px-4 py-16 text-center"
     >
       <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-full bg-caneta-clara text-caneta">
-        <svg viewBox="0 0 24 24" className="size-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
-          <rect x="6" y="5" width="4" height="14" rx="1" />
-          <rect x="14" y="5" width="4" height="14" rx="1" />
-        </svg>
+        <IconePausa className="size-7" />
       </span>
       <h2 id={idTitulo} className="text-2xl font-bold">
         Simulado pausado

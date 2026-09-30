@@ -359,6 +359,70 @@ describe('Resolução: navegação, folha e modo foco (CR-001)', () => {
     )
   })
 
+  it('"Marcada" usa as cores de alerta, sem as da forma neutra', async () => {
+    salvarSimulado({ marcadas: ['2099-001'] })
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    const marcada = screen.getByRole('button', { name: 'Marcada' })
+    expect(marcada.className).toContain('bg-alerta-claro')
+    expect(marcada.className).not.toContain('bg-papel')
+    expect(marcada.className).not.toContain('border-linha')
+  })
+
+  it('pausado, o botão da folha some do topo (D3)', async () => {
+    salvarSimulado({ pausadoEm: Date.now() - 1_000 })
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByRole('heading', { name: 'Simulado pausado' })
+
+    expect(screen.queryByRole('button', { name: /^Folha/ })).toBeNull()
+  })
+
+  it('sem questões em branco, a confirmação ainda cita as marcadas para revisar', async () => {
+    salvarSimulado({ respostas: { '2099-001': 'A', '2099-002': 'B', '2099-003': 'C' }, marcadas: ['2099-002'] })
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Finalizar simulado' }))
+    expect(screen.getByRole('dialog', { name: 'Finalizar o simulado?' })).toHaveTextContent(
+      'Você respondeu todas as questões e marcou 1 para revisar.',
+    )
+  })
+
+  it('o tempo acabando com a folha aberta fecha o painel e finaliza', async () => {
+    instalarApiFalsa({
+      'GET /api/questoes': (_c, url) =>
+        json(200, { questoes: url.searchParams.get('ids')!.split(',').map((id) => questaoFalsa(id)), textos_base: {}, nao_encontradas: [] }),
+      'POST /api/correcoes': (corpo) => correcaoFalsa(corpo),
+    })
+    salvarSimulado({ iniciadoEm: Date.now() - 598_500 }) // 1,5 s para o fim dos 600 s
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+    await userEvent.click(screen.getByRole('button', { name: 'Folha 0/3' }))
+    expect(screen.getByRole('dialog', { name: 'Folha de respostas' })).toBeInTheDocument()
+
+    await waitFor(() => expect(salvo()).toBeNull(), { timeout: 4000 })
+    expect(screen.queryByRole('dialog', { name: 'Folha de respostas' })).toBeNull()
+    expect(document.documentElement.style.overflow).toBe('')
+  })
+
+  it('arrastar da grade até o fundo não fecha o painel', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Folha 0/3' }))
+    const painel = screen.getByRole('dialog', { name: 'Folha de respostas' })
+    const fundo = painel.parentElement!
+    await userEvent.pointer([
+      { keys: '[MouseLeft>]', target: within(painel).getByRole('heading', { name: 'Folha de respostas' }) },
+      { target: fundo },
+      { keys: '[/MouseLeft]', target: fundo },
+    ])
+
+    expect(screen.getByRole('dialog', { name: 'Folha de respostas' })).toBeInTheDocument()
+  })
+
   it('clicar fora do painel fecha a folha', async () => {
     salvarSimulado()
     renderizar(<App />, { rota: '/simulado' })

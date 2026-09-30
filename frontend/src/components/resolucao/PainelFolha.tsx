@@ -1,4 +1,6 @@
-import { useEffect, useId, useRef, type ReactNode } from 'react'
+import { useEffect, useId, useRef, type MouseEvent, type ReactNode } from 'react'
+
+import { Icone } from '../Icone'
 
 const FOCAVEIS = 'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
 
@@ -54,14 +56,25 @@ export function PainelFolha({ onFechar, children, rodape }: Props) {
     }
   }, [])
 
+  // Só fecha o clique que começa e termina no fundo: arrastar da grade até o fundo não fecha
+  const apertouNoFundo = useRef(false)
+  const noFundo = (e: MouseEvent) => e.target === e.currentTarget
+
   return (
-    <div className="fixed inset-0 z-30 flex flex-col justify-end bg-tinta/45" onClick={() => fechar.current()}>
+    <div
+      className="fixed inset-0 z-30 flex flex-col justify-end bg-tinta/45"
+      onMouseDown={(e) => {
+        apertouNoFundo.current = noFundo(e)
+      }}
+      onClick={(e) => {
+        if (apertouNoFundo.current && noFundo(e)) fechar.current()
+      }}
+    >
       <div
         ref={painel}
         role="dialog"
         aria-modal="true"
         aria-labelledby={idTitulo}
-        onClick={(e) => e.stopPropagation()}
         className="flex max-h-[88dvh] flex-col rounded-t-2xl bg-papel shadow-[0_-8px_24px_rgb(29_36_48/0.18)]"
       >
         <div className="flex items-center justify-between pt-2 pr-2 pl-4">
@@ -75,17 +88,9 @@ export function PainelFolha({ onFechar, children, rodape }: Props) {
             onClick={() => fechar.current()}
             className="inline-flex size-11 items-center justify-center rounded-lg text-tinta hover:bg-fundo"
           >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              className="size-[22px]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            >
+            <Icone className="size-[22px]">
               <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
+            </Icone>
           </button>
         </div>
         <div className="flex min-h-0 flex-1 flex-col px-4 pb-4">{children}</div>

@@ -21,19 +21,25 @@ export function ConfirmDialog({
 }: Props) {
   const idTitulo = useId()
   const botaoCancelar = useRef<HTMLButtonElement>(null)
+  // O efeito roda só ao abrir: um onCancelar novo a cada render (o relógio da resolução
+  // re-renderiza a cada segundo) não pode devolver o foco para "Cancelar" (CR-001)
+  const ultimoCancelar = useRef(onCancelar)
+  useEffect(() => {
+    ultimoCancelar.current = onCancelar
+  })
 
   useEffect(() => {
     const anterior = document.activeElement as HTMLElement | null
     botaoCancelar.current?.focus()
     const aoTeclar = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onCancelar()
+      if (e.key === 'Escape') ultimoCancelar.current()
     }
     document.addEventListener('keydown', aoTeclar)
     return () => {
       document.removeEventListener('keydown', aoTeclar)
       anterior?.focus()
     }
-  }, [onCancelar])
+  }, [])
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-tinta/40 p-4 sm:items-center">

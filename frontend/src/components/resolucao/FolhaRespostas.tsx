@@ -43,7 +43,8 @@ function Legenda() {
 export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, formato }: Props) {
   const total = questaoIds.length
   const respondidas = questaoIds.filter((id) => respostas[id]).length
-  const paraRevisar = questaoIds.filter((id) => marcadas.includes(id)).length
+  const revisar = new Set(marcadas)
+  const paraRevisar = questaoIds.filter((id) => revisar.has(id)).length
   const resumo = `${respondidas} ${respondidas === 1 ? 'respondida' : 'respondidas'} · ${total - respondidas} em branco${paraRevisar ? ` · ${paraRevisar} para revisar` : ''}`
 
   // No painel do celular, a questão atual já aparece à vista ao abrir
@@ -54,8 +55,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
 
   const rotulo = (id: string, i: number) => {
     const resposta = respostas[id]
-    const revisar = marcadas.includes(id)
-    return `Questão ${i + 1}: ${resposta ? `respondida ${resposta}` : 'em branco'}${revisar ? ', marcada para revisar' : ''}`
+    return `Questão ${i + 1}: ${resposta ? `respondida ${resposta}` : 'em branco'}${revisar.has(id) ? ', marcada para revisar' : ''}`
   }
 
   if (formato === 'grade') {
@@ -63,7 +63,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
       <div className="flex min-h-0 flex-col gap-2.5">
         <p className="text-sm text-tinta-suave">{resumo}</p>
         <Legenda />
-        <nav aria-label="Folha de respostas" className="-mx-1 min-h-0 overflow-y-auto px-1 pt-1.5 pb-1">
+        <nav aria-label="Folha de respostas" className="-mx-1 min-h-0 overflow-y-auto overscroll-contain px-1 pt-1.5 pb-1">
           <ol className="grid grid-cols-5 gap-2">
             {questaoIds.map((id, i) => {
               const resposta = respostas[id]
@@ -90,7 +90,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                       {resposta ?? ''}
                     </span>
                   </button>
-                  {marcadas.includes(id) && (
+                  {revisar.has(id) && (
                     <span
                       aria-hidden="true"
                       className="absolute -top-1 -right-1 size-3 rounded-full border-2 border-papel bg-alerta"
@@ -160,7 +160,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                   </span>
                   <span
                     aria-hidden="true"
-                    className={`ml-0.5 size-1.5 shrink-0 rounded-full ${marcadas.includes(id) ? 'bg-alerta' : ''}`}
+                    className={`ml-0.5 size-1.5 shrink-0 rounded-full ${revisar.has(id) ? 'bg-alerta' : ''}`}
                   />
                 </button>
               </li>
