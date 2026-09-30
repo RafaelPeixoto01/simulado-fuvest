@@ -1,6 +1,6 @@
 ano: 2025
 versao: V1
-status: rascunho
+status: publicada
 fonte:
   url_prova: https://www.fuvest.br/wp-content/uploads/fuvest2025_primeira_fase_prova_V1.pdf
   url_gabarito: https://www.fuvest.br/wp-content/uploads/fuvest2025_gabarito_primeira_fase.pdf
@@ -16,7 +16,9 @@ textos_base:
       O conjunto de valores defendidos pelos movimentos sociais que lutam por reconhecimento e respeito à diversidade tornam-se atributos exigidos por diversas empresas como elemento fundamental nas suas escolhas de investimento.
       Sendo assim, a sanção específica realizada pelos agentes do ‘cancelamento’ procura atingir não a liberdade do sujeito que supostamente ofende valores morais relevantes, que seria o instrumento coercitivo tradicionalmente previsto no direito penal, ou mesmo buscar reparações indenizatórias, instrumento de resposta a atos ilícitos no direito civil, mas sim impedir, restringir ou infligir danos na trajetória econômica e/ou profissional do sujeito ‘cancelado’.
       Nesse contexto, a ‘cultura do cancelamento’ representa um mecanismo de eliminação do mercado, em casos considerados graves, ou, em outros casos, de mera diminuição relativa do capital, de sujeitos ineficientes em fator competitivo específico, como inadequação de valores morais ostentados, por atos e/ou palavras, em determinados ambientes sociais.”
-      MARTINS, Tamires de Assis Lima; CORDEIRO, Ana Paula. A cultura do cancelamento: contribuições de um olhar sociológico. Extraprensa , v.15, n. esp., p.39, mai.2022 (Adaptado).
+      MARTINS, Tamires de Assis Lima; CORDEIRO, Ana Paula. A cultura do cancelamento: contribuições de um olhar sociológico. Extraprensa, v.15, n. esp., p.39, mai.2022 (Adaptado).
+  - texto: '(No original, estão sublinhados: “seja... seja”, “que” em “que lutam”, “Sendo assim”, “mas
+      sim” e “como” em “como inadequação”.)'
 - id: tb02
   questoes:
   - 27
@@ -109,7 +111,7 @@ textos_base:
       Nostalgia is a mind's trick
       If I'd been there, I'd hate it
       It was freezing in the palace”
-      “I hate it here”, Taylor Swift, do álbum The Tortured Poets Department , 2024 (Adaptado).
+      “I hate it here”, Taylor Swift, do álbum The Tortured Poets Department, 2024 (Adaptado).
 - id: tb05
   questoes:
   - 65
@@ -126,25 +128,26 @@ textos_base:
   - 74
   conteudo:
   - texto: |-
-      Um artigo publicado em 2018, na Revista Brasileira de Ensino de Física, reporta um curioso estudo sobre a pressão interna de “foguetes de garrafa PET”, propulsionados a partir da reação química entre ácido acético e bicarbonato de sódio. Uma mistura de vinagre (que contém ácido acético, CH COOH) com bicarbonato de sódio (NaHCO ) produz gás carbônico (CO ) por meio da reação química representada pela seguinte equação:
-      CH COOH + NaHCO → CH COONa + CO + H O
-      A reação ocorre no interior de uma garrafa PET de 2 L de volume útil total, da qual foi retirado todo o ar. Insere-se na garrafa um volume inicial V de vinagre líquido e bicarbonato de sódio, sendo a garrafa posteriormente selada com uma tampa acoplada a um manômetro. A reação produzirá gás
+      Um artigo publicado em 2018, na Revista Brasileira de Ensino de Física, reporta um curioso estudo sobre a pressão interna de “foguetes de garrafa PET”, propulsionados a partir da reação química entre ácido acético e bicarbonato de sódio.[1] Uma mistura de vinagre (que contém ácido acético, CH₃COOH) com bicarbonato de sódio (NaHCO₃) produz gás carbônico (CO₂) por meio da reação química representada pela seguinte equação:
+      CH₃COOH + NaHCO₃ → CH₃COONa + CO₂ + H₂O
+  - texto: "A reação ocorre no interior de uma garrafa PET de 2 L de volume útil total, da qual foi retirado
+      todo o ar. Insere-se na garrafa um volume inicial \U0001D449ᵥᵢₙ de vinagre líquido e bicarbonato
+      de sódio, sendo a garrafa posteriormente selada com uma tampa acoplada a um manômetro. A reação
+      produzirá gás carbônico que ocupará um volume \U0001D449(CO₂) e exercerá uma pressão \U0001D443(CO₂)
+      sobre a tampa da garrafa, medida pelo manômetro, como mostra a figura."
   - figura: tb06-1.webp
-  - texto: |-
-      carbônico que ocupará um volume V
-      sobre a e exercerá uma pressão P
-      tampa da garrafa, medida pelo manômetro, como mostra a figura.
-      [1] FONSECA et al, RBEF, vol. 40, nº 3, e3504 (2018). Disponível em http://dx.doi.org/10.1590/1806-9126-RBEF-2017-0340.
+  - texto: '[1] FONSECA et al, RBEF, vol. 40, nº 3, e3504 (2018). Disponível em http://dx.doi.org/10.1590/1806-9126-RBEF-2017-0340.'
 questoes:
 - numero: 1
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       Texto 1
       “Afinal, depois de ver todas as coisas daquele museu, acabei me perguntando se os brancos já não teriam começado a adquirir também tantas de nossas coisas só porque nós, Yanomami, já estamos começando também a desaparecer. Por que ficam nos pedindo nossos cestos, nossos arcos e nossos adornos de penas, enquanto garimpeiros e fazendeiros invadem nossa terra?”
-      KOPENAWA, Davi; ALBERT, Bruce. Queda do céu: palavras de um xamã yanomami . São Paulo: Companhia das Letras, 2015. p.429.
+      KOPENAWA, Davi; ALBERT, Bruce. Queda do céu: palavras de um xamã yanomami. São Paulo: Companhia das Letras, 2015. p.429.
       Texto 2
       “Em seu trabalho, Glicéria debruça-se sobre a artesania do manto tupinambá, símbolo das tradições ancestrais de seu povo. A artista chama de cosmo-técnica a feitura do manto, e hoje busca compreender qual era sua função cultural e social em sua comunidade. Recentemente, a artista esteve na Europa e encontrou mantos datados do século XVII, que foram levados do Brasil ao longo da colonização, na Dinamarca. Segundo Glicéria, ‘hoje, as pessoas entendem o manto como arte, arte contemporânea, mas eu vejo muito além. É um ancestral nosso’.”
       Instituto Pipa. Ocupação dos artistas premiados do Pipa 2023: Glicéria Tupinambá. Disponível em: https://www.premiopipa.com/2023/10/ (Adaptado).
@@ -178,7 +181,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -213,7 +216,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 3
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -241,13 +244,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “E assim como o branco e os mamelucos se aproveitaram não raro das veredas dos índios, há motivo para pensar que estes, por sua vez, foram, em muitos casos, simples sucessores dos animais selvagens, do tapir especialmente, cujos carreiros ao longo dos rios e riachos, ou em direção a nascentes de águas, se adaptavam perfeitamente às necessidades e hábitos daquelas populações.”
-      HOLANDA, Sergio Buarque de. Caminhos e fronteiras . Rio de Janeiro: José Olympio, 1975. p.35.
+      HOLANDA, Sergio Buarque de. Caminhos e fronteiras. Rio de Janeiro: José Olympio, 1975. p.35.
       De acordo com o excerto, a ocupação territorial da América portuguesa pelos colonizadores foi inicialmente marcada
   alternativas:
     A:
@@ -264,18 +267,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 5
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Os quadrinhos a seguir são parte da obra Dois irmãos , de Fábio Moon e Gabriel Bá (2015), uma
-      adaptação do romance Dois irmãos , de Milton Hatoum, para o universo das novelas gráficas ( graphic
+  - texto: Os quadrinhos a seguir são parte da obra Dois irmãos, de Fábio Moon e Gabriel Bá (2015), uma
+      adaptação do romance Dois irmãos, de Milton Hatoum, para o universo das novelas gráficas (graphic
       novels ).
   - figura: q005-1.webp
   - figura: q005-2.webp
   - figura: q005-3.webp
   - texto: 'Considerando as características visuais dos quadrinhos e os traços narrativos do romance Dois
-      irmãos , de Milton Hatoum, é correto afirmar:'
+      irmãos, de Milton Hatoum, é correto afirmar:'
   alternativas:
     A:
       texto: O uso dos contrastes claro x escuro na novela gráfica confere ênfase visual ao conflito entre
@@ -286,8 +289,8 @@ questoes:
         a diferença étnica e social que fundamenta a rivalidade fraterna entre Yaqub e Omar, um dos eixos
         estruturais do romance.
     C:
-      texto: Ao utilizar procedimentos como a aproximação ( zoom-in ) e a fragmentação das imagens, a
-        novela gráfica recria o fluxo de consciência e a atmosfera onírica da narrativa de Hatoum.
+      texto: Ao utilizar procedimentos como a aproximação (zoom-in) e a fragmentação das imagens, a novela
+        gráfica recria o fluxo de consciência e a atmosfera onírica da narrativa de Hatoum.
     D:
       texto: A novela gráfica demonstra, por meio de imagens, que o romance Dois irmãos reinventa a tradição
         da literatura regionalista do Brasil, retratando a opulência da cidade de Manaus ao longo do século
@@ -299,14 +302,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Leia o texto e analise a charge a seguir.
       “Se, compreendendo um outro ser humano, penetro profundamente no horizonte do que lhe é próprio, então logo me depararei com o fato de que, assim como o seu corpo se encontra no meu campo de percepção, também o meu corpo se encontra no dele, e que, em geral, ele me experiencia sem mais como um outro para ele, tal como eu o experiencio como outro para mim.”
-      HUSSERL, E. Meditações cartesianas . Rio de Janeiro: Forense Universitária, 2013.
+      HUSSERL, E. Meditações cartesianas. Rio de Janeiro: Forense Universitária, 2013.
   - figura: q006-1.webp
   - texto: |-
       Bira Dantas. Disponível em https://facebook.com/.
@@ -330,7 +333,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -354,13 +357,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 8
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Eu não venero a criação mais do que o Criador, mas venero a criatura criada como eu sou, adotando a criação de maneira livre e espontânea, de modo que Ele possa elevar nossa natureza e nos tornar partícipes de Sua natureza divina. Sendo assim, eu me atrevo a fazer uma imagem do Deus invisível não como invisível, mas como tendo se tornado visível por nossa causa, tornando-se carne e sangue. Eu não faço uma imagem da divindade imortal. Eu pinto a carne visível de Deus, pois é impossível representar o espírito e ainda mais Deus, que dá vida ao espírito.”
-      John Damascene. On holy images . Disponível em https://www.gutenberg.org/files/49917/ (Adaptado).
+      John Damascene. On holy images. Disponível em https://www.gutenberg.org/files/49917/ (Adaptado).
       Nessa citação, João Damasceno (675-749), monge e teólogo cristão do período medieval, dirige-se contra o movimento iconoclasta ao
   alternativas:
     A:
@@ -377,7 +380,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -390,7 +393,7 @@ questoes:
       como congestionamento de tempo e de informação.
       Uma mídia eletrônica de massa clássica como o rádio só permite uma comunicação unilateral. O destinatário da mensagem é condenado à passividade.
       Hoje não somos mais destinatários e consumidores passivos de informação, mas sim remetentes e produtores ativos. Não nos contentamos mais em consumir informações passivamente, mas sim queremos produzi-las e comunicá-las ativamente nós mesmos. Somos simultaneamente consumidores e produtores.”
-      HAN, Byung-Chul. No enxame : Perspectivas do digital. São Paulo: Editora Vozes, 2018. p.35-36 (Adaptado).
+      HAN, Byung-Chul. No enxame: Perspectivas do digital. São Paulo: Editora Vozes, 2018. p.35-36 (Adaptado).
       Segundo o texto, a mídia digital distingue-se da mídia de massa tradicional por
   alternativas:
     A:
@@ -412,7 +415,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -435,11 +438,9 @@ questoes:
         valores morais que consideram irresponsáveis.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto-base tb01: Texto sublinhado na página 6, y≈110, 122, 159, 195, 256, 342: formatação perdida
-    no texto puro'
+  pendencias: []
 - numero: 11
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -458,19 +459,18 @@ questoes:
       texto: como introduz uma comparação entre distintas ações passíveis de gerar cancelamento.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 6, y≈676, 700, 725, 749, 774: formatação perdida no texto puro'
+  pendencias: []
 - numero: 12
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Texto 1
-      “Em Big Tech: a ascensão dos dados e a morte da política , Morozov estabelece ‘um paralelo com os setores extrativistas de recursos naturais, como o petróleo’, colocando ‘no centro da discussão o modo de produção dessa economia, que ele chama de ‘extrativismo de dados’. Apesar de a frase ‘os dados são o novo petróleo’ ser um chavão fraco em termos conceituais, Morozov acha o modismo útil para debatermos a matriz extrativista desse modo de produção, em especial a forma como as grandes empresas de tecnologia ‘continuam escavando a nossa psique tal como as empresas de petróleo escavam o solo’.”
-      ZANATTA, Rafael. “Extrativismo Digital”. Quatro Cinco Um , 01/04/2019. Disponível em: https://quatrocincoum.com.br/resenhas/ (Adaptado).
+      “Em Big Tech: a ascensão dos dados e a morte da política, Morozov estabelece ‘um paralelo com os setores extrativistas de recursos naturais, como o petróleo’, colocando ‘no centro da discussão o modo de produção dessa economia, que ele chama de ‘extrativismo de dados’. Apesar de a frase ‘os dados são o novo petróleo’ ser um chavão fraco em termos conceituais, Morozov acha o modismo útil para debatermos a matriz extrativista desse modo de produção, em especial a forma como as grandes empresas de tecnologia ‘continuam escavando a nossa psique tal como as empresas de petróleo escavam o solo’.”
+      ZANATTA, Rafael. “Extrativismo Digital”. Quatro Cinco Um, 01/04/2019. Disponível em: https://quatrocincoum.com.br/resenhas/ (Adaptado).
       Texto 2
-      “Colonialismo de dados é um modo de configurar o mundo inteiro, de tal forma que um recurso novo possa ser extraído – e esse recurso é a vida humana a partir da qual se pode extrair um valor econômico. Sustentamos que os modos nos quais este novo colonialismo opera, as escalas nas quais opera diferem do colonialismo histórico que tão bem entendemos. Mas a função, a finalidade subjacente, o núcleo deste novo colonialismo é exatamente o mesmo do colonialismo histórico. É o de despossuir, apropriar-se dos recursos do mundo para o bem de uns poucos, de uma parte do mundo.” COULDRY, Nick. Colonialismo de Dados e Esvaziamento da Vida Social Antes e Pós Pandemia de Covid-19. In: Homo Digitalis . A Escalada da Algoritmização da Vida em Tempos de Pandemia. Anais do XIX Simpósio Internacional Instituto Humanitas Unisinos (Adaptado).
+      “Colonialismo de dados é um modo de configurar o mundo inteiro, de tal forma que um recurso novo possa ser extraído – e esse recurso é a vida humana a partir da qual se pode extrair um valor econômico. Sustentamos que os modos nos quais este novo colonialismo opera, as escalas nas quais opera diferem do colonialismo histórico que tão bem entendemos. Mas a função, a finalidade subjacente, o núcleo deste novo colonialismo é exatamente o mesmo do colonialismo histórico. É o de despossuir, apropriar-se dos recursos do mundo para o bem de uns poucos, de uma parte do mundo.” COULDRY, Nick. Colonialismo de Dados e Esvaziamento da Vida Social Antes e Pós Pandemia de Covid-19. In: Homo Digitalis. A Escalada da Algoritmização da Vida em Tempos de Pandemia. Anais do XIX Simpósio Internacional Instituto Humanitas Unisinos (Adaptado).
       Considerando os excertos apresentados, é correto afirmar que extrativismo de dados e colonialismo de dados são conceitos desenvolvidos por Morozov e Couldry para nomear e descrever fenômenos
   alternativas:
     A:
@@ -495,7 +495,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 13
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -523,13 +523,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 14
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Brasileiros! (...) está conhecida nossa ilusão ou engano em adotarmos um sistema de governo defeituoso em sua origem, e mais defeituoso em suas partes componentes. As constituições, as leis e todas as instituições humanas são feitas para os povos e não os povos para elas. Eia, pois, brasileiros, tratemos de constituirmos de um modo análogo às luzes do século em que vivemos; o sistema americano deve ser idêntico; desprezemos instituições oligárquicas, só cabidas na encanecida Europa.”
-      ANDRADE, Manoel de Carvalho Paes de. Manifesto de proclamação da Confederação do Equador. Apud TORRES, João Camillo de Oliveira. A democracia coroada : Teoria política do Império do Brasil. Petrópolis: Vozes, 1964. p.522 (Adaptado).
+      ANDRADE, Manoel de Carvalho Paes de. Manifesto de proclamação da Confederação do Equador. Apud TORRES, João Camillo de Oliveira. A democracia coroada: Teoria política do Império do Brasil. Petrópolis: Vozes, 1964. p.522 (Adaptado).
       O excerto apresenta trecho do manifesto divulgado pelos rebeldes da Confederação do Equador (1824) e reage explicitamente
   alternativas:
     A:
@@ -548,15 +548,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 15
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “ justice , each getting what he or she is due. Formal justice is the impartial and consistent application of principles, whether or not the principles themselves are just. Substantive justice is closely associated with rights, i.e., with what individuals can legitimately demand of one another or what they can legitimately demand of their government (e.g., with respect to the protection of liberty or the promotion of equality).
+      “justice, each getting what he or she is due. Formal justice is the impartial and consistent application of principles, whether or not the principles themselves are just. Substantive justice is closely associated with rights, i.e., with what individuals can legitimately demand of one another or what they can legitimately demand of their government (e.g., with respect to the protection of liberty or the promotion of equality).
       Retributive justice concerns when and why punishment is justified. Debate continues over whether punishment is justified as retribution for past wrongdoing or because it deters future wrongdoing. Those who stress retribution as the justification for punishment usually believe human beings have libertarian free will, while those who stress deterrence usually accept determinism.
       At least since Aristotle, justice has commonly been identified both with obeying law and with treating everyone with fairness. But if law is, and justice is not, entirely a matter of convention, then justice cannot be identified with obeying law.”
-      The Cambridge Dictionary of Philosophy . General Editor Robert Audi, Cambridge, U.K.: C.U.P., 1999. p.456.
+      The Cambridge Dictionary of Philosophy. General Editor Robert Audi, Cambridge, U.K.: C.U.P., 1999. p.456.
       Conforme o verbete, a justiça substantiva pode ser definida como a
   alternativas:
     A:
@@ -573,23 +573,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      A construção de uma rampa que seja acessível a usuários de cadeira de rodas deve seguir a norma ABNT NBR 9050. Esse documento regulamenta a inclinação que a rampa deve ter a depender do desnível máximo de cada segmento de rampa, conforme o seguinte quadro:
-      Inclinação e desnível máximo de cada segmento de rampa
-      Desnível h (em m)
-      Inclinação i admissível (em %)
-      1 ℎ 1,5
-      5
-      0,8 ℎ 1
-      5 𝑖 6,25
-      0 ℎ 0,8
-      6,25 𝑖 8,33
-      Acessibilidade a edificações, mobiliário, espaços e equipamentos urbanos. Disponível em https://www.prefeitura.sp.gov.br/cidade/ (Adaptado).
-      A inclinação 𝑖 da rampa em porcentagem (%) é calculada dividindo a altura ℎ do desnível do segmento da rampa, em metros, pelo comprimento da projeção horizontal 𝑐 , em metros, e multiplicando o resultado por 100. A figura a seguir mostra uma rampa de dois segmentos.
+  - texto: 'A construção de uma rampa que seja acessível a usuários de cadeira de rodas deve seguir a
+      norma ABNT NBR 9050. Esse documento regulamenta a inclinação que a rampa deve ter a depender do
+      desnível máximo de cada segmento de rampa, conforme o seguinte quadro:'
+  - figura: q016-t.webp
+  - texto: "Acessibilidade a edificações, mobiliário, espaços e equipamentos urbanos. Disponível em https://www.prefeitura.sp.gov.br/cidade/
+      (Adaptado).\nA inclinação \U0001D456 da rampa em porcentagem (%) é calculada dividindo a altura
+      ℎ do desnível do segmento da rampa, em metros, pelo comprimento da projeção horizontal \U0001D450,
+      em metros, e multiplicando o resultado por 100. A figura a seguir mostra uma rampa de dois segmentos."
   - figura: q016-1.webp
   - texto: |-
       Determinada rampa de dois segmentos foi construída da seguinte maneira:
@@ -610,12 +605,9 @@ questoes:
         o primeiro está.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 8, y≈166, 181, 196, 350, 362, 375, 387, 400:
-    recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 8, y≈148–210
+  pendencias: []
 - numero: 17
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -625,24 +617,24 @@ questoes:
       pela faixa que liga O a B e, em seguida, utiliza a faixa que liga B a C. Considere que as coordenadas
       dos pontos indicados na figura, em metros, são: O(0,0), B(13,-15) e C(29,-8).'
   - figura: q017-1.webp
-  - texto: 'Seja 𝑑 a distância, em metros, que essa pessoa deixaria de percorrer se tivesse optado por
-      fazer a travessia pela faixa de pedestre que liga O a C. Nesse contexto, é correto afirmar:'
+  - texto: "Seja \U0001D451 a distância, em metros, que essa pessoa deixaria de percorrer se tivesse optado
+      por fazer a travessia pela faixa de pedestre que liga O a C. Nesse contexto, é correto afirmar:"
   alternativas:
     A:
-      texto: 𝑑 2
+      texto: "\U0001D451 < 2"
     B:
-      texto: 2 𝑑 5
+      texto: "2 ≤ \U0001D451 < 5"
     C:
-      texto: 5 𝑑 8
+      texto: "5 ≤ \U0001D451 ≤ 8"
     D:
-      texto: 8 𝑑 11
+      texto: "8 < \U0001D451 ≤ 11"
     E:
-      texto: 11 𝑑
+      texto: "11 < \U0001D451"
   resposta: C
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -653,31 +645,26 @@ questoes:
   - texto: Disponível em https://www.nytimes.com/ (Adaptado). Assumindo que a massa do navio no momento
       do impacto seja de 100 mil toneladas e, tendo por base os dados do gráfico, a magnitude da força
       média atuando sobre o navio durante a colisão é de, aproximadamente,
+  - texto: |-
+      Note e adote:
+      Considere que a força atuando sobre o navio durante a colisão seja constante e igual à força média.
+      Utilize 1 m.p.h. = 0,5 m/s.
   alternativas:
     A:
-      texto: 7 10 N.
+      texto: 7 × 10⁻² N.
     B:
-      texto: 7 10 N.
+      texto: 7 × 10⁰ N.
     C:
-      texto: 7 10 N.
+      texto: 7 × 10² N.
     D:
-      texto: 7 10 N.
+      texto: 7 × 10⁴ N.
     E:
-      texto: |-
-        7 10 N.
-        Note e adote:
-        Considere que a força atuando sobre o navio durante a colisão seja constante e igual à força média.
-        Utilize 1 m.p.h. = 0,5 m/s.
+      texto: 7 × 10⁶ N.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈74, 79, 442, 454, 467, 479, 491: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 9, y≈74, 442, 454, 467, 479, 491: recortar
-    como figura'
-  - 'Texto sublinhado na página 9, y≈79: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 9, y≈171–560
+  pendencias: []
 - numero: 19
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -685,34 +672,32 @@ questoes:
       radioterápicos. O efeito relaciona-se à mudança no comprimento de onda de fótons de raios X quando
       interagem com partículas como elétrons ou prótons, conforme ilustrado na figura a seguir.
   - figura: q019-1.webp
-  - texto: |-
-      Quando um fóton com comprimento de onda 𝜆 incide sobre uma partícula, ele emerge dessa interação formando um ângulo 𝜃 com sua direção inicial de movimento, e seu novo comprimento de onda 𝜆′ é dado pela relação
-      𝛼
-      𝜆 𝜆 1 cos 𝜃 ,
-      𝑚
-      𝛼
-      𝑚
-      em que é uma constante positiva e é a massa da partícula.
-      Com base nessas informações e em seus conhecimentos sobre a propagação das ondas eletromagnéticas, assinale a alternativa correta.
+  - texto: "Quando um fóton com comprimento de onda \U0001D706₀ incide sobre uma partícula, ele emerge
+      dessa interação formando um ângulo \U0001D703 com sua direção inicial de movimento, e seu novo comprimento
+      de onda \U0001D706′ é dado pela relação\n\U0001D706′ = \U0001D706₀ + (\U0001D6FC/\U0001D45A)(1 −
+      cos \U0001D703),\nem que \U0001D6FC é uma constante positiva e \U0001D45A é a massa da partícula.\nCom
+      base nessas informações e em seus conhecimentos sobre a propagação das ondas eletromagnéticas, assinale
+      a alternativa correta."
   alternativas:
     A:
-      texto: A maior variação no comprimento de onda do fóton ocorre quando o ângulo 𝜃 é igual a 90°.
+      texto: "A maior variação no comprimento de onda do fóton ocorre quando o ângulo \U0001D703 é igual
+        a 90°."
     B:
-      texto: Se o ângulo 𝜃 é igual a 30°, o fóton emergente tem frequência menor do que a frequência inicial.
+      texto: "Se o ângulo \U0001D703 é igual a 30°, o fóton emergente tem frequência menor do que a frequência
+        inicial."
     C:
-      texto: Quando 𝜃 = 0, a velocidade do fóton emergente é menor do que a do fóton incidente, devido
-        à conservação da quantidade de movimento.
+      texto: "Quando \U0001D703 = 0, a velocidade do fóton emergente é menor do que a do fóton incidente,
+        devido à conservação da quantidade de movimento."
     D:
-      texto: Se o ângulo 𝜃 é igual a 60°, a variação no comprimento de onda do fóton é menor se a partícula
-        for um elétron do que se a partícula for um próton.
+      texto: "Se o ângulo \U0001D703 é igual a 60°, a variação no comprimento de onda do fóton é menor
+        se a partícula for um elétron do que se a partícula for um próton."
     E:
       texto: Um fóton que emergiu perpendicularmente à sua direção inicial não sofreu mudança em sua frequência.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈769: conferir o texto'
+  pendencias: []
 - numero: 20
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -725,7 +710,7 @@ questoes:
       texto: Todos os modelos previram a presença de cargas positivas no núcleo atômico.
     B:
       texto: O modelo proposto por Thomson, por prever a existência de nêutrons, não poderia explicar
-        a radiação alfa ( α ).
+        a radiação alfa (α ).
     C:
       texto: Diferentemente do modelo de Dalton, o modelo de Rutherford não explica a estrutura de cátions
         e ânions.
@@ -738,60 +723,55 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Baterias íon-lítio (íon-Li) armazenam energia por meio de um processo de intercalação iônica, no qual íons Li penetram e se acomodam entre camadas de grafite no ânodo da bateria. A quantidade de energia armazenada é diretamente proporcional ao número de íons Li intercalados no ânodo, que, entre outros aspectos, é limitado pelo espaço disponível para a sua alocação. Uma recente inovação tecnológica em baterias é a substituição de Li por Na, formando baterias íonsódio (íon-Na). O mecanismo de funcionamento se baseia no processo de intercalação, com a vantagem de que o Na é mais abundante do que o Li no planeta.
-      Considerando que a única diferença entre baterias de mesma massa e volume seja o íon utilizado (Na ou Li ) e que a densidade de energia é a quantidade de energia armazenada na bateria por unidade de massa e volume, é correto afirmar que a densidade de energia de uma bateria íon-Na é
+      Baterias íon-lítio (íon-Li) armazenam energia por meio de um processo de intercalação iônica, no qual íons Li⁺ penetram e se acomodam entre camadas de grafite no ânodo da bateria. A quantidade de energia armazenada é diretamente proporcional ao número de íons Li⁺ intercalados no ânodo, que, entre outros aspectos, é limitado pelo espaço disponível para a sua alocação. Uma recente inovação tecnológica em baterias é a substituição de Li por Na, formando baterias íon-sódio (íon-Na). O mecanismo de funcionamento se baseia no processo de intercalação, com a vantagem de que o Na é mais abundante do que o Li no planeta.
+      Considerando que a única diferença entre baterias de mesma massa e volume seja o íon utilizado (Na⁺ ou Li⁺) e que a densidade de energia é a quantidade de energia armazenada na bateria por unidade de massa e volume, é correto afirmar que a densidade de energia de uma bateria íon-Na é
+  - texto: |-
+      Note e adote:
+      Distribuição eletrônica: Li = 1s², 2s¹; Na = 1s², 2s², 2p⁶, 3s¹.
+      Massa atômica (u): Li = 7; Na = 23.
   alternativas:
     A:
-      texto: maior do que de uma bateria íon-Li, pois o Na tem maior massa e menor raio iônico do que
-        o Li .
+      texto: maior do que de uma bateria íon-Li, pois o Na⁺ tem maior massa e menor raio iônico do que
+        o Li⁺.
     B:
-      texto: menor do que de uma bateria íon-Li, pois o Na tem maior massa e maior raio iônico do que
-        o Li .
+      texto: menor do que de uma bateria íon-Li, pois o Na⁺ tem maior massa e maior raio iônico do que
+        o Li⁺.
     C:
-      texto: maior do que de uma bateria íon-Li, pois o Na tem menor massa e maior raio iônico do que
-        o Li .
+      texto: maior do que de uma bateria íon-Li, pois o Na⁺ tem menor massa e maior raio iônico do que
+        o Li⁺.
     D:
-      texto: menor do que de uma bateria íon-Li, pois o Na tem menor massa e menor raio iônico do que
-        o Li .
+      texto: menor do que de uma bateria íon-Li, pois o Na⁺ tem menor massa e menor raio iônico do que
+        o Li⁺.
     E:
-      texto: |-
-        igual à de uma bateria íon-Li, pois ambos os íons são monovalentes.
-        Note e adote:
-        Distribuição eletrônica: Li = 1s , 2s ; Na = 1s , 2s , 2p , 3s .
-        Massa atômica (u): Li = 7; Na = 23.
+      texto: igual à de uma bateria íon-Li, pois ambos os íons são monovalentes.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 10, y≈78, 115, 216, 270, 283, 295, 307, 319, 331, 344,
-    351, 356, 364, 388, 418: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈400–440
+  pendencias: []
 - numero: 22
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q022-1.webp
   - figura: q022-2.webp
-  - texto: |-
-      Uma das possíveis tecnologias para a produção de telas sensíveis ao toque aproveita a reflexão interna total da luz. Esse tipo de reflexão ocorre quando um raio luminoso viaja do interior de um meio 1, com índice de refração 𝑛 , em direção a um meio 2, com índice de refração 𝑛 , formando com a direção perpendicular à interface entre os meios um ângulo 𝜃 maior do que um certo valor limite 𝜃 , tal que sen 𝜃 = 𝑛 / 𝑛 . Quando um objeto (como um dedo) se aproxima da interface entre os meios, a reflexão total não ocorre, o que é captado por sensores, revelando a posição do objeto. Suponha que se deseje projetar uma tela sensível ao toque que, conforme mostra a figura, funcione com uma fonte luminosa 𝐹 fixa na borda. A tabela a seguir indica os índices de refração de alguns materiais candidatos à utilização no meio 1.
-      Índice de refração 𝑛
-      Material
-      1,0002
-      A
-      1,0003
-      B
-      1,1503
-      C
-      1,3204
-      D
-      1,4889
-      E
-      Tratando o meio 2 sempre como tendo índice de refração 𝑛 1,0003 , o material que permite o maior intervalo de ângulos de incidência que produzem reflexão total é:
+  - texto: "Uma das possíveis tecnologias para a produção de telas sensíveis ao toque aproveita a reflexão
+      interna total da luz. Esse tipo de reflexão ocorre quando um raio luminoso viaja do interior de
+      um meio 1, com índice de refração \U0001D45B₁, em direção a um meio 2, com índice de refração \U0001D45B₂,
+      formando com a direção perpendicular à interface entre os meios um ângulo \U0001D703 maior do que
+      um certo valor limite \U0001D703L, tal que sen \U0001D703L = \U0001D45B₂/\U0001D45B₁. Quando um
+      objeto (como um dedo) se aproxima da interface entre os meios, a reflexão total não ocorre, o que
+      é captado por sensores, revelando a posição do objeto. Suponha que se deseje projetar uma tela sensível
+      ao toque que, conforme mostra a figura, funcione com uma fonte luminosa \U0001D439 fixa na borda.
+      A tabela a seguir indica os índices de refração de alguns materiais candidatos à utilização no meio
+      1."
+  - figura: q022-t.webp
+  - texto: "Tratando o meio 2 sempre como tendo índice de refração \U0001D45B₂ = 1,0003, o material que
+      permite o maior intervalo de ângulos de incidência que produzem reflexão total é:"
   alternativas:
     A:
       texto: Material A.
@@ -805,10 +785,9 @@ questoes:
       texto: Material E.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈486–562
+  pendencias: []
 - numero: 23
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -840,7 +819,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -863,13 +842,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 25
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - matematica
   texto_base: null
   enunciado:
   - texto: |-
       “Historiadores encontraram um mapa antigo onde não era possível identificar a escala do mapa. Com algum esforço e apoio de Geógrafos, foi possível avaliar a distância no mapa entre duas localidades como sendo de 20 centímetros. Buscando elementos na paisagem, foi possível quantificar a distância entre elas como equivalente a 40 quilômetros.”
-      FITZ, Paulo Roberto. Cartografia Básica . São Paulo: Oficina de Textos, 2008 (Adaptado).
+      FITZ, Paulo Roberto. Cartografia Básica. São Paulo: Oficina de Textos, 2008 (Adaptado).
       Com base nessas medidas, a escala numérica do mapa corresponde a
   alternativas:
     A:
@@ -886,7 +866,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -921,7 +901,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 27
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -941,7 +921,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 28
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -962,8 +942,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - ingles
   texto_base: tb02
   enunciado:
   - texto: Considerando os seres vivos atuais, as informações trazidas pelo texto e os princípios da Teoria
@@ -986,7 +967,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1011,45 +992,39 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Alguns corais contêm, em sua estrutura, algas fornecedoras de carboidratos que auxiliam no crescimento e na construção do esqueleto do coral. Os corais, por sua vez, fornecem um ambiente de proteção e importantes nutrientes às algas. As mudanças climáticas globais têm provocado a morte dessas algas e, em muitos casos, a morte dos corais.
       Assinale a alternativa que representa a relação ecológica entre os corais e as algas, assim como o impacto imediato causado pela morte dos corais.
-      Relação ecológica
-      Impacto imediato
   alternativas:
     A:
       texto: |-
-        Predação
-        Formação das marés vermelhas e desoxigenação das águas oceânicas.
+        Relação ecológica: Predação.
+        Impacto imediato: Formação das marés vermelhas e desoxigenação das águas oceânicas.
     B:
       texto: |-
-        Mutualismo
-        Perda de habitat para diversas espécies marinhas, assim como diminuição de suas fontes de proteção e alimento.
+        Relação ecológica: Mutualismo.
+        Impacto imediato: Perda de habitat para diversas espécies marinhas, assim como diminuição de suas fontes de proteção e alimento.
     C:
       texto: |-
-        Colônia
-        Aumento de habitats e nichos ecológicos para espécies que passam a viver no local antes ocupado pelos corais.
+        Relação ecológica: Colônia.
+        Impacto imediato: Aumento de habitats e nichos ecológicos para espécies que passam a viver no local antes ocupado pelos corais.
     D:
       texto: |-
-        Competição
-        Invasão biológica por espécies que ocupam o nicho deixado vago pelos corais.
+        Relação ecológica: Competição.
+        Impacto imediato: Invasão biológica por espécies que ocupam o nicho deixado vago pelos corais.
     E:
       texto: |-
-        Comensalismo
-        Enriquecimento
-        das
-        águas oceânicas por cálcio e nitrogênio, favorecendo o desenvolvimento de algas marinhas.
+        Relação ecológica: Comensalismo.
+        Impacto imediato: Enriquecimento das águas oceânicas por cálcio e nitrogênio, favorecendo o desenvolvimento de algas marinhas.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 14, y≈418: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈183–418
+  pendencias: []
 - numero: 32
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1075,17 +1050,23 @@ questoes:
       texto: reflexão e interferência.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈477: conferir o texto'
+  pendencias: []
 - numero: 33
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q033-1.webp
-  - texto: |-
-      WASSENBERGH, Sam Van; MIELKE, Maia. Physics Today, vol. 77 (2024) (Adaptado).
-      Em um estudo relatado no periódico Physics Today , cientistas belgas mostraram que os pica-paus não dispõem de mecanismos de absorção de choques em seus ossos do crânio, ao contrário do que se acreditava anteriormente. Nos experimentos realizados, verificou-se que o cérebro de um pica-pau pode experimentar desacelerações instantâneas de até 400 𝑔 , sendo 𝑔 o módulo da aceleração da gravidade. Suponha que, durante uma batida em um tronco de árvore, o crânio do pica-pau, suposto perfeitamente rígido, sofra uma desaceleração constante de 200 𝑔 ao longo de um tempo de 2,0 milissegundos. Qual é a distância percorrida pelo crânio do pica-pau durante esse tempo, até atingir momentaneamente o repouso?
+  - texto: "WASSENBERGH, Sam Van; MIELKE, Maia. Physics Today, vol. 77 (2024) (Adaptado).\nEm um estudo
+      relatado no periódico Physics Today, cientistas belgas mostraram que os pica-paus não dispõem de
+      mecanismos de absorção de choques em seus ossos do crânio, ao contrário do que se acreditava anteriormente.
+      Nos experimentos realizados, verificou-se que o cérebro de um pica-pau pode experimentar desacelerações
+      instantâneas de até 400 \U0001D454, sendo \U0001D454 o módulo da aceleração da gravidade. Suponha
+      que, durante uma batida em um tronco de árvore, o crânio do pica-pau, suposto perfeitamente rígido,
+      sofra uma desaceleração constante de 200 \U0001D454 ao longo de um tempo de 2,0 milissegundos. Qual
+      é a distância percorrida pelo crânio do pica-pau durante esse tempo, até atingir momentaneamente
+      o repouso?"
+  - texto: "Note e adote:\nAceleração da gravidade: \U0001D454 = 10 m/s²."
   alternativas:
     A:
       texto: 2,0 mm
@@ -1096,23 +1077,19 @@ questoes:
     D:
       texto: 16 mm
     E:
-      texto: |-
-        32 mm
-        Note e adote:
-        Aceleração da gravidade: 𝑔 = 10 m/s .
+      texto: 32 mm
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈460–489
+  pendencias: []
 - numero: 34
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “São os ratos!... Vai escutar com atenção, a respiração meio parada. Hão de ser muitos: há várias fontes daquele guinchinho, e de quando em quando, no forro, em vários pontos, o rufar...
       A casa está cheia de ratos...”
-      Dyonélio Machado. Os ratos .
+      Dyonélio Machado. Os ratos.
       A obra Os ratos (1935), de Dyonélio Machado, narra o dia em que Naziazeno saiu pela cidade de Porto Alegre no intuito de conseguir dinheiro para pagar a conta do leiteiro. Os animais que dão título à narrativa apenas aparecem em seus últimos capítulos e ocupam o tempo reservado para o descanso do protagonista. É possível, então, afirmar:
   alternativas:
     A:
@@ -1134,13 +1111,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “ Ele vê o gesto do advogado Dr. Otávio Conti, no café, metendo a mão no bolso, tirando uma cédula de cem milréis e entregando-a ao Duque : ‘— Vá levantar esta letra. Você me devolve depois.’ Não é bem caridade... Ele não sabe explicar... Há nisso um certo tom de versatilidade... de facilidade... de um tal ou qual afrouxamento do caráter... Ele vê o Andrade tirando, com o gesto do Dr. Otávio Conti, a ‘mesma’ cédula do bolso e entregando-lha ... A casa aristocrática acha-se perto. A numeração já está em quase trezentos. Uma pequena aragem que sopra levemente nesta parte alta da rua passa-lhe pelas mãos e esfria-as ... O seu corpo suado fica como que um bloco gelado e dá-lhe a sensação de que se encolhe, se retrai dentro da sua roupa quente e assoleada, que dela se despega como duma carapaça. Ao mesmo tempo o coração, que batia lá no fundo do peito, veio palpitar bem à superfície, quase à flor da pele, meio engasgando-o .”
-      Dyonélio Machado. Os ratos .
+      “Ele vê o gesto do advogado Dr. Otávio Conti, no café, metendo a mão no bolso, tirando uma cédula de cem milréis e entregando-a ao Duque: ‘— Vá levantar esta letra. Você me devolve depois.’ Não é bem caridade... Ele não sabe explicar... Há nisso um certo tom de versatilidade... de facilidade... de um tal ou qual afrouxamento do caráter... Ele vê o Andrade tirando, com o gesto do Dr. Otávio Conti, a ‘mesma’ cédula do bolso e entregando-lha ... A casa aristocrática acha-se perto. A numeração já está em quase trezentos. Uma pequena aragem que sopra levemente nesta parte alta da rua passa-lhe pelas mãos e esfria-as ... O seu corpo suado fica como que um bloco gelado e dá-lhe a sensação de que se encolhe, se retrai dentro da sua roupa quente e assoleada, que dela se despega como duma carapaça. Ao mesmo tempo o coração, que batia lá no fundo do peito, veio palpitar bem à superfície, quase à flor da pele, meio engasgando-o.”
+      Dyonélio Machado. Os ratos.
       Dentre as frases em destaque, a que caracteriza os efeitos fisiológicos em Naziazeno da reação de luta ou fuga pela ativação do sistema nervoso simpático é:
   alternativas:
     A:
@@ -1160,7 +1137,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1174,7 +1151,7 @@ questoes:
       Mas o nervosismo desapareceu logo. Djimo deu uma ordem:
       - Madala, não olhes para lá!
       Dentro de Madala, qualquer coisa se crispou. Mas não eram os fios da sua doença.”
-      Luís Bernardo Honwana. “Dina”. In: Nós matamos o cão tinhoso! .
+      Luís Bernardo Honwana. “Dina”. In: Nós matamos o cão tinhoso!.
       Considerando o papel da antologia Nós matamos o cão tinhoso! na literatura moçambicana e como a sociedade de Moçambique dos anos 1950 e 1960 se configura literariamente no conto “Dina”, é correto afirmar:
   alternativas:
     A:
@@ -1201,11 +1178,11 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 37
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
-  - texto: A expressão bem-vinda usada no título e repetida no último verso faz alusão
+  - texto: A expressão “bem-vinda” usada no título e repetida no último verso faz alusão
   alternativas:
     A:
       texto: ao aprisionamento da mulher que não consegue se libertar do poderio masculino.
@@ -1220,10 +1197,9 @@ questoes:
         encurralava.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 16, y≈604: formatação perdida no texto puro'
+  pendencias: []
 - numero: 38
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1252,13 +1228,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q039-1.webp
   - texto: |-
-      PALACIO, Ángela. Privilegiados . Libro de lectura inicial. Buenos Aires: Kapelusz, 1954. Apud CAPELATO, Maria Helena. Multidões em cena . Propaganda política no varguismo e no peronismo. Campinas: Papirus, 1998. p.88-91.
+      PALACIO, Ángela. Privilegiados. Libro de lectura inicial. Buenos Aires: Kapelusz, 1954. Apud CAPELATO, Maria Helena. Multidões em cena. Propaganda política no varguismo e no peronismo. Campinas: Papirus, 1998. p.88-91.
       As imagens mostram páginas de uma cartilha de alfabetização produzida durante o governo de Juan Domingo Perón na Argentina (1946-1955). As ilustrações
   alternativas:
     A:
@@ -1276,7 +1252,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1319,7 +1295,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1339,7 +1315,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1359,7 +1335,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1387,7 +1363,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1395,7 +1371,7 @@ questoes:
   - texto: |-
       Disponível em https://br.pinterest.com/.
       “Quem negaria que os futuros ainda não são? Mas já está na mente a espera dos futuros. E quem negaria que os passados já não são? Todavia, ainda está na mente a memória dos passados. E quem negaria que o tempo presente não tem extensão temporal, porque passa em um instante? Todavia, perdura a atenção, pela qual o que está presente se encaminha para a ausência.”
-      Agostinho de Hipona. Confissões .
+      Agostinho de Hipona. Confissões.
       Ao propor uma aproximação entre a fala da personagem Calvin no quadrinho e o trecho citado das Confissões de Agostinho, é possível encontrar semelhanças com relação à descrição do tempo e sua compreensão filosófica. Dentre as afirmativas a seguir, qual delas pode ser considerada verdadeira para ambos os casos?
   alternativas:
     A:
@@ -1410,50 +1386,33 @@ questoes:
       texto: Há ruptura completa entre o tempo presente e o futuro.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈46, 59, 77: conferir o texto'
-  - 'Texto sublinhado na página 19, y≈84, 97, 109, 122, 135, 147: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈64–304
+  pendencias: []
 - numero: 45
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Considere que a expectativa de vida no Brasil à idade de 19 anos pode ser calculada, de forma aproximada, como a média aritmética simples entre a expectativa de vida estimada à mesma idade dos homens e das mulheres. O mesmo pode ser feito à idade de 20 anos.
       Segundo dados do IBGE, em 2022, a expectativa de vida estimada no Brasil à idade de 19 anos era 58, e a expectativa de vida estimada dos homens à mesma idade era 54,7.
-      Sabe-se que a diferença entre a expectativa de vida estimada dos homens e a das mulheres se manteve à idade de 20 anos e que a expectativa de vida estimada dos homens a essa idade (EVH ) era 53,8.
-      Com base nos dados apresentados, assinale a alternativa que apresenta a expectativa de vida estimada das mulheres à idade de 19 anos (EVM ) e a expectativa de vida estimada à idade de 20 anos no Brasil (EVB ) em 2022.
-      EVB
-      EVM
+      Sabe-se que a diferença entre a expectativa de vida estimada dos homens e a das mulheres se manteve à idade de 20 anos e que a expectativa de vida estimada dos homens a essa idade (EVH₂₀) era 53,8.
+      Com base nos dados apresentados, assinale a alternativa que apresenta a expectativa de vida estimada das mulheres à idade de 19 anos (EVM₁₉) e a expectativa de vida estimada à idade de 20 anos no Brasil (EVB₂₀) em 2022.
   alternativas:
     A:
-      texto: |-
-        54,7
-        54,7
+      texto: EVM₁₉ = 54,7; EVB₂₀ = 54,7
     B:
-      texto: |-
-        54,7
-        58
+      texto: EVM₁₉ = 54,7; EVB₂₀ = 58
     C:
-      texto: |-
-        60
-        54
+      texto: EVM₁₉ = 60; EVB₂₀ = 54
     D:
-      texto: |-
-        61,3
-        56
+      texto: EVM₁₉ = 61,3; EVB₂₀ = 56
     E:
-      texto: |-
-        61,3
-        57,1
+      texto: EVM₁₉ = 61,3; EVB₂₀ = 57,1
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈760: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈71–148
+  pendencias: []
 - numero: 46
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1479,7 +1438,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1504,7 +1463,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1537,7 +1496,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1563,7 +1522,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 50
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1589,7 +1548,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 51
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1619,17 +1578,21 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 52
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      As enchentes ocorridas no Rio Grande do Sul, em maio de 2024, prejudicaram a infraestrutura de comunicação. A população afetada era informada sobre as notícias relativas às enchentes ao sintonizar, por rádio de pilhas, frequências de onda AM, cujo alcance é maior.
-      Uma onda AM é modelada matematicamente por equações que envolvem a função cosseno, cuja variável independente é o tempo t , que aparece multiplicado pela frequência f da onda.
-      Como exemplo, pode-se considerar a equação referente ao processo de modulação de uma onda AM:
-      𝑠𝑡𝐴 1 𝑘 𝑚𝑡 cos 2 𝜋 𝑓 𝑡 ,
-      em que 𝐴 é a amplitude, 𝑓 a frequência, 𝑘 a constante da sensibilidade à amplitude e 𝑚𝑡 o sinal que contém a informação.
-      Quando a frequência f é multiplicada por 3, o comprimento da onda sofre alteração. Por causa dessa multiplicação, qual transformação ocorre no gráfico da função cosseno original?
+  - texto: "As enchentes ocorridas no Rio Grande do Sul, em maio de 2024, prejudicaram a infraestrutura
+      de comunicação. A população afetada era informada sobre as notícias relativas às enchentes ao sintonizar,
+      por rádio de pilhas, frequências de onda AM, cujo alcance é maior.\nUma onda AM é modelada matematicamente
+      por equações que envolvem a função cosseno, cuja variável independente é o tempo \U0001D461, que
+      aparece multiplicado pela frequência \U0001D453 da onda.\nComo exemplo, pode-se considerar a equação
+      referente ao processo de modulação de uma onda AM:\n\U0001D460(\U0001D461) = \U0001D434[1 + \U0001D458
+      \U0001D45A(\U0001D461)] cos(2\U0001D70B\U0001D453\U0001D461),\nem que \U0001D434 é a amplitude,
+      \U0001D453 a frequência, \U0001D458 a constante da sensibilidade à amplitude e \U0001D45A(\U0001D461)
+      o sinal que contém a informação.\nQuando a frequência \U0001D453 é multiplicada por 3, o comprimento
+      da onda sofre alteração. Por causa dessa multiplicação, qual transformação ocorre no gráfico da
+      função cosseno original?"
   alternativas:
     A:
       texto: Expansão vertical.
@@ -1643,10 +1606,9 @@ questoes:
       texto: Contração vertical.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 21, y≈664, 698: recortar como figura'
+  pendencias: []
 - numero: 53
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1674,8 +1636,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
@@ -1702,7 +1665,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1727,7 +1690,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 56
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1750,7 +1713,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 57
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1780,45 +1743,45 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 58
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A toxicidade do Pb e o risco de sua ingestão ganharam notoriedade na mídia devido à presença
       desse elemento em copos térmicos amplamente comercializados. A exposição ao Pb, no entanto, pode
       ocorrer também por fontes naturais, como a ingestão de água em contato prolongado com minérios como
-      a anglesita, rico em PbSO (Kps = 1,0 × 10 ). Sabendo que a legislação estabelece a concentração
+      a anglesita, rico em PbSO₄ (Kps = 1,0 × 10⁻⁸). Sabendo que a legislação estabelece a concentração
       máxima de Pb de 0,01 mg/L para água potável, assinale a alternativa correta em relação à ingestão
       de água que tenha contato prolongado com a anglesita.
+  - texto: |-
+      Note e adote:
+      Massa molar (g/mol): Pb = 207
   alternativas:
     A:
-      texto: Não é segura, pois a concentração de Pb na água será de 2,07×10 mg/L, maior que o valor permitido.
+      texto: Não é segura, pois a concentração de Pb na água será de 2,07 × 10¹ mg/L, maior que o valor
+        permitido.
     B:
-      texto: É segura, pois a concentração de Pb na água será de 1×10 mg/L, menor que o valor permitido.
+      texto: É segura, pois a concentração de Pb na água será de 1 × 10⁻⁴ mg/L, menor que o valor permitido.
     C:
-      texto: Não é segura, pois a concentração de Pb na água será de 1×10 mg/L, menor que o valor permitido.
+      texto: Não é segura, pois a concentração de Pb na água será de 1 × 10⁻⁸ mg/L, menor que o valor
+        permitido.
     D:
-      texto: É segura, pois a concentração de Pb na água será de 1×10 mg/L, igual ao valor permitido.
+      texto: É segura, pois a concentração de Pb na água será de 1 × 10⁻² mg/L, igual ao valor permitido.
     E:
-      texto: |-
-        É segura, pois a concentração de Pb na água será de 2,07×10 mg/L, maior que o valor permitido.
-        Note e adote:
-        Massa molar (g/mol): Pb = 207
+      texto: É segura, pois a concentração de Pb na água será de 2,07 × 10⁻⁶ mg/L, maior que o valor permitido.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈127, 131, 206, 231, 255, 280, 304: conferir o texto'
-  - 'Texto sublinhado na página 23, y≈205: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 23, y≈324–354
+  pendencias: []
 - numero: 59
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Quando uma barra de um certo material é aquecida até uma temperatura 𝑇 a partir de uma temperatura
-      inicial 𝑇 , seu comprimento inicial 𝐿 sofre um aumento Δ𝐿 dado por Δ𝐿 𝛼 𝐿 𝑇𝑇 , sendo 𝛼 o coeficiente
+  - texto: "Quando uma barra de um certo material é aquecida até uma temperatura \U0001D447 a partir de
+      uma temperatura inicial \U0001D447₀, seu comprimento inicial \U0001D43F₀ sofre um aumento Δ\U0001D43F
+      dado por Δ\U0001D43F = \U0001D6FC \U0001D43F₀ (\U0001D447 − \U0001D447₀), sendo \U0001D6FC o coeficiente
       de expansão linear, que depende do material. O gráfico a seguir mostra curvas de expansão linear
-      para barras feitas de três materiais distintos.
+      para barras feitas de três materiais distintos."
   - figura: q059-1.webp
   - texto: 'Com base no gráfico e nas informações apresentadas, é correto afirmar:'
   alternativas:
@@ -1838,18 +1801,15 @@ questoes:
         de comprimento quando levadas de 0°C a 100°C.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈416, 428, 440: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 23, y≈436: recortar como figura'
+  pendencias: []
 - numero: 60
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       As massas de duas barras, uma de ferro e outra de aço inoxidável, armazenadas em um mesmo ambiente úmido e na presença de oxigênio, foram monitoradas ao longo do tempo. Assinale a alternativa que representa a variação das massas de ambas as barras ao longo do tempo.
-      Ferro
-      Aço inoxidável
+      Em cada alternativa, o gráfico da esquerda é o do ferro e o da direita, o do aço inoxidável.
   alternativas:
     A:
       figura: q060-a.webp
@@ -1863,18 +1823,19 @@ questoes:
       figura: q060-e.webp
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 23, y≈188–631
+  pendencias: []
 - numero: 61
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  disciplinas_secundarias:
+  - ingles
   texto_base: null
   enunciado:
   - texto: |-
-      Os versos a seguir pertencem à canção Fall on Me , da banda norte-americana R.E.M., lançada em 1986.
+      Os versos a seguir pertencem à canção “Fall on Me”, da banda norte-americana R.E.M., lançada em 1986.
       “There's a problem, feathers, iron
       Bargain buildings, weights and pulleys
-      Feathers hit the ground before the weight can leave the air” Bill Berry, Peter Buck, Mike Mills e Michael Stipe.
+      Feathers hit the ground before the weight can leave the air”
+      Bill Berry, Peter Buck, Mike Mills e Michael Stipe.
       A qual episódio (real ou hipotético) da história da física o trecho da música faz alusão?
   alternativas:
     A:
@@ -1892,10 +1853,9 @@ questoes:
         calor e energia.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈82: conferir o texto'
+  pendencias: []
 - numero: 62
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1907,8 +1867,10 @@ questoes:
       seguida de uma descida vertiginosa, cuja velocidade, no ponto mais baixo desse trecho, atinge cerca
       de 30 m/s em poucos segundos.
   - figura: q062-1.webp
-  - texto: Montanha-russa Takabisha. Considerando um carrinho ocupado com massa total de 300 kg em repouso
-      na posição de altura máxima, a energia mecânica perdida durante a descida inicial é, aproximadamente,
+  - texto: |-
+      Montanha-russa Takabisha.
+      Considerando um carrinho ocupado com massa total de 300 kg em repouso na posição de altura máxima, a energia mecânica perdida durante a descida inicial é, aproximadamente,
+  - texto: "Note e adote:\nAceleração da gravidade: \U0001D454 = 10 m/s²."
   alternativas:
     A:
       texto: 1200 J.
@@ -1919,41 +1881,35 @@ questoes:
     D:
       texto: 15000 J.
     E:
-      texto: |-
-        20000 J.
-        Note e adote:
-        Aceleração da gravidade: g = 10 m/s .
+      texto: 20000 J.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈347, 358, 369, 452, 489, 501, 513, 537, 774: conferir
-    o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈757–786
+  pendencias: []
 - numero: 63
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A utilização de matrizes energéticas limpas, tais como aquelas que não aumentam a concentração
-      de CO (g) na atmosfera, é essencial para evitar a escalada das alterações climáticas causadas pela
+      de CO₂(g) na atmosfera, é essencial para evitar a escalada das alterações climáticas causadas pela
       emissão de gases de efeito estufa. Considere a proposta apresentada na figura a seguir para a produção
       de uma matriz energética limpa.
   - figura: q063-1.webp
   - texto: |-
-      (I) Capturar o CO (g) atmosférico utilizando NaOH(aq) para formar Na CO (aq). (II) Tratar essa solução, na presença de um catalisador, com H (g) oriundo de fontes renováveis, para gerar CH (g), um gás combustível.
+      (I) Capturar o CO₂(g) atmosférico utilizando NaOH(aq) para formar Na₂CO₃(aq). (II) Tratar essa solução, na presença de um catalisador, com H₂(g) oriundo de fontes renováveis, para gerar CH₄(g), um gás combustível.
       Com base nessas informações e em seus conhecimentos, assinale a alternativa correta.
   alternativas:
     A:
       texto: O catalisador participa da reação de produção de metano e se decompõe em NaOH.
     B:
-      texto: A combustão do CH não emite CO , motivo pelo qual a proposta se configura como uma matriz
+      texto: A combustão do CH₄ não emite CO₂, motivo pelo qual a proposta se configura como uma matriz
         energética limpa.
     C:
       texto: A proposta não representa uma matriz energética limpa, pois a combustão completa de 1 mol
-        de CH emite mais CO do que o que é utilizado para a sua síntese.
+        de CH₄ emite mais CO₂ do que o que é utilizado para a sua síntese.
     D:
-      texto: A retirada de CO da atmosfera seria maior se a proposta de usar uma matriz energética limpa
-        se resumisse unicamente em utilizar o H como combustível.
+      texto: A retirada de CO₂ da atmosfera seria maior se a proposta de usar uma matriz energética limpa
+        se resumisse unicamente em utilizar o H₂ como combustível.
     E:
       texto: Em relação ao ciclo do carbono, a proposta é semelhante ao uso do etanol como combustível
         veicular.
@@ -1961,13 +1917,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Alguns motores de foguetes espaciais usam metano como combustível e oxigênio como comburente. Ambos os compostos são armazenados em estado líquido no próprio foguete, o que permite o seu armazenamento em maior quantidade do que se estivessem no estado gasoso. Sabe-se que o foguete armazena um volume de oxigênio líquido 1,5 vez maior do que de metano líquido e que ambos são completamente consumidos na combustão, conforme a equação CH ( l ) + 2 O ( l ) → CO (g) + 2 H O(g).
+      Alguns motores de foguetes espaciais usam metano como combustível e oxigênio como comburente. Ambos os compostos são armazenados em estado líquido no próprio foguete, o que permite o seu armazenamento em maior quantidade do que se estivessem no estado gasoso. Sabe-se que o foguete armazena um volume de oxigênio líquido 1,5 vez maior do que de metano líquido e que ambos são completamente consumidos na combustão, conforme a equação CH₄(ℓ) + 2 O₂(ℓ) → CO₂(g) + 2 H₂O(g).
       Nessas condições, é correto afirmar que a razão entre a densidade do metano líquido e a densidade do oxigênio líquido é igual a
+  - texto: |-
+      Note e adote:
+      Massa molar (g/mol): H = 1; C = 12; O = 16
   alternativas:
     A:
       texto: 0,186.
@@ -1978,19 +1937,14 @@ questoes:
     D:
       texto: 1,5.
     E:
-      texto: |-
-        3.
-        Note e adote:
-        Massa molar (g/mol): H = 1; C = 12; O = 16
+      texto: '3.'
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 25, y≈167: conferir o texto'
-  - 'Texto sublinhado na página 25, y≈242: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 25, y≈290–319
+  pendencias: []
 - numero: 65
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - portugues
   texto_base: tb05
   enunciado:
   - texto: De acordo com o texto, a pesquisa com caldo de cana apresentou resultados promissores em relação
@@ -2015,12 +1969,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
-  - texto: Ao empregar o pronome se em “utilizou-se o caldo de cana em uma célula a combustível para gerar
-      energia elétrica”, o pesquisador
+  - texto: Ao empregar o pronome “se” em “utilizou-se o caldo de cana em uma célula a combustível para
+      gerar energia elétrica”, o pesquisador
   alternativas:
     A:
       texto: indetermina o sujeito, tentando mostrar que desconhece a real autoria do experimento.
@@ -2039,7 +1993,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2049,7 +2003,7 @@ questoes:
   - figura: q067-1.webp
   - texto: |-
       Disponível em https://upload.wikimedia.org/wikipedia/ (Adaptado).
-      As células especializadas que derivam de uma mesma célulatronco possuem os(as) mesmos(as)
+      As células especializadas que derivam de uma mesma célula-tronco possuem os(as) mesmos(as)
   alternativas:
     A:
       texto: genes.
@@ -2063,10 +2017,9 @@ questoes:
       texto: organelas.
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 25, y≈539–677
+  pendencias: []
 - numero: 68
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2096,16 +2049,14 @@ questoes:
         apresentam produção científica por milhão de habitantes acima da média mundial.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈78: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 26, y≈78: recortar como figura'
+  pendencias: []
 - numero: 69
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: No plano cartesiano 𝑂𝑥𝑦 , o gráfico que melhor representa a função 𝑓𝑥 | 𝑥 5 𝑥 6| 5 𝑥 6 é dado
-      por
+  - texto: "No plano cartesiano \U0001D442\U0001D465\U0001D466, o gráfico que melhor representa a função
+      \U0001D453(\U0001D465) = |\U0001D465² + 5\U0001D465 − 6| − 5\U0001D465 + 6 é dado por"
   alternativas:
     A:
       figura: q069-a.webp
@@ -2119,45 +2070,35 @@ questoes:
       figura: q069-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 26, y≈95–764
+  pendencias: []
 - numero: 70
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Seja 𝑎 uma progressão aritmética cujo primeiro termo é 𝑎 e a razão 𝑟 , ambos números reais. É possível construir uma outra sequência 𝑏 , em que o primeiro termo é um número real 𝑏 e com a seguinte lei de formação
-      𝑏 𝑎 ,
-      𝑏
-      sendo 𝑛 0 um número natural.
-      Por exemplo, se 𝑏 0 e
-      𝑎 1,3,5,7,9,11,… ,
-      tem-se
-      𝑏 0,1,4,9,16,25,… .
-      Com base em tais informações, os valores de 𝑎 e 𝑟 foram escolhidos de forma que 𝑏 também seja uma progressão aritmética de razão 𝑟′ . Nessas condições, é correto afirmar:
+  - texto: "Seja (\U0001D44Eₙ) uma progressão aritmética cujo primeiro termo é \U0001D44E₁ e a razão \U0001D45F,
+      ambos números reais. É possível construir uma outra sequência (\U0001D44Fₙ), em que o primeiro termo
+      é um número real \U0001D44F₁ e com a seguinte lei de formação\n\U0001D44Fₙ₊₁ = \U0001D44Fₙ + \U0001D44Eₙ,\nsendo
+      \U0001D45B > 0 um número natural.\nPor exemplo, se \U0001D44F₁ = 0 e\n(\U0001D44Eₙ) = (1, 3, 5,
+      7, 9, 11, …),\ntem-se\n(\U0001D44Fₙ) = (0, 1, 4, 9, 16, 25, …).\nCom base em tais informações, os
+      valores de \U0001D44E₁ e \U0001D45F foram escolhidos de forma que (\U0001D44Fₙ) também seja uma
+      progressão aritmética de razão \U0001D45F′. Nessas condições, é correto afirmar:"
   alternativas:
     A:
-      texto: 𝑟′𝑎
+      texto: "\U0001D45F′ = \U0001D44E₁"
     B:
-      texto: |-
-        𝑟′ 2 𝑎
-        𝑟′𝑟
+      texto: "\U0001D45F′ = 2\U0001D44E₁"
     C:
-      texto: ''
+      texto: "\U0001D45F′ = \U0001D45F"
     D:
-      texto: 𝑟′ 2 𝑟
+      texto: "\U0001D45F′ = 2\U0001D45F"
     E:
-      texto: 𝑟 𝑏 𝑎
+      texto: "\U0001D45F′ = \U0001D44F₁ − \U0001D44E₁"
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 27, y≈66, 90, 118, 133, 151, 166, 193, 224,
-    254, 266, 277, 289, 301: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 27, y≈70, 95, 107, 122, 155, 171, 198, 216, 228, 258,
-    270, 300, 305: conferir o texto'
+  pendencias: []
 - numero: 71
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2189,41 +2130,44 @@ questoes:
         experimento relatado, enquanto o 1 é o menos eficiente.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 27, y≈513, 564, 576, 589, 601, 613: conferir o texto'
+  pendencias: []
 - numero: 72
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A reação do antibiótico sulfanilamida com halogênios leva à reação de substituição com o halogênio
       em duas posições distintas do anel aromático, como representado na equação não balanceada a seguir.
   - figura: q072-1.webp
-  - texto: Em um experimento, 1 L de uma solução de sulfanilamida de pH 5 reagiu com Br em excesso, obtendo-se
+  - texto: Em um experimento, 1 L de uma solução de sulfanilamida de pH 5 reagiu com Br₂ em excesso, obtendo-se
       pH 4 após reação total. Considerando que o volume se manteve inalterado após a adição do halogênio,
       quantos mols de sulfanilamida reagiram com bromo?
   alternativas:
     A:
-      texto: 4,5 × 10
+      texto: 4,5 × 10⁻⁵
     B:
-      texto: 9,0 × 10
+      texto: 9,0 × 10⁻⁵
     C:
-      texto: 1,0 × 10
+      texto: 1,0 × 10⁻⁴
     D:
-      texto: 5,0 × 10
+      texto: 5,0 × 10⁻²
     E:
-      texto: 1,0 × 10
+      texto: 1,0 × 10⁻¹
   resposta: A
   anulada: false
   pendencias: []
 - numero: 73
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - fisica
   texto_base: tb06
   enunciado:
-  - texto: Suponha que a reação produza 2 mols de CO para cada 3 litros de vinagre. Nas condições do experimento,
-      em que o volume de líquido é 1/3 de litro à temperatura T = 300 K, a pressão P medida pelo manômetro
-      será por volta de
+  - texto: "Suponha que a reação produza 2 mols de CO₂ para cada 3 litros de vinagre. Nas condições do
+      experimento, em que o volume de líquido é 1/3 de litro à temperatura \U0001D447 = 300 K, a pressão
+      \U0001D443(CO₂) medida pelo manômetro será por volta de"
+  - texto: "Note e adote:\nConsidere o CO₂ como um gás ideal.\nConstante dos gases ideais: R = 0,08 atm.L/(K.mol).\nAssuma
+      que todo o ácido acético do vinagre reagiu com o bicarbonato de sódio e que o líquido resultante
+      da reação ocupa aproximadamente o mesmo volume do vinagre antes da reação (\U0001D449ᵥᵢₙ)."
   alternativas:
     A:
       texto: 3,2 atm.
@@ -2234,105 +2178,90 @@ questoes:
     D:
       texto: 9,0 atm.
     E:
-      texto: |-
-        12 atm.
-        Note e adote:
-        Considere o CO como um gás ideal.
-        Constante dos gases ideais: R = 0,08 atm.L/(K.mol).
-        Assuma que todo o ácido acético do vinagre reagiu com o bicarbonato de sódio e que o líquido resultante da reação ocupa aproximadamente o mesmo volume do vinagre antes da reação (V ).
+      texto: 12 atm.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 28, y≈407, 409, 443, 546, 552, 553, 561, 564, 569, 579,
-    588, 594: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 28, y≈530, 542: recortar como figura'
-  - 'Texto sublinhado na página 28, y≈561, 577: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 28, y≈531–600
-  - 'Texto-base tb06: Índice/expoente em fonte pequena na página 28, y≈55, 67, 101, 107, 129, 142, 172,
-    227, 288, 302: conferir o texto'
+  pendencias: []
 - numero: 74
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
   - texto: |-
       Considere agora um outro experimento feito em condições semelhantes, em que o manômetro indica uma pressão de 5 atm e, sem que a pressão no interior da garrafa se altere, ele é cuidadosamente substituído por uma rolha de 10 g de massa e 2 cm de diâmetro (igual ao diâmetro interno do bocal da garrafa). Logo após a rolha ser encaixada no local, ela é expelida devido à pressão interna da garrafa ser maior que a pressão atmosférica.
       A aceleração da rolha no momento em que ela é expelida é de, aproximadamente,
+  - texto: "Note e adote:\nAssuma que a pressão atmosférica seja de 1 atm = 10⁵ Pa.\nUtilize \U0001D70B
+      = 3.\nConsidere que as forças relevantes atuando sobre a rolha no momento em que é expelida são
+      apenas aquelas relativas à diferença de pressão entre os seus lados interno e externo."
   alternativas:
     A:
-      texto: 12 m/s .
+      texto: 12 m/s².
     B:
-      texto: 120 m/s .
+      texto: 120 m/s².
     C:
-      texto: 1200 m/s .
+      texto: 1200 m/s².
     D:
-      texto: 12000 m/s .
+      texto: 12000 m/s².
     E:
-      texto: |-
-        120000 m/s .
-        Note e adote:
-        Assuma que a pressão atmosférica seja de 1 atm = 10 Pa.
-        Utilize π = 3.
-        Considere que as forças relevantes atuando sobre a rolha no momento em que é expelida são apenas aquelas relativas à diferença de pressão entre os seus lados interno e externo.
+      texto: 120000 m/s².
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 28, y≈624, 637, 649, 661, 673, 776, 789: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 28, y≈633, 645, 657, 669: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 28, y≈90–164
+  pendencias: []
 - numero: 75
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Um designer de produtos deseja fabricar um vaso para flores conforme a figura a seguir.
   - figura: q075-1.webp
-  - texto: Sabe-se que a base e o topo do vaso são uma circunferência de raio 𝑅 que mede 10 cm, a parte
-      central é uma circunferência de raio 𝑟 de 5 cm e a medida ℎ mede 12 cm. Qual é a capacidade volumétrica
-      desse vaso em cm ?
+  - texto: "Sabe-se que a base e o topo do vaso são uma circunferência de raio \U0001D445 que mede 10
+      cm, a parte central é uma circunferência de raio \U0001D45F de 5 cm e a medida ℎ mede 12 cm. Qual
+      é a capacidade volumétrica desse vaso em cm³?"
   alternativas:
     A:
-      texto: 1400 𝜋
+      texto: "1400\U0001D70B"
     B:
-      texto: 2100 𝜋
+      texto: "2100\U0001D70B"
     C:
-      texto: 2400 𝜋
+      texto: "2400\U0001D70B"
     D:
-      texto: 2600 𝜋
+      texto: "2600\U0001D70B"
     E:
-      texto: 2800 𝜋
+      texto: "2800\U0001D70B"
   resposta: A
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Considere um cilindro 𝐶 de altura ℎ 0 e cujo raio das circunferências, do topo e da base, é 𝑟 0 ; um cilindro 𝐶 cujo raio é igual ao de 𝐶 e altura igual a ; e um cilindro 𝐶 com altura ℎ e raio igual a .
-      Sendo 𝑉 , 𝑉 e 𝑉 os volumes e 𝐴 , 𝐴 e 𝐴 as áreas laterais dos cilindros 𝐶 , 𝐶 e 𝐶 , respectivamente, é correto afirmar:
+  - texto: "Considere um cilindro \U0001D436 de altura ℎ > 0 e cujo raio das circunferências, do topo
+      e da base, é \U0001D45F > 0; um cilindro \U0001D436₁ cujo raio é igual ao de \U0001D436 e altura
+      igual a ℎ/2; e um cilindro \U0001D436₂ com altura ℎ e raio igual a \U0001D45F/2.\nSendo \U0001D449,
+      \U0001D449₁ e \U0001D449₂ os volumes e \U0001D434, \U0001D434₁ e \U0001D434₂ as áreas laterais dos
+      cilindros \U0001D436, \U0001D436₁ e \U0001D436₂, respectivamente, é correto afirmar:"
   alternativas:
     A:
-      texto: 𝑉 𝑉 𝑉 e 𝐴𝐴 𝐴
+      texto: "\U0001D449 = \U0001D449₁ + \U0001D449₂ e \U0001D434 = \U0001D434₁ + \U0001D434₂"
     B:
-      texto: 𝑉 𝑉 𝑉 e 𝐴𝐴 2 𝐴
+      texto: "\U0001D449 = \U0001D449₁ + \U0001D449₂ e \U0001D434 = \U0001D434₁ + 2\U0001D434₂"
     C:
-      texto: 𝑉 𝑉 2 𝑉 e 𝐴𝐴 2 𝐴
+      texto: "\U0001D449 = \U0001D449₁ + 2\U0001D449₂ e \U0001D434 = \U0001D434₁ + 2\U0001D434₂"
     D:
-      texto: 𝑉 𝑉 2 𝑉 e 𝐴𝐴 𝐴
+      texto: "\U0001D449 = \U0001D449₁ + 2\U0001D449₂ e \U0001D434 = \U0001D434₁ + \U0001D434₂"
     E:
-      texto: 𝑉 2 𝑉 2 𝑉 e 𝐴 2 𝐴 2 𝐴
+      texto: "\U0001D449 = 2\U0001D449₁ + 2\U0001D449₂ e \U0001D434 = 2\U0001D434₁ + 2\U0001D434₂"
   resposta: D
   anulada: false
   pendencias: []
 - numero: 77
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Em relação ao plano cartesiano Oxy , é correto afirmar que as equações 𝑥 𝑦 4 𝑥 3 e 𝑥 𝑦 4 𝑦
-      3 representam
+  - texto: "Em relação ao plano cartesiano \U0001D442\U0001D465\U0001D466, é correto afirmar que as equações
+      \U0001D465² + \U0001D466² − 4\U0001D465 = −3 e \U0001D465² + \U0001D466² − 4\U0001D466 = −3 representam"
   alternativas:
     A:
       texto: duas circunferências com raios de mesma medida e que se interceptam em dois pontos.
@@ -2346,12 +2275,11 @@ questoes:
       texto: duas circunferências com centros distintos e que não se interceptam.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 29, y≈78: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 29, y≈78: recortar como figura'
+  pendencias: []
 - numero: 78
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - matematica
   texto_base: null
   enunciado:
   - figura: q078-1.webp
@@ -2373,7 +2301,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 79
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2397,15 +2325,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 80
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Leia o excerto a seguir de A Ética Protestante e o Espírito do Capitalismo , de Max Weber.
+      Leia o excerto a seguir de A Ética Protestante e o Espírito do Capitalismo, de Max Weber.
       “Temos de nos emancipar da seguinte visão: que se pode deduzir a Reforma das transformações econômicas como algo ‘necessário em termos de desenvolvimento histórico’. Por outro lado, não se deve de forma alguma defender uma tese tão disparatadamente doutrinária que afirmasse que o ‘espírito capitalista’ pôde surgir somente como resultado de determinados influxos da Reforma.
       Em face da enorme barafunda de influxos recíprocos entre as bases materiais, as formas de organização social e política e o conteúdo espiritual das épocas culturais da Reforma, procederemos tão-só de modo a examinar de perto se, e em quais pontos, podemos reconhecer determinadas ‘afinidades eletivas’ entre certas formas da fé religiosa e certas formas da ética profissional. Por esse meio serão elucidados o efeito que, em virtude de tais afinidades eletivas, o movimento religioso exerceu sobre o desenvolvimento da cultura material.”
-      WEBER, Max. A Ética Protestante e o Espírito do Capitalismo . São Paulo: Companhia das Letras, 2004, p.82-83 (Adaptado).
+      WEBER, Max. A Ética Protestante e o Espírito do Capitalismo. São Paulo: Companhia das Letras, 2004, p.82-83 (Adaptado).
       A partir da ideia expressa no excerto acerca da relação entre o desenvolvimento do capitalismo e alguns elementos da doutrina calvinista, é correto afirmar que
   alternativas:
     A:
@@ -2427,8 +2355,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
@@ -2455,7 +2384,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2486,15 +2415,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 83
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O funcionário público como personagem literário ganha destaque na literatura brasileira a partir dos anos 1930. Uma explicação para esse fenômeno está na tematização, por parte dos escritores, das mudanças do papel do Estado brasileiro na constituição do mercado de trabalho assalariado e como agente da modernização do país:
       “De 1930 em diante, foram criadas dezenas de comissões, instituições e órgãos de planejamento e/ou de promoção das atividades econômicas, notadamente as ligadas às atividades agrícolas e àquelas voltadas para a industrialização.”
-      MATTOS, Fernando Augusto Mansor de. A trajetória do emprego público no Brasil desde o início do século XX. Ensaios FEE , v.36, n.1, p.95, jun.2015.
-      No romance Os ratos , de Dyonélio Machado, o funcionalismo público configura-se como
+      MATTOS, Fernando Augusto Mansor de. A trajetória do emprego público no Brasil desde o início do século XX. Ensaios FEE, v.36, n.1, p.95, jun.2015.
+      No romance Os ratos, de Dyonélio Machado, o funcionalismo público configura-se como
   alternativas:
     A:
       texto: solução final para o conflito básico da narrativa, uma vez que é a partir de seu emprego
@@ -2518,15 +2447,14 @@ questoes:
         objetivava a garantia de apoio político e social.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 31, y≈236, 435, 490: formatação perdida no texto puro'
+  pendencias: []
 - numero: 84
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Leia os trechos das obras Marília de Dirceu e Romanceiro da Inconfidência :
+      Leia os trechos das obras Marília de Dirceu e Romanceiro da Inconfidência:
       Lira VII (Parte II)
       “Meu prezado Glauceste,
       Se fazes o conceito
@@ -2578,7 +2506,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 85
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2599,7 +2527,7 @@ questoes:
       à luz de velas acesas,
       entre sigilo e espionagem,
       acontece a Inconfidência.”
-      Os versos de Cecília Meireles, no Romanceiro da Inconfidência , remetem
+      Os versos de Cecília Meireles, no Romanceiro da Inconfidência, remetem
   alternativas:
     A:
       texto: à insurreição promovida por maçons e reinóis, adeptos do iluminismo, contra a cobrança do
@@ -2620,17 +2548,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 86
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
-      No texto intitulado Tarsila , a pesquisadora Aracy Amaral transcreve um trecho das impressões de Tarsila do Amaral sobre a viagem às cidades históricas coloniais mineiras, que realizara em 1924 com o grupo modernista, liderado por Mário de Andrade: “(...) As decorações murais de um modesto corredor de hotel; o forro das salas, feito de taquarinhas coloridas e trançadas; as pinturas das igrejas, simples e comoventes, executadas com amor e devoção por artistas anônimos; o Aleijadinho, nas suas estátuas e nas linhas geniais da sua arquitetura religiosa, tudo era motivo para as nossas exclamações admirativas. Encontrei em Minas as cores que adorava em criança. Ensinaram-me depois que eram feias e caipiras. Segui o ramerrão do gosto apurado... Mas depois vinguei-me da opressão passando-as para as minhas telas: azul puríssimo, rosa violáceo, amarelo vivo, verde cantante, tudo em gradações mais ou menos fortes, conforme a mistura de branco. Pintura limpa, sobretudo, sem medo de cânones convencionais. Liberdade e sinceridade, uma certa estilização que a adaptava à época moderna.”
+      No texto intitulado Tarsila, a pesquisadora Aracy Amaral transcreve um trecho das impressões de Tarsila do Amaral sobre a viagem às cidades históricas coloniais mineiras, que realizara em 1924 com o grupo modernista, liderado por Mário de Andrade: “(...) As decorações murais de um modesto corredor de hotel; o forro das salas, feito de taquarinhas coloridas e trançadas; as pinturas das igrejas, simples e comoventes, executadas com amor e devoção por artistas anônimos; o Aleijadinho, nas suas estátuas e nas linhas geniais da sua arquitetura religiosa, tudo era motivo para as nossas exclamações admirativas. Encontrei em Minas as cores que adorava em criança. Ensinaram-me depois que eram feias e caipiras. Segui o ramerrão do gosto apurado... Mas depois vinguei-me da opressão passando-as para as minhas telas: azul puríssimo, rosa violáceo, amarelo vivo, verde cantante, tudo em gradações mais ou menos fortes, conforme a mistura de branco. Pintura limpa, sobretudo, sem medo de cânones convencionais. Liberdade e sinceridade, uma certa estilização que a adaptava à época moderna.”
       AMARAL, Tarsila, 1939. Apud AMARAL, Aracy. Tarsila, In: Tarsila do Amaral. São Paulo: Fundação Finambras, s.d, p.4.
   - figura: q086-1.webp
   - texto: |-
-      Tarsila do Amaral, O mamoeiro , 1925, óleo s/ tela, 65,0 cm x 70,0 cm. Coleção Mário de Andrade - Instituto de Estudos Brasileiros da Universidade de São Paulo. Reprodução fotográfica: Rômulo Fialdini. Disponível em: https://enciclopedia.itaucultural.org.br/.
-      Considerando a obra O Mamoeiro , de Tarsila do Amaral, qual é o principal elemento que caracteriza a influência do movimento modernista brasileiro na pintura?
+      Tarsila do Amaral, O mamoeiro, 1925, óleo s/ tela, 65,0 cm x 70,0 cm. Coleção Mário de Andrade - Instituto de Estudos Brasileiros da Universidade de São Paulo. Reprodução fotográfica: Rômulo Fialdini. Disponível em: https://enciclopedia.itaucultural.org.br/.
+      Considerando a obra O Mamoeiro, de Tarsila do Amaral, qual é o principal elemento que caracteriza a influência do movimento modernista brasileiro na pintura?
   alternativas:
     A:
       texto: O emprego de recursos pictóricos que realçam os efeitos de luz e sombra na cena retratada.
@@ -2646,13 +2575,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 87
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Tecidos de Ijebu
-      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.” OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África . São Paulo: Penguin, 2012. p.361.
+      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.” OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África. São Paulo: Penguin, 2012. p.361.
       O texto é parte de um relato das memórias de um exescravizado natural de Ijebu, na atual Nigéria, trazido ao Brasil no início do século XIX. O excerto faz menção
   alternativas:
     A:
@@ -2669,7 +2598,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2692,7 +2621,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 89
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2702,7 +2631,7 @@ questoes:
       Falava-se, inevitavelmente, de identidade versus globalização. Respondi com uma pergunta:
       - E para si, o que é ser europeu?
       O homem gaguejou. Não sabia responder. Mas o interessante é que, para ele, a questão da identidade se colocava naturalmente para os africanos. Não para os europeus. Ele nunca tinha colocado a questão no espelho. Recordo o episódio porque me parece que ele toca uma questão central: quando se fala de África, de qual África estamos falando? Terá o continente africano uma essência facilmente capturável? Haverá uma substância exótica que os caçadores de identidades possam recolher como sendo a alma africana?”
-      COUTO, Mia. “Um retrato sem moldura”. In: HERNANDEZ, Leila Leite. A África na sala de aula: visita à história contemporânea . São Paulo: Selo Negro, 2008. p.11.
+      COUTO, Mia. “Um retrato sem moldura”. In: HERNANDEZ, Leila Leite. A África na sala de aula: visita à história contemporânea. São Paulo: Selo Negro, 2008. p.11.
       Ao relatar e comentar o episódio, o escritor moçambicano Mia Couto apresenta a África como
   alternativas:
     A:
@@ -2719,8 +2648,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
