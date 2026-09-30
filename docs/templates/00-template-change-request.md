@@ -1,0 +1,178 @@
+# Change Request — CR-[XXX]: [Título Descritivo]
+
+**Versão:** 1.0  
+**Data:** YYYY-MM-DD  
+**Status:** Rascunho | Aprovado | Em Implementação | Concluído | Cancelado  
+**Autor:** [Nome]  
+**Prioridade:** Crítica | Alta | Média | Baixa
+
+---
+
+## 1. Resumo da Mudança
+
+[Descrição clara e concisa do que precisa ser alterado e por quê]
+
+---
+
+## 2. Classificação
+
+| Campo            | Valor                                                                 |
+|------------------|-----------------------------------------------------------------------|
+| Tipo             | Bug Fix / Mudança de Regra de Negócio / Nova Feature / Refactoring / Mudança de Arquitetura |
+| Origem           | Feedback do usuário / Bug reportado / Evolução do produto / Dívida técnica |
+| Urgência         | Imediata / Próxima sprint / Backlog                                   |
+| Complexidade     | Baixa / Média / Alta                                                  |
+
+---
+
+## 3. Contexto e Motivação
+
+### Situação Atual (AS-IS)
+[Como funciona hoje / qual é o comportamento atual]
+
+### Problema ou Necessidade
+[O que está errado ou o que falta]
+
+### Situação Desejada (TO-BE)
+[Como deve funcionar após a mudança]
+
+---
+
+## 4. Detalhamento da Mudança
+
+### 4.1 O que muda
+
+| #  | Item                    | Antes (AS-IS)        | Depois (TO-BE)       |
+|----|-------------------------|----------------------|----------------------|
+| 1  | [Regra / Comportamento] | ...                  | ...                  |
+| 2  | [Regra / Comportamento] | ...                  | ...                  |
+
+### 4.2 O que NÃO muda
+[Listar explicitamente o que permanece inalterado para evitar mudanças acidentais]
+
+- ...
+- ...
+
+---
+
+## 5. Impacto nos Documentos
+
+| Documento                       | Impactado? | Seções Afetadas              | Ação Necessária       |
+|---------------------------------|------------|------------------------------|-----------------------|
+| `/docs/01-PRD.md`               | Sim / Não  | [ex: Requisitos Funcionais]  | Atualizar RF-XXX      |
+| `/docs/02-ARCHITECTURE.md`      | Sim / Não  | [ex: Modelagem de Dados]     | Adicionar ADR-XXX     |
+| `/docs/03-SPEC.md`              | Sim / Não  | [ex: Feature RF-XXX]         | Reescrever seção 2.X  |
+| `/docs/04-IMPLEMENTATION-PLAN.md` | Sim / Não | [ex: Grupo 3]              | Adicionar tarefas     |
+| `/docs/05-DEPLOY-GUIDE.md`      | Sim / Não  | [ex: Checklist pré-deploy]   | Atualizar procedimento|
+| `CLAUDE.md`                     | Sim / Não  | [ex: Change Requests, estrutura, comandos] | Adicionar CR-XXX |
+
+---
+
+## 6. Impacto no Código
+
+### 6.1 Arquivos Afetados
+
+| Ação      | Caminho do Arquivo                   | Descrição da Mudança               |
+|-----------|--------------------------------------|-------------------------------------|
+| Modificar | `src/modules/x/x.service.ts`        | Alterar lógica de [descrição]       |
+| Modificar | `src/modules/x/x.controller.ts`     | Ajustar validação de [descrição]    |
+| Criar     | `src/modules/x/x-new.service.ts`    | Novo service para [descrição]       |
+| Modificar | `tests/unit/x.test.ts`              | Atualizar testes existentes         |
+| Criar     | `tests/unit/x-new.test.ts`          | Novos testes para a mudança         |
+
+### 6.2 Banco de Dados
+
+| Ação      | Descrição                            | Migration Necessária? |
+|-----------|--------------------------------------|-----------------------|
+| ...       | ...                                  | Sim / Não             |
+
+**Migration (se aplicável):**
+```sql
+-- Descrever a migration necessária
+ALTER TABLE ...;
+```
+
+---
+
+## 7. Tarefas de Implementação
+
+| ID      | Tarefa                              | Depende de | Done When                          |
+|---------|-------------------------------------|------------|------------------------------------|
+| CR-T-01 | [Descrição da tarefa]               | —          | [Critério de conclusão]            |
+| CR-T-02 | [Descrição da tarefa]               | CR-T-01    | [Critério de conclusão]            |
+| CR-T-03 | Atualizar testes                    | CR-T-02    | Testes passam cobrindo novo cenário|
+| CR-T-04 | Atualizar documentação              | CR-T-03    | Docs refletem a mudança            |
+
+---
+
+## 8. Critérios de Aceite
+
+- [ ] [Critério 1: Descrever o comportamento esperado após a mudança]
+- [ ] [Critério 2: ...]
+- [ ] [Critério 3: ...]
+- [ ] Testes existentes continuam passando (regressão)
+- [ ] Novos testes cobrem a mudança
+- [ ] Fluxo afetado exercitado em runtime antes do merge — descrever O QUE foi validado e o resultado (Playwright para UI, chamada HTTP para endpoints); ou "N/A — [justificativa]" (CR-037)
+- [ ] [Se complexidade Média/Alta] Revisão de código pré-merge (`/code-review` no diff da branch) executada — registrar findings corrigidos/justificados; ou "N/A — complexidade Baixa" (CR-040)
+- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada — obrigatória se o CR envolver endpoint novo/alterado, auth/tokens/cookies, CRUD com dados de usuário ou nova dependência; ou "N/A — [justificativa: só UI sem endpoints / só docs / refactoring sem mudança de contrato]"
+- [ ] Documentos afetados foram atualizados
+
+> **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
+
+---
+
+## 9. Riscos e Efeitos Colaterais
+
+| #  | Risco / Efeito Colateral           | Probabilidade | Impacto | Mitigação                        |
+|----|------------------------------------|---------------|---------|----------------------------------|
+| 1  | [Descrever risco]                  | Alta / Média / Baixa | Alto / Médio / Baixo | [Como mitigar]          |
+| 2  | [Descrever efeito colateral]       | ...           | ...     | ...                              |
+
+---
+
+## 10. Plano de Rollback
+
+> Referencia: Procedimentos detalhados em `/docs/05-DEPLOY-GUIDE.md` (secoes 4 e 5).
+
+### 10.1 Rollback de Codigo
+
+- **Metodo:** `git checkout -b hotfix/revert-CR-XXX` → `git revert [hash(es)]` → merge em `master` → push
+- **Metodo alternativo:** Redeploy do deployment anterior via Railway Dashboard
+- **Commits a reverter:** [listar commits ou range]
+
+### 10.2 Rollback de Migration
+
+- **Migration afetada:** [ex: `003_add_categories.py`]
+- **Comando de downgrade:** `alembic downgrade [revisao_anterior]` (ex: `alembic downgrade 002`)
+- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade e destrutivo?** [ ] Sim (dados perdidos) / [ ] Nao (schema revertido sem perda)
+
+### 10.3 Impacto em Dados
+
+- **Dados serao perdidos no rollback?** [ ] Sim / [ ] Nao
+- **Detalhamento:** [Ex: "Coluna X sera removida, dados nela serao perdidos" ou "Apenas schema revertido, dados preservados"]
+- **Backup necessario antes do deploy?** [ ] Sim / [ ] Nao
+- **Procedimento de backup:** Ver Deploy Guide secao 5 (`railway run pg_dump -Fc > backup.dump`)
+
+### 10.4 Rollback de Variaveis de Ambiente
+
+- **Variaveis novas/alteradas:** [listar ou "Nenhuma"]
+- **Acao de rollback:** [Ex: "Remover VAR_X do Railway" ou "Restaurar VAR_Y para valor anterior"]
+
+### 10.5 Verificacao Pos-Rollback
+
+- [ ] Aplicacao acessivel e funcional
+- [ ] `alembic current` mostra revisao esperada (se migration revertida)
+- [ ] [Verificacao especifica do CR — ex: "Endpoint X retorna dados corretamente"]
+- [ ] Usuarios existentes conseguem fazer login
+
+---
+
+## Changelog
+
+| Data       | Autor  | Descrição                    |
+|------------|--------|------------------------------|
+| YYYY-MM-DD | [Nome] | CR criado                    |
+| YYYY-MM-DD | [Nome] | Implementação iniciada       |
+| YYYY-MM-DD | [Nome] | Implementação concluída      |
+| YYYY-MM-DD | [Nome] | Validação realizada — status: ✅ |

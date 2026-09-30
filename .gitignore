@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# SQLite
+*.db
+
+# Node
+node_modules/
+frontend/dist/
+frontend/src/**/*.js
+frontend/tsconfig.app.tsbuildinfo
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+
+# Logs
+*.log
+*.json.log
+logs.*.json
+
+# Claude Code (settings.json e hooks sao versionados)
+.claude/settings.local.json
+
+# Playwright MCP logs
+.playwright-mcp/

@@ -1,0 +1,9 @@
+{
+  "$comment": "Checks executados pelo check-quality.js antes de cada git commit. Vazio ate o scaffold (T-001): um check sem codigo falharia sempre e bloquearia todo commit. No T-001, mover as entradas de $pendentes para checks.",
+  "checks": [],
+  "$pendentes": [
+    { "name": "pytest", "cwd": "backend", "command": "python -m pytest tests/ -q", "timeoutSeconds": 300 },
+    { "name": "TypeScript", "cwd": "frontend", "command": "npx tsc --noEmit -p tsconfig.app.json" },
+    { "name": "ESLint", "cwd": "frontend", "command": "npx eslint src" }
+  ]
+}

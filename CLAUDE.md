@@ -1,0 +1,338 @@
+# CLAUDE.md — Instruções do Projeto
+
+## Identidade do Projeto
+
+- **Nome:** Simulado Fuvest
+- **Descrição:** Site que gera simulados da prova da FUVEST a partir de questões de provas de anos anteriores (acervo oficial em fuvest.br), para estudantes praticarem com questões reais
+- **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4, TanStack Query v5, FastAPI, SQLAlchemy 2.0, Alembic, PostgreSQL (prod) / SQLite (dev), deploy na Railway
+- **Repositório:** remoto GitHub ainda não criado — pendência do bootstrap (repositório local na branch `master`)
+
+---
+
+## Comandos Essenciais
+
+> Disponíveis após o scaffold (T-001). A estrutura exata é definida em `/docs/02-ARCHITECTURE.md`.
+
+| Ação | Comando |
+|------|---------|
+| Backend (dev) | `cd backend && python -m alembic upgrade head && python -m uvicorn app.main:app --reload` (porta 8000) |
+| Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` → 8000) |
+| Testes backend | `cd backend && python -m pytest tests/ -v` |
+| Testes frontend | `cd frontend && npm test` (Vitest) |
+| Build check TS | `cd frontend && npx tsc --noEmit -p tsconfig.app.json` |
+| Lint frontend | `cd frontend && npm run lint` |
+| Migrations | `cd backend && python -m alembic upgrade head` (aplicar) / `python -m alembic downgrade -1` (reverter) |
+
+---
+
+## Fluxo de Desenvolvimento (Spec-Driven Development)
+
+Este projeto segue um fluxo de desenvolvimento baseado em documentação. **Nunca implemente código sem antes consultar os documentos existentes.**
+
+### Fases do Fluxo
+
+| Fase | Documento | Caminho | Quando Usar |
+|------|-----------|---------|-------------|
+| 0 | Change Request (CR) | `/docs/changes/CR-XXX.md` | Alterações e correções em funcionalidades existentes |
+| 1 | PRD | `/docs/01-PRD.md` | Definição inicial ou adição de módulos grandes |
+| 2 | Arquitetura | `/docs/02-ARCHITECTURE.md` | Decisões de stack, estrutura e padrões |
+| 3 | Spec Técnica | `/docs/03-SPEC.md` | Detalhamento técnico de cada feature |
+| 4 | Plano de Implementação | `/docs/04-IMPLEMENTATION-PLAN.md` | Ordem e dependências das tarefas |
+| 5 | Implementação | Código-fonte | Construção efetiva |
+| 6 | Revisão de Segurança | Checklist OWASP | Novos endpoints, auth, CRUD com dados de usuário, novas dependências |
+| 7 | Validação | Checklist "Done When" | Verificar critérios de aceite antes do deploy |
+| 8 | Deploy e Release | `/docs/05-DEPLOY-GUIDE.md` | Procedimentos de deploy, rollback e verificação |
+
+### Regra de Ouro
+
+```
+Documentação PRIMEIRO → Código DEPOIS
+```
+
+- Novas features: PRD → Arquitetura → Spec → Plano → Implementação
+- Alterações/Correções: CR → Avaliar impacto → Atualizar docs afetados → Implementar
+- Bug fix simples: CR → Implementar → Atualizar testes
+
+### IMPORTANTE: CR é Obrigatório
+
+> **NUNCA implemente uma feature ou alteração significativa sem criar o CR primeiro.**
+> Mesmo para mudanças urgentes ou aparentemente simples. Se uma alteração já foi feita
+> sem CR, crie um retroativamente antes de prosseguir com qualquer follow-up.
+
+---
+
+## Templates e Prompts
+
+### Templates de Documentos
+
+Ao criar qualquer documento do fluxo, **use obrigatoriamente o template correspondente** como base:
+
+| Documento | Template |
+|-----------|----------|
+| Change Request | `/docs/templates/00-template-change-request.md` |
+| PRD | `/docs/templates/01-template-prd.md` |
+| Arquitetura | `/docs/templates/02-template-architecture.md` |
+| Spec Técnica | `/docs/templates/03-template-spec.md` |
+| Plano de Implementação | `/docs/templates/04-template-implementation-plan.md` |
+| CLAUDE.md | `/docs/templates/CLAUDE-template.md` |
+
+---
+
+## Regras de Implementação
+
+### Antes de Codar
+
+1. **Leia** `/docs/02-ARCHITECTURE.md` para entender stack e padrões
+2. **Leia** `/docs/03-SPEC.md` para entender o que construir
+3. **Leia** `/docs/04-IMPLEMENTATION-PLAN.md` para entender a ordem
+4. **Nunca invente** funcionalidades que não estão na spec
+5. **Nunca omita** funcionalidades que estão na spec
+6. **Se houver ambiguidade**, pare e pergunte antes de decidir
+7. **Explore antes de mudar:** Em tarefas que envolvem deploy, migrations, ou dependências, explore o estado atual antes de agir (o que está deployado, schema do banco, dependências instaladas)
+
+### Durante a Implementação
+
+- Siga a estrutura de pastas do `02-ARCHITECTURE.md`
+- Siga as convenções de nomenclatura do `02-ARCHITECTURE.md`
+- Implemente uma tarefa por vez conforme o `04-IMPLEMENTATION-PLAN.md`
+- Escreva testes para cada funcionalidade
+- Verifique o checklist "Done When Universal" ao concluir cada tarefa
+
+### Done When Universal
+
+Toda tarefa (CR-T-XX, T-XXX) só é considerada concluída quando:
+
+**Obrigatórios:**
+- [ ] Funcionalidade implementada conforme descrito na tarefa
+- [ ] App roda localmente sem erros (backend + frontend)
+- [ ] Fluxo afetado exercitado em runtime antes do merge — Playwright para UI, chamada HTTP real para endpoints — com registro no CR do que foi validado; ou justificativa de N/A no CR
+- [ ] Testes existentes continuam passando (regressão)
+- [ ] Novos testes cobrem a funcionalidade adicionada/alterada
+- [ ] Commit segue Conventional Commits e referencia o ID da tarefa
+
+**Se aplicável:**
+- [ ] Revisão de código pré-merge executada (`/code-review` no diff da branch) para CRs de complexidade Média/Alta, com findings corrigidos ou justificados no CR
+- [ ] Migration testada: `alembic upgrade head` + `alembic downgrade -1`
+- [ ] Endpoints respondem com status codes corretos
+- [ ] Documentos afetados atualizados (Spec, Architecture, CLAUDE.md)
+- [ ] Sem erros/warnings no console do browser (frontend)
+- [ ] Revisão de segurança realizada (checklist OWASP — ver seção "Revisão de Segurança")
+
+### Revisão de Segurança
+
+**Quando executar** — obrigatório se a tarefa/CR envolver:
+- Novo endpoint ou mudança em endpoint existente
+- Autenticação, tokens, cookies ou sessões
+- CRUD com dados de outros usuários (verificação de ownership)
+- Nova dependência (biblioteca externa)
+
+Pular com justificativa explícita apenas se a mudança for exclusivamente: UI sem novos endpoints, atualização de documentação, ou refactoring interno sem alteração de contrato.
+
+**Checklist OWASP (adaptado à stack):**
+- [ ] Sem segredos hardcoded no código (SECRET_KEY, API keys, tokens)
+- [ ] Inputs do usuário validados via Pydantic (backend) antes de uso no banco
+- [ ] Tokens sensíveis não armazenados em `localStorage` (preferir cookie HttpOnly)
+- [ ] Endpoints de dados verificam ownership (usuário acessa só seus próprios recursos)
+- [ ] Queries usam ORM parametrizado (SQLAlchemy) — sem concatenação de SQL raw
+- [ ] CORS: origins e headers explícitos; `allow_credentials=True` exige origins não-wildcard
+- [ ] Headers de segurança HTTP presentes
+- [ ] Novas dependências auditadas: `pip audit` / `npm audit`
+
+### Fluxo de Branches
+
+- Nunca commitar diretamente em `master`
+- Criar branch para cada CR: `git checkout -b feat/CR-XXX-slug`
+- Nomenclatura:
+  - Nova feature/CR: `feat/CR-XXX-slug`
+  - Correção/CR:     `fix/CR-XXX-slug`
+  - Hotfix urgente:  `hotfix/descricao`
+- Ao concluir: merge em `master` com `--no-ff` e deletar a branch:
+  ```bash
+  git checkout master
+  git merge feat/CR-XXX-slug --no-ff
+  git branch -d feat/CR-XXX-slug
+  git push origin master
+  ```
+- Push em `master` dispara o auto-deploy na Railway (depois de configurado o serviço)
+
+### Commits
+
+- Formato: Conventional Commits
+- Nova feature: `feat: implement T-XXX - <descrição>`
+- Correção: `fix: CR-XXX - <descrição>`
+- Documentação: `docs: update <documento> for CR-XXX`
+- Refactoring: `refactor: <descrição>`
+- Testes: `test: add tests for T-XXX`
+
+### Push e Deploy
+
+- Antes de push, verifique se o build passa: `cd frontend && npx tsc --noEmit -p tsconfig.app.json` e `npm run lint`, e os testes do backend
+- CI (GitHub Actions, `.github/workflows/ci.yml`) roda pytest + tsc + eslint + vitest em cada push em `master` e em PRs — verifique que ficou verde após o push (`gh run watch`)
+- Commits devem referenciar o CR relevante (ex: `feat: CR-004 - descricao`)
+- Após implementação, atualize TODOS os documentos relacionados antes de push
+- Faça merge da branch do CR em `master` e então push: `git push origin master`
+
+---
+
+## Regras para Alterações e Correções
+
+Quando eu pedir uma alteração, correção ou nova funcionalidade em algo que já existe, **use a skill `/sdd-pipeline`**, que automatiza o fluxo completo:
+
+> CR (template + numeração sequencial em `/docs/changes/`) → branch `feat/CR-XXX-slug` → avaliação de impacto e atualização dos docs afetados → implementação → revisão de segurança (checklist OWASP) → validação (critérios de aceite + Done When Universal) → build TS + lint + testes → merge `--no-ff` em `master` + push.
+
+Os detalhes de cada etapa estão nas seções "Fluxo de Desenvolvimento", "Regras de Implementação" e "Fluxo de Branches" acima. Todo CR concluído entra em `/docs/changes/INDEX.md`.
+
+**Nunca faça alterações direto no código sem antes documentar o CR.**
+
+---
+
+## Regras para Criação de Documentos
+
+- Ao criar qualquer documento, **leia primeiro o template correspondente** em `/docs/templates/`
+- Mantenha versionamento nos documentos (Versão 1.0, 1.1, 2.0...)
+- Ao atualizar um documento, adicione entrada no changelog (quando existente)
+- Referencie IDs entre documentos (RF-001, RN-001, T-001, CR-001, US-001)
+- Use diagramas Mermaid quando aplicável
+
+---
+
+## Estrutura de Pastas do Projeto
+
+Estrutura planejada — o detalhe arquivo a arquivo passa a viver no `/docs/02-ARCHITECTURE.md` (fonte da verdade da estrutura) depois da fase de Arquitetura. Para o estado atual real, liste o filesystem (Glob) em vez de confiar em árvores documentadas.
+
+```
+Simulado Fuvest/
+├── .github/workflows/ci.yml   # CI: pytest (backend) + tsc/eslint/vitest (frontend)
+├── .claude/                    # Versionado (exceto settings.local.json)
+│   ├── hooks/check-quality.js  #   Bloqueia git commit se algum check falhar
+│   ├── hooks/check-config.json #   Lista de checks do hook (vazia até o T-001)
+│   └── settings.json           #   Hook PreToolUse para git commit
+├── docs/                       # PRD, Arquitetura, Spec, Plano, Deploy Guide
+│   ├── changes/                #   Change Requests CR-XXX + INDEX.md
+│   └── templates/              #   Templates obrigatórios dos documentos
+├── backend/                    # FastAPI + SQLAlchemy + Alembic (criado no T-001)
+├── frontend/                   # React + Vite + TS (criado no T-001)
+├── CLAUDE.md
+└── .gitignore
+```
+
+---
+
+## Convenções de Código
+
+| Item              | Padrão        | Exemplo                 |
+|-------------------|---------------|-------------------------|
+| Arquivos Python   | snake_case    | `question_service.py`   |
+| Arquivos TS/TSX   | camelCase     | `useSimulado.ts`        |
+| Componentes React | PascalCase    | `QuestionCard.tsx`      |
+| Classes Python    | PascalCase    | `Question`              |
+| Funções Python    | snake_case    | `build_simulado()`      |
+| Funções TS        | camelCase     | `formatScore()`         |
+| Tabelas BD        | snake_case    | `questions`, `exams`    |
+| Rotas API         | kebab-case    | `/api/simulados/{id}`   |
+
+- TypeScript em modo strict (`strict: true`)
+- PATCH para atualização parcial (`exclude_unset=True`)
+- Tailwind CSS v4: `@import "tailwindcss"` + `@theme` (NÃO usar diretivas v3)
+- Tabelas criadas via migration Alembic, nunca via `create_all()`
+
+---
+
+## Stack Tecnológica
+
+Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`) e fixadas no scaffold (T-001).
+
+| Camada         | Tecnologia                       | Versão |
+|----------------|----------------------------------|--------|
+| Frontend       | React + TypeScript               | React 19 |
+| Build/Dev      | Vite                             | 6.x    |
+| Estilização    | Tailwind CSS                     | 4.x    |
+| State/Fetch    | TanStack Query                   | 5.x    |
+| Routing        | react-router-dom                 | 7.x    |
+| Lint (FE)      | ESLint + typescript-eslint       | —      |
+| Testes (FE)    | Vitest + jsdom                   | —      |
+| Backend        | Python + FastAPI                 | Python 3.12 |
+| ORM            | SQLAlchemy (síncrono)            | 2.0+   |
+| Banco de Dados | PostgreSQL (prod) + SQLite (dev) | —      |
+| Migrations     | Alembic                          | 1.14+  |
+| Validação      | Pydantic                         | 2.x    |
+| Testes (BE)    | pytest                           | —      |
+| CI             | GitHub Actions                   | Node 22 / Python 3.12 |
+| Deploy         | Railway                          | —      |
+| Arquitetura    | Monorepo (backend/ + frontend/)  | —      |
+
+---
+
+## Contexto Atual do Projeto
+
+### Documentos Existentes
+- [ ] PRD (`/docs/01-PRD.md`)
+- [ ] Arquitetura (`/docs/02-ARCHITECTURE.md`)
+- [ ] Spec Técnica (`/docs/03-SPEC.md`)
+- [ ] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`)
+- [ ] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`)
+
+### Change Requests
+> **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
+
+- Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
+
+### Última Tarefa Implementada
+- Bootstrap SDD (2026-09-29): templates, hook de qualidade (sem checks até o T-001), CI com guardas temporárias e este CLAUDE.md
+
+### Pendências do Scaffold (T-001)
+- Mover os checks de `$pendentes` para `checks` em `.claude/hooks/check-config.json`
+- Remover as guardas `if: hashFiles(...)` de `.github/workflows/ci.yml`
+- Atualizar "Comandos Essenciais", "Estrutura de Pastas" e as versões da "Stack Tecnológica"
+
+---
+
+## Lembretes Importantes
+
+- **CR só é "Concluído" com todos os checkboxes fechados.** Nenhum CR pode receber Status "Concluído" com critérios de aceite desmarcados — cada um deve estar `[x]` ou riscado com justificativa. Critério pendente de evento posterior (ex: CI verde) mantém o CR "Em Implementação" até o follow-up.
+- **Pergunte antes de assumir.** Se algo não está claro na spec, pergunte.
+- **Não corrija o que não foi pedido.** Foque apenas no escopo da tarefa.
+- **Testes são obrigatórios.** Toda funcionalidade precisa de cobertura.
+- **Um passo de cada vez.** Implemente por grupo/tarefa, não tudo de uma vez.
+- **Documente primeiro.** Código sem documentação gera retrabalho.
+- **Docs sempre sincronizados.** Ao concluir uma feature ou CR, atualize TODOS os documentos relacionados na mesma sessão (Implementation Plan, PRD, Spec, CR). A tarefa só está completa quando os docs estão atualizados.
+- **Não fabrique ferramentas.** Nunca invente ou adivinhe a existência de plugins, comandos CLI ou ferramentas. Se não tiver certeza, verifique a documentação primeiro. Se um comando falhar, reconheça o erro imediatamente.
+- **Planeje antes de codar.** Em tarefas complexas (3+ etapas), crie um plano TodoWrite detalhado antes de escrever qualquer código. Inclua: CR, arquivos a modificar, verificação de build, atualizações de docs, commit.
+- **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, tsc, eslint a partir do T-001). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf).
+- **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
+
+---
+
+## Troubleshooting e Erros Conhecidos
+
+Referência rápida de problemas encontrados e suas soluções. Consulte esta seção antes de debugar problemas já resolvidos. As entradas iniciais vêm do projeto Meu Controle (mesma stack e mesma máquina).
+
+### Banco de Dados Local
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| `alembic upgrade`, `alembic downgrade` ou `uvicorn` local atingem **produção** | `backend/.env` com `DATABASE_URL` apontando para o PostgreSQL da Railway (aconteceu no Meu Controle) | **Sempre sobrescrever a variável** para trabalho local: `DATABASE_URL="sqlite:///./local.db" python -m alembic upgrade head` e o mesmo prefixo no `uvicorn`. Conferir com `python -c "from app.database import engine; print(engine.url)"` antes de qualquer escrita. A suíte `pytest` deve usar SQLite in-memory via fixtures, ignorando o `.env` |
+
+### Alembic / Migrations
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| `ALTER TABLE` com FK falha no SQLite | SQLite não suporta `ALTER` com foreign keys | Usar `op.batch_alter_table()` nas migrations Alembic |
+
+### Frontend
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Arquivos `.js` duplicando os `.tsx` em `frontend/src/` | `tsc` rodado sem `--noEmit` emite JS ao lado dos fontes | Ignorados via `.gitignore` (`frontend/src/**/*.js`). **Sempre editar o `.tsx`/`.ts`**; os `.js` podem ser deletados com segurança |
+
+### Ambiente Windows
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Comando `del` falha no bash | `del` é comando do CMD, não do bash | Usar `rm -f` no bash tool |
+| `timeout` não funciona no PowerShell | Comando exclusivo do CMD | Usar `Start-Sleep` no PowerShell |
+| `curl` não funciona no PowerShell | Alias conflita com `Invoke-WebRequest` | Usar `Invoke-RestMethod` no PowerShell |
+| uvicorn/alembic não encontrados | Executáveis não estão no PATH do Windows | Usar `python -m uvicorn` / `python -m alembic` |
+| `pkill` / `kill` não encerram processo | Comandos Unix não funcionam no Windows | Usar `taskkill //F //PID <pid>` |
+| Processo Python com nome inesperado | Nome pode ser `python3.12.exe` em vez de `python.exe` | Identificar via PID: `netstat -ano \| grep <porta>` + `tasklist //FI "PID eq <pid>"` |
+| `pip-audit` falha com `CERTIFICATE_VERIFY_FAILED` | Interceptação de certificado local nesta máquina | Auditoria roda no CI (passo informativo no job backend) — não insistir localmente |
