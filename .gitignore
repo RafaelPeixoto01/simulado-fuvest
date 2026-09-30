@@ -43,3 +43,6 @@ logs.*.json
 
 # Playwright MCP logs
 .playwright-mcp/
+
+# Ingestao: PDFs baixados do acervo (so cache local)
+data/_cache/

@@ -1,9 +1,10 @@
 {
-  "$comment": "Checks executados pelo check-quality.js antes de cada git commit. Vazio ate o scaffold (T-001): um check sem codigo falharia sempre e bloquearia todo commit. No T-001, mover as entradas de $pendentes para checks.",
-  "checks": [],
-  "$pendentes": [
-    { "name": "pytest", "cwd": "backend", "command": "python -m pytest tests/ -q", "timeoutSeconds": 300 },
-    { "name": "TypeScript", "cwd": "frontend", "command": "npx tsc --noEmit -p tsconfig.app.json" },
-    { "name": "ESLint", "cwd": "frontend", "command": "npx eslint src" }
+  "$comment": "Checks executados pelo check-quality.js antes de cada git commit (Windows/cmd.exe). O backend usa o Python do venv do projeto (backend/.venv): o Python global tem as versoes do Meu Controle.",
+  "checks": [
+    { "name": "pytest", "cwd": "backend", "command": ".venv\\Scripts\\python.exe -m pytest tests/ -q", "timeoutSeconds": 60 },
+    { "name": "ruff", "cwd": "backend", "command": ".venv\\Scripts\\python.exe -m ruff check .", "timeoutSeconds": 30 },
+    { "name": "TypeScript", "cwd": "frontend", "command": "npx tsc --noEmit -p tsconfig.app.json", "timeoutSeconds": 60 },
+    { "name": "ESLint", "cwd": "frontend", "command": "npx eslint .", "timeoutSeconds": 60 },
+    { "name": "Vitest", "cwd": "frontend", "command": "npx vitest run", "timeoutSeconds": 60 }
   ]
 }

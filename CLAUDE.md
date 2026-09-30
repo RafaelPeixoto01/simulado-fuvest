@@ -12,17 +12,19 @@
 
 ## Comandos Essenciais
 
-> Disponíveis após o scaffold (T-001). A estrutura exata é definida em `/docs/02-ARCHITECTURE.md`.
+> O backend usa o venv **do projeto** (`backend/.venv`) — nunca o Python global, que tem as versões do Meu Controle. Setup: `cd backend && python -m venv .venv && .venv/Scripts/python -m pip install -r requirements-dev.txt`; `cd frontend && npm install`.
 
 | Ação | Comando |
 |------|---------|
-| Backend (dev) | `cd backend && python -m alembic upgrade head && python -m uvicorn app.main:app --reload` (porta 8000) |
-| Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` → 8000) |
-| Testes backend | `cd backend && python -m pytest tests/ -v` |
+| Backend (dev) | `cd backend && .venv/Scripts/python -m alembic upgrade head && .venv/Scripts/python -m uvicorn app.main:app --reload` (porta 8000, SQLite `local.db`) |
+| Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` e `/figuras` → 8000) |
+| Testes backend | `cd backend && .venv/Scripts/python -m pytest` |
+| Lint backend | `cd backend && .venv/Scripts/python -m ruff check .` |
 | Testes frontend | `cd frontend && npm test` (Vitest) |
 | Build check TS | `cd frontend && npx tsc --noEmit -p tsconfig.app.json` |
 | Lint frontend | `cd frontend && npm run lint` |
-| Migrations | `cd backend && python -m alembic upgrade head` (aplicar) / `python -m alembic downgrade -1` (reverter) |
+| Build frontend | `cd frontend && npm run build` |
+| Migrations | `cd backend && .venv/Scripts/python -m alembic upgrade head` (aplicar) / `... downgrade -1` (reverter) |
 
 ---
 
@@ -288,12 +290,6 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ### Última Tarefa Implementada
 - Documentação do Fluxo A (2026-09-29): PRD, Arquitetura, Specs e Plano. Próxima tarefa: T-001 (scaffold do backend)
 
-### Pendências do Scaffold (T-001)
-- Mover os checks de `$pendentes` para `checks` em `.claude/hooks/check-config.json`
-- Remover as guardas `if: hashFiles(...)` de `.github/workflows/ci.yml`, subir o CI para Node 24, remover o `SECRET_KEY` (não há auth) e adicionar `ruff check` + `python -m ingestao validar --todas`
-- Adicionar `ruff` aos checks do hook
-- Atualizar "Comandos Essenciais", "Estrutura de Pastas" e as versões da "Stack Tecnológica"
-
 ---
 
 ## Lembretes Importantes
@@ -307,7 +303,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **Docs sempre sincronizados.** Ao concluir uma feature ou CR, atualize TODOS os documentos relacionados na mesma sessão (Implementation Plan, PRD, Spec, CR). A tarefa só está completa quando os docs estão atualizados.
 - **Não fabrique ferramentas.** Nunca invente ou adivinhe a existência de plugins, comandos CLI ou ferramentas. Se não tiver certeza, verifique a documentação primeiro. Se um comando falhar, reconheça o erro imediatamente.
 - **Planeje antes de codar.** Em tarefas complexas (3+ etapas), crie um plano TodoWrite detalhado antes de escrever qualquer código. Inclua: CR, arquivos a modificar, verificação de build, atualizações de docs, commit.
-- **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, tsc, eslint a partir do T-001). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf).
+- **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, ruff, tsc, eslint, vitest). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf ou de um JSON de simulação) — para simular o hook, passe o payload por arquivo (`node .claude/hooks/check-quality.js < payload.json`).
 - **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR.
 - **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
 - **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
@@ -348,3 +344,6 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | `pkill` / `kill` não encerram processo | Comandos Unix não funcionam no Windows | Usar `taskkill //F //PID <pid>` |
 | Processo Python com nome inesperado | Nome pode ser `python3.12.exe` em vez de `python.exe` | Identificar via PID: `netstat -ano \| grep <porta>` + `tasklist //FI "PID eq <pid>"` |
 | `pip-audit` falha com `CERTIFICATE_VERIFY_FAILED` | Interceptação de certificado local nesta máquina | Auditoria roda no CI (passo informativo no job backend) — não insistir localmente |
+| Instalar dependências do backend quebra o Meu Controle | O Python global tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0) | Sempre usar `backend/.venv` (hook, comandos e docs já apontam para ele) |
+| Vitest: "failed to find the current suite" só no hook | Com o cwd em `d:\...` (drive minúsculo) o Vitest carrega o próprio módulo duas vezes | O `check-quality.js` normaliza a letra do drive para maiúscula; ao rodar à mão via `cmd`, usar `D:\` |
+| `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
