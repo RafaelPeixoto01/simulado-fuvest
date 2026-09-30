@@ -103,6 +103,7 @@
 | 2026-09-29 | T-022 | FT-001: Início → Prova completa (descartando o anterior, RN-011) → responder 3 → recarregar | Volta na questão 3 de 90 com a resposta marcada; folha mostra 1 B, 2 D, 3 A; cronômetro seguiu (04:59:50); console limpo |
 | 2026-09-29 | T-022 | FT-005: celular 360 px | Sem rolagem horizontal (345 px); folha de respostas em gaveta fecha ao navegar; figura amplia e fecha com Esc. Ajustes feitos: folha com 2 colunas visíveis no desktop (lateral de 20rem) e barra fixa em uma linha no celular (descrição oculta, ícone para ocultar o tempo) |
 | 2026-09-29 | T-023 | FT-010: Prova de 2099 → 5 respostas → Finalizar → resultado → filtro "Erradas" → histórico | **Achou um bug**: a finalização caía em `/` (o `DESCARTAR` urgente fazia a resolução redirecionar antes da navegação, que roda como transição). Corrigido movendo o descarte para a tela de resultado; teste reforçado para exigir a tela de resultado. Após a correção: "Você acertou 2 de 90" (as 2 anuladas de 2099, RN-002), folha corrigida com rótulos por linha, filtro "Erradas" com 5 questões, histórico com a entrada e simulado em andamento descartado |
+| 2026-09-29 | T-024 | FT-004: Treino → responder 3 → feedback → próxima | Feedback imediato ("Resposta correta: A."), alternativas travadas, placar "0 acertos em 3 respondidas", texto compartilhado exibido com figura. Implementado com `useInfiniteQuery` (lotes como páginas; `excluir` = já vistas) |
 
 ---
 
