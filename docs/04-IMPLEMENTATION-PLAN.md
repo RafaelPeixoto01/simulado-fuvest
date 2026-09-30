@@ -17,7 +17,7 @@
 | 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
 | 3 | API | T-012 a T-017 | Concluído |
 | 4 | Frontend | T-018 a T-025 | Concluído |
-| 5 | Deploy | T-026 a T-027 | Em andamento |
+| 5 | Deploy | T-026 a T-027 | Concluído (pendente: toggle "Wait for CI", curador) |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
 
 > **Status:** Pendente / Em andamento / Concluído
@@ -105,6 +105,8 @@
 | 2026-09-29 | T-023 | FT-010: Prova de 2099 → 5 respostas → Finalizar → resultado → filtro "Erradas" → histórico | **Achou um bug**: a finalização caía em `/` (o `DESCARTAR` urgente fazia a resolução redirecionar antes da navegação, que roda como transição). Corrigido movendo o descarte para a tela de resultado; teste reforçado para exigir a tela de resultado. Após a correção: "Você acertou 2 de 90" (as 2 anuladas de 2099, RN-002), folha corrigida com rótulos por linha, filtro "Erradas" com 5 questões, histórico com a entrada e simulado em andamento descartado |
 | 2026-09-29 | T-024 | FT-004: Treino → responder 3 → feedback → próxima | Feedback imediato ("Resposta correta: A."), alternativas travadas, placar "0 acertos em 3 respondidas", texto compartilhado exibido com figura. Implementado com `useInfiniteQuery` (lotes como páginas; `excluir` = já vistas) |
 | 2026-09-30 | T-025 | FT-020: reportar na resolução | Modal com a fonte da questão; "Obrigado! Vamos revisar esta questão." e fechamento em 2 s; cronômetro seguiu (05:00:00 → 04:59:58); reporte gravado e listado pela CLI (`reportes listar`) |
+| 2026-09-30 | T-026 | Composição de produção local (build do SPA + `ENVIRONMENT=production` + start completo) e job `docker` no CI | SPA nas rotas profundas, assets/figuras/favicon com tipo certo, 404 JSON em `/api`, sem Swagger, CSP/HSTS ativos; no navegador, nenhuma violação de CSP e as duas fontes carregam. CI: imagem construída e smoke test verde |
+| 2026-09-30 | T-027 | Provisionamento via CLI + merge em `master` + primeiro deploy | Projeto, Postgres e serviço criados (o app da Railway no GitHub precisou de acesso ao repositório, liberado pelo curador); deploy de `2ad8220` com sucesso; migration aplicada no Postgres; health `{"status":"ok","provas":0}`; início em https://simulado-fuvest-production.up.railway.app com "Ainda não há provas publicadas" (o rascunho 2025 é ignorado até a curadoria); headers de segurança e ausência de CORS/docs conferidos. **O simulado completo em produção fica para depois da T-011** |
 
 ---
 
