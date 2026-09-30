@@ -13,13 +13,14 @@
 | Item | Valor |
 |------|-------|
 | Hosting | Railway, projeto `simulado-fuvest`, serviço `simulado-fuvest` (container Docker) |
+| URL | https://simulado-fuvest-production.up.railway.app |
 | Banco de dados | PostgreSQL (add-on Railway, serviço `Postgres`) |
 | Repositório | https://github.com/RafaelPeixoto01/simulado-fuvest (branch `master`) |
 | Build trigger | Push em `master` (auto-deploy da Railway) |
 | Gate de deploy | "Wait for CI" ligado no serviço (toggle só no dashboard) |
 | Config-as-code | `railway.json`: builder Dockerfile, healthcheck `/api/health` (120 s), restart on failure (10×) |
 | Container | `node:24-alpine` (build do SPA) → `python:3.12-slim` |
-| Porta | `PORT` injetada pela Railway (padrão local 8000) |
+| Porta | `PORT` injetada pela Railway (8080 em produção; padrão local 8000) |
 
 ### 1.2 Pipeline de Deploy
 

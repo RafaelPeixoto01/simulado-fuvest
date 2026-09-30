@@ -423,7 +423,7 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 
 | Item | Valor |
 |------|-------|
-| Hosting | Railway (container Docker, serviço único) — projeto `simulado-fuvest`, serviço `simulado-fuvest` ligado ao repositório `RafaelPeixoto01/simulado-fuvest` |
+| Hosting | Railway (container Docker, serviço único) — projeto `simulado-fuvest`, serviço `simulado-fuvest` ligado ao repositório `RafaelPeixoto01/simulado-fuvest`; https://simulado-fuvest-production.up.railway.app |
 | Banco de dados | PostgreSQL (add-on Railway); `DATABASE_URL` por referência `${{Postgres.DATABASE_URL}}` |
 | Provisionamento | Via CLI (`railway init`/`add`/`domain`), mesmo padrão do Meu Controle — comandos em T-027 e no `05-DEPLOY-GUIDE.md` |
 | Config-as-code | `railway.json`: builder `DOCKERFILE`, `healthcheckPath: /api/health`, `restartPolicyType: ON_FAILURE` (10 tentativas) |
