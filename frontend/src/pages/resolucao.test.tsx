@@ -315,7 +315,7 @@ describe('Resolução: navegação, folha e modo foco (CR-001)', () => {
     const fechar = within(painel).getByRole('button', { name: 'Fechar folha' })
     expect(fechar).toHaveFocus()
     expect(document.documentElement.style.overflow).toBe('hidden')
-    expect(within(painel).getByText('1 respondidas · 2 em branco')).toBeInTheDocument()
+    expect(within(painel).getByText('1 respondida · 2 em branco')).toBeInTheDocument()
     expect(within(painel).getByRole('button', { name: 'Questão 2: respondida D' })).toBeInTheDocument()
 
     // Tab circula dentro do painel: do último (Finalizar simulado) volta ao primeiro (Fechar)

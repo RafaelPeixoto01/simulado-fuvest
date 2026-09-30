@@ -44,7 +44,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
   const total = questaoIds.length
   const respondidas = questaoIds.filter((id) => respostas[id]).length
   const paraRevisar = questaoIds.filter((id) => marcadas.includes(id)).length
-  const resumo = `${respondidas} respondidas · ${total - respondidas} em branco${paraRevisar ? ` · ${paraRevisar} para revisar` : ''}`
+  const resumo = `${respondidas} ${respondidas === 1 ? 'respondida' : 'respondidas'} · ${total - respondidas} em branco${paraRevisar ? ` · ${paraRevisar} para revisar` : ''}`
 
   // No painel do celular, a questão atual já aparece à vista ao abrir
   const botaoAtual = useRef<HTMLButtonElement>(null)
