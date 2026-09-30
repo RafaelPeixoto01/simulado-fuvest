@@ -16,7 +16,7 @@
 | 1 | Setup e Infraestrutura | T-001 a T-004 | Concluído |
 | 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
 | 3 | API | T-012 a T-017 | Concluído |
-| 4 | Frontend | T-018 a T-025 | Pendente |
+| 4 | Frontend | T-018 a T-025 | Em andamento |
 | 5 | Deploy | T-026 a T-027 | Pendente |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
 
@@ -93,6 +93,13 @@
 | T-023 | Resultado (resumo, disciplinas, revisão) + Histórico | `pages/ResultadoPage.tsx`, `HistoricoPage.tsx`, `storage/historicoStorage.ts`, componentes | RF-017–RF-020 | T-022 | UT-020, UT-021 verdes; FT-002 e FT-010 validados |
 | T-024 | TreinoPage (lotes, feedback imediato, placar, recomeçar) | `pages/TreinoPage.tsx` | RF-012 | T-020, T-015 | FT-004 validado |
 | T-025 | ReportarModal integrado ao QuestaoView | `components/ReportarModal.tsx` | RF-021 | T-020, T-016 | FT-020 validado |
+
+### Validações em runtime do Grupo 4 (Playwright MCP, backend + Vite locais, base sintética 2098/2099)
+
+| Data | Tarefa | Fluxo | Resultado |
+|------|--------|-------|-----------|
+| 2026-09-29 | T-018 | Navegar pelas 8 rotas | Todas renderizam; console sem erros após adicionar o favicon |
+| 2026-09-29 | T-021 | FT-003: Personalizado (Inglês, 2098, 90 questões) | 409 → "Só existem 11 questões para esses filtros." → "Gerar com 11 questões" → `/simulado` com 11 questões, limite 2200 s, pausável. O único registro no console é o log automático do navegador para a resposta 409 (esperado e tratado pelo app) |
 
 ---
 
