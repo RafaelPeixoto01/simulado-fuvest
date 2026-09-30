@@ -291,7 +291,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
 
 ### Última Tarefa Implementada
-- Grupos 1 a 4 do MVP (2026-09-30): backend, ingestão (família 2025), API e frontend completos em `feat/mvp`, com validação em runtime registrada no plano. Próximo: Grupo 5 (T-026 Docker/`railway.json`, T-027 provisionar a Railway e primeiro deploy). Pendente do curador: T-011 (curadoria da prova 2025)
+- MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Pendente do curador: T-011/T-029 (curar e publicar as provas, numa branch `conteudo/prova-AAAA`). Depois: T-030 (revisão final)
 
 ---
 
@@ -349,5 +349,6 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | `pip-audit` falha com `CERTIFICATE_VERIFY_FAILED` | Interceptação de certificado local nesta máquina | Auditoria roda no CI (passo informativo no job backend) — não insistir localmente |
 | Instalar dependências do backend quebra o Meu Controle | O Python global tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0) | Sempre usar `backend/.venv` (hook, comandos e docs já apontam para ele) |
 | Vitest: "failed to find the current suite" só no hook | Com o cwd em `d:\...` (drive minúsculo) o Vitest carrega o próprio módulo duas vezes | O `check-quality.js` normaliza a letra do drive para maiúscula; ao rodar à mão via `cmd`, usar `D:\` |
+| Regex com `\b` virou backspace (`\x08`) ao editar via script Python em heredoc | Em string Python comum, `\b` é o caractere de controle backspace; o arquivo parecia certo mas o regex não casava | Editar regex com a ferramenta Edit ou com string raw (`r'...'`); conferir com `repr()` quando um Edit "não acha" o texto |
 | `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
 | Saída da CLI com `�` no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | Só acontece com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |

@@ -18,7 +18,7 @@
 | 3 | API | T-012 a T-017 | Concluído |
 | 4 | Frontend | T-018 a T-025 | Concluído |
 | 5 | Deploy | T-026 a T-027 | Concluído (pendente: toggle "Wait for CI", curador) |
-| 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
+| 6 | Conteúdo e Lançamento | T-028 a T-030 | Em andamento (T-028 concluída) |
 
 > **Status:** Pendente / Em andamento / Concluído
 
@@ -123,7 +123,7 @@
 
 | ID | Tarefa | Arquivos | Ref | Depende de | Done When |
 |----|--------|----------|-----|------------|-----------|
-| T-028 | Estender o registry da família 2025 aos anos vizinhos (2024, 2023, …) até onde ela extrair sem pendência estrutural; documentar onde uma família nova seria necessária | `ingestao/layouts/__init__.py`, `ingestao/gabarito/__init__.py`, fixtures | RF-003, ADR-003 | T-010 | Anos suportados listados no registry e na Arquitetura |
+| T-028 | Estender o registry da família 2025 aos anos vizinhos (2024, 2023, …) até onde ela extrair sem pendência estrutural; documentar onde uma família nova seria necessária | `ingestao/layouts/__init__.py`, `ingestao/gabarito/__init__.py`, fixtures | RF-003, ADR-003 | T-010 | Anos suportados listados no registry e na Arquitetura. **Resultado (2026-09-30):** a família cobre 2020, 2022, 2023, 2024 e 2025 (muda só a fonte do número da questão; gabarito com versões V/K/Q/X/Z). 2021 fica de fora: o PDF não tem texto extraível e exigiria OCR. Rascunhos extraídos: 2024 62/90, 2023 61/90, 2022 56/90, 2020 68/90 sem pendência estrutural (2025: 61/90). O gabarito retificado de 2024 aceita duas respostas na questão 48 (versão V): vira pendência para o curador |
 | T-029 | **(curador)** Curadoria e publicação até **≥ 5 provas** (meta do PRD §2) | `data/provas/**` | PRD §2 | T-011, T-028 | `validar --todas` verde; 5+ provas no catálogo de produção |
 | T-030 | Revisão final: acessibilidade (teclado, contraste, alt), mobile 360 px, performance (geração p95 < 2 s), `/code-review` do diff, sincronização de todos os docs (PRD, Arquitetura, Specs, Plano, CLAUDE.md) | docs + ajustes | RNF-001–RNF-003 | T-027, T-029 | Checklist Done When Universal completo; findings corrigidos ou justificados |
 

@@ -67,7 +67,8 @@ class Fonte(_Modelo):
 
 class PacoteProva(_Modelo):
     ano: int = Field(ge=1977, le=2100)
-    versao: str = Field(pattern=r"^(V[1-4]|unica)$")
+    # 2025: V1..V4; 2020 e 2022-2024: letras (V, K, Q, X, Z); versao unica
+    versao: str = Field(pattern=r"^(V[1-4]|[A-Z]|unica)$")
     status: Literal["rascunho", "publicada"] = "rascunho"
     fonte: Fonte
     textos_base: list[TextoBase] = []
