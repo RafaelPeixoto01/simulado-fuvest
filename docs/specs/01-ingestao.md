@@ -187,7 +187,7 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
 5. Dentro do corpo: linhas iniciadas por `(A)`…`(E)` iniciam as alternativas; o que vem antes é o enunciado.
 6. Textos-base: um trecho iniciado por `Texto para as questões N e M` (e variações: `N a M`, `N, M e P`) vira um `TextoBase` com `id` sequencial `tbNN` e é vinculado às questões citadas.
 7. Limpeza de texto (em `pdf_util`): remover artefatos `(cid:N)` (cid:3 → espaço), normalizar espaços, juntar hifenização de fim de linha quando a linha seguinte começa em minúscula e preservar quebras de parágrafo (espaçamento vertical > 1,5× a altura da linha).
-8. Figuras: cada imagem embutida (`page.images`) cuja bbox cai na região de uma questão é renderizada a 2× (144 dpi), limitada a 1200 px de largura, em WebP qualidade 80, com o nome `qNNN-k.webp` (ou `tbNN-k.webp`) e inserida como bloco `figura` na posição vertical correspondente. Imagem na região de uma alternativa vira `figura` da alternativa.
+8. Figuras: palavras cuja bbox cai dentro da bbox de uma figura (rótulos sobrepostos a mapas e gráficos, ex.: Q02 de 2025) **não** entram no texto, porque o recorte já as inclui. Cada imagem embutida (`page.images`) cuja bbox cai na região de uma questão é renderizada a 2× (144 dpi), limitada a 1200 px de largura, em WebP qualidade 80, com o nome `qNNN-k.webp` (ou `tbNN-k.webp`) e inserida como bloco `figura` na posição vertical correspondente. Imagem na região de uma alternativa vira `figura` da alternativa.
 9. Pendências geradas pelo parser (texto em `pendencias`):
    - menos de 5 alternativas detectadas;
    - região com muitos traços vetoriais (curvas/retângulos) e sem imagem: "Possível figura vetorial na página P, y≈Y0–Y1";
