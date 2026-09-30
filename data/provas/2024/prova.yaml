@@ -13,19 +13,23 @@ textos_base:
   conteudo:
   - texto: |-
       Tempo de nos aquilombar
+
       É tempo de caminhar em fingido silêncio,
       e buscar o momento certo no grito,
       aparentar fechar um olho evitando o cisco
       e abrir escancaradamente o outro.
+
       É tempo de fazer os ouvidos moucos
       para os vazios lero-leros,
       e cuidar dos passos assuntando as vias,
       ir se vigiando atento, que o buraco é fundo.
+
       É tempo de ninguém se soltar de ninguém,
       mas olhar fundo na palma aberta
       a alma de quem lhe oferece o gesto.
       O laçar de mãos não pode ser algemas,
       e sim acertada tática, necessário esquema.
+
       É tempo de formar novos quilombos,
       em qualquer lugar que estejamos
       e que venham dias futuros, salve 2020
@@ -55,16 +59,34 @@ textos_base:
   - texto: |-
       Over the last two decades, technology companies and policymakers warned of a “digital divide” in which poor children could fall behind their more affluent peers without equal access to technology. Today, with widespread internet access and smartphone ownership, the gap has narrowed sharply.
       But with less fanfare a different division has appeared: Across the country, poor children and adolescents are participating far less in sports and fitness activities than more affluent youngsters are. Call it the physical divide. Data from multiple sources reveal a significant gap in sports participation by income level.
-      A combination of factors is responsible. Spending cuts and changing priorities at some public schools have curtailed physical education classes and organized sports. At the same time, privatized youth sports have become a multibilliondollar enterprise offering new opportunities — at least for families that can afford hundreds to thousands of dollars each season for club-team fees, uniforms, equipment, travel to tournaments and private coaching.
+      A combination of factors is responsible. Spending cuts and changing priorities at some public schools have curtailed physical education classes and organized sports. At the same time, privatized youth sports have become a multibillion-dollar enterprise offering new opportunities — at least for families that can afford hundreds to thousands of dollars each season for club-team fees, uniforms, equipment, travel to tournaments and private coaching.
       “What’s happened as sports has become privatized is that it has become the haves and have-nots,” said Jon Solomon, editorial director for the Aspen Institute Sports and Society Program. “Particularly for low-income kids, if they don’t have access to sports within the school setting, where are they going to get their physical activity?” Mr. Solomon said. “The answer is nowhere.”
-      The New York Times . 24 March 2023. Adaptado.
+      The New York Times. 24 March 2023. Adaptado.
+- id: tb05
+  questoes:
+  - 82
+  - 83
+  conteudo:
+  - texto: |-
+      Texto I
+      “Na confusão verde do fundo da machamba, Maria não viu o capataz imediatamente. Esbracejou com aflição, tentando libertar as pernas. O braço rodeou-lhe os ombros duramente. O bafo quente e ácido do homem aproximou-se da sua face.
+      A capulana da Maria desprendeu-se durante a breve luta e a sensação fria de água tornou-se-lhe mais vívida. Um arrepio fê-la contrair-se.
+      Sentiu nas coxas nuas a carícia morna e áspera dos dedos calosos do homem.”
+      Luis Bernardo Honwana. Dina, In: Nós Matamos o Cão Tinhoso!.
+      Texto II
+      “– Mas choraste. A bofetada que te dei foi só uma disciplina para aprenderes a não fazer ciúmes. Gosto muito de ti, Sarnau. És a minha primeira mulher. É tua a honra deste território. Tu és a mãe de todas as mães da nossa terra. Tu és o meu mundo, minha flor, rebuçado [bala] do meu coração.
+      Deixei cair duas gotas de fel bem amargas e salgadinhas. Meu marido acariciava-me à moda dos búfalos; dizia-me coisas no ouvido e o seu hálito fedia a álcool, enjoava-me, arrepiava-me, maltratando o meu corpinho frágil. Explodi furiosa e chorei de amargura.
+      – Sarnau, pareces ser uma machamba difícil. Já faz tempo que semeio em ti e não vejo resultado. Com a outra foi tão diferente. Bastou uma sementeira e germinou logo.
+      – Casámo-nos há pouco tempo, Nguila, muito pouco tempo.
+      – Não tenho lá muita paciência. Não estou para lavrar sem colher.”
+      Paulina Chiziane. Balada de amor ao vento, p. 61-62.
 questoes:
 - numero: 1
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
-  - texto: O verso “ É tempo de formar novos quilombos ” é um exemplo de
+  - texto: O verso “É tempo de formar novos quilombos” é um exemplo de
   alternativas:
     A:
       texto: paradoxo, na medida em que propõe retomar o passado num contexto atual.
@@ -81,7 +103,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -99,10 +121,9 @@ questoes:
       texto: as peculiaridades das diferentes classes sociais ao enfrentar os problemas sociais atuais.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 2, y≈555: conferir o texto'
+  pendencias: []
 - numero: 3
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -119,7 +140,7 @@ questoes:
   - texto: Jean-Baptiste Debret. “Um jantar brasileiro”, 1827. Aquarela, 15,7 x 22 cm. Disponível em http://museuscastromaya.com.br/.
   - figura: q003-2.webp
   - texto: |-
-      Gê Viana. “Sentem para jantar”, 2021. Impressão em jato de tinta com pigmento natural de colagem digital sobre papel Hahnemuhle Photo Rag 308 g/m ; 29,7 x 42 cm. Disponível em https://mam.rio/ge-viana/.
+      Gê Viana. “Sentem para jantar”, 2021. Impressão em jato de tinta com pigmento natural de colagem digital sobre papel Hahnemuhle Photo Rag 308 g/m²; 29,7 x 42 cm. Disponível em https://mam.rio/ge-viana/.
       Com base nas informações e imagens apresentadas, assinale a alternativa que corresponde à abordagem adotada por Gê Viana em sua obra “Sentem para jantar”, ao utilizar como referência a obra “Um jantar brasileiro”, de Jean-Baptiste Debret.
   alternativas:
     A:
@@ -131,8 +152,8 @@ questoes:
       texto: Gê Viana emprega, em sua obra, as mesmas técnicas e os mesmos materiais utilizados na obra
         de Debret, o que lhes confere grande semelhança.
     D:
-      texto: Gê Viana ignora aspectos relacionados a questões étnicoraciais em sua releitura da obra de
-        Debret, focando apenas na estética visual da obra.
+      texto: Gê Viana ignora aspectos relacionados a questões étnico-raciais em sua releitura da obra
+        de Debret, focando apenas na estética visual da obra.
     E:
       texto: Gê Viana busca desconstruir, em sua obra, os estereótipos étnico-raciais presentes na obra
         original de Debret.
@@ -140,7 +161,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -160,7 +181,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 5
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -180,13 +201,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Na coluna do ativo como na do passivo, seria difícil exagerar o papel do açúcar na história do Brasil colonial. Se ele foi o produto que proporcionou a base inicial solidamente econômica para o esforço do colonizador, foi também o que plasmou o regime de propriedade latifundiária, instalou a escravidão africana na América portuguesa e, no seu exclusivismo, inibiu o desenvolvimento da policultura (...), embora estimulando, em áreas apartadas, a pecuária e a lavoura de subsistência. (...) Ele desenvolveu um estilo de vida que marcou a existência de todas as camadas da população que integrou, reservando, contudo, seus privilégios a uns poucos.”
-      MELLO, Evaldo Cabral de. Um imenso Portugal : História e historiografia. São Paulo: Ed. 34, 2002. p.110. O texto indica que, no Nordeste açucareiro dos séculos XVI e XVII,
+      MELLO, Evaldo Cabral de. Um imenso Portugal: História e historiografia. São Paulo: Ed. 34, 2002. p.110.
+      O texto indica que, no Nordeste açucareiro dos séculos XVI e XVII,
   alternativas:
     A:
       texto: a mão de obra de escravizados de origem africana e indígena era empregada nos canaviais,
@@ -206,7 +228,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -236,7 +258,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 8
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -272,8 +294,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
@@ -282,7 +305,7 @@ questoes:
       – (...) Eu tenho alunos de estudos africanos que não sabem escrever (...).
       – Então o que é que nós devíamos estar fazendo? (...) O professor Nielson ainda usa terno (...), embora o padrão da indumentária tenha relaxado a partir do exemplo dado pelas túnicas de Mandela. (...) – Você não está propondo que a gente baixe ainda mais os critérios de admissão à universidade. Então a universidade é pra avançar no conhecimento ou é pra andar pra trás?
       O que Steve está perguntando é se esse ensino adicional de faz de conta na esperança de elevar os alunos a um nível universitário pode compensar dez anos de educação primária e secundária de péssimo nível.”
-      GORDIMER, Nadine. O melhor tempo é o tempo presente . São Paulo: Companhia das Letras, 2014. p.82-83.
+      GORDIMER, Nadine. O melhor tempo é o tempo presente. São Paulo: Companhia das Letras, 2014. p.82-83.
       No excerto do romance da escritora sul-africana Nadine Gordimer, é possível identificar:
   alternativas:
     A:
@@ -290,28 +313,29 @@ questoes:
         alunos e professores negros fora da universidade.
     B:
       texto: a segregação formal das mulheres no acesso à educação, conforme estabelecido pela Constituição
-        promulgada no pós- apartheid .
+        promulgada no pós-apartheid.
     C:
       texto: as eficazes estratégias de apoio aos estudantes pobres para assegurar a boa qualidade da
-        educação básica e superior na época do apartheid .
+        educação básica e superior na época do apartheid.
     D:
       texto: as incertezas sobre as estratégias adotadas para enfrentar desigualdades sociais e educacionais
         legadas pelo regime do apartheid na África do Sul.
     E:
       texto: o reconhecimento consensual do sucesso do projeto de inclusão educacional no cenário sul-africano
-        pósapartheid .
+        pós-apartheid.
   resposta: D
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       “Por quê? Porque pensar em direitos humanos tem um pressuposto: reconhecer que aquilo que consideramos indispensável para nós é também indispensável para o próximo. (...).
       Nesse ponto as pessoas são frequentemente vítimas de uma curiosa obnubilação. Elas afirmam que o próximo tem direito, sem dúvida, a certos bens fundamentais, como casa, comida, instrução, saúde, coisas que ninguém bem formado admite hoje em dia que sejam privilégio de minorias, como são no Brasil. Mas será que pensam que seu semelhante pobre teria direito a ler Dostoievski ou ouvir os quartetos de Beethoven? (...). Ora, o esforço para incluir o semelhante no mesmo elenco de bens que reivindicamos está na base da reflexão sobre os direitos humanos.”
-      CANDIDO, Antonio. Vários escritos . 3ª ed. revista e ampliada. São Paulo: Duas Cidades, 1995.
+      CANDIDO, Antonio. Vários escritos. 3ª ed. revista e ampliada. São Paulo: Duas Cidades, 1995.
       Com base na leitura do texto, pode-se afirmar que Antonio Candido defende que o acesso a bens como a literatura e a música
   alternativas:
     A:
@@ -328,7 +352,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 11
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -348,7 +372,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 12
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -368,53 +392,51 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 13
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Matrizes podem ser usadas para se obter informações sobre uma rede social. Para compreender
       como isso pode ser feito, consideremos como exemplo uma pequena rede social formada por 4 pessoas:
-      \U0001D443 ,\U0001D443 ,\U0001D443 ,\U0001D443 . A matriz associada a essa rede social é a matriz
-      4×4 :"
+      \U0001D443₁, \U0001D443₂, \U0001D443₃, \U0001D443₄. A matriz associada a essa rede social é a matriz
+      4 × 4:"
   - figura: q013-1.webp
-  - texto: "O valor 1 (um) na posição \U0001D44E (linha 3, coluna 2) da matriz significa que a pessoa
-      \U0001D443 segue a pessoa \U0001D443 , ao passo que o valor 0 (zero) na posição \U0001D44E (linha
-      2, coluna 4) significa que a pessoa \U0001D443 não segue a pessoa \U0001D443 . O valor 0 (zero)
-      será atribuído às posições \U0001D44E . O significado do valor da posição da matriz produto \U0001D440×\U0001D440=\U0001D440
-      é a quantidade de \U0001D44F\nconexões da pessoa \U0001D443 até a pessoa \U0001D443 passando exatamente
-      por uma pessoa, diferente delas duas, que chamaremos de conexão de grau 2.\nDessa forma, os valores
-      das posições da matriz \U0001D440 podem refletir o alcance da rede social, suas potencialidades
-      e fraquezas, a influência de certos membros dela, dentre outros aspectos.\nCom relação à rede social
-      apresentada, é correto afirmar que:"
+  - texto: "O valor 1 (um) na posição \U0001D44E₃₂ (linha 3, coluna 2) da matriz significa que a pessoa
+      \U0001D443₃ segue a pessoa \U0001D443₂, ao passo que o valor 0 (zero) na posição \U0001D44E₂₄ (linha
+      2, coluna 4) significa que a pessoa \U0001D443₂ não segue a pessoa \U0001D443₄. O valor 0 (zero)
+      será atribuído às posições \U0001D44Eᵢᵢ. O significado do valor da posição \U0001D44Fₘₙ da matriz
+      produto \U0001D440 × \U0001D440 = \U0001D440² é a quantidade de conexões da pessoa \U0001D443ₘ até
+      a pessoa \U0001D443ₙ passando exatamente por uma pessoa, diferente delas duas, que chamaremos de
+      conexão de grau 2.\nDessa forma, os valores das posições da matriz \U0001D440² podem refletir o
+      alcance da rede social, suas potencialidades e fraquezas, a influência de certos membros dela, dentre
+      outros aspectos.\nCom relação à rede social apresentada, é correto afirmar que:"
+  - texto: "Note e adote:\nA posição \U0001D44Fₘₙ da matriz produto \U0001D440 × \U0001D440 = \U0001D440²
+      é dada pela expressão\n\U0001D44Fₘₙ = \U0001D44Eₘ₁\U0001D44E₁ₙ + \U0001D44Eₘ₂\U0001D44E₂ₙ + \U0001D44Eₘ₃\U0001D44E₃ₙ
+      + \U0001D44Eₘ₄\U0001D44E₄ₙ"
   alternativas:
     A:
-      texto: "Existem 5 pares de pessoas diferentes ( \U0001D443 ≠\U0001D443 ) que não possuem conexões
+      texto: "Existem 5 pares de pessoas diferentes (\U0001D443ᵢ ≠ \U0001D443ⱼ) que não possuem conexões
         de grau 2."
     B:
-      texto: "Existem 6 pares de pessoas diferentes ( \U0001D443 ≠\U0001D443 ) que possuem apenas uma
+      texto: "Existem 6 pares de pessoas diferentes (\U0001D443ᵢ ≠ \U0001D443ⱼ) que possuem apenas uma
         conexão de grau 2."
     C:
-      texto: "Existem 3 pares de pessoas diferentes ( \U0001D443 ≠\U0001D443 ) que possuem 2 conexões
+      texto: "Existem 3 pares de pessoas diferentes (\U0001D443ᵢ ≠ \U0001D443ⱼ) que possuem 2 conexões
         de grau 2 diferentes."
     D:
       texto: Existem 3 pessoas que possuem conexões de grau 2 com todas as outras pessoas da rede social.
     E:
-      texto: "Existe apenas 1 pessoa \U0001D443 ( \U0001D456 ≠3 ) tal que \U0001D443 e \U0001D443 seguem-se
-        mutuamente.\nNote e adote:\nA posição \U0001D44F da matriz produto \U0001D440×\U0001D440=\U0001D440
-        é dada pela expressão\n\U0001D44F =\U0001D44E \U0001D44E +\U0001D44E \U0001D44E +\U0001D44E \U0001D44E
-        +\U0001D44E \U0001D44E"
+      texto: "Existe apenas 1 pessoa \U0001D443ᵢ (\U0001D456 ≠ 3) tal que \U0001D443ᵢ e \U0001D443₃ seguem-se
+        mutuamente."
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈111, 216, 228, 240, 253, 265, 273, 277, 289, 322,
-    393, 418, 443, 493, 541, 544, 554: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈523–562
+  pendencias: []
 - numero: 14
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: 'Na série ficcional Wandinha , o poder da visão é transmitido entre as bruxas, conforme o modelo
+  - texto: 'Na série ficcional Wandinha, o poder da visão é transmitido entre as bruxas, conforme o modelo
       genealógico hipotético a seguir:'
   - figura: q014-1.webp
   - texto: Considerando a genealogia apresentada, o poder da visão tem herança
@@ -433,12 +455,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 15
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: 'Em Dois irmãos , de Milton Hatoum, os gêmeos Yaqub e Omar representam duas personalidades
-      antagônicas que se enfrentam ao longo da narrativa. A rivalidade entre eles tem como resultado:'
+  - texto: 'Em Dois irmãos, de Milton Hatoum, os gêmeos Yaqub e Omar representam duas personalidades antagônicas
+      que se enfrentam ao longo da narrativa. A rivalidade entre eles tem como resultado:'
   alternativas:
     A:
       texto: A prosperidade econômica de ambos.
@@ -454,11 +476,11 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: 'A partir da leitura de Dois irmãos , com o foco na questão da paternidade de Nael, narrador
+  - texto: 'A partir da leitura de Dois irmãos, com o foco na questão da paternidade de Nael, narrador
       do romance, pode-se afirmar:'
   alternativas:
     A:
@@ -476,13 +498,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
       “O Quim disse-me também que as feridas do Cão Tinhoso eram por causa da guerra e da bomba atômica [...] O Quim disse-me isso de o Cão Tinhoso ser muito velho quando um dia o vimos a bocejar sem dentes na boca. Foi nesse dia que me contou a história da bomba atômica com os japoneses pequeninos a morrer todos que era uma beleza e o Cão Tinhoso a fugir depois de ela rebentar e a correr uma distância monstra para não morrer.”
-      Luís Bernardo Honwana . Nós matamos o Cão Tinhoso! .
+      Luís Bernardo Honwana. Nós matamos o Cão Tinhoso!.
       A radiação ionizante, resultante da explosão da bomba atômica, é capaz de provocar feridas na pele iguais às do Cão Tinhoso, que são consequências de
   alternativas:
     A:
@@ -492,14 +515,14 @@ questoes:
     C:
       texto: ativação dos processos de reparo do DNA e bloqueio da diferenciação celular.
     D:
-      texto: aumento da divisão meiótica decorrente do processo de crossing-over .
+      texto: aumento da divisão meiótica decorrente do processo de crossing-over.
     E:
       texto: processos de evolução desencadeados por mutações aleatórias.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -524,8 +547,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
   - texto: Olestra é uma gordura artificial com sabor parecido ao do óleo vegetal. Essa substância não
@@ -547,10 +571,9 @@ questoes:
       figura: q019-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 7, y≈202–651
+  pendencias: []
 - numero: 20
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -573,7 +596,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -584,31 +607,30 @@ questoes:
   - texto: A resposta fornecida pelo sistema de inteligência artificial está
   alternativas:
     A:
-      texto: errada, pois pH negativo refere-se à concentração de H maior que 1 mol/L, resultando em um
-        valor de pH menor que zero.
+      texto: errada, pois pH negativo refere-se à concentração de H⁺ maior que 1 mol/L, resultando em
+        um valor de pH menor que zero.
     B:
-      texto: correta, pois pH negativo refere-se à concentração de OH maior que 1 mol/L, resultando em
+      texto: correta, pois pH negativo refere-se à concentração de OH⁻ maior que 1 mol/L, resultando em
         um valor de pH menor que zero.
     C:
-      texto: correta, assim como é possível existir pH maior que 14 em soluções com concentração de H
+      texto: correta, assim como é possível existir pH maior que 14 em soluções com concentração de H⁺
         maior que 14 mol/L.
     D:
-      texto: errada, pois a escala de pH é fixa entre 0 e 14, independentemente da concentração de H .
+      texto: errada, pois a escala de pH é fixa entre 0 e 14, independentemente da concentração de H⁺.
     E:
       texto: correta, pois o pH tende a diminuir e tornar-se negativo em soluções com concentração de
-        íons H extremamente baixa.
+        íons H⁺ extremamente baixa.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 8, y≈639, 676, 725, 749, 773: conferir o texto'
+  pendencias: []
 - numero: 22
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A Enciclopédia conseguiu destronar a antiga rainha das ciências e elevar a filosofia para o seu lugar. Longe de ser um compêndio neutro de informações, a obra modelava o conhecimento de tal maneira que o tirava do clero e o colocava nas mãos de intelectuais comprometidos com o Iluminismo. (...) Mas o combate mais importante ocorreu na década de 1750, quando os enciclopedistas reconheceram que conhecimento era poder e, mapeando o universo do saber, partiram para a conquista.”
-      DARNTON, Robert. O grande massacre de gatos . Rio de Janeiro: Graal, 1986. p.270. Adaptado.
+      DARNTON, Robert. O grande massacre de gatos. Rio de Janeiro: Graal, 1986. p.270. Adaptado.
       Segundo o excerto, a Enciclopédia preparada pelos pensadores Diderot e D’Alembert propunha um novo papel para os filósofos e uma reordenação do conhecimento científico. Tal proposta se caracterizou pela
   alternativas:
     A:
@@ -626,13 +648,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Quero dizer, numa palavra, que, levando em conta todas as coisas que nascem, devemos verificar se em cada caso é bem assim que nasce cada um dos seres, isto é, se os contrários não nascem senão dos seus próprios contrários, em toda parte onde existe tal relação: entre o belo, por exemplo, e o feio, que é, penso, o seu contrário; entre o justo e o injusto; e assim milhares de outros casos. (...)
-      Exemplo: quando uma coisa se torna maior , não é necessário que ela anteriormente tenha sido menor , para em seguida se tornar maior ?”
+      Exemplo: quando uma coisa se torna maior, não é necessário que ela anteriormente tenha sido menor, para em seguida se tornar maior?”
       Platão, Fédon, p.79.
       No trecho transcrito do texto Fédon, Platão propõe uma compreensão filosófica própria sobre a relação existente entre os opostos. Com base nela, dentre as inferências possíveis, aquela que descreve a articulação principal entre dois termos que se opõem é:
   alternativas:
@@ -650,7 +672,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -658,11 +680,11 @@ questoes:
       em analogia com os processos de interferência das ondas acústicas, corroboraram a natureza ondulatória
       da luz. Por outro lado, Einstein introduziu, em 1905, o conceito de fóton, em que cada componente
       monocromática de frequência \U0001D453 da radiação seria equivalente a um sistema de partículas
-      idênticas sem massa, cada qual com energia ℎ\U0001D453 , sendo ℎ≃ 6,626×10 J.s a constante de Planck.
-      A hipótese da existência de fótons só teve ampla aceitação após os experimentos de Compton, em 1922,
-      sobre o espalhamento da radiação eletromagnética na faixa dos raios X por alvos de elementos leves,
-      como o grafite.”\nAdaptado de F. Caruso e V. Oguri, Sobre a necessidade do conceito de fóton, RBEF
-      43, e20210011 (2021).\nDe acordo com o texto e seus conhecimentos, é correto afirmar:"
+      idênticas sem massa, cada qual com energia ℎ\U0001D453, sendo ℎ ≃ 6,626 × 10⁻³⁴ J.s a constante
+      de Planck. A hipótese da existência de fótons só teve ampla aceitação após os experimentos de Compton,
+      em 1922, sobre o espalhamento da radiação eletromagnética na faixa dos raios X por alvos de elementos
+      leves, como o grafite.”\nAdaptado de F. Caruso e V. Oguri, Sobre a necessidade do conceito de fóton,
+      RBEF 43, e20210011 (2021).\nDe acordo com o texto e seus conhecimentos, é correto afirmar:"
   alternativas:
     A:
       texto: A radiação eletromagnética apresenta somente comportamento ondulatório.
@@ -677,21 +699,21 @@ questoes:
         incorretos.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈154: conferir o texto'
+  pendencias: []
 - numero: 25
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
-  - texto: Quando uma solução de NaC l é colocada em contato com uma chama, observa-se uma luz amarela
+  - texto: Quando uma solução de NaCℓ é colocada em contato com uma chama, observa-se uma luz amarela
       (figura I). Quando esse mesmo experimento é realizado na presença de uma lâmpada de Na, a chama
       aparenta estar preta (figura II).
   - figura: q025-1.webp
+  - texto: (I) Chama na presença de solução de NaCℓ.
   - figura: q025-2.webp
   - texto: |-
-      (I) Chama na presença de (II) Chama na presença de solução de solução de NaC
-      NaC l , irradiada com lâmpada de Na. l.
+      (II) Chama na presença de solução de NaCℓ, irradiada com lâmpada de Na.
       Considerando que um material emite e absorve radiação em um mesmo comprimento de onda, assinale a afirmação correta sobre o experimento.
   alternativas:
     A:
@@ -715,7 +737,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -723,14 +745,21 @@ questoes:
       na escala Kelvin), que corresponde à tonalidade da luz emitida pela lâmpada. A “temperatura de cor”
       não indica a temperatura de operação da lâmpada, servindo apenas como uma referência da cor predominante
       da radiação eletromagnética termicamente emitida por um corpo a essa dada temperatura.\nA densidade
-       (  ) de energia eletromagnética irradiada é função do comprimento de onda  da luz emitida. As
-      curvas presentes nos gráficos das alternativas mostram  (  ) dividida pelo seu valor máximo 
-      (\U0001D706 ) . O máximo de cada curva corresponde ao comprimento de onda \U0001D706\npredominante
-      da luz irradiada.\nCom base nessas informações, assinale a alternativa que apresenta o gráfico que
-      melhor corresponde à situação em que a cor predominante da luz irradiada seja amarela .\nNote e
-      adote:\nVelocidade da luz no vácuo: 3×10 m/s.\nCores associadas a frequências de luz visível:\nCor\nFrequência
-      aproximada (Hz)\nVermelha\n4,4 x 10\nAmarela\n5,0 x 10\nVerde\n6,0 x 10\nAzul\n6,3 x 10\nVioleta\n7,5
-      x 10"
+      \U0001D70C(\U0001D706) de energia eletromagnética irradiada é função do comprimento de onda \U0001D706
+      da luz emitida. As curvas presentes nos gráficos das alternativas mostram \U0001D70C(\U0001D706)
+      dividida pelo seu valor máximo \U0001D70C(\U0001D706ₘₐₓ). O máximo de cada curva corresponde ao
+      comprimento de onda \U0001D706ₘₐₓ predominante da luz irradiada.\nCom base nessas informações, assinale
+      a alternativa que apresenta o gráfico que melhor corresponde à situação em que a cor predominante
+      da luz irradiada seja amarela."
+  - texto: |-
+      Note e adote:
+      Velocidade da luz no vácuo: 3 × 10⁸ m/s.
+      Cores associadas a frequências de luz visível (frequência aproximada):
+      Vermelha: 4,4 × 10¹⁴ Hz
+      Amarela: 5,0 × 10¹⁴ Hz
+      Verde: 6,0 × 10¹⁴ Hz
+      Azul: 6,3 × 10¹⁴ Hz
+      Violeta: 7,5 × 10¹⁴ Hz
   alternativas:
     A:
       figura: q026-a.webp
@@ -744,19 +773,15 @@ questoes:
       figura: q026-e.webp
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 10, y≈196, 208, 287, 323, 334, 344, 354, 364: conferir
-    o texto'
-  - 'Texto sublinhado na página 10, y≈262: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈41–792
+  pendencias: []
 - numero: 27
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma empresa júnior de alunos de engenharia projetou um termômetro mecânico para medir a temperatura
       do óleo utilizado em máquinas e equipamentos, com base na variação da densidade do óleo com a temperatura.
-      Com essa finalidade, emprega-se um objeto de massa \U0001D440 igual a 18 g e volume de 20 cm , que
+      Com essa finalidade, emprega-se um objeto de massa \U0001D440 igual a 18 g e volume de 20 cm³, que
       permanece imerso em um óleo e está preso, por um fio, ao fundo da superfície, conforme mostra a
       figura."
   - figura: q027-1.webp
@@ -765,15 +790,14 @@ questoes:
       com a temperatura.
   - figura: q027-2.webp
   - texto: Nessa configuração, a temperatura na qual a tensão na corda se anula é igual a
+  - texto: |-
+      Note e adote:
+      Despreze a massa do fio.
   alternativas:
     A:
-      texto: |-
-        0°C
-        Note e adote:
+      texto: 0°C
     B:
-      texto: |-
-        75°C
-        Despreze a massa do fio.
+      texto: 75°C
     C:
       texto: 100°C
     D:
@@ -782,11 +806,9 @@ questoes:
       texto: 275°C
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈134: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 11, y≈576–605
+  pendencias: []
 - numero: 28
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -824,28 +846,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Fogareiros abastecidos com pequenos botijões de gás são equipamentos corriqueiros em trilhas e escaladas de duração prolongada para possibilitar o cozimento de alimentos. Em geral, esses botijões são abastecidos com propano, isobutano ou n-butano. A tabela mostra a temperatura de ebulição e o calor liberado na combustão desses três gases, à pressão atmosférica.
-      Calor liberadona
-      Temperatura de
-      combustão
-      ebulição
-      (kcal/m de substância ( ° C)
-      na fase gasosa)
-      Propano
-      −42
-      5065
-      Isobutano
-      −12
-      8211
-      n-Butano
-      −1
-      8411
-      Com base nessas informações, qual seria o gás mais indicado para a utilização em um ambiente com temperatura típica de −6 °C, considerando a viabilidade e o consumo de gás necessário para o preparo de alimentos?
+  - texto: Fogareiros abastecidos com pequenos botijões de gás são equipamentos corriqueiros em trilhas
+      e escaladas de duração prolongada para possibilitar o cozimento de alimentos. Em geral, esses botijões
+      são abastecidos com propano, isobutano ou n-butano. A tabela mostra a temperatura de ebulição e
+      o calor liberado na combustão desses três gases, à pressão atmosférica.
+  - figura: q029-t.webp
+  - texto: Com base nessas informações, qual seria o gás mais indicado para a utilização em um ambiente
+      com temperatura típica de −6 °C, considerando a viabilidade e o consumo de gás necessário para o
+      preparo de alimentos?
   alternativas:
     A:
       texto: Propano, por estar líquido em −6 °C e, dentre as substâncias líquidas nessa temperatura,
@@ -864,23 +876,24 @@ questoes:
         sua combustão fornecer menos calor por volume de gás.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈184, 186, 278, 346, 349: conferir o texto'
-  - 'Texto sublinhado na página 12, y≈247: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 12, y≈159–247
+  pendencias: []
 - numero: 30
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Para gerar hidrogênio, foi utilizado o aparato ilustrado na figura.
   - figura: q030-1.webp
-  - texto: Durante o processo de geração de H
+  - texto: Durante o processo de geração de H₂
   - figura: q030-2.webp
   - texto: |-
-      Apóso processo de geração de H
-      Ao frasco à esquerda adicionou-se uma quantidade prédeterminada de raspas de zinco metálico e ácido clorídrico. Em seguida, o frasco foi fechado com uma rolha conectada a uma tubulação. À medida que o hidrogênio é produzido pela reação Zn (s) + 2H (aq) → Zn (aq) + H (g), o gás se acumula em uma proveta previamente cheia de água. Dado que a solubilidade do hidrogênio na água é desprezível, o volume ocupado pelo gás na proveta corresponde ao volume de hidrogênio produzido durante a reação.
+      Após o processo de geração de H₂
+      Ao frasco à esquerda adicionou-se uma quantidade pré-determinada de raspas de zinco metálico e ácido clorídrico. Em seguida, o frasco foi fechado com uma rolha conectada a uma tubulação. À medida que o hidrogênio é produzido pela reação Zn⁰(s) + 2H⁺(aq) → Zn²⁺(aq) + H₂(g), o gás se acumula em uma proveta previamente cheia de água. Dado que a solubilidade do hidrogênio na água é desprezível, o volume ocupado pelo gás na proveta corresponde ao volume de hidrogênio produzido durante a reação.
       Considerando que, nas condições do experimento, foram gerados 49,8 mL de hidrogênio, qual a quantidade de Zn metálico, em gramas, que de fato reagiu?
+  - texto: |-
+      Note e adote:
+      Volume molar do gás ideal nas condições do experimento = 24,9 L.
+      Massa molar do Zn = 65,4 g/mol.
   alternativas:
     A:
       texto: 0,07
@@ -891,17 +904,12 @@ questoes:
     D:
       texto: 0,29
     E:
-      texto: |-
-        0,48
-        Note e adote:
-        Volume molar do gás ideal nas condições do experimento = 24,9 L.
-        Massa molar do Zn = 65,4 g/mol.
+      texto: 0,48
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 12, y≈520–566
+  pendencias: []
 - numero: 31
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -910,168 +918,98 @@ questoes:
       do caminhão-pipa para abastecer sua caixa d’água. Após o abastecimento, o motorista percebeu que
       o reservatório do caminhão estava cheio até 3/4 de sua altura, conforme ilustrado na figura.
   - figura: q031-1.webp
-  - texto: |-
-      Qual foi o volume, em metros cúbicos, de água utilizada para abastecer a caixa d’água da escola, sabendo que o reservatório do caminhão estava cheio antes do abastecimento?
-      √
+  - texto: Qual foi o volume, em metros cúbicos, de água utilizada para abastecer a caixa d’água da escola,
+      sabendo que o reservatório do caminhão estava cheio antes do abastecimento?
   alternativas:
     A:
-      texto: |-
-        (2 π - )
-        √
+      texto: "(2\U0001D70B − √3/4)"
     B:
-      texto: |-
-        (2 π -
-        )
-        √
+      texto: "(2\U0001D70B − 3√3/2)"
     C:
-      texto: |-
-        (2 π +
-        )
-        √
+      texto: "(2\U0001D70B + 3√3/2)"
     D:
-      texto: |-
-        (4 π + )
-        √
-        )
+      texto: "(4\U0001D70B + √3/4)"
     E:
-      texto: (4 π +
+      texto: "(4\U0001D70B + 3√3/2)"
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 13, y≈340, 408, 440, 472, 504, 524, 536: formatação perdida no texto puro'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 13, y≈400, 411, 432, 443, 464, 475, 495, 507,
-    527, 539: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈399–527
+  pendencias: []
 - numero: 32
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      A tabela a seguir mostra a condição de duas variáveis sociais em quatro cidades urbanas genéricas.
-      % da população
-      % de domicílios com
-      imunizada com
-      coleta de esgoto e
-      cobertura vacinal
-      tratamento de água
-      completa
-      89%
-      19%
-      cidade I
-      12%
-      13%
-      cidade II
-      98%
-      15%
-      cidade III
-      10%
-      90%
-      cidade IV
-      Com base nesses dados, é correto afirmar que a população humana dessas cidades tem risco aumentado de ter as respectivas doenças:
-      cidade I
-      cidade II
-      cidade III
-      cidade IV
+  - texto: A tabela a seguir mostra a condição de duas variáveis sociais em quatro cidades urbanas genéricas.
+  - figura: q032-t.webp
+  - texto: 'Com base nesses dados, é correto afirmar que a população humana dessas cidades tem risco aumentado
+      de ter as respectivas doenças:'
   alternativas:
     A:
       texto: |-
-        leptospirose
-        influenza
-        amebíase
-        cólera
-        COVID
-        teníase
-        tétano
-        tuberculose
+        cidade I: leptospirose
+        cidade II: influenza
+        cidade III: amebíase
+        cidade IV: cólera
     B:
       texto: |-
-        hepatite B
-        amebíase
-        cólera
-        leptospirose
+        cidade I: COVID
+        cidade II: teníase
+        cidade III: tétano
+        cidade IV: tuberculose
     C:
       texto: |-
-        influenza
-        teníase
-        pneumonia
-        COVID
+        cidade I: hepatite B
+        cidade II: amebíase
+        cidade III: cólera
+        cidade IV: leptospirose
     D:
-      texto: ''
+      texto: |-
+        cidade I: influenza
+        cidade II: teníase
+        cidade III: pneumonia
+        cidade IV: COVID
     E:
       texto: |-
-        tuberculose poliomielite
-        hepatite B
-        amebíase
+        cidade I: tuberculose
+        cidade II: poliomielite
+        cidade III: hepatite B
+        cidade IV: amebíase
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 13, y≈743: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈41–744
+  pendencias: []
 - numero: 33
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Uma empresa farmacêutica produz certo medicamento, o qual é formado por quatro componentes, conforme indicado na tabela I. O custo do grama de cada um dos componentes desse medicamento também é apresentado nessa tabela.
       Tabela I
-      Composição do
-      Quantidade
-      Custo
-      medicamento
-      (em mg)
-      (em R$/g)
-      Componente A
-      200
-      700
-      Componente B
-      70
-      500
-      Componente C
-      130
-      300
-      Componente D
-      100
-      120
+  - figura: q033-t1.webp
+  - texto: |-
       Para a produção do próximo lote do medicamento, a empresa terá um gasto diferente para fabricá-lo, pois os custos de alguns componentes sofreram alterações, conforme mostra a tabela II.
       Tabela II
-      Composição do
-      Variação no
-      medicamento
-      custo (em %)
-      Componente A
-      + 7
-      Componente B
-      − 5
-      Componente C
-      0
-      Componente D
-      + 10
-      Qual é o aumento, em reais, no custo do medicamento?
+  - figura: q033-t2.webp
+  - texto: Qual é o aumento, em reais, no custo do medicamento?
+  - texto: |-
+      Note e adote:
+      Considere que os outros custos de produção permaneceram inalterados.
   alternativas:
     A:
-      texto: |-
-        9,25
-        Note e adote:
+      texto: 9,25
     B:
-      texto: |-
-        12,00
-        Considere que os outros custos de
+      texto: 12,00
     C:
-      texto: |-
-        12,75
-        produção permaneceram inalterados.
+      texto: 12,75
     D:
       texto: 36,00
     E:
       texto: 86,00
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈278–605
+  pendencias: []
 - numero: 34
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1093,7 +1031,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1118,7 +1056,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1141,17 +1079,17 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 37
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'A respeito dos contos “Nós matamos o Cão Tinhoso!”, “Dina”, “Papá, cobra e eu” e “Nhinguitimo”,
-      de Nós matamos o Cão Tinhoso! , é possível afirmar:'
+      de Nós matamos o Cão Tinhoso!, é possível afirmar:'
   alternativas:
     A:
       texto: Os narradores e os protagonistas são crianças.
     B:
-      texto: São narrados em primeira pessoa, por narradoresprotagonistas.
+      texto: São narrados em primeira pessoa, por narradores-protagonistas.
     C:
       texto: Os protagonistas são oprimidos socialmente, e a reação deles não é endereçada aos opressores.
     D:
@@ -1162,7 +1100,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1170,7 +1108,7 @@ questoes:
       Leia o texto a seguir:
       Uma vida inteira pela frente.
       O tiro veio por trás.
-      Cíntia Moscovich, Os cem menores contos brasileiros do século (organização: Marcelino Freire) .
+      Cíntia Moscovich, Os cem menores contos brasileiros do século (organização: Marcelino Freire).
       Embora seja um texto composto por apenas duas linhas, é possível caracterizá-lo como uma narrativa. Nesse texto, essa caracterização deve-se ao fato de que ele apresenta
   alternativas:
     A:
@@ -1187,14 +1125,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Mas quantas vezes a insônia é um dom. De repente acordar no meio da noite e ter essa coisa rara: solidão. Quase nenhum ruído. Só o das ondas do mar batendo na praia. E tomo café com gosto, toda sozinha no mundo. Ninguém me interrompe o nada. É um nada a um tempo vazio e rico. E o telefone mudo, sem aquele toque súbito que sobressalta. Depois vai amanhecendo. As nuvens se clareando sob um sol às vezes pálido como uma lua, às vezes de fogo puro. Vou ao terraço e sou talvez a primeira do dia a ver a espuma branca do mar. O mar é meu, o sol é meu, a terra é minha. E sinto-me feliz por nada, por tudo. Até que, como o sol subindo, a casa vai acordando e há o reencontro com meus filhos sonolentos.”
-      Clarice Lispector. “Insônia infeliz e feliz”. In: A descoberta do mundo . Rio de Janeiro: Rocco, 1999.
-      Considerando as características do trecho apresentado, podese afirmar que ele pertence a uma crônica, pois
+      Clarice Lispector. “Insônia infeliz e feliz”. In: A descoberta do mundo. Rio de Janeiro: Rocco, 1999.
+      Considerando as características do trecho apresentado, pode-se afirmar que ele pertence a uma crônica, pois
   alternativas:
     A:
       texto: representa uma história paralela ligada a uma história principal.
@@ -1210,7 +1148,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1243,12 +1181,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
   - texto: |-
-      As moléculas de água podem conter o isótopo estável mais abundante de oxigênio, O, ou o isótopo estável menos abundante, O.
+      As moléculas de água podem conter o isótopo estável mais abundante de oxigênio, ¹⁶O, ou o isótopo estável menos abundante, ¹⁸O.
       Essa pequena diferença de massa entre as moléculas de água é suficiente para alterar a sua pressão de vapor. Por esse motivo, a análise de isótopos de oxigênio na água da chuva possibilita a identificação de períodos secos e de períodos chuvosos.
       A figura ilustra a mudança na constituição isotópica da água da chuva ao longo do tempo como resultado da diferença na pressão de vapor.
   - figura: q041-1.webp
@@ -1256,42 +1195,43 @@ questoes:
   alternativas:
     A:
       texto: Em períodos de alta pluviosidade, as primeiras precipitações da nuvem são isotopicamente
-        mais leves e a nuvem de chuva se enriquece, relativamente, em O.
+        mais leves e a nuvem de chuva se enriquece, relativamente, em ¹⁸O.
     B:
       texto: Em períodos de baixa pluviosidade, a constituição isotópica das nuvens pouco se altera ao
-        longo do tempo, e a pouca chuva dessas nuvens é relativamente enriquecida em O.
+        longo do tempo, e a pouca chuva dessas nuvens é relativamente enriquecida em ¹⁸O.
     C:
       texto: No período atual, em função do aquecimento global, as temperaturas elevadas fazem com que
-        o fracionamento isotópico de O e O resultante da evaporação e da precipitação da água não ocorra.
+        o fracionamento isotópico de ¹⁶O e ¹⁸O resultante da evaporação e da precipitação da água não
+        ocorra.
     D:
       texto: Em períodos glaciais, em função da maior temperatura do planeta, as chuvas são enriquecidas
-        em O, enquanto, nos oceanos, a água é enriquecida em O.
+        em ¹⁸O, enquanto, nos oceanos, a água é enriquecida em ¹⁶O.
     E:
       texto: Em períodos interglaciais, em função da menor temperatura do planeta, as chuvas são enriquecidas
-        em O, enquanto, nos oceanos, a água é enriquecida em O.
+        em ¹⁶O, enquanto, nos oceanos, a água é enriquecida em ¹⁸O.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 16, y≈85, 97, 160, 267, 428, 477, 513, 550, 562, 578,
-    598: conferir o texto'
+  pendencias: []
 - numero: 42
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
       Considere os textos a seguir sobre o campo magnético terrestre, essencial para a manutenção da vida no planeta:
-      “O campo magnético é o resultado do movimento do ferro líquido que envolve o núcleo interno do planeta, formado de ferro sólido. Ao girar a uma velocidade maior que aquela da superfície, o ferro líquido produz um campo magnético com dois polos magnéticos opostos, próximos aos polos Norte e Sul geográficos.”
-      “O campo magnético do planeta, porém, não é estável e vem enfraquecendo continuamente desde pelo menos 1832, quando o físico e matemático alemão Carl Friedrich Gauss aferiu pela primeira vez sua intensidade. De lá para cá, medições mais frequentes e precisas confirmam que a intensidade diminui à taxa de 17 nanoteslas (nT) por ano – o campo tem 66 mil nT nos polos e 22 mil nT sobre uma faixa do hemisfério Sul que vai da África à América do Sul.”
+      “O campo magnético é o resultado do movimento do ferro líquido que envolve o núcleo interno do planeta, formado de ferro sólido. Ao girar a uma velocidade maior que aquela da superfície, o ferro líquido produz um campo magnético com dois polos magnéticos opostos, próximos aos polos Norte e Sul geográficos.”⁽¹⁾
+      “O campo magnético do planeta, porém, não é estável e vem enfraquecendo continuamente desde pelo menos 1832, quando o físico e matemático alemão Carl Friedrich Gauss aferiu pela primeira vez sua intensidade. De lá para cá, medições mais frequentes e precisas confirmam que a intensidade diminui à taxa de 17 nanoteslas (nT) por ano – o campo tem 66 mil nT nos polos e 22 mil nT sobre uma faixa do hemisfério Sul que vai da África à América do Sul.”⁽²⁾
   - figura: q042-1.webp
   - texto: |-
       Fontes:
-      (1) O norte da questão, Revista Pesquisa FAPESP, junho de 2018. Adaptado. (2) Uma falha no campo magnético da Terra passeia sobre o Brasil, Revista Pesquisa FAPESP, maio de 2021.
+      (1) O norte da questão, Revista Pesquisa FAPESP, junho de 2018. Adaptado.
+      (2) Uma falha no campo magnético da Terra passeia sobre o Brasil, Revista Pesquisa FAPESP, maio de 2021.
       Com base nos textos e na figura apresentados e nos seus conhecimentos, é correto afirmar que:
   alternativas:
     A:
       texto: A variação da intensidade do campo magnético terrestre ao longo da linha do Equador é menor
-        do que 10 T.
+        do que 10⁻⁶ T.
     B:
       texto: O campo magnético terrestre é constante em módulo ao longo do meridiano de Greenwich.
     C:
@@ -1307,14 +1247,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q043-1.webp
   - texto: |-
       IPCC 4th Report Main Findings. Disponível em: https://www.inforse.org/. Adaptado.
-      O gráfico apresentado mostra as concentrações atmosféricas dos principais gases de efeito estufa até o ano 2000, sendo eles: CO , quantificado em partes por milhão (ppm), N O e CH , ambos quantificados em partes por bilhão (ppb). Em junho de 2022, a Administração Nacional Oceânica e Atmosférica (NOAA) reportou que, naquela data, os níveis de CO na atmosfera encontravam-se em torno de 420 ppm. Esse valor é muito superior à concentração média de aproximadamente 280 ppm, existente antes da Revolução Industrial. Com base nessas informações e em seus conhecimentos, é correto afirmar:
+      O gráfico apresentado mostra as concentrações atmosféricas dos principais gases de efeito estufa até o ano 2000, sendo eles: CO₂, quantificado em partes por milhão (ppm), N₂O e CH₄, ambos quantificados em partes por bilhão (ppb). Em junho de 2022, a Administração Nacional Oceânica e Atmosférica (NOAA) reportou que, naquela data, os níveis de CO₂ na atmosfera encontravam-se em torno de 420 ppm. Esse valor é muito superior à concentração média de aproximadamente 280 ppm, existente antes da Revolução Industrial. Com base nessas informações e em seus conhecimentos, é correto afirmar:
   alternativas:
     A:
       texto: Apesar do grande aumento nas quantidades dos três principais gases de efeito estufa a partir
@@ -1330,19 +1270,18 @@ questoes:
         constantes durante sua existência.
     E:
       texto: O efeito estufa é um fenômeno intensificado a partir da Revolução Industrial, devido às atividades
-        humanas emissoras de CO , que contribuem para o aquecimento global.
+        humanas emissoras de CO₂, que contribuem para o aquecimento global.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 17, y≈329, 341, 378, 628: conferir o texto'
+  pendencias: []
 - numero: 44
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Industrializar é uma condição de vida, é uma absoluta e imperiosa necessidade, é mesmo um dever de que já não está ao nosso alcance declinar. Nem que o quiséssemos, não poderíamos sobreviver conservando-nos nação pastoril e agrícola, no velho estilo, exportando café e umas poucas matérias-primas [...] Industrializar um país não é uma obra mágica que possa ser feita sem preparo, ao simples sopro de uma aspiração. É necessário que exista uma mentalidade industrial, um estado de espírito propício ao desenvolvimento, é necessário que existam gerações preparadas para a ação.”
-      OLIVEIRA, Juscelino Kubitschek de. Industrialização : batalha pela própria sobrevivência da nacionalidade. São Paulo: Serviço de Publicações da Federação e Centro das Indústrias do Estado de S. Paulo, 1957. p.9-10.
+      OLIVEIRA, Juscelino Kubitschek de. Industrialização: batalha pela própria sobrevivência da nacionalidade. São Paulo: Serviço de Publicações da Federação e Centro das Indústrias do Estado de S. Paulo, 1957. p.9-10.
       A “mentalidade industrial”, proposta pelo então presidente Juscelino Kubitschek, concretiza-se em seu governo (1956-1961) sob a forma
   alternativas:
     A:
@@ -1359,7 +1298,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1389,8 +1328,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 46
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: Observe o mapa da expansão da cafeicultura nos estados de São Paulo e Rio de Janeiro nos séculos
@@ -1424,7 +1364,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1453,13 +1393,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Uma empresa de alimentos utiliza embalagens, no formato de paralelepípedo reto-retângulo, de
       dimensões 2 cm x 3 cm x 11 cm, para armazenar biscoitos. Para o transporte desse produto, são utilizadas
-      caixas para acondicionar essas embalagens, também no formato de paralelepípedo retoretângulo, de
+      caixas para acondicionar essas embalagens, também no formato de paralelepípedo reto-retângulo, de
       dimensões 12 cm x 13 cm x 26 cm. A imagem a seguir ilustra um paralelepípedo reto-retângulo.
   - figura: q048-1.webp
   - texto: Determine o número máximo de embalagens que podem ser acondicionadas em cada caixa fechada
@@ -1475,12 +1415,11 @@ questoes:
       texto: '60'
     E:
       texto: '61'
-  resposta: null
+  resposta: E
   anulada: false
-  pendencias:
-  - 'Marcação de gabarito não reconhecida: conferir no PDF'
+  pendencias: []
 - numero: 49
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1495,6 +1434,9 @@ questoes:
   - texto: |-
       Observação: A imagem não está em escala.
       Após a vaga da moto, restou um espaço na garagem. Os responsáveis pela obra estão avaliando a possibilidade de colocar algum objeto que possa ser utilizado pelos condôminos do edifício. Qual a medida do segmento destacado (tracejado) nesse espaço?
+  - texto: |-
+      Note e adote:
+      cos(60°) = 0,5; sen(60°) = √3/2
   alternativas:
     A:
       texto: 0,75 m
@@ -1505,18 +1447,12 @@ questoes:
     D:
       texto: 2,20 m
     E:
-      texto: |-
-        2,25 m
-        Note e adote:
-        cos (60°) = 0,5 ; sen (60°) =
+      texto: 2,25 m
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈657, 667, 726: conferir o texto'
-  - 'Texto sublinhado na página 19, y≈665: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈636–679
+  pendencias: []
 - numero: 50
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1528,41 +1464,38 @@ questoes:
       Entre as curvas no gráfico da figura II, indique aquela que melhor corresponde à dependência da posição do carro com o tempo, segundo esses pingos. Adote como positivo o sentido para a direita, conforme a indicação da seta em I.
   - figura: q050-2.webp
   - texto: Figura II
+  - texto: |-
+      Note e adote:
+      Assuma que o intervalo de tempo entre os pingos seja o mesmo.
   alternativas:
     A:
-      texto: "Curva \U0001D44E .\nNote e adote:\n\U0001D44F"
+      texto: "Curva \U0001D44E."
     B:
-      texto: |-
-        Curva .
-        Assuma que o intervalo de tempo
+      texto: "Curva \U0001D44F."
     C:
-      texto: "Curva \U0001D450 .\nentre os pingos seja o mesmo."
+      texto: "Curva \U0001D450."
     D:
-      texto: "Curva \U0001D451 ."
+      texto: "Curva \U0001D451."
     E:
-      texto: "Curva \U0001D452 ."
+      texto: "Curva \U0001D452."
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈403–439
+  pendencias: []
 - numero: 51
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Uma das modalidades de skate é o bowl , disputado em um espaço em formato aproximado de bacia.
+  - texto: Uma das modalidades de skate é o bowl, disputado em um espaço em formato aproximado de bacia.
       Supondo um bowl com profundidade de 2,45 m, qual a máxima velocidade que um skatista, partindo do
       repouso no ponto mais alto da bacia, poderia alcançar no ponto mais baixo?
   - figura: q051-1.webp
+  - texto: "Note e adote:\nAceleração da gravidade (\U0001D454) = 10 m/s²"
   alternativas:
     A:
-      texto: |-
-        3 m/s
-        Note e adote:
+      texto: 3 m/s
     B:
-      texto: |-
-        5 m/s
-        Aceleração da gravidade (g) = 10m/s
+      texto: 5 m/s
     C:
       texto: 7 m/s
     D:
@@ -1571,16 +1504,15 @@ questoes:
       texto: 11 m/s
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈708–737
+  pendencias: []
 - numero: 52
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “A história do skate no Brasil passou por fases diferentes e até mesmo antagônicas. Em 1988, por exemplo, na cidade de São Paulo, sob acusação de ser prática displicente, foi promulgada a Lei n º 25.871, pelo então prefeito Jânio Quadros, que proibia a prática da modalidade nas ruas da cidade. Essa proibição foi alterada no ano seguinte, quando a nova prefeita da cidade, Luiza Erundina, em um de seus primeiros atos, revogou essa mesma lei e liberou a prática do skate nas ruas da cidade.
-      Anos depois, em 2015, o Brasil somava 8,4 milhões de praticantes de skate , segundo pesquisa Datafolha.
+      “A história do skate no Brasil passou por fases diferentes e até mesmo antagônicas. Em 1988, por exemplo, na cidade de São Paulo, sob acusação de ser prática displicente, foi promulgada a Lei nº 25.871, pelo então prefeito Jânio Quadros, que proibia a prática da modalidade nas ruas da cidade. Essa proibição foi alterada no ano seguinte, quando a nova prefeita da cidade, Luiza Erundina, em um de seus primeiros atos, revogou essa mesma lei e liberou a prática do skate nas ruas da cidade.
+      Anos depois, em 2015, o Brasil somava 8,4 milhões de praticantes de skate, segundo pesquisa Datafolha.
       Já em 2021, quando o skate estreou como modalidade olímpica nos Jogos de Tóquio, o Brasil se destacou como o segundo país com mais medalhas olímpicas na modalidade. No mesmo ano, a indústria nacional ligada ao esporte foi considerada a segunda maior do mundo, atrás apenas dos Estados Unidos, cujo mercado é estimado em US$ 4,5 bilhões ao ano.”
       Thais Carrança, BBC News Brasil em São Paulo, 26 julho 2021. Adaptado.
       A partir da leitura do texto, é correto afirmar:
@@ -1604,14 +1536,14 @@ questoes:
         equivocado datar a criação de um esporte, pois ele já pode ter sofrido alterações que descaracterizaram
         sua origem.
     E:
-      texto: O skate , bem como outras práticas esportivas, foi criado de modo discreto, por grupos pequenos,
+      texto: O skate, bem como outras práticas esportivas, foi criado de modo discreto, por grupos pequenos,
         e ganhou força e ascensão a partir do aumento de incentivo financeiro para sua realização, o que
         é determinante para um esporte alcançar reconhecimento mundial.
   resposta: C
   anulada: false
   pendencias: []
 - numero: 53
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1632,7 +1564,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1652,7 +1584,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1660,8 +1592,8 @@ questoes:
   - texto: "Como ilustrado pela foto, o gerador de Van de Graaf, equipamento popular em parques de ciência,
       permite o acúmulo de cargas elétricas em uma cúpula metálica. A distribuição de cargas na cúpula
       de um desses geradores, quando ninguém a toca, pode ser considerada esférica. Dois desses geradores,
-      A e B, estão separados por uma certa distância. O gerador A contém uma carga +\U0001D444 , e o gerador
-      B, uma carga +2\U0001D444 , com \U0001D444 >0 ."
+      A e B, estão separados por uma certa distância. O gerador A contém uma carga +\U0001D444, e o gerador
+      B, uma carga +2\U0001D444, com \U0001D444 > 0."
   - figura: q055-2.webp
   - texto: Entre as alternativas, assinale aquela que melhor corresponde ao vetor campo elétrico resultante
       produzido pelos geradores no ponto médio P entre eles.
@@ -1678,19 +1610,21 @@ questoes:
       texto: nulo
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈251, 263: conferir o texto'
+  pendencias: []
 - numero: 56
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Um tema de grande interesse na química é a ativação seletiva de ligações C-H. Essa ativação permite a substituição de H nessas ligações por outros átomos, como O ou N. A relevância desse tema pode ser verificada em um estudo recentemente publicado no prestigioso periódico Science , que conta com uma egressa da USP dentre seus autores.
+      Um tema de grande interesse na química é a ativação seletiva de ligações C-H. Essa ativação permite a substituição de H nessas ligações por outros átomos, como O ou N. A relevância desse tema pode ser verificada em um estudo recentemente publicado no prestigioso periódico Science, que conta com uma egressa da USP dentre seus autores.
       A baixa diferença de eletronegatividade entre C e H é um dos motivos que dificulta a ativação da ligação C-H, pois torna a ligação pouco polar e diminui sua reatividade.
   - figura: q056-1.webp
   - texto: Considerando apenas a eletronegatividade, representada no gráfico, qual das alternativas apresenta
       uma ligação ainda menos reativa do que a ligação C-H?
+  - texto: |-
+      Note e adote:
+      Número atômico (Z) dos elementos: H = 1, C = 6, N = 7, O = 8, F = 9, P = 15, S = 16, Cℓ = 17.
   alternativas:
     A:
       texto: C-N
@@ -1701,51 +1635,38 @@ questoes:
     D:
       texto: P-H
     E:
-      texto: |-
-        P-C l
-        Note e adote:
-        Número atômico (Z) dos elementos: H = 1, C = 6, N = 7, O = 8, F = 9, P = 15, S = 16, C l = 17.
+      texto: P-Cℓ
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈558, 570: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 21, y≈158–204
+  pendencias: []
 - numero: 57
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "A foto a seguir mostra um circuito com três resistores ( \U0001D445 , \U0001D445 e \U0001D445
-      ) conectados em uma protoboard (base de contatos). Nesse tipo de placa, os cinco furos de uma mesma
+  - texto: "A foto a seguir mostra um circuito com três resistores (\U0001D445₁, \U0001D445₂ e \U0001D445₃)
+      conectados em uma protoboard (base de contatos). Nesse tipo de placa, os cinco furos de uma mesma
       linha (indicados pelos retângulos amarelos) estão em curto, formando os nós do circuito. Os cabos
       vermelho e preto, por sua vez, estão conectados aos terminais de uma fonte contínua de 5V."
   - figura: q057-1.webp
-  - texto: "Se \U0001D445 = 150 k Ω e \U0001D445 = \U0001D445 = 100 k Ω , a corrente elétrica que passa
-      pelo resistor \U0001D445 será de:\nμ"
+  - texto: "Se \U0001D445₁ = 150 kΩ e \U0001D445₂ = \U0001D445₃ = 100 kΩ, a corrente elétrica que passa
+      pelo resistor \U0001D445₁ será de:"
   alternativas:
     A:
-      texto: |-
-        12,5 A
-        μ
+      texto: 12,5 μA
     B:
-      texto: |-
-        14,3 A
-        μ
+      texto: 14,3 μA
     C:
-      texto: |-
-        25,0 A
-        μ
+      texto: 25,0 μA
     D:
-      texto: |-
-        37,5 A
-        μ
+      texto: 37,5 μA
     E:
-      texto: 50,0 A
+      texto: 50,0 μA
   resposta: C
   anulada: false
   pendencias: []
 - numero: 58
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1757,71 +1678,60 @@ questoes:
   - figura: q058-1.webp
   - texto: Considerando apenas o potencial de redução padrão, qual das alternativas apresenta um material
       que poderia gerar um falso positivo para o objeto de ouro no teste descrito?
+  - texto: |-
+      Note e adote:
+      Mg²⁺ + 2e⁻ ⇌ Mg⁰; E° = −2,37 V
+      Aℓ³⁺ + 3e⁻ ⇌ Aℓ⁰; E° = −1,66 V
+      Fe²⁺ + 2e⁻ ⇌ Fe⁰; E° = −0,44 V
+      2H⁺ + 2e⁻ ⇌ H₂; E° = 0,00 V
+      Pt²⁺ + 2e⁻ ⇌ Pt⁰; E° = +1,20 V
+      Au³⁺ + 3e⁻ ⇌ Au⁰; E° = +1,50 V
+      F₂ + 2e⁻ ⇌ 2F⁻; E° = +2,87 V
   alternativas:
     A:
-      texto: |-
-        Mg
-        Note e adote:
+      texto: Mg
     B:
-      texto: |-
-        A l
-        Mg + 2e ⇌ Mg E° = −2,37 V A l + 3e ⇌ A l
-        E° = − 1,66 V
+      texto: Aℓ
     C:
-      texto: |-
-        Fe
-        E° = − 0,44 V Fe + 2e ⇌ Fe
+      texto: Fe
     D:
-      texto: |-
-        Pt
-        E° = 0,00 V 2H + 2e ⇌ H
+      texto: Pt
     E:
-      texto: |-
-        F
-        E° = + 1,20 V Pt + 2e ⇌ Pt
-        Au + 3e ⇌ Au E° = + 1,50 V E° = + 2,87 V F + 2e ⇌ 2F
+      texto: F₂
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 22, y≈75: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 22, y≈314, 324, 335, 344, 352, 354, 364, 374, 376: conferir
-    o texto'
-  - 'Texto sublinhado na página 22, y≈384: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈297–385
+  pendencias: []
 - numero: 59
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Considere a função \U0001D453, dada por \U0001D453(\U0001D465)= \U0001D44F , com \U0001D44F>0,\U0001D44F≠1
-      e \U0001D465 ∈ℝ, e a sua inversa \U0001D453 . A figura destaca dois pontos, um pertencente ao gráfico
-      de \U0001D453 e outro ao gráfico de \U0001D453 . Determine \U0001D44F+ \U0001D458 ."
+  - texto: "Considere a função \U0001D453, dada por \U0001D453(\U0001D465) = \U0001D44Fˣ, com \U0001D44F
+      > 0, \U0001D44F ≠ 1 e \U0001D465 ∈ ℝ, e a sua inversa \U0001D453⁻¹. A figura destaca dois pontos,
+      um pertencente ao gráfico de \U0001D453 e outro ao gráfico de \U0001D453⁻¹. Determine \U0001D44F
+      + \U0001D458."
   - figura: q059-1.webp
   alternativas:
     A:
-      texto: ''
+      texto: 5/6
     B:
       texto: '1'
     C:
-      texto: ''
+      texto: 6/5
     D:
-      texto: ''
+      texto: 13/5
     E:
-      texto: ''
+      texto: 18/5
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈427, 440, 452: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 22, y≈654, 666, 700, 712, 727, 739, 753, 765:
-    recortar como figura'
-  - 'Texto sublinhado na página 22, y≈663, 709, 736, 762: formatação perdida no texto puro'
+  pendencias: []
 - numero: 60
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "\U0001D465+2\U0001D466=4\nConsidere o sistema linear\n. Assinale a 3\U0001D465−\U0001D466=5\nalternativa
-      que representa graficamente esse sistema."
+  - texto: "Considere o sistema linear\n\U0001D465 + 2\U0001D466 = 4\n3\U0001D465 − \U0001D466 = 5\nAssinale
+      a alternativa que representa graficamente esse sistema."
   alternativas:
     A:
       figura: q060-a.webp
@@ -1835,10 +1745,9 @@ questoes:
       figura: q060-e.webp
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈109–778
+  pendencias: []
 - numero: 61
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1847,29 +1756,28 @@ questoes:
   - figura: q061-1.webp
   - texto: |-
       GRIGORIEV, A.A. The theoretical fundaments of modern physical Geography. In: The interaction of sciences in the Earth, Moscou, 1968. Adaptado.
-      Sobre os ambientes do globo terrestre que podem ser exemplificados pelos dados demonstrados no gráfico, é correto afirmar que , onde o índice de aridez é igual a
+      Sobre os ambientes do globo terrestre que podem ser exemplificados pelos dados demonstrados no gráfico, é correto afirmar que, onde o índice de aridez é igual a
   alternativas:
     A:
-      texto: 1 e o balanço de radiação é igual a 70 kcal/cm , a curva de biomassa e biodiversidade atinge
+      texto: 1 e o balanço de radiação é igual a 70 kcal/cm², a curva de biomassa e biodiversidade atinge
         o ápice, caracterizando, por exemplo, o ambiente de uma floresta equatorial.
     B:
-      texto: 2 e o balanço de radiação é igual a 40 kcal/cm , é possível inferir os ambientes compostos
+      texto: 2 e o balanço de radiação é igual a 40 kcal/cm², é possível inferir os ambientes compostos
         por savanas ou cerrados, com crescimento da curva de biomassa e biodiversidade.
     C:
-      texto: 0 e o balanço de radiação é igual também a 0, encontramse os ambientes desérticos muito quentes,
-        a exemplo do deserto do Saara.
+      texto: 0 e o balanço de radiação é igual também a 0, encontram-se os ambientes desérticos muito
+        quentes, a exemplo do deserto do Saara.
     D:
       texto: 3 e o balanço de radiação é igual a 0, a curva de biomassa e biodiversidade indica exemplo
         típico de ambiente tropical úmido.
     E:
-      texto: 1,5 e o balanço de radiação é igual a 55 kcal/cm , a curva de biomassa e biodiversidade diminui,
+      texto: 1,5 e o balanço de radiação é igual a 55 kcal/cm², a curva de biomassa e biodiversidade diminui,
         caracterizando os ambientes com presença de neve eterna.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈369, 405, 515: conferir o texto'
+  pendencias: []
 - numero: 62
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1885,7 +1793,7 @@ questoes:
   - figura: q062-3.webp
   - texto: |-
       (3)
-      AB’SÁBER, Aziz Nacib. Os domínios de natureza no Brasil . Potencialidades paisagísticas. São Paulo: Ateliê Editorial, 2003.
+      AB’SÁBER, Aziz Nacib. Os domínios de natureza no Brasil. Potencialidades paisagísticas. São Paulo: Ateliê Editorial, 2003.
       As imagens representam aspectos paisagísticos dos tipos climáticos semiárido (1), tropical (2) e subtropical (3), presentes, respectivamente, nos seguintes domínios morfoclimáticos:
   alternativas:
     A:
@@ -1902,7 +1810,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1917,28 +1825,27 @@ questoes:
   - texto: |-
       Domínio público. Disponível em https://commons.wikimedia.org/.
       A partir de qual etapa da construção o lado de cada um dos novos quadrados obtidos fica, pela primeira vez, menor do que 1 décimo de milésimo do lado do quadrado da Etapa 1?
+  - texto: |-
+      Note e adote:
+      log₁₀ 2 = 0,3
   alternativas:
     A:
       texto: '26'
     B:
-      texto: |-
-        27
-        Note e adote:
+      texto: '27'
     C:
-      texto: "28\n\U0001D459\U0001D45C\U0001D454 2=0,3"
+      texto: '28'
     D:
       texto: '29'
     E:
       texto: '30'
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈510: conferir o texto'
-  - 'Texto sublinhado na página 24, y≈518: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈487–518
+  pendencias: []
 - numero: 64
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: '“Pesquisadores realizaram em 2022 uma expedição que promete fazer história. Destino: Serra
@@ -1951,7 +1858,7 @@ questoes:
   - figura: q064-1.webp
   - texto: |-
       Localização da Serra do Imeri.
-      Disponível em https://jornal.usp.br/ciencias/rumo-a-amazoniadesconhecida/21/10/2022. Adaptado.
+      Disponível em https://jornal.usp.br/ciencias/rumo-a-amazonia-desconhecida/21/10/2022. Adaptado.
       Com base nas informações fornecidas e em seus conhecimentos, assinale a alternativa correta.
   alternativas:
     A:
@@ -1975,8 +1882,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: Em fevereiro de 2023, ocorreu uma precipitação pluviométrica extrema no litoral norte de São
@@ -2009,7 +1917,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2043,32 +1951,38 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O SOBREVIVENTE
+
       Impossível compor um poema a essa altura da evolução
       [da humanidade.
       Impossível escrever um poema – uma linha que seja – de
       [verdadeira poesia.
       O último trovador morreu em 1914.
       Tinha um nome de que ninguém se lembra mais.
+
       Há máquinas terrivelmente complicadas para as
-      [necessidades mais simples. Se quer fumar um charuto aperte um botão.
+      [necessidades mais simples.
+      Se quer fumar um charuto aperte um botão.
       Paletós abotoam-se por eletricidade.
       Amor se faz pelo sem-fio.
       Não precisa estômago para digestão.
+
       Um sábio declarou a O Jornal que ainda falta muito para atingirmos um nível razoável de cultura. Mas até lá, felizmente, estarei morto.
+
       Os homens não melhoraram
       e matam-se como percevejos.
       Os percevejos heroicos renascem.
       Inabitável o mundo é cada vez mais habitado.
       E se os olhos reaprendessem a chorar seria um segundo
       [dilúvio.
+
       (Desconfio que escrevi um poema.)
-      Carlos Drummond de Andrade. Alguma Poesia , 1930.
+      Carlos Drummond de Andrade. Alguma Poesia, 1930.
       Entre o primeiro e o último verso, há uma aparente contradição, que, todavia, não se sustenta porque
   alternativas:
     A:
@@ -2085,8 +1999,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
@@ -2096,15 +2011,18 @@ questoes:
       flutua calma no seu caminho.
       “Peixinho, peixinho, deixe-a ir!
       Peixinho, peixinho, se apresse em fugir!”
+
       Ali atrás, longos fios transparentes se arrastam
       e os olhos do peixinho a um banquete convidam.
       “Serão, por acaso, minhocas o que eu vejo de repente?”
       “Peixinho, peixinho, deixe-me alertar!
       Peixinho, peixinho, não se deixe enganar!”
+
       Próximo demais o peixinho chegou:
       “Ai, ai, ai, agora ela me pegou!
       Firme me amarrou e não consigo me soltar!
       Firme me envolve e arde de matar!”
+
       [...]
       Tradução e adaptação de Flavia Souza, Stefano Hagen e Luiz Fontes.
       O fragmento de poema apresentado foi escrito pelo naturalista Fritz Müller para suas filhas. O trecho do poema permite afirmar que a predação é realizada por um/uma
@@ -2123,7 +2041,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 69
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2145,7 +2063,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 70
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2178,51 +2096,38 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Para esfriar um copo contendo 250 mL de água fervente (100°C), é comum utilizar o seguinte método:
-      Passo 1. Colocar esse copo
-      dentro de uma vasilha em
-      contato com 1 litro de água à
-      temperatura ambiente (25°C),
+      Passo 1. Colocar esse copo dentro de uma vasilha em contato com 1 litro de água à temperatura ambiente (25°C), como mostrado na figura.
   - figura: q071-1.webp
   - texto: |-
-      como mostrado na figura.
-      Passo 2. Esperar que entrem
-      em equilíbrio térmico.
+      Passo 2. Esperar que entrem em equilíbrio térmico.
       Passo 3. Tirar o copo e trocar a água da vasilha por outro litro de água à temperatura ambiente.
       Passo 4. Colocar o copo em contato com a água “nova” e esperar que entrem em equilíbrio térmico.
       Após o passo (4) desse método, a temperatura da água no copo será aproximadamente:
+  - texto: |-
+      Note e adote:
+      Considere apenas trocas de calor entre a água no copo e a água na vasilha. Despreze quaisquer trocas de calor do sistema com o ambiente.
   alternativas:
     A:
-      texto: |-
-        14 ° C
-        Note e adote:
+      texto: 14°C
     B:
-      texto: |-
-        28°C
-        Considere apenas trocas de calor
+      texto: 28°C
     C:
-      texto: |-
-        40°C
-        entre a água no copo e a água na
+      texto: 40°C
     D:
-      texto: |-
-        60°C
-        vasilha. Despreze quaisquer trocas de
+      texto: 60°C
     E:
-      texto: |-
-        84°C
-        calor do sistema com o ambiente.
+      texto: 84°C
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 27, y≈281–340
+  pendencias: []
 - numero: 72
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2231,8 +2136,8 @@ questoes:
       etapa, o gás da câmara de pneu é comprimido adiabaticamente. Na segunda etapa, o gás é aquecido
       isovolumetricamente. Na terceira etapa, o gás sofre uma expansão adiabática e, finalmente, na quarta
       etapa, um resfriamento isovolumétrico.\nAssinale a alternativa que melhor representa o diagrama
-      correspondente a essa máquina térmica no plano pressão ( \U0001D45D ) \U0001D465 volume ( \U0001D449
-      ).\nNote e adote:\nDespreze efeitos de dilatação ou contração da câmara do pneu."
+      correspondente a essa máquina térmica no plano pressão (\U0001D45D) × volume (\U0001D449).\nNote
+      e adote:\nDespreze efeitos de dilatação ou contração da câmara do pneu."
   alternativas:
     A:
       figura: q072-a.webp
@@ -2246,11 +2151,9 @@ questoes:
       figura: q072-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 28, y≈518: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 28, y≈217–767
+  pendencias: []
 - numero: 73
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2262,38 +2165,30 @@ questoes:
       assinalar a alternativa que apresenta a melhor aproximação para o valor do comprimento de onda da
       vibração em questão.
   - figura: q073-1.webp
+  - texto: |-
+      Note e adote:
+      Os grãos de areia tendem naturalmente a se acumular em torno dos pontos nos quais o deslocamento transversal da canaleta é nulo.
   alternativas:
     A:
-      texto: |-
-        1,2 cm
-        Note e adote:
+      texto: 1,2 cm
     B:
-      texto: |-
-        5,1 cm
-        Os grãos de areia tendem
+      texto: 5,1 cm
     C:
-      texto: |-
-        6,8 cm
-        naturalmente a se acumular em torno
+      texto: 6,8 cm
     D:
-      texto: |-
-        11,3 cm
-        dos pontos nos quais o deslocamento
+      texto: 11,3 cm
     E:
-      texto: |-
-        18,1 cm
-        transversal da canaleta é nulo.
+      texto: 18,1 cm
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 28, y≈285–343
+  pendencias: []
 - numero: 74
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Apesar de a África ser considerada o berço das civilizações e existirem indícios de conhecimentos elementares de Química no sul do continente cerca de 100.000 anos atrás, os conhecimentos químicos ensinados são eurocentristas. Entretanto, uma das grandes contribuições para o estudo de reatividade química é atribuída ao químico egípcio Ahmed Hassan Zewail, agraciado com o prêmio Nobel em 1999 por seus estudos de reações químicas usando uma técnica conhecida como espectroscopia de femtossegundos. Essa técnica possibilita identificar espécies com tempo de vida curto utilizando pulsos de laser com duração de 10 s.
+      Apesar de a África ser considerada o berço das civilizações e existirem indícios de conhecimentos elementares de Química no sul do continente cerca de 100.000 anos atrás, os conhecimentos químicos ensinados são eurocentristas. Entretanto, uma das grandes contribuições para o estudo de reatividade química é atribuída ao químico egípcio Ahmed Hassan Zewail, agraciado com o prêmio Nobel em 1999 por seus estudos de reações químicas usando uma técnica conhecida como espectroscopia de femtossegundos. Essa técnica possibilita identificar espécies com tempo de vida curto utilizando pulsos de laser com duração de 10⁻¹⁵ s.
       Essa contribuição é relevante para o estudo de reações químicas, pois
   alternativas:
     A:
@@ -2313,14 +2208,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 75
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: O mapa a seguir retrata o Nordeste da África e a Península Arábica, no século IV.
   - figura: q075-1.webp
   - texto: |-
-      CARNINE, Douglas et alii. World History : Ancient through Modern Times. Evanston, IL: McDougal Littell, 2009. Adaptado.
+      CARNINE, Douglas et alii. World History: Ancient through Modern Times. Evanston, IL: McDougal Littell, 2009. Adaptado.
       Considerando as rotas comerciais representadas no mapa, pelas quais se transportavam, por exemplo, cereais, marfim e escravizados, e que envolviam sociedades antigas, em especial os reinos de Axum, Cuxe e Egito, é correto afirmar que
   alternativas:
     A:
@@ -2339,7 +2234,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2348,7 +2243,8 @@ questoes:
       Como prometido, Fidel Castro reagiu contra os Estados Unidos (...). Ele anunciou a nacionalização de todas as propriedades norte-americanas importantes da ilha. (...) Numa frase sinistra (...), Castro salientou que a Cuba revolucionária tinha agora o apoio militar de fora do continente. Cuba ‘aceitaria com gratidão’, disse ele, ‘a ajuda dos foguetes da União Soviética (...)’.
       Naquele mês, a lenha fora jogada na fogueira, quando Castro chegou a Nova York para falar na Assembleia Geral da ONU, instalando-se no Harlem. (...)
       Castro ficou no [hotel] Theresa, cercado por um grupo de admiradores (...) e numa tarde memorável foi visitado pelo líder soviético. (...) Kruschev escreveu nas suas memórias que ‘indo a um hotel negro num bairro negro, nós estávamos fazendo uma dupla demonstração contra as políticas discriminatórias dos Estados Unidos em relação aos negros, assim como em relação a Cuba’”.
-      GOTT, Richard. Cuba : uma nova história. Rio de Janeiro: Zahar, 2006. p.210-213. Adaptado. As tensões políticas abordadas no texto referem-se
+      GOTT, Richard. Cuba: uma nova história. Rio de Janeiro: Zahar, 2006. p.210-213. Adaptado.
+      As tensões políticas abordadas no texto referem-se
   alternativas:
     A:
       texto: à indecisão de Fidel Castro sobre o alinhamento político de Cuba na Guerra Fria e ao isolamento
@@ -2361,7 +2257,7 @@ questoes:
         oposição dos EUA ao movimento insurgente.
     D:
       texto: ao gradual alinhamento entre Cuba e a URSS e ao aceno dos dois governantes de apoio ao movimento
-        negro norteamericano.
+        negro norte-americano.
     E:
       texto: à articulação entre os governos da URSS e dos EUA para enfraquecer Fidel Castro e os movimentos
         sociais no Harlem.
@@ -2369,13 +2265,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 77
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Desde os anos 20 governado pela dinastia Pahlevi, o Irã vinha sendo modernizado e ocidentalizado pelas sucessivas gerações de xás, que viam na observância estrita da religião um atraso a ser superado. País de numerosa população xiita, no entanto, o regime modernizante sempre precisou contar com uma grande dose de repressão, para conter a oposição dos grupos religiosos, que se fazia cada vez mais popular. Na década de 1970, este movimento conheceu um líder, que, refugiado na França, preparava-se para voltar ao país: era o aiatolá Khomeini, que apelava aos muçulmanos para que restaurassem a autoridade do islã na sociedade.”
-      GRINBERG, Keila. O mundo árabe e as guerras árabe-israelenses. In: REIS FILHO, Daniel Aarão; FERREIRA, Jorge; ZENHA, Celeste (orgs.). O século XX : o tempo das dúvidas. Rio de Janeiro: Civilização Brasileira, 2002. p.116.
+      GRINBERG, Keila. O mundo árabe e as guerras árabe-israelenses. In: REIS FILHO, Daniel Aarão; FERREIRA, Jorge; ZENHA, Celeste (orgs.). O século XX: o tempo das dúvidas. Rio de Janeiro: Civilização Brasileira, 2002. p.116.
       O texto descreve o contexto histórico que antecedeu
   alternativas:
     A:
@@ -2392,7 +2288,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 78
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2424,7 +2320,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 79
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2457,7 +2353,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 80
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2473,8 +2369,8 @@ questoes:
         ranking em razão da produção agrícola e do extrativismo mineral, enquanto que a Itália sofrerá
         queda na economia devido à instabilidade política do país.
     B:
-      texto: Entre 1992 e 2028, o Brasil apresentou elevação na sua produção e sofrerá declínio no ranking
-        , assim como o Reino Unido, em razão desses países terem declinado de tratados econômicos globais.
+      texto: Entre 1992 e 2028, o Brasil apresentou elevação na sua produção e sofrerá declínio no ranking,
+        assim como o Reino Unido, em razão desses países terem declinado de tratados econômicos globais.
     C:
       texto: Entre 1992 e 2010, China e Índia apresentaram crescimento de suas economias em razão do aumento
         da capacidade produtiva, do potencial de consumo interno e da infraestrutura na produção industrial.
@@ -2488,7 +2384,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2515,25 +2411,16 @@ questoes:
         abarca apenas uma parte da reprodução social, pois não inclui o trabalho doméstico remunerado
         e os trabalhos de reprodução executados fora do ambiente doméstico.
     E:
-      texto: |-
-        Os dados estimados sobre a participação das atividades domésticas não remuneradas no PIB do Brasil mostram que a reprodução social acontece apenas quando não há uma relação salarial entre quem executa e quem se beneficia desse tipo de trabalho.
-        TEXTOS PARA AS QUESTÕES 82 E 83
-        Texto I
-        “Na confusão verde do fundo da machamba, Maria não viu o capataz imediatamente. Esbracejou com aflição, tentando libertar as pernas. O braço rodeou-lhe os ombros duramente. O bafo quente e ácido do homem aproximou-se da sua face. A capulana da Maria desprendeu-se durante a breve luta e a sensação fria de água tornou-se-lhe mais vívida. Um arrepio fê-la contrair-se.
-        Sentiu nas coxas nuas a carícia morna e áspera dos dedos calosos do homem.”
-        Luis Bernardo Honwana. Dina, In: Nós Matamos o Cão Tinhoso! .
-        Texto II
-        “– Mas choraste. A bofetada que te dei foi só uma disciplina para aprenderes a não fazer ciúmes. Gosto muito de ti, Sarnau. És a minha primeira mulher. É tua a honra deste território. Tu és a mãe de todas as mães da nossa terra. Tu és o meu mundo, minha flor, rebuçado [bala] do meu coração. Deixei cair duas gotas de fel bem amargas e salgadinhas. Meu marido acariciava-me à moda dos búfalos; dizia-me coisas no ouvido e o seu hálito fedia a álcool, enjoava-me, arrepiavame, maltratando o meu corpinho frágil. Explodi furiosa e chorei de amargura.
-        – Sarnau, pareces ser uma machamba difícil. Já faz tempo que semeio em ti e não vejo resultado. Com a outra foi tão diferente. Bastou uma sementeira e germinou logo.
-        – Casámo-nos há pouco tempo, Nguila, muito pouco tempo. – Não tenho lá muita paciência. Não estou para lavrar sem colher.”
-        Paulina Chiziane. Balada de amor ao vento , p. 61-62.
+      texto: Os dados estimados sobre a participação das atividades domésticas não remuneradas no PIB
+        do Brasil mostram que a reprodução social acontece apenas quando não há uma relação salarial entre
+        quem executa e quem se beneficia desse tipo de trabalho.
   resposta: D
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb05
   enunciado:
   - texto: 'Os trechos transcritos foram retirados dos livros dos moçambicanos Luís Bernardo Honwana e
       Paulina Chiziane. Em ambos, observa-se a ocorrência da palavra “machamba”. A respeito do uso desse
@@ -2546,7 +2433,7 @@ questoes:
       texto: No texto I, machamba possui sentido literal, referindo-se às terras para cultivo; no texto
         II, o sentido é figurado, referindo-se ao útero de Sarnau.
     C:
-      texto: No texto I, machamba possui sentido figurado, referindose à colheita; no texto II, o sentido
+      texto: No texto I, machamba possui sentido figurado, referindo-se à colheita; no texto II, o sentido
         é literal, referindo-se a um problema.
     D:
       texto: Em ambos os textos, machamba apresenta sentido literal e refere-se a um terreno agrícola
@@ -2558,9 +2445,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 83
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb05
   enunciado:
   - texto: 'Nos excertos, os escritores moçambicanos descrevem, cada um em seu contexto, cenas de violência.
       Sobre elas, é correto afirmar:'
@@ -2584,8 +2471,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 84
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: O Atlas da Violência, publicado em 2019 e organizado pelo Instituto de Pesquisa Econômica Aplicada
@@ -2618,7 +2506,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 85
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2650,14 +2538,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 86
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Para praticar a agricultura, os tupis derrubavam árvores e faziam a queimada – técnica que iria ser incorporada pelos colonizadores. Plantavam feijão, milho, abóbora e principalmente mandioca, cuja farinha se tornou também um alimento básico da Colônia. A economia era basicamente de subsistência e destinada ao consumo próprio. Cada aldeia produzia para satisfazer a suas necessidades, havendo poucas trocas de gêneros alimentícios com outras aldeias.
       Mas existiam contatos entre elas para a troca de mulheres e de bens de luxo, como penas de tucano e pedras para se fazer botoque. Dos contatos resultavam alianças em que grupos de aldeias se posicionavam uns contra os outros. A guerra e a captura de inimigos – mortos em meio à celebração de um ritual canibalístico – eram elementos integrantes da sociedade tupi. Dessas atividades, reservadas aos homens, dependiam a obtenção de prestígio e a renovação das mulheres.”
-      FAUSTO, Boris. História do Brasil . São Paulo: Edusp, 2006. p.40.
+      FAUSTO, Boris. História do Brasil. São Paulo: Edusp, 2006. p.40.
       De acordo com o texto, é correto afirmar que, no período colonial brasileiro, as sociedades pertencentes ao tronco linguístico Tupi
   alternativas:
     A:
@@ -2675,13 +2563,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 87
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Colombo não reconhece a diversidade das línguas e, por isso, quando se vê diante de uma língua estrangeira, só há dois comportamentos possíveis, e complementares: reconhecer que é uma língua, e recusar-se a aceitar que seja diferente, ou então reconhecer a diferença e recusar-se a admitir que seja uma língua... Os índios que encontra logo no início, a 12 de outubro de 1492, provocam uma reação do segundo tipo; ao vê-los, promete: ‘Se Deus assim o quiser, no momento da partida levarei seis deles a Vossas Altezas, para que aprendam a falar’ (...).”
-      TODOROV, Tzvetán. A conquista da América : a questão do outro. São Paulo: Martins Fontes, 1993. p.29-30.
+      TODOROV, Tzvetán. A conquista da América: a questão do outro. São Paulo: Martins Fontes, 1993. p.29-30.
       Ao tratar das reações iniciais de Colombo ao chegar à América, o excerto indica que o navegador
   alternativas:
     A:
@@ -2698,8 +2586,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: ingles
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
@@ -2724,7 +2613,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 89
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2747,7 +2636,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2757,7 +2646,8 @@ questoes:
       MERTON, Robert. Sociologia: Teoria e Estrutura. São Paulo: Editora Mestre Jou, 1970. p.515-517.
       Texto II
       “Depois de alguns anos inseridos nesta lógica de abuso e privações de distintos tipos, o detento é novamente colocado em liberdade. (...) Conseguir um trabalho não é tão fácil como parece, já que mesmo as atividades menos qualificadas e manuais (como as relacionadas a limpeza, serviços gerais, construção civil, dentre outras) demandam ‘atestado de bons antecedentes e a marca da passagem pela cadeia pode significar um indesejável pertencimento ao mundo do crime’ (Ramalho, 2018, p. 91). (...) O fator [condicionante da reincidência] mais citado, presente em 44% dos textos [sobre o tema], foi a baixa qualificação e as poucas oportunidades, sendo essa a explicação padrão de boa parte da literatura para a reincidência.”
-      RIBEIRO, Ludmila; OLIVEIRA, Valéria. Reincidência e reentrada na prisão no Brasil: o que os estudos dizem sobre os fatores que contribuem para essa trajetória . Artigo Estratégico 56. São Paulo: Instituto Igarapé, 2022. p.10-14. Aplicando a noção proposta por Robert Merton, no texto I, ao cenário descrito no texto II, qual definição da situação das pessoas egressas do sistema prisional pelos possíveis empregadores no mercado de trabalho tornaria a reincidência criminal uma “profecia que se cumpre por si mesma”?
+      RIBEIRO, Ludmila; OLIVEIRA, Valéria. Reincidência e reentrada na prisão no Brasil: o que os estudos dizem sobre os fatores que contribuem para essa trajetória. Artigo Estratégico 56. São Paulo: Instituto Igarapé, 2022. p.10-14.
+      Aplicando a noção proposta por Robert Merton, no texto I, ao cenário descrito no texto II, qual definição da situação das pessoas egressas do sistema prisional pelos possíveis empregadores no mercado de trabalho tornaria a reincidência criminal uma “profecia que se cumpre por si mesma”?
   alternativas:
     A:
       texto: Pessoas egressas do sistema prisional têm dificuldade de conseguir emprego no mercado de
@@ -2772,12 +2662,8 @@ questoes:
       texto: Pessoas egressas do sistema prisional voltarão a cometer crimes e, por isso, não devem ser
         contratadas para trabalhar.
     E:
-      texto: |-
-        Pessoas egressas do sistema prisional conseguem somente trabalhos informais e de baixa remuneração por terem pouca qualificação e dificuldades para conseguir seus documentos.
-        RASCUNHO
-        NÃO SERÁ
-        CONSIDERADO NA
-        CORREÇÃO
+      texto: Pessoas egressas do sistema prisional conseguem somente trabalhos informais e de baixa remuneração
+        por terem pouca qualificação e dificuldades para conseguir seus documentos.
   resposta: D
   anulada: false
   pendencias: []
