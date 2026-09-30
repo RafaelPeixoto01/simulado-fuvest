@@ -33,3 +33,14 @@ def client(app):
 def sessao(app):
     with app.state.fabrica_sessao() as s:
         yield s
+
+
+@pytest.fixture
+def base_sintetica(sessao, settings):
+    """Provas ficticias 2098 e 2099 sincronizadas no banco do app (e figuras em DATA_DIR)."""
+    from app.pacote.sincronizar import sincronizar
+    from tests.fixtures.gerar_pacotes import escrever_pacotes
+
+    escrever_pacotes(settings.data_dir)
+    sincronizar(sessao, settings.data_dir)
+    return settings.data_dir

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao
-from app.routers import health
+from app.routers import catalogo, health
 
 
 def criar_app(settings: Settings | None = None) -> FastAPI:
@@ -15,6 +15,7 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
     app.state.fabrica_sessao = criar_fabrica_sessao(engine)
 
     app.include_router(health.router)
+    app.include_router(catalogo.router)
     return app
 
 
