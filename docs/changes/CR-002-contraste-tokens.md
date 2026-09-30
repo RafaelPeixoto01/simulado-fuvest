@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-09-30  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -119,7 +119,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. Cada rota define o p
 |---------|--------|------------|-----------|
 | CR-T-01 | Tokens no `index.css` e teste de contraste calculado a partir do arquivo (P2.1, P2.3, P2.4) | — | Teste mede ≥ 4,5:1 para texto e ≥ 3:1 para a borda |
 | CR-T-02 | `text-optico-texto` nas letras e números; `border-borda-campo` nos campos | CR-T-01 | Nenhum texto em `text-optico`; nenhum campo com `border-linha` |
-| CR-T-03 | P2.2: conferir que a resolução já não tem letras nas bolinhas (CR-001) e registrar a folha corrigida no escopo do CR-003 | — | Registrado no CR-003 |
+| CR-T-03 | P2.2: conferir que a resolução já não tem letras nas bolinhas (CR-001) e registrar a folha corrigida no escopo do CR-003 | — | Registrado no CR-003 (D5 do CR-003) |
 | CR-T-04 | `useTituloPagina` em todas as rotas (P2.5) | — | Teste confere o título de cada rota |
 | CR-T-05 | Validação runtime (Playwright: cores calculadas e títulos) + documentação | CR-T-01..04 | Registrado na seção 8; docs atualizados |
 
@@ -127,18 +127,31 @@ O rosa #d9667f continua nos círculos e bordas decorativos. Cada rota define o p
 
 ## 8. Critérios de Aceite
 
-- [ ] P2.1: letras A–E das alternativas e números das folhas em #b8405f (≥ 4,5:1 sobre branco e sobre `caneta-clara`)
-- [ ] P2.2: a folha da resolução não tem letras dentro das bolinhas (CR-001); a folha corrigida entra no escopo do CR-003
-- [ ] P2.3: "Correta" e "Sua resposta" (acerto) em #17703f, ≥ 4,5:1 sobre `acerto-claro`
-- [ ] P2.4: bordas de `input`, `select`, `textarea` e do seletor segmentado em #848e9c (≥ 3:1 sobre branco e sobre `fundo`)
-- [ ] P2.5: cada rota tem um título próprio no formato "‹página› · Simulado Fuvest"
-- [ ] O rosa #d9667f continua nos elementos decorativos
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge (Playwright), com o resultado registrado aqui
-- [ ] Revisão de código: N/A — complexidade Baixa (troca de tokens e de classes, um hook de título)
-- [ ] Revisão de segurança: N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
-- [ ] Documentos afetados foram atualizados
+- [x] P2.1: letras A–E das alternativas e números das folhas em #b8405f (≥ 4,5:1 sobre branco e sobre `caneta-clara`)
+- [x] P2.2: a folha da resolução não tem letras dentro das bolinhas (CR-001); a folha corrigida entra no escopo do CR-003
+- [x] P2.3: "Correta" e "Sua resposta" (acerto) em #17703f, ≥ 4,5:1 sobre `acerto-claro`
+- [x] P2.4: bordas de `input`, `select`, `textarea` e do seletor segmentado em #848e9c (≥ 3:1 sobre branco e sobre `fundo`)
+- [x] P2.5: cada rota tem um título próprio no formato "‹página› · Simulado Fuvest"
+- [x] O rosa #d9667f continua nos elementos decorativos (borda da bolinha medida em #d9667f)
+- [x] Testes existentes continuam passando (regressão): Vitest 123/123, `tsc --noEmit`, ESLint e o hook de commit
+- [x] Novos testes cobrem a mudança: `tokens.test.ts` (11 pares, calculados do `index.css`; o verde antigo falharia com 4,43:1) e `titulos.test.tsx` (8 rotas)
+- [x] Fluxo afetado exercitado em runtime antes do merge (Playwright), com o resultado registrado abaixo
+- [x] ~~Revisão de código~~ N/A — complexidade Baixa (troca de tokens e de classes, um hook de título)
+- [x] ~~Revisão de segurança~~ N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
+- [x] Documentos afetados foram atualizados (Spec índice v1.2 e spec 03 v1.2, Arquitetura v1.2, Plano, CLAUDE.md, INDEX; PRD sem mudança, com justificativa na seção 5)
+
+### 8.1 Validação em runtime (Playwright, 2026-09-30)
+
+Backend com `local.db` (prova 2025) + Vite, 1440 × 900; Personalizado de 3 questões iniciado e finalizado pelo fluxo real.
+
+| Verificação | Medida no navegador | Resultado |
+|-------------|---------------------|-----------|
+| Títulos | `/` "Simulado Fuvest"; `/novo/personalizado` "Simulado personalizado · Simulado Fuvest"; `/novo/ano`, `/treino`, `/historico` e rota inexistente com os títulos da tabela; resolução "Personalizado: todas as disciplinas, 3 questões · Simulado Fuvest"; resultado "Resultado · Simulado Fuvest" | ✅ |
+| Letra A–E da alternativa neutra | cor rgb(184, 64, 95) = #b8405f; borda da bolinha rgb(217, 102, 127) = #d9667f | ✅ |
+| Número da folha da resolução | rgb(184, 64, 95) | ✅ |
+| "Correta" na revisão do resultado | rgb(23, 112, 63) = #17703f sobre rgb(230, 244, 236) | ✅ |
+| Bordas de campo | dois `select` de anos e a quantidade no Personalizado, o `select` de disciplina e o seletor segmentado na revisão: rgb(132, 142, 156) = #848e9c | ✅ |
+| Console | sem erros nem avisos (só a mensagem informativa do React DevTools) | ✅ |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -190,3 +203,5 @@ O rosa #d9667f continua nos círculos e bordas decorativos. Cada rota define o p
 | Data       | Autor  | Descrição                    |
 |------------|--------|------------------------------|
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado a partir da revisão de design (P2.1 a P2.5) e da tela "Contraste: antes e depois" |
+| 2026-09-30 | Rafael Peixoto (com Claude) | P2.2 da folha corrigida passa para o CR-003, cujo redesenho da folha foi decidido pelo usuário |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Implementação e validação em runtime concluídas; documentação atualizada — status: ✅ Concluído |

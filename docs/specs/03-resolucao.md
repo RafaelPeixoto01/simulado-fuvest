@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens)
 
 ---
 
@@ -40,6 +40,8 @@ SPA React: tela inicial com catálogo, configuração dos modos, tela de resolu�
 | Criar | `frontend/src/**/*.test.ts(x)` | Vitest |
 | Criar (CR-001) | `frontend/src/components/resolucao/PainelFolha.tsx`, `TelaPausa.tsx` | Folha do celular como diálogo; tela de pausa |
 | Criar (CR-001) | `frontend/src/components/Icone.tsx` | Ícones de traço comuns (`Icone`, `IconePausa`) |
+| Criar (CR-002) | `frontend/src/hooks/useTituloPagina.ts` | Título da aba por página |
+| Criar (CR-002) | `frontend/src/tokens.test.ts` | Contraste WCAG dos pares de tokens, lido do `index.css` |
 
 ### 2.2 Interfaces / Types
 
@@ -115,11 +117,24 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
 | `*` | 404 simples | Link para `/` |
 
+**Título da página (CR-002, WCAG 2.4.2):** cada página chama `useTituloPagina`: "Simulado Fuvest" no início e "‹página› · Simulado Fuvest" nas demais (Simulado personalizado, Prova de um ano, ‹descrição do simulado› na resolução, Treino por questão, Resultado, Histórico, Página não encontrada).
+
 "Prova completa" inicia direto da Home (sem configuração); fica desabilitada com a explicação "Disponível quando a base tiver 90 questões válidas" se `completa_disponivel=false`.
 
 ---
 
 ## 3. Componentes de UI
+
+### Tokens de contraste (CR-002)
+
+| Token | Valor | Uso |
+|-------|-------|-----|
+| `optico` | #d9667f | Só decorativo: círculos da marca, bordas das bolinhas, contornos da folha |
+| `optico-texto` | #b8405f | Letras A–E das alternativas e números das folhas (5,33:1 no branco) |
+| `borda-campo` | #848e9c | Borda de `input`, `select`, `textarea` e do seletor segmentado (≥ 3:1) |
+| `acerto` | #17703f | Texto, borda e preenchimento de acerto (≥ 4,5:1 sobre `acerto-claro`) |
+
+O `tokens.test.ts` calcula o contraste dos pares a partir do `index.css`. Para isso, o Vitest processa só esse arquivo (`css.include` no `vite.config.ts`).
 
 ### Componente: Blocos
 
