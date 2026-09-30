@@ -9,13 +9,16 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App.tsx'
 import { queryClient } from './queryClient'
+import { SimuladoProvider } from './simulado/SimuladoContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SimuladoProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SimuladoProvider>
     </QueryClientProvider>
   </StrictMode>,
 )
