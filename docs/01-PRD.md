@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 1.0
-**Data:** 2026-09-29
+**Versão:** 1.1
+**Data:** 2026-09-30
 **Status:** Aprovado
 **Fase:** MVP — Simulados da 1ª fase
-**CR Ref:** —
+**CR Ref:** CR-001
 
 ---
 
@@ -156,14 +156,18 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 **RF-014 — Detalhamento:**
 - Grade com os números das questões, colorida pelo estado; clicar leva à questão
 - Opção "marcar para revisar" por questão
+- No desktop, a folha de respostas fica sempre à vista e cabe inteira na tela; no celular, abre como painel (diálogo acessível) com botões de 48 px (CR-001)
+- Anterior, Revisar e Próxima ficam numa barra fixa no rodapé; trocar de questão volta ao topo da nova questão (CR-001)
 
 **RF-015 — Detalhamento:**
 - Mostra o tempo restante; pode ser ocultado na tela, mas continua contando
+- No Personalizado, pausar esconde a questão até retomar (CR-001)
 - Aviso quando faltarem 15 min; ao zerar, finaliza automaticamente (RN-010)
 
 **RF-016 — Detalhamento:**
 - Respostas, marcações e horário de início persistidos no navegador a cada alteração: recarregar a página ou fechar a aba não perde nada
-- "Finalizar" pede confirmação e mostra quantas questões estão em branco
+- "Finalizar" pede confirmação e mostra quantas questões estão em branco e quantas estão marcadas para revisar; fica no rodapé da folha de respostas e no lugar de "Próxima" na última questão (CR-001)
+- Durante a resolução, a tela fica em modo foco, sem o cabeçalho e o rodapé do site (CR-001)
 
 ### Módulo: Resultado
 
@@ -377,4 +381,4 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ---
 
-*Documento criado em 2026-09-29.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco).*

@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.0
-**Data:** 2026-09-29
+**Versão:** 1.1
+**Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0
-**CR Ref:** —
+**CR Ref:** CR-001
 
 ---
 
@@ -135,15 +135,15 @@ Simulado Fuvest/
 └── frontend/
     ├── package.json, vite.config.ts, tsconfig.json, tsconfig.app.json, eslint.config.js, index.html
     └── src/
-        ├── main.tsx, App.tsx (rotas), queryClient.ts, index.css (tokens @theme), types.ts
+        ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001), queryClient.ts, index.css (tokens @theme), types.ts
         ├── services/api.ts         # cliente fetch + ApiError (código/dados do erro de domínio)
         ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1)
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
         │                           #   useConfirmarDescarte, useAtalhos, useAgora
-        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, estilos.ts
+        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, estilos.ts
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
-        │   ├── resolucao/          #   FolhaRespostas (folha óptica), Cronometro
+        │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas, FolhaCorrigida, RevisaoQuestoes
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, NaoEncontrada
         ├── utils/                  # tempo.ts, format.ts
@@ -505,4 +505,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`.*

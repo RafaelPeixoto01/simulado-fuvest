@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.0
-**Data:** 2026-09-29
+**Versão:** 1.1
+**Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0
-**CR Ref:** —
+**CR Ref:** CR-001
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -20,7 +20,7 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 |---|------|-----|--------|
 | 01 | [Ingestão de Provas](specs/01-ingestao.md) | RF-001–RF-006 | CLI do curador, pacote `prova.yaml`, validação V01–V10, sincronização repo → banco, família de layout 2025 |
 | 02 | [Catálogo e Geração](specs/02-catalogo-e-geracao.md) | RF-008–RF-012 | `GET /api/catalogo`, `POST /api/simulados` (4 modos), `GET /api/questoes` |
-| 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: rotas, Home, configuração, resolução, cronômetro, Treino, storage |
+| 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: rotas, Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
 | 04 | [Correção, Resultado e Histórico](specs/04-correcao-resultado.md) | RF-017–RF-020 | `POST /api/correcoes`, resultado por disciplina, revisão, histórico local |
 | 05 | [Reporte de Erro](specs/05-reportes.md) | RF-007, RF-021 | `POST /api/reportes`, modal, CLI de reportes |
 
@@ -95,3 +95,4 @@ Nenhum endpoint exige autenticação (não há dados de usuário no servidor —
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.1 | 2026-09-30 | CR-001: spec 03 v1.1 — resolução em modo foco, barra inferior fixa, folha em colunas (desktop) e em painel (celular), pausa que esconde a questão |

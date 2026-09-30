@@ -13,11 +13,12 @@ import { TreinoPage } from './pages/TreinoPage'
 export default function App() {
   return (
     <Routes>
+      {/* Modo foco (CR-001, D5): a resolução não tem o cabeçalho nem o rodapé do site */}
+      <Route path="simulado" element={<ResolucaoPage />} />
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="novo/personalizado" element={<ConfigurarPersonalizadoPage />} />
         <Route path="novo/ano" element={<EscolherAnoPage />} />
-        <Route path="simulado" element={<ResolucaoPage />} />
         <Route path="treino" element={<TreinoPage />} />
         <Route path="resultado/:id" element={<ResultadoPage />} />
         <Route path="historico" element={<HistoricoPage />} />
