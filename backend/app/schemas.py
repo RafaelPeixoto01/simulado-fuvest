@@ -122,3 +122,45 @@ class QuestoesResponse(BaseModel):
     questoes: list[QuestaoPublica]
     textos_base: dict[str, TextoBasePublico]
     nao_encontradas: list[str]
+
+
+class RespostaItem(BaseModel):
+    questao_id: IdQuestao
+    resposta: Letra | None  # null = em branco
+
+
+def _ids_unicos(respostas: list[RespostaItem]) -> list[RespostaItem]:
+    if len({r.questao_id for r in respostas}) != len(respostas):
+        raise ValueError("Questão repetida")
+    return respostas
+
+
+class CorrecaoRequest(BaseModel):
+    respostas: Annotated[
+        list[RespostaItem], Field(min_length=1, max_length=90), AfterValidator(_ids_unicos)
+    ]
+
+
+class ItemCorrigido(BaseModel):
+    questao_id: str
+    resposta: Letra | None
+    correta: Letra | None  # null so quando anulada
+    anulada: bool
+    acertou: bool
+    disciplina: Disciplina
+
+
+class DesempenhoDisciplina(BaseModel):
+    disciplina: Disciplina
+    total: int
+    acertos: int
+    percentual: float
+
+
+class CorrecaoResponse(BaseModel):
+    itens: list[ItemCorrigido]
+    total: int
+    acertos: int
+    percentual: float
+    por_disciplina: list[DesempenhoDisciplina]
+    ignoradas: list[str]
