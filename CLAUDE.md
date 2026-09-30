@@ -20,6 +20,7 @@
 | Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` e `/figuras` → 8000) |
 | Testes backend | `cd backend && .venv/Scripts/python -m pytest` |
 | Lint backend | `cd backend && .venv/Scripts/python -m ruff check .` |
+| Validar pacotes | `cd backend && .venv/Scripts/python -m ingestao validar --todas` (ou `--ano AAAA`) |
 | Testes frontend | `cd frontend && npm test` (Vitest) |
 | Build check TS | `cd frontend && npx tsc --noEmit -p tsconfig.app.json` |
 | Lint frontend | `cd frontend && npm run lint` |
@@ -347,3 +348,4 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | Instalar dependências do backend quebra o Meu Controle | O Python global tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0) | Sempre usar `backend/.venv` (hook, comandos e docs já apontam para ele) |
 | Vitest: "failed to find the current suite" só no hook | Com o cwd em `d:\...` (drive minúsculo) o Vitest carrega o próprio módulo duas vezes | O `check-quality.js` normaliza a letra do drive para maiúscula; ao rodar à mão via `cmd`, usar `D:\` |
 | `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
+| Saída da CLI com `�` no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | Só acontece com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |
