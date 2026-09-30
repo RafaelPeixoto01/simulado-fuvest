@@ -1,15 +1,17 @@
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { DesempenhoDisciplinas } from '../components/resultado/DesempenhoDisciplinas'
 import { FolhaCorrigida } from '../components/resultado/FolhaCorrigida'
 import { ResumoResultado } from '../components/resultado/ResumoResultado'
+import { abrirQuestao, REVISAO_INICIAL, trocarFiltros, type EstadoRevisao, type FiltroRevisao } from '../components/resultado/revisao'
 import { RevisaoQuestoes } from '../components/resultado/RevisaoQuestoes'
 import type { EstadoResultado } from '../hooks/useFinalizarSimulado'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import { obterDoHistorico } from '../storage/historicoStorage'
+import type { Disciplina } from '../types'
 
 function Aviso({ children }: { children: string }) {
   return <p className="rounded-md bg-alerta-claro px-3 py-2 text-alerta">{children}</p>
@@ -25,6 +27,25 @@ export function ResultadoPage() {
     [estado, id],
   )
   const { simulado, despachar } = useSimulado()
+  // Questão aberta na revisão e filtros: a folha corrigida e a revisão compartilham (P1.7, D6)
+  const [revisao, setRevisao] = useState<EstadoRevisao>(REVISAO_INICIAL)
+  const [pedidoDeFoco, setPedidoDeFoco] = useState(0)
+  const questaoIds = entrada?.questaoIds
+  const itens = entrada?.resultado.itens
+  const porId = useMemo(() => new Map((itens ?? []).map((i) => [i.questao_id, i])), [itens])
+  const mudarRevisao = useCallback((proximo: (atual: EstadoRevisao) => EstadoRevisao) => {
+    setRevisao(proximo)
+    setPedidoDeFoco((n) => n + 1)
+  }, [])
+  const abrir = useCallback(
+    (indice: number) => mudarRevisao((atual) => abrirQuestao(atual, indice, questaoIds ?? [], porId)),
+    [mudarRevisao, questaoIds, porId],
+  )
+  const filtrar = useCallback(
+    (filtro: FiltroRevisao, disciplina: Disciplina | '') =>
+      mudarRevisao((atual) => trocarFiltros(atual, filtro, disciplina, questaoIds ?? [], porId)),
+    [mudarRevisao, questaoIds, porId],
+  )
 
   // O simulado que virou este resultado sai de "em andamento" só aqui, já fora da resolução
   useEffect(() => {
@@ -69,13 +90,39 @@ export function ResultadoPage() {
         </div>
       </div>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      {/* P1.7: "Por disciplina", a folha corrigida (no celular) e a revisão, nessa ordem;
+          no desktop, a folha fica fixa na barra lateral (D5) */}
+      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_25.5rem]">
         <div className="min-w-0 space-y-12">
           <DesempenhoDisciplinas dados={entrada.resultado.por_disciplina} />
-          <RevisaoQuestoes questaoIds={entrada.questaoIds} itens={entrada.resultado.itens} />
+          <div className="lg:hidden">
+            <FolhaCorrigida
+              formato="grade"
+              questaoIds={entrada.questaoIds}
+              itens={entrada.resultado.itens}
+              atual={revisao.indice}
+              onIr={abrir}
+            />
+          </div>
+          <RevisaoQuestoes
+            questaoIds={entrada.questaoIds}
+            itens={entrada.resultado.itens}
+            estado={revisao}
+            onFiltros={filtrar}
+            onIr={(indice) => mudarRevisao((atual) => ({ ...atual, indice }))}
+            pedidoDeFoco={pedidoDeFoco}
+          />
         </div>
-        <aside className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:self-start lg:overflow-auto">
-          <FolhaCorrigida questaoIds={entrada.questaoIds} itens={entrada.resultado.itens} />
+        <aside className="hidden lg:block">
+          <div className="sticky top-6 max-h-[calc(100dvh-3rem)] overflow-y-auto rounded-xl border border-optico/45 bg-papel p-4">
+            <FolhaCorrigida
+              formato="bolhas"
+              questaoIds={entrada.questaoIds}
+              itens={entrada.resultado.itens}
+              atual={revisao.indice}
+              onIr={abrir}
+            />
+          </div>
         </aside>
       </div>
     </div>

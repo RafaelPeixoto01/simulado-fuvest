@@ -62,14 +62,26 @@ describe('Resultado (RF-017 a RF-019)', () => {
     expect(linhas[1]).toMatch(/Física.*1 de 2/)
   })
 
-  it('folha corrigida descreve cada questão', async () => {
+  it('folha corrigida descreve cada questão, nos dois formatos (D5)', async () => {
     localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
 
     renderizar(<App />, { rota: '/resultado/sim-9' })
 
-    const folha = await screen.findByRole('list', { name: 'Folha de respostas corrigida' })
-    expect(within(folha).getByLabelText('Questão 2: marcou B, correta C')).toBeInTheDocument()
-    expect(within(folha).getByLabelText('Questão 3: em branco, correta D')).toBeInTheDocument()
+    // Celular (grade) e desktop (bolhas): só uma aparece de cada vez, pelo CSS
+    const [grade, bolhas] = await screen.findAllByRole('list', { name: 'Folha de respostas corrigida' })
+    for (const folha of [grade, bolhas]) {
+      expect(within(folha).getByRole('button', { name: 'Questão 1: acertou A' })).toBeInTheDocument()
+      expect(within(folha).getByRole('button', { name: 'Questão 2: marcou B, correta C' })).toBeInTheDocument()
+      expect(within(folha).getByRole('button', { name: 'Questão 3: em branco, correta D' })).toBeInTheDocument()
+    }
+    // Grade: marca da questão (✓ letra, ✗ letra, – em branco) e selos de contagem
+    expect(within(grade).getByRole('button', { name: /^Questão 2:/ })).toHaveTextContent('02B')
+    expect(within(grade).getByRole('button', { name: /^Questão 3:/ })).toHaveTextContent('03–')
+    expect(screen.getAllByText('1 acerto')).toHaveLength(2)
+    expect(screen.getAllByText('1 erro')).toHaveLength(2)
+    expect(screen.getAllByText('– 1 em branco')).toHaveLength(2)
+    // Bolhas: sem letra dentro das bolinhas (P2.2)
+    expect(within(bolhas).getByRole('button', { name: /^Questão 2:/ })).toHaveTextContent(/^02$/)
   })
 
   it('revisão filtra as erradas e as em branco', async () => {
@@ -85,6 +97,70 @@ describe('Resultado (RF-017 a RF-019)', () => {
     await userEvent.click(screen.getByRole('radio', { name: 'Em branco' }))
     expect(screen.getByText('Enunciado da questão 2099-003')).toBeInTheDocument()
     expect(screen.queryByText('Enunciado da questão 2099-002')).toBeNull()
+  })
+
+  it('a revisão mostra uma questão por vez, com selo, posição e Anterior/Próxima (D6)', async () => {
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+
+    const revisao = await screen.findByRole('region', { name: 'Revisão das questões' })
+    expect(await within(revisao).findByRole('heading', { level: 3, name: 'Questão 1 de 3' })).toBeInTheDocument()
+    expect(revisao).toHaveTextContent('Você acertou: A')
+    expect(revisao).toHaveTextContent('1 de 3 questões')
+    expect(within(revisao).getByRole('button', { name: 'Questão anterior' })).toBeDisabled()
+
+    await userEvent.click(within(revisao).getByRole('button', { name: 'Próxima questão' }))
+    expect(within(revisao).getByRole('heading', { level: 3, name: 'Questão 2 de 3' })).toHaveFocus()
+    expect(revisao).toHaveTextContent('Você marcou B · correta C')
+
+    await userEvent.click(within(revisao).getByRole('button', { name: 'Próxima questão' }))
+    expect(revisao).toHaveTextContent('Em branco · correta D')
+    expect(within(revisao).getByRole('button', { name: 'Próxima questão' })).toBeDisabled()
+  })
+
+  it('tocar numa questão da folha abre ela na revisão, rola até lá e foca o título (P1.7)', async () => {
+    const rolar = vi.fn()
+    Element.prototype.scrollIntoView = rolar
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+
+    const [grade] = await screen.findAllByRole('list', { name: 'Folha de respostas corrigida' })
+    await screen.findByText('Enunciado da questão 2099-001')
+    await userEvent.click(within(grade).getByRole('button', { name: /^Questão 3:/ }))
+
+    const revisao = screen.getByRole('region', { name: 'Revisão das questões' })
+    expect(within(revisao).getByRole('heading', { level: 3, name: 'Questão 3 de 3' })).toHaveFocus()
+    expect(screen.getByText('Enunciado da questão 2099-003')).toBeInTheDocument()
+    expect(rolar).toHaveBeenCalledWith({ block: 'start' })
+    expect(within(grade).getByRole('button', { name: /^Questão 3:/ })).toHaveAttribute('aria-current', 'true')
+    // O jsdom não tem scrollIntoView: o componente chama com `?.`; tira o simulado
+    delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView
+  })
+
+  it('questão fora do filtro, escolhida na folha, volta o filtro para "Todas"', async () => {
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('radio', { name: 'Erradas' }))
+    expect(screen.getByText('Enunciado da questão 2099-002')).toBeInTheDocument()
+
+    const [, bolhas] = screen.getAllByRole('list', { name: 'Folha de respostas corrigida' })
+    await userEvent.click(within(bolhas).getByRole('button', { name: /^Questão 1:/ }))
+
+    expect(screen.getByRole('radio', { name: 'Todas' })).toBeChecked()
+    expect(screen.getByText('Enunciado da questão 2099-001')).toBeInTheDocument()
+  })
+
+  it('filtro por disciplina continua na revisão (RF-019)', async () => {
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Disciplina' }), 'quimica')
+
+    expect(screen.getByText('Enunciado da questão 2099-002')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Revisão das questões' })).toHaveTextContent('1 de 1 questões')
   })
 
   it('avisos de tempo esgotado fora e de histórico não salvo (state da navegação)', async () => {

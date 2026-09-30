@@ -1,43 +1,83 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { useQuestoes } from '../../hooks/useQuestoes'
 import { NOMES_DISCIPLINAS, type Disciplina, type ItemCorrigido } from '../../types'
 import { Carregando, ErroCarregamento, Vazio } from '../Estados'
-import { BOTAO_SECUNDARIO } from '../estilos'
+import { BARRA_NEUTRO, BOTAO_BARRA_FORMA } from '../estilos'
+import { Icone } from '../Icone'
 import { QuestaoView } from '../questao/QuestaoView'
+import { filtrarRevisao, situacao, type EstadoRevisao, type FiltroRevisao, type Situacao } from './revisao'
 
-type Filtro = 'todas' | 'erradas' | 'branco'
-const POR_PAGINA = 10 // não renderizar 90 questões com figuras de uma vez
-
-const FILTROS: { valor: Filtro; rotulo: string }[] = [
-  { valor: 'todas', rotulo: 'Todas' },
-  { valor: 'erradas', rotulo: 'Erradas' },
-  { valor: 'branco', rotulo: 'Em branco' },
+const FILTROS: { valor: FiltroRevisao; rotulo: string; nome: string }[] = [
+  { valor: 'todas', rotulo: 'Todas', nome: 'questões' },
+  { valor: 'erradas', rotulo: 'Erradas', nome: 'erradas' },
+  { valor: 'branco', rotulo: 'Em branco', nome: 'em branco' },
 ]
 
-export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; itens: ItemCorrigido[] }) {
+const COR_SELO: Record<Situacao, string> = {
+  acerto: 'bg-acerto-claro text-acerto',
+  erro: 'bg-erro-claro text-erro',
+  branco: 'bg-fundo text-tinta',
+  anulada: 'bg-alerta-claro text-alerta',
+  removida: 'bg-fundo text-tinta-suave',
+}
+
+function textoSelo(item: ItemCorrigido | undefined): string {
+  const s = situacao(item)
+  if (s === 'removida' || !item) return 'Removida da base'
+  if (s === 'anulada') return 'Anulada: ponto para todos'
+  if (s === 'acerto') return `Você acertou: ${item.resposta}`
+  if (s === 'branco') return `Em branco · correta ${item.correta}`
+  return `Você marcou ${item.resposta} · correta ${item.correta}`
+}
+
+interface Props {
+  questaoIds: string[]
+  itens: ItemCorrigido[]
+  estado: EstadoRevisao
+  /** Troca de filtro (a página decide a questão aberta) */
+  onFiltros: (filtro: FiltroRevisao, disciplina: Disciplina | '') => void
+  /** Anterior/Próxima dentro da lista filtrada */
+  onIr: (indice: number) => void
+  /** Incrementado a cada troca pedida pelo estudante: rola até a revisão e foca o título (P1.1) */
+  pedidoDeFoco: number
+}
+
+/** Revisão uma questão por vez (D6, CR-003): filtros, posição no filtro, selo do resultado e Anterior/Próxima. */
+export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pedidoDeFoco }: Props) {
   const questoes = useQuestoes(questaoIds)
-  const [filtro, setFiltro] = useState<Filtro>('todas')
-  const [disciplina, setDisciplina] = useState<Disciplina | ''>('')
-  const [pagina, setPagina] = useState(0)
+  const secao = useRef<HTMLElement>(null)
+  const titulo = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    if (pedidoDeFoco === 0) return
+    secao.current?.scrollIntoView?.({ block: 'start' })
+    titulo.current?.focus({ preventScroll: true })
+  }, [pedidoDeFoco])
 
   const porId = new Map(itens.map((i) => [i.questao_id, i]))
   const disciplinas = [...new Set(itens.map((i) => i.disciplina))]
-  const visiveis = questaoIds
-    .map((id, indice) => ({ id, indice, item: porId.get(id) }))
-    .filter(({ item }) => {
-      if (disciplina && item?.disciplina !== disciplina) return false
-      if (filtro === 'erradas') return !!item && !item.acertou && item.resposta !== null
-      if (filtro === 'branco') return !!item && item.resposta === null && !item.anulada
-      return true
-    })
-  const paginas = Math.max(1, Math.ceil(visiveis.length / POR_PAGINA))
-  const atual = Math.min(pagina, paginas - 1)
-  const trecho = visiveis.slice(atual * POR_PAGINA, (atual + 1) * POR_PAGINA)
+  const lista = filtrarRevisao(questaoIds, porId, estado.filtro, estado.disciplina)
+  const posicao = lista.indexOf(estado.indice)
+  const id = questaoIds[estado.indice]
+  const item = porId.get(id)
+  const questao = questoes.data?.questoes.find((q) => q.id === id)
+  const nomeFiltro = FILTROS.find((f) => f.valor === estado.filtro)!.nome
+
+  const complemento = (
+    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+      <span className={`rounded-full px-3 py-1 text-sm font-bold ${COR_SELO[situacao(item)]}`}>{textoSelo(item)}</span>
+      <span className="text-sm tabular-nums text-tinta-suave">
+        {posicao + 1} de {lista.length} {nomeFiltro}
+      </span>
+    </div>
+  )
 
   return (
-    <section>
-      <h2 className="text-xl font-bold">Revisão das questões</h2>
+    <section ref={secao} aria-labelledby="titulo-revisao" className="scroll-mt-4">
+      <h2 id="titulo-revisao" className="text-xl font-bold">
+        Revisão das questões
+      </h2>
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <fieldset className="flex overflow-hidden rounded-md border border-borda-campo">
           <legend className="sr-only">Mostrar</legend>
@@ -47,11 +87,8 @@ export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; i
                 type="radio"
                 name="filtro-revisao"
                 className="sr-only"
-                checked={filtro === f.valor}
-                onChange={() => {
-                  setFiltro(f.valor)
-                  setPagina(0)
-                }}
+                checked={estado.filtro === f.valor}
+                onChange={() => onFiltros(f.valor, estado.disciplina)}
               />
               {f.rotulo}
             </label>
@@ -60,11 +97,8 @@ export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; i
         <label className="flex items-center gap-2 text-sm">
           Disciplina
           <select
-            value={disciplina}
-            onChange={(e) => {
-              setDisciplina(e.target.value as Disciplina | '')
-              setPagina(0)
-            }}
+            value={estado.disciplina}
+            onChange={(e) => onFiltros(estado.filtro, e.target.value as Disciplina | '')}
             className="rounded-md border border-borda-campo bg-papel px-2 py-1"
           >
             <option value="">Todas</option>
@@ -75,49 +109,65 @@ export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; i
         </label>
       </div>
 
-      <div className="mt-6 space-y-12">
+      <div className="mt-6">
         {questoes.isPending && <Carregando texto="Carregando as questões…" />}
         {questoes.isError && (
           <ErroCarregamento mensagem="Não foi possível carregar as questões." onTentar={() => questoes.refetch()} />
         )}
-        {questoes.data && trecho.length === 0 && <Vazio>Nenhuma questão com esse filtro.</Vazio>}
-        {questoes.data &&
-          trecho.map(({ id, indice, item }) => {
-            const questao = questoes.data.questoes.find((q) => q.id === id)
-            if (!questao || !item) {
-              return (
-                <p key={id} className="rounded-lg border border-dashed border-linha px-4 py-4 text-tinta-suave">
-                  Questão {indice + 1}: removida da base.
-                </p>
-              )
-            }
-            return (
+        {questoes.data && lista.length === 0 && <Vazio>Nenhuma questão com esse filtro.</Vazio>}
+        {questoes.data && lista.length > 0 && (
+          <>
+            {questao && item ? (
               <QuestaoView
                 key={id}
                 questao={questao}
                 textoBase={questao.texto_base_id ? questoes.data.textos_base[questao.texto_base_id] : null}
-                posicao={{ atual: indice + 1, total: questaoIds.length }}
+                posicao={{ atual: estado.indice + 1, total: questaoIds.length }}
                 selecionada={item.resposta}
                 onSelecionar={() => {}}
                 correcao={{ correta: item.correta, anulada: item.anulada }}
+                refTitulo={titulo}
+                nivelTitulo={3}
+                complemento={complemento}
               />
-            )
-          })}
+            ) : (
+              <div className="max-w-[68ch] rounded-lg border border-dashed border-linha px-4 py-4">
+                <h3 ref={titulo} tabIndex={-1} className="text-xl font-bold focus:outline-none">
+                  Questão {estado.indice + 1} de {questaoIds.length}
+                </h3>
+                {complemento}
+                <p className="mt-2 text-tinta-suave">Esta questão foi removida da base e não entrou na nota.</p>
+              </div>
+            )}
+            <nav aria-label="Navegar na revisão" className="mt-6 flex max-w-[68ch] gap-2">
+              <button
+                type="button"
+                aria-label="Questão anterior"
+                disabled={posicao <= 0}
+                onClick={() => onIr(lista[posicao - 1])}
+                className={`${BOTAO_BARRA_FORMA} ${BARRA_NEUTRO} flex-1 pr-4 pl-2.5 sm:flex-none`}
+              >
+                <Icone>
+                  <path d="M15 6l-6 6 6 6" />
+                </Icone>
+                Anterior
+              </button>
+              <button
+                type="button"
+                aria-label="Próxima questão"
+                disabled={posicao >= lista.length - 1}
+                onClick={() => onIr(lista[posicao + 1])}
+                className={`${BOTAO_BARRA_FORMA} ${BARRA_NEUTRO} flex-1 pr-2.5 pl-4 sm:flex-none`}
+              >
+                Próxima
+                <Icone>
+                  <path d="M9 6l6 6-6 6" />
+                </Icone>
+              </button>
+            </nav>
+          </>
+        )}
       </div>
-
-      {paginas > 1 && (
-        <nav aria-label="Páginas da revisão" className="mt-8 flex items-center gap-3">
-          <button type="button" className={BOTAO_SECUNDARIO} disabled={atual === 0} onClick={() => setPagina(atual - 1)}>
-            Página anterior
-          </button>
-          <span className="text-sm text-tinta-suave">
-            Página {atual + 1} de {paginas}
-          </span>
-          <button type="button" className={BOTAO_SECUNDARIO} disabled={atual === paginas - 1} onClick={() => setPagina(atual + 1)}>
-            Próxima página
-          </button>
-        </nav>
-      )}
     </section>
   )
 }

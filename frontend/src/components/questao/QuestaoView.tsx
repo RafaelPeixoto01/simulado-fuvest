@@ -15,9 +15,25 @@ interface Props {
   acoes?: ReactNode
   /** Título focável: a resolução leva o foco a ele ao trocar de questão (CR-001) */
   refTitulo?: Ref<HTMLHeadingElement>
+  /** h3 quando a questão fica dentro de uma seção com h2, como na revisão do resultado (CR-003) */
+  nivelTitulo?: 2 | 3
+  /** Linha extra no cabeçalho, abaixo da fonte (ex.: selo do resultado e posição na revisão) */
+  complemento?: ReactNode
 }
 
-export function QuestaoView({ questao, textoBase, posicao, selecionada, onSelecionar, correcao, acoes, refTitulo }: Props) {
+export function QuestaoView({
+  questao,
+  textoBase,
+  posicao,
+  selecionada,
+  onSelecionar,
+  correcao,
+  acoes,
+  refTitulo,
+  nivelTitulo = 2,
+  complemento,
+}: Props) {
+  const Titulo = nivelTitulo === 3 ? 'h3' : 'h2'
   const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, FUVEST ${questao.ano} (questão ${questao.numero})`
   const alt = `Figura da questão ${questao.numero}, FUVEST ${questao.ano}`
   const [reportando, setReportando] = useState(false)
@@ -26,11 +42,12 @@ export function QuestaoView({ questao, textoBase, posicao, selecionada, onSeleci
     <article className="max-w-[68ch]">
       <header className="mb-5">
         {posicao && (
-          <h2 ref={refTitulo} tabIndex={refTitulo ? -1 : undefined} className="text-xl font-bold focus:outline-none">
+          <Titulo ref={refTitulo} tabIndex={refTitulo ? -1 : undefined} className="text-xl font-bold focus:outline-none">
             Questão {posicao.atual} de {posicao.total}
-          </h2>
+          </Titulo>
         )}
         <p className="text-sm text-tinta-suave">{fonte}</p>
+        {complemento}
       </header>
 
       {textoBase && (
