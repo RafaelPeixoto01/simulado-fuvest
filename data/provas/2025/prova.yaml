@@ -339,7 +339,7 @@ questoes:
   enunciado:
   - figura: q007-1.webp
   - texto: |-
-      Disponível em https://screenrant.com/funniest-peanuts-comics-charliebrown-vs-lucy/.
+      Disponível em https://screenrant.com/funniest-peanuts-comics-charlie-brown-vs-lucy/.
       Falácias são argumentos que podem até parecer à primeira vista bem construídos logicamente, mas são falhos, seja em termos do uso da linguagem, de pertinência temática ou de correção formal. Os primeiros estudos sistemáticos das falácias foram feitos pelo filósofo Aristóteles, que classificou alguns dos argumentos falaciosos mais comuns.
       No terceiro quadrinho da história, uma personagem se serve de um argumento falacioso bastante conhecido a fim de persuadir o outro. Esse argumento pode ser classificado como um caso de qual tipo de falácia?
   alternativas:
@@ -1116,13 +1116,13 @@ questoes:
   texto_base: null
   enunciado:
   - texto: |-
-      “Ele vê o gesto do advogado Dr. Otávio Conti, no café, metendo a mão no bolso, tirando uma cédula de cem milréis e entregando-a ao Duque: ‘— Vá levantar esta letra. Você me devolve depois.’ Não é bem caridade... Ele não sabe explicar... Há nisso um certo tom de versatilidade... de facilidade... de um tal ou qual afrouxamento do caráter... Ele vê o Andrade tirando, com o gesto do Dr. Otávio Conti, a ‘mesma’ cédula do bolso e entregando-lha ... A casa aristocrática acha-se perto. A numeração já está em quase trezentos. Uma pequena aragem que sopra levemente nesta parte alta da rua passa-lhe pelas mãos e esfria-as ... O seu corpo suado fica como que um bloco gelado e dá-lhe a sensação de que se encolhe, se retrai dentro da sua roupa quente e assoleada, que dela se despega como duma carapaça. Ao mesmo tempo o coração, que batia lá no fundo do peito, veio palpitar bem à superfície, quase à flor da pele, meio engasgando-o.”
+      “Ele vê o gesto do advogado Dr. Otávio Conti, no café, metendo a mão no bolso, tirando uma cédula de cem mil-réis e entregando-a ao Duque: ‘— Vá levantar esta letra. Você me devolve depois.’ Não é bem caridade... Ele não sabe explicar... Há nisso um certo tom de versatilidade... de facilidade... de um tal ou qual afrouxamento do caráter... Ele vê o Andrade tirando, com o gesto do Dr. Otávio Conti, a ‘mesma’ cédula do bolso e entregando-lha ... A casa aristocrática acha-se perto. A numeração já está em quase trezentos. Uma pequena aragem que sopra levemente nesta parte alta da rua passa-lhe pelas mãos e esfria-as ... O seu corpo suado fica como que um bloco gelado e dá-lhe a sensação de que se encolhe, se retrai dentro da sua roupa quente e assoleada, que dela se despega como duma carapaça. Ao mesmo tempo o coração, que batia lá no fundo do peito, veio palpitar bem à superfície, quase à flor da pele, meio engasgando-o.”
       Dyonélio Machado. Os ratos.
       Dentre as frases em destaque, a que caracteriza os efeitos fisiológicos em Naziazeno da reação de luta ou fuga pela ativação do sistema nervoso simpático é:
   alternativas:
     A:
       texto: Ele vê o gesto do advogado Dr. Otávio Conti, no café, metendo a mão no bolso, tirando uma
-        cédula de cem milréis e entregando-a ao Duque.
+        cédula de cem mil-réis e entregando-a ao Duque.
     B:
       texto: Ele não sabe explicar... Há nisso um certo tom de versatilidade... de facilidade... de um
         tal ou qual afrouxamento do caráter...
@@ -1262,7 +1262,8 @@ questoes:
   - texto: |-
       2030, adotada pela ONU em 2015.
       No cenário esportivo, é possível identificar alguns avanços em relação ao alcance dessa meta, conforme reconheceu a jogadora brasileira de futebol Marta:
-      “Quando as atletas do sexo feminino têm a chance de se destacar, os resultados são enormes. E para isso, a Copa do Mundo Feminina de 2019 foi realmente uma virada no jogo. A audiência global do torneio ultrapassou 1 bilhão de pessoas.” Disponível em https://brasil.un.org/.
+      “Quando as atletas do sexo feminino têm a chance de se destacar, os resultados são enormes. E para isso, a Copa do Mundo Feminina de 2019 foi realmente uma virada no jogo. A audiência global do torneio ultrapassou 1 bilhão de pessoas.”
+      Disponível em https://brasil.un.org/.
       A Olimpíada de Paris 2024, por sua vez, estabeleceu, pela primeira vez na história, a paridade de gênero em todos os esportes olímpicos, com 5.250 vagas destinadas a cada sexo. Apesar das conquistas, o caminho rumo à igualdade de gênero continua.
       Com base no exposto, é correto afirmar:
   alternativas:
@@ -1526,13 +1527,9 @@ questoes:
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Neste bioma, a vegetação nativa apresenta-se intercalada por extensas monoculturas de soja
-      e de arroz. Em alguns lugares, a vegetação campestre original tem sido substituída por vegetação
-      florestal, formada por árvores de eucaliptos. Em vários locais, observa-se a expansão de grandes
-      areais, em que os solos arenosos ficam expostos e suscetíveis a uma intensa erosão. Este é o bioma
-      brasileiro menos protegido por Unidades de Conservação, embora esteja entre aqueles que mais perderam
-      vegetação nativa nas últimas três décadas. A descrição da paisagem impactada por ações humanas refere-se
-      ao bioma
+  - texto: |-
+      Neste bioma, a vegetação nativa apresenta-se intercalada por extensas monoculturas de soja e de arroz. Em alguns lugares, a vegetação campestre original tem sido substituída por vegetação florestal, formada por árvores de eucaliptos. Em vários locais, observa-se a expansão de grandes areais, em que os solos arenosos ficam expostos e suscetíveis a uma intensa erosão. Este é o bioma brasileiro menos protegido por Unidades de Conservação, embora esteja entre aqueles que mais perderam vegetação nativa nas últimas três décadas.
+      A descrição da paisagem impactada por ações humanas refere-se ao bioma
   alternativas:
     A:
       texto: Caatinga.
@@ -2581,8 +2578,9 @@ questoes:
   enunciado:
   - texto: |-
       Tecidos de Ijebu
-      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.” OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África. São Paulo: Penguin, 2012. p.361.
-      O texto é parte de um relato das memórias de um exescravizado natural de Ijebu, na atual Nigéria, trazido ao Brasil no início do século XIX. O excerto faz menção
+      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.”
+      OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África. São Paulo: Penguin, 2012. p.361.
+      O texto é parte de um relato das memórias de um ex-escravizado natural de Ijebu, na atual Nigéria, trazido ao Brasil no início do século XIX. O excerto faz menção
   alternativas:
     A:
       texto: à existência de um comércio de produtos manufaturados entre a África e a América.
