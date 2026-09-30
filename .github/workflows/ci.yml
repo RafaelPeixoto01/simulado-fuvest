@@ -1,41 +1,58 @@
-# CI — pytest (backend) + tsc/eslint/vitest (frontend) em cada push/PR.
+# CI — pytest + ruff (backend) e tsc + eslint + vitest (frontend) em cada push/PR.
 # Baseado no ci.yml do Meu Controle (kit sdd-bootstrap).
-#
-# GUARDAS TEMPORARIAS: os `if: hashFiles(...)` mantem o CI verde enquanto o
-# repositorio so tem docs. Remover as guardas no T-001 (scaffold) — depois
-# dele, arquivo ausente deve quebrar o CI, nao pular os checks.
 name: CI
 
 on:
-  push:
-    branches: [master]
+  push:            # todas as branches: feat/* recebe feedback antes do merge em master
   pull_request:
 
 jobs:
   backend:
-    name: Backend (pytest)
+    name: Backend (pytest + ruff + migrations no Postgres)
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: backend
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        if: hashFiles('backend/requirements-dev.txt') != ''
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: backend/requirements-dev.txt
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-ingestao.txt
+            backend/requirements-dev.txt
       - name: Install dependencies
-        if: hashFiles('backend/requirements-dev.txt') != ''
         run: pip install -r requirements-dev.txt
+      - name: Ruff
+        run: python -m ruff check .
       - name: Run tests
-        if: hashFiles('backend/requirements-dev.txt') != ''
-        env:
-          SECRET_KEY: ci-test-secret
         run: python -m pytest tests/ -v
+      - name: Validar pacotes de provas (data/provas)
+        run: python -m ingestao validar --todas
+      - name: Migrations no Postgres (upgrade -> downgrade -> upgrade)
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/ci
+        run: |
+          python -m alembic upgrade head
+          python -m alembic downgrade base
+          python -m alembic upgrade head
       - name: pip-audit (informativo — nao bloqueia)
-        if: hashFiles('backend/requirements-dev.txt') != ''
         run: python -m pip_audit
         continue-on-error: true
 
@@ -48,24 +65,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        if: hashFiles('frontend/package-lock.json') != ''
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
-        if: hashFiles('frontend/package-lock.json') != ''
         run: npm ci
       - name: TypeScript check
-        if: hashFiles('frontend/package-lock.json') != ''
         run: npx tsc --noEmit -p tsconfig.app.json
       - name: ESLint
-        if: hashFiles('frontend/package-lock.json') != ''
         run: npm run lint
       - name: Unit tests (vitest)
-        if: hashFiles('frontend/package-lock.json') != ''
         run: npm test
       - name: npm audit (informativo — nao bloqueia)
-        if: hashFiles('frontend/package-lock.json') != ''
         run: npm audit --audit-level=high
         continue-on-error: true
+
+  docker:
+    name: Imagem Docker (build + smoke test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build da imagem (a mesma que a Railway constrói)
+        run: docker build -t simulado-fuvest:ci .
+      - name: Smoke test (SQLite dentro do container)
+        run: |
+          docker run -d --name app -p 8000:8000 simulado-fuvest:ci
+          for i in $(seq 1 30); do curl -sf http://localhost:8000/api/health && break; sleep 1; done
+          curl -sf http://localhost:8000/api/health | grep '"status":"ok"'
+          curl -sf http://localhost:8000/ | grep -q '<div id="root">'
+          curl -sf http://localhost:8000/historico | grep -q '<div id="root">'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/api/nada)" = 404
+          ! curl -s http://localhost:8000/docs | grep -qi swagger
+          curl -sI http://localhost:8000/ | grep -qi content-security-policy
+      - name: Logs do container
+        if: always()
+        run: docker logs app || true

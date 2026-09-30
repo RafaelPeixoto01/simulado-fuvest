@@ -1,0 +1,4 @@
+# CLI de ingestao (maquina do curador e CI) — nao vai para a imagem de producao
+pdfplumber==0.11.*
+pypdfium2==5.13.*
+pillow==12.3.*

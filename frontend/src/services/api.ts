@@ -1,0 +1,66 @@
+import type {
+  Catalogo,
+  Correcao,
+  PedidoSimulado,
+  QuestoesPorId,
+  RespostaItem,
+  Simulado,
+  TipoReporte,
+} from '../types'
+
+export class ApiError extends Error {
+  readonly status: number
+  readonly codigo?: string
+  readonly dados?: Record<string, unknown>
+
+  constructor(status: number, mensagem: string, codigo?: string, dados?: Record<string, unknown>) {
+    super(mensagem)
+    this.name = 'ApiError'
+    this.status = status
+    this.codigo = codigo
+    this.dados = dados
+  }
+}
+
+const MENSAGEM_PADRAO = 'Não foi possível completar a operação. Tente novamente.'
+
+async function requisitar<T>(caminho: string, init?: RequestInit): Promise<T> {
+  let resposta: Response
+  try {
+    resposta = await fetch(caminho, {
+      ...init,
+      headers: { 'Content-Type': 'application/json', ...init?.headers },
+    })
+  } catch {
+    throw new ApiError(0, 'Sem conexão com o servidor. Verifique sua internet.')
+  }
+  if (resposta.ok) {
+    return (await resposta.json()) as T
+  }
+  let detalhe: unknown
+  try {
+    detalhe = ((await resposta.json()) as { detail?: unknown }).detail
+  } catch {
+    detalhe = undefined
+  }
+  // Erro de dominio: {codigo, mensagem, ...}; 429 e outros: detail em texto
+  if (detalhe && typeof detalhe === 'object' && 'codigo' in detalhe) {
+    const d = detalhe as Record<string, unknown>
+    throw new ApiError(resposta.status, String(d.mensagem ?? MENSAGEM_PADRAO), String(d.codigo), d)
+  }
+  throw new ApiError(resposta.status, typeof detalhe === 'string' ? detalhe : MENSAGEM_PADRAO)
+}
+
+function post<T>(caminho: string, corpo: unknown): Promise<T> {
+  return requisitar<T>(caminho, { method: 'POST', body: JSON.stringify(corpo) })
+}
+
+export const api = {
+  catalogo: () => requisitar<Catalogo>('/api/catalogo'),
+  gerarSimulado: (pedido: PedidoSimulado) => post<Simulado>('/api/simulados', pedido),
+  questoes: (ids: string[]) =>
+    requisitar<QuestoesPorId>(`/api/questoes?${new URLSearchParams({ ids: ids.join(',') })}`),
+  corrigir: (respostas: RespostaItem[]) => post<Correcao>('/api/correcoes', { respostas }),
+  reportar: (dados: { questao_id: string; tipo: TipoReporte; descricao?: string }) =>
+    post<{ id: number }>('/api/reportes', dados),
+}

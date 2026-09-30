@@ -43,8 +43,11 @@ process.stdin.on("end", () => {
 
   // CLAUDE_PROJECT_DIR primeiro: data.cwd pode vir em formato POSIX
   // (Git Bash) ou apontar para subdiretorio, quebrando o path.join
-  const projectDir =
-    process.env.CLAUDE_PROJECT_DIR || data.cwd || process.cwd();
+  // Letra do drive em maiuscula: com "d:\" o Vitest carrega o proprio modulo
+  // duas vezes no Windows e falha com "failed to find the current suite"
+  const projectDir = (
+    process.env.CLAUDE_PROJECT_DIR || data.cwd || process.cwd()
+  ).replace(/^[a-z]:/, (drive) => drive.toUpperCase());
 
   const configPath = path.join(
     projectDir,

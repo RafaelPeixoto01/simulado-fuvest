@@ -1,0 +1,77 @@
+import { vi } from 'vitest'
+
+import type { Catalogo, Questao, Simulado } from '../types'
+
+type Manipulador = (corpo: unknown, url: URL) => Response | Promise<Response>
+
+export function json(status: number, corpo: unknown): Response {
+  return new Response(JSON.stringify(corpo), { status, headers: { 'Content-Type': 'application/json' } })
+}
+
+/** Substitui o fetch global roteando por "METODO /caminho". Devolve o mock para inspeção. */
+export function instalarApiFalsa(rotas: Record<string, Manipulador>) {
+  const falso = vi.fn(async (entrada: RequestInfo | URL, init?: RequestInit) => {
+    const url = new URL(String(entrada), 'http://localhost')
+    const chave = `${init?.method ?? 'GET'} ${url.pathname}`
+    const manipulador = rotas[chave]
+    if (!manipulador) return json(404, { detail: `sem rota falsa para ${chave}` })
+    const corpo = init?.body ? JSON.parse(String(init.body)) : undefined
+    return manipulador(corpo, url)
+  })
+  vi.stubGlobal('fetch', falso)
+  return falso
+}
+
+export const CATALOGO: Catalogo = {
+  provas: [
+    { ano: 2025, versao: 'V1', total_questoes: 90, url_prova: 'https://www.fuvest.br/p2025.pdf', url_gabarito: 'https://www.fuvest.br/g2025.pdf' },
+    { ano: 2024, versao: 'V1', total_questoes: 90, url_prova: 'https://www.fuvest.br/p2024.pdf', url_gabarito: 'https://www.fuvest.br/g2024.pdf' },
+  ],
+  disciplinas: [
+    { slug: 'biologia', nome: 'Biologia', total_questoes: 22 },
+    { slug: 'fisica', nome: 'Física', total_questoes: 24 },
+    { slug: 'geografia', nome: 'Geografia', total_questoes: 22 },
+    { slug: 'historia', nome: 'História', total_questoes: 22 },
+    { slug: 'ingles', nome: 'Inglês', total_questoes: 20 },
+    { slug: 'matematica', nome: 'Matemática', total_questoes: 24 },
+    { slug: 'portugues', nome: 'Português', total_questoes: 24 },
+    { slug: 'quimica', nome: 'Química', total_questoes: 20 },
+  ],
+  total_questoes: 178,
+  distribuicao_completa: { biologia: 11, fisica: 12, geografia: 11, historia: 11, ingles: 10, matematica: 12, portugues: 12, quimica: 11 },
+  completa_disponivel: true,
+}
+
+export function questaoFalsa(id: string, extra: Partial<Questao> = {}): Questao {
+  const [ano, numero] = id.split('-').map(Number)
+  return {
+    id,
+    ano,
+    numero,
+    disciplina: 'fisica',
+    disciplinas_secundarias: [],
+    texto_base_id: null,
+    enunciado: [{ texto: `Enunciado da questão ${id}`, figura: null }],
+    alternativas: {
+      A: { texto: `A da ${id}`, figura: null },
+      B: { texto: `B da ${id}`, figura: null },
+      C: { texto: `C da ${id}`, figura: null },
+      D: { texto: `D da ${id}`, figura: null },
+      E: { texto: `E da ${id}`, figura: null },
+    },
+    ...extra,
+  }
+}
+
+export function simuladoFalso(ids: string[], extra: Partial<Simulado> = {}): Simulado {
+  return {
+    modo: 'completa',
+    questoes: ids.map((id) => questaoFalsa(id)),
+    textos_base: {},
+    tempo_limite_s: 18000,
+    pausavel: false,
+    disponiveis: ids.length,
+    semente: 1,
+    ...extra,
+  }
+}

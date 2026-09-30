@@ -5,23 +5,29 @@
 - **Nome:** Simulado Fuvest
 - **Descrição:** Site que gera simulados da prova da FUVEST a partir de questões de provas de anos anteriores (acervo oficial em fuvest.br), para estudantes praticarem com questões reais
 - **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4, TanStack Query v5, FastAPI, SQLAlchemy 2.0, Alembic, PostgreSQL (prod) / SQLite (dev), deploy na Railway
-- **Repositório:** remoto GitHub ainda não criado — pendência do bootstrap (repositório local na branch `master`)
+- **Repositório:** https://github.com/RafaelPeixoto01/simulado-fuvest (público, branch padrão `master`; `gh` é o credential helper do git, conta `RafaelPeixoto01`). Identidade de commit **local ao repo**: `Rafael Peixoto <rafaelspeixoto1@gmail.com>` — a global da máquina é a de trabalho e não deve ir para este repositório
+- **Deploy:** Railway, projeto/serviço `simulado-fuvest`, provisionado via `railway` CLI (T-027); deploy com a skill `/deploy-railway`
 
 ---
 
 ## Comandos Essenciais
 
-> Disponíveis após o scaffold (T-001). A estrutura exata é definida em `/docs/02-ARCHITECTURE.md`.
+> O backend usa o venv **do projeto** (`backend/.venv`) — nunca o Python global, que tem as versões do Meu Controle. Setup: `cd backend && python -m venv .venv && .venv/Scripts/python -m pip install -r requirements-dev.txt`; `cd frontend && npm install`.
 
 | Ação | Comando |
 |------|---------|
-| Backend (dev) | `cd backend && python -m alembic upgrade head && python -m uvicorn app.main:app --reload` (porta 8000) |
-| Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` → 8000) |
-| Testes backend | `cd backend && python -m pytest tests/ -v` |
+| Backend (dev) | `cd backend && .venv/Scripts/python -m alembic upgrade head && .venv/Scripts/python -m uvicorn app.main:app --reload` (porta 8000, SQLite `local.db`) |
+| Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` e `/figuras` → 8000) |
+| Testes backend | `cd backend && .venv/Scripts/python -m pytest` |
+| Lint backend | `cd backend && .venv/Scripts/python -m ruff check .` |
+| Validar pacotes | `cd backend && .venv/Scripts/python -m ingestao validar --todas` (ou `--ano AAAA`) |
+| Dados sintéticos (dev) | `cd backend && .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos && .venv/Scripts/python -m ingestao importar --data-dir ../data/_cache/sinteticos` (provas fictícias 2098/2099 no `local.db`) |
+| Importar pacotes reais | `cd backend && .venv/Scripts/python -m ingestao importar` (usa `data/provas`; **o banco passa a espelhar o diretório** — provas fora dele são removidas) |
 | Testes frontend | `cd frontend && npm test` (Vitest) |
 | Build check TS | `cd frontend && npx tsc --noEmit -p tsconfig.app.json` |
 | Lint frontend | `cd frontend && npm run lint` |
-| Migrations | `cd backend && python -m alembic upgrade head` (aplicar) / `python -m alembic downgrade -1` (reverter) |
+| Build frontend | `cd frontend && npm run build` |
+| Migrations | `cd backend && .venv/Scripts/python -m alembic upgrade head` (aplicar) / `... downgrade -1` (reverter) |
 
 ---
 
@@ -83,7 +89,7 @@ Ao criar qualquer documento do fluxo, **use obrigatoriamente o template correspo
 ### Antes de Codar
 
 1. **Leia** `/docs/02-ARCHITECTURE.md` para entender stack e padrões
-2. **Leia** `/docs/03-SPEC.md` para entender o que construir
+2. **Leia** o índice `/docs/03-SPEC.md` e só a spec da feature afetada em `/docs/specs/` (não carregue todas as specs)
 3. **Leia** `/docs/04-IMPLEMENTATION-PLAN.md` para entender a ordem
 4. **Nunca invente** funcionalidades que não estão na spec
 5. **Nunca omita** funcionalidades que estão na spec
@@ -167,7 +173,7 @@ Pular com justificativa explícita apenas se a mudança for exclusivamente: UI s
 ### Push e Deploy
 
 - Antes de push, verifique se o build passa: `cd frontend && npx tsc --noEmit -p tsconfig.app.json` e `npm run lint`, e os testes do backend
-- CI (GitHub Actions, `.github/workflows/ci.yml`) roda pytest + tsc + eslint + vitest em cada push em `master` e em PRs — verifique que ficou verde após o push (`gh run watch`)
+- CI (GitHub Actions, `.github/workflows/ci.yml`) roda em push de **qualquer branch**: pytest + ruff + migrations num Postgres 17 + tsc + eslint + vitest — verifique que ficou verde após o push (`gh run watch`). Não há Postgres/Docker local: o CI é onde as migrations são testadas no Postgres
 - Commits devem referenciar o CR relevante (ex: `feat: CR-004 - descricao`)
 - Após implementação, atualize TODOS os documentos relacionados antes de push
 - Faça merge da branch do CR em `master` e então push: `git push origin master`
@@ -205,13 +211,16 @@ Simulado Fuvest/
 ├── .github/workflows/ci.yml   # CI: pytest (backend) + tsc/eslint/vitest (frontend)
 ├── .claude/                    # Versionado (exceto settings.local.json)
 │   ├── hooks/check-quality.js  #   Bloqueia git commit se algum check falhar
+│   ├── skills/deploy-railway/  #   /deploy-railway (copiada do Meu Controle): merge em master + push + verificação
 │   ├── hooks/check-config.json #   Lista de checks do hook (vazia até o T-001)
 │   └── settings.json           #   Hook PreToolUse para git commit
 ├── docs/                       # PRD, Arquitetura, Spec, Plano, Deploy Guide
 │   ├── changes/                #   Change Requests CR-XXX + INDEX.md
 │   └── templates/              #   Templates obrigatórios dos documentos
-├── backend/                    # FastAPI + SQLAlchemy + Alembic (criado no T-001)
-├── frontend/                   # React + Vite + TS (criado no T-001)
+├── data/provas/AAAA/           # Pacotes de prova (prova.yaml + figuras/) — FONTE DA VERDADE das questões (ADR-002)
+├── data/_cache/                # PDFs baixados do acervo (gitignored)
+├── backend/                    # FastAPI + SQLAlchemy + Alembic; app/pacote (schema/validação/sincronização); ingestao/ (CLI do curador)
+├── frontend/                   # React + Vite + TS (SPA servido pelo FastAPI em produção)
 ├── CLAUDE.md
 └── .gitignore
 ```
@@ -240,37 +249,41 @@ Simulado Fuvest/
 
 ## Stack Tecnológica
 
-Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`) e fixadas no scaffold (T-001).
+Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixadas no scaffold (T-001/T-002).
 
 | Camada         | Tecnologia                       | Versão |
 |----------------|----------------------------------|--------|
-| Frontend       | React + TypeScript               | React 19 |
-| Build/Dev      | Vite                             | 6.x    |
+| Frontend       | React + TypeScript               | React 19.3, TS ~6.0 (não 7 — ADR-007) |
+| Build/Dev      | Vite + @vitejs/plugin-react      | 8.x / 6.x |
 | Estilização    | Tailwind CSS                     | 4.x    |
 | State/Fetch    | TanStack Query                   | 5.x    |
 | Routing        | react-router-dom                 | 7.x    |
-| Lint (FE)      | ESLint + typescript-eslint       | —      |
-| Testes (FE)    | Vitest + jsdom                   | —      |
-| Backend        | Python + FastAPI                 | Python 3.12 |
-| ORM            | SQLAlchemy (síncrono)            | 2.0+   |
+| Lint (FE)      | ESLint + typescript-eslint       | 10.x / 8.x |
+| Testes (FE)    | Vitest + jsdom                   | 5.x    |
+| Backend        | Python + FastAPI + uvicorn       | 3.12 / 0.142 / 0.54 |
+| ORM            | SQLAlchemy (síncrono)            | 2.1    |
 | Banco de Dados | PostgreSQL (prod) + SQLite (dev) | —      |
-| Migrations     | Alembic                          | 1.14+  |
-| Validação      | Pydantic                         | 2.x    |
-| Testes (BE)    | pytest                           | —      |
-| CI             | GitHub Actions                   | Node 22 / Python 3.12 |
-| Deploy         | Railway                          | —      |
-| Arquitetura    | Monorepo (backend/ + frontend/)  | —      |
+| Migrations     | Alembic                          | 1.20   |
+| Validação      | Pydantic                         | 2.13   |
+| Rate limit     | slowapi                          | 0.1    |
+| Ingestão (PDF) | pdfplumber + pypdfium2 + Pillow  | 0.11 / 5.13 / 12.3 |
+| Pacotes        | PyYAML                           | 6.0    |
+| Lint (BE)      | ruff                             | 0.16   |
+| Testes (BE)    | pytest + httpx                   | 9.1 / 0.28 |
+| CI             | GitHub Actions                   | Node 24 / Python 3.12 |
+| Deploy         | Railway (Docker, serviço único)  | —      |
+| Arquitetura    | Monorepo (backend/ + frontend/ + data/) | — |
 
 ---
 
 ## Contexto Atual do Projeto
 
 ### Documentos Existentes
-- [ ] PRD (`/docs/01-PRD.md`)
-- [ ] Arquitetura (`/docs/02-ARCHITECTURE.md`)
-- [ ] Spec Técnica (`/docs/03-SPEC.md`)
-- [ ] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`)
-- [ ] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`)
+- [x] PRD (`/docs/01-PRD.md`) — v1.0 aprovado em 2026-09-29
+- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.0, ADR-001 a ADR-008
+- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..05`
+- [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
+- [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — provisionamento via CLI, rollback, operação do curador
 
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
@@ -278,12 +291,7 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 - Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
 
 ### Última Tarefa Implementada
-- Bootstrap SDD (2026-09-29): templates, hook de qualidade (sem checks até o T-001), CI com guardas temporárias e este CLAUDE.md
-
-### Pendências do Scaffold (T-001)
-- Mover os checks de `$pendentes` para `checks` em `.claude/hooks/check-config.json`
-- Remover as guardas `if: hashFiles(...)` de `.github/workflows/ci.yml`
-- Atualizar "Comandos Essenciais", "Estrutura de Pastas" e as versões da "Stack Tecnológica"
+- Grupos 1 a 4 do MVP (2026-09-30): backend, ingestão (família 2025), API e frontend completos em `feat/mvp`, com validação em runtime registrada no plano. Próximo: Grupo 5 (T-026 Docker/`railway.json`, T-027 provisionar a Railway e primeiro deploy). Pendente do curador: T-011 (curadoria da prova 2025)
 
 ---
 
@@ -298,7 +306,10 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 - **Docs sempre sincronizados.** Ao concluir uma feature ou CR, atualize TODOS os documentos relacionados na mesma sessão (Implementation Plan, PRD, Spec, CR). A tarefa só está completa quando os docs estão atualizados.
 - **Não fabrique ferramentas.** Nunca invente ou adivinhe a existência de plugins, comandos CLI ou ferramentas. Se não tiver certeza, verifique a documentação primeiro. Se um comando falhar, reconheça o erro imediatamente.
 - **Planeje antes de codar.** Em tarefas complexas (3+ etapas), crie um plano TodoWrite detalhado antes de escrever qualquer código. Inclua: CR, arquivos a modificar, verificação de build, atualizações de docs, commit.
-- **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, tsc, eslint a partir do T-001). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf).
+- **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, ruff, tsc, eslint, vitest). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf ou de um JSON de simulação) — para simular o hook, passe o payload por arquivo (`node .claude/hooks/check-quality.js < payload.json`).
+- **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR.
+- **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
+- **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
 
 ---
@@ -336,3 +347,7 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | `pkill` / `kill` não encerram processo | Comandos Unix não funcionam no Windows | Usar `taskkill //F //PID <pid>` |
 | Processo Python com nome inesperado | Nome pode ser `python3.12.exe` em vez de `python.exe` | Identificar via PID: `netstat -ano \| grep <porta>` + `tasklist //FI "PID eq <pid>"` |
 | `pip-audit` falha com `CERTIFICATE_VERIFY_FAILED` | Interceptação de certificado local nesta máquina | Auditoria roda no CI (passo informativo no job backend) — não insistir localmente |
+| Instalar dependências do backend quebra o Meu Controle | O Python global tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0) | Sempre usar `backend/.venv` (hook, comandos e docs já apontam para ele) |
+| Vitest: "failed to find the current suite" só no hook | Com o cwd em `d:\...` (drive minúsculo) o Vitest carrega o próprio módulo duas vezes | O `check-quality.js` normaliza a letra do drive para maiúscula; ao rodar à mão via `cmd`, usar `D:\` |
+| `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
+| Saída da CLI com `�` no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | Só acontece com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |
