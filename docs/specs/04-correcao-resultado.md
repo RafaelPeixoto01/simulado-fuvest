@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.0
-**Data:** 2026-09-29
+**Versão:** 1.1
+**Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0 (RF-017 a RF-020, US-006, US-007, RN-002, RN-008, RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004, ADR-005)
-**CR Ref:** —
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez)
 
 ---
 
@@ -32,6 +32,9 @@ Endpoint de correção sem estado (usado ao finalizar um simulado e a cada respo
 | Criar | `frontend/src/storage/historicoStorage.ts` | Chave `simulado-fuvest:v1:historico` |
 | Criar | `frontend/src/pages/ResultadoPage.tsx`, `HistoricoPage.tsx` | Telas |
 | Criar | `frontend/src/components/ResumoResultado.tsx`, `DesempenhoDisciplinas.tsx`, `RevisaoQuestoes.tsx` | Componentes |
+| Modificar (CR-003) | `frontend/src/components/resultado/FolhaCorrigida.tsx`, `RevisaoQuestoes.tsx`, `pages/ResultadoPage.tsx` | Folha clicável em dois formatos; revisão uma questão por vez |
+| Criar (CR-003) | `frontend/src/components/resultado/revisao.ts` | Filtros da revisão e escolha da questão (funções puras) |
+| Criar (CR-003) | `frontend/src/components/CabecalhoLetras.tsx`, `frontend/src/utils/folha.ts` | Cabeçalho A–E e colunas das folhas ópticas (resolução e resultado) |
 
 ### 2.2 Interfaces / Types
 
@@ -101,9 +104,10 @@ interface HistoricoEntry {
 **ResultadoPage (`/resultado/:id`):**
 - Lê a entrada do histórico (ou do state da navegação). Não encontrada → "Resultado não encontrado neste navegador" + link para `/historico`.
 - `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`.
-- `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto.
-- `RevisaoQuestoes`: filtros Todas / Erradas / Em branco / por disciplina. Cada questão mostra o conteúdo (via `GET /api/questoes?ids=` com o cache do Query), a resposta do estudante, a correta e o selo "Anulada — ponto atribuído a todos". Questão que não existe mais na base → "Questão removida da base".
 - Ações: "Novo simulado" (Home), "Ver histórico".
+- **Ordem (CR-003, P1.7):** resumo → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
+- `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto.
+- **Estado da revisão (D6):** `{indice, filtro, disciplina}` fica na página e é compartilhado pela folha e pela revisão (`revisao.ts`). Tocar numa questão da folha abre aquela questão; se ela não passa nos filtros atuais, eles voltam para "Todas". Trocar os filtros mantém a questão se ela continua visível, senão abre a primeira da lista. Navegar (folha, Anterior/Próxima) rola até a revisão (`scrollIntoView`) e foca o título da questão; trocar de filtro não, para o foco continuar no filtro.
 
 **HistoricoPage (`/historico`):**
 - Aviso fixo: "O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros."
@@ -143,14 +147,31 @@ Erros:
 
 Barras em CSS (sem biblioteca de gráficos); valor sempre também em texto (acessibilidade); cor não é o único indicador.
 
-### Componente: RevisaoQuestoes
+### Componente: RevisaoQuestoes (CR-003, D6)
 
 | Prop | Tipo | Obrigatório | Default | Descrição |
 |------|------|-------------|---------|-----------|
 | itens | `ItemCorrigido[]` | Sim | — | |
 | questaoIds | `string[]` | Sim | — | Para buscar o conteúdo |
+| estado | `EstadoRevisao` | Sim | — | Questão aberta e filtros (controlado pela página) |
+| onFiltros | `(filtro, disciplina) => void` | Sim | — | |
+| onIr | `(indice) => void` | Sim | — | Anterior/Próxima dentro da lista filtrada |
+| pedidoDeFoco | `number` | Sim | — | Incrementado a cada navegação: rola até a seção e foca o título |
 
-Reusa `QuestaoView` + `Alternativas` em modo `correcao`. Lista paginada de 10 em 10 para não renderizar 90 questões com figuras de uma vez.
+Uma questão por vez. Filtros Todas / Erradas / Em branco (rádios) e Disciplina (`select`). Reusa `QuestaoView` + `Alternativas` em modo `correcao`, com o título em `h3` e, no cabeçalho, o selo ("Você acertou: X", "Você marcou X · correta Y", "Em branco · correta Y", "Anulada: ponto para todos") e a posição no filtro ("i de M questões/erradas/em branco"). Anterior/Próxima com 48 px. Filtro vazio → "Nenhuma questão com esse filtro". Questão sem conteúdo na base: sem item corrigido → "removida da base e não entrou na nota"; com item → "O conteúdo desta questão não está mais disponível na base; a correção acima continua valendo".
+
+### Componente: FolhaCorrigida (CR-003, D5)
+
+| Prop | Tipo | Obrigatório | Default | Descrição |
+|------|------|-------------|---------|-----------|
+| questaoIds, itens | | Sim | — | |
+| atual | `number` | Sim | — | Questão aberta na revisão |
+| onIr | `(indice) => void` | Sim | — | Abre a questão na revisão |
+| formato | `'grade' \| 'bolhas'` | Sim | — | Celular / desktop |
+
+Título "Folha corrigida", instrução ("Toque/Clique numa questão para revisá-la.") e selos: ✓ acertos (incluem as anuladas, como a nota), ✗ erros, – em branco e, se houver, "N anulada(s) (conta como acerto)".
+- **`grade`** (celular): 6 colunas de botões de 50 px com o número e a marca (✓ letra, ✗ letra marcada, "–" em branco, "anul."), cores de acerto, erro e alerta; em branco com borda tracejada; a questão aberta com contorno azul.
+- **`bolhas`** (desktop): colunas como na folha da resolução (3 acima de 40 questões), cabeçalho A–E (`CabecalhoLetras`), bolinhas sem letra (P2.2): marcada preenchida em verde (acertou) ou vermelho (errou), âmbar se anulada; correta contornada em verde quando o estudante errou ou deixou em branco; ponto laranja = anulada; removida com opacidade reduzida. Linhas clicáveis; legenda.
 
 ---
 
@@ -170,6 +191,9 @@ Ver `specs/03-resolucao.md` §4 e o fluxo de simulado em `02-ARCHITECTURE.md` §
 | 4 | Histórico com 50 entradas + nova | Remove a mais antiga |
 | 5 | Abrir `/resultado/:id` em outro navegador | "Resultado não encontrado neste navegador" |
 | 6 | Treino corrigindo 1 item | Mesmo endpoint; resposta com 1 item |
+| 7 | Questão escolhida na folha fora do filtro atual | Filtros voltam para "Todas" e a questão abre (CR-003) |
+| 8 | Filtro sem nenhuma questão | "Nenhuma questão com esse filtro"; a questão aberta não muda (CR-003) |
+| 9 | Trocar de `/resultado/A` para `/resultado/B` sem desmontar a rota | A revisão volta à questão 1, sem filtros (CR-003) |
 
 ---
 
@@ -185,6 +209,9 @@ Ver `specs/03-resolucao.md` §4 e o fluxo de simulado em `02-ARCHITECTURE.md` §
 | UT-020 | Histórico: inserir, limite 50, limpar, storage indisponível | `historicoStorage` | Comportamento esperado |
 | UT-021 | Tempo médio e formatação | `ResumoResultado` | Valores corretos |
 | FT-010 | Finalizar → resultado → filtro "Erradas" → histórico | E2E (Playwright MCP) | Dados consistentes |
+| UT-022 | `revisao.ts`: situação, filtros, abrir pela folha, trocar filtros | unit | Estados esperados (CR-003) |
+| UT-023 | `FolhaCorrigida`: cores das bolinhas, selos, anuladas, sem letras | componente | Classes e textos corretos (CR-003) |
+| FT-011 | Celular: ordem das seções, tocar na folha abre a questão com foco; desktop: bolinhas clicáveis | E2E (CR-003) | Rolagem e foco no título |
 
 ---
 

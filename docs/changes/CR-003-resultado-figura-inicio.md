@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-09-30  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -106,7 +106,10 @@ Terceiro CR da revisão de design de 30/09/2026 (canvas "Protótipo Simulado Fuv
 | Modificar | `frontend/src/components/questao/QuestaoView.tsx` | Props opcionais `nivelTitulo` (h3 na revisão) e `complemento` (selo e posição no cabeçalho) |
 | Modificar | `frontend/src/components/questao/ModalFigura.tsx` | Ajustar à tela / Tamanho real, barra e rodapé |
 | Modificar | `frontend/src/pages/HomePage.tsx` | Banner no topo com tempo e progresso; modos secundários com simulado aberto; "Provas na base" com aviso de link externo |
-| Modificar/Criar | testes (`resultado.test.tsx`, `inicio.test.tsx`, `Figura.test.tsx`, `revisao.test.ts`, `FolhaCorrigida.test.tsx`) | Cobrir as mudanças |
+| Criar     | `frontend/src/components/CabecalhoLetras.tsx`, `frontend/src/utils/folha.ts` | Cabeçalho A–E e colunas comuns às folhas da resolução e do resultado (revisão de código) |
+| Modificar | `frontend/src/components/resolucao/FolhaRespostas.tsx` | Usa o cabeçalho e as colunas comuns |
+| Modificar | `frontend/src/utils/tempo.ts` | `formatarRestante` (minutos, para o banner) |
+| Modificar/Criar | testes (`resultado.test.tsx`, `inicio.test.tsx`, `Figura.test.tsx`, `revisao.test.ts`, `FolhaCorrigida.test.tsx`, `tempo.test.ts`) | Cobrir as mudanças |
 
 ### 6.2 Banco de Dados
 
@@ -134,20 +137,54 @@ Terceiro CR da revisão de design de 30/09/2026 (canvas "Protótipo Simulado Fuv
 
 ## 8. Critérios de Aceite
 
-- [ ] P1.7: no celular, a folha corrigida vem logo depois de "Por disciplina" e antes da revisão; no desktop, fica num cartão fixo na barra lateral
-- [ ] P1.7/D5: tocar ou clicar numa questão da folha (grade ou bolhas) abre aquela questão na revisão, rola até ela e põe o foco no título; fora do filtro atual, o filtro volta para "Todas"
-- [ ] D5/P2.2: no celular, grade de 6 colunas com células de 50 px e selos de contagem; no desktop, bolinhas sem letra, cabeçalho A–E, marcada verde/vermelha e correta contornada em verde
-- [ ] P1.1/D6: a revisão mostra uma questão por vez, com filtros (incluindo disciplina), posição no filtro, selo e Anterior/Próxima; trocar de questão rola até a revisão e foca o título
-- [ ] P1.6/D7: a figura ampliada abre ajustada à tela e centralizada; "Tamanho real" mostra o tamanho natural com rolagem; Esc e clique fora fecham
-- [ ] P1.9: o banner fica no topo do início com o tempo restante e o aviso do relógio (ou "Pausado com…", "O tempo acabou…"); com simulado aberto, os modos ficam com botões secundários
-- [ ] P2.6: "Provas na base" mostra "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela
-- [ ] Sem rolagem horizontal em 320 px e sem erros novos no console
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge (Playwright em 1440 × 900, 390 e 320 px), com o resultado registrado aqui
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança: N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
-- [ ] Documentos afetados foram atualizados
+- [x] P1.7: no celular, a folha corrigida vem logo depois de "Por disciplina" e antes da revisão; no desktop, fica num cartão fixo na barra lateral
+- [x] P1.7/D5: tocar ou clicar numa questão da folha (grade ou bolhas) abre aquela questão na revisão, rola até ela e põe o foco no título; fora do filtro atual, o filtro volta para "Todas"
+- [x] D5/P2.2: no celular, grade de 6 colunas com células de 50 px e selos de contagem; no desktop, bolinhas sem letra, cabeçalho A–E, marcada verde/vermelha e correta contornada em verde
+- [x] P1.1/D6: a revisão mostra uma questão por vez, com filtros (incluindo disciplina), posição no filtro, selo e Anterior/Próxima; trocar de questão rola até a revisão e foca o título
+- [x] P1.6/D7: a figura ampliada abre ajustada à tela e centralizada; "Tamanho real" mostra o tamanho natural com rolagem; Esc e o clique fora da figura fecham
+- [x] P1.9: o banner fica no topo do início com o tempo restante e o aviso do relógio (ou "Pausado com…", "O tempo acabou…"); com simulado aberto, os modos ficam com botões secundários
+- [x] P2.6: "Provas na base" mostra "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela
+- [x] Sem rolagem horizontal em 320 px e sem erros novos no console
+- [x] Testes existentes continuam passando (regressão): Vitest 146/146, `tsc --noEmit`, ESLint e o hook de commit
+- [x] Novos testes cobrem a mudança: `revisao.test.ts` (5), `FolhaCorrigida.test.tsx` (3), `tempo.test.ts` (+1), 5 do banner em `inicio.test.tsx`, 7 novos ou reescritos em `resultado.test.tsx` e 3 em `Figura.test.tsx`
+- [x] Fluxo afetado exercitado em runtime antes do merge (Playwright em 1440 × 900, 390 e 320 px), com o resultado registrado abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados (registro abaixo)
+- [x] ~~Revisão de segurança~~ N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
+- [x] Documentos afetados foram atualizados (PRD v1.2, Arquitetura v1.3, Spec índice v1.3, spec 03 v1.3, spec 04 v1.1, Plano, CLAUDE.md, INDEX)
+
+### 8.1 Validação em runtime (Playwright, 2026-09-30)
+
+Backend com `local.db` (prova 2025). Primeiro pelo Vite (porta 5173); depois pelo build servido pelo próprio FastAPI (`STATIC_DIR=../frontend/dist`, porta 8001), porque o proxy do Vite derrubou com `ECONNRESET` duas respostas grandes de `/api/questoes` (o backend respondeu 200). Simulados "Prova de um ano" iniciados, respondidos em parte e finalizados pelo fluxo real.
+
+| Viewport | Verificação | Resultado |
+|----------|-------------|-----------|
+| 390 × 844 | Início com simulado aberto: banner antes do título com "12 de 90 respondidas" e "Restam 4 h 59 min. O relógio continua correndo mesmo com a aba fechada."; "Começar prova completa" com fundo branco (secundário); link "FUVEST 2025 · PDF oficial (abre em nova aba)" | ✅ |
+| 390 × 844 | Figura da questão 2 (480 × 320): ajustada à largura (escala 0,73) e centralizada; "Tamanho real" a 1:1 com rolagem; foco em "Fechar figura"; Esc fecha | ✅ |
+| 390 × 844 | Resultado com 5.185 px de altura (antes ~16.800); "Por disciplina" em y = 427, folha em 911, revisão em 1.893; grade de 6 colunas com células de 52 × 50; selos "2 acertos · 10 erros · – 78 em branco" | ✅ |
+| 390 × 844 | Tocar na 30 da folha: "Questão 30 de 90" a 156 px do topo, com foco; Próxima → 31, com foco; filtro "Erradas" → "1 de 10 erradas" | ✅ |
+| 1440 × 900 | Figura da questão 2 cresce até 1.156 × 771 (escala 2,41), com o texto alternativo na barra | ✅ |
+| 1440 × 900 | Cartão da folha corrigida: 772 px, 3 colunas, sem rolagem própria, linhas sem letra ("01"), só uma folha visível; clicar na 57 abre "Questão 57 de 90" a 114 px do topo, com foco; cartão fixo em y = 24; a linha 57 fica como atual | ✅ |
+| 320 × 640 | Resultado sem rolagem horizontal; células de 41 × 50 | ✅ |
+| 1440 × 900 | Depois da revisão de código: setas no filtro passam por Erradas e Em branco com o foco nelas e sem rolar (y = 0); clique dentro da figura mantém o diálogo; clique na faixa escura ao lado fecha | ✅ |
+| — | Console: sem erros nem avisos da aplicação. Erros de `RevisaoQuestoes` só apareceram durante o recarregamento a quente do Vite, com a página velha aberta (props da versão anterior) | ✅ |
+
+Achado fora do escopo (conteúdo, curadoria): a figura da questão 2 de 2025 (`q002-1.webp`) traz uma lasca da linha de texto de cima no recorte.
+
+### 8.2 Revisão de código pré-merge (`/code-review`, nível high)
+
+9 findings: 8 corrigidos e 1 justificado.
+
+| # | Finding | Tratamento |
+|---|---------|------------|
+| 1 | Trocar de filtro rolava e movia o foco para o título, e as setas dos rádios e do `select` deixavam de funcionar pelo teclado | Corrigido: só a navegação (folha, Anterior/Próxima) rola e foca; teste novo e checagem no navegador |
+| 2 | Ajustada à tela, a `<img>` ocupa a área toda, e o clique nas faixas escuras não fechava | Corrigido: calcula a parte pintada (`object-contain`) e fecha fora dela; teste novo e checagem no navegador |
+| 3 | O modo ajustado perdeu o fundo branco da imagem | Justificado: as figuras são recortes renderizados do PDF (opacos, fundo branco); com a `<img>` do tamanho da área, o fundo branco pintaria as faixas todas |
+| 4 | Anuladas contavam nos acertos e a marcada aparecia verde | Corrigido: selo "N anulada(s) (conta como acerto)", para bater com a nota, e a marcada da anulada em âmbar |
+| 5 | Questão corrigida sem conteúdo na base dizia "não entrou na nota" | Corrigido: texto próprio quando há item corrigido; teste novo |
+| 6 | A revisão não zerava ao trocar de resultado sem desmontar a rota | Corrigido: o conteúdo do resultado tem chave pelo `id` |
+| 7 | O banner atualiza a cada 30 s, mas mostrava segundos | Corrigido: `formatarRestante` em minutos ("4 h 52 min", "1 h"); teste novo |
+| 8 | Colunas e cabeçalho A–E copiados da folha da resolução | Corrigido: `utils/folha.ts` e `CabecalhoLetras`, usados pelas duas folhas |
+| 9 | `id` fixo em `aria-labelledby` | Corrigido: `useId` |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -200,3 +237,6 @@ Terceiro CR da revisão de design de 30/09/2026 (canvas "Protótipo Simulado Fuv
 | Data       | Autor  | Descrição                    |
 |------------|--------|------------------------------|
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado a partir da revisão de design (P1.1 da revisão, P1.6, P1.7, P1.9, P2.6 e P2.2 da folha corrigida) com as decisões D5, D6 e D7 do usuário |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Implementação concluída (CR-T-01 a CR-T-07) |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Validação em runtime e revisão de código: 9 findings, 8 corrigidos e 1 justificado (CR-T-08) |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Documentação atualizada (CR-T-09) — status: ✅ Concluído |

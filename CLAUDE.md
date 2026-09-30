@@ -288,10 +288,12 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
+- **CR-003** — Resultado, figura e início (Concluído, 2026-09-30): resultado na ordem "Por disciplina" → folha corrigida → revisão; folha clicável (grade de células no celular, bolinhas na barra lateral do desktop — D5 do CR-003); revisão uma questão por vez com filtros; figura ampliada ajustada à tela; banner do início com o tempo restante; "Provas na base" com aviso de nova aba. Com ele, a revisão de design de 30/09 fica coberta até o P2; faltam P3 e D4
 - **CR-002** — Contraste e tokens (Concluído, 2026-09-30): tokens `optico-texto` (#b8405f, texto do impresso), `borda-campo` (#848e9c) e `acerto` #17703f, com contraste conferido por `tokens.test.ts`; título próprio por rota (`useTituloPagina`)
-- **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão. Próximo CR sugerido na revisão: "Resultado, figura e início" (P1.1 da revisão, P1.6, P1.7, P1.9, P2.6)
+- **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão.
 
 ### Última Tarefa Implementada
+- CR-003 (2026-09-30): resultado, figura ampliada e banner do início
 - CR-002 (2026-09-30): contraste dos tokens e título por rota
 - CR-001 (2026-09-30): resolução em modo foco, barra inferior, folha e pausa
 - MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Provas 2025, 2024 e 2023 curadas e publicadas; pendentes do curador (T-011/T-029): 2022 e 2020, numa branch `conteudo/prova-AAAA`. Depois: T-030 (revisão final)
@@ -338,6 +340,7 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | Problema | Causa | Solução |
 |----------|-------|---------|
 | Classe Tailwind acrescentada a uma constante de estilo não tem efeito (ex.: `${BOTAO} bg-alerta-claro` continua `bg-papel`) | No Tailwind v4, entre utilitários da mesma propriedade e da mesma variante vale a ordem do CSS gerado, não a ordem na lista de classes | Constantes só com a forma (sem cor/padding) e a variação escolhida por ternário (`estilos.ts`: `BOTAO_BARRA_FORMA` + `BARRA_NEUTRO`/`BARRA_ALERTA`); nunca empilhar duas classes da mesma propriedade (CR-001) |
+| Página presa em "Carregando…" no dev; log do Vite com `http proxy error ... ECONNRESET` (o backend respondeu 200) | O proxy do Vite nesta máquina às vezes derruba respostas grandes (`/api/questoes` com 90 ids) | Para validar no navegador, servir o build pelo FastAPI: `npm run build` e `STATIC_DIR="../frontend/dist" DATABASE_URL="sqlite:///./local.db" .venv/Scripts/python -m uvicorn app.main:app --port 8001` (sem proxy) |
 | `import css from './index.css?raw'` chega vazio no Vitest | `test.css: false` zera todo CSS, inclusive com `?raw` | `css: { include: [/src[\\/]index\.css/] }` no `vite.config.ts` libera só o `index.css` (o teste de contraste lê os tokens dele — CR-002) |
 | Diálogo devolve o foco ao primeiro botão a cada segundo na resolução | O `useAgora` re-renderiza a página a cada 1 s; efeito de diálogo com o callback nas dependências roda de novo e refaz o foco | Guardar o callback numa ref e rodar o efeito só ao abrir (`ConfirmDialog`, `PainelFolha` — CR-001) |
 | Arquivos `.js` duplicando os `.tsx` em `frontend/src/` | `tsc` rodado sem `--noEmit` emite JS ao lado dos fontes | Ignorados via `.gitignore` (`frontend/src/**/*.js`). **Sempre editar o `.tsx`/`.ts`**; os `.js` podem ser deletados com segurança |
