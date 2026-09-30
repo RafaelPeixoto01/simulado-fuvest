@@ -17,9 +17,9 @@ const FILTROS: { valor: FiltroRevisao; rotulo: string; nome: string }[] = [
 const COR_SELO: Record<Situacao, string> = {
   acerto: 'bg-acerto-claro text-acerto',
   erro: 'bg-erro-claro text-erro',
-  branco: 'bg-fundo text-tinta',
+  branco: 'border border-dashed border-borda-campo bg-papel text-tinta',
   anulada: 'bg-alerta-claro text-alerta',
-  removida: 'bg-fundo text-tinta-suave',
+  removida: 'border border-dashed border-linha bg-papel text-tinta-suave',
 }
 
 function textoSelo(item: ItemCorrigido | undefined): string {
