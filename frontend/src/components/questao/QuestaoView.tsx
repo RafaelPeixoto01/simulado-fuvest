@@ -1,4 +1,4 @@
-import { useCallback, useState, type ReactNode } from 'react'
+import { useCallback, useState, type ReactNode, type Ref } from 'react'
 
 import { NOMES_DISCIPLINAS, type Letra, type Questao, type TextoBase } from '../../types'
 import { Alternativas, type CorrecaoAlternativas } from './Alternativas'
@@ -13,9 +13,11 @@ interface Props {
   onSelecionar: (letra: Letra) => void
   correcao?: CorrecaoAlternativas | null
   acoes?: ReactNode
+  /** Título focável: a resolução leva o foco a ele ao trocar de questão (CR-001) */
+  refTitulo?: Ref<HTMLHeadingElement>
 }
 
-export function QuestaoView({ questao, textoBase, posicao, selecionada, onSelecionar, correcao, acoes }: Props) {
+export function QuestaoView({ questao, textoBase, posicao, selecionada, onSelecionar, correcao, acoes, refTitulo }: Props) {
   const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, FUVEST ${questao.ano} (questão ${questao.numero})`
   const alt = `Figura da questão ${questao.numero}, FUVEST ${questao.ano}`
   const [reportando, setReportando] = useState(false)
@@ -24,7 +26,7 @@ export function QuestaoView({ questao, textoBase, posicao, selecionada, onSeleci
     <article className="max-w-[68ch]">
       <header className="mb-5">
         {posicao && (
-          <h2 className="text-xl font-bold">
+          <h2 ref={refTitulo} tabIndex={refTitulo ? -1 : undefined} className="text-xl font-bold focus:outline-none">
             Questão {posicao.atual} de {posicao.total}
           </h2>
         )}

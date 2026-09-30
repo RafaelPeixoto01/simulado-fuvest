@@ -105,6 +105,7 @@ describe('Resolução (RF-013 a RF-016)', () => {
 
     await userEvent.keyboard('{ArrowRight}')
     expect(await screen.findByText('Enunciado da questão 2099-003')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Questão anterior' })).toBeEnabled()
 
     await userEvent.keyboard('b')
     expect(salvo()?.respostas['2099-003']).toBe('B')
@@ -126,8 +127,26 @@ describe('Resolução (RF-013 a RF-016)', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Pausar' }))
     expect(salvo()?.pausadoEm).not.toBeNull()
 
-    await userEvent.click(screen.getByRole('button', { name: 'Retomar' }))
+    // D3: pausado, a questão some e o teclado não responde
+    const pausa = screen.getByRole('region', { name: 'Simulado pausado' })
+    expect(screen.getByRole('timer')).toHaveTextContent('Pausado')
+    expect(screen.queryByText('Enunciado da questão 2099-001')).toBeNull()
+    expect(screen.queryByRole('radio')).toBeNull()
+    await userEvent.keyboard('b{ArrowRight}')
+    expect(salvo()?.respostas).toEqual({})
+    expect(salvo()?.indiceAtual).toBe(0)
+
+    await userEvent.click(within(pausa).getByRole('button', { name: 'Retomar' }))
     expect(salvo()?.pausadoEm).toBeNull()
+    expect(await screen.findByText('Enunciado da questão 2099-001')).toBeInTheDocument()
+  })
+
+  it('simulado pausado reaberto cai direto na tela de pausa', async () => {
+    salvarSimulado({ pausadoEm: Date.now() - 5_000 })
+    renderizar(<App />, { rota: '/simulado' })
+
+    expect(await screen.findByRole('heading', { name: 'Simulado pausado' })).toBeInTheDocument()
+    expect(screen.queryByText('Enunciado da questão 2099-001')).toBeNull()
   })
 
   it('prova completa não tem pausa', async () => {
@@ -150,10 +169,11 @@ describe('Resolução (RF-013 a RF-016)', () => {
     renderizar(<App />, { rota: '/simulado' })
     await screen.findByText('Enunciado da questão 2099-001')
 
-    await userEvent.click(screen.getByRole('button', { name: 'Finalizar' }))
+    // D1: "Finalizar" saiu do topo e fica no rodapé da folha
+    await userEvent.click(screen.getByRole('button', { name: 'Finalizar simulado' }))
     const dialogo = await screen.findByRole('dialog', { name: 'Finalizar o simulado?' })
     expect(dialogo).toHaveTextContent('Você deixou 2 questões em branco.')
-    await userEvent.click(within(dialogo).getByRole('button', { name: 'Finalizar' }))
+    await userEvent.click(within(dialogo).getByRole('button', { name: 'Finalizar e ver o resultado' }))
 
     // Termina na tela de resultado (não pode cair no redirecionamento para o início)
     expect(await screen.findByRole('heading', { level: 1, name: 'Você acertou 1 de 3 questões' })).toBeInTheDocument()
@@ -179,8 +199,8 @@ describe('Resolução (RF-013 a RF-016)', () => {
     renderizar(<App />, { rota: '/simulado' })
     await screen.findByText('Enunciado da questão 2099-001')
 
-    await userEvent.click(screen.getByRole('button', { name: 'Finalizar' }))
-    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Finalizar' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Finalizar simulado' }))
+    await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Finalizar e ver o resultado' }))
 
     expect(await screen.findByText(/Não foi possível corrigir agora/)).toBeInTheDocument()
     expect(salvo()?.id).toBe('sim-1')
@@ -209,5 +229,145 @@ describe('Resolução (RF-013 a RF-016)', () => {
     renderizar(<App />, { rota: '/simulado' })
 
     expect(await screen.findByText(/Esta questão foi removida da base/)).toBeInTheDocument()
+  })
+})
+
+describe('Resolução: navegação, folha e modo foco (CR-001)', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    vi.mocked(window.scrollTo).mockClear()
+    instalarApiFalsa({
+      'GET /api/questoes': (_c, url) =>
+        json(200, {
+          questoes: url.searchParams.get('ids')!.split(',').map((id) => questaoFalsa(id)),
+          textos_base: {},
+          nao_encontradas: [],
+        }),
+    })
+  })
+
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('abre em modo foco, sem o cabeçalho e o rodapé do site (D5)', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    expect(screen.getByRole('main')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Histórico' })).toBeNull()
+    expect(screen.queryByText(/não é afiliado à FUVEST/)).toBeNull()
+    // D1: o topo não tem mais "Finalizar"
+    expect(screen.queryByRole('button', { name: /^Finalizar$/ })).toBeNull()
+  })
+
+  it('trocar de questão volta ao topo e leva o foco ao título (P1.1)', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+    expect(window.scrollTo).not.toHaveBeenCalled()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Próxima questão' }))
+    const titulo = await screen.findByRole('heading', { name: 'Questão 2 de 3' })
+    expect(titulo).toHaveFocus()
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 })
+
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(await screen.findByRole('heading', { name: 'Questão 1 de 3' })).toHaveFocus()
+  })
+
+  it('na última questão "Próxima" vira "Finalizar" e a confirmação cita as marcadas (D1)', async () => {
+    salvarSimulado({ indiceAtual: 2, respostas: { '2099-003': 'B' }, marcadas: ['2099-001'] })
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-003')
+
+    expect(screen.queryByRole('button', { name: 'Próxima questão' })).toBeNull()
+    await userEvent.click(screen.getByRole('button', { name: 'Finalizar o simulado' }))
+
+    const dialogo = await screen.findByRole('dialog', { name: 'Finalizar o simulado?' })
+    expect(dialogo).toHaveTextContent('Você deixou 2 questões em branco e marcou 1 para revisar.')
+    await userEvent.click(within(dialogo).getByRole('button', { name: 'Continuar resolvendo' }))
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(salvo()?.id).toBe('sim-1')
+  })
+
+  it('"Revisar" alterna a marcação e mostra o estado', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    const revisar = screen.getByRole('button', { name: 'Revisar' })
+    expect(revisar).toHaveAttribute('aria-pressed', 'false')
+    await userEvent.click(revisar)
+
+    expect(screen.getByRole('button', { name: 'Marcada' })).toHaveAttribute('aria-pressed', 'true')
+    expect(salvo()?.marcadas).toEqual(['2099-001'])
+  })
+
+  it('a folha do celular é um diálogo: foco, Esc, Tab preso e página travada (P1.5)', async () => {
+    salvarSimulado({ respostas: { '2099-002': 'D' } })
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    const abrir = screen.getByRole('button', { name: 'Folha 1/3' })
+    await userEvent.click(abrir)
+
+    const painel = screen.getByRole('dialog', { name: 'Folha de respostas' })
+    const fechar = within(painel).getByRole('button', { name: 'Fechar folha' })
+    expect(fechar).toHaveFocus()
+    expect(document.documentElement.style.overflow).toBe('hidden')
+    expect(within(painel).getByText('1 respondidas · 2 em branco')).toBeInTheDocument()
+    expect(within(painel).getByRole('button', { name: 'Questão 2: respondida D' })).toBeInTheDocument()
+
+    // Tab circula dentro do painel: do último (Finalizar simulado) volta ao primeiro (Fechar)
+    within(painel).getByRole('button', { name: 'Finalizar simulado' }).focus()
+    await userEvent.tab()
+    expect(fechar).toHaveFocus()
+    await userEvent.tab({ shift: true })
+    expect(within(painel).getByRole('button', { name: 'Finalizar simulado' })).toHaveFocus()
+
+    await userEvent.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(abrir).toHaveFocus()
+    expect(document.documentElement.style.overflow).toBe('')
+  })
+
+  it('tocar numa questão do painel fecha a folha e foca o título da questão escolhida', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Folha 0/3' }))
+    const painel = screen.getByRole('dialog', { name: 'Folha de respostas' })
+    await userEvent.click(within(painel).getByRole('button', { name: 'Questão 3: em branco' }))
+
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(await screen.findByRole('heading', { name: 'Questão 3 de 3' })).toHaveFocus()
+  })
+
+  it('"Finalizar simulado" no painel fecha a folha e abre a confirmação (D1)', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Folha 0/3' }))
+    const painel = screen.getByRole('dialog', { name: 'Folha de respostas' })
+    await userEvent.click(within(painel).getByRole('button', { name: 'Finalizar simulado' }))
+
+    expect(screen.queryByRole('dialog', { name: 'Folha de respostas' })).toBeNull()
+    expect(screen.getByRole('dialog', { name: 'Finalizar o simulado?' })).toHaveTextContent(
+      'Você deixou 3 questões em branco.',
+    )
+  })
+
+  it('clicar fora do painel fecha a folha', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Folha 0/3' }))
+    const fundo = screen.getByRole('dialog', { name: 'Folha de respostas' }).parentElement!
+    await userEvent.click(fundo)
+
+    expect(screen.queryByRole('dialog')).toBeNull()
   })
 })
