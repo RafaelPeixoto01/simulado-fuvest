@@ -2,8 +2,13 @@
 
 Layout (FUVEST 2025, V1): A4; cabecalho acima de y=35; duas colunas separadas no
 meio da pagina, com trechos em largura total em algumas paginas; numero da
-questao em Gadugi-Bold 13pt entre chaves; alternativas "(A)".."(E)"; "#####" no
-fim de cada questao; textos-base introduzidos por "TEXTO PARA AS QUESTOES ...".
+questao com 2 digitos em 13pt; alternativas "(A)".."(E)"; textos-base
+introduzidos por "TEXTO PARA AS QUESTOES ...".
+
+Tambem cobre 2020 e 2022-2024 (T-028): muda so a fonte do numero da questao
+(Gadugi-Bold/Gadugi,Bold, Arial, BrandonGrotesque-Black) e o "#####" no fim de
+cada questao, que so existe a partir de 2025 (sem ele, o proximo marcador fecha
+a questao).
 
 O que nao da para extrair com seguranca vira pendencia na questao (V08), para o
 curador resolver no prova.yaml: nada e descartado em silencio.
@@ -200,9 +205,10 @@ def _elementos_da_pagina(page, pagina: int) -> list[Elemento]:
         w for w in page.extract_words(extra_attrs=["fontname", "size"])
         if TOPO <= w["top"] and w["bottom"] <= BASE
     ]
+    # Numero da questao: 2 digitos em 12-14pt (a fonte muda de ano para ano)
     marcadores = [
         w for w in palavras
-        if "Gadugi-Bold" in w["fontname"] and 12 <= w["size"] <= 14 and w["text"].isdigit()
+        if w["text"].isdigit() and len(w["text"]) == 2 and 12 <= w["size"] <= 14
     ]
     chaves = [w for w in palavras if w["text"] in "{}" and w["size"] < TAMANHO_MINIMO + 1]
     texto = [

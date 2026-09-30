@@ -362,7 +362,7 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 - **Status:** Aceita
 - **Data:** 2026-09-29
 - **Contexto:** O PRD exclui IA na ingestão. Os PDFs variam por ano: 2025 tem duas colunas, figuras embutidas e 4 versões; 2015 traz artefatos de fonte (`(cid:3)`).
-- **Decisão:** Parsers de gabarito e de prova organizados em `ingestao/gabarito/` e `ingestao/layouts/`, com um registry que mapeia cada ano a uma família. Base comum em `pdf_util.py` (divisão em colunas, ordem de leitura, limpeza de artefatos, render de região via pypdfium2). O que o parser não extrai com segurança vira `pendencias` no YAML, e o curador completa com os comandos `preview` e `recortar`. A primeira família implementada é a do layout de 2025.
+- **Decisão:** Parsers de gabarito e de prova organizados em `ingestao/gabarito/` e `ingestao/layouts/`, com um registry que mapeia cada ano a uma família. Base comum em `pdf_util.py` (divisão em colunas, ordem de leitura, limpeza de artefatos, render de região via pypdfium2). O que o parser não extrai com segurança vira `pendencias` no YAML, e o curador completa com os comandos `preview` e `recortar`. A primeira família implementada é a do layout de 2025, que também cobre 2020 e 2022–2024 (T-028: muda só a fonte do número da questão e o gabarito usa versões por letra). 2021 não tem texto extraível (fontes sem mapeamento) e ficaria para uma futura extração com OCR.
 - **Alternativas Consideradas:**
   - PyMuPDF: descartada pela licença AGPL.
   - Um parser genérico para todos os anos: descartado, porque cada layout exige heurísticas próprias.

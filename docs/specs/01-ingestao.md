@@ -80,7 +80,7 @@ class Fonte(BaseModel):
 
 class PacoteProva(BaseModel):
     ano: int                       # 1977..2100
-    versao: str                    # "V1".."V4" | "unica"
+    versao: str                    # "V1".."V4" (2025) | "V","K","Q","X","Z" (2020, 2022-2024) | "unica"
     status: Literal["rascunho", "publicada"] = "rascunho"
     fonte: Fonte
     textos_base: list[TextoBase] = []
@@ -199,7 +199,7 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
    Os alertas são agrupados por tipo e página (`rótulo na página P, y≈A, B: ação`). Pendências de um texto-base vão para a primeira questão que o usa.
 10. Ordem de leitura por faixas: cada linha é partida em segmentos nos vãos horizontais (> 15pt) e cada segmento é classificado como coluna esquerda, direita ou largura total. As faixas de duas colunas são lidas esquerda→direita entre os elementos de largura total, o que cobre páginas mistas (p. 2 de 2025) e de coluna única (p. 12). Imagens entram na ordem pelo centro vertical (as de alternativas começam acima do rótulo `(A)`).
 
-**Parser `familia_2025` — gabarito:** as linhas têm o formato `n L n+45 L` repetido para V1–V4 (ex.: `1 E 46 D 1 A 46 C ...`). Extrair a coluna da versão pedida. Letras `A`–`E` → letra; o marcador de anulada documentado no próprio PDF → `"anulada"`; qualquer outro token → `None`.
+**Parser `familia_2025` — gabarito:** cabeçalho `PROVA V1 ...` (2025) ou `PROVA V PROVA K ...` (2020, 2022–2024, às vezes em minúsculas); as linhas têm o formato `n L n+45 L` repetido por versão (ex.: `1 E 46 D 1 A 46 C ...`). Extrair a coluna da versão pedida. Letras `A`–`E` → letra; o marcador de anulada documentado no próprio PDF → `"anulada"`; qualquer outro token, ou **duas respostas aceitas** num gabarito retificado (`48 D E`), → `None` (pendência para o curador).
 
 **Extensão do registry:** depois que `familia_2025` passar nas fixtures de 2025, rodar `baixar` + `extrair` nos anos anteriores (2024, 2023, …) e registrar na família os anos que saírem sem pendência estrutural (V01/V03). O ano em que a família parar de funcionar marca onde uma família nova será necessária (fora do MVP se a meta de ≥ 5 provas já tiver sido atingida).
 
