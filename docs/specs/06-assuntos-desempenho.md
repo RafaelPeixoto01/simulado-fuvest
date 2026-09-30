@@ -67,7 +67,7 @@ class Assunto(BaseModel):                  # extra="forbid"
     nome: str                              # 1..60 caracteres
 
 class Taxonomia(RootModel[dict[Disciplina, list[Assunto]]]):
-    # Validação: as 8 disciplinas presentes; 1..20 assuntos cada (orientação editorial: 8 a 15);
+    # Validação: as 8 disciplinas presentes; 1..20 assuntos cada (a taxonomia aprovada tem de 11 a 14, e 5 em Inglês);
     # slugs e nomes únicos dentro da disciplina
     def assuntos(self, disciplina: Disciplina) -> list[Assunto]: ...
     def contem(self, disciplina: Disciplina, slug: str) -> bool: ...
@@ -188,13 +188,16 @@ python -m ingestao assuntos [--ano AAAA] [--data-dir DIR]
 ```
 == 2025 (publicada) — 90 questões, 0 sem assunto
 Biologia — 11 questões
-  Genética (3): Q012 Em ervilhas, a cor amarela da semente…; Q034 …; Q061 …
-  Ecologia (2): …
+  Genética e hereditariedade (2)
+    Q014 Na série ficcional Wandinha, o poder da visão é transmiti…
+    Q083 O heredograma a seguir mostra o aparecimento de AME (atro…
+  Ecologia (3)
+    …
   Sem questões: Botânica, Zoologia
 Sem assunto (0)
 ```
 
-- O início do enunciado é o primeiro bloco de texto, com espaços normalizados, cortado em 60 caracteres. Questões com assunto fora da taxonomia da disciplina aparecem num grupo "Assunto inválido" com o slug. A disciplina ausente (`null`) aparece como "Sem disciplina".
+- Disciplinas em ordem alfabética do nome; assuntos na ordem da taxonomia; uma questão por linha. O início do enunciado é o primeiro bloco de texto, com espaços normalizados, cortado em 60 caracteres. Questões com assunto fora da taxonomia da disciplina aparecem num grupo "Assunto inválido" com o slug entre colchetes. Questões sem disciplina aparecem em "Sem disciplina", e as sem assunto são listadas no fim.
 - Não toca o banco. Exit 0 sempre que conseguir ler tudo (é um relatório; quem bloqueia é o `validar`).
 
 ---

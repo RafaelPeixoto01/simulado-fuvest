@@ -35,14 +35,14 @@ Primeira parte da Fase 3 do roadmap do PRD ("Contas e estatísticas"). Cada ques
 Saber que vai mal em Física não diz o que estudar. O estudante precisa ver **em que parte** da disciplina erra (Eletricidade? Óptica?), tanto num simulado quanto somando os simulados que já fez.
 
 ### Situação Desejada (TO-BE)
-- **Taxonomia** `data/provas/assuntos.yaml`: de 8 a 15 assuntos por disciplina, condensados do "Programa das disciplinas" do Guia de Provas FUVEST, versionada no repositório como os pacotes (ADR-002, ADR-009).
+- **Taxonomia** `data/provas/assuntos.yaml`: de 11 a 14 assuntos por disciplina (5 em Inglês), condensados do "Programa das disciplinas" do Guia de Provas FUVEST, versionada no repositório como os pacotes (ADR-002, ADR-009).
 - **Exatamente 1 assunto por questão**, da disciplina principal. É obrigatório para publicar: uma nova validação, a **V11**, bloqueia pacote publicado sem assunto válido.
 - **Resultado:** em "Por disciplina", cada disciplina ganha "Ver por assunto", com os acertos de cada assunto.
 - **Painel "Meu desempenho"** (`/desempenho`): soma os simulados concluídos do histórico local, por disciplina e por assunto, do pior para o melhor.
 
 **Decisões do usuário (30/09/2026):**
 - **D1 · Ordem:** assuntos antes das contas, porque não coletam dado pessoal. As contas viram a Fase 3B (CR próprio).
-- **D2 · Taxonomia:** programa FUVEST condensado (8–15 assuntos por disciplina), com rascunho de Claude revisado pelo usuário.
+- **D2 · Taxonomia:** programa FUVEST condensado (a faixa combinada era de 8 a 15 assuntos por disciplina), com rascunho de Claude revisado pelo usuário. **Gate 1 (30/09):** aprovada como proposta, com 11 a 14 assuntos por disciplina e 5 em Inglês (a prova é só de leitura: 19 questões em 3 provas).
 - **D3 · Um assunto por questão:** as estatísticas fecham a conta.
 - **D4 · Obrigatório:** V11 bloqueante, com as 270 questões publicadas (2023–2025) classificadas **na mesma entrega**, para nenhuma prova sair do ar. 2022 e 2020 nascem classificadas na curadoria delas (T-029).
 - **D5 · Onde aparece:** resultado do simulado e painel acumulado. **Sem** filtro por assunto no Personalizado/Treino.

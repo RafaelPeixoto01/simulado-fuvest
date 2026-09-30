@@ -50,6 +50,8 @@ class TextoBase(_Modelo):
 class Questao(_Modelo):
     numero: int = Field(ge=1, le=90)
     disciplina: Disciplina | None = None
+    # Slug da taxonomia (assuntos.yaml) da disciplina principal; conferido pela V11
+    assunto: str | None = None
     disciplinas_secundarias: list[Disciplina] = []
     texto_base: str | None = None
     enunciado: list[Bloco]

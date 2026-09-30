@@ -1,10 +1,12 @@
-"""Regras V01-V10 que decidem se um pacote pode ser publicado (RN-007, specs/01 §2.4)."""
+"""Regras V01-V11 que decidem se um pacote pode ser publicado (RN-007, specs/01 §2.4)."""
 
 import re
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
+from app.disciplinas import NOMES_DISCIPLINAS
+from app.pacote.assuntos import Taxonomia
 from app.pacote.schema import LETRAS, Alternativa, Bloco, PacoteProva
 
 TOTAL_QUESTOES = 90
@@ -48,7 +50,9 @@ def _v01_numeracao(pacote: PacoteProva) -> list[Pendencia]:
     return pendencias
 
 
-def _validar_questoes(pacote: PacoteProva, existentes: set[str]) -> list[Pendencia]:
+def _validar_questoes(
+    pacote: PacoteProva, existentes: set[str], taxonomia: Taxonomia | None
+) -> list[Pendencia]:
     ids_textos_base = {tb.id for tb in pacote.textos_base}
     pendencias = []
     for q in pacote.questoes:
@@ -73,6 +77,22 @@ def _validar_questoes(pacote: PacoteProva, existentes: set[str]) -> list[Pendenc
 
         if q.disciplina is None:
             pendencias.append(Pendencia("V05", n, "Disciplina não definida"))
+
+        if q.assunto is None:
+            pendencias.append(Pendencia("V11", n, "Assunto não definido"))
+        elif (
+            taxonomia is not None
+            and q.disciplina is not None
+            and not taxonomia.contem(q.disciplina, q.assunto)
+        ):
+            pendencias.append(
+                Pendencia(
+                    "V11",
+                    n,
+                    f"Assunto '{q.assunto}' não existe na taxonomia de "
+                    f"{NOMES_DISCIPLINAS[q.disciplina]}",
+                )
+            )
 
         for nome in _figuras([*q.enunciado, *q.alternativas.values()]):
             if not NOME_FIGURA.match(nome) or nome not in existentes:
@@ -131,13 +151,17 @@ def _v10_orfas(pacote: PacoteProva, existentes: set[str]) -> list[Pendencia]:
     ]
 
 
-def validar_pacote(pacote: PacoteProva, dir_figuras: Path) -> list[Pendencia]:
+def validar_pacote(
+    pacote: PacoteProva, dir_figuras: Path, taxonomia: Taxonomia | None
+) -> list[Pendencia]:
+    """`taxonomia=None` so no `extrair`: o rascunho recem-extraido ainda nao tem assunto,
+    e a V11 so acusa a ausencia. Validacao, CLI e sincronizacao passam a taxonomia real."""
     existentes = (
         {f.name for f in dir_figuras.iterdir() if f.is_file()} if dir_figuras.is_dir() else set()
     )
     return (
         _v01_numeracao(pacote)
-        + _validar_questoes(pacote, existentes)
+        + _validar_questoes(pacote, existentes, taxonomia)
         + _validar_textos_base(pacote, existentes)
         + _v10_orfas(pacote, existentes)
     )

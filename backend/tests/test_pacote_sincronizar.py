@@ -1,13 +1,15 @@
-"""IT-004 a IT-007: sincronizacao repositorio -> banco (ADR-002)."""
+"""IT-004 a IT-007, IT-018, IT-019: sincronizacao repositorio -> banco (ADR-002, ADR-009)."""
 
 import shutil
 
+import pytest
 from sqlalchemy import func, select
 
 from app.models import Prova, Questao, Reporte, TextoBase
+from app.pacote.assuntos import ARQUIVO_TAXONOMIA, TaxonomiaInvalida
 from app.pacote.leitura import carregar_pacote, salvar_pacote
-from app.pacote.sincronizar import sincronizar
-from tests.fixtures.gerar_pacotes import escrever_pacotes
+from app.pacote.sincronizar import main, sincronizar
+from tests.fixtures.gerar_pacotes import TEMAS, escrever_pacotes
 
 
 def _contar(sessao, modelo) -> int:
@@ -117,3 +119,50 @@ def test_correcao_no_pacote_atualiza_a_questao(sessao, tmp_path):
     sessao.expire_all()
 
     assert sessao.get(Questao, "2099-005").enunciado[0] == {"texto": "Enunciado corrigido"}
+
+
+def test_assunto_gravado_em_todas_as_questoes(sessao, tmp_path):
+    """IT-018 (CR-004)."""
+    escrever_pacotes(tmp_path, anos=(2099,))
+
+    sincronizar(sessao, tmp_path)
+
+    assuntos = set(sessao.scalars(select(Questao.assunto)))
+    assert assuntos == set(TEMAS)
+    assert sessao.get(Questao, "2099-030").assunto == TEMAS[30 % len(TEMAS)]
+
+
+@pytest.mark.parametrize("conteudo", [None, "fisica: ["])
+def test_taxonomia_invalida_aborta_sem_tocar_o_banco(sessao, tmp_path, conteudo):
+    """IT-019: ausente ou quebrada -> TaxonomiaInvalida antes de qualquer escrita."""
+    escrever_pacotes(tmp_path)
+    sincronizar(sessao, tmp_path)
+    taxonomia = tmp_path / ARQUIVO_TAXONOMIA
+    if conteudo is None:
+        taxonomia.unlink()
+    else:
+        taxonomia.write_text(conteudo, encoding="utf-8")
+    shutil.rmtree(tmp_path / "2098")  # sem a taxonomia, a remocao nao pode acontecer
+
+    with pytest.raises(TaxonomiaInvalida):
+        sincronizar(sessao, tmp_path)
+
+    sessao.rollback()
+    assert _contar(sessao, Prova) == 2
+    assert _contar(sessao, Questao) == 180
+
+
+def test_main_sai_com_erro_se_a_taxonomia_for_invalida(tmp_path, monkeypatch, caplog):
+    """IT-019: o start do container para (ADR-009)."""
+    from app.database import criar_engine
+    from tests.utils import aplicar_migrations
+
+    url = f"sqlite:///{(tmp_path / 'm.db').as_posix()}"
+    aplicar_migrations(criar_engine(url))
+    escrever_pacotes(tmp_path / "provas")
+    (tmp_path / "provas" / ARQUIVO_TAXONOMIA).write_text("[]", encoding="utf-8")
+    monkeypatch.setenv("DATABASE_URL", url)
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "provas"))
+
+    assert main() == 1
+    assert "Taxonomia" in caplog.text

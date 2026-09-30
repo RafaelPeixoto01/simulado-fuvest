@@ -6,7 +6,7 @@ from app.disciplinas import NOMES_DISCIPLINAS
 from app.models import Questao
 from app.services.catalogo import distribuicao_completa
 from app.services.serializacao import questao_publica
-from tests.fixtures.gerar_pacotes import gerar_pacote
+from tests.fixtures.gerar_pacotes import TEMAS, gerar_pacote
 
 
 def test_distribuicao_maior_resto_com_desempate_alfabetico():
@@ -55,6 +55,7 @@ def test_catalogo_de_base_vazia(client):
     assert dados["distribuicao_completa"] == {}
     assert dados["completa_disponivel"] is False
     assert all(d["total_questoes"] == 0 for d in dados["disciplinas"])
+    assert all(d["assuntos"] == [] for d in dados["disciplinas"])  # sem taxonomia no DATA_DIR
 
 
 def test_serializacao_publica_troca_figura_por_url_e_omite_gabarito():
@@ -70,3 +71,35 @@ def test_serializacao_publica_troca_figura_por_url_e_omite_gabarito():
     assert publica["enunciado"][1] == {"texto": None, "figura": "/figuras/2099/q020-1.webp"}
     assert publica["alternativas"]["C"]["figura"] == "/figuras/2099/q020-c.webp"
     assert "resposta" not in publica and "anulada" not in publica
+
+
+def test_catalogo_traz_os_assuntos_de_cada_disciplina(client, base_sintetica):
+    """BT-025 (CR-004): ordem da taxonomia, totais sem anuladas, inclusive assunto com 0."""
+    validas = [q for ano in (2098, 2099) for q in gerar_pacote(ano).questoes if not q.anulada]
+    esperado = Counter((q.disciplina.value, q.assunto) for q in validas)
+
+    dados = client.get("/api/catalogo").json()
+
+    for disciplina in dados["disciplinas"]:
+        assuntos = disciplina["assuntos"]
+        assert [a["slug"] for a in assuntos] == list(TEMAS)
+        assert [a["nome"] for a in assuntos] == ["Tema A", "Tema B", "Tema C"]
+        assert {a["slug"]: a["total_questoes"] for a in assuntos} == {
+            t: esperado[(disciplina["slug"], t)] for t in TEMAS
+        }
+        assert sum(a["total_questoes"] for a in assuntos) == disciplina["total_questoes"]
+
+
+def test_catalogo_lista_assunto_sem_questoes_com_zero(client, base_sintetica):
+    import yaml
+
+    arquivo = base_sintetica / "assuntos.yaml"
+    dados = yaml.safe_load(arquivo.read_text(encoding="utf-8"))
+    dados["fisica"].append({"slug": "novo", "nome": "Assunto novo"})
+    arquivo.write_text(yaml.safe_dump(dados, allow_unicode=True), encoding="utf-8")
+
+    fisica = next(
+        d for d in client.get("/api/catalogo").json()["disciplinas"] if d["slug"] == "fisica"
+    )
+
+    assert fisica["assuntos"][-1] == {"slug": "novo", "nome": "Assunto novo", "total_questoes": 0}

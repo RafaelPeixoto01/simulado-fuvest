@@ -101,3 +101,38 @@ def test_rate_limit_de_correcao(client, base_sintetica):
     codigos = [_corrigir(client, corpo).status_code for _ in range(121)]
 
     assert codigos[119] == 200 and codigos[120] == 429
+
+
+def test_correcao_por_assunto(client, base_sintetica, q2099):
+    """BT-026 (CR-004): assunto por item; assuntos por disciplina do pior para o melhor."""
+    validas = [q for q in q2099.values() if not q.anulada]
+    disciplina = validas[0].disciplina
+    da_disciplina = [q for q in validas if q.disciplina == disciplina]
+    por_tema: dict[str, list] = {}
+    for q in da_disciplina:
+        por_tema.setdefault(q.assunto, []).append(q)
+    certo, errado = sorted(por_tema)[:2]
+    respostas = (
+        [{"questao_id": f"2099-{q.numero:03d}", "resposta": q.resposta} for q in por_tema[certo][:2]]
+        + [{"questao_id": f"2099-{q.numero:03d}", "resposta": None} for q in por_tema[errado][:1]]
+    )
+
+    dados = _corrigir(client, respostas).json()
+
+    assert [i["assunto"] for i in dados["itens"]] == [certo, certo, errado]
+    (desempenho,) = dados["por_disciplina"]
+    assert desempenho["assuntos"] == [
+        {"assunto": errado, "nome": f"Tema {errado[-1].upper()}", "total": 1, "acertos": 0,
+         "percentual": 0.0},
+        {"assunto": certo, "nome": f"Tema {certo[-1].upper()}", "total": 2, "acertos": 2,
+         "percentual": 100.0},
+    ]
+
+
+def test_correcao_sem_taxonomia_usa_o_slug_como_nome(client, base_sintetica, q2099):
+    (base_sintetica / "assuntos.yaml").unlink()
+    q = next(q for q in q2099.values() if not q.anulada)
+
+    dados = _corrigir(client, [{"questao_id": f"2099-{q.numero:03d}", "resposta": None}]).json()
+
+    assert dados["por_disciplina"][0]["assuntos"][0]["nome"] == q.assunto

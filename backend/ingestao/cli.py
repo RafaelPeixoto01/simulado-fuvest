@@ -11,7 +11,15 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao, normalizar_database_url
+from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
+from app.pacote.assuntos import (
+    Taxonomia,
+    TaxonomiaInvalida,
+    carregar_taxonomia,
+    taxonomia_em_uso,
+)
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
+from app.pacote.schema import PacoteProva, Questao
 from app.pacote.sincronizar import formatar_resumo, sincronizar
 from app.pacote.validacao import formatar_relatorio, tem_bloqueante, validar_pacote
 
@@ -20,14 +28,22 @@ def _erro(mensagem: str) -> None:
     print(mensagem, file=sys.stderr)
 
 
-def _validar_um(dir_prova: Path) -> bool:
+def _carregar_taxonomia(data_dir: Path) -> Taxonomia | None:
+    try:
+        return carregar_taxonomia(data_dir)
+    except TaxonomiaInvalida as erro:
+        _erro(f"Taxonomia de assuntos inválida ou ausente: {erro}")
+        return None
+
+
+def _validar_um(dir_prova: Path, taxonomia: Taxonomia) -> bool:
     """Imprime o relatorio; False se o pacote impede o CI (invalido ou publicado com bloqueio)."""
     try:
         pacote = carregar_pacote(dir_prova)
     except PacoteInvalido as erro:
         print(f"== {dir_prova.name} — YAML INVÁLIDO\n  {erro.detalhe}")
         return False
-    pendencias = validar_pacote(pacote, dir_prova / DIR_FIGURAS)
+    pendencias = validar_pacote(pacote, dir_prova / DIR_FIGURAS, taxonomia)
     print(formatar_relatorio(pacote, pendencias))
     return not (pacote.status == "publicada" and tem_bloqueante(pendencias))
 
@@ -44,7 +60,10 @@ def _cmd_validar(args: argparse.Namespace) -> int:
             _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
             return 1
         diretorios = [dir_prova]
-    resultados = [_validar_um(d) for d in diretorios]
+    taxonomia = _carregar_taxonomia(args.data_dir)
+    if taxonomia is None:
+        return 1
+    resultados = [_validar_um(d, taxonomia) for d in diretorios]
     return 0 if all(resultados) else 1
 
 
@@ -63,7 +82,73 @@ def _cmd_importar(args: argparse.Namespace) -> int:
         _erro(f"Falha no banco ({erro.__class__.__name__}). "
               "O schema existe? Rode antes: python -m alembic upgrade head")
         return 1
+    except TaxonomiaInvalida as erro:
+        _erro(f"Taxonomia de assuntos inválida ou ausente (banco não alterado): {erro}")
+        return 1
     print(formatar_resumo(resumo))
+    return 0
+
+
+def _inicio_enunciado(questao: Questao, limite: int = 60) -> str:
+    texto = " ".join(next((b.texto for b in questao.enunciado if b.texto), "").split())
+    return texto if len(texto) <= limite else texto[: limite - 1].rstrip() + "…"
+
+
+def _linha_questao(questao: Questao) -> str:
+    return f"    Q{questao.numero:03d} {_inicio_enunciado(questao)}"
+
+
+def formatar_assuntos(pacote: PacoteProva, taxonomia: Taxonomia) -> str:
+    """Classificacao por disciplina e assunto, para o curador revisar (specs/06 §2.5)."""
+    sem_assunto = [q for q in pacote.questoes if q.assunto is None]
+    linhas = [f"== {pacote.ano} ({pacote.status}) — {len(pacote.questoes)} questões, "
+              f"{len(sem_assunto)} sem assunto"]
+    for disciplina in sorted(Disciplina, key=lambda d: NOMES_DISCIPLINAS[d]):
+        questoes = [q for q in pacote.questoes if q.disciplina == disciplina]
+        if not questoes:
+            continue
+        linhas.append(f"{NOMES_DISCIPLINAS[disciplina]} — {len(questoes)} questões")
+        vazios = []
+        for assunto in taxonomia.assuntos(disciplina):
+            do_assunto = [q for q in questoes if q.assunto == assunto.slug]
+            if not do_assunto:
+                vazios.append(assunto.nome)
+                continue
+            linhas.append(f"  {assunto.nome} ({len(do_assunto)})")
+            linhas += [_linha_questao(q) for q in do_assunto]
+        invalidas = [q for q in questoes if q.assunto and not taxonomia.contem(disciplina, q.assunto)]
+        if invalidas:
+            linhas.append(f"  Assunto inválido ({len(invalidas)})")
+            linhas += [f"{_linha_questao(q)} [{q.assunto}]" for q in invalidas]
+        if vazios:
+            linhas.append(f"  Sem questões: {', '.join(vazios)}")
+    sem_disciplina = [q for q in pacote.questoes if q.disciplina is None]
+    if sem_disciplina:
+        linhas.append(f"Sem disciplina ({len(sem_disciplina)})")
+        linhas += [_linha_questao(q) for q in sem_disciplina]
+    linhas.append(f"Sem assunto ({len(sem_assunto)})")
+    linhas += [_linha_questao(q) for q in sem_assunto]
+    return "\n".join(linhas)
+
+
+def _cmd_assuntos(args: argparse.Namespace) -> int:
+    if args.ano is None:
+        diretorios = listar_pacotes(args.data_dir)
+    else:
+        diretorios = [args.data_dir / str(args.ano)]
+        if not diretorios[0].is_dir():
+            _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
+            return 1
+    taxonomia = _carregar_taxonomia(args.data_dir)
+    if taxonomia is None:
+        return 1
+    for dir_prova in diretorios:
+        try:
+            pacote = carregar_pacote(dir_prova)
+        except PacoteInvalido as erro:
+            _erro(f"{dir_prova.name}: YAML inválido\n  {erro.detalhe}")
+            return 1
+        print(formatar_assuntos(pacote, taxonomia))
     return 0
 
 
@@ -231,14 +316,16 @@ def _cmd_extrair(args: argparse.Namespace) -> int:
         (figuras / nome).write_bytes(dados)
     salvar_pacote(pacote, dir_prova)
 
-    pendencias = validar_pacote(pacote, figuras)
+    # Rascunho recem-extraido: nenhuma questao tem assunto ainda (V11 so acusa a ausencia)
+    pendencias = validar_pacote(pacote, figuras, taxonomia_em_uso(args.data_dir))
     print(formatar_relatorio(pacote, pendencias))
     com_problema = {
         p.questao for p in pendencias if p.codigo in PENDENCIAS_ESTRUTURAIS and p.questao
     }
     limpas = len(pacote.questoes) - len(com_problema)
     print(f"\n{limpas}/{len(pacote.questoes)} questões sem pendência estrutural "
-          f"({len(resultado.figuras)} figuras). Próximo passo: classificar as disciplinas (V05).")
+          f"({len(resultado.figuras)} figuras). Próximo passo: classificar disciplina e assunto "
+          "(V05, V11).")
     return 0
 
 
@@ -296,7 +383,7 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m ingestao", description=__doc__)
     sub = parser.add_subparsers(dest="comando", required=True)
 
-    validar = sub.add_parser("validar", help="Valida pacotes (regras V01-V10)")
+    validar = sub.add_parser("validar", help="Valida a taxonomia e os pacotes (regras V01-V11)")
     alvo = validar.add_mutually_exclusive_group(required=True)
     alvo.add_argument("--ano", type=_ano)
     alvo.add_argument("--todas", action="store_true")
@@ -309,6 +396,10 @@ def _parser() -> argparse.ArgumentParser:
         help="Inclui rascunhos completos (só com banco SQLite local)",
     )
     importar.set_defaults(func=_cmd_importar)
+
+    assuntos = sub.add_parser("assuntos", help="Relatório da classificação por assunto (revisão)")
+    assuntos.add_argument("--ano", type=_ano, help="Só este ano (padrão: todos os pacotes)")
+    assuntos.set_defaults(func=_cmd_assuntos)
 
     baixar = sub.add_parser("baixar", help="Baixa os PDFs de prova e gabarito para data/_cache")
     baixar.add_argument("--ano", type=_ano, required=True)

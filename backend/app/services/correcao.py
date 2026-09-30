@@ -4,14 +4,46 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models import Questao
-from app.schemas import CorrecaoResponse, DesempenhoDisciplina, ItemCorrigido, RespostaItem
+from app.pacote.assuntos import Taxonomia
+from app.schemas import (
+    CorrecaoResponse,
+    DesempenhoAssunto,
+    DesempenhoDisciplina,
+    ItemCorrigido,
+    RespostaItem,
+)
 
 
 def _percentual(acertos: int, total: int) -> float:
     return round(100 * acertos / total, 1) if total else 0.0
 
 
-def corrigir(sessao: Session, respostas: list[RespostaItem]) -> CorrecaoResponse:
+def _por_assunto(
+    disciplina: str, itens: list[ItemCorrigido], taxonomia: Taxonomia | None
+) -> list[DesempenhoAssunto]:
+    """CR-004: itens sem assunto ficam fora do detalhe (continuam na disciplina)."""
+    grupos: dict[str, list[ItemCorrigido]] = {}
+    for item in itens:
+        if item.assunto is not None:
+            grupos.setdefault(item.assunto, []).append(item)
+    assuntos = []
+    for slug, lista in grupos.items():
+        acertos = sum(i.acertou for i in lista)
+        nome = taxonomia.nome(disciplina, slug) if taxonomia else None
+        assuntos.append(DesempenhoAssunto(
+            assunto=slug,
+            nome=nome or slug,
+            total=len(lista),
+            acertos=acertos,
+            percentual=_percentual(acertos, len(lista)),
+        ))
+    assuntos.sort(key=lambda a: (a.percentual, a.assunto))
+    return assuntos
+
+
+def corrigir(
+    sessao: Session, respostas: list[RespostaItem], taxonomia: Taxonomia | None
+) -> CorrecaoResponse:
     ids = [r.questao_id for r in respostas]
     questoes = {q.id: q for q in sessao.scalars(select(Questao).where(Questao.id.in_(ids)))}
 
@@ -28,6 +60,7 @@ def corrigir(sessao: Session, respostas: list[RespostaItem]) -> CorrecaoResponse
             # Anulada: ponto para todos (RN-002). Em branco conta como erro (RN-008).
             acertou=q.anulada or (r.resposta is not None and r.resposta == q.resposta),
             disciplina=q.disciplina,
+            assunto=q.assunto,
         ))
 
     por_disciplina: dict[str, list[ItemCorrigido]] = {}
@@ -39,6 +72,7 @@ def corrigir(sessao: Session, respostas: list[RespostaItem]) -> CorrecaoResponse
             total=len(lista),
             acertos=sum(i.acertou for i in lista),
             percentual=_percentual(sum(i.acertou for i in lista), len(lista)),
+            assuntos=_por_assunto(d, lista, taxonomia),
         )
         for d, lista in por_disciplina.items()
     ]

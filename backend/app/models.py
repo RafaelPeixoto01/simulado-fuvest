@@ -70,6 +70,8 @@ class Questao(Base):
     anulada: Mapped[bool] = mapped_column(Boolean, default=False, server_default=false())
     disciplina: Mapped[str] = mapped_column(String(12), index=True)
     disciplinas_secundarias: Mapped[list] = mapped_column(JSON, default=list)
+    # Slug da taxonomia (CR-004). Nullable so pela ordem migration -> sincronizacao (V11)
+    assunto: Mapped[str | None] = mapped_column(String(40), nullable=True, index=True)
 
     prova: Mapped[Prova] = relationship(back_populates="questoes")
     # Sem este relationship o ORM pode inserir a questao antes do texto-base (FK)

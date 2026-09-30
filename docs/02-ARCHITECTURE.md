@@ -274,7 +274,7 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 
 ### Assuntos (taxonomia, CR-004)
 
-`data/provas/assuntos.yaml` lista, para cada uma das 8 disciplinas, de 8 a 15 assuntos condensados do "Programa das disciplinas" do Guia de Provas FUVEST, na ordem de exibição:
+`data/provas/assuntos.yaml` lista, para cada uma das 8 disciplinas, de 11 a 14 assuntos (Inglês, só leitura, tem 5) condensados do "Programa das disciplinas" do Guia de Provas FUVEST, na ordem de exibição:
 
 ```yaml
 fisica:

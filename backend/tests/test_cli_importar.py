@@ -56,3 +56,16 @@ def test_importar_sem_migrations_falha_com_orientacao(tmp_path, monkeypatch, cap
 
     assert main(["importar", "--data-dir", str(tmp_path / "provas")]) == 1
     assert "alembic upgrade head" in capsys.readouterr().err
+
+
+def test_importar_com_taxonomia_invalida_nao_toca_o_banco(tmp_path, monkeypatch, capsys):
+    """IT-019 pela CLI (CR-004)."""
+    engine = _banco_migrado(tmp_path, monkeypatch)
+    escrever_pacotes(tmp_path / "provas")
+    (tmp_path / "provas" / "assuntos.yaml").unlink()
+
+    assert main(["importar", "--data-dir", str(tmp_path / "provas")]) == 1
+
+    assert "Taxonomia" in capsys.readouterr().err
+    with criar_fabrica_sessao(engine)() as s:
+        assert s.scalar(select(func.count()).select_from(Questao)) == 0

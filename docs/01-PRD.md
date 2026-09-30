@@ -93,7 +93,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Regras específicas: feita pelo curador no pacote de revisão; a importação recusa questão sem disciplina principal ou sem assunto válido. Um comando lista a classificação de uma prova, agrupada por disciplina e assunto, para revisão
 
 **RF-023 — Detalhamento (CR-004):**
-- Lista fixa de assuntos por disciplina (8 a 15 por disciplina), condensada do "Programa das disciplinas" do Guia de Provas FUVEST, em arquivo versionado junto com os pacotes das provas
+- Lista fixa de assuntos por disciplina (11 a 14; Inglês, que na FUVEST é só leitura, tem 5), condensada do "Programa das disciplinas" do Guia de Provas FUVEST, em arquivo versionado junto com os pacotes das provas
 - Cada assunto tem um identificador estável (slug) e um nome para exibição
 - A taxonomia é validada no CI; taxonomia inválida impede a publicação (a sincronização não altera o banco)
 - Renomear o slug de um assunto já usado exige reclassificar as questões na mesma mudança (a validação acusa o que ficou órfão)

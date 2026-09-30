@@ -94,10 +94,17 @@ class ProvaCatalogo(BaseModel):
     url_gabarito: str
 
 
+class AssuntoCatalogo(BaseModel):
+    slug: str
+    nome: str
+    total_questoes: int  # nao anuladas
+
+
 class DisciplinaCatalogo(BaseModel):
     slug: Disciplina
     nome: str
     total_questoes: int
+    assuntos: list[AssuntoCatalogo]  # ordem da taxonomia (CR-004); [] sem taxonomia
 
 
 class CatalogoResponse(BaseModel):
@@ -148,6 +155,15 @@ class ItemCorrigido(BaseModel):
     anulada: bool
     acertou: bool
     disciplina: Disciplina
+    assunto: str | None  # slug (CR-004); None so se a questao nao tiver assunto no banco
+
+
+class DesempenhoAssunto(BaseModel):
+    assunto: str
+    nome: str
+    total: int
+    acertos: int
+    percentual: float
 
 
 class DesempenhoDisciplina(BaseModel):
@@ -155,6 +171,7 @@ class DesempenhoDisciplina(BaseModel):
     total: int
     acertos: int
     percentual: float
+    assuntos: list[DesempenhoAssunto]  # pior -> melhor; itens sem assunto ficam fora
 
 
 class CorrecaoResponse(BaseModel):

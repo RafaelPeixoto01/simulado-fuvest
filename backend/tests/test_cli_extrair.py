@@ -43,9 +43,11 @@ def test_extrair_gera_pacote_rascunho_com_gabarito(data_dir, capsys):
     assert [q.numero for q in pacote.questoes] == [2, 3, 4]
     assert [q.resposta for q in pacote.questoes] == ["B", "B", "C"]  # gabarito oficial V1
     assert all(q.disciplina is None for q in pacote.questoes)
+    assert all(q.assunto is None for q in pacote.questoes)
+    assert "assunto: null" in (data_dir / "2025" / "prova.yaml").read_text(encoding="utf-8")
     assert (data_dir / "2025" / "figuras" / "q002-1.webp").exists()
     saida = capsys.readouterr().out
-    assert "V05" in saida and "sem pendência estrutural" in saida
+    assert "V05" in saida and "V11" in saida and "sem pendência estrutural" in saida
 
 
 def test_extrair_recusa_sobrescrever_revisao(data_dir, capsys):

@@ -1,7 +1,8 @@
 """Pacotes sinteticos validos (anos ficticios 2098/2099) para testes e dev local.
 
 Deterministicos por ano. Cobrem: as 8 disciplinas, anuladas, textos-base (um com
-figura), disciplinas secundarias, figuras no enunciado e em alternativa.
+figura), disciplinas secundarias, figuras no enunciado e em alternativa, e um assunto
+por questao da taxonomia sintetica (3 temas por disciplina, gravada em assuntos.yaml).
 
 Uso no dev local (site com dados antes de existir prova real curada):
     .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos
@@ -13,14 +14,29 @@ import random
 import sys
 from pathlib import Path
 
+import yaml
 from PIL import Image
 
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
+from app.pacote.assuntos import ARQUIVO_TAXONOMIA, Taxonomia
 from app.pacote.leitura import DIR_FIGURAS, salvar_pacote
 from app.pacote.schema import LETRAS, Alternativa, Bloco, Fonte, PacoteProva, Questao, TextoBase
 
 TEXTOS_BASE = {"tb01": [10, 11], "tb02": [30, 31, 32]}
 FIGURA_TEXTO_BASE = "tb02-1.webp"
+TEMAS = ("tema-a", "tema-b", "tema-c")
+
+
+def taxonomia_sintetica() -> Taxonomia:
+    return Taxonomia.model_validate({
+        d.value: [{"slug": s, "nome": f"Tema {s[-1].upper()}"} for s in TEMAS] for d in Disciplina
+    })
+
+
+def escrever_taxonomia(destino: Path) -> None:
+    destino.mkdir(parents=True, exist_ok=True)
+    texto = yaml.safe_dump(taxonomia_sintetica().model_dump(mode="json"), allow_unicode=True)
+    (destino / ARQUIVO_TAXONOMIA).write_text(texto, encoding="utf-8")
 
 
 def _disciplinas_por_numero(rng: random.Random) -> list[Disciplina]:
@@ -60,6 +76,7 @@ def gerar_pacote(ano: int) -> PacoteProva:
             Questao(
                 numero=numero,
                 disciplina=disciplina,
+                assunto=TEMAS[numero % len(TEMAS)],
                 disciplinas_secundarias=secundarias,
                 texto_base=texto_base_de.get(numero),
                 enunciado=enunciado,
@@ -107,6 +124,7 @@ def _webp_placeholder(nome: str) -> bytes:
 
 
 def escrever_pacotes(destino: Path, anos: tuple[int, ...] = (2098, 2099)) -> list[Path]:
+    escrever_taxonomia(destino)
     diretorios = []
     for ano in anos:
         pacote = gerar_pacote(ano)

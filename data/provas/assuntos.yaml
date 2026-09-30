@@ -1,0 +1,224 @@
+# Taxonomia de assuntos por disciplina (RN-014, ADR-009, CR-004).
+#
+# Condensada do "Programa das disciplinas" do Guia de Provas FUVEST 2027
+# (https://www.fuvest.br/wp-content/uploads/fuvest2027-guia-provas-programas.pdf)
+# e ajustada ao que as provas de 2023 a 2025 cobram. A ordem aqui é a ordem de exibição.
+#
+# Regras de classificação (cada questão tem exatamente um assunto, da disciplina principal):
+# - O slug é estável: vai para o banco e para o histórico dos estudantes. Renomear ou remover
+#   um slug em uso exige reclassificar as questões no mesmo commit (a V11 acusa).
+# - O nome pode mudar à vontade (a exibição usa sempre o nome atual).
+# - Português: questão sobre uma obra da lista de leituras obrigatórias vai para
+#   "leituras-obrigatorias", mesmo que seja um poema; lógica e falácias vão para "argumentacao".
+# - História: Filosofia e Sociologia são classificadas em História (como as disciplinas) e
+#   têm assuntos próprios.
+
+biologia:
+  - slug: citologia
+    nome: Células e divisão celular
+  - slug: metabolismo-energetico
+    nome: Metabolismo energético
+  - slug: genetica
+    nome: Genética e hereditariedade
+  - slug: biologia-molecular
+    nome: DNA, biologia molecular e biotecnologia
+  - slug: evolucao
+    nome: Evolução
+  - slug: botanica
+    nome: Botânica
+  - slug: zoologia
+    nome: Zoologia
+  - slug: fisiologia-humana
+    nome: Fisiologia humana e nutrição
+  - slug: saude
+    nome: Saúde, doenças e parasitas
+  - slug: ecologia
+    nome: Ecologia
+  - slug: ambiente
+    nome: Ambiente e ação humana
+
+fisica:
+  - slug: cinematica
+    nome: Cinemática
+  - slug: dinamica
+    nome: Dinâmica e leis de Newton
+  - slug: energia
+    nome: Trabalho e energia
+  - slug: quantidade-de-movimento
+    nome: Impulso e quantidade de movimento
+  - slug: gravitacao
+    nome: Gravitação e astronomia
+  - slug: hidrostatica
+    nome: Hidrostática e hidrodinâmica
+  - slug: termologia
+    nome: Termometria, calorimetria e dilatação
+  - slug: termodinamica
+    nome: Gases e termodinâmica
+  - slug: ondulatoria
+    nome: Ondas, som e MHS
+  - slug: optica
+    nome: Óptica
+  - slug: eletrostatica
+    nome: Eletrostática
+  - slug: eletrodinamica
+    nome: Eletrodinâmica e circuitos
+  - slug: magnetismo
+    nome: Magnetismo e eletromagnetismo
+  - slug: fisica-moderna
+    nome: Física moderna e radiações
+
+geografia:
+  - slug: cartografia
+    nome: Cartografia
+  - slug: relevo-e-solos
+    nome: Geologia, relevo e solos
+  - slug: clima
+    nome: Clima e fenômenos atmosféricos
+  - slug: hidrografia
+    nome: Hidrografia e oceanos
+  - slug: biomas
+    nome: Biomas e domínios morfoclimáticos
+  - slug: questoes-ambientais
+    nome: Questões ambientais e mudanças climáticas
+  - slug: populacao
+    nome: População e migrações
+  - slug: espaco-urbano
+    nome: Espaço urbano
+  - slug: espaco-agrario
+    nome: Espaço agrário e agronegócio
+  - slug: industria-e-energia
+    nome: Indústria, energia e recursos minerais
+  - slug: transportes
+    nome: Transportes e circulação
+  - slug: economia-mundial
+    nome: Globalização e economia mundial
+  - slug: geopolitica
+    nome: Geopolítica e conflitos
+  - slug: formacao-territorial
+    nome: Formação territorial do Brasil
+
+historia:
+  - slug: antiguidade
+    nome: Antiguidade
+  - slug: idade-media
+    nome: Idade Média
+  - slug: idade-moderna
+    nome: Idade Moderna
+  - slug: revolucoes
+    nome: Iluminismo, revoluções e século XIX
+  - slug: seculo-xx
+    nome: Mundo contemporâneo (séculos XX e XXI)
+  - slug: america-colonial
+    nome: América colonial e povos indígenas
+  - slug: america-latina
+    nome: América Latina independente
+  - slug: brasil-colonia
+    nome: Brasil Colônia
+  - slug: brasil-imperio
+    nome: Brasil Império
+  - slug: brasil-republica
+    nome: Brasil República
+  - slug: africa
+    nome: História da África
+  - slug: cidadania
+    nome: Cidadania, direitos e desigualdades
+  - slug: filosofia
+    nome: Filosofia
+  - slug: sociologia
+    nome: Sociologia
+
+ingles:
+  - slug: compreensao
+    nome: Compreensão de texto
+  - slug: vocabulario
+    nome: Vocabulário em contexto
+  - slug: expressoes
+    nome: Expressões idiomáticas e phrasal verbs
+  - slug: gramatica
+    nome: Gramática e relações entre ideias
+  - slug: linguagem-figurada
+    nome: Linguagem figurada, humor e ironia
+
+matematica:
+  - slug: aritmetica
+    nome: Números e aritmética
+  - slug: razao-e-proporcao
+    nome: Razão, proporção e grandezas
+  - slug: porcentagem
+    nome: Porcentagem e matemática financeira
+  - slug: sequencias
+    nome: Sequências e progressões
+  - slug: algebra
+    nome: Expressões, equações e polinômios
+  - slug: funcoes
+    nome: Funções afim, quadrática e modular
+  - slug: exponencial-e-logaritmo
+    nome: Exponencial e logaritmo
+  - slug: trigonometria
+    nome: Trigonometria
+  - slug: matrizes-e-sistemas
+    nome: Matrizes e sistemas lineares
+  - slug: geometria-plana
+    nome: Geometria plana
+  - slug: geometria-espacial
+    nome: Geometria espacial
+  - slug: geometria-analitica
+    nome: Geometria analítica
+  - slug: combinatoria-e-probabilidade
+    nome: Contagem e probabilidade
+  - slug: estatistica
+    nome: Estatística
+
+portugues:
+  - slug: interpretacao
+    nome: Interpretação de texto
+  - slug: textos-multimodais
+    nome: Charges, tiras e anúncios
+  - slug: argumentacao
+    nome: Argumentação e lógica
+  - slug: coesao
+    nome: Coesão, coerência e conectivos
+  - slug: semantica
+    nome: Semântica e efeitos de sentido
+  - slug: figuras-de-linguagem
+    nome: Figuras de linguagem
+  - slug: gramatica
+    nome: Morfologia e sintaxe
+  - slug: variacao-linguistica
+    nome: Variação linguística
+  - slug: poesia
+    nome: Análise de poemas e canções
+  - slug: prosa
+    nome: Análise de contos, crônicas e romances
+  - slug: movimentos-literarios
+    nome: Movimentos literários
+  - slug: leituras-obrigatorias
+    nome: Obras de leitura obrigatória
+
+quimica:
+  - slug: atomistica
+    nome: Modelos atômicos e tabela periódica
+  - slug: ligacoes
+    nome: Ligações e forças intermoleculares
+  - slug: substancias-e-misturas
+    nome: Substâncias, misturas e separação
+  - slug: funcoes-inorganicas
+    nome: Ácidos, bases, sais e óxidos
+  - slug: estequiometria
+    nome: Estequiometria e gases
+  - slug: solucoes
+    nome: Soluções e propriedades coligativas
+  - slug: termoquimica
+    nome: Termoquímica e combustão
+  - slug: cinetica
+    nome: Cinética química
+  - slug: equilibrio
+    nome: Equilíbrio químico e pH
+  - slug: eletroquimica
+    nome: Eletroquímica e oxirredução
+  - slug: radioatividade
+    nome: Radioatividade
+  - slug: organica
+    nome: Química orgânica
+  - slug: ambiental
+    nome: Química ambiental
