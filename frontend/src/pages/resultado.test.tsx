@@ -60,6 +60,52 @@ describe('Resultado (RF-017 a RF-019)', () => {
     const linhas = within(disciplinas).getAllByRole('listitem').map((li) => li.textContent)
     expect(linhas[0]).toMatch(/Química.*0 de 1/)
     expect(linhas[1]).toMatch(/Física.*1 de 2/)
+    // Resultado gravado antes do CR-004: sem o detalhe por assunto (UT-024)
+    expect(screen.queryByText('Ver por assunto')).not.toBeInTheDocument()
+  })
+
+  it('"Ver por assunto" abre os assuntos de cada disciplina (UT-024, CR-004)', async () => {
+    const comAssuntos: HistoricoEntry = {
+      ...ENTRADA,
+      resultado: {
+        ...ENTRADA.resultado,
+        por_disciplina: [
+          {
+            disciplina: 'quimica',
+            total: 1,
+            acertos: 0,
+            percentual: 0,
+            assuntos: [{ assunto: 'organica', nome: 'Química orgânica', total: 1, acertos: 0, percentual: 0 }],
+          },
+          {
+            disciplina: 'fisica',
+            total: 2,
+            acertos: 1,
+            percentual: 50,
+            assuntos: [
+              { assunto: 'eletrodinamica', nome: 'Eletrodinâmica e circuitos', total: 1, acertos: 0, percentual: 0 },
+              { assunto: 'optica', nome: 'Óptica', total: 1, acertos: 1, percentual: 100 },
+            ],
+          },
+        ],
+      },
+    }
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([comAssuntos]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+
+    const resumos = await screen.findAllByText('Ver por assunto')
+    expect(resumos).toHaveLength(2)
+    expect(resumos[1]).toHaveTextContent('Ver por assunto em Física') // nome da disciplina para leitor de tela
+    expect(resumos[1].closest('details')).not.toHaveAttribute('open')
+
+    await userEvent.click(resumos[1])
+
+    expect(resumos[1].closest('details')).toHaveAttribute('open')
+    const fisica = screen.getByRole('list', { name: 'Desempenho por assunto em Física' })
+    expect(within(fisica).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+      'Eletrodinâmica e circuitos0 de 1 (0%)',
+      'Óptica1 de 1 (100%)',
+    ])
   })
 
   it('folha corrigida descreve cada questão, nos dois formatos (D5)', async () => {

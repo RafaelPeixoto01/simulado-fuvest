@@ -19,6 +19,11 @@ export function HistoricoPage() {
       <p className="mt-2 text-tinta-suave">
         O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros.
       </p>
+      {lista.length > 0 && (
+        <Link to="/desempenho" className={`${LINK} mt-3 inline-block`}>
+          Ver meu desempenho
+        </Link>
+      )}
 
       <div className="mt-6">
         {lista.length === 0 ? (

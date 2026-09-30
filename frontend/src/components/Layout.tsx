@@ -2,6 +2,9 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 
 import { Marca } from './Marca'
 
+const itemNav = ({ isActive }: { isActive: boolean }) =>
+  `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
+
 export function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -11,13 +14,11 @@ export function Layout() {
             <Marca className="h-2.5 w-auto" />
             Simulado Fuvest
           </Link>
-          <nav>
-            <NavLink
-              to="/historico"
-              className={({ isActive }) =>
-                `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
-              }
-            >
+          <nav className="flex gap-1">
+            <NavLink to="/desempenho" className={itemNav}>
+              Desempenho
+            </NavLink>
+            <NavLink to="/historico" className={itemNav}>
               Histórico
             </NavLink>
           </nav>

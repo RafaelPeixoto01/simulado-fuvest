@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import { Layout } from './components/Layout'
 import { ConfigurarPersonalizadoPage } from './pages/ConfigurarPersonalizadoPage'
+import { DesempenhoPage } from './pages/DesempenhoPage'
 import { EscolherAnoPage } from './pages/EscolherAnoPage'
 import { HistoricoPage } from './pages/HistoricoPage'
 import { HomePage } from './pages/HomePage'
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="treino" element={<TreinoPage />} />
         <Route path="resultado/:id" element={<ResultadoPage />} />
         <Route path="historico" element={<HistoricoPage />} />
+        <Route path="desempenho" element={<DesempenhoPage />} />
         <Route path="*" element={<NaoEncontradaPage />} />
       </Route>
     </Routes>

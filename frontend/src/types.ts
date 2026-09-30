@@ -46,10 +46,17 @@ export interface ProvaCatalogo {
   url_gabarito: string
 }
 
+export interface AssuntoCatalogo {
+  slug: string
+  nome: string
+  total_questoes: number
+}
+
 export interface DisciplinaCatalogo {
   slug: Disciplina
   nome: string
   total_questoes: number
+  assuntos: AssuntoCatalogo[] // ordem da taxonomia (CR-004)
 }
 
 export interface Catalogo {
@@ -109,6 +116,16 @@ export interface ItemCorrigido {
   anulada: boolean
   acertou: boolean
   disciplina: Disciplina
+  /** Slug do assunto (CR-004). Ausente nos resultados gravados antes dele. */
+  assunto?: string | null
+}
+
+export interface DesempenhoAssunto {
+  assunto: string
+  nome: string
+  total: number
+  acertos: number
+  percentual: number
 }
 
 export interface DesempenhoDisciplina {
@@ -116,6 +133,8 @@ export interface DesempenhoDisciplina {
   total: number
   acertos: number
   percentual: number
+  /** Do pior para o melhor (CR-004). Ausente nos resultados gravados antes dele. */
+  assuntos?: DesempenhoAssunto[]
 }
 
 export interface Correcao {
