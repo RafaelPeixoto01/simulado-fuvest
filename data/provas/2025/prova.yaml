@@ -1262,7 +1262,8 @@ questoes:
   - texto: |-
       2030, adotada pela ONU em 2015.
       No cenário esportivo, é possível identificar alguns avanços em relação ao alcance dessa meta, conforme reconheceu a jogadora brasileira de futebol Marta:
-      “Quando as atletas do sexo feminino têm a chance de se destacar, os resultados são enormes. E para isso, a Copa do Mundo Feminina de 2019 foi realmente uma virada no jogo. A audiência global do torneio ultrapassou 1 bilhão de pessoas.” Disponível em https://brasil.un.org/.
+      “Quando as atletas do sexo feminino têm a chance de se destacar, os resultados são enormes. E para isso, a Copa do Mundo Feminina de 2019 foi realmente uma virada no jogo. A audiência global do torneio ultrapassou 1 bilhão de pessoas.”
+      Disponível em https://brasil.un.org/.
       A Olimpíada de Paris 2024, por sua vez, estabeleceu, pela primeira vez na história, a paridade de gênero em todos os esportes olímpicos, com 5.250 vagas destinadas a cada sexo. Apesar das conquistas, o caminho rumo à igualdade de gênero continua.
       Com base no exposto, é correto afirmar:
   alternativas:
@@ -1526,13 +1527,9 @@ questoes:
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Neste bioma, a vegetação nativa apresenta-se intercalada por extensas monoculturas de soja
-      e de arroz. Em alguns lugares, a vegetação campestre original tem sido substituída por vegetação
-      florestal, formada por árvores de eucaliptos. Em vários locais, observa-se a expansão de grandes
-      areais, em que os solos arenosos ficam expostos e suscetíveis a uma intensa erosão. Este é o bioma
-      brasileiro menos protegido por Unidades de Conservação, embora esteja entre aqueles que mais perderam
-      vegetação nativa nas últimas três décadas. A descrição da paisagem impactada por ações humanas refere-se
-      ao bioma
+  - texto: |-
+      Neste bioma, a vegetação nativa apresenta-se intercalada por extensas monoculturas de soja e de arroz. Em alguns lugares, a vegetação campestre original tem sido substituída por vegetação florestal, formada por árvores de eucaliptos. Em vários locais, observa-se a expansão de grandes areais, em que os solos arenosos ficam expostos e suscetíveis a uma intensa erosão. Este é o bioma brasileiro menos protegido por Unidades de Conservação, embora esteja entre aqueles que mais perderam vegetação nativa nas últimas três décadas.
+      A descrição da paisagem impactada por ações humanas refere-se ao bioma
   alternativas:
     A:
       texto: Caatinga.
@@ -2581,7 +2578,8 @@ questoes:
   enunciado:
   - texto: |-
       Tecidos de Ijebu
-      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.” OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África. São Paulo: Penguin, 2012. p.361.
+      “Os ijebus vestem-se quase sempre com panos produzidos por eles próprios. São fazendas de algodão, matéria-prima que obtêm localmente. Nas famílias, as tarefas de colher algodão, fiá-lo, tecê-lo e tingi-lo estão costumeiramente a cargo das mulheres, e sabe-se ser muito grande a quantidade de tecidos manufaturados em Ijebu e dali exportados, não apenas para os países vizinhos, mas até mesmo para o Brasil, cujos navios vêm buscar em Lagos essa mercadoria tão apreciada pela gente de origem africana transplantada para aquela terra distante. As cores mais comuns, depois da branca e da azul, são a amarela, a vermelha, a carmesim e a verde. Alguns panos são de uma só cor, outros são multicoloridos.”
+      OSIFEKUNDE. Notícia sobre o país e o povo dos Ijebus. In: COSTA E SILVA, Alberto. Imagens da África. São Paulo: Penguin, 2012. p.361.
       O texto é parte de um relato das memórias de um ex-escravizado natural de Ijebu, na atual Nigéria, trazido ao Brasil no início do século XIX. O excerto faz menção
   alternativas:
     A:
