@@ -170,7 +170,7 @@ Pular com justificativa explícita apenas se a mudança for exclusivamente: UI s
 ### Push e Deploy
 
 - Antes de push, verifique se o build passa: `cd frontend && npx tsc --noEmit -p tsconfig.app.json` e `npm run lint`, e os testes do backend
-- CI (GitHub Actions, `.github/workflows/ci.yml`) roda pytest + tsc + eslint + vitest em cada push em `master` e em PRs — verifique que ficou verde após o push (`gh run watch`)
+- CI (GitHub Actions, `.github/workflows/ci.yml`) roda em push de **qualquer branch**: pytest + ruff + migrations num Postgres 17 + tsc + eslint + vitest — verifique que ficou verde após o push (`gh run watch`). Não há Postgres/Docker local: o CI é onde as migrations são testadas no Postgres
 - Commits devem referenciar o CR relevante (ex: `feat: CR-004 - descricao`)
 - Após implementação, atualize TODOS os documentos relacionados antes de push
 - Faça merge da branch do CR em `master` e então push: `git push origin master`

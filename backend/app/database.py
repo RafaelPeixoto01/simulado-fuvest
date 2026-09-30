@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 
-from sqlalchemy import Engine, create_engine
+from sqlalchemy import Engine, create_engine, event
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
@@ -24,8 +24,17 @@ def criar_engine(url: str) -> Engine:
         if url in ("sqlite://", "sqlite:///:memory:"):
             # Banco em memoria compartilhado entre conexoes (testes)
             opcoes["poolclass"] = StaticPool
-        return create_engine(url, **opcoes)
+        engine = create_engine(url, **opcoes)
+        event.listen(engine, "connect", _ligar_foreign_keys_sqlite)
+        return engine
     return create_engine(url, pool_pre_ping=True)
+
+
+def _ligar_foreign_keys_sqlite(conexao_dbapi, _registro) -> None:
+    # Sem este PRAGMA o SQLite ignora ON DELETE CASCADE (paridade com o Postgres)
+    cursor = conexao_dbapi.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
 def criar_fabrica_sessao(engine: Engine) -> sessionmaker[Session]:

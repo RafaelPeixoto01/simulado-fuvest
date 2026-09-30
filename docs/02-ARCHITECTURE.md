@@ -29,7 +29,7 @@
 | Driver Postgres | psycopg | 3.3 | Driver moderno do SQLAlchemy 2 |
 | Testes | pytest + httpx2 (BE), Vitest + jsdom (FE) | 9.1 / 5.0 | Mesma stack; `httpx2` é o cliente que o `starlette.testclient` 1.7 exige (com `httpx` emite deprecação) |
 | Lint | ruff (BE), ESLint + typescript-eslint (FE) | 0.16 / 10.11 + 8.71 | Erros de lint bloqueiam commit e CI |
-| CI/CD | GitHub Actions | — | pytest + ruff + validação dos pacotes + tsc + eslint + vitest |
+| CI/CD | GitHub Actions | — | Em push de qualquer branch: pytest + ruff + migrations num Postgres 17 (service container) + validação dos pacotes + tsc + eslint + vitest |
 | Deploy | Railway (container Docker) | Node 24 / Python 3.12 | Serviço único + Postgres add-on (ADR-001) |
 
 ---

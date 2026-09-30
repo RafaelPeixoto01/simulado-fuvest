@@ -3,17 +3,30 @@
 name: CI
 
 on:
-  push:
-    branches: [master]
+  push:            # todas as branches: feat/* recebe feedback antes do merge em master
   pull_request:
 
 jobs:
   backend:
-    name: Backend (pytest + ruff)
+    name: Backend (pytest + ruff + migrations no Postgres)
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: backend
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,6 +43,13 @@ jobs:
         run: python -m ruff check .
       - name: Run tests
         run: python -m pytest tests/ -v
+      - name: Migrations no Postgres (upgrade -> downgrade -> upgrade)
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/ci
+        run: |
+          python -m alembic upgrade head
+          python -m alembic downgrade base
+          python -m alembic upgrade head
       - name: pip-audit (informativo — nao bloqueia)
         run: python -m pip_audit
         continue-on-error: true
