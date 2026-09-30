@@ -288,10 +288,11 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
-- Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
+- **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão. Próximos CRs sugeridos na revisão: "Contraste e tokens" (P2.1–P2.5) e "Resultado, figura e início" (P1.1 da revisão, P1.6, P1.7, P1.9, P2.6)
 
 ### Última Tarefa Implementada
-- MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Pendente do curador: T-011/T-029 (curar e publicar as provas, numa branch `conteudo/prova-AAAA`). Depois: T-030 (revisão final)
+- CR-001 (2026-09-30): resolução em modo foco, barra inferior, folha e pausa
+- MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Provas 2025, 2024 e 2023 curadas e publicadas; pendentes do curador (T-011/T-029): 2022 e 2020, numa branch `conteudo/prova-AAAA`. Depois: T-030 (revisão final)
 
 ---
 
@@ -334,6 +335,8 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 
 | Problema | Causa | Solução |
 |----------|-------|---------|
+| Classe Tailwind acrescentada a uma constante de estilo não tem efeito (ex.: `${BOTAO} bg-alerta-claro` continua `bg-papel`) | No Tailwind v4, entre utilitários da mesma propriedade e da mesma variante vale a ordem do CSS gerado, não a ordem na lista de classes | Constantes só com a forma (sem cor/padding) e a variação escolhida por ternário (`estilos.ts`: `BOTAO_BARRA_FORMA` + `BARRA_NEUTRO`/`BARRA_ALERTA`); nunca empilhar duas classes da mesma propriedade (CR-001) |
+| Diálogo devolve o foco ao primeiro botão a cada segundo na resolução | O `useAgora` re-renderiza a página a cada 1 s; efeito de diálogo com o callback nas dependências roda de novo e refaz o foco | Guardar o callback numa ref e rodar o efeito só ao abrir (`ConfirmDialog`, `PainelFolha` — CR-001) |
 | Arquivos `.js` duplicando os `.tsx` em `frontend/src/` | `tsc` rodado sem `--noEmit` emite JS ao lado dos fontes | Ignorados via `.gitignore` (`frontend/src/**/*.js`). **Sempre editar o `.tsx`/`.ts`**; os `.js` podem ser deletados com segurança |
 
 ### Ambiente Windows
@@ -351,4 +354,5 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | Vitest: "failed to find the current suite" só no hook | Com o cwd em `d:\...` (drive minúsculo) o Vitest carrega o próprio módulo duas vezes | O `check-quality.js` normaliza a letra do drive para maiúscula; ao rodar à mão via `cmd`, usar `D:\` |
 | Regex com `\b` virou backspace (`\x08`) ao editar via script Python em heredoc | Em string Python comum, `\b` é o caractere de controle backspace; o arquivo parecia certo mas o regex não casava | Editar regex com a ferramenta Edit ou com string raw (`r'...'`); conferir com `repr()` quando um Edit "não acha" o texto |
 | `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
+| Arquivo editado por script Python fica com CRLF (Git avisa "CRLF will be replaced by LF") | `Path.write_text` no Windows traduz `\n` para `\r\n` | Gravar com `write_text(..., newline="\n")` (ou `write_bytes`) |
 | Saída da CLI com `�` no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | Só acontece com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |

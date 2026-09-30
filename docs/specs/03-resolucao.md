@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.0
-**Data:** 2026-09-29
+**Versão:** 1.1
+**Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** —
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa)
 
 ---
 
@@ -35,9 +35,11 @@ SPA React: tela inicial com catálogo, configuração dos modos, tela de resolu�
 | Criar | `frontend/src/contexts/SimuladoContext.tsx` | Reducer + persistência a cada ação |
 | Criar | `frontend/src/utils/tempo.ts` | `restanteMs`, `decorridoMs`, `formatarTempo` |
 | Criar | `frontend/src/hooks/useCatalogo.ts`, `useQuestoes.ts`, `useCronometro.ts` | TanStack Query + relógio |
-| Criar | `frontend/src/components/` | `Layout`, `Blocos`, `Figura`, `Alternativas`, `QuestaoView`, `GradeQuestoes`, `Cronometro`, `ConfirmDialog`, `AvisoStorage` |
+| Criar | `frontend/src/components/` | `Layout`, `Blocos`, `Figura`, `Alternativas`, `QuestaoView`, `FolhaRespostas` (planejado como `GradeQuestoes`), `Cronometro`, `ConfirmDialog`, `AvisoStorage` |
 | Criar | `frontend/src/pages/` | `HomePage`, `ConfigurarPersonalizadoPage`, `EscolherAnoPage`, `ResolucaoPage`, `TreinoPage` |
 | Criar | `frontend/src/**/*.test.ts(x)` | Vitest |
+| Criar (CR-001) | `frontend/src/components/resolucao/PainelFolha.tsx`, `TelaPausa.tsx` | Folha do celular como diálogo; tela de pausa |
+| Criar (CR-001) | `frontend/src/components/Icone.tsx` | Ícones de traço comuns (`Icone`, `IconePausa`) |
 
 ### 2.2 Interfaces / Types
 
@@ -83,6 +85,8 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 ```
 `useCronometro` só força re-render a cada 1 s (`setInterval`); o valor vem sempre da fórmula. Fechar a aba não pausa: ao reabrir, a fórmula já considera o tempo decorrido.
 
+**Pausa (Personalizado, CR-001 D3):** com `pausadoEm ≠ null`, a questão, a barra inferior e a folha dão lugar à `TelaPausa` ("Simulado pausado" + Retomar), o botão "Folha" do topo some e os atalhos ficam desligados. O cronômetro mostra "Pausado". Os avisos ("Corrigindo…", erro de correção) continuam visíveis. Um simulado salvo pausado reabre direto na `TelaPausa`.
+
 **Eventos do cronômetro:**
 - `restanteMs ≤ 15 min` (primeira vez) → banner "Faltam 15 minutos" (RF-015)
 - `restanteMs = 0` → finalização automática (RN-010), sem diálogo de confirmação
@@ -95,7 +99,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 **Persistência:** o Context grava o estado no storage após cada ação; `DESCARTAR` remove a chave. Na carga do app, lê a chave; se `versao` for desconhecida ou o JSON estiver corrompido, descarta. Sem storage disponível (bloqueado/privado): funciona em memória e mostra `AvisoStorage` ("Seu navegador bloqueou o armazenamento local: o simulado não será salvo se você recarregar a página").
 
-**Finalizar (RF-016):** botão "Finalizar" → `ConfirmDialog` com "Você deixou N questões em branco" → correção (fluxo em `specs/04-correcao-resultado.md`). Se a correção falhar, o simulado **continua** em andamento e aparece "Não foi possível corrigir agora. Tentar novamente" (nenhuma resposta se perde).
+**Finalizar (RF-016, CR-001 D1):** "Finalizar simulado" no rodapé da folha (cartão no desktop, painel no celular) ou "Finalizar" no lugar de "Próxima" na última questão → `ConfirmDialog` "Finalizar o simulado?" com "Você deixou N questões em branco" ou "Você respondeu todas as questões", seguido de "e marcou M para revisar" quando houver marcadas; botões "Continuar resolvendo" e "Finalizar e ver o resultado" → correção (fluxo em `specs/04-correcao-resultado.md`). Não há botão "Finalizar" na barra do topo. Se a correção falhar, o simulado **continua** em andamento e aparece "Não foi possível corrigir agora. Tentar novamente" (nenhuma resposta se perde).
 
 **Treino (RF-012):** estado só da página (não persiste). Filtros (disciplinas, anos) → `POST /api/simulados {modo:'treino', excluir: vistas}` busca lotes de 20; quando faltarem 3 questões no lote, busca o próximo. Ao escolher uma alternativa → `POST /api/correcoes` com 1 item → mostra certo/errado + a alternativa correta, e as alternativas ficam travadas. "Próxima" avança. Placar "acertos / respondidas". Lote vazio → "Você já viu todas as questões deste filtro" + "Recomeçar" (limpa `excluir`).
 
@@ -106,7 +110,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/` | `HomePage` | Catálogo + 4 modos + "Retomar simulado" se houver um em andamento |
 | `/novo/personalizado` | `ConfigurarPersonalizadoPage` | Disciplinas (checkbox, mín. 1), anos (dois selects com os anos do catálogo), quantidade (1–90, default 20), cronômetro (default ligado; mostra o tempo calculado) |
 | `/novo/ano` | `EscolherAnoPage` | Lista de anos publicados; cada item com o link do PDF oficial (RN-013) |
-| `/simulado` | `ResolucaoPage` | Sem simulado em andamento → redireciona para `/` |
+| `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
 | `/treino` | `TreinoPage` | Filtros + sessão |
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
 | `*` | 404 simples | Link para `/` |
@@ -150,24 +154,44 @@ Texto renderizado como texto React (escapado) com `whitespace-pre-line`; **nunca
 
 Monta: cabeçalho "Questão i de n · Disciplina · FUVEST AAAA, nº NN" (RN-013) → texto-base (se houver, em caixa destacada) → enunciado → alternativas. Mostra o botão "Reportar problema" (`specs/05-reportes.md`).
 
-### Componente: GradeQuestoes
+### Estrutura da ResolucaoPage (CR-001)
+
+- **Barra do topo** (fixa; 60 px no celular, 64 px no desktop): no desktop, a descrição do simulado à esquerda e o `Cronometro` à direita; no celular, o `Cronometro` e o botão "Folha r/n", que abre o `PainelFolha`.
+- **Barra inferior** (fixa no rodapé da coluna da questão): Anterior | Revisar | Próxima. "Próxima" é o único botão azul e ocupa o resto da linha no celular; na última questão vira "Finalizar" (rótulo acessível "Finalizar o simulado"). "Revisar" usa `aria-pressed` e mostra "Marcada" em laranja quando marcada. Botões de 48 px no celular e 44 px no desktop; abaixo de 380 px, "Anterior" fica só com o ícone. No desktop, a linha de atalhos aparece sob a barra.
+- **Trocar de questão** (botões, atalhos ← → ou folha): `window.scrollTo({top: 0})` e foco no título "Questão N de M" (`tabIndex=-1`, `focus({preventScroll: true})`), pelo `refTitulo` da `QuestaoView`.
+- **Desktop (≥ 1024 px):** coluna da questão e cartão da folha (408 px) fixo 24 px abaixo da barra, com título, `FolhaRespostas` no formato `bolhas` e "Finalizar simulado". A folha de 90 questões cabe inteira em 1440 × 900; a rolagem própria (`max-h`) só entra como reserva em telas baixas.
+
+### Componente: FolhaRespostas
 
 | Prop | Tipo | Obrigatório | Default | Descrição |
 |------|------|-------------|---------|-----------|
-| total | `number` | Sim | — | |
-| estado | `(i) => 'respondida' \| 'branco' \| 'marcada'` | Sim | — | Marcada tem prioridade visual (com indicador de respondida) |
-| atual | `number` | Sim | — | |
+| questaoIds | `string[]` | Sim | — | Ordem do simulado |
+| respostas | `Record<string, Letra>` | Sim | — | |
+| marcadas | `string[]` | Sim | — | "Para revisar" |
+| atual | `number` | Sim | — | `aria-current="step"` |
 | onIr | `(i) => void` | Sim | — | |
+| formato | `'bolhas'` ou `'grade'` | Sim | — | Desktop / painel do celular (D2) |
 
-Desktop (≥ 1024 px): painel lateral fixo. Mobile: botão "Questões (x/n)" abre uma gaveta. Legenda de cores + contagens.
+Resumo "r respondida(s) · b em branco · m para revisar" e legenda (respondida, em branco, para revisar). Cada questão é um botão com o rótulo "Questão N: respondida X" ou "Questão N: em branco", seguido de ", marcada para revisar" quando for o caso.
+
+- **`bolhas`**: 3 colunas acima de 40 questões, 2 acima de 15 e 1 até 15, preenchidas de cima para baixo; cabeçalho A–E em cada coluna; linhas de 20 px com o número, cinco bolinhas sem letra (a marcada preenchida a caneta) e o ponto laranja de revisar.
+- **`grade`**: 5 colunas de botões de 48 px com o número e uma bolinha com a letra marcada; ponto laranja no canto = revisar; a questão atual rola para a vista ao abrir.
+
+### Componente: PainelFolha
+
+Painel inferior do celular (`role="dialog"`, `aria-modal`, título "Folha de respostas"). Ao abrir, põe o foco no botão "Fechar folha" e `overflow: hidden` no `<html>`. Tab e Shift+Tab circulam dentro do painel. Esc, o botão Fechar e o clique que começa e termina no fundo fecham. Ao fechar, o foco volta ao botão "Folha", ou ao título se a questão mudou. A grade rola dentro do painel (`overscroll-contain`), e o rodapé traz "Finalizar simulado".
+
+### Componente: TelaPausa
+
+Ocupa o lugar do conteúdo enquanto o simulado está pausado (D3): ícone, título "Simulado pausado", o texto "O cronômetro está parado e a questão fica oculta até você retomar." e o botão Retomar.
 
 ### Componente: Cronometro
 
-Mostra `hh:mm:ss` restante; botão "Ocultar/Mostrar" (continua contando); "Pausar/Retomar" só quando `pausavel`; estado de aviso (≤ 15 min) com cor de alerta + `aria-live="polite"`.
+Mostra `hh:mm:ss` restante (ou o decorrido, sem limite; o prefixo "Tempo:" some abaixo de 640 px), "Oculto" quando escondido e "Pausado" quando pausado. Botão "Ocultar/Mostrar" (continua contando) e "Pausar/Retomar" só quando `pausavel`; no celular, os dois são só ícone, com 44 px. Estado de aviso (≤ 15 min) em cor de alerta.
 
 ### Atalhos (ResolucaoPage e TreinoPage)
 
-`A`–`E` marcam a alternativa; `←`/`→` navegam; `M` alterna "revisar". Ignorados quando o foco está em campo de texto ou há diálogo aberto.
+`A`–`E` marcam a alternativa; `←`/`→` navegam; `M` alterna "revisar". Ignorados quando o foco está em campo de texto, há diálogo aberto ou o simulado está pausado.
 
 **Estados comuns das páginas:** Loading (skeleton), Error ("Não foi possível carregar. Tentar novamente"), Empty (catálogo vazio: "Ainda não há provas publicadas").
 
@@ -202,13 +226,16 @@ sequenceDiagram
 |---|---------|------------------------|
 | 1 | Recarregar no meio da prova | Mesma questão, respostas e marcações; tempo continua descontado |
 | 2 | Fechar a aba por 1 h na Prova completa | Ao voltar, o restante já desconta 1 h |
-| 3 | Personalizado pausado e aba fechada | Ao voltar, continua pausado; a pausa não consome tempo |
+| 3 | Personalizado pausado e aba fechada | Ao voltar, continua pausado (direto na `TelaPausa`); a pausa não consome tempo |
 | 4 | Storage bloqueado | Funciona em memória + aviso |
 | 5 | JSON do storage corrompido ou de outra versão | Descartado sem quebrar o app |
 | 6 | Questão do simulado salvo removida da base | `nao_encontradas` → aviso; a questão é tratada como em branco e mostrada como "removida da base" |
 | 7 | Duas abas com o mesmo simulado | Não suportado; a última gravação vence (documentado) |
 | 8 | Tempo zera com um diálogo aberto | Fecha o diálogo e finaliza |
 | 9 | Correção falha na finalização automática | Mantém o simulado; banner de erro com "Tentar novamente" |
+| 10 | Tempo zera com a folha aberta no celular | Fecha o painel (e destrava a página) e finaliza (CR-001) |
+| 11 | Pausar durante a correção | Os avisos "Corrigindo…" e de erro continuam visíveis na `TelaPausa` (CR-001) |
+| 12 | Arrastar da grade do painel até o fundo | Não fecha o painel (CR-001) |
 
 ---
 
@@ -224,11 +251,18 @@ sequenceDiagram
 | UT-006 | JSON corrompido/versão desconhecida | `simuladoStorage` | Retorna null e limpa |
 | UT-007 | Alternativas: clique, desmarcar, modo correção desabilitado | componente | Callbacks e estados corretos |
 | UT-008 | Blocos com texto contendo `<script>` | componente | Renderizado como texto literal |
+| UT-009 | `FolhaRespostas`: colunas (3/2/1), cabeçalho A–E, resumo, grade de 48 px com a letra marcada | componente | Estrutura e rótulos corretos (CR-001) |
+| UT-010 | Trocar de questão: `scrollTo({top: 0})` e foco no título | `ResolucaoPage` | Título focado (CR-001) |
+| UT-011 | `PainelFolha`: foco, Tab preso, Esc, clique e arrasto no fundo, trava da rolagem | `ResolucaoPage` | Comportamento de diálogo (CR-001) |
+| UT-012 | Pausa: questão oculta, atalhos desligados, folha escondida, reabrir pausado | `ResolucaoPage` | `TelaPausa` (CR-001) |
 | FT-001 | Home → Prova completa → responder 3 → recarregar | E2E (Playwright MCP) | Respostas e tempo preservados |
 | FT-002 | Personalizado com filtros → grade → finalizar | E2E | Resultado exibido |
 | FT-003 | Personalizado insuficiente | E2E | Mensagem + "Gerar com N" |
 | FT-004 | Treino: responder → feedback → próxima | E2E | Correta destacada; placar atualiza |
 | FT-005 | Mobile 360 px: grade em gaveta, figura com zoom | E2E | Sem rolagem horizontal |
+| FT-006 | 320 e 390 px: barra inferior numa linha, painel da folha, última questão → Finalizar | E2E (CR-001) | Sem quebra nem rolagem horizontal |
+| FT-007 | 1440 × 900: folha de 90 questões inteira, sem rolagem própria, nunca sob a barra | E2E (CR-001) | Cartão visível ao rolar até o fim |
+| FT-008 | Personalizado: pausar, recarregar, retomar | E2E (CR-001) | Questão oculta; tempo não descontado |
 
 ---
 

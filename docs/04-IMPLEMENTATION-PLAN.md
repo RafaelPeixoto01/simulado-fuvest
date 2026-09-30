@@ -5,7 +5,7 @@
 **PRD Ref:** 01-PRD v1.0
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0
 **Spec Ref:** 03-SPEC v1.0 (specs 01–05)
-**CR Ref:** —
+**CR Ref:** CR-001
 
 ---
 
@@ -19,6 +19,7 @@
 | 4 | Frontend | T-018 a T-025 | Concluído |
 | 5 | Deploy | T-026 a T-027 | Concluído (pendente: toggle "Wait for CI", curador) |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Em andamento (T-028 concluída) |
+| CR-001 | Resolução: navegação, folha de respostas e pausa (pós-MVP, [CR](changes/CR-001-resolucao-navegacao.md)) | CR-T-01 a CR-T-10 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 

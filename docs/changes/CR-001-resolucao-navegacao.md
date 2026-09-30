@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-09-30  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -114,7 +114,9 @@ A resolução segue o protótipo:
 | Criar     | `frontend/src/components/resolucao/TelaPausa.tsx` | Tela "Simulado pausado" com Retomar (D3) |
 | Modificar | `frontend/src/components/resolucao/Cronometro.tsx` | Botões de ícone de 44 px no celular, "Pausado" no mostrador, sem "(pausado)" |
 | Modificar | `frontend/src/components/questao/QuestaoView.tsx` | Prop opcional `refTitulo` (título focável com `tabIndex=-1`) |
-| Modificar | `frontend/src/components/estilos.ts` | Estilos dos botões das barras |
+| Modificar | `frontend/src/components/estilos.ts` | Estilos dos botões das barras (forma e cor separadas) |
+| Criar     | `frontend/src/components/Icone.tsx` | Ícones de traço comuns (`Icone`, `IconePausa`) |
+| Modificar | `frontend/src/components/ConfirmDialog.tsx` | Callback de cancelar numa ref: o foco não volta a "Cancelar" a cada segundo do relógio |
 | Modificar | `frontend/src/test/setup.ts` | Stub de `window.scrollTo` (não existe no jsdom) |
 | Modificar | `frontend/src/pages/resolucao.test.tsx` | Rótulos novos e testes de foco, rolagem, painel, pausa e última questão |
 | Criar     | `frontend/src/components/resolucao/FolhaRespostas.test.tsx` | Formatos, colunas, resumo, estado atual e revisar |
@@ -146,21 +148,58 @@ A resolução segue o protótipo:
 
 ## 8. Critérios de Aceite
 
-- [ ] P1.1: ao trocar de questão (botões, atalhos ← → ou folha), a janela volta ao topo e o foco vai para o título "Questão N de M"
-- [ ] P1.2: em 320 e 390 px, Anterior | Revisar | Próxima ficam numa única linha, fixa no rodapé, sem quebra
-- [ ] P1.3: "Próxima" é o botão azul; "Finalizar" não está mais na barra do topo; na última questão "Próxima" vira "Finalizar" e abre a confirmação (D1)
-- [ ] P1.4: em 1440 × 900, a folha de 90 questões aparece inteira em 3 colunas, sem rolagem própria, e continua visível abaixo da barra ao rolar até o fim de uma questão curta
-- [ ] P1.5: no celular, a folha é um diálogo (`role="dialog"`, `aria-modal`): o foco entra no painel, Tab fica preso nele, Esc e o clique fora fecham, a página de trás não rola e os botões das questões têm 48 px (D2)
-- [ ] P1.8: com o Personalizado pausado, a questão some atrás da tela "Simulado pausado", as alternativas e os atalhos não respondem, e Retomar volta à questão; um simulado pausado reaberto cai direto nessa tela (D3)
-- [ ] D5: `/simulado` abre sem o cabeçalho e o rodapé do site; as demais rotas continuam com eles
-- [ ] "Finalizar simulado" no rodapé da folha (painel e cartão) abre a confirmação, que cita em branco e marcadas para revisar
-- [ ] Sem rolagem horizontal em 320 px e sem erros novos no console
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge (Playwright em 1440 × 900, 390 e 320 px), com o resultado registrado aqui
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança: N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
-- [ ] Documentos afetados foram atualizados
+- [x] P1.1: ao trocar de questão (botões, atalhos ← → ou folha), a janela volta ao topo e o foco vai para o título "Questão N de M"
+- [x] P1.2: em 320 e 390 px, Anterior | Revisar | Próxima ficam numa única linha, fixa no rodapé, sem quebra
+- [x] P1.3: "Próxima" é o botão azul; "Finalizar" não está mais na barra do topo; na última questão "Próxima" vira "Finalizar" e abre a confirmação (D1)
+- [x] P1.4: em 1440 × 900, a folha de 90 questões aparece inteira em 3 colunas, sem rolagem própria, e continua visível abaixo da barra ao rolar até o fim de uma questão curta
+- [x] P1.5: no celular, a folha é um diálogo (`role="dialog"`, `aria-modal`): o foco entra no painel, Tab fica preso nele, Esc e o clique fora fecham, a página de trás não rola e os botões das questões têm 48 px (D2)
+- [x] P1.8: com o Personalizado pausado, a questão some atrás da tela "Simulado pausado", as alternativas e os atalhos não respondem, e Retomar volta à questão; um simulado pausado reaberto cai direto nessa tela (D3)
+- [x] D5: `/simulado` abre sem o cabeçalho e o rodapé do site; as demais rotas continuam com eles
+- [x] "Finalizar simulado" no rodapé da folha (painel e cartão) abre a confirmação, que cita em branco e marcadas para revisar
+- [x] Sem rolagem horizontal em 320 px e sem erros novos no console
+- [x] Testes existentes continuam passando (regressão): Vitest 104/104, `tsc --noEmit`, ESLint, e o hook de commit com pytest e ruff
+- [x] Novos testes cobrem a mudança: `FolhaRespostas.test.tsx` (4) e 14 casos novos (mais 4 reescritos) em `resolucao.test.tsx` (foco e rolagem, modo foco, última questão, "Revisar"/"Marcada", painel da folha, pausa, tempo esgotado com o painel aberto, arrasto até o fundo)
+- [x] Fluxo afetado exercitado em runtime antes do merge (Playwright em 1440 × 900, 390 e 320 px), com o resultado registrado abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados (registro abaixo)
+- [x] ~~Revisão de segurança~~ N/A — só UI, sem endpoint novo ou alterado, sem auth/cookies e sem dependência nova
+- [x] Documentos afetados foram atualizados (PRD v1.1, Arquitetura v1.1, Spec índice v1.1 e spec 03 v1.1, Plano, CLAUDE.md, INDEX)
+
+### 8.1 Validação em runtime (Playwright, 2026-09-30)
+
+Backend com `local.db` (prova 2025 real) + Vite; simulados iniciados pelo fluxo real ("Prova de um ano" e "Personalizado").
+
+| Viewport | Verificação | Resultado |
+|----------|-------------|-----------|
+| 390 × 844 | Sem cabeçalho e rodapé do site; barra inferior em y = 773–844 com Anterior 104 × 48, Revisar 101 × 48 e Próxima 130 × 48 numa linha | ✅ |
+| 390 × 844 | Rolar 2.732 px na questão 1 e tocar em Próxima: `scrollY` = 0, título "Questão 2 de 90" em y = 81 e com foco | ✅ |
+| 390 × 844 | Painel da folha: foco em "Fechar folha", `overflow: hidden` no `<html>`, 90 botões de 62 × 48, questão atual marcada, Shift+Tab/Tab circulam entre Fechar e Finalizar, Esc fecha e devolve o foco a "Folha 1/90"; roda do mouse no fundo não rola a página (0 px) e na grade rola só a grade (300 px) | ✅ |
+| 390 × 844 | Escolher a questão 45 no painel: fecha e foca "Questão 45 de 90" com `scrollY` = 0 | ✅ |
+| 320 × 640 | Sem rolagem horizontal; "Anterior" só com ícone (42 × 48), Revisar e Próxima na mesma linha; topo do Personalizado (cronômetro + ocultar + pausar + "Folha 1/20") cabe até x = 293 | ✅ |
+| 320 × 640 | Questão 90: "Próxima" vira "Finalizar"; confirmação "Você deixou 89 questões em branco e marcou 1 para revisar."; foco em "Finalizar e ver o resultado" continua lá 2,5 s depois (o relógio não o devolve a "Cancelar") | ✅ |
+| 1440 × 900 | Cartão da folha com 784 px, 3 colunas × 30 linhas, sem rolagem própria; rolado até o fim da questão mais curta (4), o cartão fica em y = 88, abaixo da barra (y = 65) | ✅ |
+| 1440 × 900 | Personalizado pausado: sem enunciado, alternativas, barra inferior nem folha; `b` e → não mudam nada; recarregar mantém a tela de pausa; Retomar volta com 01:06:40 (a pausa não consumiu tempo) | ✅ |
+| 390 × 844 | "Marcada" com fundo #fff4e0 e borda e texto #9a5b00; pausado, o botão "Folha" some do topo (revalidado depois da revisão de código) | ✅ |
+| 390 × 844 | `/`, `/historico`, `/treino` e `/novo/ano` continuam com cabeçalho e rodapé | ✅ |
+| — | Console: sem erros nem avisos da aplicação (só a mensagem informativa do React DevTools; dois erros transitórios de HMR do Vite durante as edições) | ✅ |
+
+Observação: no primeiro início do simulado, o proxy do Vite devolveu `ECONNRESET` para `POST /api/simulados` (o backend respondeu 200) e a página ficou esperando. É instabilidade do ambiente de desenvolvimento, sem relação com o CR. O fluxo foi repetido com sucesso, também com um simulado expirado salvo ("Descartar e começar").
+
+### 8.2 Revisão de código pré-merge (`/code-review`, nível high)
+
+10 findings: 9 corrigidos e 1 justificado.
+
+| # | Finding | Tratamento |
+|---|---------|------------|
+| 1 | "Marcada" não mostrava as cores de alerta: no Tailwind v4, as classes da constante venciam as acrescentadas (vale a ordem do CSS gerado) | Corrigido: `BOTAO_BARRA_FORMA` sem cor nem padding, e a cor escolhida por ternário (`BARRA_NEUTRO`/`BARRA_ALERTA`). O mesmo conflito (`sm:px-*`) foi removido do `Cronometro`. Teste de classe + checagem de cor no navegador |
+| 2 | Pausado, o botão "Folha" do celular continuava ativo | Corrigido: some durante a pausa, como a folha do desktop; teste novo |
+| 3 | A pausa escondia "Corrigindo…" e o erro de correção | Corrigido: os avisos ficam acima da `TelaPausa` |
+| 4 | Tempo esgotado com o painel aberto deixava o painel sobre a correção | Corrigido: o painel fecha junto com a confirmação; teste novo |
+| 5 | Arrastar da grade até o fundo fechava o painel | Corrigido: fecha só o clique que começa e termina no fundo; teste novo |
+| 6 | Sem questões em branco, a confirmação omitia as marcadas | Corrigido; teste novo |
+| 7 | `overflow: hidden` no `<html>` não trava a rolagem em iOS antigos | Parcial: `overscroll-contain` na grade. Justificativa: o RNF-008 suporta as 2 últimas versões do Safari, que respeitam `overflow: hidden` |
+| 8 | `ConfirmDialog` dependia da identidade do callback (o relógio re-renderiza a cada segundo) | Corrigido no componente (callback numa ref). Justificado não extrair agora um hook comum com o `PainelFolha`: os dois diálogos têm comportamentos diferentes (trava de rolagem e Tab preso só no painel) |
+| 9 | Contagens repetidas e `includes` em laço | Corrigido: `Set` das marcadas na `FolhaRespostas`. As contagens da página e da folha vêm dos mesmos dados e não divergem |
+| 10 | Ícones de traço repetidos em 4 arquivos | Corrigido: componente `Icone` comum (`Icone`, `IconePausa`) |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -186,7 +225,7 @@ A resolução segue o protótipo:
 
 - **Metodo:** `git checkout -b hotfix/revert-CR-001` → `git revert -m 1 [hash do merge]` → merge em `master` → push
 - **Metodo alternativo:** Redeploy do deployment anterior via Railway Dashboard
-- **Commits a reverter:** o merge da branch `feat/CR-001-resolucao-navegacao` (registrar o hash no changelog)
+- **Commits a reverter:** o merge da branch `feat/CR-001-resolucao-navegacao` em `master`
 
 ### 10.2 Rollback de Migration
 
@@ -221,3 +260,6 @@ A resolução segue o protótipo:
 | Data       | Autor  | Descrição                    |
 |------------|--------|------------------------------|
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado a partir da revisão de design (itens P1.1, P1.2, P1.3, P1.4, P1.5 e P1.8, com D1, D2 e D3) e da decisão D5 (modo foco) |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Implementação iniciada e concluída (CR-T-01 a CR-T-08) |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Validação em runtime (Playwright) e revisão de código: 10 findings, 9 corrigidos e 1 justificado (CR-T-09) |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Documentação atualizada (CR-T-10) — status: ✅ Concluído |
