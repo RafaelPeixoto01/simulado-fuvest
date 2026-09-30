@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.2
+**Versão:** 1.3
 **Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0
-**CR Ref:** CR-001, CR-002
+**CR Ref:** CR-001, CR-002, CR-003
 
 ---
 
@@ -141,12 +141,12 @@ Simulado Fuvest/
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
         │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina
-        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, estilos.ts
+        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, estilos.ts
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
-        │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas, FolhaCorrigida, RevisaoQuestoes
+        │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas, FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, NaoEncontrada
-        ├── utils/                  # tempo.ts, format.ts
+        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
@@ -505,4 +505,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`.*

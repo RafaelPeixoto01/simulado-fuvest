@@ -5,7 +5,7 @@
 **PRD Ref:** 01-PRD v1.0
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0
 **Spec Ref:** 03-SPEC v1.0 (specs 01–05)
-**CR Ref:** CR-001, CR-002
+**CR Ref:** CR-001, CR-002, CR-003
 
 ---
 
@@ -21,6 +21,7 @@
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Em andamento (T-028 concluída) |
 | CR-001 | Resolução: navegação, folha de respostas e pausa (pós-MVP, [CR](changes/CR-001-resolucao-navegacao.md)) | CR-T-01 a CR-T-10 | Concluído |
 | CR-002 | Contraste e tokens (pós-MVP, [CR](changes/CR-002-contraste-tokens.md)) | CR-T-01 a CR-T-05 | Concluído |
+| CR-003 | Resultado, figura e início (pós-MVP, [CR](changes/CR-003-resultado-figura-inicio.md)) | CR-T-01 a CR-T-09 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 

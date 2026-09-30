@@ -34,3 +34,13 @@ export function formatarDuracao(ms: number): string {
   if (m > 0) return s > 0 ? `${m} min ${s} s` : `${m} min`
   return `${s} s`
 }
+
+/** Tempo restante em minutos, arredondando para cima: "4 h 52 min", "1 h", "58 min", "1 min".
+ *  Para textos que não são atualizados a cada segundo, como o banner do início (CR-003). */
+export function formatarRestante(ms: number): string {
+  const minutos = Math.ceil(Math.max(0, ms) / 60_000)
+  const h = Math.floor(minutos / 60)
+  const m = minutos % 60
+  if (h > 0) return m > 0 ? `${h} h ${m} min` : `${h} h`
+  return `${m} min`
+}

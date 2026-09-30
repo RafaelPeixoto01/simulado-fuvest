@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 
 import { LETRAS, type Letra } from '../../types'
+import { colunasDaFolha, trilhaDaFolha } from '../../utils/folha'
+import { CabecalhoLetras } from '../CabecalhoLetras'
 
 interface Props {
   questaoIds: string[]
@@ -13,12 +15,6 @@ interface Props {
 }
 
 const dois = (n: number) => String(n).padStart(2, '0')
-
-/** Colunas da folha do desktop: 90 questões cabem inteiras em 3 colunas de 30 linhas (P1.4). */
-function colunasDaFolha(total: number): number {
-  if (total > 40) return 3
-  return total > 15 ? 2 : 1
-}
 
 function Legenda() {
   return (
@@ -107,26 +103,12 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
 
   const colunas = colunasDaFolha(total)
   const porColuna = Math.ceil(total / colunas)
-  const trilha = `repeat(${colunas}, minmax(0, 1fr))`
+  const trilha = trilhaDaFolha(colunas)
   return (
     <div>
       <p className="text-sm text-tinta-suave">{resumo}</p>
       <nav aria-label="Folha de respostas" className="mt-3">
-        {/* Letras A–E só no cabeçalho de cada coluna (D2): dentro das bolinhas, a 8 px, eram ilegíveis */}
-        <div aria-hidden="true" className="grid gap-x-2" style={{ gridTemplateColumns: trilha }}>
-          {Array.from({ length: colunas }, (_, c) => (
-            <div key={c} className="flex h-4 items-center gap-1 px-1">
-              <span className="w-[1.125rem] shrink-0" />
-              <span className="flex gap-[3px]">
-                {LETRAS.map((letra) => (
-                  <span key={letra} className="w-[13px] text-center text-[10px] font-bold text-tinta-suave">
-                    {letra}
-                  </span>
-                ))}
-              </span>
-            </div>
-          ))}
-        </div>
+        <CabecalhoLetras colunas={colunas} />
         <ol
           className="grid grid-flow-col gap-x-2"
           style={{ gridTemplateColumns: trilha, gridTemplateRows: `repeat(${porColuna}, auto)` }}

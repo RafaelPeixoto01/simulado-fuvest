@@ -38,10 +38,13 @@ describe('Início (RF-008)', () => {
     expect(screen.getByRole('link', { name: 'Montar simulado' })).toHaveAttribute('href', '/novo/personalizado')
     expect(screen.getByRole('link', { name: 'Treinar' })).toHaveAttribute('href', '/treino')
     expect(screen.getByText(/178 questões de 2 provas/)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Prova 2025 (PDF oficial)' })).toHaveAttribute(
-      'href',
-      'https://www.fuvest.br/p2025.pdf',
-    )
+    // P2.6 (CR-003): o link diz que abre o PDF oficial em outra aba
+    const pdf = screen.getByRole('link', { name: 'FUVEST 2025 · PDF oficial (abre em nova aba)' })
+    expect(pdf).toHaveAttribute('href', 'https://www.fuvest.br/p2025.pdf')
+    expect(pdf).toHaveAttribute('target', '_blank')
+    // Sem simulado aberto, "Começar prova completa" é o botão principal
+    expect(screen.getByRole('button', { name: 'Começar prova completa' }).className).toContain('bg-caneta')
+    expect(screen.queryByRole('region', { name: /FUVEST/ })).toBeNull()
   })
 
   it('prova completa fica indisponível com base pequena', async () => {
@@ -112,6 +115,64 @@ describe('Início (RF-008)', () => {
     await userEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Descartar e começar' }))
 
     await waitFor(() => expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).id).not.toBe('antigo'))
+  })
+})
+
+describe('Início com simulado em andamento (P1.9, CR-003)', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    instalarApiFalsa({ 'GET /api/catalogo': () => json(200, CATALOGO) })
+  })
+  afterEach(() => vi.unstubAllGlobals())
+
+  const salvar = (extra: Record<string, unknown>) =>
+    localStorage.setItem(CHAVE_SIMULADO, JSON.stringify({ ...EM_ANDAMENTO, ...extra }))
+
+  it('o banner vem antes do título, com progresso, revisar e o tempo restante', async () => {
+    salvar({ iniciadoEm: Date.now() - (8 * 60 + 5) * 1000, marcadas: ['2024-002'] })
+    renderizar(<App />)
+
+    const banner = await screen.findByRole('region', { name: 'FUVEST 2024' })
+    const titulo = screen.getByRole('heading', { level: 1 })
+    expect(banner.compareDocumentPosition(titulo) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(banner).toHaveTextContent('Simulado em andamento')
+    expect(banner).toHaveTextContent('1 de 2 respondidas · 1 para revisar')
+    expect(banner).toHaveTextContent(
+      /Restam 4 h 5[12] min\. O relógio continua correndo mesmo com a aba fechada\./,
+    )
+  })
+
+  it('com simulado aberto, todos os modos ficam com botão secundário', async () => {
+    salvar({})
+    renderizar(<App />)
+
+    const completa = await screen.findByRole('button', { name: 'Começar prova completa' })
+    expect(completa.className).not.toContain('bg-caneta')
+    expect(completa.className).toContain('bg-papel')
+  })
+
+  it('pausado, o banner mostra o tempo que sobrou', async () => {
+    salvar({ modo: 'personalizado', pausavel: true, tempoLimiteS: 3600, pausadoEm: Date.now() - 60_000, iniciadoEm: Date.now() - 60_000 })
+    renderizar(<App />)
+
+    expect(await screen.findByRole('region', { name: 'FUVEST 2024' })).toHaveTextContent('Pausado com 1 h restantes.')
+  })
+
+  it('com o tempo esgotado, avisa que continuar finaliza o simulado', async () => {
+    salvar({ iniciadoEm: Date.now() - 18_001_000 })
+    renderizar(<App />)
+
+    expect(await screen.findByRole('region', { name: 'FUVEST 2024' })).toHaveTextContent(
+      'O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas.',
+    )
+  })
+
+  it('sem cronômetro, o banner não fala de tempo', async () => {
+    salvar({ modo: 'personalizado', tempoLimiteS: null })
+    renderizar(<App />)
+
+    const banner = await screen.findByRole('region', { name: 'FUVEST 2024' })
+    expect(banner).not.toHaveTextContent(/Restam|Pausado|tempo acabou/)
   })
 })
 

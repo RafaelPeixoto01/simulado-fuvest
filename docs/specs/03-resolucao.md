@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.2
+**Versão:** 1.3
 **Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada)
 
 ---
 
@@ -109,7 +109,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 | Rota | Página | Observação |
 |------|--------|------------|
-| `/` | `HomePage` | Catálogo + 4 modos + "Retomar simulado" se houver um em andamento |
+| `/` | `HomePage` | Com simulado em andamento, banner no topo (CR-003, P1.9): "Simulado em andamento", descrição, barra de progresso, "r de n respondidas · m para revisar", tempo ("Restam 4 h 52 min. O relógio continua correndo mesmo com a aba fechada." / "Pausado com 58 min restantes." / "O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas."; sem cronômetro, nada), "Continuar simulado" e "Descartar"; atualiza a cada 30 s e mostra minutos (`formatarRestante`); os 4 modos ficam com botão secundário. Depois, catálogo e 4 modos. "Provas na base": "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela (P2.6) |
 | `/novo/personalizado` | `ConfigurarPersonalizadoPage` | Disciplinas (checkbox, mín. 1), anos (dois selects com os anos do catálogo), quantidade (1–90, default 20), cronômetro (default ligado; mostra o tempo calculado) |
 | `/novo/ano` | `EscolherAnoPage` | Lista de anos publicados; cada item com o link do PDF oficial (RN-013) |
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
@@ -152,7 +152,7 @@ Texto renderizado como texto React (escapado) com `whitespace-pre-line`; **nunca
 | src | `string` | Sim | — | URL `/figuras/...` |
 | alt | `string` | Sim | — | "Figura da questão N — FUVEST AAAA" (RNF-003) |
 
-**Comportamento:** `loading="lazy"`, largura máxima da coluna; clique/Enter abre um overlay em tela cheia com a imagem em tamanho natural e rolagem (zoom nativo do navegador no mobile); Esc ou clique fora fecha. Falha de carga → "Não foi possível carregar a figura" + link para o PDF oficial.
+**Comportamento:** `loading="lazy"`, largura máxima da coluna; clique/Enter abre a `ModalFigura` (CR-003, P1.6, D7): diálogo em tela cheia sobre fundo escuro, com a imagem **ajustada à tela** e centralizada (`object-contain`; cresce até ocupar a área) e o grupo "Ajustar à tela | Tamanho real" (`aria-pressed`); "Tamanho real" mostra o tamanho natural com rolagem. Barra com o texto alternativo (desktop) e "Fechar" (44 px no celular); foco inicial em "Fechar figura"; Esc, "Fechar", o fundo escuro e as faixas em volta da parte pintada da figura fecham. Rodapé: "Use dois dedos para aproximar ainda mais." (celular) / "Esc fecha · a figura cresce até ocupar a tela" (desktop). Falha de carga → "Não foi possível carregar a figura" + link para o PDF oficial.
 
 ### Componente: Alternativas
 

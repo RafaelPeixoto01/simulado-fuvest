@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Data:** 2026-09-30
 **Status:** Aprovado
 **Fase:** MVP — Simulados da 1ª fase
-**CR Ref:** CR-001
+**CR Ref:** CR-001, CR-003
 
 ---
 
@@ -108,7 +108,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 **RF-008 — Detalhamento:**
 - Mostra os 4 modos (RF-009 a RF-012) com uma descrição curta de cada um
 - Mostra os anos publicados e o total de questões por disciplina
-- Se houver simulado em andamento no navegador, oferece retomar (RN-012)
+- Se houver simulado em andamento no navegador, oferece retomar (RN-012), num aviso no topo da página com o progresso e o tempo restante (o relógio continua correndo com a aba fechada, RN-009); enquanto isso, os modos ficam em segundo plano (CR-003)
+- Os anos da base aparecem como links para o PDF oficial, avisando que abrem em outra aba (CR-003)
 - Rodapé com aviso de que o site não é afiliado à FUVEST/USP e com link para o acervo oficial
 
 ### Módulo: Geração de Simulados
@@ -148,7 +149,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RF-016 | Salvar o simulado em andamento no navegador e finalizar com confirmação | Alta | Estudante |
 
 **RF-013 — Detalhamento:**
-- Figuras com ampliação (zoom) ao tocar/clicar
+- Figuras com ampliação ao tocar/clicar: abrem ajustadas à tela, com a opção "Tamanho real" (CR-003)
 - Mostra a fonte da questão (FUVEST ano, nº original)
 - Atalhos de teclado: A–E marcam a alternativa; setas navegam
 - O gabarito nunca aparece durante o simulado (exceto no modo Treino)
@@ -187,6 +188,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 **RF-019 — Detalhamento:**
 - Cada questão com a alternativa marcada, a correta e a sinalização de anulada, quando for o caso
 - Filtros: todas, erradas, em branco, por disciplina
+- Uma questão por vez, com Anterior/Próxima; a folha corrigida, logo depois do desempenho por disciplina, leva direto a qualquer questão (CR-003)
 
 ### Módulo: Histórico Local
 
@@ -381,4 +383,4 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco).*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida).*
