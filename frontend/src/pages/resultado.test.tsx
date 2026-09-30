@@ -152,6 +152,39 @@ describe('Resultado (RF-017 a RF-019)', () => {
     expect(screen.getByText('Enunciado da questão 2099-001')).toBeInTheDocument()
   })
 
+  it('trocar o filtro não tira o foco dele nem rola a página (teclado)', async () => {
+    const rolar = vi.fn()
+    Element.prototype.scrollIntoView = rolar
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    const erradas = screen.getByRole('radio', { name: 'Erradas' })
+    await userEvent.click(erradas)
+    expect(erradas).toHaveFocus()
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Disciplina' }), 'quimica')
+    expect(screen.getByRole('combobox', { name: 'Disciplina' })).toHaveFocus()
+    expect(rolar).not.toHaveBeenCalled()
+    delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView
+  })
+
+  it('questão corrigida cujo conteúdo saiu da base mantém o selo e não diz que ficou fora da nota', async () => {
+    instalarApiFalsa({
+      'GET /api/questoes': () =>
+        json(200, { questoes: [questaoFalsa('2099-001'), questaoFalsa('2099-003')], textos_base: {}, nao_encontradas: ['2099-002'] }),
+    })
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Próxima questão' }))
+
+    const revisao = screen.getByRole('region', { name: 'Revisão das questões' })
+    expect(revisao).toHaveTextContent('Você marcou B · correta C')
+    expect(revisao).toHaveTextContent('O conteúdo desta questão não está mais disponível na base')
+    expect(revisao).not.toHaveTextContent('não entrou na nota')
+  })
+
   it('filtro por disciplina continua na revisão (RF-019)', async () => {
     localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
     renderizar(<App />, { rota: '/resultado/sim-9' })

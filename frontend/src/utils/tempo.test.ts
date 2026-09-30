@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { SimuladoEmAndamento } from '../simulado/tipos'
-import { decorridoMs, formatarDuracao, formatarTempo, restanteMs } from './tempo'
+import { decorridoMs, formatarDuracao, formatarRestante, formatarTempo, restanteMs } from './tempo'
 
 function simulado(extra: Partial<SimuladoEmAndamento> = {}): SimuladoEmAndamento {
   return {
@@ -61,5 +61,15 @@ describe('tempo (UT-001)', () => {
     expect(formatarDuracao(2 * 3_600_000 + 13 * 60_000)).toBe('2 h 13 min')
     expect(formatarDuracao(45_000)).toBe('45 s')
     expect(formatarDuracao(125_000)).toBe('2 min 5 s')
+  })
+})
+
+describe('formatarRestante (CR-003)', () => {
+  it('mostra horas e minutos, arredondando os minutos para cima', () => {
+    expect(formatarRestante(4 * 3_600_000 + 51 * 60_000 + 10_000)).toBe('4 h 52 min')
+    expect(formatarRestante(3_600_000)).toBe('1 h')
+    expect(formatarRestante(58 * 60_000)).toBe('58 min')
+    expect(formatarRestante(20_000)).toBe('1 min')
+    expect(formatarRestante(0)).toBe('0 min')
   })
 })

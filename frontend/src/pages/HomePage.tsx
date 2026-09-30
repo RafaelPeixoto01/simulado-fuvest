@@ -11,7 +11,7 @@ import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Catalogo } from '../types'
-import { formatarDuracao, restanteMs } from '../utils/tempo'
+import { formatarRestante, restanteMs } from '../utils/tempo'
 
 function Modo({ titulo, descricao, acao }: { titulo: string; descricao: ReactNode; acao: ReactNode }) {
   return (
@@ -42,11 +42,11 @@ function SimuladoEmAndamento() {
       'O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas.'
     ) : simulado.pausadoEm !== null ? (
       <>
-        Pausado com <strong>{formatarDuracao(restante)}</strong> restantes.
+        Pausado com <strong>{formatarRestante(restante)}</strong> restantes.
       </>
     ) : (
       <>
-        Restam <strong>{formatarDuracao(restante)}</strong>. O relógio continua correndo mesmo com a aba fechada.
+        Restam <strong>{formatarRestante(restante)}</strong>. O relógio continua correndo mesmo com a aba fechada.
       </>
     )
 

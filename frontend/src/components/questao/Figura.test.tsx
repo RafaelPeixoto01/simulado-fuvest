@@ -51,6 +51,22 @@ describe('Figura', () => {
     expect(screen.getByRole('button', { name: 'Ampliar: Figura da questão 15' })).toHaveFocus()
   })
 
+  it('ajustada à tela, o clique na faixa escura em volta da figura fecha; na figura, não', async () => {
+    render(<Figura src="/figuras/2099/q015-1.webp" alt="Figura da questão 15" />)
+    await userEvent.click(screen.getByRole('button', { name: 'Ampliar: Figura da questão 15' }))
+
+    // Figura 400 × 100 numa área de 800 × 800: pintada em 800 × 200, de y = 300 a y = 500
+    const imagem = within(screen.getByRole('dialog')).getByRole('img')
+    Object.defineProperty(imagem, 'naturalWidth', { value: 400 })
+    Object.defineProperty(imagem, 'naturalHeight', { value: 100 })
+    imagem.getBoundingClientRect = () => ({ left: 0, top: 0, width: 800, height: 800, right: 800, bottom: 800, x: 0, y: 0, toJSON: () => ({}) })
+
+    fireEvent.click(imagem, { clientX: 400, clientY: 400 })
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    fireEvent.click(imagem, { clientX: 400, clientY: 100 })
+    expect(screen.queryByRole('dialog')).toBeNull()
+  })
+
   it('imagem que não carrega vira aviso', () => {
     render(<Figura src="/quebrada.webp" alt="Figura X" />)
 

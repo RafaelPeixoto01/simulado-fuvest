@@ -32,8 +32,19 @@ describe('FolhaCorrigida no desktop (D5, CR-003)', () => {
     expect(q3[3].className).toContain('border-2 border-acerto') // D, a correta, com a questão em branco
     expect(q3.filter((b) => b.className.includes('bg-'))).toHaveLength(0)
 
-    // Anulada: a correta não é contornada (o ponto vale para todos)
-    expect(bolinhas(/^Questão 4:/)[0].className).not.toContain('border-2')
+    // Anulada: a correta não é contornada e a marcada fica em âmbar, não em verde
+    const q4 = bolinhas(/^Questão 4:/)
+    expect(q4[0].className).not.toContain('border-2')
+    expect(q4[4].className).toContain('bg-alerta')
+    expect(q4[4].className).not.toContain('bg-acerto')
+  })
+
+  it('os acertos contam as anuladas, como a nota, e um selo mostra quantas são', () => {
+    render(<FolhaCorrigida formato="grade" questaoIds={IDS} itens={ITENS} atual={0} onIr={() => {}} />)
+
+    expect(screen.getByText('2 acertos')).toBeInTheDocument()
+    expect(screen.getByText('1 anulada (conta como acerto)')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Questão 4: anulada, ponto para todos' })).toHaveTextContent('04anul.')
   })
 
   it('tem cabeçalho A–E e nenhuma letra dentro das bolinhas (P2.2)', () => {

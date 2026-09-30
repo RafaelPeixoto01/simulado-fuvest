@@ -1,6 +1,8 @@
 import { useId } from 'react'
 
 import { LETRAS, type ItemCorrigido, type Letra } from '../../types'
+import { colunasDaFolha, trilhaDaFolha } from '../../utils/folha'
+import { CabecalhoLetras } from '../CabecalhoLetras'
 import { Icone } from '../Icone'
 import { situacao, type Situacao } from './revisao'
 
@@ -25,12 +27,6 @@ const IconeErrado = ({ className }: { className: string }) => (
   </Icone>
 )
 
-/** Colunas das bolinhas no desktop, como na folha da resolução (D2 do CR-001). */
-function colunasDaFolha(total: number): number {
-  if (total > 40) return 3
-  return total > 15 ? 2 : 1
-}
-
 // Célula da grade do celular (D5): cor, borda e marca por situação
 const CELULA: Record<Situacao, string> = {
   acerto: 'border-acerto/40 bg-acerto-claro text-acerto',
@@ -44,6 +40,8 @@ const CELULA: Record<Situacao, string> = {
 // a correta contornada em verde quando o estudante errou ou deixou em branco
 function estiloBolinha(item: ItemCorrigido | undefined, letra: Letra): string {
   if (item?.resposta === letra) {
+    // Anulada vale ponto para todos, mas a letra marcada não é "a certa": fica em âmbar
+    if (item.anulada) return 'border-[1.2px] border-alerta bg-alerta'
     return item.acertou ? 'border-[1.2px] border-acerto bg-acerto' : 'border-[1.2px] border-erro bg-erro'
   }
   if (item && !item.anulada && !item.acertou && item.correta === letra) return 'border-2 border-acerto'
@@ -68,6 +66,8 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
   const acertos = itens.filter((i) => i.acertou).length
   const erros = itens.filter((i) => !i.acertou && i.resposta !== null).length
   const brancos = itens.filter((i) => !i.acertou && i.resposta === null).length
+  // Os acertos incluem as anuladas, como a nota (RN-008); o selo delas explica a diferença
+  const anuladas = itens.filter((i) => i.anulada).length
 
   const cabecalho = (
     <>
@@ -89,6 +89,11 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
         <span className="flex items-center gap-1 rounded-full border border-dashed border-borda-campo bg-papel px-2.5 py-[3px] text-tinta-suave">
           – {brancos} em branco
         </span>
+        {anuladas > 0 && (
+          <span className="rounded-full bg-alerta-claro px-2.5 py-1 text-alerta">
+            {anuladas} {anuladas === 1 ? 'anulada' : 'anuladas'} (conta como acerto)
+          </span>
+        )}
       </p>
     </>
   )
@@ -129,25 +134,11 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
 
   const colunas = colunasDaFolha(questaoIds.length)
   const porColuna = Math.ceil(questaoIds.length / colunas)
-  const trilha = `repeat(${colunas}, minmax(0, 1fr))`
+  const trilha = trilhaDaFolha(colunas)
   return (
     <section aria-labelledby={idTitulo}>
       {cabecalho}
-      {/* Letras A–E só no cabeçalho de cada coluna: dentro das bolinhas, a 8 px, eram ilegíveis (P2.2) */}
-      <div aria-hidden="true" className="mt-3 grid gap-x-2" style={{ gridTemplateColumns: trilha }}>
-        {Array.from({ length: colunas }, (_, c) => (
-          <div key={c} className="flex h-4 items-center gap-1 px-1">
-            <span className="w-[1.125rem] shrink-0" />
-            <span className="flex gap-[3px]">
-              {LETRAS.map((letra) => (
-                <span key={letra} className="w-[13px] text-center text-[10px] font-bold text-tinta-suave">
-                  {letra}
-                </span>
-              ))}
-            </span>
-          </div>
-        ))}
-      </div>
+      <CabecalhoLetras colunas={colunas} className="mt-3" />
       <ol
         aria-label="Folha de respostas corrigida"
         className="grid grid-flow-col gap-x-2"

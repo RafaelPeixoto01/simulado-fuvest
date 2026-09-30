@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 import { useQuestoes } from '../../hooks/useQuestoes'
 import { NOMES_DISCIPLINAS, type Disciplina, type ItemCorrigido } from '../../types'
@@ -48,6 +48,7 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
   const questoes = useQuestoes(questaoIds)
   const secao = useRef<HTMLElement>(null)
   const titulo = useRef<HTMLHeadingElement>(null)
+  const idTitulo = useId()
 
   useEffect(() => {
     if (pedidoDeFoco === 0) return
@@ -74,8 +75,8 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
   )
 
   return (
-    <section ref={secao} aria-labelledby="titulo-revisao" className="scroll-mt-4">
-      <h2 id="titulo-revisao" className="text-xl font-bold">
+    <section ref={secao} aria-labelledby={idTitulo} className="scroll-mt-4">
+      <h2 id={idTitulo} className="text-xl font-bold">
         Revisão das questões
       </h2>
       <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -136,7 +137,11 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
                   Questão {estado.indice + 1} de {questaoIds.length}
                 </h3>
                 {complemento}
-                <p className="mt-2 text-tinta-suave">Esta questão foi removida da base e não entrou na nota.</p>
+                <p className="mt-2 text-tinta-suave">
+                  {item
+                    ? 'O conteúdo desta questão não está mais disponível na base; a correção acima continua valendo.'
+                    : 'Esta questão foi removida da base e não entrou na nota.'}
+                </p>
               </div>
             )}
             <nav aria-label="Navegar na revisão" className="mt-6 flex max-w-[68ch] gap-2">

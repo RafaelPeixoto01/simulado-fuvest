@@ -155,7 +155,7 @@ describe('Início com simulado em andamento (P1.9, CR-003)', () => {
     salvar({ modo: 'personalizado', pausavel: true, tempoLimiteS: 3600, pausadoEm: Date.now() - 60_000, iniciadoEm: Date.now() - 60_000 })
     renderizar(<App />)
 
-    expect(await screen.findByRole('region', { name: 'FUVEST 2024' })).toHaveTextContent('Pausado com 1 h 0 min restantes.')
+    expect(await screen.findByRole('region', { name: 'FUVEST 2024' })).toHaveTextContent('Pausado com 1 h restantes.')
   })
 
   it('com o tempo esgotado, avisa que continuar finaliza o simulado', async () => {

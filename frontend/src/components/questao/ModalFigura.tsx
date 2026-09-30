@@ -29,6 +29,19 @@ export function ModalFigura({ src, alt, onFechar }: { src: string; alt: string; 
   const fecharNoFundo = (e: MouseEvent) => {
     if (e.target === e.currentTarget) ultimoFechar.current()
   }
+  // Ajustada à tela, a <img> ocupa a área toda (object-contain): as faixas escuras em volta da
+  // figura são da própria <img>, então o clique fora da parte pintada também fecha
+  const fecharForaDaFigura = (e: MouseEvent<HTMLImageElement>) => {
+    const img = e.currentTarget
+    if (real || !img.naturalWidth || !img.naturalHeight) return
+    const caixa = img.getBoundingClientRect()
+    const escala = Math.min(caixa.width / img.naturalWidth, caixa.height / img.naturalHeight)
+    const largura = img.naturalWidth * escala
+    const altura = img.naturalHeight * escala
+    const x = e.clientX - (caixa.left + (caixa.width - largura) / 2)
+    const y = e.clientY - (caixa.top + (caixa.height - altura) / 2)
+    if (x < 0 || x > largura || y < 0 || y > altura) ultimoFechar.current()
+  }
   const opcao = (ativa: boolean) => `h-10 px-3 text-sm font-semibold ${ativa ? 'bg-papel text-tinta' : 'text-papel'}`
 
   return (
@@ -62,6 +75,7 @@ export function ModalFigura({ src, alt, onFechar }: { src: string; alt: string; 
         <img
           src={src}
           alt={alt}
+          onClick={fecharForaDaFigura}
           className={real ? 'm-auto max-w-none bg-papel' : 'm-auto size-full object-contain'}
         />
       </div>
