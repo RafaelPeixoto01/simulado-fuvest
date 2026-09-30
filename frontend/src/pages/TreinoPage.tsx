@@ -7,6 +7,7 @@ import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { QuestaoView } from '../components/questao/QuestaoView'
 import { useAtalhos } from '../hooks/useAtalhos'
 import { useCatalogo } from '../hooks/useCatalogo'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import { api, type ApiError } from '../services/api'
 import type { Catalogo, Disciplina, ItemCorrigido, Letra, TextoBase } from '../types'
 
@@ -61,13 +62,13 @@ function Configuracao({ catalogo, onComecar }: { catalogo: Catalogo; onComecar: 
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2">
             De
-            <select value={anoInicio} onChange={(e) => setAnoInicio(Number(e.target.value))} className="rounded-md border border-linha bg-papel px-2 py-1.5">
+            <select value={anoInicio} onChange={(e) => setAnoInicio(Number(e.target.value))} className="rounded-md border border-borda-campo bg-papel px-2 py-1.5">
               {anos.map((a) => <option key={a}>{a}</option>)}
             </select>
           </label>
           <label className="flex items-center gap-2">
             até
-            <select value={anoFim} onChange={(e) => setAnoFim(Number(e.target.value))} className="rounded-md border border-linha bg-papel px-2 py-1.5">
+            <select value={anoFim} onChange={(e) => setAnoFim(Number(e.target.value))} className="rounded-md border border-borda-campo bg-papel px-2 py-1.5">
               {anos.map((a) => <option key={a}>{a}</option>)}
             </select>
           </label>
@@ -215,6 +216,7 @@ function Sessao({
 }
 
 export function TreinoPage() {
+  useTituloPagina('Treino por questão')
   const catalogo = useCatalogo()
   const [filtros, setFiltros] = useState<Filtros | null>(null)
   const [sessao, setSessao] = useState(0) // nova sessão a cada início

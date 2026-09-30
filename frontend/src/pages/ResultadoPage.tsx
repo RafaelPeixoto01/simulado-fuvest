@@ -7,6 +7,7 @@ import { FolhaCorrigida } from '../components/resultado/FolhaCorrigida'
 import { ResumoResultado } from '../components/resultado/ResumoResultado'
 import { RevisaoQuestoes } from '../components/resultado/RevisaoQuestoes'
 import type { EstadoResultado } from '../hooks/useFinalizarSimulado'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import { obterDoHistorico } from '../storage/historicoStorage'
 
@@ -15,6 +16,7 @@ function Aviso({ children }: { children: string }) {
 }
 
 export function ResultadoPage() {
+  useTituloPagina('Resultado')
   const { id = '' } = useParams()
   const estado = useLocation().state as EstadoResultado | null
   // Recém-finalizado chega pelo state (funciona mesmo sem storage); depois, pelo histórico

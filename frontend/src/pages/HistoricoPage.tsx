@@ -6,8 +6,10 @@ import { Vazio } from '../components/Estados'
 import { BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { limparHistorico, listarHistorico } from '../storage/historicoStorage'
 import { formatarDataHora, formatarPercentual } from '../utils/format'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 
 export function HistoricoPage() {
+  useTituloPagina('Histórico')
   const [lista, setLista] = useState(listarHistorico)
   const [confirmando, setConfirmando] = useState(false)
 

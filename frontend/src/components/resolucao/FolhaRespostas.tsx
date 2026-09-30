@@ -80,7 +80,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                       eAtual ? 'border-2 border-caneta bg-caneta-clara' : 'border border-linha bg-papel'
                     }`}
                   >
-                    <span className="text-sm font-bold tabular-nums text-optico">{dois(i + 1)}</span>
+                    <span className="text-sm font-bold tabular-nums text-optico-texto">{dois(i + 1)}</span>
                     <span
                       aria-hidden="true"
                       className={`flex size-[22px] items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
@@ -145,7 +145,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                     eAtual ? 'bg-caneta-clara shadow-[inset_0_0_0_1.5px_var(--color-caneta)]' : 'hover:bg-fundo'
                   }`}
                 >
-                  <span className="w-[1.125rem] shrink-0 text-right text-[11.5px] font-bold tabular-nums text-optico">
+                  <span className="w-[1.125rem] shrink-0 text-right text-[11.5px] font-bold tabular-nums text-optico-texto">
                     {dois(i + 1)}
                   </span>
                   <span aria-hidden="true" className="flex gap-[3px]">

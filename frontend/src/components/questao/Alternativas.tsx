@@ -20,7 +20,7 @@ type Estado = 'neutra' | 'marcada' | 'correta' | 'errada'
 const ESTILOS: Record<Estado, { linha: string; bolinha: string }> = {
   neutra: {
     linha: 'border-linha bg-papel hover:border-caneta/50',
-    bolinha: 'border-optico text-optico',
+    bolinha: 'border-optico text-optico-texto',
   },
   marcada: {
     linha: 'border-caneta bg-caneta-clara',

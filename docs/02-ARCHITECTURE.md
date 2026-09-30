@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0
-**CR Ref:** CR-001
+**CR Ref:** CR-001, CR-002
 
 ---
 
@@ -135,12 +135,12 @@ Simulado Fuvest/
 └── frontend/
     ├── package.json, vite.config.ts, tsconfig.json, tsconfig.app.json, eslint.config.js, index.html
     └── src/
-        ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001), queryClient.ts, index.css (tokens @theme), types.ts
+        ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001), queryClient.ts, index.css (tokens @theme; contraste conferido por tokens.test.ts — CR-002), types.ts
         ├── services/api.ts         # cliente fetch + ApiError (código/dados do erro de domínio)
         ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1)
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
-        │                           #   useConfirmarDescarte, useAtalhos, useAgora
+        │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina
         ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, estilos.ts
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
@@ -505,4 +505,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens.*

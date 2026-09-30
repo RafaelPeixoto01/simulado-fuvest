@@ -5,8 +5,10 @@ import { BOTAO_PRIMARIO, LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useConfirmarDescarte } from '../hooks/useConfirmarDescarte'
 import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 
 export function EscolherAnoPage() {
+  useTituloPagina('Prova de um ano')
   const catalogo = useCatalogo()
   const { iniciar, iniciando, erro } = useIniciarSimulado()
   const { comConfirmacao, dialogo } = useConfirmarDescarte()

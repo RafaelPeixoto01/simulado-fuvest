@@ -27,7 +27,7 @@ export function FolhaCorrigida({ questaoIds, itens }: { questaoIds: string[]; it
           const item = porId.get(id)
           return (
             <li key={id} aria-label={rotulo(i + 1, item)} className="flex items-center gap-1 px-1 py-0.5">
-              <span aria-hidden="true" className="w-5 text-right text-xs font-bold tabular-nums text-optico">
+              <span aria-hidden="true" className="w-5 text-right text-xs font-bold tabular-nums text-optico-texto">
                 {dois(i + 1)}
               </span>
               {LETRAS.map((letra) => {

@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Data:** 2026-09-30
 **PRD Ref:** 01-PRD v1.0
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0
-**CR Ref:** CR-001
+**CR Ref:** CR-001, CR-002
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -95,4 +95,5 @@ Nenhum endpoint exige autenticação (não há dados de usuário no servidor —
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.2 | 2026-09-30 | CR-002: spec 03 v1.2 — tokens de contraste (`optico-texto`, `borda-campo`, `acerto`) e título por rota |
 | 1.1 | 2026-09-30 | CR-001: spec 03 v1.1 — resolução em modo foco, barra inferior fixa, folha em colunas (desktop) e em painel (celular), pausa que esconde a questão |

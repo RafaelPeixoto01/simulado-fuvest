@@ -21,6 +21,7 @@ import { useAgora } from '../hooks/useAgora'
 import { useAtalhos } from '../hooks/useAtalhos'
 import { useFinalizarSimulado } from '../hooks/useFinalizarSimulado'
 import { useQuestoes } from '../hooks/useQuestoes'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import type { SimuladoEmAndamento } from '../simulado/tipos'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Letra } from '../types'
@@ -46,6 +47,7 @@ function IconeFolha() {
 }
 
 function Resolucao({ simulado }: { simulado: SimuladoEmAndamento }) {
+  useTituloPagina(simulado.descricao)
   const { despachar } = useSimulado()
   const agora = useAgora()
   const questoes = useQuestoes(simulado.questaoIds)
