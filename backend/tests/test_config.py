@@ -10,6 +10,7 @@ def test_defaults_locais_sem_variaveis_de_ambiente():
     assert s.environment == "development"
     assert s.allowed_origins == ("http://localhost:5173",)
     assert s.data_dir == Path(__file__).resolve().parents[2] / "data" / "provas"
+    assert s.static_dir == Path(__file__).resolve().parents[1] / "static"
     assert s.producao is False
 
 

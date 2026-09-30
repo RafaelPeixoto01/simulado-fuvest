@@ -10,12 +10,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 RAIZ_PROJETO = Path(__file__).resolve().parents[2]
+RAIZ_BACKEND = Path(__file__).resolve().parents[1]
 
 
 @dataclass(frozen=True)
 class Settings:
     database_url: str = "sqlite:///./local.db"
     data_dir: Path = field(default_factory=lambda: RAIZ_PROJETO / "data" / "provas")
+    # Build do SPA (Dockerfile copia frontend/dist para ca); ausente em dev
+    static_dir: Path = field(default_factory=lambda: RAIZ_BACKEND / "static")
     environment: str = "development"
     allowed_origins: tuple[str, ...] = ("http://localhost:5173",)
 
@@ -31,6 +34,7 @@ class Settings:
         return cls(
             database_url=env.get("DATABASE_URL", padrao.database_url),
             data_dir=Path(env["DATA_DIR"]) if env.get("DATA_DIR") else padrao.data_dir,
+            static_dir=Path(env["STATIC_DIR"]) if env.get("STATIC_DIR") else padrao.static_dir,
             environment=env.get("ENVIRONMENT", padrao.environment),
             allowed_origins=(
                 tuple(o.strip() for o in origens.split(",") if o.strip())

@@ -43,12 +43,23 @@ def sessao(app):
         yield s
 
 
-@pytest.fixture
-def base_sintetica(sessao, settings):
-    """Provas ficticias 2098 e 2099 sincronizadas no banco do app (e figuras em DATA_DIR)."""
-    from app.pacote.sincronizar import sincronizar
+@pytest.fixture(scope="session")
+def _pacotes_sinteticos(tmp_path_factory):
+    """Gerados uma vez por sessao; cada teste recebe uma copia (pode alterar a vontade)."""
     from tests.fixtures.gerar_pacotes import escrever_pacotes
 
-    escrever_pacotes(settings.data_dir)
+    destino = tmp_path_factory.mktemp("sinteticos")
+    escrever_pacotes(destino)
+    return destino
+
+
+@pytest.fixture
+def base_sintetica(sessao, settings, _pacotes_sinteticos):
+    """Provas ficticias 2098 e 2099 sincronizadas no banco do app (e figuras em DATA_DIR)."""
+    import shutil
+
+    from app.pacote.sincronizar import sincronizar
+
+    shutil.copytree(_pacotes_sinteticos, settings.data_dir)
     sincronizar(sessao, settings.data_dir)
     return settings.data_dir

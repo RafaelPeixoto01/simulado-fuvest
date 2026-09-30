@@ -14,8 +14,8 @@
 | Grupo | Descrição | Tarefas | Status |
 |-------|-----------|---------|--------|
 | 1 | Setup e Infraestrutura | T-001 a T-004 | Concluído |
-| 2 | Pacote e Ingestão | T-005 a T-011 | Em andamento |
-| 3 | API | T-012 a T-017 | Pendente |
+| 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
+| 3 | API | T-012 a T-017 | Concluído |
 | 4 | Frontend | T-018 a T-025 | Pendente |
 | 5 | Deploy | T-026 a T-027 | Pendente |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
@@ -63,6 +63,21 @@
 | T-015 | Serviço de correção + `POST /api/correcoes` | `services/correcao.py`, `routers/correcoes.py` | RF-017, RF-018, RN-002, RN-008 | T-012 | BT-020 a BT-024 verdes |
 | T-016 | Reportes: `POST /api/reportes` + CLI `reportes listar/resolver` | `routers/reportes.py`, `services/reportes.py`, `ingestao/cli.py` | RF-007, RF-021, ADR-008 | T-012 | BT-030 a BT-035 verdes |
 | T-017 | Rota de figuras, fallback do SPA, headers de segurança, CORS/docs por ambiente | `main.py`, `security_headers.py` | Spec §3 | T-007 | BT-040 a BT-046 verdes; revisão OWASP registrada |
+
+### Revisão de segurança do Grupo 3 (checklist OWASP do CLAUDE.md) — 2026-09-29
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum: o MVP não tem segredo (sem auth); config só por variáveis de ambiente, sem `.env` |
+| Validação de entrada | Pydantic em todos os corpos (modos discriminados, faixas, padrões `AAAA-NNN`, listas únicas, descrição ≤ 500); `ids` da query validados antes da consulta |
+| Tokens / ownership | N/A: não há usuário nem dado pessoal no servidor (ADR-004); reportes anônimos, sem IP gravado |
+| SQL | Só ORM/`select()` parametrizado; nenhum SQL concatenado |
+| CORS | Só em desenvolvimento, com origem explícita (`http://localhost:5173`), métodos GET/POST e header `Content-Type`; produção sem CORS (SPA na mesma origem) |
+| Headers HTTP | CSP restritiva, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`; HSTS em produção (BT-045/046) |
+| Exposição de dados | Gabarito nunca sai em geração/consulta (BT-017); `/docs` e OpenAPI desligados em produção |
+| Path traversal | `/figuras`: regex de ano/arquivo antes de tocar o disco + só provas sincronizadas; fallback do SPA confere `is_relative_to(static)` |
+| Abuso | Rate limit por IP: simulados 30/min, correções 120/min, reportes 10/h (IP real via `--proxy-headers`) |
+| Dependências | `pip-audit` e `npm audit` no CI (informativos); localmente o `pip-audit` falha por certificado (CLAUDE.md) |
 
 ---
 

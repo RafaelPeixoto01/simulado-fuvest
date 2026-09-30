@@ -20,7 +20,12 @@ class PacoteInvalido(Exception):
         self.detalhe = detalhe
 
 
-class _Dumper(yaml.SafeDumper):
+# libyaml (C) quando disponivel: ~10x mais rapido; a sincronizacao le todos os
+# pacotes a cada start do container
+_Loader = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+
+
+class _Dumper(getattr(yaml, "CSafeDumper", yaml.SafeDumper)):
     pass
 
 
@@ -66,7 +71,7 @@ def salvar_pacote(pacote: PacoteProva, dir_prova: Path) -> None:
 def carregar_pacote(dir_prova: Path) -> PacoteProva:
     caminho = dir_prova / ARQUIVO_PACOTE
     try:
-        dados = yaml.safe_load(caminho.read_text(encoding="utf-8"))
+        dados = yaml.load(caminho.read_text(encoding="utf-8"), Loader=_Loader)
     except (OSError, yaml.YAMLError) as erro:
         raise PacoteInvalido(caminho, str(erro)) from erro
     try:
