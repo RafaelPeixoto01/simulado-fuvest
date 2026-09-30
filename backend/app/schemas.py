@@ -164,3 +164,25 @@ class CorrecaoResponse(BaseModel):
     percentual: float
     por_disciplina: list[DesempenhoDisciplina]
     ignoradas: list[str]
+
+
+TipoReporte = Literal["enunciado", "figura", "gabarito", "outro"]
+
+
+def _descricao_limpa(texto: str | None) -> str | None:
+    if texto is None:
+        return None
+    texto = texto.strip()
+    if len(texto) > 500:
+        raise ValueError("Descrição deve ter até 500 caracteres")
+    return texto or None
+
+
+class ReporteCreate(BaseModel):
+    questao_id: IdQuestao
+    tipo: TipoReporte
+    descricao: Annotated[str | None, AfterValidator(_descricao_limpa)] = None
+
+
+class ReporteCriado(BaseModel):
+    id: int

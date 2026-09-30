@@ -242,6 +242,49 @@ def _cmd_extrair(args: argparse.Namespace) -> int:
     return 0
 
 
+def _descrever_banco(url: str) -> str:
+    """host/banco sem usuario nem senha (a URL publica da Railway tem a senha)."""
+    from sqlalchemy.engine import make_url
+
+    u = make_url(normalizar_database_url(url))
+    return f"{u.host or 'local'}/{u.database}"
+
+
+def _executar_reportes(args: argparse.Namespace) -> int:
+    from app.services.reportes import listar_reportes, resolver_reportes
+
+    fabrica = criar_fabrica_sessao(criar_engine(args.database_url))
+    with fabrica() as sessao:
+        if args.acao == "listar":
+            status = None if args.status == "todos" else args.status
+            reportes = listar_reportes(sessao, status)
+            if not reportes:
+                print(f"Nenhum reporte ({args.status}).")
+            for r in reportes:
+                data = r.criado_em.strftime("%Y-%m-%d %H:%M") if r.criado_em else "?"
+                print(f"{r.id:>5} | {r.questao_id} | {r.tipo:<9} | {r.status:<9} | {data} | "
+                      f"{r.descricao or ''}")
+            return 0
+        resultado = resolver_reportes(sessao, args.ids)
+        print(f"Resolvidos: {resultado.resolvidos or 'nenhum'}")
+        if resultado.ja_resolvidos:
+            print(f"Já estavam resolvidos: {resultado.ja_resolvidos}")
+        if resultado.inexistentes:
+            print(f"Inexistentes: {resultado.inexistentes}")
+            return 1
+        return 0
+
+
+def _cmd_reportes(args: argparse.Namespace) -> int:
+    # Sempre mostra o banco alvo antes de agir (ADR-008)
+    print(f"Banco: {_descrever_banco(args.database_url)}")
+    try:
+        return _executar_reportes(args)
+    except SQLAlchemyError as erro:
+        _erro(f"Falha no banco ({erro.__class__.__name__}).")
+        return 1
+
+
 def _ano(valor: str) -> int:
     ano = int(valor)
     if not 1977 <= ano <= 2100:
@@ -292,6 +335,19 @@ def _parser() -> argparse.ArgumentParser:
     extrair.add_argument("--forcar", action="store_true",
                          help="Sobrescreve prova.yaml existente (perde a revisão manual)")
     extrair.set_defaults(func=_cmd_extrair)
+
+    reportes = sub.add_parser("reportes", help="Reportes de erro enviados pelos estudantes")
+    acoes = reportes.add_subparsers(dest="acao", required=True)
+    for nome, ajuda in (("listar", "Lista os reportes"), ("resolver", "Marca reportes como resolvidos")):
+        acao = acoes.add_parser(nome, help=ajuda)
+        # Obrigatoria e nunca lida do ambiente: comando local contra producao (ADR-008)
+        acao.add_argument("--database-url", required=True,
+                          help="URL do banco (produção: DATABASE_PUBLIC_URL da Railway)")
+        acao.set_defaults(func=_cmd_reportes)
+    acoes.choices["listar"].add_argument(
+        "--status", choices=["pendente", "resolvido", "todos"], default="pendente"
+    )
+    acoes.choices["resolver"].add_argument("ids", type=int, nargs="+")
 
     for comando in sub.choices.values():
         comando.add_argument(
