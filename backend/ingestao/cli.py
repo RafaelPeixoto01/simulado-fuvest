@@ -4,8 +4,12 @@ import argparse
 import sys
 from pathlib import Path
 
+from sqlalchemy.exc import SQLAlchemyError
+
 from app.config import Settings
+from app.database import criar_engine, criar_fabrica_sessao, normalizar_database_url
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
+from app.pacote.sincronizar import formatar_resumo, sincronizar
 from app.pacote.validacao import formatar_relatorio, tem_bloqueante, validar_pacote
 
 
@@ -41,6 +45,25 @@ def _cmd_validar(args: argparse.Namespace) -> int:
     return 0 if all(resultados) else 1
 
 
+def _cmd_importar(args: argparse.Namespace) -> int:
+    settings = Settings.from_env()
+    url = normalizar_database_url(settings.database_url)
+    if args.incluir_rascunhos and not url.startswith("sqlite"):
+        # ADR-008: rascunho so no banco local, nunca em producao
+        _erro("--incluir-rascunhos só é aceito com banco SQLite local (DATABASE_URL).")
+        return 1
+    fabrica = criar_fabrica_sessao(criar_engine(url))
+    try:
+        with fabrica() as sessao:
+            resumo = sincronizar(sessao, args.data_dir, incluir_rascunhos=args.incluir_rascunhos)
+    except SQLAlchemyError as erro:
+        _erro(f"Falha no banco ({erro.__class__.__name__}). "
+              "O schema existe? Rode antes: python -m alembic upgrade head")
+        return 1
+    print(formatar_resumo(resumo))
+    return 0
+
+
 def _ano(valor: str) -> int:
     ano = int(valor)
     if not 1977 <= ano <= 2100:
@@ -57,6 +80,14 @@ def _parser() -> argparse.ArgumentParser:
     alvo.add_argument("--ano", type=_ano)
     alvo.add_argument("--todas", action="store_true")
     validar.set_defaults(func=_cmd_validar)
+
+    importar = sub.add_parser("importar", help="Sincroniza os pacotes com o banco de DATABASE_URL")
+    importar.add_argument(
+        "--incluir-rascunhos",
+        action="store_true",
+        help="Inclui rascunhos completos (só com banco SQLite local)",
+    )
+    importar.set_defaults(func=_cmd_importar)
 
     for comando in sub.choices.values():
         comando.add_argument(

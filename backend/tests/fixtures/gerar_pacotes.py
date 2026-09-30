@@ -4,8 +4,8 @@ Deterministicos por ano. Cobrem: as 8 disciplinas, anuladas, textos-base (um com
 figura), disciplinas secundarias, figuras no enunciado e em alternativa.
 
 Uso no dev local (site com dados antes de existir prova real curada):
-    .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_sinteticos
-    DATA_DIR=../data/_sinteticos .venv/Scripts/python -m ingestao importar
+    .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos
+    .venv/Scripts/python -m ingestao importar --data-dir ../data/_cache/sinteticos
 """
 
 import io

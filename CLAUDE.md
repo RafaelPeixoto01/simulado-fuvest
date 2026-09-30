@@ -21,6 +21,8 @@
 | Testes backend | `cd backend && .venv/Scripts/python -m pytest` |
 | Lint backend | `cd backend && .venv/Scripts/python -m ruff check .` |
 | Validar pacotes | `cd backend && .venv/Scripts/python -m ingestao validar --todas` (ou `--ano AAAA`) |
+| Dados sintéticos (dev) | `cd backend && .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos && .venv/Scripts/python -m ingestao importar --data-dir ../data/_cache/sinteticos` (provas fictícias 2098/2099 no `local.db`) |
+| Importar pacotes reais | `cd backend && .venv/Scripts/python -m ingestao importar` (usa `data/provas`; **o banco passa a espelhar o diretório** — provas fora dele são removidas) |
 | Testes frontend | `cd frontend && npm test` (Vitest) |
 | Build check TS | `cd frontend && npx tsc --noEmit -p tsconfig.app.json` |
 | Lint frontend | `cd frontend && npm run lint` |
