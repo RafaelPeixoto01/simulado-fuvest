@@ -46,3 +46,6 @@ logs.*.json
 
 # Ingestao: PDFs baixados do acervo (so cache local)
 data/_cache/
+
+# Build do SPA copiado para o backend (Docker / teste local de produção)
+backend/static/

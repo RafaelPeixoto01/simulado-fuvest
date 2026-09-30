@@ -283,7 +283,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.0, ADR-001 a ADR-008
 - [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..05`
 - [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
-- [ ] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`)
+- [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — provisionamento via CLI, rollback, operação do curador
 
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.

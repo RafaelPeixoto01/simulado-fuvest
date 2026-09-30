@@ -17,7 +17,7 @@
 | 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
 | 3 | API | T-012 a T-017 | Concluído |
 | 4 | Frontend | T-018 a T-025 | Concluído |
-| 5 | Deploy | T-026 a T-027 | Pendente |
+| 5 | Deploy | T-026 a T-027 | Em andamento |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
 
 > **Status:** Pendente / Em andamento / Concluído
