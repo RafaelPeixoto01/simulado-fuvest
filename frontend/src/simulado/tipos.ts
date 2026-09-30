@@ -1,4 +1,4 @@
-import type { Letra, Modo } from '../types'
+import type { Correcao, Letra, Modo } from '../types'
 
 /** Simulado em andamento, persistido no navegador (RN-012, specs/03 §2.2).
  *  O conteudo das questoes nao vai para o storage: so ids, respostas e tempos. */
@@ -26,3 +26,18 @@ export type AcaoSimulado =
   | { tipo: 'PAUSAR'; agora: number }
   | { tipo: 'RETOMAR'; agora: number }
   | { tipo: 'DESCARTAR' }
+
+/** Simulado concluído, guardado só no navegador (RF-020, specs/04 §2.2). */
+export interface HistoricoEntry {
+  versao: 1
+  id: string // = id do SimuladoEmAndamento
+  modo: Exclude<Modo, 'treino'>
+  descricao: string
+  iniciadoEm: number
+  finalizadoEm: number
+  tempoGastoMs: number
+  tempoLimiteS: number | null
+  finalizadoPorTempo: boolean
+  questaoIds: string[]
+  resultado: Correcao
+}
