@@ -5,7 +5,8 @@
 - **Nome:** Simulado Fuvest
 - **Descrição:** Site que gera simulados da prova da FUVEST a partir de questões de provas de anos anteriores (acervo oficial em fuvest.br), para estudantes praticarem com questões reais
 - **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4, TanStack Query v5, FastAPI, SQLAlchemy 2.0, Alembic, PostgreSQL (prod) / SQLite (dev), deploy na Railway
-- **Repositório:** remoto GitHub ainda não criado — pendência do bootstrap (repositório local na branch `master`)
+- **Repositório:** https://github.com/RafaelPeixoto01/simulado-fuvest (a criar via `gh repo create`, público, como o Meu Controle; `gh` é o credential helper do git, conta `RafaelPeixoto01`)
+- **Deploy:** Railway, projeto/serviço `simulado-fuvest`, provisionado via `railway` CLI (T-027); deploy com a skill `/deploy-railway`
 
 ---
 
@@ -205,6 +206,7 @@ Simulado Fuvest/
 ├── .github/workflows/ci.yml   # CI: pytest (backend) + tsc/eslint/vitest (frontend)
 ├── .claude/                    # Versionado (exceto settings.local.json)
 │   ├── hooks/check-quality.js  #   Bloqueia git commit se algum check falhar
+│   ├── skills/deploy-railway/  #   /deploy-railway (copiada do Meu Controle): merge em master + push + verificação
 │   ├── hooks/check-config.json #   Lista de checks do hook (vazia até o T-001)
 │   └── settings.json           #   Hook PreToolUse para git commit
 ├── docs/                       # PRD, Arquitetura, Spec, Plano, Deploy Guide
@@ -308,6 +310,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, tsc, eslint a partir do T-001). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf).
 - **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR.
 - **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
+- **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
 
 ---

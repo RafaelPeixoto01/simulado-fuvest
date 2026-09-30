@@ -24,7 +24,7 @@
 
 **Branch:** todo o MVP é desenvolvido em `feat/mvp`, com commit ao fim de cada tarefa. O merge `--no-ff` em `master` acontece em T-027, depois da validação local completa dos Grupos 1–5. Depois do MVP, as mudanças de código seguem o Fluxo B (CR).
 
-**Responsável:** as tarefas marcadas com **(curador)** dependem de trabalho manual do dono do produto (revisão e classificação das questões, configuração da Railway). As demais são de implementação.
+**Responsável:** as tarefas marcadas com **(curador)** dependem de trabalho manual do dono do produto (revisão e classificação das questões). GitHub e Railway são provisionados por CLI (`gh`, `railway`), como no Meu Controle. O único passo manual de infraestrutura é o toggle "Wait for CI" (T-027).
 
 ---
 
@@ -85,8 +85,8 @@
 
 | ID | Tarefa | Arquivos | Ref | Depende de | Done When |
 |----|--------|----------|-----|------------|-----------|
-| T-026 | Dockerfile multi-stage (Node 24 → Python 3.12) com `data/provas`, start = migrations + sincronização + uvicorn com proxy headers; `05-DEPLOY-GUIDE.md` | `Dockerfile`, `.dockerignore`, `docs/05-DEPLOY-GUIDE.md` | ADR-001, Arq. §9 | Grupos 3 e 4 | `docker build` + `docker run` local com SQLite servem o SPA, a API e as figuras (se não houver Docker local, validar no primeiro deploy e registrar) |
-| T-027 | **(curador)** Repositório GitHub + proteção da `master` + serviço e Postgres na Railway com "Wait for CI"; merge `feat/mvp` → `master`; primeiro deploy e smoke test em produção | Railway/GitHub (fora do repo) | Arq. §9 | T-026 | CI verde em `master`; `/api/health` em produção; simulado completo exercitado em produção |
+| T-026 | Dockerfile multi-stage (Node 24 → Python 3.12) com `data/provas`, start = migrations + sincronização + uvicorn com proxy headers; `railway.json` (config-as-code: builder Dockerfile, healthcheck `/api/health`, restart on failure); `05-DEPLOY-GUIDE.md` no formato do Meu Controle | `Dockerfile`, `.dockerignore`, `railway.json`, `docs/05-DEPLOY-GUIDE.md` | ADR-001, Arq. §9 | Grupos 3 e 4 | `docker build` + `docker run` local com SQLite servem o SPA, a API e as figuras (se não houver Docker local, validar no primeiro deploy e registrar) |
+| T-027 | Provisionar a Railway via CLI (mesmo padrão do Meu Controle) + merge `feat/mvp` → `master` + primeiro deploy (`/deploy-railway`) + smoke test em produção. Comandos: `railway init -n simulado-fuvest`; `railway add -d postgres`; `railway add -s simulado-fuvest -r RafaelPeixoto01/simulado-fuvest -v 'DATABASE_URL=${{Postgres.DATABASE_URL}}' -v ENVIRONMENT=production`; `railway domain`. **Único passo manual (curador):** ligar o toggle "Wait for CI" no dashboard (Settings → Source), que não é exposto por CLI, config-as-code nem API | Railway (fora do repo) | Arq. §9 | T-026 | CI verde em `master`; `/api/health` 200 no domínio da Railway; simulado completo exercitado em produção; "Wait for CI" ligado |
 
 ---
 

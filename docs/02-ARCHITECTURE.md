@@ -418,9 +418,12 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 
 | Item | Valor |
 |------|-------|
-| Hosting | Railway (container Docker, serviço único) |
-| Banco de dados | PostgreSQL (add-on Railway) |
-| Build trigger | Push em `master` (com "Wait for CI" configurado na Railway) |
+| Hosting | Railway (container Docker, serviço único) — projeto `simulado-fuvest`, serviço `simulado-fuvest` ligado ao repositório `RafaelPeixoto01/simulado-fuvest` |
+| Banco de dados | PostgreSQL (add-on Railway); `DATABASE_URL` por referência `${{Postgres.DATABASE_URL}}` |
+| Provisionamento | Via CLI (`railway init`/`add`/`domain`), mesmo padrão do Meu Controle — comandos em T-027 e no `05-DEPLOY-GUIDE.md` |
+| Config-as-code | `railway.json`: builder `DOCKERFILE`, `healthcheckPath: /api/health`, `restartPolicyType: ON_FAILURE` (10 tentativas) |
+| Build trigger | Push em `master` (auto-deploy da Railway) |
+| Gate de deploy | Toggle "Wait for CI" na Railway (só existe no dashboard). Sem branch protection no GitHub, como no Meu Controle: o fluxo faz merge local e push direto em `master`, e o gate é o CI antes do deploy |
 | Container base | `node:24-alpine` (build do SPA) + `python:3.12-slim` (runtime) |
 | Dados | `data/provas/` copiado para a imagem (`DATA_DIR=/app/data/provas`) |
 | Start | `alembic upgrade head && python -m app.pacote.sincronizar && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips=*` |
