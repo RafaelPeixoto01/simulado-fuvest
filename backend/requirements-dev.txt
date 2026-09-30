@@ -1,0 +1,6 @@
+-r requirements.txt
+-r requirements-ingestao.txt
+pytest==9.1.*
+httpx2==2.13.*
+ruff==0.16.*
+pip-audit==2.10.*

@@ -13,7 +13,7 @@
 
 | Grupo | Descrição | Tarefas | Status |
 |-------|-----------|---------|--------|
-| 1 | Setup e Infraestrutura | T-001 a T-004 | Pendente |
+| 1 | Setup e Infraestrutura | T-001 a T-004 | Em andamento |
 | 2 | Pacote e Ingestão | T-005 a T-011 | Pendente |
 | 3 | API | T-012 a T-017 | Pendente |
 | 4 | Frontend | T-018 a T-025 | Pendente |
@@ -32,7 +32,7 @@
 
 | ID | Tarefa | Arquivos | Ref | Depende de | Done When |
 |----|--------|----------|-----|------------|-----------|
-| T-001 | Scaffold do backend: FastAPI (`main`, `config`, `database`), `GET /api/health`, requirements (prod/ingestão/dev), `pyproject.toml` (ruff + pytest), `conftest.py` com SQLite in-memory, `.env.example` | `backend/**` | ADR-001 | — | `python -m uvicorn app.main:app` sobe; `/api/health` 200; `pytest` e `ruff check` verdes |
+| T-001 | Scaffold do backend: FastAPI (`main`, `config`, `database`), `GET /api/health`, requirements (prod/ingestão/dev), `pyproject.toml` (ruff + pytest), `conftest.py` com SQLite in-memory, venv `backend/.venv` (sem `.env`, ver Arq. §9.3) | `backend/**` | ADR-001 | — | `python -m uvicorn app.main:app` sobe; `/api/health` 200; `pytest` e `ruff check` verdes |
 | T-002 | Scaffold do frontend: Vite 8 + React 19 + TS 6.0 strict + Tailwind 4 + TanStack Query + react-router + ESLint + Vitest; proxy `/api` e `/figuras` → 8000 | `frontend/**` | ADR-007 | — | `npm run dev` abre a página; `tsc --noEmit -p tsconfig.app.json`, `npm run lint` e `npm test` verdes |
 | T-003 | Ativar os checks de qualidade: mover `$pendentes` → `checks` (+ `ruff`) no hook; no CI, remover as guardas `hashFiles`, subir para Node 24, remover o `SECRET_KEY`, adicionar `ruff check` e `python -m ingestao validar --todas`; atualizar os Comandos Essenciais e a Stack do `CLAUDE.md` | `.claude/hooks/check-config.json`, `.github/workflows/ci.yml`, `CLAUDE.md`, `.gitignore` (`data/_cache/`) | — | T-001, T-002 | Simulação do hook roda os 4 checks e passa; YAML do CI válido; CLAUDE.md sem a seção "Pendências do Scaffold" |
 | T-004 | Models SQLAlchemy + migration `001_schema_inicial` (5 tabelas, índices) + Alembic configurado | `backend/app/models.py`, `backend/alembic/**` | Arq. §4 | T-001 | `alembic upgrade head` e `downgrade base` sem erro (BT-047) |

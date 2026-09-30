@@ -27,7 +27,7 @@
 | Leitura de PDF | pdfplumber (+ pypdfium2) | 0.11 / 5.13 | Texto com coordenadas, imagens embutidas e renderização de regiões; licenças MIT/Apache (ADR-003) |
 | Imagens | Pillow | 12.3 | Conversão das figuras para WebP otimizado (RNF-001) |
 | Driver Postgres | psycopg | 3.3 | Driver moderno do SQLAlchemy 2 |
-| Testes | pytest + httpx (BE), Vitest + jsdom (FE) | 9.1 / 5.0 | Mesma stack |
+| Testes | pytest + httpx2 (BE), Vitest + jsdom (FE) | 9.1 / 5.0 | Mesma stack; `httpx2` é o cliente que o `starlette.testclient` 1.7 exige (com `httpx` emite deprecação) |
 | Lint | ruff (BE), ESLint + typescript-eslint (FE) | 0.16 / 10.11 + 8.71 | Erros de lint bloqueiam commit e CI |
 | CI/CD | GitHub Actions | — | pytest + ruff + validação dos pacotes + tsc + eslint + vitest |
 | Deploy | Railway (container Docker) | Node 24 / Python 3.12 | Serviço único + Postgres add-on (ADR-001) |
@@ -451,7 +451,9 @@ graph LR
 | `ENVIRONMENT` | Não | `development` | `production` desliga docs OpenAPI e CORS de dev |
 | `ALLOWED_ORIGINS` | Não | `http://localhost:5173` | CORS, só em desenvolvimento |
 
-Não há segredos no MVP (sem autenticação nem integrações pagas).
+Não há segredos no MVP (sem autenticação nem integrações pagas). **Não existe arquivo `.env`:** todas as variáveis têm default local seguro (SQLite) e produção as define na Railway, de modo que nenhum comando local atinge produção por acidente (ADR-008).
+
+**Ambiente Python local:** `backend/.venv` próprio do projeto. O Python global da máquina tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0), que este projeto não pode alterar.
 
 ### 9.4 Verificação e Rollback
 
