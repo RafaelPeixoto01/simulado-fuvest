@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 import { api, type ApiError } from '../services/api'
 import type { HistoricoEntry, SimuladoEmAndamento } from '../simulado/tipos'
-import { useSimulado } from '../simulado/useSimulado'
 import { adicionarAoHistorico } from '../storage/historicoStorage'
 import { decorridoMs } from '../utils/tempo'
 
@@ -18,10 +17,9 @@ interface Opcoes {
   expirouFora: boolean
 }
 
-/** Corrige, grava no histórico, descarta o simulado e abre o resultado (specs/04 §2.3).
+/** Corrige, grava no histórico e abre o resultado, que descarta o simulado (specs/04 §2.3).
  *  Se a correção falhar, nada é descartado: as respostas continuam salvas. */
 export function useFinalizarSimulado(simulado: SimuladoEmAndamento | null) {
-  const { despachar } = useSimulado()
   const navegar = useNavigate()
 
   const mutacao = useMutation<HistoricoEntry, ApiError, Opcoes>({
@@ -49,8 +47,10 @@ export function useFinalizarSimulado(simulado: SimuladoEmAndamento | null) {
     onSuccess: (entrada, { expirouFora }) => {
       const salvo = adicionarAoHistorico(entrada)
       const estado: EstadoResultado = { entrada, naoSalvo: !salvo, expirouFora }
+      // O descarte fica com a tela de resultado (ao montar): descartar aqui faria a
+      // resolução, ainda montada, redirecionar para o início antes da navegação
+      // (o navigate do React Router roda como transição, com prioridade menor)
       navegar(`/resultado/${entrada.id}`, { state: estado })
-      despachar({ tipo: 'DESCARTAR' })
     },
   })
 

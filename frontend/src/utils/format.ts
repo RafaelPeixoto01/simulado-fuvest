@@ -1,0 +1,13 @@
+const numero = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 })
+const data = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+const hora = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' })
+
+export function formatarPercentual(valor: number): string {
+  return `${numero.format(valor)}%`
+}
+
+/** "29/09/2026 22:05" */
+export function formatarDataHora(epochMs: number): string {
+  const d = new Date(epochMs)
+  return `${data.format(d)} ${hora.format(d)}`
+}

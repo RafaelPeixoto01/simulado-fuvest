@@ -5,14 +5,17 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { SimuladoProvider } from '../simulado/SimuladoContext'
 
-export function renderizar(ui: ReactElement, { rota = '/' }: { rota?: string } = {}) {
+export function renderizar(
+  ui: ReactElement,
+  { rota = '/', estado }: { rota?: string; estado?: unknown } = {},
+) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   })
   return render(
     <QueryClientProvider client={queryClient}>
       <SimuladoProvider>
-        <MemoryRouter initialEntries={[rota]}>{ui}</MemoryRouter>
+        <MemoryRouter initialEntries={[{ pathname: rota, state: estado }]}>{ui}</MemoryRouter>
       </SimuladoProvider>
     </QueryClientProvider>,
   )

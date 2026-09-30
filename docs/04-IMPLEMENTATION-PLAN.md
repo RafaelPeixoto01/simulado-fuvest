@@ -102,6 +102,7 @@
 | 2026-09-29 | T-021 | FT-003: Personalizado (Inglês, 2098, 90 questões) | 409 → "Só existem 11 questões para esses filtros." → "Gerar com 11 questões" → `/simulado` com 11 questões, limite 2200 s, pausável. O único registro no console é o log automático do navegador para a resposta 409 (esperado e tratado pelo app) |
 | 2026-09-29 | T-022 | FT-001: Início → Prova completa (descartando o anterior, RN-011) → responder 3 → recarregar | Volta na questão 3 de 90 com a resposta marcada; folha mostra 1 B, 2 D, 3 A; cronômetro seguiu (04:59:50); console limpo |
 | 2026-09-29 | T-022 | FT-005: celular 360 px | Sem rolagem horizontal (345 px); folha de respostas em gaveta fecha ao navegar; figura amplia e fecha com Esc. Ajustes feitos: folha com 2 colunas visíveis no desktop (lateral de 20rem) e barra fixa em uma linha no celular (descrição oculta, ícone para ocultar o tempo) |
+| 2026-09-29 | T-023 | FT-010: Prova de 2099 → 5 respostas → Finalizar → resultado → filtro "Erradas" → histórico | **Achou um bug**: a finalização caía em `/` (o `DESCARTAR` urgente fazia a resolução redirecionar antes da navegação, que roda como transição). Corrigido movendo o descarte para a tela de resultado; teste reforçado para exigir a tela de resultado. Após a correção: "Você acertou 2 de 90" (as 2 anuladas de 2099, RN-002), folha corrigida com rótulos por linha, filtro "Erradas" com 5 questões, histórico com a entrada e simulado em andamento descartado |
 
 ---
 

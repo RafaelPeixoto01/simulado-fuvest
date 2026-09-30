@@ -155,6 +155,8 @@ describe('Resolução (RF-013 a RF-016)', () => {
     expect(dialogo).toHaveTextContent('Você deixou 2 questões em branco.')
     await userEvent.click(within(dialogo).getByRole('button', { name: 'Finalizar' }))
 
+    // Termina na tela de resultado (não pode cair no redirecionamento para o início)
+    expect(await screen.findByRole('heading', { level: 1, name: 'Você acertou 1 de 3 questões' })).toBeInTheDocument()
     await waitFor(() => expect(salvo()).toBeNull())
     const pedido = api.mock.calls.find(([u]) => String(u) === '/api/correcoes')!
     expect(JSON.parse(String(pedido[1]!.body)).respostas).toEqual([
