@@ -1,7 +1,9 @@
 """CLI do curador: `python -m ingestao <comando>` (specs/01-ingestao.md §2.3)."""
 
 import argparse
+import json
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -169,6 +171,77 @@ def _cmd_recortar(args: argparse.Namespace) -> int:
     return 0
 
 
+PENDENCIAS_ESTRUTURAIS = {"V02", "V03", "V06", "V08"}
+
+
+def _cmd_extrair(args: argparse.Namespace) -> int:
+    from app.pacote.leitura import ARQUIVO_PACOTE, salvar_pacote
+    from app.pacote.schema import Fonte, PacoteProva
+    from ingestao.familias import FamiliaNaoRegistrada, familia_do_ano
+    from ingestao.gabarito import obter_parser_gabarito
+    from ingestao.gabarito.familia_2025 import ErroGabarito
+    from ingestao.layouts import obter_parser_layout
+
+    cache = _dir_cache(args)
+    if not (cache / "fonte.json").is_file():
+        _erro(f"Sem PDFs em cache para {args.ano} ({cache}). Rode `baixar` antes.")
+        return 1
+    try:
+        familia = familia_do_ano(args.ano)
+    except FamiliaNaoRegistrada as erro:
+        _erro(str(erro))
+        return 1
+    dir_prova = args.data_dir / str(args.ano)
+    if (dir_prova / ARQUIVO_PACOTE).exists() and not args.forcar:
+        _erro(f"{dir_prova / ARQUIVO_PACOTE} já existe e pode ter revisão manual. "
+              "Use --forcar para sobrescrever.")
+        return 1
+
+    fonte = json.loads((cache / "fonte.json").read_text(encoding="utf-8"))
+    try:
+        gabarito = obter_parser_gabarito(args.ano).extrair(cache / "gabarito.pdf", fonte["versao"])
+    except ErroGabarito as erro:
+        _erro(f"Gabarito: {erro}")
+        return 1
+    resultado = obter_parser_layout(args.ano).extrair(cache / "prova.pdf")
+
+    for q in resultado.questoes:
+        marcacao = gabarito.get(q.numero)
+        if marcacao == "anulada":
+            q.anulada = True
+        elif marcacao is None:
+            q.pendencias.append("Marcação de gabarito não reconhecida: conferir no PDF")
+        else:
+            q.resposta = marcacao
+
+    pacote = PacoteProva(
+        ano=args.ano,
+        versao=fonte["versao"],
+        status="rascunho",
+        fonte=Fonte(url_prova=fonte["url_prova"], url_gabarito=fonte["url_gabarito"],
+                    familia_layout=familia),
+        textos_base=resultado.textos_base,
+        questoes=resultado.questoes,
+    )
+    figuras = dir_prova / DIR_FIGURAS
+    if figuras.is_dir():
+        shutil.rmtree(figuras)  # com --forcar: figuras antigas virariam orfas
+    figuras.mkdir(parents=True)
+    for nome, dados in resultado.figuras.items():
+        (figuras / nome).write_bytes(dados)
+    salvar_pacote(pacote, dir_prova)
+
+    pendencias = validar_pacote(pacote, figuras)
+    print(formatar_relatorio(pacote, pendencias))
+    com_problema = {
+        p.questao for p in pendencias if p.codigo in PENDENCIAS_ESTRUTURAIS and p.questao
+    }
+    limpas = len(pacote.questoes) - len(com_problema)
+    print(f"\n{limpas}/{len(pacote.questoes)} questões sem pendência estrutural "
+          f"({len(resultado.figuras)} figuras). Próximo passo: classificar as disciplinas (V05).")
+    return 0
+
+
 def _ano(valor: str) -> int:
     ano = int(valor)
     if not 1977 <= ano <= 2100:
@@ -213,6 +286,12 @@ def _parser() -> argparse.ArgumentParser:
     recortar.add_argument("--bbox", required=True, help="x0,y0,x1,y1 em pontos PDF")
     recortar.add_argument("--nome", required=True, help="qNNN-k ou tbNN-k (sem extensão)")
     recortar.set_defaults(func=_cmd_recortar)
+
+    extrair = sub.add_parser("extrair", help="Extrai a prova em cache para um pacote rascunho")
+    extrair.add_argument("--ano", type=_ano, required=True)
+    extrair.add_argument("--forcar", action="store_true",
+                         help="Sobrescreve prova.yaml existente (perde a revisão manual)")
+    extrair.set_defaults(func=_cmd_extrair)
 
     for comando in sub.choices.values():
         comando.add_argument(

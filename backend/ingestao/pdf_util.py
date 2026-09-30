@@ -26,6 +26,9 @@ class Linha:
     x1: float
     top: float
     bottom: float
+    # Borda direita da coluna desta linha; None = usar a de juntar_linhas().
+    # Necessario quando uma questao continua em outra coluna/pagina.
+    x_direita: float | None = None
 
 
 def limpar_texto(texto: str) -> str:
@@ -48,7 +51,7 @@ def juntar_linhas(linhas: list[Linha], x_direita: float, tolerancia: float = 15.
     partes = [linhas[0].texto]
     for anterior, atual in zip(linhas, linhas[1:]):
         altura = anterior.bottom - anterior.top
-        cheia = anterior.x1 >= x_direita - tolerancia
+        cheia = anterior.x1 >= (anterior.x_direita or x_direita) - tolerancia
         if atual.top - anterior.bottom > 0.8 * altura or not cheia:
             partes.append("\n" + atual.texto)
         elif anterior.texto.endswith("-") and atual.texto.startswith("-"):

@@ -192,7 +192,12 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
    - menos de 5 alternativas detectadas;
    - região com muitos traços vetoriais (curvas/retângulos) e sem imagem: "Possível figura vetorial na página P, y≈Y0–Y1";
    - texto com o caractere de substituição `�`;
-   - enunciado vazio.
+   - enunciado vazio;
+   - índice/expoente em fonte pequena (< 7,5pt): a palavra sai do texto (evita "PbSO" + linha solta "4") e o curador reescreve (ex.: PbSO₄);
+   - glifos sem mapeamento `(cid:N)` (N ≠ 3), típicos de fórmulas em Cambria Math: recortar a fórmula como figura;
+   - texto sublinhado (fio fino logo abaixo de uma palavra): o texto puro perde a ênfase, e questões como "conectivos sublinhados" (Q11 de 2025) dependem dela.
+   Os alertas são agrupados por tipo e página (`rótulo na página P, y≈A, B: ação`). Pendências de um texto-base vão para a primeira questão que o usa.
+10. Ordem de leitura por faixas: cada linha é partida em segmentos nos vãos horizontais (> 15pt) e cada segmento é classificado como coluna esquerda, direita ou largura total. As faixas de duas colunas são lidas esquerda→direita entre os elementos de largura total, o que cobre páginas mistas (p. 2 de 2025) e de coluna única (p. 12). Imagens entram na ordem pelo centro vertical (as de alternativas começam acima do rótulo `(A)`).
 
 **Parser `familia_2025` — gabarito:** as linhas têm o formato `n L n+45 L` repetido para V1–V4 (ex.: `1 E 46 D 1 A 46 C ...`). Extrair a coluna da versão pedida. Letras `A`–`E` → letra; o marcador de anulada documentado no próprio PDF → `"anulada"`; qualquer outro token → `None`.
 
