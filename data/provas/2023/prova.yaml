@@ -1,6 +1,6 @@
 ano: 2023
 versao: V
-status: rascunho
+status: publicada
 fonte:
   url_prova: https://www.fuvest.br/wp-content/uploads/fuvest2023_primeira_fase_prova_V.pdf
   url_gabarito: https://www.fuvest.br/wp-content/uploads/fuvest2023_gabarito_primeira_fase.pdf
@@ -15,7 +15,7 @@ textos_base:
       Luc Boltanski e Ève Chiapello demonstram com clareza e sagacidade a capacidade antropofágica do capitalismo financeiro que “engole” a linguagem do protesto e da libertação para transformá-la e utilizá-la para legitimar a dominação social e política a partir do próprio mercado.
       Na dimensão do mundo do trabalho, por exemplo, todo um novo vocabulário teve que ser inventado para escamotear as novas transformações e melhor oprimir o trabalhador. Com essa linguagem aparentemente libertadora, passa-se a impressão de que o ambiente de trabalho melhorou e o trabalhador se emancipou.
       Assim houve um esforço dirigido para transformar o trabalhador em "colaborador", para eufemizar e esconder a consciência de sua superexploração; tenta-se também exaltar os supostos valores de liderança para possibilitar que, a partir de agora, o próprio funcionário, não mais o patrão, passe a controlar e vigiar o colega de trabalho. Ou, ainda, há a intenção de difundir a cultura do empreendedorismo, segundo a qual todo mundo pode ser empresário de si mesmo. E, o mais importante, se ele falhar nessa empreitada, a culpa é apenas dele. É necessário sempre culpar individualmente a vítima pelo fracasso socialmente construído.
-      SOUZA, Jessé. Como o racismo criou o Brasil . Rio de Janeiro: Estação Brasil, 2021.
+      SOUZA, Jessé. Como o racismo criou o Brasil. Rio de Janeiro: Estação Brasil, 2021.
 - id: tb02
   questoes:
   - 7
@@ -31,7 +31,8 @@ textos_base:
   conteudo:
   - texto: |-
       From French electronic and Japanese indie to K-pop and Spanish jazz, it’s common for people to listen to songs they don’t necessarily understand. Not knowing the language of the lyrics, it seems, doesn’t stop people from liking—and sometimes even singing along to—a song. Unless the listener is looking up the dictionary meaning of the lyrics, then the dictionary meaning of the lyrics doesn’t make or break their appreciation of a song. But why?
-      “It’s a complicated answer,” said musicologist Lisa Decenteceo, adding that it all starts with what’s called “sound symbolism.” Sound symbolism refers to the study of the relationships between utterances and their meaning. This doesn’t have to do only with music. Marketers, for example, can tune into sound symbolism as part of their strategy in coming up with appealing brand names. In music as well as in branding, Decenteceo explained, there’s something about the appeal of words as sounds, beyond their meaning in a language. While things like culture and personal experiences affect people’s responses to different kinds of music, she explained there are certain musical techniques that are generally used to convey certain moods. One of which is scale. “Songs in a major scale usually have brighter, happier sounds, while minor scales usually have the slightly darker, melancholic feel,” explains Thea Tolentino, a music teacher. The human brain is wired to respond to sound, she added. In a process called entrainment, the brain “synchronizes our breathing, our movement, even neural activities with the sounds we hear.” This is why fast-paced music is so popular for running, for example, or why some yoga teachers play rhythmic and melodic tracks in their classes. And there are also the things that accompany the words. “Elements of sound and music like pitch, melody, harmony, timbre, and amplitude have an affective, emotional, psychological, cognitive, and even physical impact on listeners. Music adds so much meaning and dimension to texts through a complex of these avenues,” said Decenteceo. What all these things do, she added, is liberate the words. “Song frees the voice from any burden of saying anything meaningful”. It’s important, then, to understand music as a discourse between musical elements. But all in all, Decenteceo said there’s value in whatever immediate appeal people find in the music they listen to, whether or not they understand the words. Music, after all, is the universal language.
+      “It’s a complicated answer,” said musicologist Lisa Decenteceo, adding that it all starts with what’s called “sound symbolism.” Sound symbolism refers to the study of the relationships between utterances and their meaning. This doesn’t have to do only with music. Marketers, for example, can tune into sound symbolism as part of their strategy in coming up with appealing brand names. In music as well as in branding, Decenteceo explained, there’s something about the appeal of words as sounds, beyond their meaning in a language. While things like culture and personal experiences affect people’s responses to different kinds of music, she explained there are certain musical techniques that are generally used to convey certain moods. One of which is scale. “Songs in a major scale usually have brighter, happier sounds, while minor scales usually have the slightly darker, melancholic feel,” explains Thea Tolentino, a music teacher.
+      The human brain is wired to respond to sound, she added. In a process called entrainment, the brain “synchronizes our breathing, our movement, even neural activities with the sounds we hear.” This is why fast-paced music is so popular for running, for example, or why some yoga teachers play rhythmic and melodic tracks in their classes. And there are also the things that accompany the words. “Elements of sound and music like pitch, melody, harmony, timbre, and amplitude have an affective, emotional, psychological, cognitive, and even physical impact on listeners. Music adds so much meaning and dimension to texts through a complex of these avenues,” said Decenteceo. What all these things do, she added, is liberate the words. “Song frees the voice from any burden of saying anything meaningful”. It’s important, then, to understand music as a discourse between musical elements. But all in all, Decenteceo said there’s value in whatever immediate appeal people find in the music they listen to, whether or not they understand the words. Music, after all, is the universal language.
       Disponível em https://www.vice.com/. March, 2022. Adaptado.
 - id: tb04
   questoes:
@@ -40,32 +41,37 @@ textos_base:
   conteudo:
   - texto: |-
       O QUINTO IMPÉRIO
+
       Triste de quem vive em casa,
       Contente com o seu lar,
       Sem que um sonho, no erguer de asa,
       Faça até mais rubra a brasa
       Da lareira a abandonar!
+
       Triste de quem é feliz!
       Vive porque a vida dura.
       Nada na alma lhe diz
       Mais que a lição da raiz —
       Ter por vida a sepultura.
+
       Eras sobre eras se somem
       No tempo que em eras vem.
       Ser descontente é ser homem.
       Que as forças cegas se domem
       Pela visão que a alma tem!
+
       E assim, passados os quatro
       Tempos do ser que sonhou,
       A terra será teatro
       Do dia claro, que no atro
       Da erma noite começou.
+
       Grécia, Roma, Cristandade,
       Europa — os quatro se vão
       Para onde vai toda idade.
       Quem vem viver a verdade
       Que morreu D. Sebastião?
-      Fernando Pessoa. Mensagem .
+      Fernando Pessoa. Mensagem.
 - id: tb05
   questoes:
   - 68
@@ -74,18 +80,18 @@ textos_base:
   conteudo:
   - texto: |-
       The expression “dark doldrums” chills the hearts of renewable-energy engineers, who use it to refer to the lulls when solar panels and wind turbines are thwarted by clouds, night, or still air. On a bright, cloudless day, a solar farm can generate prodigious amounts of electricity. But at night solar cells do little, and in calm air turbines sit useless.
-      The dark doldrums make it difficult for us to rely totally on renewable energy. Power companies need to plan not just for individual storms or windless nights but for difficulties that can stretch for days. Last year, Europe experienced a weekslong “wind drought,” and in 2006 Hawaii endured six weeks of consecutive rainy days. On a smaller scale, communities that want to go all-renewable need to fill the gaps. The obvious solution is batteries, which power everything from mobile phones to electric vehicles; they are relatively inexpensive to make and getting cheaper. But typical models exhaust their stored energy after only three or four hours of maximum output, and—as every smartphone owner knows—their capacity dwindles with each recharge. Moreover, it is expensive to collect enough batteries to cover longer discharges.
+      The dark doldrums make it difficult for us to rely totally on renewable energy. Power companies need to plan not just for individual storms or windless nights but for difficulties that can stretch for days. Last year, Europe experienced a weeks-long “wind drought,” and in 2006 Hawaii endured six weeks of consecutive rainy days. On a smaller scale, communities that want to go all-renewable need to fill the gaps. The obvious solution is batteries, which power everything from mobile phones to electric vehicles; they are relatively inexpensive to make and getting cheaper. But typical models exhaust their stored energy after only three or four hours of maximum output, and—as every smartphone owner knows—their capacity dwindles with each recharge. Moreover, it is expensive to collect enough batteries to cover longer discharges.
       We already have one kind of renewable energy storage: more than ninety per cent of the world’s energy-storage capacity is in reservoirs, as part of a technology called pumped-storage hydropower, used to smooth out sharp increases in electricity demand. Motors pump water uphill from a river or a reservoir to a higher reservoir; when the water is released downhill, it spins a turbine, generating power. A pumped-hydro installation is like a giant, permanent battery, charged when water is pumped uphill and depleted as it flows down. Some countries are expanding their use of pumped hydro, but the right geography is hard to find, permits are difficult to obtain, and construction is slow and expensive. The hunt is on for new approaches to energy storage.
-      The New Yorker . Abril, 2022. Adaptado.
+      The New Yorker. Abril, 2022. Adaptado.
 questoes:
 - numero: 1
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A associação de sistemas múltiplos de subordinação tem sido descrita de vários modos: discriminação composta, cargas múltiplas ou como dupla ou tripla discriminação. A interseccionalidade é uma conceituação do problema que busca capturar as consequências estruturais e dinâmicas da interação entre dois ou mais eixos da subordinação. Ela trata especificamente da forma pela qual o racismo, o patriarcalismo, a opressão de classe e outros sistemas discriminatórios criam desigualdades básicas que estruturam as posições relativas de mulheres, raças, etnias, classes e outras”.
-      CRENSHAW, Kimberlé W. “Documento para o Encontro de Especialistas em Aspectos da Discriminação Racial Relativos ao Gênero”. Estudos Feministas , ano 10, nº 1/2002.
+      CRENSHAW, Kimberlé W. “Documento para o Encontro de Especialistas em Aspectos da Discriminação Racial Relativos ao Gênero”. Estudos Feministas, ano 10, nº 1/2002.
   - figura: q001-1.webp
   - texto: |-
       DIEESE (Departamento Intersindical de Estatísticas e Estudos Socioeconômicos), 2021. Adaptado.
@@ -110,13 +116,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “O voto feminino no Brasil completou 90 anos. Desde que a professora Celina Guimarães se alistou para votar em Mossoró, em 1927, e Alzira Soriano, primeira mulher eleita para um cargo público no país, assumiu a Prefeitura de Lajes, em 1929, ambos municípios do Rio Grande do Norte, muita coisa mudou. Em que pesem os avanços legais, o cenário nacional segue desfavorável, e a participação das mulheres na política ainda é irrisória considerando-se o perfil demográfico brasileiro. Mulheres somam 52% dos votantes, mas representam apenas 15% dos parlamentares do Congresso. A maioria da população feminina é negra, ao contrário da parlamentar, que é majoritariamente não negra. Indígena, apenas uma. Verdade que o percentual de participação feminina na Câmara e no Senado cresceu na comparação com legislaturas anteriores. Ainda assim, é pouco. Na prática, a política no Brasil é feita por homens brancos. Dados da União Interparlamentar, que reúne países ligados à ONU, colocam o Brasil na posição 145º do ranking Mulheres nos Parlamentos Nacionais. Numa nação onde em 2021 quatro mulheres foram vítimas de feminicídio por dia, e os casos de estupro voltaram a crescer, já passou da hora de usar a via democrática para tentar mudar esse cenário. É necessário que as mulheres assumam o protagonismo nesse pleito, reivindiquem cabeças de chapas majoritárias e exijam transparência na distribuição dos recursos do fundo partidário. Claro que não há garantias de transformação, mas pode ser uma bela oportunidade de ao menos dar uma sacolejada no jogo e incluir em pauta a discussão de alguns problemas reais do Brasil”.
-      ROSA, Ana Cristina. “Com mulheres na cabeça”. Folha de S. Paulo . 27.02.2022. Adaptado.
+      ROSA, Ana Cristina. “Com mulheres na cabeça”. Folha de S. Paulo. 27.02.2022. Adaptado.
       É correto afirmar que o cenário nacional ao qual se refere a autora do texto
   alternativas:
     A:
@@ -136,12 +142,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 3
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “O ‘País’ abriu quarta-feira em suas colunas o mais interessante dos plebiscitos para solução de um importante problema social: Como deve ser educada a mulher... Trata-se de saber se devemos ser educadas para, pelo casamento, sermos sustentadas pelo homem, ou para nos tornarmos hábeis e prover à nossa própria subsistência pelo nosso único trabalho. Se admitis a primeira hipótese, em que consiste a educação feminina para o casamento? Se preferis a segunda, quais são os gêneros de trabalho em que a mulher pode, sem decair, ganhar a vida em nossa terra? (...) Esta forma de educação requer toda uma ordem de conhecimento que não sejam apenas frívolos. (...) Os nossos costumes, por isso mesmo, são ingênuos e se apoiam em preconceitos e tradições, não admitem ainda a mulher que trabalha. (...) Assim mesmo as professoras já lograram subir um pouco na cotação social. As médicas vão impondo-se pouco a pouco...”. Carmem Dolores. “A Semana”. Rio de Janeiro, 08/04/1906. In: VASCONCELLOS, Eliane (org.). Carmem Dolores. Crônicas , 1905-1910. Rio de Janeiro: Arquivo Público do Estado do Rio de Janeiro, 1998.
+      “O ‘País’ abriu quarta-feira em suas colunas o mais interessante dos plebiscitos para solução de um importante problema social: Como deve ser educada a mulher... Trata-se de saber se devemos ser educadas para, pelo casamento, sermos sustentadas pelo homem, ou para nos tornarmos hábeis e prover à nossa própria subsistência pelo nosso único trabalho. Se admitis a primeira hipótese, em que consiste a educação feminina para o casamento? Se preferis a segunda, quais são os gêneros de trabalho em que a mulher pode, sem decair, ganhar a vida em nossa terra? (...) Esta forma de educação requer toda uma ordem de conhecimento que não sejam apenas frívolos. (...) Os nossos costumes, por isso mesmo, são ingênuos e se apoiam em preconceitos e tradições, não admitem ainda a mulher que trabalha. (...) Assim mesmo as professoras já lograram subir um pouco na cotação social. As médicas vão impondo-se pouco a pouco...”.
+      Carmem Dolores. “A Semana”. Rio de Janeiro, 08/04/1906. In: VASCONCELLOS, Eliane (org.). Carmem Dolores. Crônicas, 1905-1910. Rio de Janeiro: Arquivo Público do Estado do Rio de Janeiro, 1998.
       De acordo com o excerto, assinale a alternativa mais adequada para expressar o processo de inserção das mulheres no mundo do trabalho no início do século XX.
   alternativas:
     A:
@@ -164,31 +171,34 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       FAMÍLIA
+
       Três meninos e duas meninas,
       sendo uma ainda de colo.
       A cozinheira preta, a copeira mulata,
       o papagaio, o gato, o cachorro,
       as galinhas gordas no palmo de horta
       e a mulher que trata de tudo.
+
       A espreguiçadeira, a cama, a gangorra,
       o cigarro, o trabalho, a reza,
       a goiabada na sobremesa de domingo,
       o palito nos dentes contentes,
       o gramofone rouco toda noite
       e a mulher que trata de tudo.
+
       O agiota, o leiteiro, o turco,
       o médico uma vez por mês,
       o bilhete todas as semanas
       branco! mas a esperança sempre verde.
       A mulher que trata de tudo
       e a felicidade.
-      Carlos Drummond de Andrade. Alguma poesia .
+      Carlos Drummond de Andrade. Alguma poesia.
       No poema de Drummond,
   alternativas:
     A:
@@ -210,7 +220,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 5
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -231,7 +241,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -252,7 +262,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -272,7 +282,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 8
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -293,14 +303,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q009-1.webp
-  - texto: 'CUNHA, Sandra B.; GUERRA, Antônio J. T. (Orgs.). Geomorfologia: exercícios, técnicas e aplicações
-      . Rio de Janeiro: Ed. Bertrand Brasil, 1998. Adaptado. A partir da figura, pode-se afirmar que as
-      áreas com as condições naturais mais favoráveis à ocupação humana são:'
+  - texto: |-
+      CUNHA, Sandra B.; GUERRA, Antônio J. T. (Orgs.). Geomorfologia: exercícios, técnicas e aplicações. Rio de Janeiro: Ed. Bertrand Brasil, 1998. Adaptado.
+      A partir da figura, pode-se afirmar que as áreas com as condições naturais mais favoráveis à ocupação humana são:
   alternativas:
     A:
       texto: Os topos mais aplainados dos morros ou a área de terraços fluviais, partes mais planas do
@@ -324,18 +334,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Em nossa época, entretanto, devemos conceber o Estado contemporâneo como uma comunidade humana que, dentro dos limites de determinado território (...) reivindica o monopólio do uso legítimo da violência física. É, com efeito, próprio de nossa época não reconhecer, em relação a qualquer outro grupo ou aos indivíduos, o direito de fazer uso da violência, a não ser nos casos em que o Estado o tolere: o Estado se transforma, portanto, na única fonte do ‘direito’ à violência”.
       WEBER, Max. Ciência e Política: duas vocações. São Paulo: Cultrix, 1970.
-      “Com a entrada das milícias na disputa por territórios no Rio de Janeiro, elas passaram a se digladiar pelo domínio geográfico das comunidades cariocas e fluminenses (...). Embora as milícias também comandem a comunidade com tirania e sua autoridade se mantenha à base de ameaças, como fazem os traficantes, e aqueles que contestam seu poder possam perder a vida e sofrer torturas, ao contrário do tráfico, os milicianos se vendem como fiadores de mercadorias valiosíssimas:
-      ordem,
-      estabilidade
-      e possibilidade de planejar o futuro, aliança política com o Estado e a polícia. (...) O lado impopular desse modelo é que a maior parte das receitas para bancar o negócio vem da extorsão dos habitantes”.
-      PAES MANSO, Bruno . A república das milícias . São Paulo: Todavia, 2020.
+      “Com a entrada das milícias na disputa por territórios no Rio de Janeiro, elas passaram a se digladiar pelo domínio geográfico das comunidades cariocas e fluminenses (...). Embora as milícias também comandem a comunidade com tirania e sua autoridade se mantenha à base de ameaças, como fazem os traficantes, e aqueles que contestam seu poder possam perder a vida e sofrer torturas, ao contrário do tráfico, os milicianos se vendem como fiadores de mercadorias valiosíssimas: ordem, estabilidade e possibilidade de planejar o futuro, aliança política com o Estado e a polícia. (...) O lado impopular desse modelo é que a maior parte das receitas para bancar o negócio vem da extorsão dos habitantes”.
+      PAES MANSO, Bruno. A república das milícias. São Paulo: Todavia, 2020.
       A partir da definição de Estado proposta por Max Weber e de acordo com a citação de Paes Manso, como é possível analisar a atuação das milícias no Rio de Janeiro?
   alternativas:
     A:
@@ -355,10 +362,9 @@ questoes:
         usar a violência e controlar territórios.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈89, 101: conferir o texto'
+  pendencias: []
 - numero: 11
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -382,83 +388,75 @@ questoes:
       figura: q011-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈326, 396, 432, 481, 494, 588, 600, 625: conferir
-    o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 5, y≈499–720
+  pendencias: []
 - numero: 12
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Em um estudo, pesquisadores mostraram que a energia de interação (E) de SO com diversas espécies
-      tem relação com a distância da ligação S=O (D ), como representado na figura.
+  - texto: Em um estudo, pesquisadores mostraram que a energia de interação (E) de SO₃ com diversas espécies
+      tem relação com a distância da ligação S=O (Dₛ₌ₒ), como representado na figura.
   - figura: q012-1.webp
-  - texto: |-
-      A energia de interação de uma espécie com outra pode ser entendida como a energia
-      necessária para desfazer a
-      interação entre o SO e os
+  - texto: A energia de interação de uma espécie com outra pode ser entendida como a energia necessária
+      para desfazer a interação entre o SO₃ e os compostos estudados (X), como representado na figura
+      ao lado.
   - figura: q012-2.webp
-  - texto: |-
-      compostos estudados (X), como
-      representado na figura ao lado.
-      Considerando essas informações, é correto afirmar que
+  - texto: Considerando essas informações, é correto afirmar que
   alternativas:
     A:
-      texto: a interação mais forte ocorre entre SO e MeCN.
+      texto: a interação mais forte ocorre entre SO₃ e MeCN.
     B:
       texto: quanto mais forte a interação entre moléculas, mais longa é a ligação S=O.
     C:
-      texto: a interação de SO e NH é a que faz com que a ligação S=O se alongue mais.
+      texto: a interação de SO₃ e NH₃ é a que faz com que a ligação S=O se alongue mais.
     D:
       texto: a ligação S=O se torna mais curta com o aumento da energia de interação entre moléculas.
     E:
-      texto: a energia de interação do SO com uma molécula de HCN é do mesmo valor do que com uma molécula
-        de NH .
+      texto: a energia de interação do SO₃ com uma molécula de HCN é do mesmo valor do que com uma molécula
+        de NH₃.
   resposta: B
   anulada: false
   pendencias: []
 - numero: 13
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Diversos processos na indústria de óleo e gás podem envolver misturas de gases a diferentes
       temperaturas. Um sistema isolado é composto por dois compartimentos de mesmo volume: o primeiro
-      é ocupado por \U0001D45B =1 mol e o segundo é ocupado por \U0001D45B =2 mols de um gás ideal monoatômico.
-      Inicialmente cada compartimento encontra-se em equilíbrio térmico, com temperatura \U0001D447 =4\U0001D447
-      e \U0001D447 =\U0001D447 , respectivamente, conforme mostra a figura:"
+      é ocupado por \U0001D45B₁ = 1 mol e o segundo é ocupado por \U0001D45B₂ = 2 mols de um gás ideal
+      monoatômico. Inicialmente cada compartimento encontra-se em equilíbrio térmico, com temperatura
+      \U0001D447₁ = 4\U0001D447 e \U0001D447₂ = \U0001D447, respectivamente, conforme mostra a figura:"
   - figura: q013-1.webp
   - texto: "A partir de certo instante, a parede que separa os compartimentos é removida e, após algum
-      tempo, o sistema atinge uma nova temperatura de equilíbrio \U0001D447 . Supondo que não há trabalho
+      tempo, o sistema atinge uma nova temperatura de equilíbrio \U0001D447ₘ. Supondo que não há trabalho
       realizado após a remoção da parede, nem troca de calor entre o sistema e o ambiente externo, a temperatura
-      de equilíbrio \U0001D447 é dada por:"
+      de equilíbrio \U0001D447ₘ é dada por:"
+  - texto: "Note e adote:\nA energia interna de um gás ideal monoatômico é dada por \U0001D448 = 3\U0001D45B\U0001D445\U0001D447/2,
+      sendo \U0001D45B o número de mols, \U0001D445 a constante universal dos gases ideais e \U0001D447
+      a temperatura absoluta."
   alternativas:
     A:
       texto: "\U0001D447"
     B:
-      texto: "3\U0001D447⁄2"
+      texto: "3\U0001D447/2"
     C:
       texto: "2\U0001D447"
     D:
-      texto: "5\U0001D447⁄2"
+      texto: "5\U0001D447/2"
     E:
-      texto: "4\U0001D447\nNote e adote:\nA energia interna de um gás ideal monoatômico é dada por \U0001D448=3\U0001D45B\U0001D445\U0001D447/2
-        , sendo \U0001D45B o número de mols, \U0001D445 a constante universal dos gases ideais e \U0001D447
-        a temperatura absoluta."
+      texto: "4\U0001D447"
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈72, 109: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈192–247
+  pendencias: []
 - numero: 14
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: O odor característico de peixes deve-se à base metilamina (CH –NH ). Esse odor pode ser minimizado
+  - texto: O odor característico de peixes deve-se à base metilamina (CH₃–NH₂). Esse odor pode ser minimizado
       lavando-se o peixe, por exemplo, com suco de limão. Assinale a alternativa que apresenta a estrutura
-      de um dos produtos dessa reação ácidobase.
+      de um dos produtos dessa reação ácido-base.
   alternativas:
     A:
       figura: q014-a.webp
@@ -472,11 +470,9 @@ questoes:
       figura: q014-e.webp
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈309, 615: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈359–707
+  pendencias: []
 - numero: 15
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -508,12 +504,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
-      “O Equador alertou, em julho de 2020, sobre a presença de embarcações próximas às Ilhas Galápagos, principalmente com bandeira chinesa. As ilhas estão a 1.000 km do continente, e a área inclui uma reserva marinha de 133 mil km . Os navios pesqueiros se encontram em águas internacionais, mas sua proximidade do arquipélago, classificado como Patrimônio Natural da Humanidade, preocupa as autoridades equatorianas”.
+      “O Equador alertou, em julho de 2020, sobre a presença de embarcações próximas às Ilhas Galápagos, principalmente com bandeira chinesa. As ilhas estão a 1.000 km do continente, e a área inclui uma reserva marinha de 133 mil km². Os navios pesqueiros se encontram em águas internacionais, mas sua proximidade do arquipélago, classificado como Patrimônio Natural da Humanidade, preocupa as autoridades equatorianas”.
       Disponível em https://www.dw.com/. Adaptado.
       O texto aborda a pesca em águas oceânicas internacionais, sobre a qual é correto afirmar:
   alternativas:
@@ -536,48 +533,47 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
-  - texto: |-
-      Poluentes orgânicos persistentes (POPs) são compostos que persistem no ambiente por longos períodos, ou seja, são pouco degradados naturalmente, magnificam-se ao longo da teia trófica e provocam efeitos adversos à saúde e ao meio ambiente. Entre eles estão alguns compostos orgânicos clorados utilizados como pesticidas e isolantes de chamas. Uma das características dos POPs é que são pouco hidrossolúveis, com elevada tendência de interagir com lipídeos. Uma forma padronizada de se medir essa tendência é pelo cálculo do coeficiente de partição octanol-água (K ). Esse coeficiente representa a razão entre a concentração de um composto na fase de n-octanol e sua concentração na fase aquosa (K = C /C ) após a mistura e separação das fases. Com base nessas informações, assinale a alternativa correta.
-      muito baixo, os POPs não se
+  - texto: Poluentes orgânicos persistentes (POPs) são compostos que persistem no ambiente por longos
+      períodos, ou seja, são pouco degradados naturalmente, magnificam-se ao longo da teia trófica e provocam
+      efeitos adversos à saúde e ao meio ambiente. Entre eles estão alguns compostos orgânicos clorados
+      utilizados como pesticidas e isolantes de chamas. Uma das características dos POPs é que são pouco
+      hidrossolúveis, com elevada tendência de interagir com lipídeos. Uma forma padronizada de se medir
+      essa tendência é pelo cálculo do coeficiente de partição octanol-água (Kow). Esse coeficiente representa
+      a razão entre a concentração de um composto na fase de n-octanol e sua concentração na fase aquosa
+      (Kow = Co/Cw) após a mistura e separação das fases. Com base nessas informações, assinale a alternativa
+      correta.
   alternativas:
     A:
-      texto: |-
-        Por possuírem K
-        solubilizam nem na água nem no octanol.
-        não pode ser determinado para os POPs, pois
+      texto: Por possuírem Kow muito baixo, os POPs não se solubilizam nem na água nem no octanol.
     B:
-      texto: |-
-        O K
-        octanol e água são completamente miscíveis.
+      texto: O Kow não pode ser determinado para os POPs, pois octanol e água são completamente miscíveis.
     C:
       texto: Uma vez que os POPs se magnificam ao longo da teia trófica, sua concentração é maior em produtores
         primários.
     D:
-      texto: |-
-        Os compostos clorados são pouco solúveis em água, de forma que o NaC l pode ser considerado um POP.
-        elevado, solubilizando-se mais
+      texto: Os compostos clorados são pouco solúveis em água, de forma que o NaCℓ pode ser considerado
+        um POP.
     E:
-      texto: |-
-        POPs possuem K
-        facilmente na fase orgânica por serem substâncias lipossolúveis.
+      texto: POPs possuem Kow elevado, solubilizando-se mais facilmente na fase orgânica por serem substâncias
+        lipossolúveis.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 7, y≈311, 348, 378, 403, 489: conferir o texto'
+  pendencias: []
 - numero: 18
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Observe a imagem de satélite a seguir:'
   - figura: q018-1.webp
-  - texto: Google Earth, 2022. Parte dos topos do Chapadão Ocidental Baiano, divisor de águas das bacias
-      hidrográficas dos rios Tocantins e São Francisco, é dominada por monocultura para exportação. Com
-      base na imagem e em seus conhecimentos, é correto afirmar que
+  - texto: |-
+      Google Earth, 2022.
+      Parte dos topos do Chapadão Ocidental Baiano, divisor de águas das bacias hidrográficas dos rios Tocantins e São Francisco, é dominada por monocultura para exportação. Com base na imagem e em seus conhecimentos, é correto afirmar que
   alternativas:
     A:
       texto: tanto a bacia do rio Tocantins quanto a do São Francisco são ameaçadas por contaminação de
@@ -600,19 +596,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Lavouras que mais utilizam fertilizantes no Brasil (%)
   - figura: q019-1.webp
   - texto: |-
-      O Estado de São Paulo , março de 2022.
+      O Estado de São Paulo, março de 2022.
       A partir do gráfico e de seus conhecimentos sobre a dinâmica do espaço agrário brasileiro, é correto afirmar que o uso de fertilizantes no Brasil ocorre, majoritariamente,
   alternativas:
     A:
       texto: em lavouras intensivas, em pequenas propriedades, com baixa produtividade e pouco emprego
-        de tecnologia, direcionadas ao mercado internacional de commodities , principalmente no Centro-Sul
+        de tecnologia, direcionadas ao mercado internacional de commodities, principalmente no Centro-Sul
         do país.
     B:
       texto: em lavouras extensivas, com elevado emprego de mão de obra, altíssima mecanização, com predomínio
@@ -632,16 +628,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 20
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “Para reduzir a dependência de fertilizantes importados para a agricultura, especialmente o nitrogênio, cientistas têm trabalhado
-      no
-      desenvolvimento
-      de
-      organismos geneticamente modificados que podem ser úteis no cultivo de plantações. Uma das propostas é transferir genes das bactérias fixadoras de nitrogênio para as organelas que mais se assemelham a esses microorganismos, viabilizando a fixação de nitrogênio diretamente do ar pelas plantas que não se associam a essas bactérias simbiontes”.
+      “Para reduzir a dependência de fertilizantes importados para a agricultura, especialmente o nitrogênio, cientistas têm trabalhado no desenvolvimento de organismos geneticamente modificados que podem ser úteis no cultivo de plantações. Uma das propostas é transferir genes das bactérias fixadoras de nitrogênio para as organelas que mais se assemelham a esses microorganismos, viabilizando a fixação de nitrogênio diretamente do ar pelas plantas que não se associam a essas bactérias simbiontes”.
       Disponível em https://news.mit.edu/2020/. Adaptado.
       A modificação genética citada
   alternativas:
@@ -659,7 +651,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -668,26 +660,24 @@ questoes:
       exatamente 1 kg de arroz paga R$ 5,00.\n• Quanto maior for a quantidade que o cliente comprar, maior
       será o total a pagar.\n• Quanto maior for a quantidade que o cliente comprar, menor será o valor
       por quilo.\nCada uma das alternativas listadas apresenta uma possível fórmula para o total que o
-      cliente irá pagar, em reais, se comprar uma quantidade \U0001D465 , em quilos, de arroz. A única
+      cliente irá pagar, em reais, se comprar uma quantidade \U0001D465, em quilos, de arroz. A única
       alternativa que atende aos critérios estabelecidos é:"
   alternativas:
     A:
-      texto: "5\U0001D465"
+      texto: "5\U0001D465²"
     B:
-      texto: "5√\U0001D465\n5"
+      texto: "5√\U0001D465"
     C:
-      texto: "\U0001D465"
+      texto: "5/\U0001D465"
     D:
       texto: "5\U0001D465"
     E:
-      texto: "5\U0001D465−\U0001D465"
+      texto: "5\U0001D465 − \U0001D465²"
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 8, y≈614, 666: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 8, y≈639: recortar como figura'
+  pendencias: []
 - numero: 22
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -709,7 +699,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -739,7 +729,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -751,28 +741,32 @@ questoes:
       é:'
   alternativas:
     A:
-      texto: 5 /8
+      texto: 5/8
     B:
-      texto: 2⁄3
+      texto: 2/3
     C:
-      texto: 7⁄10
+      texto: 7/10
     D:
-      texto: 3⁄4
+      texto: 3/4
     E:
-      texto: 4⁄5
+      texto: 4/5
   resposta: B
   anulada: false
   pendencias: []
 - numero: 25
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Combustíveis fósseis, como o diesel, contém em sua composição uma fração de enxofre. Durante o processo de combustão, o enxofre é convertido em SO , tornando-se um poluente ambiental. Em postos de combustível, normalmente são comercializados dois tipos de diesel, o Diesel S10 e o Diesel S500. O primeiro contém 10 ppm de enxofre, e o segundo, 500 ppm de enxofre.
-      Considere que na combustão do diesel, todo enxofre seja convertido em SO , conforme reação a seguir:
-      S(s) + O (g) → SO (g)
-      Nesse caso, a diferença de massa de SO emitido para a atmosfera por kg de diesel quando cada um dos dois tipos é queimado é de
+      Combustíveis fósseis, como o diesel, contém em sua composição uma fração de enxofre. Durante o processo de combustão, o enxofre é convertido em SO₂, tornando-se um poluente ambiental. Em postos de combustível, normalmente são comercializados dois tipos de diesel, o Diesel S10 e o Diesel S500. O primeiro contém 10 ppm de enxofre, e o segundo, 500 ppm de enxofre.
+      Considere que na combustão do diesel, todo enxofre seja convertido em SO₂, conforme reação a seguir:
+      S(s) + O₂(g) → SO₂(g)
+      Nesse caso, a diferença de massa de SO₂ emitido para a atmosfera por kg de diesel quando cada um dos dois tipos é queimado é de
+  - texto: |-
+      Note e adote:
+      Massas molares (g/mol): O = 16; S = 32.
+      1 ppm de enxofre equivale a 1 mg de enxofre por kg de diesel.
   alternativas:
     A:
       texto: 245 mg/kg.
@@ -783,46 +777,21 @@ questoes:
     D:
       texto: 1960 mg/kg.
     E:
-      texto: |-
-        3920 mg/kg.
-        Note e adote:
-        Massas molares (g/mol): O = 16; S = 32.
-        1 ppm de enxofre equivale a 1 mg de enxofre por kg de diesel.
+      texto: 3920 mg/kg.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈103, 179, 195, 211: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 9, y≈326–371
+  pendencias: []
 - numero: 26
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
-  - texto: |-
-      A tabela fornece informações sobre fatores ambientais relacionados a duas regiões de floresta, uma com alto grau de degradação (I) e outra com baixo grau de degradação (II).
-      Fator
-      Região I
-      Região II
-      Frequência de geadas
-      baixa
-      moderada
-      Temperatura máxima
-      moderada
-      alta
-      no verão
-      Disponibilidade de
-      alta
-      moderada
-      água no solo
-      Concentração de SO
-      alta
-      baixa
-      na atmosfera
-      Concentração de CO
-      moderada
-      moderada
-      na atmosfera
-      Com base nos dados da tabela, qual fenômeno pode causar maior grau de degradação das florestas da região I em comparação com aquelas da região II?
+  - texto: A tabela fornece informações sobre fatores ambientais relacionados a duas regiões de floresta,
+      uma com alto grau de degradação (I) e outra com baixo grau de degradação (II).
+  - figura: q026-t.webp
+  - texto: Com base nos dados da tabela, qual fenômeno pode causar maior grau de degradação das florestas
+      da região I em comparação com aquelas da região II?
   alternativas:
     A:
       texto: Chuva ácida.
@@ -836,11 +805,9 @@ questoes:
       texto: Calor extremo no verão.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈576, 607: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 9, y≈459–628
+  pendencias: []
 - numero: 27
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -848,7 +815,7 @@ questoes:
       probabilidade de ocorrência de geada.
   - figura: q027-1.webp
   - texto: |-
-      MARTINELLI, Marcelo. Clima do Estado de São Paulo , Confins, 2010.
+      MARTINELLI, Marcelo. Clima do Estado de São Paulo, Confins, 2010.
       Com base em seu conhecimento sobre o estado de São Paulo e os fatores que contribuem para a formação de geadas, é correto inferir que a maior ocorrência de geadas no estado de São Paulo está associada
   alternativas:
     A:
@@ -869,52 +836,54 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 28
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: O gráfico mostra a variação no número de folhas de uma espécie de árvore ao longo do ano, bem
       como a variação da temperatura mínima e da pluviosidade no local em que há presença dessa planta.
   - figura: q028-1.webp
   - texto: |-
-      Com base na variação no número de folhas, essa planta é característica de clima I_ , e tal variação está relacionada a _ II _.
+      Com base na variação no número de folhas, essa planta é característica de clima ___I___, e tal variação está relacionada a ___II___.
       As lacunas I e II são corretamente preenchidas por
-      I
-      II
   alternativas:
     A:
       texto: |-
-        tropical
-        temperaturas mínimas altas e muita chuva nos meses mais frios
+        I: tropical
+        II: temperaturas mínimas altas e muita chuva nos meses mais frios
     B:
-      texto: temperado temperaturas mínimas baixas e pouca chuva nos meses mais quentes
+      texto: |-
+        I: temperado
+        II: temperaturas mínimas baixas e pouca chuva nos meses mais quentes
     C:
       texto: |-
-        tropical
-        temperaturas mínimas altas e pouca chuva nos meses mais quentes
+        I: tropical
+        II: temperaturas mínimas altas e pouca chuva nos meses mais quentes
     D:
-      texto: temperado temperaturas mínimas baixas e pouca chuva nos meses mais frios
+      texto: |-
+        I: temperado
+        II: temperaturas mínimas baixas e pouca chuva nos meses mais frios
     E:
       texto: |-
-        equatorial
-        temperaturas mínimas baixas e muita chuva nos meses mais quentes
+        I: equatorial
+        II: temperaturas mínimas baixas e muita chuva nos meses mais quentes
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 10, y≈64, 76: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈96–268
+  pendencias: []
 - numero: 29
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: A figura a seguir ilustra o xiquexique, um cacto nativo da Caatinga.
   - figura: q029-1.webp
   - texto: |-
       Disponível em Wikimedia Commons.
-      Dada sua alta capacidade de armazenamento de água, a planta é muito utilizada para alimentação de bovinos, de caprinos e, inclusive, de seres humanos, especialmente durante os períodos de seca, como aludido em Angústia :
+      Dada sua alta capacidade de armazenamento de água, a planta é muito utilizada para alimentação de bovinos, de caprinos e, inclusive, de seres humanos, especialmente durante os períodos de seca, como aludido em Angústia:
       (...) “Amaro vaqueiro alimentava-se, nas secas, com sementes de mucunã lavadas em sete águas, raiz de imbu, miolo de xiquexique, e de tempos a tempos furtava uma cabra no chiqueiro e atirava a culpa à suçuarana”.(...)
-      Graciliano Ramos, Angústia .
+      Graciliano Ramos, Angústia.
       O acúmulo de água no xiquexique é possível pela
   alternativas:
     A:
@@ -931,14 +900,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       “Mas não medimos os tempos que passam, quando os medimos pela sensibilidade. Quem pode medir os tempos passados que já não existem ou os futuros que ainda não chegaram? Só se alguém se atrever a dizer que pode medir o que não existe! Quando está decorrendo o tempo, pode percebê-lo e medi-lo. Quando, porém, já estiver decorrido, não o pode perceber nem medir, porque esse tempo já não existe”.
-      Santo Agostinho. Confissões .
-      O tempo físico e o tempo psicológico se diferenciam na medida em que o primeiro se firma na objetividade e o segundo, na subjetividade. De acordo com os argumentos de Santo Agostinho, pode-se dizer que, no romance Angústia , de Graciliano Ramos, a passagem que melhor exprime a duração interior é:
+      Santo Agostinho. Confissões.
+      O tempo físico e o tempo psicológico se diferenciam na medida em que o primeiro se firma na objetividade e o segundo, na subjetividade. De acordo com os argumentos de Santo Agostinho, pode-se dizer que, no romance Angústia, de Graciliano Ramos, a passagem que melhor exprime a duração interior é:
   alternativas:
     A:
       texto: “– 1910. Minto, 1911. 1911, Manuel?”
@@ -954,14 +924,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O filósofo David Hume apresenta a seguinte relação entre sensações (ou, em suas palavras, sentimentos) e ideias:
       “Em suma, todos os materiais do pensamento são derivados do nosso sentimento externo e interno. Apenas a mistura e composição destes materiais compete à mente e à vontade. Ou, para me expressar em linguagem filosófica, todas as nossas ideias ou percepções mais fracas são cópias das nossas impressões, ou percepções mais vívidas”.
-      HUME, David. Investigação sobre o entendimento humano . Lisboa: Imprensa Nacional / Casa da Moeda, 2002.
+      HUME, David. Investigação sobre o entendimento humano. Lisboa: Imprensa Nacional / Casa da Moeda, 2002.
       É possível tornar mais clara a concepção de Hume vinculando-a a fatos cotidianos. Qual situação confirma a relação proposta no excerto?
   alternativas:
     A:
@@ -978,7 +948,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 32
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -998,7 +968,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 33
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1017,10 +987,9 @@ questoes:
       texto: transmit.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 11, y≈68–184
+  pendencias: []
 - numero: 34
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1041,7 +1010,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1064,17 +1033,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
-  - texto: |-
-      Na teoria musical, o intervalo entre duas notas é medido pela razão entre suas frequências (medidas em Hz). Na escala pitagórica, os intervalos de um tom e de um semitom correspondem, respectivamente, às razões e
-      . A soma de intervalos corresponde ao produto das razões. Por exemplo, no intervalo de dois tons, a razão entre as frequências é de ⋅ = .
+  - texto: Na teoria musical, o intervalo entre duas notas é medido pela razão entre suas frequências
+      (medidas em Hz). Na escala pitagórica, os intervalos de um tom e de um semitom correspondem, respectivamente,
+      às razões 9/8 e 256/243. A soma de intervalos corresponde ao produto das razões. Por exemplo, no
+      intervalo de dois tons, a razão entre as frequências é de 9/8 ⋅ 9/8 = 81/64.
   - figura: q036-1.webp
   - texto: "Em um instrumento afinado de acordo com a escala pitagórica, se o intervalo entre uma nota
-      de 220 Hz e outra de 990 Hz é composto por \U0001D45B tons e \U0001D45A semitons, a soma \U0001D45A+\U0001D45B
-      é igual a:"
+      de 220 Hz e outra de 990 Hz é composto por \U0001D45B tons e \U0001D45A semitons, a soma \U0001D45A
+      + \U0001D45B é igual a:"
   alternativas:
     A:
       texto: '13'
@@ -1088,16 +1059,18 @@ questoes:
       texto: '17'
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 12, y≈109, 121, 152, 164: recortar como figura'
-  - 'Texto sublinhado na página 12, y≈118, 161: formatação perdida no texto puro'
+  pendencias: []
 - numero: 37
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Presentemente eu posso me considerar um sujeito de sorte Porque apesar de muito moço, me sinto são e salvo e forte E tenho comigo pensado, Deus é brasileiro e anda do meu lado E assim já não posso sofrer no ano passado
+      Presentemente eu posso me considerar um sujeito de sorte
+      Porque apesar de muito moço, me sinto são e salvo e forte
+      E tenho comigo pensado, Deus é brasileiro e anda do meu lado
+      E assim já não posso sofrer no ano passado
+
       Tenho sangrado demais, tenho chorado pra cachorro
       Ano passado eu morri, mas esse ano eu não morro
       Belchior. “Sujeito de sorte”.
@@ -1121,11 +1094,11 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
-  - texto: De acordo com o texto, a ideia de felicidade, também nuclear em outros poemas de Mensagem ,
+  - texto: De acordo com o texto, a ideia de felicidade, também nuclear em outros poemas de Mensagem,
   alternativas:
     A:
       texto: alimenta as aspirações humanas.
@@ -1141,7 +1114,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1162,13 +1135,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A Exposição Internacional do Centenário de 1922 no Rio de Janeiro constituiu uma versão brasileira grandiosa, embora anacrônica, das exposições do século XIX, destinadas a celebrar o ideal nacional. Para essa mostra o México enviou uma importante delegação, com farto material de exposição, tendo inclusive construído um pavilhão especial para abrigar seus produtos. José Vasconcelos (1881-1952), o filósofo e intelectual mexicano de maior destaque (...), chefiou a delegação mexicana. No final da exposição, o México deixou no Rio um Cuauhtémoc carioca olhando para a baía da Guanabara, e Vasconcelos partiu levando uma bagagem de mitos nacionais brasileiros (...)”.
-      TENORIO TRILLO, Mauricio. “Um Cuahtémoc Carioca: comemorando o Centenário da independência do Brasil e a raça cósmica”. Estudos Históricos , Rio de Janeiro, v. 7, n. 14, 1994.
+      TENORIO TRILLO, Mauricio. “Um Cuahtémoc Carioca: comemorando o Centenário da independência do Brasil e a raça cósmica”. Estudos Históricos, Rio de Janeiro, v. 7, n. 14, 1994.
       No ano seguinte à celebração do centenário da independência do México, o governo mexicano enviou ao Brasil uma delegação para participar dos festejos do centenário da independência brasileira e escolheu, para simbolizar seu país, a figura de Cuahtémoc, imperador asteca que morreu na luta de resistência contra os conquistadores espanhóis.
       A partir do excerto, é correto atestar a seguinte semelhança entre os dois países:
   alternativas:
@@ -1186,13 +1159,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Eu quase fui um índio sacana, como meu tio. (...) Desses índio que são índio pela metade. Ou seja, qui nem índio, nem branco, nem cholo, nem negro, nem serrano, nem costeiro, nem camponês, nem equatoriano, nem estrangeiro, nem nada. Índio sacana, claro. Índio qu’está à vista de toda gente e ninguém vê, qu’está mesminho nas ruas todos os dias, caminhando pra lá pra cá, buscando trabalho nas porta de gente rica, de jardineiro, de mensageiro, cuidador de cachorros, saloneiro, caseiro, criador de crianças, de toda classe de trabalho. Chofer. O Equador está cheinho de índio sacana assim. Desse tipo d’índio que não é nada”.
-      CARVALHO-NETO, Paulo de. Meu tio Atahualpa . Rio de Janeiro: Salamandra, 1978.
+      CARVALHO-NETO, Paulo de. Meu tio Atahualpa. Rio de Janeiro: Salamandra, 1978.
       A expressão “índio sacana”, presente no texto, faz referência a:
   alternativas:
     A:
@@ -1212,13 +1185,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Os vadios são o ódio de todas as nações civilizadas, e contra eles se tem muitas vezes legislado; porém as regras comuns relativas a este ponto não podem ser aplicáveis ao território de Minas; porque estes vadios, que em outra parte seriam prejudiciais, são ali úteis”.
-      Desembargador J.J. Teixeira Coelho. “Instruções para o governo da capitania de Minas Gerais (1780)”. Apud SOUZA, Laura de Mello e. Os desclassificados do ouro. A pobreza mineira no século XVIII . Rio de Janeiro: Graal, 1982.
+      Desembargador J.J. Teixeira Coelho. “Instruções para o governo da capitania de Minas Gerais (1780)”. Apud SOUZA, Laura de Mello e. Os desclassificados do ouro. A pobreza mineira no século XVIII. Rio de Janeiro: Graal, 1982.
       A partir da leitura do excerto, que aborda aspectos da sociedade mineira do século XVIII, é correto afirmar que, nessa sociedade,
   alternativas:
     A:
@@ -1240,17 +1213,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
       I.
       “É indispensável romper com todas as diplomacias nocivas, mandar pro diabo qualquer forma de hipocrisia, suprimir as políticas literárias e conquistar uma profunda sinceridade pra com os outros e pra consigo mesmo. A convicção dessa urgência foi pra mim a melhor conquista até hoje do movimento que chamam de ‘modernismo’. Foi ela que nos permitiu a intuição de que carecemos, sob pena de morte, de procurar uma arte de expressão nacional”.
-      HOLANDA, Sérgio Buarque de. O lado oposto e outros lados , 1926.
+      HOLANDA, Sérgio Buarque de. O lado oposto e outros lados, 1926.
       II.
       “Trazendo de países distantes nossas formas de convívio, nossas instituições, nossas ideias, e timbrando em manter tudo isso em ambiente muitas vezes desfavorável e hostil, somos ainda hoje uns desterrados em nossa terra”.
-      HOLANDA, Sérgio Buarque de. Raízes do Brasil , 1936.
+      HOLANDA, Sérgio Buarque de. Raízes do Brasil, 1936.
       Os dois excertos do historiador e crítico literário Sérgio Buarque de Holanda salientam que a cultura brasileira somente completará a sua formação quando
   alternativas:
     A:
@@ -1267,8 +1241,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
@@ -1281,7 +1256,7 @@ questoes:
       Dus rio di tuttas naçó;
       I os matto si perdi di vista,
       Nu meio da imensidó.”
-      BANANÉRE, Juó. “Migna terra”. La Divina Increnca . São Paulo: Irmãos Marrano Editora, 1924.
+      BANANÉRE, Juó. “Migna terra”. La Divina Increnca. São Paulo: Irmãos Marrano Editora, 1924.
       Assinale a alternativa que melhor expressa as relações entre o poema e a inserção social de imigrantes italianos no Brasil.
   alternativas:
     A:
@@ -1303,13 +1278,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Quatro anos atrás, neste dia, a esta mesma hora, chegava ao Panteão, em Roma, o carro fúnebre que levava o cadáver de Vittorio Emanuele II, primeiro rei da Itália, morto depois de 29 anos de reinado, durante os quais a grande pátria italiana, antes despedaçada em sete estados e oprimida por estrangeiros e tiranos, tinha renascido como um só país, independente e livre (...)”.
-      AMICIS, Edmondo de. Coração: um livro para jovens . São Paulo: CosacNaify, 2011.
+      AMICIS, Edmondo de. Coração: um livro para jovens. São Paulo: CosacNaify, 2011.
       Esse livro foi publicado pela primeira vez na Itália em 1886. Obteve grande sucesso entre os jovens leitores e foi, desde cedo, amplamente utilizado como livro de leitura nas escolas do país. O texto mobiliza representações que iam ao encontro do culto
   alternativas:
     A:
@@ -1326,13 +1301,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 46
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A Pólis apresenta-se como um universo homogêneo, sem hierarquia, sem planos diversos, sem diferenciação. (...) Segundo um ciclo regulamentado, a soberania passa de um grupo a outro, de um indivíduo a outro, de tal maneira que comandar e obedecer, em vez de se oporem como dois absolutos, tornam-se os dois termos inseparáveis de uma mesma relação reversível”.
-      VERNANT, Jean-Pierre. As Origens do Pensamento Grego . Rio de Janeiro: Difel, 2002.
+      VERNANT, Jean-Pierre. As Origens do Pensamento Grego. Rio de Janeiro: Difel, 2002.
       Sobre a noção de pólis expressa no texto, é correto afirmar que ela pressupõe
   alternativas:
     A:
@@ -1349,7 +1324,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1375,7 +1350,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1386,7 +1361,7 @@ questoes:
   - figura: q048-2.webp
   - texto: |-
       Fotografia tirada por Domício Pinheiro, Comício da Central do Brasil, 13 de março de 1964.
-      SCHWARCZ, Lilia e STARLING, Heloísa. Brasil: uma biografia . São Paulo: Companhia das Letras, 2015.
+      SCHWARCZ, Lilia e STARLING, Heloísa. Brasil: uma biografia. São Paulo: Companhia das Letras, 2015.
       As fotografias registram cenas do comício realizado pelo governo João Goulart no Rio de Janeiro, em março de 1964. Considerando a leitura das imagens, é correto afirmar:
   alternativas:
     A:
@@ -1403,16 +1378,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: '“Nos países bálticos, na Ásia central, no Cáucaso, até mesmo na Rússia e nas duas outras nações
-      eslavas (Ucrânia e Bielo-Rússia [ou Belarus]), consideradas o núcleo básico de sustentação da União
-      Soviética, [em 1990] os parlamentos nacionais proclamavam a própria soberania em relação ao poder
-      central da União, ou seja, a primazia das leis nacionais sobre as leis soviéticas. Num contexto
-      de predomínio de forças centrífugas, qual seria o destino do poder central?”. REIS FILHO, Daniel
-      Aarão. As Revoluções Russas e o Socialismo Soviético . São Paulo: Editoria Unesp, 2003.'
+  - texto: |-
+      “Nos países bálticos, na Ásia central, no Cáucaso, até mesmo na Rússia e nas duas outras nações eslavas (Ucrânia e Bielo-Rússia [ou Belarus]), consideradas o núcleo básico de sustentação da União Soviética, [em 1990] os parlamentos nacionais proclamavam a própria soberania em relação ao poder central da União, ou seja, a primazia das leis nacionais sobre as leis soviéticas. Num contexto de predomínio de forças centrífugas, qual seria o destino do poder central?”.
+      REIS FILHO, Daniel Aarão. As Revoluções Russas e o Socialismo Soviético. São Paulo: Editoria Unesp, 2003.
   - figura: q049-1.webp
   - texto: |-
       VALTMAN, Edmund S., Artista. Gorbachev [Mikhail Gorbachev, presidente da União Soviética entre 1985-1991] contempla uma foice e um martelo despedaçados. União Soviética, 1991. https://www.loc.gov/item/2016687304/.
@@ -1436,7 +1408,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 50
-  disciplina: null
+  disciplina: portugues
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1460,7 +1432,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 51
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1470,7 +1442,7 @@ questoes:
       Observe o mapa com dados de 2015:
   - figura: q051-1.webp
   - texto: |-
-      United Nations Development Programme (UNDP), Human Development indices and indicators , 2015.
+      United Nations Development Programme (UNDP), Human Development indices and indicators, 2015.
       Os dados representados no mapa são condizentes com:
   alternativas:
     A:
@@ -1487,7 +1459,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 52
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1508,8 +1480,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 53
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: 'O mapa do continente africano a seguir reproduz as fronteiras étnicas anteriores ao processo
@@ -1539,7 +1512,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1548,19 +1521,11 @@ questoes:
       Esse transporte era realizado por carregadores que puxavam os trenós sobre a areia.
   - figura: q054-1.webp
   - texto: |-
-      FALL et al., Physical Review Letters 112 , 175502 (2014).
+      FALL et al., Physical Review Letters 112, 175502 (2014).
       Em 2014, cientistas realizaram medidas para testar essa hipótese e, sob certas condições, encontraram os coeficientes de atrito cinético entre o trenó e a areia listados na tabela:
-      Conteúdo de
-      0%
-      1,5%
-      3,2%
-      7,4% água
-      Coeficiente de
-      0,57
-      0,54
-      0,50
-      0,61 atrito
-      Considerando as informações da tabela, qual conteúdo de água na areia tornaria mais fácil o transporte das peças pelos carregadores?
+  - figura: q054-t.webp
+  - texto: Considerando as informações da tabela, qual conteúdo de água na areia tornaria mais fácil o
+      transporte das peças pelos carregadores?
   alternativas:
     A:
       texto: 0% (areia seca)
@@ -1574,18 +1539,15 @@ questoes:
       texto: O conteúdo de água não afeta o transporte.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 17, y≈506, 600, 625: conferir o texto'
-  - 'Texto sublinhado na página 17, y≈570: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 17, y≈520–571
+  pendencias: []
 - numero: 55
-  disciplina: null
+  disciplina: historia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Todos os homens, por natureza, tendem ao saber. Sinal disso é o amor pelas sensações. De fato, eles amam as sensações por si mesmas, independentemente de sua utilidade e amam, acima de todas, a sensação da visão. Com efeito, não só em vista da ação, mas mesmo sem nenhuma intenção de agir, nós preferimos o ver, em certo sentido, a todas as outras sensações. E o motivo está no fato de que a visão nos proporciona mais conhecimento do que todas as outras sensações e nos torna manifestas numerosas diferenças entre as coisas”.
-      Aristóteles. Metafísica , São Paulo: Loyola, 2002.
+      Aristóteles. Metafísica, São Paulo: Loyola, 2002.
       Nessa passagem, a tese principal apresentada por Aristóteles é a de que “todos os homens, por natureza, tendem ao saber”. Com base na construção do argumento, descrever a sensação da visão tem, como função principal, a seguinte tarefa:
   alternativas:
     A:
@@ -1602,12 +1564,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 56
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O cientista Richard Feynman, prêmio Nobel de Física em 1965, fez comentários sobre o processo de combustão em uma entrevista chamada Fun to Imagine . Segundo ele, à primeira vista, é impressionante pensar que os átomos de carbono de uma árvore não entram em combustão com o oxigênio da atmosfera de forma espontânea, já que existe uma grande afinidade entre essas espécies para a formação de CO . Entretanto, quando a reação tem início, o fogo se espalha facilmente.
+      O cientista Richard Feynman, prêmio Nobel de Física em 1965, fez comentários sobre o processo de combustão em uma entrevista chamada Fun to Imagine. Segundo ele, à primeira vista, é impressionante pensar que os átomos de carbono de uma árvore não entram em combustão com o oxigênio da atmosfera de forma espontânea, já que existe uma grande afinidade entre essas espécies para a formação de CO₂. Entretanto, quando a reação tem início, o fogo se espalha facilmente.
       Essa aparente contradição pode ser explicada pois
   alternativas:
     A:
@@ -1615,9 +1577,9 @@ questoes:
     B:
       texto: o fogo torna a reação desfavorável.
     C:
-      texto: o fogo depende da presença de CO para começar.
+      texto: o fogo depende da presença de CO₂ para começar.
     D:
-      texto: o átomo de carbono da árvore é muito mais resistente ao O do que os átomos de carbono dispersos
+      texto: o átomo de carbono da árvore é muito mais resistente ao O₂ do que os átomos de carbono dispersos
         no fogo.
     E:
       texto: a reação precisa de uma energia de ativação para começar.
@@ -1625,43 +1587,43 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 57
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
-      O carbono 14, um isótopo radioativo com meia-vida de 5700 anos, é gerado de forma constante na atmosfera a partir da interação de nêutrons com o nitrogênio atmosférico. Esse C reage com o O e produz CO . Em função de seu decaimento e de suas taxas de deposição e formação, a proporção de CO e de CO na atmosfera é razoavelmente constante ao longo da história geológica da Terra. Esses gases são absorvidos por produtores primários pela fotossíntese, e os isótopos de C são transferidos aos organismos heterotróficos pela teia alimentar.
-      Com a queima de combustíveis fósseis, produzidos há milhões de anos, quantidades significativas de CO têm sido lançadas na atmosfera, aumentando a concentração desse gás.
-      Com base no exposto, o CO emitido a partir da queima de combustíveis fósseis
+      O carbono 14, um isótopo radioativo com meia-vida de 5700 anos, é gerado de forma constante na atmosfera a partir da interação de nêutrons com o nitrogênio atmosférico. Esse ¹⁴C reage com o O₂ e produz ¹⁴CO₂. Em função de seu decaimento e de suas taxas de deposição e formação, a proporção de ¹⁴CO₂ e de ¹²CO₂ na atmosfera é razoavelmente constante ao longo da história geológica da Terra. Esses gases são absorvidos por produtores primários pela fotossíntese, e os isótopos de C são transferidos aos organismos heterotróficos pela teia alimentar.
+      Com a queima de combustíveis fósseis, produzidos há milhões de anos, quantidades significativas de CO₂ têm sido lançadas na atmosfera, aumentando a concentração desse gás.
+      Com base no exposto, o CO₂ emitido a partir da queima de combustíveis fósseis
   alternativas:
     A:
-      texto: mantém constante a proporção C/ C na atmosfera em relação à encontrada no período pré-industrial.
+      texto: mantém constante a proporção ¹²C/¹⁴C na atmosfera em relação à encontrada no período pré-industrial.
     B:
-      texto: apresenta maior concentração de CO em relação à concentração de CO atmosférico encontrado
+      texto: apresenta maior concentração de ¹⁴CO₂ em relação à concentração de CO₂ atmosférico encontrado
         no período pré-industrial.
     C:
-      texto: contém quantidades iguais de C e C, dado que as taxas de formação e deposição de ambos são
-        as mesmas.
+      texto: contém quantidades iguais de ¹⁴C e ¹²C, dado que as taxas de formação e deposição de ambos
+        são as mesmas.
     D:
-      texto: aumenta a proporção C/ C na atmosfera em relação à encontrada no período pré-industrial.
+      texto: aumenta a proporção ¹²C/¹⁴C na atmosfera em relação à encontrada no período pré-industrial.
     E:
-      texto: contém apenas CO , que é o real causador do aquecimento global por ser um gás de efeito estufa
-        mais eficiente que o CO .
+      texto: contém apenas ¹⁴CO₂, que é o real causador do aquecimento global por ser um gás de efeito
+        estufa mais eficiente que o ¹²CO₂.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 18, y≈94, 106, 110, 130, 135, 211, 238, 265, 289, 293,
-    305, 326, 350, 375, 378, 399, 403: conferir o texto'
+  pendencias: []
 - numero: 58
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
-  - texto: O gráfico mostra a quantidade de emissão de CO (em bilhões de toneladas) em função do ano.
+  - texto: O gráfico mostra a quantidade de emissão de CO₂ (em bilhões de toneladas) em função do ano.
   - figura: q058-1.webp
   - texto: |-
       Disponível em https://www.bbc.com/. Adaptado.
-      O total de emissão de CO , em bilhões de toneladas, entre os anos de 1950 e 1990, está entre
+      O total de emissão de CO₂, em bilhões de toneladas, entre os anos de 1950 e 1990, está entre
   alternativas:
     A:
       texto: 1 e 5.
@@ -1675,16 +1637,16 @@ questoes:
       texto: 800 e 1000.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 18, y≈453, 707: conferir o texto'
+  pendencias: []
 - numero: 59
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
       “O Brasil possui a segunda maior área de cobertura de manguezais do globo. Esses ecossistemas proporcionam segurança alimentar às populações costeiras; habitat para espécies terrestres, aves e peixes; e sequestro de carbono. A conservação dos manguezais também é uma solução eficaz para o clima. No entanto, esses ecossistemas e seu vasto potencial natural de armazenamento de carbono são vulneráveis aos impactos causados por atividades antrópicas. No Brasil, aliás, os manguezais estão em perigo. Em 2020, o governo brasileiro aprovou legislação que eliminaria a proteção de manguezais em benefício do desenvolvimento imobiliário. Felizmente, em dezembro de 2021, o Supremo Tribunal Federal considerou essa legislação inconstitucional”.
-      BEZERRA et al. 2022. “Brazil’s mangroves: Natural carbon storage”. Science , 375(6586): 1239. Adaptado.
+      BEZERRA et al. 2022. “Brazil’s mangroves: Natural carbon storage”. Science, 375(6586): 1239. Adaptado.
       Com base no texto, o processo biológico e a atividade socioeconômica sustentável que explicam a importância dos manguezais são, respectivamente,
   alternativas:
     A:
@@ -1701,13 +1663,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - figura: q060-1.webp
   - texto: |-
-      Revista Fapesp , 2022. Adaptado.
+      Revista Fapesp, 2022. Adaptado.
       Segundo os dados apresentados e seus conhecimentos, é possível afirmar que, no Brasil,
   alternativas:
     A:
@@ -1729,7 +1692,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 61
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1741,7 +1704,7 @@ questoes:
       não produzem esse composto.
   - figura: q061-1.webp
   - texto: |-
-      SANTANGELO et al. 2022. “Global urban environmental change drives adaptation in white clover”. Science , 375 (6586): 1275-1281. Adaptado.
+      SANTANGELO et al. 2022. “Global urban environmental change drives adaptation in white clover”. Science, 375 (6586): 1275-1281. Adaptado.
       Com base nas informações fornecidas, é correto afirmar:
   alternativas:
     A:
@@ -1756,10 +1719,9 @@ questoes:
       texto: A produção ou não do composto corresponde a duas espécies diferentes.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 19, y≈670, 706: formatação perdida no texto puro'
+  pendencias: []
 - numero: 62
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1784,7 +1746,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1792,7 +1754,7 @@ questoes:
   - figura: q063-1.webp
   - texto: |-
       MOREIRA et al. 2020. “Aspectos fundamentais da leishmaniose cutânea no Brasil”. DOI:10.22533/at.ed.4852012037. Adaptado.
-      O parasita sobrevive nas células do hospedeiro mamífero pela inativação de enzimas da(o) I , o que bloqueia a digestão intracelular e possibilita a continuidade do ciclo da leishmania. Uma das formas de se prevenir a transmissão dessa doença é II .
+      O parasita sobrevive nas células do hospedeiro mamífero pela inativação de enzimas da(o) ___I___, o que bloqueia a digestão intracelular e possibilita a continuidade do ciclo da leishmania. Uma das formas de se prevenir a transmissão dessa doença é ___II___.
       As lacunas I e II podem ser preenchidas corretamente por:
   alternativas:
     A:
@@ -1809,8 +1771,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: O mapa mostra a variação do número de espécies de aves no território brasileiro, com as linhas
@@ -1835,7 +1798,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1843,9 +1806,9 @@ questoes:
       alguns mais contínuos e outros mais irregulares. Alguns eventos podem mudar rapidamente a superfície,
       enquanto outros a modificam lentamente.
   - figura: q065-1.webp
-  - texto: 'GOUDIE, Andrew S.; VILES, Heather A. Landscapes and Geomorphology: A Very Short Introduction
-      . Oxford University Press, Oxford, 2010. Adaptado. Com base nos dados apresentados, é possível afirmar
-      que os números 1, 2 e 3 correspondem, respectivamente, a:'
+  - texto: |-
+      GOUDIE, Andrew S.; VILES, Heather A. Landscapes and Geomorphology: A Very Short Introduction. Oxford University Press, Oxford, 2010. Adaptado.
+      Com base nos dados apresentados, é possível afirmar que os números 1, 2 e 3 correspondem, respectivamente, a:
   alternativas:
     A:
       texto: Ação eólica, erupções vulcânicas e soerguimento de cadeias montanhosas.
@@ -1859,10 +1822,9 @@ questoes:
       texto: Ação eólica, formação de cavernas e soerguimento de cadeias montanhosas.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 20, y≈792: formatação perdida no texto puro'
+  pendencias: []
 - numero: 66
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1885,7 +1847,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1893,27 +1855,28 @@ questoes:
       e são utilizados em diversos equipamentos, como termômetros digitais domésticos, automóveis, refrigeradores
       e fornos. A curva de calibração de um termistor é mostrada na figura:'
   - figura: q067-1.webp
-  - texto: |-
-      Considere que o termistor se rompa quando percorrido por uma corrente maior do que 10 mA. Supondo que o termistor seja conectado a uma bateria de 5 V, assinale a alternativa que contém uma faixa de temperaturas em que o dispositivo sempre funcionará adequadamente:
-      Note e adote:
+  - texto: 'Considere que o termistor se rompa quando percorrido por uma corrente maior do que 10 mA.
+      Supondo que o termistor seja conectado a uma bateria de 5 V, assinale a alternativa que contém uma
+      faixa de temperaturas em que o dispositivo sempre funcionará adequadamente:'
+  - texto: "Note e adote:\nA relação entre a resistência \U0001D445 de um dispositivo, a corrente \U0001D43C
+      que o percorre e a diferença de potencial elétrico \U0001D449 entre seus terminais é \U0001D449
+      = \U0001D445\U0001D43C."
   alternativas:
     A:
-      texto: "10℃<\U0001D447 <35℃"
+      texto: "10 °C < \U0001D447 < 35 °C"
     B:
-      texto: "20℃<\U0001D447 <45℃\nA relação entre a resistência \U0001D445 de um dispositivo, a corrente
-        \U0001D43C que o"
+      texto: "20 °C < \U0001D447 < 45 °C"
     C:
-      texto: "30℃<\U0001D447 <55℃\npercorre e a diferença de potencial"
+      texto: "30 °C < \U0001D447 < 55 °C"
     D:
-      texto: "40℃<\U0001D447 <65℃\nelétrico \U0001D449 entre seus terminais é"
+      texto: "40 °C < \U0001D447 < 65 °C"
     E:
-      texto: "50℃<\U0001D447 <75℃\n\U0001D449=\U0001D445\U0001D43C ."
+      texto: "50 °C < \U0001D447 < 75 °C"
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 20, y≈730–793
+  pendencias: []
 - numero: 68
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1931,11 +1894,9 @@ questoes:
       texto: as dificuldades encontradas por comunidades rurais para distribuir eletricidade.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto-base tb05: Índice/expoente em fonte pequena na página 21, y≈449, 454, 474, 478: conferir o
-    texto'
+  pendencias: []
 - numero: 69
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1957,7 +1918,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 70
-  disciplina: null
+  disciplina: ingles
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1978,41 +1939,37 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
-  - texto: "Uma das apostas para a produção de energia limpa, sem emissão de gases de efeito estufa e
-      sem geração de resíduos radioativos, é a fusão nuclear, como a que ocorre nas estrelas. Em laboratório,
-      são utilizados os isótopos de hidrogênio deutério ( \U0001D43B ) e trítio ( \U0001D43B ), que, dentro
-      de um intenso campo magnético, são aquecidos a 150 milhões de graus Celsius. Nessas condições, \U0001D43B
-      e \U0001D43B fundem-se formando \U0001D43B\U0001D452 e um outro subproduto, além de liberar uma
-      grande quantidade de energia.\nCom base nessas informações, assinale a alternativa que traz as informações
-      corretas sobre qual é o subproduto formado e sobre a variação de entalpia desse processo."
+  - texto: |-
+      Uma das apostas para a produção de energia limpa, sem emissão de gases de efeito estufa e sem geração de resíduos radioativos, é a fusão nuclear, como a que ocorre nas estrelas. Em laboratório, são utilizados os isótopos de hidrogênio deutério (²₁H) e trítio (³₁H), que, dentro de um intenso campo magnético, são aquecidos a 150 milhões de graus Celsius. Nessas condições, ²₁H e ³₁H fundem-se formando ⁴₂He e um outro subproduto, além de liberar uma grande quantidade de energia.
+      Com base nessas informações, assinale a alternativa que traz as informações corretas sobre qual é o subproduto formado e sobre a variação de entalpia desse processo.
   alternativas:
     A:
-      texto: |-
-        Próton; Δ H<0
-        Δ
+      texto: Próton; ΔH < 0
     B:
-      texto: Próton; H>0
+      texto: Próton; ΔH > 0
     C:
-      texto: Nêutron; Δ H<0
+      texto: Nêutron; ΔH < 0
     D:
-      texto: Nêutron; Δ H>0
+      texto: Nêutron; ΔH > 0
     E:
-      texto: Elétron; Δ H<0
+      texto: Elétron; ΔH < 0
   resposta: C
   anulada: false
   pendencias: []
 - numero: 72
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “De acordo com o órgão responsável pela área de telecomunicações e radiodifusão dos Estados Unidos, considera-se ionizante qualquer radiação eletromagnética que transporte energia maior que 10 eV (elétron-volts). Essa energia é equivalente àquela transportada pelo ultravioleta longínquo, uma das faixas mais energéticas do ultravioleta, que se estende entre 122 nm e 200 nm de comprimento de onda.”
-      Disponível em https://mundoeducacao.uol.com.br/. Adaptado. “De acordo com a professora Patricia Nicolucci, da USP, há dois tipos de radiação: a ionizante e a não ionizante. Mas elas possuem características diferentes de interação com o corpo humano. ‘[Alguns tipos de radiação] são consideradas não ionizantes porque a energia não é suficiente para liberar elétrons quando interagem com o tecido do corpo humano ou qualquer outro material. Já a radiação ionizante, utilizada em medicina nuclear e em radioterapia, tem uma energia maior, o que lhe confere essa característica de tirar elétrons dos átomos da matéria com a qual interage’.”
+      Disponível em https://mundoeducacao.uol.com.br/. Adaptado.
+      “De acordo com a professora Patricia Nicolucci, da USP, há dois tipos de radiação: a ionizante e a não ionizante. Mas elas possuem características diferentes de interação com o corpo humano. ‘[Alguns tipos de radiação] são consideradas não ionizantes porque a energia não é suficiente para liberar elétrons quando interagem com o tecido do corpo humano ou qualquer outro material. Já a radiação ionizante, utilizada em medicina nuclear e em radioterapia, tem uma energia maior, o que lhe confere essa característica de tirar elétrons dos átomos da matéria com a qual interage’.”
       Disponível em https://www5.usp.br/noticias/. Adaptado.
       Com base nos textos e nos seus conhecimentos, assinale a alternativa correta.
   alternativas:
@@ -2032,11 +1989,9 @@ questoes:
         não afeta as propriedades químicas dessas moléculas.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈48, 147, 165, 177, 188, 200, 212: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 22, y≈161, 173, 208: recortar como figura'
+  pendencias: []
 - numero: 73
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2044,36 +1999,31 @@ questoes:
       um prisma de vidro a partir do ar, mostrando apenas raios refratados correspondentes a três cores
       diferentes. Um fenômeno análogo é responsável pelo aparecimento do arco-íris após uma chuva.
   - figura: q073-1.webp
-  - texto: "Na base do fenômeno da dispersão está a refração de raios luminosos quando incidem sobre uma
+  - texto: 'Na base do fenômeno da dispersão está a refração de raios luminosos quando incidem sobre uma
       interface que separa dois meios físicos distintos. A descrição matemática da refração é feita pela
-      lei de Snell, conforme apresentada a seguir:\n\U0001D45B sen\U0001D703 = \U0001D45B sen\U0001D703\nem
-      que:\n• \U0001D45B é o índice de refração da luz de comprimento de \U0001D456,\U0001D706\nonda \U0001D706
-      no meio incidente,\n• \U0001D703 é o ângulo que o raio incidente faz com a reta normal à interface,\n•
-      \U0001D45B é o índice de refração da mesma luz no meio refratado e\n• \U0001D703 é o ângulo que
-      o raio refratado faz com a reta normal \U0001D45F\nà interface.\nO índice de refração do ar pode
-      ser tomado como igual a 1 para qualquer comprimento de onda. Com base nessas informações, a relação
-      correta entre os índices de refração dos raios das cores 1 ( \U0001D45B ), 2 ( \U0001D45B ) e 3
-      ( \U0001D45B ) no vidro é dada por:"
+      lei de Snell, conforme apresentada a seguir:'
+  - figura: q073-2.webp
+  - figura: q073-3.webp
+  - texto: "O índice de refração do ar pode ser tomado como igual a 1 para qualquer comprimento de onda.
+      Com base nessas informações, a relação correta entre os índices de refração dos raios das cores
+      1 (\U0001D45B₁), 2 (\U0001D45B₂) e 3 (\U0001D45B₃) no vidro é dada por:"
+  - texto: "Note e adote:\nA função seno é crescente quando \U0001D703 está entre 0 e 90 graus."
   alternativas:
     A:
-      texto: "\U0001D45B =\U0001D45B =\U0001D45B 1"
+      texto: "\U0001D45B₁ = \U0001D45B₂ = \U0001D45B₃ > 1"
     B:
-      texto: "\U0001D45B \U0001D45B \U0001D45B 1"
+      texto: "\U0001D45B₁ > \U0001D45B₂ > \U0001D45B₃ > 1"
     C:
-      texto: "1<\U0001D45B <\U0001D45B <\U0001D45B"
+      texto: "1 < \U0001D45B₁ < \U0001D45B₂ < \U0001D45B₃"
     D:
-      texto: "\U0001D45B <\U0001D45B <\U0001D45B <1"
+      texto: "\U0001D45B₁ < \U0001D45B₂ < \U0001D45B₃ < 1"
     E:
-      texto: "1\U0001D45B \U0001D45B \U0001D45B\nNote e adote:\nA função seno é crescente quando \U0001D703
-        está entre 0 e 90 graus."
+      texto: "1 > \U0001D45B₁ > \U0001D45B₂ > \U0001D45B₃"
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈702: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 22, y≈772: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈230–267
+  pendencias: []
 - numero: 74
-  disciplina: null
+  disciplina: quimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2085,39 +2035,37 @@ questoes:
       que 5 e azul em valores próximos a 8, conforme figura a seguir, que mostra a cor da solução em diferentes
       valores de pH.
   - figura: q074-2.webp
-  - texto: |-
-      Com base no exposto, qual das alternativas apresenta compostos ou produtos que poderiam ser usados para preparar uma “tinta” rosa/vermelha e uma azul/verde empregando o extrato de repolho roxo?
-      Rosa/Vermelha
-      Azul/Verde
+  - texto: Com base no exposto, qual das alternativas apresenta compostos ou produtos que poderiam ser
+      usados para preparar uma “tinta” rosa/vermelha e uma azul/verde empregando o extrato de repolho
+      roxo?
   alternativas:
     A:
       texto: |-
-        Açúcar
-        Sal de cozinha
+        Rosa/Vermelha: Açúcar
+        Azul/Verde: Sal de cozinha
     B:
       texto: |-
-        Sal de cozinha
-        Bicarbonato de sódio
+        Rosa/Vermelha: Sal de cozinha
+        Azul/Verde: Bicarbonato de sódio
     C:
       texto: |-
-        Bicarbonato de sódio
-        Vinagre
+        Rosa/Vermelha: Bicarbonato de sódio
+        Azul/Verde: Vinagre
     D:
       texto: |-
-        Açúcar
-        Soda cáustica
+        Rosa/Vermelha: Açúcar
+        Azul/Verde: Soda cáustica
     E:
       texto: |-
-        Suco de limão
-        Bicarbonato de sódio
+        Rosa/Vermelha: Suco de limão
+        Azul/Verde: Bicarbonato de sódio
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 23, y≈124: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 23, y≈48–125
+  pendencias: []
 - numero: 75
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  disciplinas_secundarias:
+  - ingles
   texto_base: null
   enunciado:
   - figura: q075-1.webp
@@ -2139,8 +2087,9 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: Os lagartos do gênero Basiliscus têm a capacidade incomum de correr sobre a água. Essa espécie
@@ -2150,7 +2099,9 @@ questoes:
       figura a seguir. Isso garante uma estabilidade dinâmica na superfície da água, em corridas que podem
       chegar a dezenas de metros, dependendo do peso e da idade do animal.
   - figura: q076-1.webp
-  - texto: 'Disponível em https://wonderopolis.org/. Sobre esse movimento, é correto afirmar:'
+  - texto: |-
+      Disponível em https://wonderopolis.org/.
+      Sobre esse movimento, é correto afirmar:
   alternativas:
     A:
       texto: A componente vertical da reação à força gerada pelas patadas na água compensa o peso do animal,
@@ -2169,28 +2120,27 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 77
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Um tradicional brinquedo infantil, conhecido como bate-bate, é composto por duas esferas (bolinhas)
       de massas iguais conectadas cada qual por uma corda e amarradas num ponto comum. Desloca-se a bolinha
-      1 de uma altura ℎ , conforme ilustrado no arranjo:'
+      1 de uma altura ℎ, conforme ilustrado no arranjo:'
   - figura: q077-1.webp
   - texto: 'Ao soltar a esfera 1, ela colidirá com a bolinha 2, inicialmente em repouso. Supondo que a
       colisão seja perfeitamente elástica, verifica-se que, após a colisão, a esfera 2 subirá para a mesma
-      altura ℎ . Imagine agora que uma pequena goma colante seja colocada numa das esferas de modo que,
+      altura ℎ. Imagine agora que uma pequena goma colante seja colocada numa das esferas de modo que,
       após a colisão, ambas permaneçam unidas. Neste caso, após a colisão, a altura alcançada pelo sistema
       formado pelas duas bolinhas unidas será:'
+  - texto: |-
+      Note e adote:
+      Desconsiderar a massa da goma.
   alternativas:
     A:
-      texto: |-
-        ℎ/8
-        Note e adote:
+      texto: ℎ/8
     B:
-      texto: |-
-        ℎ/4
-        Desconsiderar a massa da goma.
+      texto: ℎ/4
     C:
       texto: ℎ/3
     D:
@@ -2199,51 +2149,35 @@ questoes:
       texto: ℎ
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 23, y≈553–582
+  pendencias: []
 - numero: 78
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: O telescópio espacial James Webb, lançado em dezembro de 2021, move-se nas proximidades de
-      um ponto especial chamado ponto de Lagrange , sobre o qual um objeto orbita o Sol com o mesmo período
+      um ponto especial chamado ponto de Lagrange, sobre o qual um objeto orbita o Sol com o mesmo período
       de translação que a Terra. O esquema a seguir, fora de escala, representa o Sol, a Terra e o telescópio
       Webb, com as respectivas massas e distâncias indicadas.
   - figura: q078-1.webp
-  - texto: "A força resultante necessária para manter um objeto de massa \U0001D45A em uma órbita circular
-      de raio \U0001D445 com velocidade angular \U0001D714 é \U0001D439 =\U0001D45A\U0001D714 \U0001D445
-      . Sendo \U0001D439 e \U0001D439 as intensidades das forças gravitacionais resultantes sobre a Terra
-      e sobre o telescópio, respectivamente, assinale a alternativa que descreve a razão \U0001D439 /\U0001D439
-      entre essas forças.\n="
+  - figura: q078-2.webp
+  - figura: q078-3.webp
   alternativas:
     A:
-      texto: |-
-        ( )
-        =
+      figura: q078-a.webp
     B:
-      texto: '='
+      figura: q078-b.webp
     C:
-      texto: ( )
+      figura: q078-c.webp
     D:
-      texto: |-
-        =
-        ( )
+      figura: q078-d.webp
     E:
-      texto: "=\nNote e adote:\nDespreze os efeitos gravitacionais da Lua e suponha que \U0001D45A seja
-        desprezível frente às outras massas e que as órbitas sejam perfeitamente circulares. Suponha ainda
-        que o telescópio se situe exatamente sobre o ponto de Lagrange ."
+      figura: q078-e.webp
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 24, y≈102, 262, 295, 328, 362, 395: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 24, y≈105, 191, 192, 196, 217, 229, 233, 238, 253, 256,
-    262, 265, 278, 286, 298, 305, 308, 319, 331, 358, 365, 366, 369, 391, 398, 443, 467: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 24, y≈253, 265, 286, 298, 319, 331, 353, 365,
-    386, 398: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈419–484
+  pendencias: []
 - numero: 79
-  disciplina: null
+  disciplina: fisica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2254,15 +2188,14 @@ questoes:
       cabeça. Em seguida, a pessoa realiza sobre a bola um trabalho adicional de 10 calorias para arremessá-la.
       Se a colisão da bola com o solo for perfeitamente inelástica, a energia total dissipada na colisão
       será de
+  - texto: |-
+      Note e adote:
+      Considere 1 cal = 4,2 J e g = 10 m/s².
   alternativas:
     A:
-      texto: |-
-        10 cal.
-        Note e adote:
+      texto: 10 cal.
     B:
-      texto: |-
-        20 cal.
-        Considere 1 cal = 4,2 J e g = 10 m/s .
+      texto: 20 cal.
     C:
       texto: 30 cal.
     D:
@@ -2271,27 +2204,26 @@ questoes:
       texto: 50 cal.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈589: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈86–120
+  pendencias: []
 - numero: 80
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
-      O processo de transporte de O para a respiração pode ser entendido como um processo de equilíbrio químico entre a hemoglobina (Hb) e o O . A Hb é uma proteína do sangue responsável pelo transporte do O que também pode existir na forma protonada como HbH . Dependendo da concentração de CO , podem ocorrer a alcalose ou a acidose respiratória. A ligação do oxigênio com a HbH gera a forma oxigenada (HbO ), como pode ser representado pela equação química simplificada:
-      HbH (aq) + O (g) ⇌ HbO (aq) + H (aq)
+      O processo de transporte de O₂ para a respiração pode ser entendido como um processo de equilíbrio químico entre a hemoglobina (Hb) e o O₂. A Hb é uma proteína do sangue responsável pelo transporte do O₂ que também pode existir na forma protonada como HbH⁺. Dependendo da concentração de CO₂, podem ocorrer a alcalose ou a acidose respiratória. A ligação do oxigênio com a HbH⁺ gera a forma oxigenada (HbO₂), como pode ser representado pela equação química simplificada:
+      HbH⁺(aq) + O₂(g) ⇌ HbO₂(aq) + H⁺(aq)
       O dióxido de carbono liberado na respiração pode alterar esse equilíbrio devido à formação de ácido carbônico, representado pela equação:
-      CO (g) + H O( l ) ⇌ H (aq) + HCO (aq)
+      CO₂(g) + H₂O(ℓ) ⇌ H⁺(aq) + HCO₃⁻(aq)
       Com base nessas informações, é correto afirmar:
   alternativas:
     A:
       texto: Nos pulmões, onde a concentração de oxigênio é mais elevada, a forma de hemoglobina favorecida
         é a protonada.
     B:
-      texto: Nos tecidos humanos, onde é consumido O pelo metabolismo, a forma de hemoglobina favorecida
-        é a HbO .
+      texto: Nos tecidos humanos, onde é consumido O₂ pelo metabolismo, a forma de hemoglobina favorecida
+        é a HbO₂.
     C:
       texto: Quando uma pessoa expira mais depressa que o normal, a concentração de dióxido de carbono
         no seu sangue diminui e, nessas situações, a forma de hemoglobina favorecida é a forma protonada.
@@ -2300,23 +2232,23 @@ questoes:
         de hemoglobina favorecida é a forma protonada.
     E:
       texto: Nos tecidos humanos, onde é liberado dióxido de carbono produzido pelo metabolismo, a forma
-        de hemoglobina favorecida é a HbO .
+        de hemoglobina favorecida é a HbO₂.
   resposta: D
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Os três gráficos mostram o comportamento circadiano das variáveis hormônio melatonina (produzida
-      na glândula pineal), hormônio cortisol (produzido nas glândulas suprarenais) e temperatura corpórea
+      na glândula pineal), hormônio cortisol (produzido nas glândulas supra-renais) e temperatura corpórea
       em indivíduos saudáveis ao longo do dia (retângulo claro) e da noite (retângulo escuro). As linhas
       azuis (pontilhadas) correspondem a indivíduos mais jovens, e as vermelhas (contínuas), a indivíduos
       mais idosos.
   - figura: q081-1.webp
   - texto: |-
-      HOOD & AMIR, 2017. “The aging clock: circadian rhythms and later life”. The Journal of Clinical Investigation , 127(2): 437-446. Adaptado.
+      HOOD & AMIR, 2017. “The aging clock: circadian rhythms and later life”. The Journal of Clinical Investigation, 127(2): 437-446. Adaptado.
       Com base nos gráficos, é correto afirmar que
   alternativas:
     A:
@@ -2336,7 +2268,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
+  disciplina: geografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2359,10 +2291,9 @@ questoes:
       figura: q082-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 25, y≈41–762
+  pendencias: []
 - numero: 83
-  disciplina: null
+  disciplina: biologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2385,10 +2316,9 @@ questoes:
       texto: '600'
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈55, 125, 244: conferir o texto'
+  pendencias: []
 - numero: 84
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2409,20 +2339,17 @@ questoes:
       texto: '84'
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈541, 552, 564, 576: conferir o texto'
+  pendencias: []
 - numero: 85
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "A FIFA (Federação Internacional de Futebol) implementou, em 2018, a versão mais recente do
-      ranking das seleções. Suponha que as seleções A e B, com pontuações \U0001D443 e \U0001D443 , respectivamente,
-      disputarão uma final de Copa do Mundo. A pontuação atualizada da seleção A após a partida será dada
-      por\n\U0001D443 =\U0001D443 +60(\U0001D449 −\U0001D438 ),\nonde\n10\n\U0001D438 =\n1+10\ne o valor
-      de \U0001D449 depende do resultado da partida de acordo com a tabela:\nValor de \U0001D449\nResultado
-      da partida\nVitória de A\n1\nEmpate\n0,5\nDerrota de A\n0\nSabendo que \U0001D443 −\U0001D443 =360
-      , se a seleção A vencer a partida, sua pontuação aumentará em"
+  - figura: q085-1.webp
+  - figura: q085-2.webp
+  - texto: |-
+      Note e adote:
+      log₁₀ 2 = 0,3
   alternativas:
     A:
       texto: 6 pontos.
@@ -2433,46 +2360,42 @@ questoes:
     D:
       texto: 15 pontos.
     E:
-      texto: "20 pontos.\nNote e adote:\n\U0001D459\U0001D45C\U0001D454 2=0,3"
+      texto: 20 pontos.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈588, 631, 682, 686, 712, 719, 731, 732, 734, 738,
-    759: conferir o texto'
-  - 'Texto sublinhado na página 26, y≈720, 731, 739: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 26, y≈48–254
+  pendencias: []
 - numero: 86
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Para medir o volume de uma pedra com formato irregular, Ana utilizou um recipiente cilíndrico
-      de raio \U0001D45F=8 \U0001D450\U0001D45A e com água até a altura de 20 \U0001D450\U0001D45A . Após
-      colocar a pedra no recipiente, a altura da água subiu para 23,5 \U0001D450\U0001D45A ."
+      de raio \U0001D45F = 8 cm e com água até a altura de 20 cm. Após colocar a pedra no recipiente,
+      a altura da água subiu para 23,5 cm."
   - figura: q086-1.webp
   - texto: 'O volume da pedra é:'
   alternativas:
     A:
-      texto: "128\U0001D70B \U0001D450\U0001D45A"
+      texto: "128\U0001D70B cm³"
     B:
-      texto: "224\U0001D70B \U0001D450\U0001D45A"
+      texto: "224\U0001D70B cm³"
     C:
-      texto: "240\U0001D70B \U0001D450\U0001D45A"
+      texto: "240\U0001D70B cm³"
     D:
-      texto: "282\U0001D70B \U0001D450\U0001D45A"
+      texto: "282\U0001D70B cm³"
     E:
-      texto: "320\U0001D70B \U0001D450\U0001D45A"
+      texto: "320\U0001D70B cm³"
   resposta: B
   anulada: false
   pendencias: []
 - numero: 87
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Dado um número natural \U0001D45B ≥ 2 , o primorial de \U0001D45B, denotado por \U0001D45B#
-      , é o produto de todos os números primos menores que ou iguais a \U0001D45B . Por exemplo,\n6#=2⋅3⋅5=30\n.\nO
-      menor número da forma \U0001D45B# que é maior que 2000 é:"
+  - texto: "Dado um número natural \U0001D45B ≥ 2, o primorial de \U0001D45B, denotado por \U0001D45B#,
+      é o produto de todos os números primos menores que ou iguais a \U0001D45B. Por exemplo,\n6# = 2
+      ⋅ 3 ⋅ 5 = 30.\nO menor número da forma \U0001D45B# que é maior que 2000 é:"
   alternativas:
     A:
       texto: '2300'
@@ -2488,7 +2411,7 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2515,42 +2438,38 @@ questoes:
       texto: (3 . 4 . 6 . 4)
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 27, y≈88, 280: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 27, y≈280, 308, 319, 330, 341, 352, 363, 374, 384, 395,
-    406, 495: conferir o texto'
-  - 'Texto sublinhado na página 27, y≈316, 338, 360, 382, 404: formatação perdida no texto puro'
+  pendencias: []
 - numero: 89
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Considere a região do plano cartesiano\n\U0001D434 = (\U0001D465,\U0001D466) ∈ ℝ :|\U0001D465|+|\U0001D466|
-      ≤ 1\nesboçada na figura."
+  - texto: "Considere a região do plano cartesiano\n\U0001D434 = {(\U0001D465, \U0001D466) ∈ ℝ²: |\U0001D465|
+      + |\U0001D466| ≤ 1}\nesboçada na figura."
   - figura: q089-1.webp
-  - texto: "Dado \U0001D435 =(\U0001D465,\U0001D466)∈ℝ :(\U0001D465+1) +\U0001D466 ≥1 , a área da região
-      \U0001D434∩\U0001D435 é:"
+  - texto: "Dado \U0001D435 = {(\U0001D465, \U0001D466) ∈ ℝ²: (\U0001D465 + 1)² + \U0001D466² ≥ 1}, a
+      área da região \U0001D434 ∩ \U0001D435 é:"
   alternativas:
     A:
-      texto: 2−
+      texto: "2 − \U0001D70B/4"
     B:
-      texto: 2−
+      texto: "2 − \U0001D70B/2"
     C:
-      texto: 4+
+      texto: "4 + \U0001D70B/2"
     D:
-      texto: 4−
+      texto: "4 − \U0001D70B/4"
     E:
-      texto: 2+
+      texto: "2 + \U0001D70B/2"
   resposta: A
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
+  disciplina: matematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "No plano cartesiano, os pontos (3,2) e (5,4) pertencem ao gráfico da função dada por\n\U0001D466=\U0001D459\U0001D45C\U0001D454
-      (\U0001D44E\U0001D465+\U0001D44F).\nO valor de \U0001D44E+\U0001D44F é:"
+  - texto: "No plano cartesiano, os pontos (3,2) e (5,4) pertencem ao gráfico da função dada por\n\U0001D466
+      = log₂(\U0001D44E\U0001D465 + \U0001D44F).\nO valor de \U0001D44E + \U0001D44F é:"
   alternativas:
     A:
       texto: '-8'
