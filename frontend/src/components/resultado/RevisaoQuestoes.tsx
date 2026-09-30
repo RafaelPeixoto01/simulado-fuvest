@@ -39,7 +39,7 @@ export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; i
     <section>
       <h2 className="text-xl font-bold">Revisão das questões</h2>
       <div className="mt-3 flex flex-wrap items-center gap-3">
-        <fieldset className="flex overflow-hidden rounded-md border border-linha">
+        <fieldset className="flex overflow-hidden rounded-md border border-borda-campo">
           <legend className="sr-only">Mostrar</legend>
           {FILTROS.map((f) => (
             <label key={f.valor} className="cursor-pointer border-r border-linha px-3 py-1.5 text-sm last:border-r-0 has-checked:bg-caneta has-checked:text-papel has-focus-visible:outline-2 has-focus-visible:outline-caneta">
@@ -65,7 +65,7 @@ export function RevisaoQuestoes({ questaoIds, itens }: { questaoIds: string[]; i
               setDisciplina(e.target.value as Disciplina | '')
               setPagina(0)
             }}
-            className="rounded-md border border-linha bg-papel px-2 py-1"
+            className="rounded-md border border-borda-campo bg-papel px-2 py-1"
           >
             <option value="">Todas</option>
             {disciplinas.map((d) => (

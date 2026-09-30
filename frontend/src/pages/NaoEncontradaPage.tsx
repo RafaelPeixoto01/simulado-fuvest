@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 
+import { useTituloPagina } from '../hooks/useTituloPagina'
+
 export function NaoEncontradaPage() {
+  useTituloPagina('Página não encontrada')
   return (
     <section className="max-w-prose">
       <h1 className="text-2xl font-bold">Página não encontrada</h1>

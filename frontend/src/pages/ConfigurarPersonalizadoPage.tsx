@@ -6,6 +6,7 @@ import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useConfirmarDescarte } from '../hooks/useConfirmarDescarte'
 import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import { descricaoPersonalizado } from '../simulado/novoSimulado'
 import type { Catalogo, Disciplina } from '../types'
 import { formatarDuracao } from '../utils/tempo'
@@ -83,13 +84,13 @@ function Formulario({ catalogo }: { catalogo: Catalogo }) {
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2">
             De
-            <select value={anoInicio} onChange={(e) => setAnoInicio(Number(e.target.value))} className="rounded-md border border-linha bg-papel px-2 py-1.5">
+            <select value={anoInicio} onChange={(e) => setAnoInicio(Number(e.target.value))} className="rounded-md border border-borda-campo bg-papel px-2 py-1.5">
               {anos.map((a) => <option key={a}>{a}</option>)}
             </select>
           </label>
           <label className="flex items-center gap-2">
             até
-            <select value={anoFim} onChange={(e) => setAnoFim(Number(e.target.value))} className="rounded-md border border-linha bg-papel px-2 py-1.5">
+            <select value={anoFim} onChange={(e) => setAnoFim(Number(e.target.value))} className="rounded-md border border-borda-campo bg-papel px-2 py-1.5">
               {anos.map((a) => <option key={a}>{a}</option>)}
             </select>
           </label>
@@ -105,7 +106,7 @@ function Formulario({ catalogo }: { catalogo: Catalogo }) {
           max={90}
           value={Number.isNaN(quantidade) ? '' : quantidade}
           onChange={(e) => setQuantidade(e.target.valueAsNumber)}
-          className="mt-2 block w-28 rounded-md border border-linha bg-papel px-3 py-1.5 tabular-nums"
+          className="mt-2 block w-28 rounded-md border border-borda-campo bg-papel px-3 py-1.5 tabular-nums"
         />
       </div>
 
@@ -147,6 +148,7 @@ function Formulario({ catalogo }: { catalogo: Catalogo }) {
 }
 
 export function ConfigurarPersonalizadoPage() {
+  useTituloPagina('Simulado personalizado')
   const catalogo = useCatalogo()
   return (
     <div className="max-w-2xl">

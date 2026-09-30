@@ -16,6 +16,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    css: false,
+    // Só o index.css é processado: o teste de contraste lê os tokens dele (CR-002)
+    css: { include: [/src[\\/]index\.css/] },
   },
 })

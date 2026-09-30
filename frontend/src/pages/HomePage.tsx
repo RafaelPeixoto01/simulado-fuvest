@@ -6,6 +6,7 @@ import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useConfirmarDescarte } from '../hooks/useConfirmarDescarte'
 import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Catalogo } from '../types'
 
@@ -85,6 +86,7 @@ function NaBase({ catalogo }: { catalogo: Catalogo }) {
 }
 
 export function HomePage() {
+  useTituloPagina()
   const catalogo = useCatalogo()
   const { iniciar, iniciando, erro } = useIniciarSimulado()
   const { comConfirmacao, dialogo } = useConfirmarDescarte()

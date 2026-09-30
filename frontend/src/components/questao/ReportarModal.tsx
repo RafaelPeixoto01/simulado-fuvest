@@ -90,7 +90,7 @@ export function ReportarModal({ questaoId, descricao, onFechar }: { questaoId: s
                 maxLength={LIMITE}
                 rows={3}
                 onChange={(e) => setTexto(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-linha px-3 py-2"
+                className="mt-1 block w-full rounded-md border border-borda-campo px-3 py-2"
               />
               <p className="text-right text-xs tabular-nums text-tinta-suave">
                 {texto.length}/{LIMITE}

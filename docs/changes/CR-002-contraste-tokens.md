@@ -45,7 +45,9 @@ Tokens novos no `index.css`, como na tela "Contraste: antes e depois":
 - `--color-borda-campo: #848e9c` (≥ 3:1) nas bordas de campo;
 - `--color-acerto: #17703f` (5,40:1 sobre `acerto-claro`).
 
-O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida perde as letras dentro das bolinhas e ganha o cabeçalho A–E, como a folha da resolução (D2 do CR-001). Cada rota define o próprio título.
+O rosa #d9667f continua nos círculos e bordas decorativos. Cada rota define o próprio título.
+
+**P2.2 (letras de 8 px dentro das bolinhas):** na folha da resolução, já resolvido pelo CR-001 (D2). Na folha corrigida do resultado, sai no redesenho do CR-003: grade de células no celular e bolinhas sem letra, com cabeçalho A–E, no desktop, conforme a decisão do usuário de 30/09/2026. Este CR não mexe na estrutura da folha corrigida, para não refazer o trabalho do CR-003.
 
 ---
 
@@ -56,7 +58,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 | #  | Item | Antes (AS-IS) | Depois (TO-BE) |
 |----|------|---------------|----------------|
 | 1 | Token de texto do impresso (P2.1) | Letras e números em `text-optico` | `text-optico-texto` (#b8405f) em: letra da bolinha neutra das alternativas, números da folha da resolução (bolhas e grade) e números da folha corrigida |
-| 2 | Folha corrigida (P2.2) | Letras A–E de 8 px dentro das bolinhas | Bolinhas sem letra; cabeçalho A–E acima de cada coluna (`aria-hidden`); rótulo acessível de cada linha sem mudança |
+| 2 | Letras dentro das bolinhas (P2.2) | Letras A–E de 8 px na folha da resolução e na folha corrigida | Resolução: já feito no CR-001 (D2). Folha corrigida: no CR-003 |
 | 3 | Verde de acerto (P2.3) | `--color-acerto: #1b7f4b` | `#17703f` (vale para texto, borda e preenchimento de acerto) |
 | 4 | Borda de campo (P2.4) | `border-linha` | `border-borda-campo` em: `select` de anos (Personalizado e Treino), quantidade (Personalizado), `select` de disciplina e seletor segmentado da revisão, `textarea` do reporte |
 | 5 | Título da página (P2.5) | Sempre "Simulado Fuvest" | Hook `useTituloPagina`: "Simulado Fuvest" no início e "‹página› · Simulado Fuvest" nas demais (Simulado personalizado, Prova de um ano, ‹descrição do simulado›, Treino por questão, Resultado, Histórico, Página não encontrada) |
@@ -64,7 +66,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 ### 4.2 O que NÃO muda
 
 - O rosa `optico` #d9667f nos círculos da marca, nas bordas das bolinhas e nos contornos decorativos (cartão da folha).
-- A estrutura da folha corrigida (colunas, cores de acerto e erro, contorno da correta): a navegação por ela e a nova ordem do resultado ficam no CR-003.
+- A estrutura da folha corrigida (colunas, bolinhas, cores, contorno da correta): o redesenho, a navegação por ela e a nova ordem do resultado ficam no CR-003. Aqui só o número muda para `optico-texto`.
 - Os demais tokens (`caneta`, `erro`, `alerta`, `tinta-suave`), que já passam no AA.
 - Os cartões de disciplina com checkbox: a borda deles é decorativa, e o limite do componente é o próprio checkbox.
 
@@ -78,7 +80,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 | `/docs/02-ARCHITECTURE.md`      | Sim        | §3 Estrutura (`hooks/`)      | Listar `useTituloPagina` |
 | `/docs/03-SPEC.md`              | Sim        | Cabeçalho, changelog         | v1.2 com referência ao CR-002 |
 | `/docs/specs/03-resolucao.md`   | Sim        | §3 (componentes), tokens, títulos | Tokens de texto e borda, título por rota; v1.2 |
-| `/docs/specs/04-correcao-resultado.md` | Sim | Folha corrigida              | Sem letras nas bolinhas, cabeçalho A–E; v1.1 |
+| `/docs/specs/04-correcao-resultado.md` | Não | —                            | A folha corrigida muda no CR-003 |
 | `/docs/04-IMPLEMENTATION-PLAN.md` | Sim      | Cabeçalho, Visão Geral       | Registrar o CR-002 |
 | `/docs/05-DEPLOY-GUIDE.md`      | Não        | —                            | Sem variáveis, migrations ou procedimentos novos |
 | `CLAUDE.md`                     | Sim        | Change Requests              | Adicionar o CR-002 |
@@ -95,12 +97,13 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 | Modificar | `frontend/src/index.css` | Tokens `optico-texto`, `borda-campo` e novo valor de `acerto` |
 | Modificar | `frontend/src/components/questao/Alternativas.tsx` | Letra da bolinha neutra em `text-optico-texto` |
 | Modificar | `frontend/src/components/resolucao/FolhaRespostas.tsx` | Números em `text-optico-texto` |
-| Modificar | `frontend/src/components/resultado/FolhaCorrigida.tsx` | Números em `text-optico-texto`; bolinhas sem letra; cabeçalho A–E |
+| Modificar | `frontend/src/components/resultado/FolhaCorrigida.tsx` | Números em `text-optico-texto` (o redesenho é do CR-003) |
 | Modificar | `frontend/src/pages/ConfigurarPersonalizadoPage.tsx`, `TreinoPage.tsx`, `components/resultado/RevisaoQuestoes.tsx`, `components/questao/ReportarModal.tsx` | `border-borda-campo` nos campos |
 | Criar     | `frontend/src/hooks/useTituloPagina.ts` | Define `document.title` por página |
 | Modificar | `frontend/src/pages/*.tsx` | Chamar `useTituloPagina` |
 | Criar     | `frontend/src/tokens.test.ts` | Contraste dos pares de tokens calculado a partir do `index.css` |
-| Modificar | testes das páginas | Título por rota; folha corrigida sem letras |
+| Modificar | `frontend/vite.config.ts` | Vitest processa só o `index.css` (o teste de contraste lê os tokens pelo `?raw`) |
+| Modificar | testes das páginas | Título por rota |
 
 ### 6.2 Banco de Dados
 
@@ -116,7 +119,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 |---------|--------|------------|-----------|
 | CR-T-01 | Tokens no `index.css` e teste de contraste calculado a partir do arquivo (P2.1, P2.3, P2.4) | — | Teste mede ≥ 4,5:1 para texto e ≥ 3:1 para a borda |
 | CR-T-02 | `text-optico-texto` nas letras e números; `border-borda-campo` nos campos | CR-T-01 | Nenhum texto em `text-optico`; nenhum campo com `border-linha` |
-| CR-T-03 | Folha corrigida sem letras nas bolinhas, com cabeçalho A–E (P2.2) | CR-T-01 | Teste da folha corrigida verde |
+| CR-T-03 | P2.2: conferir que a resolução já não tem letras nas bolinhas (CR-001) e registrar a folha corrigida no escopo do CR-003 | — | Registrado no CR-003 |
 | CR-T-04 | `useTituloPagina` em todas as rotas (P2.5) | — | Teste confere o título de cada rota |
 | CR-T-05 | Validação runtime (Playwright: cores calculadas e títulos) + documentação | CR-T-01..04 | Registrado na seção 8; docs atualizados |
 
@@ -125,7 +128,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 ## 8. Critérios de Aceite
 
 - [ ] P2.1: letras A–E das alternativas e números das folhas em #b8405f (≥ 4,5:1 sobre branco e sobre `caneta-clara`)
-- [ ] P2.2: a folha corrigida não tem letras dentro das bolinhas; o cabeçalho A–E fica acima de cada coluna
+- [ ] P2.2: a folha da resolução não tem letras dentro das bolinhas (CR-001); a folha corrigida entra no escopo do CR-003
 - [ ] P2.3: "Correta" e "Sua resposta" (acerto) em #17703f, ≥ 4,5:1 sobre `acerto-claro`
 - [ ] P2.4: bordas de `input`, `select`, `textarea` e do seletor segmentado em #848e9c (≥ 3:1 sobre branco e sobre `fundo`)
 - [ ] P2.5: cada rota tem um título próprio no formato "‹página› · Simulado Fuvest"
@@ -145,7 +148,7 @@ O rosa #d9667f continua nos círculos e bordas decorativos. A folha corrigida pe
 
 | #  | Risco / Efeito Colateral | Probabilidade | Impacto | Mitigação |
 |----|--------------------------|---------------|---------|-----------|
-| 1 | Sem letras nas bolinhas, a folha corrigida depende do cabeçalho para indicar a coluna | Baixa | Baixo | Cabeçalho A–E por coluna, como a folha da resolução; o rótulo acessível de cada linha continua com a letra marcada e a correta |
+| 1 | A folha corrigida continua com as letras de 8 px até o CR-003 | Alta | Baixo | O CR-003 é o próximo da fila e já tem o redesenho decidido; o rótulo acessível de cada linha traz a letra marcada e a correta |
 | 2 | O verde mais escuro altera o visual de acerto em todas as telas | Alta | Baixo | Mudança intencional e pequena (#1b7f4b → #17703f) |
 | 3 | O título muda a cada rota e pode aparecer diferente em favoritos e abas | Alta | Baixo | Efeito desejado (WCAG 2.4.2) |
 
