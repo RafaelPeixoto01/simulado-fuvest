@@ -14,7 +14,7 @@
 | Grupo | Descrição | Tarefas | Status |
 |-------|-----------|---------|--------|
 | 1 | Setup e Infraestrutura | T-001 a T-004 | Concluído |
-| 2 | Pacote e Ingestão | T-005 a T-011 | Pendente |
+| 2 | Pacote e Ingestão | T-005 a T-011 | Em andamento |
 | 3 | API | T-012 a T-017 | Pendente |
 | 4 | Frontend | T-018 a T-025 | Pendente |
 | 5 | Deploy | T-026 a T-027 | Pendente |
