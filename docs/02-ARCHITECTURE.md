@@ -483,6 +483,7 @@ Rollback de código ou de dados é o mesmo procedimento: `git revert` do commit 
 |-------------|-----|--------|
 | typescript | `~6.0.3` | typescript-eslint 8.71 exige `<6.1.0` (ADR-007) |
 | vite / @vitejs/plugin-react | `^8` / `^6` | plugin-react 6 exige vite 8 |
+| jsdom | `^29.1` | jsdom 30 exige Node ≥ 24.15 e a máquina local tem 24.11; subir quando o Node local for atualizado |
 | pdfplumber | `==0.11.*` | Mudanças na API de coordenadas quebram os parsers; atualizar só com as fixtures verdes |
 
 ### 10.2 Processo de Auditoria
