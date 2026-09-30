@@ -6,6 +6,14 @@ from app.main import criar_app
 from tests.utils import aplicar_migrations
 
 
+@pytest.fixture(autouse=True)
+def _zerar_rate_limit():
+    """O limiter e unico no processo (como no Meu Controle): zera entre testes."""
+    from app.rate_limit import limiter
+
+    limiter.reset()
+
+
 @pytest.fixture
 def settings(tmp_path) -> Settings:
     return Settings(

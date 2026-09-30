@@ -106,3 +106,19 @@ class CatalogoResponse(BaseModel):
     total_questoes: int
     distribuicao_completa: dict[Disciplina, int]
     completa_disponivel: bool
+
+
+class SimuladoResponse(BaseModel):
+    modo: str
+    questoes: list[QuestaoPublica]
+    textos_base: dict[str, TextoBasePublico]
+    tempo_limite_s: int | None
+    pausavel: bool
+    disponiveis: int
+    semente: int
+
+
+class QuestoesResponse(BaseModel):
+    questoes: list[QuestaoPublica]
+    textos_base: dict[str, TextoBasePublico]
+    nao_encontradas: list[str]

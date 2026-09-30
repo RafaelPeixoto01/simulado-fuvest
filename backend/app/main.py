@@ -1,8 +1,10 @@
 from fastapi import FastAPI
+from slowapi.errors import RateLimitExceeded
 
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao
-from app.routers import catalogo, health
+from app.rate_limit import limite_excedido, limiter
+from app.routers import catalogo, health, questoes, simulados
 
 
 def criar_app(settings: Settings | None = None) -> FastAPI:
@@ -14,8 +16,13 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
     app.state.engine = engine
     app.state.fabrica_sessao = criar_fabrica_sessao(engine)
 
+    app.state.limiter = limiter
+    app.add_exception_handler(RateLimitExceeded, limite_excedido)
+
     app.include_router(health.router)
     app.include_router(catalogo.router)
+    app.include_router(simulados.router)
+    app.include_router(questoes.router)
     return app
 
 
