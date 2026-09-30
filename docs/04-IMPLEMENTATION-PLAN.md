@@ -2,10 +2,10 @@
 
 **Versão:** 1.0
 **Data:** 2026-09-29
-**PRD Ref:** 01-PRD v1.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0
-**Spec Ref:** 03-SPEC v1.0 (specs 01–05)
-**CR Ref:** CR-001, CR-002, CR-003
+**PRD Ref:** 01-PRD v2.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4
+**Spec Ref:** 03-SPEC v1.4 (specs 01–06)
+**CR Ref:** CR-001, CR-002, CR-003, CR-004
 
 ---
 
@@ -22,6 +22,7 @@
 | CR-001 | Resolução: navegação, folha de respostas e pausa (pós-MVP, [CR](changes/CR-001-resolucao-navegacao.md)) | CR-T-01 a CR-T-10 | Concluído |
 | CR-002 | Contraste e tokens (pós-MVP, [CR](changes/CR-002-contraste-tokens.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-003 | Resultado, figura e início (pós-MVP, [CR](changes/CR-003-resultado-figura-inicio.md)) | CR-T-01 a CR-T-09 | Concluído |
+| CR-004 | Assuntos e desempenho — Fase 3A do roadmap ([CR](changes/CR-004-assuntos-desempenho.md), [spec 06](specs/06-assuntos-desempenho.md)) | CR-T-01 a CR-T-10 | Em andamento |
 
 > **Status:** Pendente / Em andamento / Concluído
 

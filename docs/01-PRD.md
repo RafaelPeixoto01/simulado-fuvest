@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 1.2
+**Versão:** 2.0
 **Data:** 2026-09-30
 **Status:** Aprovado
-**Fase:** MVP — Simulados da 1ª fase
-**CR Ref:** CR-001, CR-003
+**Fase:** MVP — Simulados da 1ª fase + Fase 3A — Assuntos e desempenho
+**CR Ref:** CR-001, CR-003, CR-004
 
 ---
 
@@ -14,7 +14,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **Problema:** as provas antigas existem só como PDFs soltos, um por ano. Para treinar, o estudante imprime ou lê o PDF, confere as respostas à mão no gabarito e não tem nenhuma visão do próprio desempenho por disciplina. Também não dá para montar uma prova misturando anos, nem treinar só uma matéria.
 
-**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho. Não é preciso criar conta.
+**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, assunto, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho por disciplina e por assunto, em cada simulado e somando os simulados já feitos (CR-004). Não é preciso criar conta.
 
 **Público-alvo:** estudantes que vão prestar a FUVEST (3º ano do ensino médio, cursinho, treineiros).
 
@@ -29,6 +29,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Base de questões útil no lançamento | Provas (anos) publicadas na base | ≥ 5 provas (450 questões) no lançamento; +1 prova por ano (a cada novo vestibular) |
 | Questões corretas e confiáveis | % de questões publicadas que passam em todas as validações automáticas (RN-007) | 100% |
 | Questões corretas e confiáveis | Questões com reporte de erro confirmado / questões publicadas | < 2% |
+| Estatística por assunto confiável | % de questões publicadas com assunto da taxonomia (V11, CR-004) | 100% |
 | Ingestão sustentável sem IA | Tempo de curadoria manual (revisão + classificação) por prova | ≤ 3 h por prova |
 | Uso do produto | Simulados gerados por semana (contagem anônima no servidor) | Linha de base medida no 1º mês após o lançamento |
 | Experiência fluida | Tempo de geração de um simulado (p95) | < 2 s |
@@ -59,9 +60,10 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RF-002 | Extrair o gabarito oficial (90 respostas A–E ou "anulada") da versão escolhida | Alta | Curador |
 | RF-003 | Extrair as questões do PDF da prova: número, enunciado, texto-base compartilhado, alternativas A–E e figuras | Alta | Curador |
 | RF-004 | Gerar um pacote de revisão editável por prova, com relatório de validação e pendências | Alta | Curador |
-| RF-005 | Classificar cada questão por disciplina durante a revisão | Alta | Curador |
+| RF-005 | Classificar cada questão por disciplina e por assunto durante a revisão | Alta | Curador |
 | RF-006 | Importar o pacote revisado no banco de forma idempotente e publicar a prova | Alta | Curador |
 | RF-007 | Consultar os reportes de erro enviados pelos estudantes e corrigir a questão | Média | Curador |
+| RF-023 | Manter a taxonomia de assuntos de cada disciplina, versionada junto com as provas (CR-004) | Alta | Curador |
 
 **RF-001 — Detalhamento:**
 - Campos obrigatórios: ano do vestibular, URL do PDF da prova, URL do PDF do gabarito
@@ -82,13 +84,19 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **RF-004 — Detalhamento:**
 - Saída por prova: arquivo estruturado legível e editável à mão + pasta com as figuras
-- Validações automáticas: 90 questões; 5 alternativas não vazias por questão; resposta do gabarito presente para cada questão; toda figura referenciada existe; toda questão tem disciplina principal
+- Validações automáticas: 90 questões; 5 alternativas não vazias por questão; resposta do gabarito presente para cada questão; toda figura referenciada existe; toda questão tem disciplina principal e um assunto dessa disciplina (CR-004)
 - Relatório lista as pendências por questão (ex.: "Q37: alternativa D vazia", "Q52: figura não localizada")
 
 **RF-005 — Detalhamento:**
-- Campos obrigatórios: disciplina principal (uma das 8 disciplinas oficiais)
-- Campos opcionais: disciplinas secundárias (para questões interdisciplinares)
-- Regras específicas: feita pelo curador no pacote de revisão; a importação recusa questão sem disciplina principal
+- Campos obrigatórios: disciplina principal (uma das 8 disciplinas oficiais); assunto (exatamente um, da taxonomia da disciplina principal — RN-014, CR-004)
+- Campos opcionais: disciplinas secundárias (para questões interdisciplinares), sem assunto próprio
+- Regras específicas: feita pelo curador no pacote de revisão; a importação recusa questão sem disciplina principal ou sem assunto válido. Um comando lista a classificação de uma prova, agrupada por disciplina e assunto, para revisão
+
+**RF-023 — Detalhamento (CR-004):**
+- Lista fixa de assuntos por disciplina (8 a 15 por disciplina), condensada do "Programa das disciplinas" do Guia de Provas FUVEST, em arquivo versionado junto com os pacotes das provas
+- Cada assunto tem um identificador estável (slug) e um nome para exibição
+- A taxonomia é validada no CI; taxonomia inválida impede a publicação (a sincronização não altera o banco)
+- Renomear o slug de um assunto já usado exige reclassificar as questões na mesma mudança (a validação acusa o que ficou órfão)
 
 **RF-006 — Detalhamento:**
 - Reimportar a mesma prova atualiza as questões existentes, sem duplicar
@@ -184,6 +192,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **RF-018 — Detalhamento:**
 - Por disciplina principal: acertos / questões e percentual, ordenado da pior para a melhor
+- Em cada disciplina, "Ver por assunto" (recolhido) mostra acertos / questões por assunto, também do pior para o melhor (CR-004)
 
 **RF-019 — Detalhamento:**
 - Cada questão com a alternativa marcada, a correta e a sinalização de anulada, quando for o caso
@@ -200,6 +209,19 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Lista com data, modo, nota e percentual; abrir um item mostra o resultado (RF-017 a RF-019)
 - Botão para limpar o histórico
 - Aviso explícito de que o histórico fica só neste navegador e se perde ao trocar de dispositivo ou limpar os dados do navegador
+
+### Módulo: Desempenho (CR-004)
+
+| ID     | Requisito | Prioridade | Persona |
+|--------|-----------|------------|---------|
+| RF-022 | Painel "Meu desempenho": desempenho acumulado por disciplina e por assunto, somando os simulados concluídos do histórico | Alta | Estudante |
+
+**RF-022 — Detalhamento:**
+- Resumo: simulados considerados, questões e percentual de acerto
+- Por disciplina (da pior para a melhor), com os assuntos de cada uma (do pior para o melhor) e acertos / questões e percentual em texto
+- Regras de agregação na RN-015 (anuladas fora, em branco como erro, "poucas questões" abaixo de 5)
+- Fonte: o histórico local (RF-020); o Treino não entra (RF-012). O mesmo aviso do histórico: os dados ficam só neste navegador
+- Acesso pelo cabeçalho do site e pela página Histórico; sem simulados concluídos, convida a começar um
 
 ### Módulo: Reporte de Erro
 
@@ -289,6 +311,19 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Listo os reportes pendentes com a questão e a descrição
     - [ ] Depois de corrigir e reimportar, marco o reporte como resolvido
 
+- **US-011:** Como estudante, quero ver meu desempenho por assunto em cada disciplina, em cada simulado e somando os que já fiz, para saber exatamente o que estudar (CR-004)
+  - Critérios de aceite:
+    - [ ] No resultado, vejo os acertos por assunto de cada disciplina
+    - [ ] O painel "Meu desempenho" soma os simulados concluídos neste navegador, por disciplina e por assunto, do pior para o melhor
+    - [ ] Assuntos com poucas questões aparecem sinalizados
+    - [ ] O painel avisa que os dados ficam só neste navegador
+
+- **US-012:** Como curador, quero classificar cada questão num assunto de uma lista fixa, para que as estatísticas por assunto sejam comparáveis entre provas (CR-004)
+  - Critérios de aceite:
+    - [ ] A lista de assuntos de cada disciplina fica versionada no repositório e é validada no CI
+    - [ ] A publicação recusa questão sem assunto ou com assunto de outra disciplina
+    - [ ] Um comando lista a classificação de uma prova por disciplina e assunto, para revisão
+
 ---
 
 ## 7. Regras de Negócio
@@ -301,25 +336,28 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RN-004 | Uma questão não se repete dentro do mesmo simulado | Geração |
 | RN-005 | Questões que compartilham texto-base e são sorteadas no mesmo simulado aparecem em sequência; o texto-base é exibido em cada uma delas | Geração / Resolução |
 | RN-006 | Uma prova só aparece no site depois de passar em todas as validações automáticas e ser marcada como publicada pelo curador | Ingestão |
-| RN-007 | Uma questão só entra na base com: enunciado, 5 alternativas A–E não vazias, resposta do gabarito (ou "anulada"), disciplina principal e fonte (ano, versão, número original) | Ingestão |
+| RN-007 | Uma questão só entra na base com: enunciado, 5 alternativas A–E não vazias, resposta do gabarito (ou "anulada"), disciplina principal, assunto (RN-014) e fonte (ano, versão, número original) | Ingestão |
 | RN-008 | Cada questão vale 1 ponto; em branco conta como erro; nota = acertos / total de questões do simulado | Resultado |
 | RN-009 | Tempo: Prova completa e Prova de um ano têm 5 h, sem pausa, contadas pelo relógio a partir do início (fechar a aba não pausa). Personalizado: tempo proporcional (300 min ÷ 90 = 3 min 20 s por questão), com pausa permitida, ou sem cronômetro. Treino não tem cronômetro | Resolução |
 | RN-010 | Quando o tempo acaba, o simulado é finalizado automaticamente com as respostas marcadas até então | Resolução |
 | RN-011 | Só há um simulado em andamento por navegador; iniciar outro pede confirmação para descartar o atual | Resolução |
 | RN-012 | O estado do estudante (simulado em andamento e histórico) fica só no navegador; o servidor não guarda respostas nem resultados | Resolução / Histórico |
 | RN-013 | Toda questão exibida mostra a fonte (FUVEST ano, nº original) e o site oferece o link do PDF oficial daquele ano | Resolução / Catálogo |
+| RN-014 | Cada disciplina tem uma lista fixa de assuntos (taxonomia versionada). Cada questão tem **exatamente um** assunto, da lista da sua disciplina principal; disciplinas secundárias não têm assunto. O assunto não aparece durante a resolução nem filtra a geração (CR-004) | Ingestão / Resultado / Desempenho |
+| RN-015 | O painel "Meu desempenho" agrega as questões dos simulados concluídos no histórico: anuladas ficam fora (não medem conhecimento), em branco conta como erro (RN-008). Usa o assunto gravado no resultado de cada simulado. Assunto com menos de 5 questões aparece como "poucas questões" e vai para o fim da lista da disciplina; questão de resultado antigo, sem assunto, entra só na disciplina (CR-004) | Desempenho |
 
 ---
 
 ## 8. Fora de Escopo
 
 - 2ª fase (questões dissertativas) — ver Roadmap
-- Contas de usuário, login, histórico no servidor e sincronização entre dispositivos
+- Contas de usuário, login, histórico no servidor e sincronização entre dispositivos — roadmap Fase 3B
 - Extração de questões com IA (decisão do MVP: parser determinístico + revisão manual)
 - Área administrativa web (curadoria só por linha de comando)
 - Resoluções ou comentários das questões (a FUVEST não publica resolução da 1ª fase)
 - Nota de corte, simulação de aprovação ou classificação por carreira
-- Classificação por assunto dentro da disciplina (ex.: "Genética" em Biologia)
+- ~~Classificação por assunto dentro da disciplina (ex.: "Genética" em Biologia)~~ — implementada no CR-004 (RF-005, RF-022, RF-023)
+- Filtro por assunto ao gerar Personalizado ou Treino (decisão do CR-004)
 - Outros vestibulares (Unicamp, ENEM etc.)
 - Ranking ou comparação entre estudantes
 - App mobile nativo
@@ -363,6 +401,9 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Pacote de revisão | Saída do parser por prova (arquivo editável + figuras + relatório) que o curador revisa antes de importar |
 | Curador | Quem roda a ingestão, revisa, classifica e publica as provas |
 | Simulado | Conjunto de questões gerado para o estudante resolver em um dos 4 modos |
+| Assunto | Parte de uma disciplina usada nas estatísticas (ex.: "Eletricidade" em Física); cada questão tem exatamente um (RN-014) |
+| Taxonomia de assuntos | Lista fixa de assuntos por disciplina, condensada do programa oficial da FUVEST e versionada com as provas (RF-023) |
+| Painel de desempenho | Página "Meu desempenho", que soma os simulados concluídos por disciplina e por assunto (RF-022) |
 
 ---
 
@@ -373,8 +414,14 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Autoavaliação comparando com o "Guia de respostas esperadas" da FUVEST
 
 ### Fase 3 — Contas e estatísticas
+Dividida em duas partes independentes; os assuntos vieram primeiro porque não coletam dado pessoal.
+
+**Fase 3A — Assuntos e desempenho (CR-004)**
+- Classificação por assunto dentro da disciplina (RF-005, RF-023) e estatísticas por assunto no resultado e no painel "Meu desempenho" (RF-018, RF-022)
+
+**Fase 3B — Contas (CR próprio, a desenhar)**
 - Login opcional com histórico no servidor e sincronização entre dispositivos
-- Classificação por assunto dentro da disciplina e estatísticas por assunto
+- Decisões já tomadas (30/09/2026): login **só com Google** (sem senha nem e-mail de recuperação); o servidor guarda **só o histórico concluído** (o simulado em andamento continua no navegador). O painel da Fase 3A passa a somar o histórico sincronizado
 
 ### Fase 4 — Escala da base
 - Extração assistida por IA para acelerar a ingestão de anos antigos
@@ -383,4 +430,4 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida).*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B.*

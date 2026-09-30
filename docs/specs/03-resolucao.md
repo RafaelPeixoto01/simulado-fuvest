@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-09-30
-**PRD Ref:** 01-PRD v1.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
+**PRD Ref:** 01-PRD v2.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho)
 
 ---
 
@@ -115,9 +115,10 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
 | `/treino` | `TreinoPage` | Filtros + sessão |
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
+| `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho" e "Histórico", nessa ordem |
 | `*` | 404 simples | Link para `/` |
 
-**Título da página (CR-002, WCAG 2.4.2):** cada página chama `useTituloPagina`: "Simulado Fuvest" no início e "‹página› · Simulado Fuvest" nas demais (Simulado personalizado, Prova de um ano, ‹descrição do simulado› na resolução, Treino por questão, Resultado, Histórico, Página não encontrada).
+**Título da página (CR-002, WCAG 2.4.2):** cada página chama `useTituloPagina`: "Simulado Fuvest" no início e "‹página› · Simulado Fuvest" nas demais (Simulado personalizado, Prova de um ano, ‹descrição do simulado› na resolução, Treino por questão, Resultado, Histórico, Meu desempenho, Página não encontrada).
 
 "Prova completa" inicia direto da Home (sem configuração); fica desabilitada com a explicação "Disponível quando a base tiver 90 questões válidas" se `completa_disponivel=false`.
 

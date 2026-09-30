@@ -1,10 +1,10 @@
 # Especificação Técnica — Catálogo e Geração de Simulados
 
-**Versão:** 1.0
-**Data:** 2026-09-29
-**PRD Ref:** 01-PRD v1.0 (RF-008 a RF-012, US-001 a US-004, RN-002 a RN-005, RN-009, RN-013)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004, ADR-006)
-**CR Ref:** —
+**Versão:** 1.1
+**Data:** 2026-09-30
+**PRD Ref:** 01-PRD v2.0 (RF-008 a RF-012, US-001 a US-004, RN-002 a RN-005, RN-009, RN-013, RN-014)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-006, ADR-009)
+**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`)
 
 ---
 
@@ -48,7 +48,7 @@ class AlternativaPublica(BaseModel):
     texto: str | None = None
     figura: str | None = None      # URL
 
-class QuestaoPublica(BaseModel):   # NUNCA contém resposta nem anulada
+class QuestaoPublica(BaseModel):   # NUNCA contém resposta nem anulada; nem assunto (RN-014)
     id: str                        # "2025-002"
     ano: int
     numero: int
@@ -69,10 +69,16 @@ class ProvaCatalogo(BaseModel):
     url_prova: str
     url_gabarito: str
 
+class AssuntoCatalogo(BaseModel):  # CR-004
+    slug: str                      # "eletricidade"
+    nome: str                      # "Eletricidade"
+    total_questoes: int            # não anuladas
+
 class DisciplinaCatalogo(BaseModel):
     slug: Disciplina
     nome: str                      # "Matemática"
     total_questoes: int            # não anuladas, por disciplina principal
+    assuntos: list[AssuntoCatalogo]  # CR-004: ordem da taxonomia, inclusive com 0 questões; [] sem taxonomia
 
 class CatalogoResponse(BaseModel):
     provas: list[ProvaCatalogo]            # ano decrescente
@@ -229,6 +235,7 @@ Ver o diagrama "Fluxo de um simulado" em `02-ARCHITECTURE.md` §2.
 |----|---------|-------------|----------|
 | BT-001 | Catálogo com fixture de 2 provas | GET /api/catalogo | 200; contagens corretas; distribuição soma 90 |
 | BT-002 | Distribuição com restos empatados | `catalogo.distribuicao` (unit) | Maior resto + desempate alfabético |
+| BT-025 | Catálogo com assuntos (CR-004) | GET /api/catalogo | Ver `specs/06` §6 |
 | BT-003 | Completa com base suficiente | POST /api/simulados | 200; 90 questões únicas, sem anuladas, sem `resposta` no JSON |
 | BT-004 | Completa com base insuficiente | POST /api/simulados | 409 `questoes_insuficientes` |
 | BT-005 | Personalizado com filtros | POST /api/simulados | Todas respeitam disciplina/intervalo; tempo = quantidade × 200 |

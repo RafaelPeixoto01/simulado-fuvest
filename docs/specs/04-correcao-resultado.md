@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Data:** 2026-09-30
-**PRD Ref:** 01-PRD v1.0 (RF-017 a RF-020, US-006, US-007, RN-002, RN-008, RN-012)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004, ADR-005)
-**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez)
+**PRD Ref:** 01-PRD v2.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-005, ADR-009)
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`)
 
 ---
 
@@ -53,12 +53,21 @@ class ItemCorrigido(BaseModel):
     anulada: bool
     acertou: bool
     disciplina: Disciplina
+    assunto: str | None            # CR-004: slug; null só se a questão não tiver assunto no banco
+
+class DesempenhoAssunto(BaseModel):  # CR-004
+    assunto: str                   # slug
+    nome: str                      # da taxonomia (o slug se não estiver nela)
+    total: int
+    acertos: int
+    percentual: float
 
 class DesempenhoDisciplina(BaseModel):
     disciplina: Disciplina
     total: int
     acertos: int
     percentual: float              # 1 casa decimal
+    assuntos: list[DesempenhoAssunto]  # CR-004: do pior para o melhor; empate -> slug; itens sem assunto ficam fora
 
 class CorrecaoResponse(BaseModel):
     itens: list[ItemCorrigido]     # mesma ordem do request, sem as ignoradas
@@ -81,7 +90,7 @@ interface HistoricoEntry {
   tempoLimiteS: number | null;
   finalizadoPorTempo: boolean;
   questaoIds: string[];
-  resultado: CorrecaoResponse;
+  resultado: CorrecaoResponse;     // CR-004: `assunto`/`assuntos` opcionais no tipo (resultados antigos não têm); continua versao 1
 }
 ```
 
@@ -93,6 +102,7 @@ interface HistoricoEntry {
 3. Para cada item: `anulada` → `acertou = true` (RN-002); senão `acertou = resposta == correta` (em branco → false, RN-008).
 4. `total = len(itens)`, `acertos = soma`, `percentual = round(100 × acertos / total, 1)` (`total = 0` → 0.0).
 5. `por_disciplina`: agrupar pela disciplina principal; ordenar por percentual crescente, empate pelo slug.
+6. `assuntos` de cada disciplina (CR-004): agrupar os itens da disciplina pelo assunto, com o nome da taxonomia, na mesma ordenação (detalhe em `specs/06` §2.3).
 
 **Finalizar no frontend** (manual ou por tempo):
 1. `corrigir({respostas: questaoIds.map(id => ({questao_id: id, resposta: respostas[id] ?? null}))})`.
@@ -106,7 +116,7 @@ interface HistoricoEntry {
 - `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`.
 - Ações: "Novo simulado" (Home), "Ver histórico".
 - **Ordem (CR-003, P1.7):** resumo → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
-- `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto.
+- `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto; em cada disciplina, "Ver por assunto" recolhido (CR-004).
 - **Estado da revisão (D6):** `{indice, filtro, disciplina}` fica na página e é compartilhado pela folha e pela revisão (`revisao.ts`). Tocar numa questão da folha abre aquela questão; se ela não passa nos filtros atuais, eles voltam para "Todas". Trocar os filtros mantém a questão se ela continua visível, senão abre a primeira da lista. Navegar (folha, Anterior/Próxima) rola até a revisão (`scrollIntoView`) e foca o título da questão; trocar de filtro não, para o foco continuar no filtro.
 
 **HistoricoPage (`/historico`):**
@@ -114,6 +124,7 @@ interface HistoricoEntry {
 - Lista (mais recente primeiro): data/hora (pt-BR), descrição, nota e percentual; clique → `/resultado/:id`.
 - "Limpar histórico" com confirmação. Vazio → "Nenhum simulado concluído ainda" + link para a Home.
 - Treino **não** entra no histórico (PRD RF-012).
+- Link "Ver meu desempenho" (`/desempenho`, `specs/06`) acima da lista quando ela não está vazia (CR-004).
 
 ### 2.4 API Endpoints
 
@@ -145,7 +156,7 @@ Erros:
 |------|------|-------------|---------|-----------|
 | dados | `DesempenhoDisciplina[]` | Sim | — | Já ordenado pela API |
 
-Barras em CSS (sem biblioteca de gráficos); valor sempre também em texto (acessibilidade); cor não é o único indicador.
+Barras em CSS (sem biblioteca de gráficos); valor sempre também em texto (acessibilidade); cor não é o único indicador. CR-004: disciplina com `assuntos` ganha um `<details>` recolhido "Ver por assunto" com uma linha por assunto (nome e "a de t (p%)"); resultado antigo, sem `assuntos`, fica como antes (`specs/06` §3).
 
 ### Componente: RevisaoQuestoes (CR-003, D6)
 
@@ -212,6 +223,7 @@ Ver `specs/03-resolucao.md` §4 e o fluxo de simulado em `02-ARCHITECTURE.md` §
 | UT-022 | `revisao.ts`: situação, filtros, abrir pela folha, trocar filtros | unit | Estados esperados (CR-003) |
 | UT-023 | `FolhaCorrigida`: cores das bolinhas, selos, anuladas, sem letras | componente | Classes e textos corretos (CR-003) |
 | FT-011 | Celular: ordem das seções, tocar na folha abre a questão com foco; desktop: bolinhas clicáveis | E2E (CR-003) | Rolagem e foco no título |
+| BT-026, UT-024 | Correção por assunto; "Ver por assunto" no resultado | ver `specs/06` §6 | CR-004 |
 
 ---
 

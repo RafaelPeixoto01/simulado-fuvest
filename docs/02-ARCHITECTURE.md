@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-09-30
-**PRD Ref:** 01-PRD v1.0
-**CR Ref:** CR-001, CR-002, CR-003
+**PRD Ref:** 01-PRD v2.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004
 
 ---
 
@@ -38,7 +38,7 @@
 
 Monorepo com dois subsistemas que compartilham o mesmo modelo de dados:
 
-1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica, depois commita o pacote. O repositório é a fonte da verdade das questões (ADR-002).
+1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009).
 2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. O servidor não guarda nenhum estado do estudante: gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento e o histórico vivem no `localStorage`.
 
 ```mermaid
@@ -93,6 +93,7 @@ Simulado Fuvest/
 ├── Dockerfile                      # multi-stage: build do SPA (Node 24) + backend (Python 3.12)
 ├── data/
 │   ├── provas/                     # FONTE DA VERDADE das questões (versionado)
+│   │   ├── assuntos.yaml           # taxonomia de assuntos por disciplina (ADR-009, CR-004)
 │   │   └── 2025/
 │   │       ├── prova.yaml          # pacote de revisão (schema em app/pacote/schema.py)
 │   │       └── figuras/            # q037-1.webp, q052-b.webp, tb03-1.webp
@@ -118,10 +119,11 @@ Simulado Fuvest/
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
 │   │       ├── schema.py           # modelo Pydantic do prova.yaml
 │   │       ├── leitura.py          # carregar/salvar YAML
-│   │       ├── validacao.py        # regras RN-007 + relatório de pendências
+│   │       ├── assuntos.py         # taxonomia: schema, carregar_taxonomia (estrito), taxonomia_em_uso (API)
+│   │       ├── validacao.py        # regras RN-007 (V01–V11) + relatório de pendências
 │   │       └── sincronizar.py      # repo -> banco (idempotente); `python -m app.pacote.sincronizar`
 │   ├── ingestao/                   # CLI do curador: `python -m ingestao <comando>`
-│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, reportes
+│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, assuntos, reportes
 │   │   ├── baixar.py
 │   │   ├── pdf_util.py             # colunas, ordem de leitura, limpeza de texto, render de região
 │   │   ├── figuras.py              # imagens embutidas + recorte de região -> WebP
@@ -144,9 +146,9 @@ Simulado Fuvest/
         ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, estilos.ts
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
-        │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas, FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
-        ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, NaoEncontrada
-        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas)
+        │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
+        ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004), NaoEncontrada
+        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
@@ -154,7 +156,7 @@ Simulado Fuvest/
 
 ## 4. Modelagem de Dados
 
-O banco guarda só o que é **derivado do repositório** (provas, textos-base, questões), mais duas tabelas escritas em runtime (reportes e estatística anônima). Não há tabela de usuário nem de resultados (RN-012).
+O banco guarda só o que é **derivado do repositório** (provas, textos-base, questões), mais duas tabelas escritas em runtime (reportes e estatística anônima). Não há tabela de usuário nem de resultados (RN-012). A taxonomia de assuntos não tem tabela: é lida do arquivo (ADR-009).
 
 ```mermaid
 erDiagram
@@ -182,6 +184,7 @@ erDiagram
         bool anulada
         string disciplina
         json disciplinas_secundarias
+        string assunto
     }
     REPORTES {
         int id PK
@@ -234,6 +237,7 @@ erDiagram
 | anulada | bool | NOT NULL, default false | RN-002 |
 | disciplina | varchar(12) | NOT NULL, index | Disciplina principal (slug do enum) |
 | disciplinas_secundarias | JSON | NOT NULL, default `[]` | Slugs adicionais (interdisciplinares) |
+| assunto | varchar(40) | NULL, index | Slug do assunto na taxonomia da disciplina principal (RN-014). Nullable só porque a migration `002` roda antes da sincronização; toda questão publicada tem assunto (V11) — CR-004 |
 
 #### reportes
 | Campo | Tipo | Restrições | Descrição |
@@ -268,6 +272,19 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 
 `biologia`, `fisica`, `geografia`, `historia`, `ingles`, `matematica`, `portugues`, `quimica` — as 8 disciplinas oficiais da 1ª fase (Guia de Provas FUVEST 2025).
 
+### Assuntos (taxonomia, CR-004)
+
+`data/provas/assuntos.yaml` lista, para cada uma das 8 disciplinas, de 8 a 15 assuntos condensados do "Programa das disciplinas" do Guia de Provas FUVEST, na ordem de exibição:
+
+```yaml
+fisica:
+  - slug: cinematica          # ^[a-z0-9-]+$, até 40 caracteres, único na disciplina; estável (vai para o banco e o histórico)
+    nome: Cinemática          # exibição, até 60 caracteres
+```
+
+- Cada questão tem exatamente um assunto, da lista da sua disciplina principal (RN-014). Filosofia e Sociologia, que o curador classifica em História, têm assuntos próprios dentro de História; lógica e falácias ficam em Português.
+- Quem usa: a validação (V11), a sincronização (aborta se a taxonomia for inválida), a CLI (`validar`, `assuntos`) e a API (nomes e contagens no catálogo, nomes na correção). A API lê o arquivo do `DATA_DIR` com cache invalidado pelo mtime (`taxonomia_em_uso`).
+
 ---
 
 ## 5. Padrões e Convenções
@@ -296,12 +313,14 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 - Geração e correção **sem estado** no servidor (ADR-004); a única escrita pública é `POST /api/reportes`
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
 - O gabarito **nunca** vai na resposta de geração/consulta de questões; só em `POST /api/correcoes`
+- O assunto também não aparece na questão pública (resolução); ele só vem no catálogo e na correção (RN-014, CR-004)
 - Contratos detalhados em `03-SPEC.md`
 
 ### Frontend
 - Estado do servidor com TanStack Query; estado do simulado com reducer em Context, persistido no `localStorage` a cada ação
 - Todo acesso ao `localStorage` passa por `storage/*` com chave versionada (`simulado-fuvest:v1:*`) e `try/catch`: o site funciona mesmo com o storage bloqueado (sem persistência)
 - Tempo sempre derivado de timestamps (`Date.now()`), nunca de contadores de `setInterval` (RN-009)
+- Agregações que o servidor não faz (painel "Meu desempenho", RN-015) ficam em funções puras em `utils/`, testadas no Vitest, e recebem o histórico como entrada (o mesmo código servirá ao histórico sincronizado da Fase 3B)
 
 ### Estilo de Código
 - **Backend:** `ruff check` com as regras padrão + `I` (imports), configurado no `pyproject.toml`
@@ -417,6 +436,18 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 
 ---
 
+### ADR-009: Taxonomia de assuntos como conteúdo versionado, sem tabela
+- **Status:** Aceita
+- **Data:** 2026-09-30
+- **Contexto:** A Fase 3A (CR-004) classifica cada questão num assunto de uma lista fixa por disciplina. A lista muda raramente, só por decisão do curador, e precisa ser validada junto com os pacotes, que já são a fonte da verdade (ADR-002).
+- **Decisão:** A taxonomia fica em `data/provas/assuntos.yaml`, dentro do `DATA_DIR`, e entra na imagem com os pacotes, sem mudar o Dockerfile. `app/pacote/assuntos.py` define o schema (Pydantic, `extra="forbid"`), a carga estrita usada pela validação, CLI e sincronização, e uma carga tolerante com cache por mtime usada pela API. O banco guarda só o slug em `questoes.assunto`; nomes e ordem vêm do arquivo. Taxonomia inválida ou ausente faz a sincronização terminar com erro **sem tocar o banco**: o start do container falha e a Railway mantém o deploy anterior.
+- **Alternativas Consideradas:**
+  - Tabela `assuntos` sincronizada como as provas: descartada. Seria mais uma migration e mais um passo de sincronização para dados que só mudam por commit, e a API teria de juntar tabelas para mostrar um nome.
+  - Enum no código, como as disciplinas: descartada. A taxonomia é conteúdo revisado pelo curador (como os pacotes); mudar um nome não deveria exigir mexer em código Python.
+- **Consequências:**
+  - Positivas: taxonomia e classificação mudam juntas num commit, com diff, CI (`validar --todas`) e rollback via git; nenhuma tabela nova.
+  - Negativas: a API depende de um arquivo em disco (como as figuras). Renomear um slug em uso exige reclassificar as questões no mesmo commit (a V11 acusa).
+
 ## 9. Deploy e Infraestrutura
 
 ### 9.1 Plataforma de Produção
@@ -431,7 +462,7 @@ Texto é sempre texto puro: o frontend renderiza escapado e com `white-space: pr
 | Gate de deploy | Toggle "Wait for CI" na Railway (só existe no dashboard). Sem branch protection no GitHub, como no Meu Controle: o fluxo faz merge local e push direto em `master`, e o gate é o CI antes do deploy |
 | Container base | `node:24-alpine` (build do SPA) + `python:3.12-slim` (runtime) |
 | Dados | `data/provas/` copiado para a imagem (`DATA_DIR=/app/data/provas`) |
-| Start | `alembic upgrade head && python -m app.pacote.sincronizar && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips=*` |
+| Start | `alembic upgrade head && python -m app.pacote.sincronizar && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips=*` (a sincronização sai com erro, e o start para, se a taxonomia for inválida — ADR-009) |
 
 `--proxy-headers` é necessário para o rate limit por IP enxergar o IP real atrás do proxy da Railway (mesma lição do Meu Controle).
 
@@ -505,4 +536,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`.*
