@@ -266,7 +266,7 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 ## Contexto Atual do Projeto
 
 ### Documentos Existentes
-- [ ] PRD (`/docs/01-PRD.md`)
+- [x] PRD (`/docs/01-PRD.md`) — v1.0 aprovado em 2026-09-29
 - [ ] Arquitetura (`/docs/02-ARCHITECTURE.md`)
 - [ ] Spec Técnica (`/docs/03-SPEC.md`)
 - [ ] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`)
