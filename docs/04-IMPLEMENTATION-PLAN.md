@@ -16,7 +16,7 @@
 | 1 | Setup e Infraestrutura | T-001 a T-004 | Concluído |
 | 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
 | 3 | API | T-012 a T-017 | Concluído |
-| 4 | Frontend | T-018 a T-025 | Em andamento |
+| 4 | Frontend | T-018 a T-025 | Concluído |
 | 5 | Deploy | T-026 a T-027 | Pendente |
 | 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
 
@@ -104,6 +104,7 @@
 | 2026-09-29 | T-022 | FT-005: celular 360 px | Sem rolagem horizontal (345 px); folha de respostas em gaveta fecha ao navegar; figura amplia e fecha com Esc. Ajustes feitos: folha com 2 colunas visíveis no desktop (lateral de 20rem) e barra fixa em uma linha no celular (descrição oculta, ícone para ocultar o tempo) |
 | 2026-09-29 | T-023 | FT-010: Prova de 2099 → 5 respostas → Finalizar → resultado → filtro "Erradas" → histórico | **Achou um bug**: a finalização caía em `/` (o `DESCARTAR` urgente fazia a resolução redirecionar antes da navegação, que roda como transição). Corrigido movendo o descarte para a tela de resultado; teste reforçado para exigir a tela de resultado. Após a correção: "Você acertou 2 de 90" (as 2 anuladas de 2099, RN-002), folha corrigida com rótulos por linha, filtro "Erradas" com 5 questões, histórico com a entrada e simulado em andamento descartado |
 | 2026-09-29 | T-024 | FT-004: Treino → responder 3 → feedback → próxima | Feedback imediato ("Resposta correta: A."), alternativas travadas, placar "0 acertos em 3 respondidas", texto compartilhado exibido com figura. Implementado com `useInfiniteQuery` (lotes como páginas; `excluir` = já vistas) |
+| 2026-09-30 | T-025 | FT-020: reportar na resolução | Modal com a fonte da questão; "Obrigado! Vamos revisar esta questão." e fechamento em 2 s; cronômetro seguiu (05:00:00 → 04:59:58); reporte gravado e listado pela CLI (`reportes listar`) |
 
 ---
 

@@ -291,7 +291,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
 
 ### Última Tarefa Implementada
-- Documentação do Fluxo A (2026-09-29): PRD, Arquitetura, Specs e Plano. Próxima tarefa: T-001 (scaffold do backend)
+- Grupos 1 a 4 do MVP (2026-09-30): backend, ingestão (família 2025), API e frontend completos em `feat/mvp`, com validação em runtime registrada no plano. Próximo: Grupo 5 (T-026 Docker/`railway.json`, T-027 provisionar a Railway e primeiro deploy). Pendente do curador: T-011 (curadoria da prova 2025)
 
 ---
 

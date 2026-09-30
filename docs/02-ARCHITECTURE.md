@@ -135,14 +135,19 @@ Simulado Fuvest/
 └── frontend/
     ├── package.json, vite.config.ts, tsconfig.json, tsconfig.app.json, eslint.config.js, index.html
     └── src/
-        ├── main.tsx, App.tsx (rotas), queryClient.ts, index.css, types.ts
-        ├── services/api.ts         # cliente fetch da API
-        ├── storage/                # simuladoStorage.ts, historicoStorage.ts (versionados, try/catch)
-        ├── contexts/SimuladoContext.tsx  # reducer do simulado em andamento + persistência
-        ├── hooks/                  # useCatalogo, useCronometro, useGerarSimulado, useCorrecao...
-        ├── components/             # QuestaoView, Blocos, Figura, Alternativas, GradeQuestoes, Cronometro, ReportarModal...
-        ├── pages/                  # Home, ConfigurarSimulado, Resolucao, Resultado, Treino, Historico
-        └── utils/                  # tempo.ts, format.ts
+        ├── main.tsx, App.tsx (rotas), queryClient.ts, index.css (tokens @theme), types.ts
+        ├── services/api.ts         # cliente fetch + ApiError (código/dados do erro de domínio)
+        ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1)
+        ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
+        ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
+        │                           #   useConfirmarDescarte, useAtalhos, useAgora
+        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, estilos.ts
+        │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
+        │   ├── resolucao/          #   FolhaRespostas (folha óptica), Cronometro
+        │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas, FolhaCorrigida, RevisaoQuestoes
+        ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, NaoEncontrada
+        ├── utils/                  # tempo.ts, format.ts
+        └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
 ---

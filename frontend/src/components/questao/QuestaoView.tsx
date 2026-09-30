@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react'
+import { useCallback, useState, type ReactNode } from 'react'
 
 import { NOMES_DISCIPLINAS, type Letra, type Questao, type TextoBase } from '../../types'
 import { Alternativas, type CorrecaoAlternativas } from './Alternativas'
 import { Blocos } from './Blocos'
+import { ReportarModal } from './ReportarModal'
 
 interface Props {
   questao: Questao
@@ -17,6 +18,8 @@ interface Props {
 export function QuestaoView({ questao, textoBase, posicao, selecionada, onSelecionar, correcao, acoes }: Props) {
   const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, FUVEST ${questao.ano} (questão ${questao.numero})`
   const alt = `Figura da questão ${questao.numero}, FUVEST ${questao.ano}`
+  const [reportando, setReportando] = useState(false)
+  const fecharReporte = useCallback(() => setReportando(false), [])
   return (
     <article className="max-w-[68ch]">
       <header className="mb-5">
@@ -45,7 +48,17 @@ export function QuestaoView({ questao, textoBase, posicao, selecionada, onSeleci
           correcao={correcao}
         />
       </div>
-      {acoes && <div className="mt-4">{acoes}</div>}
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        {acoes}
+        <button
+          type="button"
+          onClick={() => setReportando(true)}
+          className="text-sm text-tinta-suave underline underline-offset-2 hover:text-tinta"
+        >
+          Reportar problema
+        </button>
+      </div>
+      {reportando && <ReportarModal questaoId={questao.id} descricao={fonte} onFechar={fecharReporte} />}
     </article>
   )
 }
