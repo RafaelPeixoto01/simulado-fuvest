@@ -5,7 +5,7 @@
 - **Nome:** Simulado Fuvest
 - **Descrição:** Site que gera simulados da prova da FUVEST a partir de questões de provas de anos anteriores (acervo oficial em fuvest.br), para estudantes praticarem com questões reais
 - **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4, TanStack Query v5, FastAPI, SQLAlchemy 2.0, Alembic, PostgreSQL (prod) / SQLite (dev), deploy na Railway
-- **Repositório:** https://github.com/RafaelPeixoto01/simulado-fuvest (a criar via `gh repo create`, público, como o Meu Controle; `gh` é o credential helper do git, conta `RafaelPeixoto01`)
+- **Repositório:** https://github.com/RafaelPeixoto01/simulado-fuvest (público, branch padrão `master`; `gh` é o credential helper do git, conta `RafaelPeixoto01`). Identidade de commit **local ao repo**: `Rafael Peixoto <rafaelspeixoto1@gmail.com>` — a global da máquina é a de trabalho e não deve ir para este repositório
 - **Deploy:** Railway, projeto/serviço `simulado-fuvest`, provisionado via `railway` CLI (T-027); deploy com a skill `/deploy-railway`
 
 ---
