@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+/* Tokens (plano de design do T-018):
+   papel e tinta para leitura; azul de caneta esferografica para acoes e selecao;
+   rosa "dropout" do impresso optico so na folha de respostas. */
+@theme {
+  --font-sans: "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-leitura: "Literata Variable", Georgia, "Times New Roman", serif;
+
+  --color-papel: #ffffff;
+  --color-fundo: #f5f6f8;
+  --color-tinta: #1d2430;
+  --color-tinta-suave: #5a6472;
+  --color-linha: #dde1e7;
+  --color-caneta: #1e4fd8;
+  --color-caneta-escura: #173da8;
+  --color-caneta-clara: #e8eefc;
+  --color-optico: #d9667f;
+  --color-optico-claro: #fcecef;
+  --color-grafite: #2b2f36;
+  --color-acerto: #1b7f4b;
+  --color-acerto-claro: #e6f4ec;
+  --color-erro: #c23b3b;
+  --color-erro-claro: #fbeaea;
+  --color-alerta: #9a5b00;
+  --color-alerta-claro: #fff4e0;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-fundo);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-caneta);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

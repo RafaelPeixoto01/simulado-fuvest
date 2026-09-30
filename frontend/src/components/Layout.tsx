@@ -1,0 +1,45 @@
+import { Link, NavLink, Outlet } from 'react-router-dom'
+
+import { Marca } from './Marca'
+
+export function Layout() {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <header className="border-b border-linha bg-papel">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+          <Link to="/" className="flex items-center gap-2.5 font-bold tracking-tight text-tinta">
+            <Marca className="h-2.5 w-auto" />
+            Simulado Fuvest
+          </Link>
+          <nav>
+            <NavLink
+              to="/historico"
+              className={({ isActive }) =>
+                `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
+              }
+            >
+              Histórico
+            </NavLink>
+          </nav>
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:py-10">
+        <Outlet />
+      </main>
+      <footer className="border-t border-linha">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-tinta-suave">
+          Este site não é afiliado à FUVEST nem à USP. As questões vêm do{' '}
+          <a
+            className="underline underline-offset-2 hover:text-tinta"
+            href="https://www.fuvest.br/acervo/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            acervo oficial da FUVEST
+          </a>
+          .
+        </p>
+      </footer>
+    </div>
+  )
+}

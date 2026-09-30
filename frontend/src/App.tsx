@@ -1,26 +1,28 @@
+import { Route, Routes } from 'react-router-dom'
+
+import { Layout } from './components/Layout'
+import { ConfigurarPersonalizadoPage } from './pages/ConfigurarPersonalizadoPage'
+import { EscolherAnoPage } from './pages/EscolherAnoPage'
+import { HistoricoPage } from './pages/HistoricoPage'
+import { HomePage } from './pages/HomePage'
+import { NaoEncontradaPage } from './pages/NaoEncontradaPage'
+import { ResolucaoPage } from './pages/ResolucaoPage'
+import { ResultadoPage } from './pages/ResultadoPage'
+import { TreinoPage } from './pages/TreinoPage'
+
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-4">
-          <h1 className="text-xl font-bold">Simulado Fuvest</h1>
-        </div>
-      </header>
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8" />
-      <footer className="border-t border-slate-200 bg-white">
-        <p className="mx-auto max-w-5xl px-4 py-4 text-sm text-slate-600">
-          Este site não é afiliado à FUVEST nem à USP. As questões vêm do{' '}
-          <a
-            className="underline"
-            href="https://www.fuvest.br/acervo/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            acervo oficial da FUVEST
-          </a>
-          .
-        </p>
-      </footer>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="novo/personalizado" element={<ConfigurarPersonalizadoPage />} />
+        <Route path="novo/ano" element={<EscolherAnoPage />} />
+        <Route path="simulado" element={<ResolucaoPage />} />
+        <Route path="treino" element={<TreinoPage />} />
+        <Route path="resultado/:id" element={<ResultadoPage />} />
+        <Route path="historico" element={<HistoricoPage />} />
+        <Route path="*" element={<NaoEncontradaPage />} />
+      </Route>
+    </Routes>
   )
 }
