@@ -1,0 +1,157 @@
+"""Geracao de simulados nos 4 modos (specs/02 §2.3; RN-002 a RN-005, RN-009).
+
+Sem estado: devolve as questoes sorteadas; quem chama serializa (sem gabarito).
+Toda consulta e ordenada por id antes do sorteio, entao a mesma semente com a
+mesma base gera o mesmo simulado.
+"""
+
+import random
+import secrets
+from collections.abc import Sequence
+from dataclasses import dataclass
+from typing import TypeVar
+
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from app.models import Prova, Questao
+from app.pacote.validacao import TOTAL_QUESTOES
+from app.schemas import GerarAno, GerarCompleta, GerarPersonalizado, GerarTreino
+from app.services.catalogo import contagens_por_prova, distribuicao_completa
+
+TEMPO_PROVA_S = 18000  # 5 h
+TEMPO_POR_QUESTAO_S = TEMPO_PROVA_S // TOTAL_QUESTOES  # 200 s = 3 min 20 s
+LOTE_TREINO = 20
+
+T = TypeVar("T")
+
+
+class QuestoesInsuficientes(Exception):
+    def __init__(self, disponiveis: int):
+        super().__init__(f"Só existem {disponiveis} questões para esses filtros")
+        self.disponiveis = disponiveis
+
+
+class ProvaNaoEncontrada(Exception):
+    pass
+
+
+@dataclass
+class SimuladoGerado:
+    modo: str
+    questoes: list[Questao]
+    tempo_limite_s: int | None
+    pausavel: bool
+    disponiveis: int
+    semente: int
+
+
+def sortear_completa(por_disciplina: dict[str, Sequence[T]], alvo: dict[str, int],
+                     rng: random.Random) -> list[T]:
+    """RN-003: sorteia o alvo de cada disciplina; o deficit de uma disciplina sem
+    questoes suficientes e coberto sorteando do restante."""
+    escolhidas: list[T] = []
+    sobras: list[T] = []
+    for disciplina in sorted(por_disciplina):
+        candidatas = list(por_disciplina[disciplina])
+        k = min(alvo.get(disciplina, 0), len(candidatas))
+        sorteadas = rng.sample(candidatas, k)
+        escolhidas += sorteadas
+        sobras += [c for c in candidatas if c not in sorteadas]
+    deficit = sum(alvo.values()) - len(escolhidas)
+    return escolhidas + rng.sample(sobras, min(deficit, len(sobras)))
+
+
+def _ordenar(questoes: list[Questao], rng: random.Random) -> list[Questao]:
+    """RN-005: questoes do mesmo texto-base em sequencia (ordem original); grupos embaralhados."""
+    grupos: dict[str, list[Questao]] = {}
+    for q in sorted(questoes, key=lambda q: (q.prova_ano, q.numero)):
+        grupos.setdefault(q.texto_base_id or q.id, []).append(q)
+    ordem = list(grupos.values())
+    rng.shuffle(ordem)
+    return [q for grupo in ordem for q in grupo]
+
+
+def _validas(sessao: Session, ano_inicio: int | None = None,
+             ano_fim: int | None = None) -> list[Questao]:
+    consulta = select(Questao).where(Questao.anulada.is_(False)).order_by(Questao.id)
+    if ano_inicio:
+        consulta = consulta.where(Questao.prova_ano >= ano_inicio)
+    if ano_fim:
+        consulta = consulta.where(Questao.prova_ano <= ano_fim)
+    return list(sessao.scalars(consulta))
+
+
+def _da_disciplina(questoes: list[Questao], disciplinas: list[str]) -> list[Questao]:
+    """Principal ou secundaria (questoes interdisciplinares)."""
+    if not disciplinas:
+        return questoes
+    alvo = set(disciplinas)
+    return [q for q in questoes if alvo & {q.disciplina, *q.disciplinas_secundarias}]
+
+
+def _completa(sessao: Session, rng: random.Random, semente: int) -> SimuladoGerado:
+    validas = _validas(sessao)
+    if len(validas) < TOTAL_QUESTOES:
+        raise QuestoesInsuficientes(len(validas))
+    por_disciplina: dict[str, list[Questao]] = {}
+    for q in validas:
+        por_disciplina.setdefault(q.disciplina, []).append(q)
+    alvo = distribuicao_completa(contagens_por_prova(sessao))
+    escolhidas = sortear_completa(por_disciplina, alvo, rng)
+    return SimuladoGerado("completa", _ordenar(escolhidas, rng), TEMPO_PROVA_S, False,
+                          len(validas), semente)
+
+
+def _personalizado(sessao: Session, pedido: GerarPersonalizado, rng: random.Random,
+                   semente: int) -> SimuladoGerado:
+    candidatas = _da_disciplina(
+        _validas(sessao, pedido.ano_inicio, pedido.ano_fim), pedido.disciplinas
+    )
+    if len(candidatas) < pedido.quantidade:
+        raise QuestoesInsuficientes(len(candidatas))
+    escolhidas = rng.sample(candidatas, pedido.quantidade)
+    tempo = pedido.quantidade * TEMPO_POR_QUESTAO_S if pedido.cronometro else None
+    return SimuladoGerado("personalizado", _ordenar(escolhidas, rng), tempo, True,
+                          len(candidatas), semente)
+
+
+def _ano(sessao: Session, pedido: GerarAno, semente: int) -> SimuladoGerado:
+    if sessao.get(Prova, pedido.ano) is None:
+        raise ProvaNaoEncontrada(f"Prova de {pedido.ano} não está na base")
+    # Ordem original e anuladas incluidas (RN-002: contam como acerto)
+    questoes = list(sessao.scalars(
+        select(Questao).where(Questao.prova_ano == pedido.ano).order_by(Questao.numero)
+    ))
+    return SimuladoGerado("ano", questoes, TEMPO_PROVA_S, False, len(questoes), semente)
+
+
+def _treino(sessao: Session, pedido: GerarTreino, rng: random.Random,
+            semente: int) -> SimuladoGerado:
+    vistas = set(pedido.excluir)
+    candidatas = [
+        q for q in _da_disciplina(_validas(sessao, pedido.ano_inicio, pedido.ano_fim),
+                                  pedido.disciplinas)
+        if q.id not in vistas
+    ]
+    lote = rng.sample(candidatas, min(LOTE_TREINO, len(candidatas)))
+    return SimuladoGerado("treino", _ordenar(lote, rng), None, False, len(candidatas), semente)
+
+
+def gerar_simulado(
+    sessao: Session, pedido: GerarCompleta | GerarPersonalizado | GerarAno | GerarTreino
+) -> SimuladoGerado:
+    semente = getattr(pedido, "semente", None)
+    if semente is None:
+        semente = secrets.randbelow(2**31)
+    rng = random.Random(semente)
+    match pedido:
+        case GerarCompleta():
+            return _completa(sessao, rng, semente)
+        case GerarPersonalizado():
+            return _personalizado(sessao, pedido, rng, semente)
+        case GerarAno():
+            return _ano(sessao, pedido, semente)
+        case GerarTreino():
+            return _treino(sessao, pedido, rng, semente)
+    raise ValueError(f"modo desconhecido: {pedido}")
