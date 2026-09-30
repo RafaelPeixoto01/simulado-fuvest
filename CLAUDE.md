@@ -83,7 +83,7 @@ Ao criar qualquer documento do fluxo, **use obrigatoriamente o template correspo
 ### Antes de Codar
 
 1. **Leia** `/docs/02-ARCHITECTURE.md` para entender stack e padrões
-2. **Leia** `/docs/03-SPEC.md` para entender o que construir
+2. **Leia** o índice `/docs/03-SPEC.md` e só a spec da feature afetada em `/docs/specs/` (não carregue todas as specs)
 3. **Leia** `/docs/04-IMPLEMENTATION-PLAN.md` para entender a ordem
 4. **Nunca invente** funcionalidades que não estão na spec
 5. **Nunca omita** funcionalidades que estão na spec
@@ -210,8 +210,10 @@ Simulado Fuvest/
 ├── docs/                       # PRD, Arquitetura, Spec, Plano, Deploy Guide
 │   ├── changes/                #   Change Requests CR-XXX + INDEX.md
 │   └── templates/              #   Templates obrigatórios dos documentos
-├── backend/                    # FastAPI + SQLAlchemy + Alembic (criado no T-001)
-├── frontend/                   # React + Vite + TS (criado no T-001)
+├── data/provas/AAAA/           # Pacotes de prova (prova.yaml + figuras/) — FONTE DA VERDADE das questões (ADR-002)
+├── data/_cache/                # PDFs baixados do acervo (gitignored)
+├── backend/                    # FastAPI + SQLAlchemy + Alembic; app/pacote (schema/validação/sincronização); ingestao/ (CLI do curador)
+├── frontend/                   # React + Vite + TS (SPA servido pelo FastAPI em produção)
 ├── CLAUDE.md
 └── .gitignore
 ```
@@ -240,26 +242,30 @@ Simulado Fuvest/
 
 ## Stack Tecnológica
 
-Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`) e fixadas no scaffold (T-001).
+Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixadas no scaffold (T-001/T-002).
 
 | Camada         | Tecnologia                       | Versão |
 |----------------|----------------------------------|--------|
-| Frontend       | React + TypeScript               | React 19 |
-| Build/Dev      | Vite                             | 6.x    |
+| Frontend       | React + TypeScript               | React 19.3, TS ~6.0 (não 7 — ADR-007) |
+| Build/Dev      | Vite + @vitejs/plugin-react      | 8.x / 6.x |
 | Estilização    | Tailwind CSS                     | 4.x    |
 | State/Fetch    | TanStack Query                   | 5.x    |
 | Routing        | react-router-dom                 | 7.x    |
-| Lint (FE)      | ESLint + typescript-eslint       | —      |
-| Testes (FE)    | Vitest + jsdom                   | —      |
-| Backend        | Python + FastAPI                 | Python 3.12 |
-| ORM            | SQLAlchemy (síncrono)            | 2.0+   |
+| Lint (FE)      | ESLint + typescript-eslint       | 10.x / 8.x |
+| Testes (FE)    | Vitest + jsdom                   | 5.x    |
+| Backend        | Python + FastAPI + uvicorn       | 3.12 / 0.142 / 0.54 |
+| ORM            | SQLAlchemy (síncrono)            | 2.1    |
 | Banco de Dados | PostgreSQL (prod) + SQLite (dev) | —      |
-| Migrations     | Alembic                          | 1.14+  |
-| Validação      | Pydantic                         | 2.x    |
-| Testes (BE)    | pytest                           | —      |
-| CI             | GitHub Actions                   | Node 22 / Python 3.12 |
-| Deploy         | Railway                          | —      |
-| Arquitetura    | Monorepo (backend/ + frontend/)  | —      |
+| Migrations     | Alembic                          | 1.20   |
+| Validação      | Pydantic                         | 2.13   |
+| Rate limit     | slowapi                          | 0.1    |
+| Ingestão (PDF) | pdfplumber + pypdfium2 + Pillow  | 0.11 / 5.13 / 12.3 |
+| Pacotes        | PyYAML                           | 6.0    |
+| Lint (BE)      | ruff                             | 0.16   |
+| Testes (BE)    | pytest + httpx                   | 9.1 / 0.28 |
+| CI             | GitHub Actions                   | Node 24 / Python 3.12 |
+| Deploy         | Railway (Docker, serviço único)  | —      |
+| Arquitetura    | Monorepo (backend/ + frontend/ + data/) | — |
 
 ---
 
@@ -267,9 +273,9 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 
 ### Documentos Existentes
 - [x] PRD (`/docs/01-PRD.md`) — v1.0 aprovado em 2026-09-29
-- [ ] Arquitetura (`/docs/02-ARCHITECTURE.md`)
-- [ ] Spec Técnica (`/docs/03-SPEC.md`)
-- [ ] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`)
+- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.0, ADR-001 a ADR-008
+- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..05`
+- [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
 - [ ] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`)
 
 ### Change Requests
@@ -278,11 +284,12 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 - Nenhum CR ainda — o MVP segue o Fluxo A (PRD → Arquitetura → Spec → Plano → Implementação)
 
 ### Última Tarefa Implementada
-- Bootstrap SDD (2026-09-29): templates, hook de qualidade (sem checks até o T-001), CI com guardas temporárias e este CLAUDE.md
+- Documentação do Fluxo A (2026-09-29): PRD, Arquitetura, Specs e Plano. Próxima tarefa: T-001 (scaffold do backend)
 
 ### Pendências do Scaffold (T-001)
 - Mover os checks de `$pendentes` para `checks` em `.claude/hooks/check-config.json`
-- Remover as guardas `if: hashFiles(...)` de `.github/workflows/ci.yml`
+- Remover as guardas `if: hashFiles(...)` de `.github/workflows/ci.yml`, subir o CI para Node 24, remover o `SECRET_KEY` (não há auth) e adicionar `ruff check` + `python -m ingestao validar --todas`
+- Adicionar `ruff` aos checks do hook
 - Atualizar "Comandos Essenciais", "Estrutura de Pastas" e as versões da "Stack Tecnológica"
 
 ---
@@ -299,6 +306,8 @@ Versões-alvo — confirmadas na fase de Arquitetura (`/docs/02-ARCHITECTURE.md`
 - **Não fabrique ferramentas.** Nunca invente ou adivinhe a existência de plugins, comandos CLI ou ferramentas. Se não tiver certeza, verifique a documentação primeiro. Se um comando falhar, reconheça o erro imediatamente.
 - **Planeje antes de codar.** Em tarefas complexas (3+ etapas), crie um plano TodoWrite detalhado antes de escrever qualquer código. Inclua: CR, arquivos a modificar, verificação de build, atualizações de docs, commit.
 - **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, tsc, eslint a partir do T-001). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf).
+- **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR.
+- **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
 
 ---

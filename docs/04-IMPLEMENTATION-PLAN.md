@@ -1,0 +1,148 @@
+# Plano de Implementação — Simulado Fuvest
+
+**Versão:** 1.0
+**Data:** 2026-09-29
+**PRD Ref:** 01-PRD v1.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.0
+**Spec Ref:** 03-SPEC v1.0 (specs 01–05)
+**CR Ref:** —
+
+---
+
+## Visão Geral
+
+| Grupo | Descrição | Tarefas | Status |
+|-------|-----------|---------|--------|
+| 1 | Setup e Infraestrutura | T-001 a T-004 | Pendente |
+| 2 | Pacote e Ingestão | T-005 a T-011 | Pendente |
+| 3 | API | T-012 a T-017 | Pendente |
+| 4 | Frontend | T-018 a T-025 | Pendente |
+| 5 | Deploy | T-026 a T-027 | Pendente |
+| 6 | Conteúdo e Lançamento | T-028 a T-030 | Pendente |
+
+> **Status:** Pendente / Em andamento / Concluído
+
+**Branch:** todo o MVP é desenvolvido em `feat/mvp`, com commit ao fim de cada tarefa. O merge `--no-ff` em `master` acontece em T-027, depois da validação local completa dos Grupos 1–5. Depois do MVP, as mudanças de código seguem o Fluxo B (CR).
+
+**Responsável:** as tarefas marcadas com **(curador)** dependem de trabalho manual do dono do produto (revisão e classificação das questões, configuração da Railway). As demais são de implementação.
+
+---
+
+## Grupo 1: Setup e Infraestrutura
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-001 | Scaffold do backend: FastAPI (`main`, `config`, `database`), `GET /api/health`, requirements (prod/ingestão/dev), `pyproject.toml` (ruff + pytest), `conftest.py` com SQLite in-memory, `.env.example` | `backend/**` | ADR-001 | — | `python -m uvicorn app.main:app` sobe; `/api/health` 200; `pytest` e `ruff check` verdes |
+| T-002 | Scaffold do frontend: Vite 8 + React 19 + TS 6.0 strict + Tailwind 4 + TanStack Query + react-router + ESLint + Vitest; proxy `/api` e `/figuras` → 8000 | `frontend/**` | ADR-007 | — | `npm run dev` abre a página; `tsc --noEmit -p tsconfig.app.json`, `npm run lint` e `npm test` verdes |
+| T-003 | Ativar os checks de qualidade: mover `$pendentes` → `checks` (+ `ruff`) no hook; no CI, remover as guardas `hashFiles`, subir para Node 24, remover o `SECRET_KEY`, adicionar `ruff check` e `python -m ingestao validar --todas`; atualizar os Comandos Essenciais e a Stack do `CLAUDE.md` | `.claude/hooks/check-config.json`, `.github/workflows/ci.yml`, `CLAUDE.md`, `.gitignore` (`data/_cache/`) | — | T-001, T-002 | Simulação do hook roda os 4 checks e passa; YAML do CI válido; CLAUDE.md sem a seção "Pendências do Scaffold" |
+| T-004 | Models SQLAlchemy + migration `001_schema_inicial` (5 tabelas, índices) + Alembic configurado | `backend/app/models.py`, `backend/alembic/**` | Arq. §4 | T-001 | `alembic upgrade head` e `downgrade base` sem erro (BT-047) |
+
+---
+
+## Grupo 2: Pacote e Ingestão
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-005 | Enum de disciplinas + schema do pacote + leitura/escrita YAML + gerador de pacotes sintéticos (2098/2099) | `app/disciplinas.py`, `app/pacote/schema.py`, `leitura.py`, `tests/fixtures/gerar_pacotes.py` | RF-004, RN-007 | T-001 | IT-001 verde; os pacotes sintéticos são gerados de forma determinística |
+| T-006 | Validação V01–V10 + relatório + CLI `validar` | `app/pacote/validacao.py`, `ingestao/cli.py` | RF-004, RN-007 | T-005 | IT-002, IT-003 verdes; `validar --todas` com exit code correto |
+| T-007 | Sincronização repo → banco + `python -m app.pacote.sincronizar` + CLI `importar` | `app/pacote/sincronizar.py`, `ingestao/cli.py` | RF-006, RN-006, ADR-002 | T-004, T-006 | IT-004 a IT-007 e IT-012 verdes; pacotes sintéticos importados no SQLite local |
+| T-008 | `baixar` + `pdf_util` (colunas, ordem de leitura, limpeza) + `figuras` (render → WebP) + `preview` + `recortar` | `ingestao/baixar.py`, `pdf_util.py`, `figuras.py`, `cli.py` | RF-001, RF-003 | T-005 | IT-010 e IT-013 verdes; `baixar` de 2025 grava os PDFs e o `fonte.json` |
+| T-009 | Família 2025 — gabarito (registry + parser) com fixture do PDF oficial | `ingestao/gabarito/**`, `tests/fixtures/pdfs/` | RF-002, RN-001 | T-008 | IT-008 verde (90 respostas V1; Q1=E, Q46=D) |
+| T-010 | Família 2025 — prova (registry + parser: questões, alternativas, textos-base, figuras, pendências) + CLI `extrair` | `ingestao/layouts/**`, `cli.py`, fixtures | RF-003, ADR-003 | T-008, T-009 | IT-009 e IT-011 verdes; `extrair --ano 2025` gera o pacote com relatório; métrica registrada no plano: % das 90 questões sem pendência estrutural |
+| T-011 | **(curador)** Curadoria da prova 2025: resolver as pendências, classificar as disciplinas, `validar`, conferir no site local (`importar --incluir-rascunhos`), `status: publicada` | `data/provas/2025/**` | RF-005, US-009 | T-010, T-020 | `validar --ano 2025` sem pendência bloqueante; **tempo de curadoria anotado** (meta ≤ 3 h, PRD §2) |
+
+---
+
+## Grupo 3: API
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-012 | Serialização pública + serviço de catálogo (distribuição RN-003) + `GET /api/catalogo` | `services/serializacao.py`, `services/catalogo.py`, `routers/catalogo.py`, `schemas.py` | RF-008, RN-003 | T-007 | BT-001, BT-002 verdes |
+| T-013 | Serviço de geração: 4 modos, semente, agrupamento RN-005, tempos RN-009 | `services/geracao.py` | RF-009–RF-012, RN-002–RN-005, RN-009 | T-012 | BT-010, BT-011 verdes + unitários de cada modo |
+| T-014 | `POST /api/simulados` + `GET /api/questoes` + rate limit + contador de geração | `routers/simulados.py`, `routers/questoes.py`, `rate_limit.py`, `services/estatisticas.py` | RF-009–RF-012 | T-013 | BT-003 a BT-009 e BT-012 a BT-017 verdes |
+| T-015 | Serviço de correção + `POST /api/correcoes` | `services/correcao.py`, `routers/correcoes.py` | RF-017, RF-018, RN-002, RN-008 | T-012 | BT-020 a BT-024 verdes |
+| T-016 | Reportes: `POST /api/reportes` + CLI `reportes listar/resolver` | `routers/reportes.py`, `services/reportes.py`, `ingestao/cli.py` | RF-007, RF-021, ADR-008 | T-012 | BT-030 a BT-035 verdes |
+| T-017 | Rota de figuras, fallback do SPA, headers de segurança, CORS/docs por ambiente | `main.py`, `security_headers.py` | Spec §3 | T-007 | BT-040 a BT-046 verdes; revisão OWASP registrada |
+
+---
+
+## Grupo 4: Frontend
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-018 | Base: tipos, cliente da API (`ApiError`), layout com rodapé de não afiliação, rotas, estados loading/erro/vazio | `types.ts`, `services/api.ts`, `components/Layout.tsx`, `App.tsx` | RF-008, RN-013 | T-002, T-014 | App navega entre as rotas sem erros no console |
+| T-019 | Storage + reducer + Context + utilitários de tempo + `useCronometro` + `AvisoStorage` | `storage/**`, `contexts/SimuladoContext.tsx`, `utils/tempo.ts`, `hooks/useCronometro.ts` | RF-015, RF-016, RN-009–RN-012 | T-018 | UT-001 a UT-006 verdes |
+| T-020 | Componentes de questão: Blocos, Figura (zoom), Alternativas, QuestaoView | `components/**` | RF-013, RNF-003 | T-018 | UT-007, UT-008 verdes; questão sintética com figura e texto-base renderizada |
+| T-021 | Home (catálogo + modos + retomar) + configuração do Personalizado + escolha do ano + início (RN-011, 409) | `pages/HomePage.tsx`, `ConfigurarPersonalizadoPage.tsx`, `EscolherAnoPage.tsx`, `hooks/useCatalogo.ts` | RF-008–RF-011 | T-019, T-020 | FT-003 validado (Playwright MCP) |
+| T-022 | ResolucaoPage: grade, cronômetro (ocultar, pausar, aviso de 15 min), atalhos, finalizar (manual/tempo/ao carregar) | `pages/ResolucaoPage.tsx`, `components/GradeQuestoes.tsx`, `Cronometro.tsx`, `ConfirmDialog.tsx` | RF-013–RF-016, RN-010 | T-021, T-015 | FT-001 e FT-005 validados |
+| T-023 | Resultado (resumo, disciplinas, revisão) + Histórico | `pages/ResultadoPage.tsx`, `HistoricoPage.tsx`, `storage/historicoStorage.ts`, componentes | RF-017–RF-020 | T-022 | UT-020, UT-021 verdes; FT-002 e FT-010 validados |
+| T-024 | TreinoPage (lotes, feedback imediato, placar, recomeçar) | `pages/TreinoPage.tsx` | RF-012 | T-020, T-015 | FT-004 validado |
+| T-025 | ReportarModal integrado ao QuestaoView | `components/ReportarModal.tsx` | RF-021 | T-020, T-016 | FT-020 validado |
+
+---
+
+## Grupo 5: Deploy
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-026 | Dockerfile multi-stage (Node 24 → Python 3.12) com `data/provas`, start = migrations + sincronização + uvicorn com proxy headers; `05-DEPLOY-GUIDE.md` | `Dockerfile`, `.dockerignore`, `docs/05-DEPLOY-GUIDE.md` | ADR-001, Arq. §9 | Grupos 3 e 4 | `docker build` + `docker run` local com SQLite servem o SPA, a API e as figuras (se não houver Docker local, validar no primeiro deploy e registrar) |
+| T-027 | **(curador)** Repositório GitHub + proteção da `master` + serviço e Postgres na Railway com "Wait for CI"; merge `feat/mvp` → `master`; primeiro deploy e smoke test em produção | Railway/GitHub (fora do repo) | Arq. §9 | T-026 | CI verde em `master`; `/api/health` em produção; simulado completo exercitado em produção |
+
+---
+
+## Grupo 6: Conteúdo e Lançamento
+
+| ID | Tarefa | Arquivos | Ref | Depende de | Done When |
+|----|--------|----------|-----|------------|-----------|
+| T-028 | Estender o registry da família 2025 aos anos vizinhos (2024, 2023, …) até onde ela extrair sem pendência estrutural; documentar onde uma família nova seria necessária | `ingestao/layouts/__init__.py`, `ingestao/gabarito/__init__.py`, fixtures | RF-003, ADR-003 | T-010 | Anos suportados listados no registry e na Arquitetura |
+| T-029 | **(curador)** Curadoria e publicação até **≥ 5 provas** (meta do PRD §2) | `data/provas/**` | PRD §2 | T-011, T-028 | `validar --todas` verde; 5+ provas no catálogo de produção |
+| T-030 | Revisão final: acessibilidade (teclado, contraste, alt), mobile 360 px, performance (geração p95 < 2 s), `/code-review` do diff, sincronização de todos os docs (PRD, Arquitetura, Specs, Plano, CLAUDE.md) | docs + ajustes | RNF-001–RNF-003 | T-027, T-029 | Checklist Done When Universal completo; findings corrigidos ou justificados |
+
+**Processo de conteúdo após o lançamento:** publicar uma prova nova (ou corrigir uma questão reportada) é mudança de **dados**, não de código. O fluxo é a branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote + merge com o CI verde (`validar --todas`), sem CR. Mudanças em parser, API ou UI seguem o Fluxo B.
+
+---
+
+## Diagrama de Dependências
+
+```mermaid
+graph LR
+    T001[T-001 Backend] --> T003[T-003 Checks/CI]
+    T002[T-002 Frontend] --> T003
+    T001 --> T004[T-004 Migration]
+    T001 --> T005[T-005 Schema pacote]
+    T005 --> T006[T-006 Validação]
+    T004 --> T007[T-007 Sincronização]
+    T006 --> T007
+    T005 --> T008[T-008 PDF util/figuras]
+    T008 --> T009[T-009 Gabarito 2025]
+    T009 --> T010[T-010 Prova 2025]
+    T010 --> T011[T-011 Curadoria 2025]
+    T007 --> T012[T-012 Catálogo]
+    T012 --> T013[T-013 Geração]
+    T013 --> T014[T-014 API simulados]
+    T012 --> T015[T-015 Correção]
+    T012 --> T016[T-016 Reportes]
+    T007 --> T017[T-017 Figuras/SPA/headers]
+    T014 --> T018[T-018 FE base]
+    T018 --> T019[T-019 Estado/tempo]
+    T018 --> T020[T-020 Componentes questão]
+    T020 --> T011
+    T019 --> T021[T-021 Home/config]
+    T020 --> T021
+    T021 --> T022[T-022 Resolução]
+    T015 --> T022
+    T022 --> T023[T-023 Resultado/Histórico]
+    T020 --> T024[T-024 Treino]
+    T020 --> T025[T-025 Reportar]
+    T016 --> T025
+    T023 --> T026[T-026 Docker]
+    T026 --> T027[T-027 Deploy]
+    T010 --> T028[T-028 Anos vizinhos]
+    T028 --> T029[T-029 ≥5 provas]
+    T027 --> T030[T-030 Revisão final]
+    T029 --> T030
+```
+
+---
+
+*Documento criado em 2026-09-29.*
