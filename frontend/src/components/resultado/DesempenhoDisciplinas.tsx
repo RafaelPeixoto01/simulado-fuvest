@@ -1,6 +1,5 @@
 import { NOMES_DISCIPLINAS, type DesempenhoAssunto, type DesempenhoDisciplina } from '../../types'
-import { formatarPercentual } from '../../utils/format'
-import { BarraPercentual } from '../BarraPercentual'
+import { BarraPercentual, Placar } from '../BarraPercentual'
 
 /** CR-004: detalhe recolhido — num simulado, cada assunto tem poucas questões. */
 function PorAssunto({ disciplina, assuntos }: { disciplina: string; assuntos: DesempenhoAssunto[] }) {
@@ -11,11 +10,9 @@ function PorAssunto({ disciplina, assuntos }: { disciplina: string; assuntos: De
       </summary>
       <ul aria-label={`Desempenho por assunto em ${disciplina}`} className="mt-2 space-y-1 border-l-2 border-linha pl-3">
         {assuntos.map((a) => (
-          <li key={a.assunto} className="flex items-baseline justify-between gap-4 text-sm">
-            <span>{a.nome}</span>
-            <span className="shrink-0 tabular-nums text-tinta-suave">
-              {a.acertos} de {a.total} ({formatarPercentual(a.percentual)})
-            </span>
+          <li key={a.assunto} className="flex items-baseline justify-between gap-4">
+            <span className="text-sm">{a.nome}</span>
+            <Placar {...a} />
           </li>
         ))}
       </ul>
@@ -34,9 +31,7 @@ export function DesempenhoDisciplinas({ dados }: { dados: DesempenhoDisciplina[]
           <li key={d.disciplina}>
             <div className="flex items-baseline justify-between gap-4">
               <span className="font-semibold">{NOMES_DISCIPLINAS[d.disciplina]}</span>
-              <span className="text-sm tabular-nums text-tinta-suave">
-                {d.acertos} de {d.total} ({formatarPercentual(d.percentual)})
-              </span>
+              <Placar {...d} />
             </div>
             <BarraPercentual percentual={d.percentual} />
             {/* Resultado gravado antes do CR-004 não tem assuntos: fica só a barra */}

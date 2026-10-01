@@ -154,8 +154,9 @@ def _v10_orfas(pacote: PacoteProva, existentes: set[str]) -> list[Pendencia]:
 def validar_pacote(
     pacote: PacoteProva, dir_figuras: Path, taxonomia: Taxonomia | None
 ) -> list[Pendencia]:
-    """`taxonomia=None` so no `extrair`: o rascunho recem-extraido ainda nao tem assunto,
-    e a V11 so acusa a ausencia. Validacao, CLI e sincronizacao passam a taxonomia real."""
+    """Com `taxonomia=None` a V11 so confere se o assunto existe (o `extrair` usa assim: o
+    rascunho recem-extraido ainda nao tem assunto). `validar`, `importar` e a sincronizacao
+    passam a taxonomia carregada, e entao a V11 confere tambem a disciplina."""
     existentes = (
         {f.name for f in dir_figuras.iterdir() if f.is_file()} if dir_figuras.is_dir() else set()
     )

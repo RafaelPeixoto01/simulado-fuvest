@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { BarraPercentual } from '../components/BarraPercentual'
+import { BarraPercentual, Placar } from '../components/BarraPercentual'
 import { Vazio } from '../components/Estados'
 import { LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
@@ -10,14 +10,6 @@ import { listarHistorico } from '../storage/historicoStorage'
 import { NOMES_DISCIPLINAS } from '../types'
 import { agregarDesempenho, MINIMO_QUESTOES_ASSUNTO, nomesDosAssuntos, type LinhaDisciplina } from '../utils/desempenho'
 import { formatarPercentual } from '../utils/format'
-
-function Placar({ acertos, total, percentual }: { acertos: number; total: number; percentual: number }) {
-  return (
-    <span className="shrink-0 text-sm tabular-nums text-tinta-suave">
-      {acertos} de {total} ({formatarPercentual(percentual)})
-    </span>
-  )
-}
 
 function SecaoDisciplina({ linha }: { linha: LinhaDisciplina }) {
   const nome = NOMES_DISCIPLINAS[linha.disciplina]

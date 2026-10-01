@@ -36,7 +36,8 @@ interface Contagem {
 
 const chave = (disciplina: string, slug: string) => `${disciplina}/${slug}`
 
-/** 1 casa decimal, como o servidor. */
+/** 1 casa decimal, como a API. Em empates exatos (ex.: 1 de 80 = 1,25%) a API arredonda para o par
+ *  e aqui para cima: o painel não é comparado número a número com o resultado do servidor. */
 export function calcularPercentual(acertos: number, total: number): number {
   return total ? Math.round((1000 * acertos) / total) / 10 : 0
 }

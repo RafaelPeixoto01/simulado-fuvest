@@ -12,12 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao, normalizar_database_url
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
-from app.pacote.assuntos import (
-    Taxonomia,
-    TaxonomiaInvalida,
-    carregar_taxonomia,
-    taxonomia_em_uso,
-)
+from app.pacote.assuntos import Taxonomia, TaxonomiaInvalida, carregar_taxonomia
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
 from app.pacote.schema import PacoteProva, Questao
 from app.pacote.sincronizar import formatar_resumo, sincronizar
@@ -48,18 +43,24 @@ def _validar_um(dir_prova: Path, taxonomia: Taxonomia) -> bool:
     return not (pacote.status == "publicada" and tem_bloqueante(pendencias))
 
 
+def _diretorios_alvo(args: argparse.Namespace) -> list[Path] | None:
+    """Sem --ano: todos os pacotes do diretorio. Com --ano: so ele (None, com erro, se faltar)."""
+    if args.ano is None:
+        return listar_pacotes(args.data_dir)
+    dir_prova = args.data_dir / str(args.ano)
+    if not dir_prova.is_dir():
+        _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
+        return None
+    return [dir_prova]
+
+
 def _cmd_validar(args: argparse.Namespace) -> int:
-    if args.todas:
-        diretorios = listar_pacotes(args.data_dir)
-        if not diretorios:
-            print(f"Nenhum pacote encontrado em {args.data_dir}")
-            return 0
-    else:
-        dir_prova = args.data_dir / str(args.ano)
-        if not dir_prova.is_dir():
-            _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
-            return 1
-        diretorios = [dir_prova]
+    diretorios = _diretorios_alvo(args)
+    if diretorios is None:
+        return 1
+    if not diretorios:
+        print(f"Nenhum pacote encontrado em {args.data_dir}")
+        return 0
     taxonomia = _carregar_taxonomia(args.data_dir)
     if taxonomia is None:
         return 1
@@ -126,19 +127,20 @@ def formatar_assuntos(pacote: PacoteProva, taxonomia: Taxonomia) -> str:
     if sem_disciplina:
         linhas.append(f"Sem disciplina ({len(sem_disciplina)})")
         linhas += [_linha_questao(q) for q in sem_disciplina]
-    linhas.append(f"Sem assunto ({len(sem_assunto)})")
-    linhas += [_linha_questao(q) for q in sem_assunto]
+    # As sem disciplina ja foram listadas acima: aqui so as que falta classificar no assunto
+    so_assunto = [q for q in sem_assunto if q.disciplina is not None]
+    linhas.append(f"Sem assunto ({len(so_assunto)})")
+    linhas += [_linha_questao(q) for q in so_assunto]
     return "\n".join(linhas)
 
 
 def _cmd_assuntos(args: argparse.Namespace) -> int:
-    if args.ano is None:
-        diretorios = listar_pacotes(args.data_dir)
-    else:
-        diretorios = [args.data_dir / str(args.ano)]
-        if not diretorios[0].is_dir():
-            _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
-            return 1
+    diretorios = _diretorios_alvo(args)
+    if diretorios is None:
+        return 1
+    if not diretorios:
+        print(f"Nenhum pacote encontrado em {args.data_dir}")
+        return 0
     taxonomia = _carregar_taxonomia(args.data_dir)
     if taxonomia is None:
         return 1
@@ -317,7 +319,7 @@ def _cmd_extrair(args: argparse.Namespace) -> int:
     salvar_pacote(pacote, dir_prova)
 
     # Rascunho recem-extraido: nenhuma questao tem assunto ainda (V11 so acusa a ausencia)
-    pendencias = validar_pacote(pacote, figuras, taxonomia_em_uso(args.data_dir))
+    pendencias = validar_pacote(pacote, figuras, None)
     print(formatar_relatorio(pacote, pendencias))
     com_problema = {
         p.questao for p in pendencias if p.codigo in PENDENCIAS_ESTRUTURAIS and p.questao
@@ -451,5 +453,10 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Redirecionada, a saida no Windows e cp1252 e quebra no texto das provas (o relatorio
+    # de `assuntos` o reproduz): UTF-8 sempre (CLAUDE.md, troubleshooting)
+    for fluxo in (sys.stdout, sys.stderr):
+        if hasattr(fluxo, "reconfigure"):
+            fluxo.reconfigure(encoding="utf-8")
     args = _parser().parse_args(argv)
     return args.func(args)
