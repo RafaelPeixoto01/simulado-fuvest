@@ -4,7 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
-| [CR-006](CR-006-login-obrigatorio.md) | Login obrigatório para usar o site | Em Implementação | 2026-10-01 |
+| [CR-006](CR-006-login-obrigatorio.md) | Login obrigatório para usar o site | Concluído | 2026-10-01 |
 | [CR-005](CR-005-contas-google.md) | Contas com Google e histórico sincronizado (Fase 3B do roadmap) | Concluído | 2026-10-01 |
 | [CR-004](CR-004-assuntos-desempenho.md) | Assuntos e desempenho (Fase 3A do roadmap) | Concluído | 2026-10-01 |
 | [CR-003](CR-003-resultado-figura-inicio.md) | Resultado, figura e início | Concluído | 2026-09-30 |

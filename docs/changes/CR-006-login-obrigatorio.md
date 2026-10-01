@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-01  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -152,7 +152,7 @@ O dono do produto decidiu que o uso do site exige login com Google.
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints alterados e autenticação — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v4.0, Arquitetura v1.6, 03-SPEC v1.6, specs 02/03/04/05 e 07 v1.2, Plano, Deploy Guide v1.3, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; produção conferida (sem cookie: 401 na API e apresentação no navegador; com login: uso normal) — branch verde; `master` e produção pendentes do merge
+- [x] CI verde na branch e em `master`; produção conferida (sem cookie: 401 na API e apresentação no navegador; com login: uso normal) — branch verde; `master` verde no merge `ff38f46` (run 36920047332). Produção, sem cookie: `/api/sessao` → `acesso: "conta"`; catálogo, questões e simulados → 401; health (3 provas), figura e início do login abertos; no navegador, início com a apresentação e só "Entrar" no cabeçalho, `/desempenho` → `/?voltar=%2Fdesempenho`, Privacidade aberta, nenhum cookie, console limpo. Com login: o usuário entrou, fez um simulado curto e o viu no Histórico (01/10)
 
 **Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
 - HTTP (curl), modo `conta`: `/api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo`, `GET /api/questoes`, `POST /api/correcoes` e `POST /api/reportes` → 401 `nao_autenticado`, e `POST /api/simulados` com corpo inválido também → 401 (antes do 422); `/api/health` e uma figura de 2025 → 200; com sessão, catálogo e questões → 200; depois da revisão, `POST /api/simulados` com `Origin` de outro site → 403 e com o do site → 200.
@@ -244,3 +244,4 @@ O dono do produto decidiu que o uso do site exige login com Google.
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3 |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-04): backend, frontend, validação runtime (FT-015), revisão de código (10 achados) e de segurança; achado durante os testes: ciclo de remontagem da sessão com erro de rede (corrigido com `retryOnMount: false`); CI da branch verde |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Merge `ff38f46`, CI de `master` verde; produção conferida sem login (Claude) e com login (usuário) — validação ✅, status Concluído |
