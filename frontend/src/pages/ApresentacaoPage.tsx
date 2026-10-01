@@ -19,8 +19,9 @@ const MODOS = [
 function NumerosBase({ vitrine }: { vitrine: Vitrine }) {
   const { total_questoes: total, anos } = vitrine
   const uma = anos.length === 1
-  const inicio = String(Math.min(...anos))
-  const fim = String(Math.max(...anos))
+  // Em ordem crescente (specs/07 §9.1)
+  const inicio = String(anos[0])
+  const fim = String(anos[anos.length - 1])
   const itens = [
     ['questões reais', total],
     [

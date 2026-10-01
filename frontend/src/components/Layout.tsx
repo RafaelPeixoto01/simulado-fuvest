@@ -10,14 +10,15 @@ const itemNav = ({ isActive }: { isActive: boolean }) =>
   `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
 
 export function Layout() {
-  const { data: sessao } = useSessao()
+  const { data: sessao, isPending: sessaoCarregando } = useSessao()
   // Com conta, envia as pendentes e traz o histórico da conta em qualquer página (ADR-011)
   useHistorico()
   // Login obrigatório (CR-006): Desempenho e Histórico só aparecem com acesso ao conteúdo
   // (sem conta, levariam à apresentação; com o site indisponível, ao aviso)
   const comConteudo = !sessao || sessao.acesso === 'livre' || (sessao.acesso === 'conta' && !!sessao.usuario)
   // Abaixo de 640 px os links não cabem em linha (CR-004): vão para o menu (CR-007, O2).
-  // Sem conta não há menu, só "Entrar" (O2.4)
+  // Sem conta não há menu, só "Entrar" (O2.4). Com o site indisponível, quem está conectado
+  // ainda tem o menu, só com Início e a conta (comConteudo falso, usuario presente)
   const usuario = sessao?.usuario ?? null
   const comMenu = comConteudo || !!usuario
 
@@ -31,7 +32,10 @@ export function Layout() {
             <Marca className="h-2 w-auto sm:h-2.5" />
             Simulado Fuvest
           </Link>
-          {comMenu && <MenuCelular comConteudo={comConteudo} usuario={usuario} className="sm:hidden" />}
+          {/* Enquanto a sessão carrega, o celular mostra só a marca: nem "Menu" nem "Entrar" piscam */}
+          {comMenu && !sessaoCarregando && (
+            <MenuCelular comConteudo={comConteudo} usuario={usuario} className="sm:hidden" />
+          )}
           <nav className={`items-center gap-1 ${comMenu ? 'hidden sm:flex' : 'flex'}`}>
             {comConteudo && (
               <>

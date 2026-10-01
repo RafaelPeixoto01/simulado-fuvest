@@ -83,6 +83,34 @@ describe('Menu do cabeçalho no celular (UT-045, O2)', () => {
     expect(screen.getByRole('button', { name: 'Começar prova completa' })).toBeInTheDocument()
   })
 
+  it('Tab para fora do painel fecha: o conteúdo coberto não recebe o foco com o menu aberto', async () => {
+    api(COM_LOGIN)
+    renderizar(<App />, { rota: '/' })
+    await abrir()
+
+    for (let i = 0; i < 5; i++) await userEvent.tab() // botão → 4 itens → fora
+
+    expect(screen.queryByRole('navigation', { name: 'Menu' })).toBeNull()
+  })
+
+  it('aberto, trava a rolagem da página; fechado, devolve', async () => {
+    api(COM_LOGIN)
+    renderizar(<App />, { rota: '/' })
+    const botao = await abrir()
+    expect(document.documentElement.style.overflow).toBe('hidden')
+
+    await userEvent.click(botao)
+
+    expect(document.documentElement.style.overflow).toBe('')
+  })
+
+  it('enquanto a sessão carrega, não mostra o menu', () => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    renderizar(<App />, { rota: '/privacidade' })
+
+    expect(screen.queryByRole('button', { name: 'Menu' })).toBeNull()
+  })
+
   it('o botão também fecha', async () => {
     api(COM_LOGIN)
     renderizar(<App />, { rota: '/' })

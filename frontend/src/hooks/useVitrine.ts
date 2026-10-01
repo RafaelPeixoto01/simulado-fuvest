@@ -4,5 +4,6 @@ import { api } from '../services/api'
 
 /** Totais da base para a apresentação, sem login (CR-007). */
 export function useVitrine() {
-  return useQuery({ queryKey: ['vitrine'], queryFn: api.vitrine })
+  // Os totais só mudam com um deploy: sem novas buscas ao voltar para a aba
+  return useQuery({ queryKey: ['vitrine'], queryFn: api.vitrine, staleTime: Infinity })
 }

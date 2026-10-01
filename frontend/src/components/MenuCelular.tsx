@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import type { Usuario } from '../types'
@@ -21,7 +21,8 @@ function Item({ para, icone, children, aoEscolher }: { para: string; icone: Reac
 }
 
 /** Menu do cabeçalho abaixo de 640 px (CR-007, O2): botão "Menu" e painel logo abaixo do
- *  cabeçalho, sobre o conteúdo escurecido. Fecha com Esc, toque fora, item e troca de rota. */
+ *  cabeçalho, sobre o conteúdo escurecido. Fecha com Esc, toque fora, item, troca de rota e
+ *  foco fora dele; aberto, trava a rolagem da página. */
 export function MenuCelular({
   comConteudo,
   usuario,
@@ -43,30 +44,41 @@ export function MenuCelular({
     setAberto(false)
   }
 
-  const fecharDevolvendoFoco = () => {
+  const fecharDevolvendoFoco = useCallback(() => {
     setAberto(false)
     botao.current?.focus()
-  }
+  }, [])
 
   useEffect(() => {
     if (!aberto) return
+    const fora = (alvo: EventTarget | null) =>
+      !painel.current?.contains(alvo as Node) && !botao.current?.contains(alvo as Node)
     const tecla = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return
-      setAberto(false)
-      botao.current?.focus()
+      if (e.key === 'Escape') fecharDevolvendoFoco()
     }
-    // O fundo escuro fica por cima do conteúdo: o toque fecha sem acionar o que está por baixo
+    // O fundo escuro fica por cima do conteúdo: o toque fecha sem acionar o que está por baixo.
+    // No documento, e não só no fundo, para valer também no resto do cabeçalho (marca)
     const clique = (e: MouseEvent) => {
-      const alvo = e.target as Node
-      if (!painel.current?.contains(alvo) && !botao.current?.contains(alvo)) setAberto(false)
+      if (fora(e.target)) setAberto(false)
     }
+    // O conteúdo coberto pelo fundo não recebe o foco com o menu aberto: Tab para fora fecha
+    const foco = (e: FocusEvent) => {
+      if (fora(e.target)) setAberto(false)
+    }
+    // O cabeçalho não é fixo: rolar a página levaria o painel embora e deixaria só o fundo
+    const html = document.documentElement
+    const overflowAntes = html.style.overflow
+    html.style.overflow = 'hidden'
     document.addEventListener('keydown', tecla)
     document.addEventListener('click', clique)
+    document.addEventListener('focusin', foco)
     return () => {
+      html.style.overflow = overflowAntes
       document.removeEventListener('keydown', tecla)
       document.removeEventListener('click', clique)
+      document.removeEventListener('focusin', foco)
     }
-  }, [aberto])
+  }, [aberto, fecharDevolvendoFoco])
 
   const nome = usuario ? primeiroNome(usuario.nome) : null
 
