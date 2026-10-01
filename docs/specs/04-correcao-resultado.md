@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.4
+**Versão:** 1.5
 **Data:** 2026-10-01
 **PRD Ref:** 01-PRD v4.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014, RN-016)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-005, ADR-009)
-**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`), CR-006 (correção exige sessão; resultado e histórico atrás do login)
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`), CR-006 (correção exige sessão; resultado e histórico atrás do login), CR-008 (identidade: círculo nos acertos, números em Fraunces, número da questão na bolinha)
 
 ---
 
@@ -113,7 +113,7 @@ interface HistoricoEntry {
 
 **ResultadoPage (`/resultado/:id`):**
 - Lê a entrada do state da navegação ou de `useHistorico` (CR-005). Não encontrada enquanto o histórico sincroniza → `Carregando`; depois → "Resultado não encontrado neste navegador" + link para `/historico` (sem conta e com login disponível, sugere entrar com o Google — `specs/07` §3).
-- `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`.
+- `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`. CR-008: o número de acertos no `h1` ganha o círculo de caneta (`CirculoCaneta`, `aria-hidden`; o nome do título não muda) e os três números ficam em `font-titulo`.
 - Ações: "Novo simulado" (Home), "Ver histórico".
 - **Ordem (CR-003, P1.7):** resumo → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
 - `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto; em cada disciplina, "Ver por assunto" recolhido (CR-004).
@@ -170,7 +170,7 @@ Barras em CSS (sem biblioteca de gráficos); valor sempre também em texto (aces
 | onIr | `(indice) => void` | Sim | — | Anterior/Próxima dentro da lista filtrada |
 | pedidoDeFoco | `number` | Sim | — | Incrementado a cada navegação: rola até a seção e foca o título |
 
-Uma questão por vez. Filtros Todas / Erradas / Em branco (rádios) e Disciplina (`select`). Reusa `QuestaoView` + `Alternativas` em modo `correcao`, com o título em `h3` e, no cabeçalho, o selo ("Você acertou: X", "Você marcou X · correta Y", "Em branco · correta Y", "Anulada: ponto para todos") e a posição no filtro ("i de M questões/erradas/em branco"). Anterior/Próxima com 48 px. Filtro vazio → "Nenhuma questão com esse filtro". Questão sem conteúdo na base: sem item corrigido → "removida da base e não entrou na nota"; com item → "O conteúdo desta questão não está mais disponível na base; a correção acima continua valendo".
+Uma questão por vez. Filtros Todas / Erradas / Em branco (rádios) e Disciplina (`select`). Reusa `QuestaoView` + `Alternativas` em modo `correcao`, com o título em `h3` (o número na bolinha, CR-008) e, no cabeçalho, o selo ("Você acertou: X", "Você marcou X · correta Y", "Em branco · correta Y", "Anulada: ponto para todos") e a posição no filtro ("i de M questões/erradas/em branco"). Anterior/Próxima com 48 px. Filtro vazio → "Nenhuma questão com esse filtro". Questão sem conteúdo na base: sem item corrigido → "removida da base e não entrou na nota"; com item → "O conteúdo desta questão não está mais disponível na base; a correção acima continua valendo".
 
 ### Componente: FolhaCorrigida (CR-003, D5)
 
@@ -220,6 +220,7 @@ Ver `specs/03-resolucao.md` §4 e o fluxo de simulado em `02-ARCHITECTURE.md` §
 | BT-024 | Ordem dos itens igual à do request | POST /api/correcoes | Mesma ordem |
 | UT-020 | Histórico: inserir, limite 50, limpar, storage indisponível | `historicoStorage` | Comportamento esperado |
 | UT-021 | Tempo médio e formatação | `ResumoResultado` | Valores corretos |
+| UT-051 | Círculo de caneta nos acertos, `aria-hidden`, com o `h1` "Você acertou N de M questões" inteiro | `ResumoResultado` | Nome acessível igual (CR-008; também na apresentação e no início) |
 | FT-010 | Finalizar → resultado → filtro "Erradas" → histórico | E2E (Playwright MCP) | Dados consistentes |
 | UT-022 | `revisao.ts`: situação, filtros, abrir pela folha, trocar filtros | unit | Estados esperados (CR-003) |
 | UT-023 | `FolhaCorrigida`: cores das bolinhas, selos, anuladas, sem letras | componente | Classes e textos corretos (CR-003) |

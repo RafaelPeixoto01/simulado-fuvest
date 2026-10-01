@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-10-01
 **PRD Ref:** 01-PRD v4.1 (RF-008, RF-020, RF-022, RF-024 a RF-026, US-013 a US-016, RN-012, RN-016, RN-017, RNF-004, RNF-005)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
-**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2)
 
 ---
 
@@ -559,6 +559,8 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
 - Miniatura (`aria-hidden`): barra do topo com "FUVEST 2025" (só a partir de 1024 px), o cronômetro "04:52:10" e "Folha 12/90"; "Questão 13 de 90" e "História · FUVEST 2025 (questão 13)"; o enunciado da questão 13 de 2025 na fonte de leitura; as alternativas A, B (marcada, como na resolução) e C, cortadas com reticências; e a barra inferior com "‹ Anterior", "Revisar" e "Próxima ›" (azul). O texto vem do pacote `data/provas/2025/prova.yaml`.
 - A coluna da prévia tem 616 px de altura entre 1024 e 1279 px e 584 px a partir daí, para o cartão de resultado ficar abaixo da alternativa marcada.
 - Cartão de resultado sobreposto (só a partir de 1024 px, embaixo e à esquerda da coluna): "Resultado", "58 de 90 acertos" e as barras de Inglês 40%, História 53%, Geografia 77% e Física 100% (números ilustrativos). Tem o próprio texto para leitor de tela: "Ao lado, o desempenho por disciplina de um resultado."
+
+**Identidade (CR-008):** o `h1` em Fraunces com o círculo de caneta em "reais" (`aria-hidden`; o nome do título não muda); os números da vitrine em `font-titulo`; os cartões dos modos com `CARTAO` (16 px, sem sombra) e os títulos em `font-titulo`; na prévia, o número da questão numa bolinha e o cronômetro em `font-titulo`, como na resolução nova.
 
 **Modos (O1.3):** `h2` "Quatro jeitos de treinar" (como hoje) e os 4 modos em cartões (`li` com borda, fundo branco e cantos arredondados). Cada um tem uma bolinha da folha (letra A–D em `optico-texto`, borda `optico`, `aria-hidden`), o `h3` e a descrição. A partir de 1024 px, 4 colunas, com a bolinha acima do título; abaixo disso, lista, com a bolinha à esquerda.
 

@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.7
+**Versão:** 1.8
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v4.1
-**Arquitetura Ref:** 02-ARCHITECTURE v1.7
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007
+**PRD Ref:** 01-PRD v4.2
+**Arquitetura Ref:** 02-ARCHITECTURE v1.8
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -12,7 +12,7 @@
 
 ## 1. Resumo
 
-MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca.
+MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca. CR-008: identidade visual "Papel & Caneta" (tokens, Fraunces, marca, motivos) e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque.
 
 ### Specs por feature
 
@@ -20,7 +20,7 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 |---|------|-----|--------|
 | 01 | [Ingestão de Provas](specs/01-ingestao.md) | RF-001–RF-006 | CLI do curador, pacote `prova.yaml`, validação V01–V10, sincronização repo → banco, família de layout 2025 |
 | 02 | [Catálogo e Geração](specs/02-catalogo-e-geracao.md) | RF-008–RF-012 | `GET /api/catalogo`, `POST /api/simulados` (4 modos), `GET /api/questoes` |
-| 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: rotas, cabeçalho (menu do celular — CR-007), Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
+| 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: identidade visual e tokens (CR-002, CR-008), rotas, cabeçalho (menu do celular — CR-007), início com conta (CR-008), Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
 | 04 | [Correção, Resultado e Histórico](specs/04-correcao-resultado.md) | RF-017–RF-020 | `POST /api/correcoes`, resultado por disciplina, folha corrigida clicável e revisão uma questão por vez (CR-003), histórico local |
 | 05 | [Reporte de Erro](specs/05-reportes.md) | RF-007, RF-021 | `POST /api/reportes`, modal, CLI de reportes |
 | 06 | [Assuntos e Desempenho](specs/06-assuntos-desempenho.md) | RF-005, RF-018, RF-022, RF-023 | Taxonomia `assuntos.yaml`, V11, `questoes.assunto`, assuntos no catálogo e na correção, CLI `assuntos`, "Ver por assunto" e painel `/desempenho` (CR-004) |
@@ -107,6 +107,7 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.8 | 2026-10-01 | CR-008: identidade "Papel & Caneta" — spec 03 v1.8 (tokens, fontes, marca, motivos, início com conta), spec 04 v1.5 (resultado e revisão) e spec 07 v1.4 (apresentação). Nenhum contrato da API muda |
 | 1.7 | 2026-10-01 | CR-007: `GET /api/vitrine` pública (emenda à D2 do CR-006); spec 07 v1.3 (§9: vitrine e apresentação) e spec 03 v1.7 (menu do cabeçalho no celular, barra do topo da resolução opaca) |
 | 1.6 | 2026-10-01 | CR-006: login obrigatório — coluna Acesso nos contratos, erro `site_indisponivel`, `SessaoResponse.acesso`; spec 07 v1.2 (§8), notas de acesso nas specs 02, 03, 04 e 05 |
 | 1.5 | 2026-10-01 | CR-005: spec 07 nova (contas e histórico sincronizado); contratos com sessão e Origin, erros `login_indisponivel`/`nao_autenticado`/`origem_invalida`, `Cache-Control: no-store`, migration 003; specs 03 v1.5, 04 v1.3 e 06 v1.1 |
