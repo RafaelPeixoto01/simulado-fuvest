@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-01  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -197,7 +197,7 @@ Diferenças das telas "Apresentação · desktop", "Apresentação · celular" e
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoint público novo — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v4.1, Arquitetura v1.7, 03-SPEC v1.7, specs 07 v1.3 e 03 v1.7, CR-006 (nota da emenda), Plano, Deploy Guide v1.4, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` — branch verde (run 36928491399, com o smoke test do Docker conferindo a vitrine em produção sem login); `master` verde no merge `f059415` (run 36928657774). Produção depois do deploy, sem cookie: `/api/vitrine` → 200 `{"total_questoes":270,"anos":[2023,2024,2025]}` sem `Set-Cookie`; `/api/catalogo` continua 401; no navegador a 390 px, apresentação com "270 · 3 · 2023–25", botão de 52 px, aviso "É grátis.", cabeçalho de 56 px só com "Entrar", sem rolagem horizontal e console limpo. O menu com login foi validado localmente (FT-021); em produção, depende de um login real
 
 **Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
 - HTTP (curl), modo `conta`, sem cookie: `GET /api/vitrine` → 200 `{"total_questoes":270,"anos":[2023,2024,2025]}`, sem `Set-Cookie`, com os headers de segurança; `POST /api/vitrine` → 405; parâmetro na URL é ignorado (200). `GET /api/catalogo` continua 401 e `/api/sessao` → `acesso: "conta"`.
@@ -289,3 +289,4 @@ Diferenças das telas "Apresentação · desktop", "Apresentação · celular" e
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com os itens O1 a O3, a D1 (vitrine), a D2 (extras do protótipo fora de escopo) e a emenda à D2 do CR-006 |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-05): vitrine, apresentação, menu do celular e barra opaca; validação runtime (FT-021) com 3 ajustes de layout (cabeçalho em 320 px, cartão de resultado em 1024 px, período em 390 px); revisão de código (9 achados) e de segurança |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Merge `f059415`, CI de `master` verde; produção conferida sem login — validação ✅, status Concluído |
