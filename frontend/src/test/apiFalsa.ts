@@ -9,8 +9,8 @@ export function json(status: number, corpo: unknown): Response {
   return new Response(JSON.stringify(corpo), { status, headers: { 'Content-Type': 'application/json' } })
 }
 
-/** Sem conta e com o login desligado: o padrão de todo teste que não fala de conta (CR-005). */
-export const SESSAO_ANONIMA: Sessao = { login_disponivel: false, usuario: null }
+/** Sem conta e com o login desligado (modo `livre`): o padrão de todo teste que não fala de conta. */
+export const SESSAO_ANONIMA: Sessao = { login_disponivel: false, usuario: null, acesso: 'livre' }
 
 /** Substitui o fetch global roteando por "METODO /caminho". Devolve o mock para inspeção.
  *  `GET /api/sessao` responde SESSAO_ANONIMA, a menos que o teste a substitua. */

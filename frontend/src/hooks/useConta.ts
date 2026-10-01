@@ -11,6 +11,7 @@ function semConta(queryClient: QueryClient) {
   queryClient.setQueryData<Sessao>(CHAVE_SESSAO, (antes) => ({
     login_disponivel: antes?.login_disponivel ?? true,
     usuario: null,
+    acesso: antes?.acesso ?? 'conta',
   }))
   // Evita mostrar, por um instante, a lista anônima de antes do login
   queryClient.setQueryData([...CHAVE_HISTORICO_QUERY, 'sem-conta'], listarHistorico())

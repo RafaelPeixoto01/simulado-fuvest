@@ -24,13 +24,14 @@ export function PrivacidadePage() {
         O Simulado Fuvest é gratuito e não tem publicidade. Esta página diz o que guardamos sobre você e como apagar.
       </p>
 
-      <Secao titulo="Sem conta">
+      <Secao titulo="Antes de entrar">
         <p>
-          Nenhum dado pessoal vai para o servidor. O simulado em andamento e o histórico ficam só no seu navegador.
+          Para usar o site, é preciso entrar com a conta Google. Antes disso, só a apresentação e esta página abrem:
+          nenhum dado vai para o servidor e nenhum cookie é criado.
         </p>
         <p>
-          Os reportes de erro em questões são anônimos, e contamos quantos simulados são gerados por dia, sem saber
-          quem os gerou.
+          Os reportes de erro em questões não guardam quem reportou, e contamos quantos simulados são gerados por dia,
+          sem saber quem os gerou.
         </p>
       </Secao>
 

@@ -155,9 +155,14 @@ export interface Usuario {
   nome: string | null
 }
 
+/** Modo de acesso (CR-006, ADR-012): `conta` exige login; `livre` é o desenvolvimento sem login
+ *  configurado; `indisponivel` é a produção sem login configurado. */
+export type Acesso = 'conta' | 'livre' | 'indisponivel'
+
 export interface Sessao {
   login_disponivel: boolean
   usuario: Usuario | null
+  acesso: Acesso
 }
 
 export const NOMES_DISCIPLINAS: Record<Disciplina, string> = {

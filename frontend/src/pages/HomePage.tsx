@@ -149,7 +149,7 @@ export function HomePage() {
         <p className="mt-3 max-w-2xl text-lg text-tinta-suave">
           {catalogo.data.total_questoes} questões de {catalogo.data.provas.length}{' '}
           {catalogo.data.provas.length === 1 ? 'prova' : 'provas'}
-          {periodo}. Não precisa criar conta: o progresso fica salvo neste navegador.
+          {periodo}. O simulado em andamento fica salvo neste navegador.
         </p>
       )}
 

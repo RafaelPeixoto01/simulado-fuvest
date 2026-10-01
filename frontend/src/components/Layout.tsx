@@ -12,6 +12,8 @@ export function Layout() {
   const { data: sessao } = useSessao()
   // Com conta, envia as pendentes e traz o histórico da conta em qualquer página (ADR-011)
   useHistorico()
+  // Login obrigatório (CR-006): sem conta, Desempenho e Histórico só levariam à apresentação
+  const semAcesso = !!sessao && !sessao.usuario && sessao.acesso !== 'livre'
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -23,12 +25,16 @@ export function Layout() {
           </Link>
           {/* No celular os links ficam empilhados: lado a lado, estouram 320 px (CR-004) */}
           <nav className="flex flex-col items-end sm:flex-row sm:gap-1">
-            <NavLink to="/desempenho" className={itemNav}>
-              Desempenho
-            </NavLink>
-            <NavLink to="/historico" className={itemNav}>
-              Histórico
-            </NavLink>
+            {!semAcesso && (
+              <>
+                <NavLink to="/desempenho" className={itemNav}>
+                  Desempenho
+                </NavLink>
+                <NavLink to="/historico" className={itemNav}>
+                  Histórico
+                </NavLink>
+              </>
+            )}
             {(sessao?.usuario || sessao?.login_disponivel) && (
               <NavLink to="/conta" className={itemNav}>
                 {sessao.usuario ? primeiroNome(sessao.usuario.nome) : 'Entrar'}
