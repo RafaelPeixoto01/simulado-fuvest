@@ -43,6 +43,7 @@ O dono do produto decidiu que o uso do site exige login com Google.
 **Decisões do usuário (01/10/2026):**
 - **D1 · O que fica aberto:** a apresentação e a Privacidade. Todo o resto exige login.
 - **D2 · Onde exigir:** na interface e na API. O health e as figuras continuam públicos.
+  - *Emendada pelo [CR-007](CR-007-apresentacao-menu-barra.md) (01/10/2026):* a vitrine (`GET /api/vitrine`, só os totais da base) também é pública, e a apresentação passa a mostrar os números da base. A consequência abaixo sobre os números deixa de valer.
 - **D3 · Login não configurado:** fecha em produção e abre em desenvolvimento.
 
 **Consequências que seguem das decisões (Claude):**
@@ -245,3 +246,4 @@ O dono do produto decidiu que o uso do site exige login com Google.
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3 |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-04): backend, frontend, validação runtime (FT-015), revisão de código (10 achados) e de segurança; achado durante os testes: ciclo de remontagem da sessão com erro de rede (corrigido com `retryOnMount: false`); CI da branch verde |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Merge `ff38f46`, CI de `master` verde; produção conferida sem login (Claude) e com login (usuário) — validação ✅, status Concluído |
+| 2026-10-01 | Rafael Peixoto (com Claude) | D2 emendada pelo CR-007: a vitrine (`GET /api/vitrine`, só totais) também é pública |
