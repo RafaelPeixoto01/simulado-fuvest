@@ -102,7 +102,7 @@ export function ResultadoPage() {
   const estado = useLocation().state as EstadoResultado | null
   // Recém-finalizado chega pelo state (funciona mesmo sem storage); depois, pelo histórico,
   // que com conta pode vir de outro dispositivo depois da sincronização (CR-005)
-  const { entradas, sincronizando, usuario, loginDisponivel } = useHistorico()
+  const { entradas, sincronizando, usuario } = useHistorico()
   const entrada = useMemo(
     () => (estado?.entrada?.id === id ? estado.entrada : (entradas.find((e) => e.id === id) ?? null)),
     [estado, id, entradas],
@@ -119,16 +119,16 @@ export function ResultadoPage() {
     return (
       <section className="max-w-prose">
         <h1 className="text-2xl font-bold">Resultado</h1>
-        <p className="mt-2">Resultado não encontrado neste navegador.</p>
-        <p className="mt-1 text-tinta-suave">O histórico fica guardado só no navegador em que o simulado foi feito.</p>
-        {!usuario && loginDisponivel && (
-          <p className="mt-1 text-tinta-suave">
-            Se você fez o simulado com a sua conta,{' '}
-            <Link to="/conta" className={LINK}>
-              entre com o Google
-            </Link>{' '}
-            para vê-lo aqui.
-          </p>
+        {usuario ? (
+          <>
+            <p className="mt-2">Resultado não encontrado no seu histórico.</p>
+            <p className="mt-1 text-tinta-suave">A conta guarda os 50 simulados concluídos mais recentes.</p>
+          </>
+        ) : (
+          <>
+            <p className="mt-2">Resultado não encontrado neste navegador.</p>
+            <p className="mt-1 text-tinta-suave">O histórico fica guardado só no navegador em que o simulado foi feito.</p>
+          </>
         )}
         <Link to="/historico" className={`${LINK} mt-5 inline-block`}>Ver histórico</Link>
       </section>

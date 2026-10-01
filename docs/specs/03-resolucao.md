@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.5
+**Versão:** 1.6
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v3.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
+**PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início)
 
 ---
 
@@ -109,14 +109,14 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 | Rota | Página | Observação |
 |------|--------|------------|
-| `/` | `HomePage` | Com simulado em andamento, banner no topo (CR-003, P1.9): "Simulado em andamento", descrição, barra de progresso, "r de n respondidas · m para revisar", tempo ("Restam 4 h 52 min. O relógio continua correndo mesmo com a aba fechada." / "Pausado com 58 min restantes." / "O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas."; sem cronômetro, nada), "Continuar simulado" e "Descartar"; atualiza a cada 30 s e mostra minutos (`formatarRestante`); os 4 modos ficam com botão secundário. Depois, catálogo e 4 modos. "Provas na base": "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela (P2.6) |
+| `/` | `HomePage` | Sem login (CR-006): página de apresentação (`specs/07` §8). Com login: com simulado em andamento, banner no topo (CR-003, P1.9): "Simulado em andamento", descrição, barra de progresso, "r de n respondidas · m para revisar", tempo ("Restam 4 h 52 min. O relógio continua correndo mesmo com a aba fechada." / "Pausado com 58 min restantes." / "O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas."; sem cronômetro, nada), "Continuar simulado" e "Descartar"; atualiza a cada 30 s e mostra minutos (`formatarRestante`); os 4 modos ficam com botão secundário. Depois, catálogo e 4 modos. "Provas na base": "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela (P2.6) |
 | `/novo/personalizado` | `ConfigurarPersonalizadoPage` | Disciplinas (checkbox, mín. 1), anos (dois selects com os anos do catálogo), quantidade (1–90, default 20), cronômetro (default ligado; mostra o tempo calculado) |
 | `/novo/ano` | `EscolherAnoPage` | Lista de anos publicados; cada item com o link do PDF oficial (RN-013) |
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
 | `/treino` | `TreinoPage` | Filtros + sessão |
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
 | `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho" e "Histórico", nessa ordem |
-| `/conta`, `/privacidade` | ver `specs/07-contas-sincronizacao.md` | Conta e privacidade (CR-005). Com login disponível, o cabeçalho ganha um terceiro link ("Entrar" ou o primeiro nome) para `/conta`; o rodapé ganha "Privacidade" |
+| `/conta`, `/privacidade` | ver `specs/07-contas-sincronizacao.md` | Conta e privacidade (CR-005). Com login disponível, o cabeçalho ganha um terceiro link ("Entrar" ou o primeiro nome) para `/conta`; o rodapé ganha "Privacidade". Sem login, só estas duas e a apresentação abrem: as demais rotas, inclusive `/simulado`, passam por `RequerConta` (CR-006, `specs/07` §8) |
 | `*` | 404 simples | Link para `/` |
 
 **Título da página (CR-002, WCAG 2.4.2):** cada página chama `useTituloPagina`: "Simulado Fuvest" no início e "‹página› · Simulado Fuvest" nas demais (Simulado personalizado, Prova de um ano, ‹descrição do simulado› na resolução, Treino por questão, Resultado, Histórico, Meu desempenho, Conta, Privacidade, Página não encontrada).

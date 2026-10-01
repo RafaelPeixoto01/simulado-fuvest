@@ -5,12 +5,13 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.dependencias import obter_sessao
+from app.dependencias import exigir_acesso, obter_sessao
 from app.models import Questao
 from app.schemas import QuestoesResponse
 from app.services.serializacao import questao_publica, textos_base_publicos
 
-router = APIRouter(prefix="/api", tags=["questoes"])
+# Login obrigatorio (CR-006, ADR-012)
+router = APIRouter(prefix="/api", tags=["questoes"], dependencies=[Depends(exigir_acesso)])
 
 ID_QUESTAO = re.compile(r"^\d{4}-\d{3}$")
 MAX_IDS = 90

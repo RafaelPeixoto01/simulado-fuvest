@@ -3,12 +3,17 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
-from app.dependencias import obter_sessao
+from app.dependencias import exigir_acesso, obter_sessao, verificar_origem
 from app.rate_limit import limiter
 from app.schemas import ReporteCreate, ReporteCriado
 from app.services.reportes import QuestaoNaoEncontrada, criar_reporte
 
-router = APIRouter(prefix="/api", tags=["reportes"])
+# Login obrigatorio (CR-006, ADR-012)
+router = APIRouter(
+    prefix="/api",
+    tags=["reportes"],
+    dependencies=[Depends(verificar_origem), Depends(exigir_acesso)],
+)
 
 
 @router.post("/reportes", status_code=201)

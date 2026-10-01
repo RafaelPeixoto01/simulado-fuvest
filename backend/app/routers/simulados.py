@@ -3,14 +3,19 @@ from typing import Annotated
 from fastapi import APIRouter, Body, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
-from app.dependencias import obter_sessao
+from app.dependencias import exigir_acesso, obter_sessao, verificar_origem
 from app.rate_limit import limiter
 from app.schemas import GerarTreino, PedidoSimulado, SimuladoResponse
 from app.services.estatisticas import registrar_geracao
 from app.services.geracao import ProvaNaoEncontrada, QuestoesInsuficientes, gerar_simulado
 from app.services.serializacao import questao_publica, textos_base_publicos
 
-router = APIRouter(prefix="/api", tags=["simulados"])
+# Login obrigatorio (CR-006, ADR-012)
+router = APIRouter(
+    prefix="/api",
+    tags=["simulados"],
+    dependencies=[Depends(verificar_origem), Depends(exigir_acesso)],
+)
 
 
 @router.post("/simulados")

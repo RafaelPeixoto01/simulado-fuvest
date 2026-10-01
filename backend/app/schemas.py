@@ -215,9 +215,15 @@ class UsuarioPublico(BaseModel):
     nome: str | None
 
 
+# Login obrigatorio (CR-006, ADR-012): `conta` exige sessao; `livre` e o desenvolvimento sem
+# login configurado; `indisponivel` e a producao sem login configurado
+ModoAcesso = Literal["conta", "livre", "indisponivel"]
+
+
 class SessaoResponse(BaseModel):
     login_disponivel: bool
     usuario: UsuarioPublico | None
+    acesso: ModoAcesso
 
 
 # Espelho do HistoricoEntry do navegador (specs/04 §2.2). extra="forbid" e limites de

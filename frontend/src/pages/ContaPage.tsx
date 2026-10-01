@@ -17,8 +17,8 @@ function SemConta() {
   return (
     <>
       <p className="mt-2 text-tinta-suave">
-        Entre com a sua conta Google para guardar o histórico dos simulados e vê-lo em qualquer dispositivo. Os
-        simulados já feitos neste navegador vão para a sua conta.
+        Entre com a sua conta Google para usar o site. O histórico fica na sua conta e aparece em qualquer
+        dispositivo. Os simulados já feitos neste navegador vão para a sua conta.
       </p>
       <p className="mt-3 text-tinta-suave">
         Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos. O simulado em andamento continua só

@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BarraPercentual, Placar } from '../components/BarraPercentual'
-import { ConviteConta } from '../components/ConviteConta'
 import { Vazio } from '../components/Estados'
 import { LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
@@ -50,7 +49,7 @@ function SecaoDisciplina({ linha }: { linha: LinhaDisciplina }) {
  *  o da conta (CR-005). */
 export function DesempenhoPage() {
   useTituloPagina('Meu desempenho')
-  const { entradas, usuario, loginDisponivel } = useHistorico()
+  const { entradas, usuario } = useHistorico()
   // O catálogo só traz os nomes atuais dos assuntos: enquanto carrega (ou se falhar), valem os do histórico
   const { data: catalogo } = useCatalogo()
   const painel = useMemo(() => agregarDesempenho(entradas, nomesDosAssuntos(entradas, catalogo)), [entradas, catalogo])
@@ -66,7 +65,6 @@ export function DesempenhoPage() {
         <p className="mt-2 text-tinta-suave">
           Estes números somam os simulados concluídos neste navegador. Trocar de dispositivo ou limpar os dados do
           navegador apaga o histórico.
-          {loginDisponivel && <ConviteConta />}
         </p>
       )}
 

@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 3.0
+**Versão:** 4.0
 **Data:** 2026-10-01
 **Status:** Aprovado
-**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005
+**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006)
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006
 
 ---
 
@@ -14,7 +14,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **Problema:** as provas antigas existem só como PDFs soltos, um por ano. Para treinar, o estudante imprime ou lê o PDF, confere as respostas à mão no gabarito e não tem nenhuma visão do próprio desempenho por disciplina. Também não dá para montar uma prova misturando anos, nem treinar só uma matéria.
 
-**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, assunto, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho por disciplina e por assunto, em cada simulado e somando os simulados já feitos (CR-004). Não é preciso criar conta: quem quiser entra com a conta Google para guardar o histórico e vê-lo em qualquer dispositivo (CR-005).
+**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, assunto, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho por disciplina e por assunto, em cada simulado e somando os simulados já feitos (CR-004). Para usar o site, o estudante entra com a conta Google, que guarda o histórico e o mostra em qualquer dispositivo (CR-005, CR-006).
 
 **Público-alvo:** estudantes que vão prestar a FUVEST (3º ano do ensino médio, cursinho, treineiros).
 
@@ -39,7 +39,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 ## 3. Personas
 
 ### Persona 1: Estudante vestibulando
-- **Perfil:** 16–19 anos, 3º ano do ensino médio ou cursinho, vai prestar a FUVEST. Estuda no celular e no computador. Usa o site sem cadastro ou, para levar o histórico de um aparelho para o outro, com a conta Google (CR-005).
+- **Perfil:** 16–19 anos, 3º ano do ensino médio ou cursinho, vai prestar a FUVEST. Estuda no celular e no computador. Entra com a conta Google, obrigatória desde o CR-006, e vê o mesmo histórico em qualquer aparelho.
 - **Necessidades:** treinar com questões reais no formato da prova; fazer provas completas cronometradas para ganhar ritmo; focar nas disciplinas em que vai pior; saber na hora o que errou.
 - **Frustrações:** PDFs dispersos por ano; correção manual pelo gabarito; nenhuma estatística por disciplina; não conseguir montar uma lista só de Física ou só de anos recentes.
 
@@ -119,6 +119,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Se houver simulado em andamento no navegador, oferece retomar (RN-012), num aviso no topo da página com o progresso e o tempo restante (o relógio continua correndo com a aba fechada, RN-009); enquanto isso, os modos ficam em segundo plano (CR-003)
 - Os anos da base aparecem como links para o PDF oficial, avisando que abrem em outra aba (CR-003)
 - Rodapé com aviso de que o site não é afiliado à FUVEST/USP e com link para o acervo oficial
+- Sem login, o início é uma página de apresentação: o que é o site, os 4 modos e "Entrar com Google", sem dados da base, que ficam protegidos com o catálogo (RN-017, CR-006)
 
 ### Módulo: Geração de Simulados
 
@@ -228,7 +229,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 | ID     | Requisito | Prioridade | Persona |
 |--------|-----------|------------|---------|
-| RF-024 | Entrar e sair com a conta Google, opcionalmente | Alta | Estudante |
+| RF-024 | Entrar e sair com a conta Google, obrigatório para usar o site (CR-006) | Alta | Estudante |
 | RF-025 | Sincronizar o histórico de simulados concluídos com a conta, entre dispositivos | Alta | Estudante |
 | RF-026 | Excluir a conta e todos os dados dela no servidor; página de privacidade | Alta | Estudante |
 
@@ -236,7 +237,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Só com Google: sem cadastro com senha, sem e-mail de recuperação
 - "Entrar" no cabeçalho e na página Conta; o login volta para a página de origem e o cabeçalho passa a mostrar o primeiro nome
 - Sair: os simulados ainda não enviados vão para a conta e o histórico deixa este navegador; continua na conta (RN-016)
-- Sem conta, o site funciona por inteiro, como antes
+- ~~Sem conta, o site funciona por inteiro~~ — desde o CR-006, sem conta abrem só a apresentação e a Privacidade, e um link direto volta à página pedida depois do login (RN-017)
 
 **RF-025 — Detalhamento:**
 - Ao entrar, os simulados já feitos neste navegador vão para a conta (RN-016)
@@ -268,8 +269,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RNF-001 | Geração de simulado em < 2 s (p95); figuras otimizadas para web e carregadas sob demanda | Performance |
 | RNF-002 | Layout responsivo, mobile-first, utilizável a partir de 360 px de largura | Usabilidade |
 | RNF-003 | Navegação completa por teclado, contraste WCAG AA, texto alternativo nas figuras (padrão: "Figura da questão N — FUVEST ano") | Acessibilidade |
-| RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico | Segurança |
-| RNF-005 | Sem conta, nenhum dado pessoal coletado e o estado do estudante fica só no navegador. Com conta (CR-005), só o mínimo: identificador da conta Google, nome, e-mail e o histórico de simulados concluídos, apagáveis pelo próprio estudante. Sem cookies de rastreamento nem scripts de terceiros (o cookie de sessão só existe para quem entra) | Privacidade (LGPD) |
+| RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico. Desde o CR-006, a API de conteúdo exige sessão (RN-017) | Segurança |
+| RNF-005 | Usar o site exige entrar com a conta Google (CR-006). O servidor guarda só o mínimo (CR-005): identificador da conta Google, nome, e-mail e o histórico de simulados concluídos, apagáveis pelo próprio estudante. Quem não entra vê só a apresentação e a Privacidade, sem cookie. Sem cookies de rastreamento nem scripts de terceiros | Privacidade (LGPD) |
 | RNF-006 | Questão publicada = questão validada (RN-006/RN-007); nada chega ao site sem passar pelas validações | Confiabilidade dos dados |
 | RNF-007 | Interface em português do Brasil | Localização |
 | RNF-008 | Suporte às 2 últimas versões de Chrome, Edge, Firefox e Safari (desktop e mobile) | Compatibilidade |
@@ -361,6 +362,12 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Uma página explica os dados guardados, para quê e por quanto tempo
     - [ ] Excluo a conta com uma confirmação, e tudo é apagado do servidor na hora
 
+- **US-015:** Como dono do produto, quero que o uso do site exija login com Google, para que todo uso aconteça com conta (CR-006)
+  - Critérios de aceite:
+    - [ ] Sem login, vejo só a apresentação do site e a Privacidade
+    - [ ] Um link direto (ex.: um resultado) leva ao login e, depois de entrar, abre a página pedida
+    - [ ] A API recusa catálogo, geração, questões, correção e reportes sem sessão
+
 ---
 
 ## 7. Regras de Negócio
@@ -378,11 +385,12 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RN-009 | Tempo: Prova completa e Prova de um ano têm 5 h, sem pausa, contadas pelo relógio a partir do início (fechar a aba não pausa). Personalizado: tempo proporcional (300 min ÷ 90 = 3 min 20 s por questão), com pausa permitida, ou sem cronômetro. Treino não tem cronômetro | Resolução |
 | RN-010 | Quando o tempo acaba, o simulado é finalizado automaticamente com as respostas marcadas até então | Resolução |
 | RN-011 | Só há um simulado em andamento por navegador; iniciar outro pede confirmação para descartar o atual | Resolução |
-| RN-012 | O simulado em andamento fica só no navegador, com ou sem conta. O histórico fica no navegador e, para quem entra com a conta, também no servidor (RN-016). Sem conta, o servidor não guarda respostas nem resultados (CR-005) | Resolução / Histórico |
+| RN-012 | O simulado em andamento fica só no navegador. O histórico fica na conta e no navegador, como espelho dela (RN-016, CR-005) | Resolução / Histórico |
 | RN-013 | Toda questão exibida mostra a fonte (FUVEST ano, nº original) e o site oferece o link do PDF oficial daquele ano | Resolução / Catálogo |
 | RN-014 | Cada disciplina tem uma lista fixa de assuntos (taxonomia versionada). Cada questão tem **exatamente um** assunto, da lista da sua disciplina principal; disciplinas secundárias não têm assunto. O assunto não aparece durante a resolução nem filtra a geração (CR-004) | Ingestão / Resultado / Desempenho |
 | RN-015 | O painel "Meu desempenho" agrega as questões dos simulados concluídos no histórico: anuladas ficam fora (não medem conhecimento), em branco conta como erro (RN-008). Usa o assunto gravado no resultado de cada simulado. Assunto com menos de 5 questões aparece como "poucas questões" e vai para o fim da lista da disciplina; questão de resultado antigo, sem assunto, entra só na disciplina (CR-004) | Desempenho |
-| RN-016 | Conta (CR-005): login opcional, só com Google. A conta guarda os 50 simulados concluídos mais recentes; o navegador com conta mostra o histórico da conta. Ao entrar, os simulados feitos sem conta neste navegador vão para a conta; ao sair, o histórico deixa o navegador e continua na conta; com conta, limpar o histórico limpa na conta. O resultado de um simulado não muda depois de enviado. A sessão dura 90 dias | Conta / Histórico |
+| RN-016 | Conta (CR-005): login só com Google, obrigatório desde o CR-006 (RN-017). A conta guarda os 50 simulados concluídos mais recentes; o navegador com conta mostra o histórico da conta. Ao entrar, os simulados feitos sem conta neste navegador vão para a conta; ao sair, o histórico deixa o navegador e continua na conta; com conta, limpar o histórico limpa na conta. O resultado de um simulado não muda depois de enviado. A sessão dura 90 dias | Conta / Histórico |
+| RN-017 | Acesso (CR-006): usar o site exige sessão. Sem sessão, abrem só a apresentação (início) e a Privacidade; qualquer outra página leva à apresentação, e o login volta para ela. A API de conteúdo (catálogo, geração, questões, correção e reportes) recusa pedidos sem sessão; health e figuras são públicos. Em produção sem login configurado, o site fica indisponível; fora de produção, aberto | Conta / Acesso |
 
 ---
 
@@ -412,7 +420,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - **Acervo oficial da FUVEST** (`fuvest.br/acervo-vestibular-AAAA/`): PDFs da prova da 1ª fase e do gabarito, de 1977 a 2026
 - **Railway:** hospedagem da aplicação e do PostgreSQL
 - **Bibliotecas Python de leitura de PDF:** extração de texto, imagens e renderização de páginas (escolha na Arquitetura)
-- **Google (OAuth 2.0 / OpenID Connect):** login opcional (CR-005). Exige um cliente OAuth no Google Cloud com o app publicado; sem ele, o site funciona sem login
+- **Google (OAuth 2.0 / OpenID Connect):** login obrigatório (CR-005, CR-006). Exige um cliente OAuth no Google Cloud com o app publicado; sem ele, o site fica indisponível em produção
 
 ### Premissas
 - As provas e os gabaritos do acervo são públicos. O site é gratuito e educacional, cita a fonte em cada questão (RN-013), linka os PDFs oficiais e avisa que não é afiliado à FUVEST/USP
@@ -425,7 +433,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - **Direitos autorais:** o conteúdo das provas pertence à FUVEST. A premissa acima (uso gratuito, com atribuição) deve ser revista antes de divulgar o site amplamente
 - **Esforço de ingestão:** sem IA, anos com layout muito diferente (provas antigas, escaneadas ou com fórmulas complexas) podem custar mais de 3 h de curadoria. A meta de ≥ 5 provas no lançamento prioriza os anos recentes
 - **Figuras vetoriais e fórmulas** (Matemática, Física, Química) podem não sair como texto; nesse caso a região é recortada como imagem
-- **Dados pessoais (CR-005):** com as contas, o banco passa a guardar nome, e-mail e resultados de estudantes, em geral menores de idade. Mitigação: só o mínimo (RNF-005), exclusão pelo próprio estudante, página de privacidade e backup do banco
+- **Dados pessoais (CR-005):** com as contas, o banco passa a guardar nome, e-mail e resultados de estudantes, em geral menores de idade. Mitigação: só o mínimo (RNF-005), exclusão pelo próprio estudante, página de privacidade e backup do banco. Desde o CR-006, todo estudante entrega esses dados para usar o site (LGPD art. 14: "melhor interesse" do adolescente)
+- **Alcance (CR-006):** exigir conta Google afasta quem não quer ou não pode entrar; a apresentação explica o site antes do login
 
 ---
 
@@ -449,6 +458,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Painel de desempenho | Página "Meu desempenho", que soma os simulados concluídos por disciplina e por assunto (RF-022) |
 | Conta | Identidade opcional do estudante, criada ao entrar com o Google, que guarda o histórico no servidor (RF-024, RN-016) |
 | Sincronização | Envio dos simulados concluídos do navegador para a conta e cópia do histórico da conta para o navegador (RF-025) |
+| Página de apresentação | Início para quem não entrou: descreve o site e os modos e leva ao login (RN-017) |
 
 ---
 
@@ -466,6 +476,7 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 **Fase 3B — Contas (CR-005, concluída em 2026-10-01)**
 - Login opcional com histórico no servidor e sincronização entre dispositivos (RF-024 a RF-026, RN-016)
+- CR-006 (01/10/2026): o login passa a ser obrigatório para usar o site (RN-017)
 - Decisões de 30/09/2026: login **só com Google** (sem senha nem e-mail de recuperação); o servidor guarda **só o histórico concluído** (o simulado em andamento continua no navegador). O painel da Fase 3A passa a somar o histórico sincronizado
 - Decisões de 01/10/2026: ao entrar, os simulados deste navegador vão para a conta; ao sair, o histórico deixa o navegador; a conta guarda nome e e-mail; limite de 50 simulados
 
@@ -476,4 +487,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap.*

@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.2
+**Versão:** 1.3
 **Data:** 2026-10-01
-**Arquitetura Ref:** 02-ARCHITECTURE v1.5 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, §9)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.6 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, §9)
 
 ---
 
@@ -53,7 +53,7 @@ Não existe arquivo `.env`: todo default é local e seguro (SQLite). Produção 
 | `DATA_DIR` | Não | `/app/data/provas` (Dockerfile) | Pacotes e figuras |
 | `STATIC_DIR` | Não | `/app/backend/static` (Dockerfile) | Build do SPA |
 | `PORT` | Não | Injetada pela Railway | |
-| `GOOGLE_CLIENT_ID` | Para o login | ID do cliente OAuth (seção 3.1) | Sem ele (ou sem o segredo), o login fica desligado e "Entrar" some (CR-005) |
+| `GOOGLE_CLIENT_ID` | Sim (CR-006) | ID do cliente OAuth (seção 3.1) | Sem ele (ou sem o segredo, ou com `PUBLIC_URL` sem https), o site fica **indisponível** em produção: 503 `site_indisponivel` na API de conteúdo (CR-006). Fora de produção, abre sem login |
 | `GOOGLE_CLIENT_SECRET` | Para o login | Segredo do cliente OAuth | **Único segredo do projeto.** Definir só na Railway; nunca no repositório, em log ou no chat |
 | `PUBLIC_URL` | Para o login | `https://simulado-fuvest-production.up.railway.app` | Sem barra final. Monta o `redirect_uri` e é o único `Origin` aceito nos `POST`/`DELETE` com cookie. Em produção, sem `https` o login fica desligado e o log mostra `PUBLIC_URL precisa ser https` |
 
@@ -141,7 +141,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 | Prova publicada com erro | `git revert` do commit do pacote (ou corrigir o `prova.yaml`) + push: a próxima sincronização deixa o banco igual ao repositório |
 | Migration precisa reverter | Backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade -1` (roda **dentro** do container, com a URL interna do banco) → reverter o código |
 | Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` (inclui taxonomia inválida: `TaxonomiaInvalida` no log da sincronização) |
-| Desligar o login sem reverter código (CR-005) | `railway variables -s simulado-fuvest --remove GOOGLE_CLIENT_ID`: "Entrar" some e ninguém novo entra; quem já entrou continua conectado (sincroniza, sai, exclui a conta). Trocar o segredo também não desconecta ninguém |
+| Desligar o login (CR-005/CR-006) | Desde o CR-006, remover `GOOGLE_CLIENT_ID` **tira o site do ar** em produção ("temporariamente indisponível"); quem já entrou ainda pode sair e excluir a conta. Para voltar ao site público, reverter o CR-006. Trocar o segredo não desconecta ninguém |
 | Desconectar todo mundo (ex.: suspeita de vazamento de sessões) | Apagar as linhas de `sessoes` com um comando Python no container (seção 8.3): `with app.state.engine.begin() as c: c.execute(text("DELETE FROM sessoes"))`. Os históricos ficam; cada estudante entra de novo |
 | Reverter o CR-005 (contas) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. **Não** rodar `alembic downgrade` da `003` sem backup: ele apaga contas e históricos |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
@@ -167,12 +167,13 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 ## 7. Verificação Pós-Deploy
 
 - [ ] `GET /api/health` → `{"status":"ok","provas":N}` com o N esperado de provas publicadas
-- [ ] Início carrega o catálogo (anos e questões por disciplina); `GET /api/catalogo` traz `assuntos` em cada disciplina (CR-004)
+- [ ] Com login, o início carrega o catálogo (anos e questões por disciplina), e o catálogo traz `assuntos` em cada disciplina (CR-004). Desde o CR-006, `GET /api/catalogo` sem cookie responde 401: confira no navegador logado (ou com o cookie de sessão)
 - [ ] Prova completa ou de um ano: gerar, responder, recarregar (respostas mantidas), finalizar, resultado
 - [ ] Resultado com "Ver por assunto" e `/desempenho` somando o histórico (CR-004)
 - [ ] Treino: resposta imediata
 - [ ] Conta (CR-005): `GET /api/sessao` → `login_disponivel: true`; "Entrar" → Google → volta logado com o primeiro nome no cabeçalho; o histórico aparece em outro navegador depois de entrar; "Sair" limpa o histórico do navegador
 - [ ] Sem conta: nenhum cookie é criado ao navegar (DevTools → Application → Cookies)
+- [ ] Login obrigatório (CR-006): `GET /api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo` → 401; num navegador sem login, o início mostra a apresentação e `/historico` leva a ela
 - [ ] Figuras carregam (`/figuras/AAAA/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 
@@ -223,7 +224,7 @@ Consultas sobre as contas devem mostrar só contagens: e-mails, nomes e históri
 |-----|--------|
 | backend | ruff → pytest → `ingestao validar --todas` → migrations num Postgres 17 (upgrade/downgrade/upgrade) → pip-audit (informativo) |
 | frontend | `npm ci` → tsc → eslint → vitest → npm audit (informativo) |
-| docker | `docker build` da mesma imagem da Railway → container com SQLite → smoke test (health, SPA, 404 JSON em `/api`, sem Swagger, CSP) |
+| docker | `docker build` da mesma imagem da Railway → container com SQLite → smoke test (health, SPA, 404 JSON em `/api`, sem Swagger, CSP; `/api/catalogo` → 503, porque o container de produção do CI não tem login configurado — CR-006) |
 
 Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 
@@ -237,3 +238,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-09-30 | Claude | v1.1 — CR-004: assunto obrigatório na publicação, checklist da taxonomia, rollback conjunto código + conteúdo, verificação dos assuntos |
 | 2026-10-01 | Claude | v1.2 — CR-005: variáveis do login (`GOOGLE_*`, `PUBLIC_URL`), cliente OAuth no Google Cloud (§3.1), backup com dados de usuário, rollback e verificação das contas |
 | 2026-10-01 | Claude | v1.2 — CR-005 concluído: situação do cliente OAuth (§3.1) e comandos Python no container via base64 (§8.3) |
+| 2026-10-01 | Claude | v1.3 — CR-006: login obrigatório; sem as variáveis do Google, o site fica indisponível em produção; smoke test e verificação pós-deploy |

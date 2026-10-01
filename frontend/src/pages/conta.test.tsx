@@ -12,8 +12,8 @@ import { renderizar } from '../test/renderizar'
 import type { Sessao, Usuario } from '../types'
 
 const ANA: Usuario = { id: 7, email: 'ana@exemplo.com', nome: 'Ana Souza' }
-const COM_CONTA: Sessao = { login_disponivel: true, usuario: ANA }
-const SEM_CONTA: Sessao = { login_disponivel: true, usuario: null }
+const COM_CONTA: Sessao = { login_disponivel: true, usuario: ANA, acesso: 'conta' }
+const SEM_CONTA: Sessao = { login_disponivel: true, usuario: null, acesso: 'conta' }
 
 const semCorpo = () => new Response(null, { status: 204 })
 const ids = (lista: HistoricoEntry[]) => lista.map((e) => e.id)
@@ -154,7 +154,7 @@ describe('Página Conta (UT-034, RF-024, RF-026)', () => {
   })
 
   it('com o login desligado, quem já entrou ainda vê a conta (sair e excluir)', async () => {
-    servidor({ login_disponivel: false, usuario: ANA })
+    servidor({ login_disponivel: false, usuario: ANA, acesso: 'indisponivel' })
     renderizar(<App />, { rota: '/conta' })
 
     expect(await screen.findByText(/Conectado como/)).toBeInTheDocument()
@@ -219,15 +219,6 @@ describe('Histórico e painel com conta (UT-035, RF-020, RF-022)', () => {
     expect(lerMarcaConta()).toEqual({ conta: 7, ids: [] })
   })
 
-  it('sem conta e com login disponível, convida a entrar', async () => {
-    servidor(SEM_CONTA)
-    renderizar(<App />, { rota: '/historico' })
-
-    const link = await screen.findByRole('link', { name: 'Entre com o Google' })
-    expect(link).toHaveAttribute('href', '/conta')
-    expect(screen.getByText(/O histórico fica só neste navegador/)).toBeInTheDocument()
-  })
-
   it('o painel soma o histórico da conta', async () => {
     servidor(COM_CONTA, [entradaFalsa('a', 2), entradaFalsa('b', 1)])
     renderizar(<App />, { rota: '/desempenho' })
@@ -244,14 +235,6 @@ describe('Resultado e finalizar com conta (UT-036)', () => {
 
     expect(screen.getByText('Carregando…')).toBeInTheDocument()
     expect(await screen.findByRole('heading', { level: 1, name: 'Você acertou 1 de 1 questão' })).toBeInTheDocument()
-  })
-
-  it('não encontrado sem conta sugere entrar com o Google', async () => {
-    servidor(SEM_CONTA)
-    renderizar(<App />, { rota: '/resultado/sim-x' })
-
-    expect(await screen.findByText('Resultado não encontrado neste navegador.')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'entre com o Google' })).toHaveAttribute('href', '/conta')
   })
 
   it('simulado finalizado com conta vai para o servidor', async () => {

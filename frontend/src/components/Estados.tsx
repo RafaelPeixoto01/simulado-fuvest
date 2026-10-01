@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import { useTituloPagina } from '../hooks/useTituloPagina'
+
 export function Carregando({ texto = 'Carregando…' }: { texto?: string }) {
   return (
     <div role="status" className="py-10 text-tinta-suave">
@@ -33,4 +35,15 @@ export function ErroCarregamento({
 
 export function Vazio({ children }: { children: ReactNode }) {
   return <div className="rounded-lg border border-dashed border-linha px-4 py-8 text-tinta-suave">{children}</div>
+}
+
+/** Produção sem login configurado (CR-006, D3): o site fecha em vez de abrir sem conta. */
+export function SiteIndisponivel() {
+  useTituloPagina('Site indisponível')
+  return (
+    <section className="max-w-prose px-4 py-10 sm:px-0">
+      <h1 className="text-2xl font-bold">Site temporariamente indisponível</h1>
+      <p className="mt-2 text-tinta-suave">Tente de novo em alguns minutos.</p>
+    </section>
+  )
 }

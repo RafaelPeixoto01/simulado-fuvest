@@ -270,15 +270,18 @@ describe('Resultado (RF-017 a RF-019)', () => {
 })
 
 describe('Histórico (RF-020)', () => {
-  beforeEach(() => localStorage.clear())
+  beforeEach(() => {
+    localStorage.clear()
+    instalarApiFalsa({}) // sessão `livre`: a página abre depois de verificá-la (CR-006)
+  })
   afterEach(() => vi.unstubAllGlobals())
 
-  it('lista os simulados com nota e avisa que é local', () => {
+  it('lista os simulados com nota e avisa que é local', async () => {
     localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
 
     renderizar(<App />, { rota: '/historico' })
 
-    expect(screen.getByText(/fica só neste navegador/)).toBeInTheDocument()
+    expect(await screen.findByText(/fica só neste navegador/)).toBeInTheDocument()
     const link = screen.getByRole('link', { name: /Personalizado: Física e Química/ })
     expect(link).toHaveAttribute('href', '/resultado/sim-9')
     expect(link).toHaveTextContent('1 de 3')
@@ -289,17 +292,17 @@ describe('Histórico (RF-020)', () => {
     localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
     renderizar(<App />, { rota: '/historico' })
 
-    await userEvent.click(screen.getByRole('button', { name: 'Limpar histórico' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Limpar histórico' }))
     await userEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Limpar histórico' }))
 
-    expect(screen.getByText('Nenhum simulado concluído ainda.')).toBeInTheDocument()
+    expect(await screen.findByText('Nenhum simulado concluído ainda.')).toBeInTheDocument()
     expect(localStorage.getItem(CHAVE_HISTORICO)).toBeNull()
   })
 
-  it('vazio convida a começar', () => {
+  it('vazio convida a começar', async () => {
     renderizar(<App />, { rota: '/historico' })
 
-    expect(screen.getByText('Nenhum simulado concluído ainda.')).toBeInTheDocument()
+    expect(await screen.findByText('Nenhum simulado concluído ainda.')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Começar um simulado' })).toHaveAttribute('href', '/')
   })
 })

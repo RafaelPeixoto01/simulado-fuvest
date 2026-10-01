@@ -34,13 +34,15 @@ def test_sessao_sem_login_configurado(client):
     resposta = client.get("/api/sessao")
 
     assert resposta.status_code == 200
-    assert resposta.json() == {"login_disponivel": False, "usuario": None}
+    assert resposta.json() == {"login_disponivel": False, "usuario": None, "acesso": "livre"}
     assert resposta.headers["cache-control"] == "no-store"
     assert "set-cookie" not in resposta.headers  # sem conta, nenhum cookie (RNF-005)
 
 
 def test_sessao_com_login_disponivel_e_sem_cookie(client, provedor_falso):
-    assert client.get("/api/sessao").json() == {"login_disponivel": True, "usuario": None}
+    assert client.get("/api/sessao").json() == {
+        "login_disponivel": True, "usuario": None, "acesso": "conta"
+    }
 
 
 # --- BT-051: inicio do login ---
@@ -111,6 +113,7 @@ def test_callback_cria_usuario_e_sessao(client, provedor_falso, sessao):
     assert client.get("/api/sessao").json() == {
         "login_disponivel": True,
         "usuario": {"id": usuario.id, "email": "ana@exemplo.com", "nome": "Ana Souza"},
+        "acesso": "conta",
     }
 
 

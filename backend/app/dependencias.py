@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.autenticacao import TAMANHO_MAXIMO_TOKEN, nome_cookie_sessao, origem_publica
 from app.models import Usuario
 from app.pacote.assuntos import Taxonomia, taxonomia_em_uso
+from app.schemas import ModoAcesso
 from app.services.contas import usuario_da_sessao
 
 
@@ -39,6 +40,27 @@ def exigir_usuario(usuario: Annotated[Usuario | None, Depends(obter_usuario)]) -
             "mensagem": "Entre com sua conta Google para continuar.",
         })
     return usuario
+
+
+def modo_de_acesso(request: Request) -> ModoAcesso:
+    """Login obrigatorio (CR-006, ADR-012): com o provedor Google configurado, o site exige
+    conta; sem ele, fecha em producao e abre fora dela (desenvolvimento, testes, CI)."""
+    if request.app.state.provedor_google is not None:
+        return "conta"
+    return "indisponivel" if request.app.state.settings.producao else "livre"
+
+
+def exigir_acesso(request: Request, sessao: Annotated[Session, Depends(obter_sessao)]) -> None:
+    """Dependencia dos routers de conteudo (catalogo, simulados, questoes, correcoes, reportes).
+    A sessao do usuario so e consultada no modo `conta`."""
+    modo = modo_de_acesso(request)
+    if modo == "indisponivel":
+        raise HTTPException(503, detail={
+            "codigo": "site_indisponivel",
+            "mensagem": "O site está temporariamente indisponível.",
+        })
+    if modo == "conta":
+        exigir_usuario(obter_usuario(request, sessao))  # 401 nao_autenticado
 
 
 def verificar_origem(request: Request) -> None:

@@ -109,6 +109,7 @@ describe('Painel "Meu desempenho" (UT-026, RF-022)', () => {
   it('cabeçalho e histórico levam ao painel', async () => {
     localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([ENTRADA]))
     renderizar(<App />, { rota: '/historico' })
+    await screen.findByRole('heading', { level: 1, name: 'Histórico' }) // depois da sessão (CR-006)
 
     const nav = screen.getByRole('navigation')
     expect(within(nav).getAllByRole('link').map((l) => l.textContent)).toEqual(['Desempenho', 'Histórico'])
