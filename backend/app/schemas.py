@@ -116,6 +116,13 @@ class CatalogoResponse(BaseModel):
     completa_disponivel: bool
 
 
+class VitrineResponse(BaseModel):
+    """Totais publicos para a apresentacao (CR-007, specs/07 §9.1): nada alem disto."""
+
+    total_questoes: int  # nao anuladas, como no catalogo
+    anos: list[int]  # provas sincronizadas, em ordem crescente
+
+
 class SimuladoResponse(BaseModel):
     modo: str
     questoes: list[QuestaoPublica]

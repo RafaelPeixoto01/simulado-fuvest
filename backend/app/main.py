@@ -20,6 +20,7 @@ from app.routers import (
     questoes,
     reportes,
     simulados,
+    vitrine,
 )
 from app.security_headers import SecurityHeadersMiddleware
 from app.services.google import ProvedorGoogle
@@ -86,7 +87,8 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
         )
 
     for modulo in (
-        health, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico, figuras
+        health, vitrine, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico,
+        figuras,
     ):
         app.include_router(modulo.router)
     _servir_spa(app, settings)
