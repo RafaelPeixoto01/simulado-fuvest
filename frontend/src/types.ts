@@ -148,6 +148,18 @@ export interface Correcao {
 
 export type TipoReporte = 'enunciado' | 'figura' | 'gabarito' | 'outro'
 
+/** Conta com Google (CR-005, specs/07). O id só serve de marca da conta no navegador. */
+export interface Usuario {
+  id: number
+  email: string
+  nome: string | null
+}
+
+export interface Sessao {
+  login_disponivel: boolean
+  usuario: Usuario | null
+}
+
 export const NOMES_DISCIPLINAS: Record<Disciplina, string> = {
   biologia: 'Biologia',
   fisica: 'Física',

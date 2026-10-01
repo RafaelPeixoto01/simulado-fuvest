@@ -2,11 +2,13 @@ import { Route, Routes } from 'react-router-dom'
 
 import { Layout } from './components/Layout'
 import { ConfigurarPersonalizadoPage } from './pages/ConfigurarPersonalizadoPage'
+import { ContaPage } from './pages/ContaPage'
 import { DesempenhoPage } from './pages/DesempenhoPage'
 import { EscolherAnoPage } from './pages/EscolherAnoPage'
 import { HistoricoPage } from './pages/HistoricoPage'
 import { HomePage } from './pages/HomePage'
 import { NaoEncontradaPage } from './pages/NaoEncontradaPage'
+import { PrivacidadePage } from './pages/PrivacidadePage'
 import { ResolucaoPage } from './pages/ResolucaoPage'
 import { ResultadoPage } from './pages/ResultadoPage'
 import { TreinoPage } from './pages/TreinoPage'
@@ -24,6 +26,8 @@ export default function App() {
         <Route path="resultado/:id" element={<ResultadoPage />} />
         <Route path="historico" element={<HistoricoPage />} />
         <Route path="desempenho" element={<DesempenhoPage />} />
+        <Route path="conta" element={<ContaPage />} />
+        <Route path="privacidade" element={<PrivacidadePage />} />
         <Route path="*" element={<NaoEncontradaPage />} />
       </Route>
     </Routes>

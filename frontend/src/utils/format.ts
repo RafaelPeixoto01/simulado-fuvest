@@ -11,3 +11,8 @@ export function formatarDataHora(epochMs: number): string {
   const d = new Date(epochMs)
   return `${data.format(d)} ${hora.format(d)}`
 }
+
+/** Primeiro nome para o cabeçalho (CR-005, D3); "Conta" se o Google não mandou nome. */
+export function primeiroNome(nome: string | null): string {
+  return nome?.trim().split(/\s+/)[0] || 'Conta'
+}

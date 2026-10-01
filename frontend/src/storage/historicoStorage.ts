@@ -2,7 +2,14 @@ import type { HistoricoEntry } from '../simulado/tipos'
 import { gravarJSON, lerJSON, remover } from './storage'
 
 export const CHAVE_HISTORICO = 'simulado-fuvest:v1:historico'
-export const LIMITE_HISTORICO = 50
+export const CHAVE_CONTA = 'simulado-fuvest:v1:historico-conta'
+export const LIMITE_HISTORICO = 50 // o mesmo na conta (CR-005, D4)
+
+/** Ids que o servidor já confirmou para a conta conectada neste navegador (ADR-011). */
+export interface MarcaConta {
+  conta: number
+  ids: string[]
+}
 
 const MODOS = ['completa', 'personalizado', 'ano']
 
@@ -41,4 +48,25 @@ export function obterDoHistorico(id: string): HistoricoEntry | null {
 
 export function limparHistorico(): void {
   remover(CHAVE_HISTORICO)
+}
+
+/** Troca a lista inteira (espelho da conta). Ela já vem do mais recente para o mais antigo. */
+export function substituirHistorico(lista: HistoricoEntry[]): boolean {
+  return gravarJSON(CHAVE_HISTORICO, lista.slice(0, LIMITE_HISTORICO))
+}
+
+export function lerMarcaConta(): MarcaConta | null {
+  const salvo = lerJSON(CHAVE_CONTA) as Record<string, unknown> | null
+  if (!salvo || typeof salvo !== 'object' || typeof salvo.conta !== 'number') return null
+  const ids = salvo.ids
+  if (!Array.isArray(ids) || !ids.every((i) => typeof i === 'string')) return null
+  return { conta: salvo.conta, ids }
+}
+
+export function gravarMarcaConta(marca: MarcaConta): boolean {
+  return gravarJSON(CHAVE_CONTA, marca)
+}
+
+export function removerMarcaConta(): void {
+  remover(CHAVE_CONTA)
 }
