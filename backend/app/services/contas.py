@@ -3,6 +3,7 @@
 from datetime import UTC, datetime
 
 from sqlalchemy import delete, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.autenticacao import DURACAO_SESSAO, hash_token, novo_token
@@ -15,16 +16,34 @@ def _utc(momento: datetime) -> datetime:
     return momento if momento.tzinfo else momento.replace(tzinfo=UTC)
 
 
+def _usuario_do_google(sessao: Session, identidade: IdentidadeGoogle, agora: datetime) -> Usuario:
+    consulta = select(Usuario).where(Usuario.google_sub == identidade.sub)
+    usuario = sessao.scalar(consulta)
+    if usuario is not None:
+        return usuario
+    try:
+        # Savepoint: dois primeiros logins simultaneos da mesma conta disputam o google_sub
+        with sessao.begin_nested():
+            usuario = Usuario(
+                google_sub=identidade.sub,
+                email=identidade.email,
+                nome=identidade.nome,
+                criado_em=agora,
+                ultimo_acesso_em=agora,
+            )
+            sessao.add(usuario)
+    except IntegrityError:
+        usuario = sessao.scalar(consulta)  # o outro login criou primeiro
+    return usuario
+
+
 def entrar(
     sessao: Session, identidade: IdentidadeGoogle, agora: datetime, token_anterior: str | None
 ) -> str:
     """Registra o login e abre uma sessao nova; devolve o token do cookie (nao vai ao banco)."""
     if token_anterior:  # troca de conta no mesmo navegador: a sessao anterior acaba
         _apagar_sessao(sessao, token_anterior)
-    usuario = sessao.scalar(select(Usuario).where(Usuario.google_sub == identidade.sub))
-    if usuario is None:
-        usuario = Usuario(google_sub=identidade.sub, criado_em=agora)
-        sessao.add(usuario)
+    usuario = _usuario_do_google(sessao, identidade, agora)
     usuario.email = identidade.email
     usuario.nome = identidade.nome
     usuario.ultimo_acesso_em = agora

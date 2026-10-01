@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -22,6 +24,8 @@ from app.routers import (
 from app.security_headers import SecurityHeadersMiddleware
 from app.services.google import ProvedorGoogle
 
+log = logging.getLogger(__name__)
+
 
 def _servir_spa(app: FastAPI, settings: Settings) -> None:
     """Build do SPA: /assets estatico e qualquer rota fora de /api cai no index.html."""
@@ -41,6 +45,21 @@ def _servir_spa(app: FastAPI, settings: Settings) -> None:
         return FileResponse(static / "index.html")
 
 
+def _provedor_google(settings: Settings) -> ProvedorGoogle | None:
+    """None desliga o login (ADR-010). Em producao, PUBLIC_URL sem https (variavel esquecida
+    ou errada) quebraria o redirect_uri e a verificacao de Origin: o login fica desligado e
+    o motivo vai para o log, sem derrubar o site."""
+    if not settings.login_disponivel:
+        return None
+    if settings.producao and not settings.public_url.startswith("https://"):
+        log.error(
+            "Login com Google desligado: PUBLIC_URL precisa ser https em producao (%s)",
+            settings.public_url,
+        )
+        return None
+    return ProvedorGoogle(settings.google_client_id, settings.google_client_secret)
+
+
 def criar_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     sem_docs = {"docs_url": None, "redoc_url": None, "openapi_url": None}
@@ -51,11 +70,7 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
     app.state.engine = engine
     app.state.fabrica_sessao = criar_fabrica_sessao(engine)
     # Login com Google (ADR-010): None desliga o login; testes trocam por um provedor falso
-    app.state.provedor_google = (
-        ProvedorGoogle(settings.google_client_id, settings.google_client_secret)
-        if settings.login_disponivel
-        else None
-    )
+    app.state.provedor_google = _provedor_google(settings)
 
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, limite_excedido)

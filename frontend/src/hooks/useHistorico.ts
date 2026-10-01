@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 
 import { ApiError, api } from '../services/api'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { gravarMarcaConta, limparHistorico, listarHistorico, substituirHistorico } from '../storage/historicoStorage'
-import { historicoSemConta, sincronizarHistorico } from '../storage/sincronizacao'
+import { exclusivo, historicoSemConta, sincronizarHistorico } from '../storage/sincronizacao'
 import { CHAVE_SESSAO, useSessao } from './useSessao'
 
 export const CHAVE_HISTORICO_QUERY = ['historico']
@@ -19,6 +20,8 @@ export function useHistorico() {
   const queryClient = useQueryClient()
   const sessao = useSessao()
   const usuario = sessao.data?.usuario ?? null
+  // O que havia no navegador ao montar: lido uma vez (identidade estável entre renders)
+  const [doNavegador] = useState(listarHistorico)
 
   const consulta = useQuery<HistoricoEntry[], Error>({
     queryKey: chave(usuario?.id),
@@ -36,13 +39,13 @@ export function useHistorico() {
     },
     // Só depois de saber quem está conectado: "sem conta" apaga o espelho de uma conta
     enabled: sessao.isSuccess,
-    placeholderData: () => listarHistorico(),
+    placeholderData: doNavegador,
     staleTime: usuario ? 60_000 : 0,
     refetchOnWindowFocus: !!usuario, // traz o que mudou em outro dispositivo
   })
 
   return {
-    entradas: consulta.data ?? listarHistorico(),
+    entradas: consulta.data ?? doNavegador,
     usuario,
     loginDisponivel: sessao.data?.login_disponivel ?? false,
     sincronizando: sessao.isPending || consulta.isFetching,
@@ -56,16 +59,17 @@ export function useLimparHistorico() {
   const usuario = useSessao().data?.usuario ?? null
 
   return useMutation<void, ApiError>({
-    mutationFn: async () => {
-      await queryClient.cancelQueries({ queryKey: CHAVE_HISTORICO_QUERY })
-      if (usuario) {
-        await api.limparHistoricoDaConta()
-        substituirHistorico([])
-        gravarMarcaConta({ conta: usuario.id, ids: [] })
-      } else {
-        limparHistorico()
-      }
-    },
+    // Na fila: uma sincronização em andamento termina antes (ou reenviaria o que foi limpo)
+    mutationFn: () =>
+      exclusivo(async () => {
+        if (usuario) {
+          await api.limparHistoricoDaConta()
+          substituirHistorico([])
+          gravarMarcaConta({ conta: usuario.id, ids: [] })
+        } else {
+          limparHistorico()
+        }
+      }),
     onSuccess: () => queryClient.setQueryData(chave(usuario?.id), []),
   })
 }

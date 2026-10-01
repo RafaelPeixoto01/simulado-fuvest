@@ -7,6 +7,7 @@ Nenhuma mensagem de erro carrega tokens, codigos ou o segredo.
 """
 
 import base64
+import http.client
 import json
 import time
 import urllib.error
@@ -49,7 +50,9 @@ def _post_formulario(url: str, campos: dict[str, str]) -> dict:
             return json.loads(resposta.read())
     except urllib.error.HTTPError as erro:
         raise ErroLoginGoogle(f"o endpoint de token respondeu {erro.code}") from None
-    except (urllib.error.URLError, TimeoutError, ValueError) as erro:
+    # OSError cobre URLError, timeout e conexao derrubada (RemoteDisconnected); HTTPException,
+    # resposta cortada (IncompleteRead); ValueError, JSON invalido
+    except (OSError, http.client.HTTPException, ValueError) as erro:
         raise ErroLoginGoogle(f"falha na troca do codigo ({type(erro).__name__})") from None
 
 
@@ -121,6 +124,11 @@ class ProvedorGoogle:
         aud = claims.get("aud")
         if aud != self.client_id and not (isinstance(aud, list) and self.client_id in aud):
             raise ErroLoginGoogle("id_token emitido para outro cliente")
+        # Varias audiencias: o token tem de ter sido pedido por este cliente (OIDC Core §3.1.3.7)
+        if isinstance(aud, list) and len(aud) > 1 and claims.get("azp") != self.client_id:
+            raise ErroLoginGoogle("id_token pedido por outro cliente")
+        # O e-mail so e exibido ao proprio dono da conta; a identidade e o `sub`. Por isso
+        # email_verified nao e exigido (revisao de codigo do CR-005)
         exp = claims.get("exp")
         if not isinstance(exp, int | float) or exp <= self._agora() - TOLERANCIA_RELOGIO_S:
             raise ErroLoginGoogle("id_token vencido")

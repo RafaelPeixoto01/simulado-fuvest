@@ -1,7 +1,9 @@
 """BT-062: provedor OpenID Connect do Google (CR-005, ADR-010), sem rede."""
 
 import base64
+import http.client
 import json
+import urllib.error
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
@@ -120,7 +122,9 @@ def test_id_token_invalido_e_recusado(claims):
 
 
 def test_aud_em_lista_e_aceito():
-    provedor, _ = _provedor({"id_token": _jwt(_claims(aud=["cliente-id", "outro"]))})
+    provedor, _ = _provedor(
+        {"id_token": _jwt(_claims(aud=["cliente-id", "outro"], azp="cliente-id"))}
+    )
 
     assert provedor.trocar_codigo(code="c", code_verifier="v", redirect_uri="r").sub == "1234567890"
 
@@ -182,3 +186,33 @@ def test_cookie_de_login_ida_e_volta():
     assert ler_cookie_login("a.b") is None
     assert ler_cookie_login("..x") is None
     assert ler_cookie_login("a.b.!!!") is None
+
+
+def test_varias_audiencias_exigem_azp_deste_cliente():
+    provedor, _ = _provedor({"id_token": _jwt(_claims(aud=["cliente-id", "outro"], azp="outro"))})
+
+    with pytest.raises(ErroLoginGoogle):
+        provedor.trocar_codigo(code="c", code_verifier="v", redirect_uri="r")
+
+
+@pytest.mark.parametrize(
+    "erro",
+    [
+        http.client.RemoteDisconnected("caiu"),
+        http.client.IncompleteRead(b"x"),
+        TimeoutError(),
+        urllib.error.URLError("dns"),
+    ],
+    ids=["conexao-derrubada", "resposta-cortada", "timeout", "url"],
+)
+def test_falha_de_rede_na_troca_vira_erro_de_login(monkeypatch, erro):
+    """Revisao de codigo: nenhuma falha de rede escapa como 500 no callback."""
+    from app.services import google
+
+    def urlopen(*_a, **_k):
+        raise erro
+
+    monkeypatch.setattr(google.urllib.request, "urlopen", urlopen)
+
+    with pytest.raises(ErroLoginGoogle):
+        google._post_formulario(URL_TOKEN, {"code": "c"})

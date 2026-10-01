@@ -42,10 +42,6 @@ export function adicionarAoHistorico(entrada: HistoricoEntry): boolean {
   return gravarJSON(CHAVE_HISTORICO, lista.slice(0, LIMITE_HISTORICO))
 }
 
-export function obterDoHistorico(id: string): HistoricoEntry | null {
-  return listarHistorico().find((e) => e.id === id) ?? null
-}
-
 export function limparHistorico(): void {
   remover(CHAVE_HISTORICO)
 }

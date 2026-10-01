@@ -3,7 +3,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { entradaFalsa, instalarApiFalsa, json } from '../test/apiFalsa'
 import { CHAVE_CONTA, CHAVE_HISTORICO, lerMarcaConta, listarHistorico, type MarcaConta } from './historicoStorage'
-import { apagarHistoricoDoNavegador, historicoSemConta, sincronizarHistorico } from './sincronizacao'
+import {
+  apagarHistoricoDoNavegador,
+  esquecerRecusadas,
+  exclusivo,
+  historicoSemConta,
+  sincronizarHistorico,
+} from './sincronizacao'
 
 function gravarLocal(lista: HistoricoEntry[], marca?: MarcaConta) {
   localStorage.setItem(CHAVE_HISTORICO, JSON.stringify(lista))
@@ -13,16 +19,19 @@ function gravarLocal(lista: HistoricoEntry[], marca?: MarcaConta) {
 const ids = (lista: HistoricoEntry[]) => lista.map((e) => e.id)
 
 /** Servidor falso com as regras do backend: por id, imutável, mais recente primeiro, até 50. */
-function servidor(inicial: HistoricoEntry[] = [], { recusar = [] as string[], aoEnviar = () => {} } = {}) {
+function servidor(
+  inicial: HistoricoEntry[] = [],
+  { recusar = [] as string[], aoEnviar = (): unknown => undefined } = {},
+) {
   const guardadas = [...inicial]
   const envios: string[][] = []
   const lista = () => [...guardadas].sort((a, b) => b.finalizadoEm - a.finalizadoEm).slice(0, 50)
   const fetch = instalarApiFalsa({
     'GET /api/historico': () => json(200, { entradas: lista(), rejeitadas: [] }),
-    'POST /api/historico': (corpo) => {
+    'POST /api/historico': async (corpo) => {
       const { entradas } = corpo as { entradas: HistoricoEntry[] }
       envios.push(ids(entradas))
-      aoEnviar()
+      await aoEnviar()
       for (const e of entradas) {
         if (!recusar.includes(e.id) && !guardadas.some((g) => g.id === e.id)) guardadas.push(e)
       }
@@ -33,7 +42,10 @@ function servidor(inicial: HistoricoEntry[] = [], { recusar = [] as string[], ao
 }
 
 describe('sincronizarHistorico (UT-030, ADR-011)', () => {
-  beforeEach(() => localStorage.clear())
+  beforeEach(() => {
+    localStorage.clear()
+    esquecerRecusadas()
+  })
   afterEach(() => vi.unstubAllGlobals())
 
   it('primeiro login: os simulados deste navegador vão para a conta (D1)', async () => {
@@ -97,16 +109,39 @@ describe('sincronizarHistorico (UT-030, ADR-011)', () => {
     expect(lerMarcaConta()).toBeNull()
   })
 
-  it('recusada pelo servidor fica só neste navegador e é tentada de novo', async () => {
+  it('recusada pelo servidor fica só neste navegador e não é reenviada nesta carga', async () => {
     gravarLocal([entradaFalsa('ruim', 2), entradaFalsa('boa', 1)])
     const s = servidor([], { recusar: ['ruim'] })
 
     const lista = await sincronizarHistorico(7)
-    await sincronizarHistorico(7)
+    const depois = await sincronizarHistorico(7)
 
     expect(ids(lista)).toEqual(['ruim', 'boa'])
+    expect(ids(depois)).toEqual(['ruim', 'boa'])
     expect(lerMarcaConta()?.ids).toEqual(['boa'])
+    expect(s.envios).toEqual([['ruim', 'boa']]) // a segunda foi um GET
+    esquecerRecusadas() // nova carga da página: tenta de novo
+    await sincronizarHistorico(7)
     expect(s.envios).toEqual([['ruim', 'boa'], ['ruim']])
+  })
+
+  it('uma operação exclusiva espera a sincronização em andamento terminar', async () => {
+    gravarLocal([entradaFalsa('a', 1)])
+    let liberar = () => {}
+    const segurar = new Promise<void>((r) => (liberar = r))
+    servidor([], { aoEnviar: () => segurar })
+    const ordem: string[] = []
+
+    const sincronizacao = sincronizarHistorico(7).then(() => ordem.push('sincronizou'))
+    const limpar = exclusivo(async () => {
+      ordem.push('limpou')
+      localStorage.clear()
+    })
+    liberar()
+    await Promise.all([sincronizacao, limpar])
+
+    expect(ordem).toEqual(['sincronizou', 'limpou'])
+    expect(localStorage.getItem(CHAVE_HISTORICO)).toBeNull() // nada regravado depois
   })
 
   it('o que outra aba gravou durante a chamada continua aqui, pendente', async () => {

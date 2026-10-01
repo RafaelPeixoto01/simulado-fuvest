@@ -208,13 +208,53 @@ def test_sessao_vencida_e_apagada(client_logado, sessao):
     assert _contar(sessao, SessaoUsuario) == 0
 
 
-def test_login_desligado_desconecta_quem_tinha_sessao(client_logado, app):
+def test_login_desligado_so_impede_logins_novos(client_logado, app):
+    """Revisao de codigo: rodar o segredo nao desconecta ninguem, e quem ja entrou ainda
+    sincroniza, sai e exclui a conta (RF-026)."""
     app.state.provedor_google = None
 
-    assert client_logado.get("/api/sessao").json() == {
-        "login_disponivel": False, "usuario": None
-    }
-    assert client_logado.get("/api/historico").status_code == 401
+    sessao = client_logado.get("/api/sessao").json()
+    assert sessao["login_disponivel"] is False and sessao["usuario"]["email"] == "ana@exemplo.com"
+    assert client_logado.get("/api/historico").status_code == 200
+    assert iniciar(client_logado).status_code == 404
+    assert client_logado.delete("/api/conta").status_code == 204
+
+
+def test_producao_sem_public_url_https_desliga_o_login(tmp_path, caplog):
+    settings = Settings(
+        database_url="sqlite://",
+        data_dir=tmp_path,
+        environment="production",
+        google_client_id="id",
+        google_client_secret="segredo",
+    )  # PUBLIC_URL esquecida: fica o padrao http://localhost:5173
+
+    app = criar_app(settings)
+
+    assert app.state.provedor_google is None
+    assert "PUBLIC_URL precisa ser https" in caplog.text
+
+
+def test_primeiro_login_simultaneo_da_mesma_conta(sessao, monkeypatch):
+    """Revisao de codigo: o segundo INSERT do mesmo google_sub vira releitura, nao erro 500."""
+    from app.services import contas
+    from tests.contas import ANA
+
+    sessao.add(Usuario(google_sub=ANA.sub, email="ana@exemplo.com"))
+    sessao.commit()
+    original = sessao.scalar
+    chamadas = []
+
+    def scalar_que_perde_a_corrida(consulta, *a, **k):
+        chamadas.append(1)
+        return None if len(chamadas) == 1 else original(consulta, *a, **k)
+
+    monkeypatch.setattr(sessao, "scalar", scalar_que_perde_a_corrida)
+    contas.entrar(sessao, ANA, datetime.now(UTC), None)
+    monkeypatch.undo()
+
+    assert sessao.scalar(select(func.count()).select_from(Usuario)) == 1
+    assert _contar(sessao, SessaoUsuario) == 1
 
 
 # --- BT-055: sair ---

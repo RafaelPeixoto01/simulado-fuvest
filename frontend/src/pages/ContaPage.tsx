@@ -148,12 +148,6 @@ export function ContaPage() {
         />
       </div>
     )
-  } else if (!sessao.data.login_disponivel) {
-    conteudo = (
-      <p className="mt-2 text-tinta-suave">
-        O login com Google não está disponível no momento. O histórico continua guardado neste navegador.
-      </p>
-    )
   } else if (sessao.data.usuario) {
     conteudo = (
       <Conectado
@@ -163,6 +157,12 @@ export function ContaPage() {
         aoSair={() => setStatus('Você saiu. Seu histórico continua na sua conta.')}
         aoExcluir={() => setStatus('Sua conta e o histórico guardado nela foram excluídos.')}
       />
+    )
+  } else if (!sessao.data.login_disponivel) {
+    conteudo = (
+      <p className="mt-2 text-tinta-suave">
+        O login com Google não está disponível no momento. O histórico continua guardado neste navegador.
+      </p>
     )
   } else {
     conteudo = <SemConta />

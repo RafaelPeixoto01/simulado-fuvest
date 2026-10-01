@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ConfirmDialog } from '../components/ConfirmDialog'
+import { ConviteConta } from '../components/ConviteConta'
 import { Vazio } from '../components/Estados'
 import { BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { useHistorico, useLimparHistorico } from '../hooks/useHistorico'
@@ -25,15 +26,7 @@ export function HistoricoPage() {
       ) : (
         <p className="mt-2 text-tinta-suave">
           O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros.
-          {loginDisponivel && (
-            <>
-              {' '}
-              <Link to="/conta" className={LINK}>
-                Entre com o Google
-              </Link>{' '}
-              para guardá-lo na sua conta.
-            </>
-          )}
+          {loginDisponivel && <ConviteConta />}
         </p>
       )}
       {lista.length > 0 && (

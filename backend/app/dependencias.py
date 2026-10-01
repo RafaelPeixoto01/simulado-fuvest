@@ -24,9 +24,8 @@ def obter_taxonomia(request: Request) -> Taxonomia | None:
 def obter_usuario(
     request: Request, sessao: Annotated[Session, Depends(obter_sessao)]
 ) -> Usuario | None:
-    """Usuario do cookie de sessao (ADR-010). Com o login desligado, ninguem esta conectado."""
-    if request.app.state.provedor_google is None:
-        return None
+    """Usuario do cookie de sessao (ADR-010). Desligar o login so impede logins novos: quem ja
+    entrou continua podendo sincronizar, sair e excluir a conta (RF-026)."""
     token = request.cookies.get(nome_cookie_sessao(request.app.state.settings))
     if not token or len(token) > TAMANHO_MAXIMO_TOKEN:
         return None

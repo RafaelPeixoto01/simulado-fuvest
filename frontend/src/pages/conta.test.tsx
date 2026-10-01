@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../App'
 import type { HistoricoEntry, SimuladoEmAndamento } from '../simulado/tipos'
 import { CHAVE_CONTA, CHAVE_HISTORICO, lerMarcaConta, listarHistorico } from '../storage/historicoStorage'
+import { esquecerRecusadas } from '../storage/sincronizacao'
 import { CHAVE_SIMULADO } from '../storage/simuladoStorage'
 import { CATALOGO, entradaFalsa, instalarApiFalsa, json, questaoFalsa } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
@@ -61,7 +62,10 @@ function servidor(sessaoInicial: Sessao, inicial: HistoricoEntry[] = [], extra: 
 const enviadas = (chamada: unknown[]) =>
   ids((JSON.parse(String((chamada[1] as RequestInit).body)) as { entradas: HistoricoEntry[] }).entradas)
 
-beforeEach(() => localStorage.clear())
+beforeEach(() => {
+  localStorage.clear()
+  esquecerRecusadas()
+})
 afterEach(() => vi.unstubAllGlobals())
 
 describe('Cabeçalho e rodapé com contas (UT-033)', () => {
@@ -128,10 +132,34 @@ describe('Página Conta (UT-034, RF-024, RF-026)', () => {
     expect(await screen.findByRole('status')).toHaveTextContent('Você saiu. Seu histórico continua na sua conta.')
     expect(s.chamadas('DELETE', '/api/sessao')).toHaveLength(1)
     expect(ids(s.guardadas())).toEqual(['pendente', 'a'])
-    expect(localStorage.getItem(CHAVE_HISTORICO)).toBeNull()
+    expect(listarHistorico()).toEqual([])
     expect(localStorage.getItem(CHAVE_CONTA)).toBeNull()
     expect(await screen.findByRole('link', { name: 'Entrar' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Entrar com Google' })).toBeInTheDocument()
+  })
+
+  it('ao sair, a recusada pelo servidor (que só existe aqui) fica no navegador', async () => {
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([entradaFalsa('ruim', 3)]))
+    servidor(COM_CONTA, [], {
+      'POST /api/historico': (corpo) =>
+        json(200, { entradas: [], rejeitadas: ids((corpo as { entradas: HistoricoEntry[] }).entradas) }),
+    })
+    renderizar(<App />, { rota: '/conta' })
+    await screen.findByText('1 simulado na sua conta.')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Sair' }))
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Você saiu.')
+    expect(ids(listarHistorico())).toEqual(['ruim'])
+  })
+
+  it('com o login desligado, quem já entrou ainda vê a conta (sair e excluir)', async () => {
+    servidor({ login_disponivel: false, usuario: ANA })
+    renderizar(<App />, { rota: '/conta' })
+
+    expect(await screen.findByText(/Conectado como/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Ana' })).toHaveAttribute('href', '/conta')
+    expect(screen.getByRole('button', { name: 'Excluir conta' })).toBeInTheDocument()
   })
 
   it('sem conseguir enviar as pendentes, não sai nem apaga nada', async () => {

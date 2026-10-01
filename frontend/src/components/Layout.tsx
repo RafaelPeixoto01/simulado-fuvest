@@ -29,7 +29,7 @@ export function Layout() {
             <NavLink to="/historico" className={itemNav}>
               Histórico
             </NavLink>
-            {sessao?.login_disponivel && (
+            {(sessao?.usuario || sessao?.login_disponivel) && (
               <NavLink to="/conta" className={itemNav}>
                 {sessao.usuario ? primeiroNome(sessao.usuario.nome) : 'Entrar'}
               </NavLink>
