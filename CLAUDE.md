@@ -290,13 +290,13 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
-- **CR-004** — Assuntos e desempenho, Fase 3A do roadmap (Em Implementação, 2026-10-01): taxonomia `data/provas/assuntos.yaml` (Gate 1 aprovado; 11–14 assuntos por disciplina, 5 em Inglês), exatamente 1 assunto por questão e V11 bloqueante; `questoes.assunto` (migration 002); assuntos no catálogo e na correção; "Ver por assunto" no resultado e painel `/desempenho` (RN-015); CLI `ingestao assuntos`. Classificação de 2023–2025 aguardando o Gate 2 (revisão do usuário)
+- **CR-004** — Assuntos e desempenho, Fase 3A do roadmap (Em Implementação, 2026-10-01): taxonomia `data/provas/assuntos.yaml` (Gate 1 aprovado; 11–14 assuntos por disciplina, 5 em Inglês), exatamente 1 assunto por questão e V11 bloqueante; `questoes.assunto` (migration 002); assuntos no catálogo e na correção; "Ver por assunto" no resultado e painel `/desempenho` (RN-015); CLI `ingestao assuntos`. Classificação de 2023–2025 aprovada no Gate 2 (01/10)
 - **CR-003** — Resultado, figura e início (Concluído, 2026-09-30): resultado na ordem "Por disciplina" → folha corrigida → revisão; folha clicável (grade de células no celular, bolinhas na barra lateral do desktop — D5 do CR-003); revisão uma questão por vez com filtros; figura ampliada ajustada à tela; banner do início com o tempo restante; "Provas na base" com aviso de nova aba. Com ele, a revisão de design de 30/09 fica coberta até o P2; faltam P3 e D4
 - **CR-002** — Contraste e tokens (Concluído, 2026-09-30): tokens `optico-texto` (#b8405f, texto do impresso), `borda-campo` (#848e9c) e `acerto` #17703f, com contraste conferido por `tokens.test.ts`; título próprio por rota (`useTituloPagina`)
 - **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão.
 
 ### Última Tarefa Implementada
-- CR-004 (2026-10-01): assuntos e painel "Meu desempenho" (Fase 3A); 2023–2025 classificadas por Claude, aguardando revisão do usuário antes do merge. 2022 e 2020 já devem ser publicadas com assunto (V11)
+- CR-004 (2026-10-01): assuntos e painel "Meu desempenho" (Fase 3A); 2023–2025 classificadas por Claude e aprovadas pelo usuário. 2022 e 2020 já devem ser publicadas com assunto (V11). Próximo da Fase 3: CR da Fase 3B (contas)
 - CR-003 (2026-09-30): resultado, figura ampliada e banner do início
 - CR-002 (2026-09-30): contraste dos tokens e título por rota
 - CR-001 (2026-09-30): resolução em modo foco, barra inferior, folha e pausa

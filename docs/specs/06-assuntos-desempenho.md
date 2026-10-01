@@ -292,5 +292,5 @@ sequenceDiagram
 - [x] CLI `assuntos`
 - [x] Resultado: "Ver por assunto"
 - [x] Painel `/desempenho` + links (no celular, os links do cabeçalho ficam empilhados abaixo de 640 px: lado a lado, estouravam 320 px)
-- [ ] Classificação de 2023–2025 (Gate 2: usuário revisa) — primeira passada feita
+- [x] Classificação de 2023–2025 (Gate 2 aprovado em 01/10, sem ajustes)
 - [x] Testes IT-014 a IT-020, BT-025, BT-026, BT-047, UT-024 a UT-026 + FT-012

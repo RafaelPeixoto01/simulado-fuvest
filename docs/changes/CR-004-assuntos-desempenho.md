@@ -156,7 +156,7 @@ A coluna é nullable porque a migration roda antes da sincronização no start d
 
 ## 8. Critérios de Aceite
 
-- [ ] Toda questão publicada (2023, 2024 e 2025) tem exatamente 1 assunto, da taxonomia da sua disciplina principal, e `validar --todas` passa com a V11 ativa — primeira passada feita (270/270, `validar --todas` verde, 0 questão sem assunto no banco local); **falta o Gate 2 (revisão do usuário)**
+- [x] Toda questão publicada (2023, 2024 e 2025) tem exatamente 1 assunto, da taxonomia da sua disciplina principal, e `validar --todas` passa com a V11 ativa — 270/270, `validar --todas` verde, 0 questão sem assunto no banco local; **Gate 2 aprovado pelo usuário em 01/10, sem ajustes** (15 dúvidas apresentadas e mantidas)
 - [x] Pacote publicado sem assunto, ou com assunto de outra disciplina, é bloqueado pela V11 (CLI, CI e sincronização) — IT-015, `test_publicada_sem_assunto_falha_com_v11`
 - [x] Taxonomia inválida é recusada por `validar` e faz a sincronização terminar com erro sem alterar o banco — IT-016, IT-019
 - [x] `GET /api/catalogo` traz os assuntos de cada disciplina com o total de questões não anuladas — BT-025; HTTP real abaixo
@@ -265,4 +265,5 @@ Sem o downgrade, o código anterior também funciona: ele ignora a coluna extra.
 |------------|--------|-----------|
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D6 |
 | 2026-09-30 | Rafael Peixoto (com Claude) | Gate 1: taxonomia aprovada como proposta (Inglês com 5 assuntos) |
-| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação concluída (CR-T-01 a CR-T-08), primeira passada da classificação (CR-T-09), validação runtime, revisão de código e de segurança; CI da branch verde. Pendentes: Gate 2, merge e conferência em produção |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação concluída (CR-T-01 a CR-T-08), primeira passada da classificação (CR-T-09), validação runtime, revisão de código e de segurança; CI da branch verde |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Gate 2: classificação de 2023–2025 aprovada sem ajustes; merge em `master` autorizado. Pendente: CI de `master` e conferência em produção |
