@@ -8,6 +8,7 @@ import type {
   Sessao,
   Simulado,
   TipoReporte,
+  Vitrine,
 } from '../types'
 
 /** Histórico da conta (CR-005): do mais recente para o mais antigo + ids recusados no envio. */
@@ -93,6 +94,8 @@ export function urlEntrar(voltar: string): string {
 
 export const api = {
   catalogo: () => requisitar<Catalogo>('/api/catalogo'),
+  // Pública (CR-007): só os totais da base, para a apresentação
+  vitrine: () => requisitar<Vitrine>('/api/vitrine'),
   gerarSimulado: (pedido: PedidoSimulado) => post<Simulado>('/api/simulados', pedido),
   questoes: (ids: string[]) =>
     requisitar<QuestoesPorId>(`/api/questoes?${new URLSearchParams({ ids: ids.join(',') })}`),
