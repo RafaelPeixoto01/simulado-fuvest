@@ -140,6 +140,7 @@ textos_base:
 questoes:
 - numero: 1
   disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias:
   - historia
   texto_base: null
@@ -182,6 +183,7 @@ questoes:
   pendencias: []
 - numero: 2
   disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -217,6 +219,7 @@ questoes:
   pendencias: []
 - numero: 3
   disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -245,6 +248,7 @@ questoes:
   pendencias: []
 - numero: 4
   disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -268,6 +272,7 @@ questoes:
   pendencias: []
 - numero: 5
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -303,6 +308,7 @@ questoes:
   pendencias: []
 - numero: 6
   disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -334,6 +340,7 @@ questoes:
   pendencias: []
 - numero: 7
   disciplina: portugues
+  assunto: argumentacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -358,6 +365,7 @@ questoes:
   pendencias: []
 - numero: 8
   disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -381,6 +389,7 @@ questoes:
   pendencias: []
 - numero: 9
   disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -416,6 +425,7 @@ questoes:
   pendencias: []
 - numero: 10
   disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -441,6 +451,7 @@ questoes:
   pendencias: []
 - numero: 11
   disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -462,6 +473,7 @@ questoes:
   pendencias: []
 - numero: 12
   disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -496,6 +508,7 @@ questoes:
   pendencias: []
 - numero: 13
   disciplina: historia
+  assunto: america-colonial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -524,6 +537,7 @@ questoes:
   pendencias: []
 - numero: 14
   disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -549,6 +563,7 @@ questoes:
   pendencias: []
 - numero: 15
   disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -574,6 +589,7 @@ questoes:
   pendencias: []
 - numero: 16
   disciplina: matematica
+  assunto: porcentagem
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -608,6 +624,7 @@ questoes:
   pendencias: []
 - numero: 17
   disciplina: matematica
+  assunto: geometria-analitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -635,6 +652,7 @@ questoes:
   pendencias: []
 - numero: 18
   disciplina: fisica
+  assunto: quantidade-de-movimento
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -665,6 +683,7 @@ questoes:
   pendencias: []
 - numero: 19
   disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -698,6 +717,7 @@ questoes:
   pendencias: []
 - numero: 20
   disciplina: quimica
+  assunto: atomistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -724,6 +744,7 @@ questoes:
   pendencias: []
 - numero: 21
   disciplina: quimica
+  assunto: eletroquimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -754,6 +775,7 @@ questoes:
   pendencias: []
 - numero: 22
   disciplina: fisica
+  assunto: optica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -788,6 +810,7 @@ questoes:
   pendencias: []
 - numero: 23
   disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -820,6 +843,7 @@ questoes:
   pendencias: []
 - numero: 24
   disciplina: quimica
+  assunto: substancias-e-misturas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -843,6 +867,7 @@ questoes:
   pendencias: []
 - numero: 25
   disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias:
   - matematica
   texto_base: null
@@ -867,6 +892,7 @@ questoes:
   pendencias: []
 - numero: 26
   disciplina: geografia
+  assunto: transportes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -902,6 +928,7 @@ questoes:
   pendencias: []
 - numero: 27
   disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -922,6 +949,7 @@ questoes:
   pendencias: []
 - numero: 28
   disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -943,6 +971,7 @@ questoes:
   pendencias: []
 - numero: 29
   disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias:
   - ingles
   texto_base: tb02
@@ -968,6 +997,7 @@ questoes:
   pendencias: []
 - numero: 30
   disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -993,6 +1023,7 @@ questoes:
   pendencias: []
 - numero: 31
   disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1025,6 +1056,7 @@ questoes:
   pendencias: []
 - numero: 32
   disciplina: fisica
+  assunto: optica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1053,6 +1085,7 @@ questoes:
   pendencias: []
 - numero: 33
   disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1083,6 +1116,7 @@ questoes:
   pendencias: []
 - numero: 34
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1112,6 +1146,7 @@ questoes:
   pendencias: []
 - numero: 35
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1138,6 +1173,7 @@ questoes:
   pendencias: []
 - numero: 36
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1179,6 +1215,7 @@ questoes:
   pendencias: []
 - numero: 37
   disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1200,6 +1237,7 @@ questoes:
   pendencias: []
 - numero: 38
   disciplina: portugues
+  assunto: figuras-de-linguagem
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1229,6 +1267,7 @@ questoes:
   pendencias: []
 - numero: 39
   disciplina: historia
+  assunto: america-latina
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1253,6 +1292,7 @@ questoes:
   pendencias: []
 - numero: 40
   disciplina: geografia
+  assunto: populacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1297,6 +1337,7 @@ questoes:
   pendencias: []
 - numero: 41
   disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1317,6 +1358,7 @@ questoes:
   pendencias: []
 - numero: 42
   disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1337,6 +1379,7 @@ questoes:
   pendencias: []
 - numero: 43
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1365,6 +1408,7 @@ questoes:
   pendencias: []
 - numero: 44
   disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1390,6 +1434,7 @@ questoes:
   pendencias: []
 - numero: 45
   disciplina: matematica
+  assunto: estatistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1414,6 +1459,7 @@ questoes:
   pendencias: []
 - numero: 46
   disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1440,6 +1486,7 @@ questoes:
   pendencias: []
 - numero: 47
   disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1465,6 +1512,7 @@ questoes:
   pendencias: []
 - numero: 48
   disciplina: geografia
+  assunto: espaco-agrario
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1498,6 +1546,7 @@ questoes:
   pendencias: []
 - numero: 49
   disciplina: geografia
+  assunto: espaco-agrario
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1524,6 +1573,7 @@ questoes:
   pendencias: []
 - numero: 50
   disciplina: geografia
+  assunto: biomas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1546,6 +1596,7 @@ questoes:
   pendencias: []
 - numero: 51
   disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1576,6 +1627,7 @@ questoes:
   pendencias: []
 - numero: 52
   disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1606,6 +1658,7 @@ questoes:
   pendencias: []
 - numero: 53
   disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1634,6 +1687,7 @@ questoes:
   pendencias: []
 - numero: 54
   disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias:
   - biologia
   texto_base: null
@@ -1663,6 +1717,7 @@ questoes:
   pendencias: []
 - numero: 55
   disciplina: biologia
+  assunto: zoologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1688,6 +1743,7 @@ questoes:
   pendencias: []
 - numero: 56
   disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1711,6 +1767,7 @@ questoes:
   pendencias: []
 - numero: 57
   disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1741,6 +1798,7 @@ questoes:
   pendencias: []
 - numero: 58
   disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1771,6 +1829,7 @@ questoes:
   pendencias: []
 - numero: 59
   disciplina: fisica
+  assunto: termologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1801,6 +1860,7 @@ questoes:
   pendencias: []
 - numero: 60
   disciplina: quimica
+  assunto: eletroquimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1823,6 +1883,7 @@ questoes:
   pendencias: []
 - numero: 61
   disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias:
   - ingles
   texto_base: null
@@ -1853,6 +1914,7 @@ questoes:
   pendencias: []
 - numero: 62
   disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1884,6 +1946,7 @@ questoes:
   pendencias: []
 - numero: 63
   disciplina: quimica
+  assunto: ambiental
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1915,6 +1978,7 @@ questoes:
   pendencias: []
 - numero: 64
   disciplina: quimica
+  assunto: estequiometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1940,6 +2004,7 @@ questoes:
   pendencias: []
 - numero: 65
   disciplina: quimica
+  assunto: ambiental
   disciplinas_secundarias:
   - portugues
   texto_base: tb05
@@ -1967,6 +2032,7 @@ questoes:
   pendencias: []
 - numero: 66
   disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1991,6 +2057,7 @@ questoes:
   pendencias: []
 - numero: 67
   disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2017,6 +2084,7 @@ questoes:
   pendencias: []
 - numero: 68
   disciplina: geografia
+  assunto: economia-mundial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2049,6 +2117,7 @@ questoes:
   pendencias: []
 - numero: 69
   disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2070,6 +2139,7 @@ questoes:
   pendencias: []
 - numero: 70
   disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2096,6 +2166,7 @@ questoes:
   pendencias: []
 - numero: 71
   disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2130,6 +2201,7 @@ questoes:
   pendencias: []
 - numero: 72
   disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2155,6 +2227,7 @@ questoes:
   pendencias: []
 - numero: 73
   disciplina: quimica
+  assunto: estequiometria
   disciplinas_secundarias:
   - fisica
   texto_base: tb06
@@ -2181,6 +2254,7 @@ questoes:
   pendencias: []
 - numero: 74
   disciplina: fisica
+  assunto: dinamica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -2206,6 +2280,7 @@ questoes:
   pendencias: []
 - numero: 75
   disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2230,6 +2305,7 @@ questoes:
   pendencias: []
 - numero: 76
   disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2254,6 +2330,7 @@ questoes:
   pendencias: []
 - numero: 77
   disciplina: matematica
+  assunto: geometria-analitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2275,6 +2352,7 @@ questoes:
   pendencias: []
 - numero: 78
   disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias:
   - matematica
   texto_base: null
@@ -2299,6 +2377,7 @@ questoes:
   pendencias: []
 - numero: 79
   disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2323,6 +2402,7 @@ questoes:
   pendencias: []
 - numero: 80
   disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2353,6 +2433,7 @@ questoes:
   pendencias: []
 - numero: 81
   disciplina: geografia
+  assunto: formacao-territorial
   disciplinas_secundarias:
   - historia
   texto_base: null
@@ -2382,6 +2463,7 @@ questoes:
   pendencias: []
 - numero: 82
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2413,6 +2495,7 @@ questoes:
   pendencias: []
 - numero: 83
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2447,6 +2530,7 @@ questoes:
   pendencias: []
 - numero: 84
   disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2504,6 +2588,7 @@ questoes:
   pendencias: []
 - numero: 85
   disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2546,6 +2631,7 @@ questoes:
   pendencias: []
 - numero: 86
   disciplina: portugues
+  assunto: movimentos-literarios
   disciplinas_secundarias:
   - historia
   texto_base: null
@@ -2573,6 +2659,7 @@ questoes:
   pendencias: []
 - numero: 87
   disciplina: historia
+  assunto: africa
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2597,6 +2684,7 @@ questoes:
   pendencias: []
 - numero: 88
   disciplina: geografia
+  assunto: geopolitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2620,6 +2708,7 @@ questoes:
   pendencias: []
 - numero: 89
   disciplina: historia
+  assunto: africa
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2647,6 +2736,7 @@ questoes:
   pendencias: []
 - numero: 90
   disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias:
   - portugues
   texto_base: null
