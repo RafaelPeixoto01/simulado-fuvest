@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.5
+**Versão:** 1.6
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v3.0
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005
+**PRD Ref:** 01-PRD v4.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006
 
 ---
 
@@ -40,7 +40,7 @@
 Monorepo com dois subsistemas que compartilham o mesmo modelo de dados:
 
 1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009).
-2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. Gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento vive no `localStorage`. O histórico também vive no `localStorage`; para quem entra com a conta Google (opcional, ADR-010), ele é guardado também no servidor, nas tabelas de conta, e o navegador vira um espelho dele (ADR-011, CR-005).
+2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. Gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento vive no `localStorage`. O histórico também vive no `localStorage`; para quem entra com a conta Google (ADR-010), obrigatória para usar o site desde o CR-006 (ADR-012), ele é guardado também no servidor, nas tabelas de conta, e o navegador vira um espelho dele (ADR-011, CR-005).
 
 ```mermaid
 graph TD
@@ -372,8 +372,8 @@ fisica:
 
 ### API
 - Todas as rotas sob `/api/` (exceto `/figuras/...` e o SPA)
-- Catálogo, geração, questões, correção, reportes e figuras **não exigem autenticação** e não leem a sessão
-- Autenticação só nas rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
+- Catálogo, geração, questões, correção e reportes **exigem sessão** desde o CR-006 (`exigir_acesso`, ADR-012): 401 `nao_autenticado` sem sessão; 503 `site_indisponivel` em produção sem login configurado; abertos fora de produção sem login configurado. `/api/health`, `/figuras`, o login e `/api/sessao` continuam públicos
+- Rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
 - Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
 - O gabarito **nunca** vai na resposta de geração/consulta de questões; só em `POST /api/correcoes`
@@ -387,6 +387,7 @@ fisica:
 - Agregações que o servidor não faz (painel "Meu desempenho", RN-015) ficam em funções puras em `utils/`, testadas no Vitest, e recebem o histórico como entrada (com conta, o histórico sincronizado — CR-005)
 - Páginas leem o histórico só por `useHistorico` (sessão + sincronização, ADR-011), nunca direto do `localStorage`; o `Layout` também o chama, para o envio de pendentes acontecer em qualquer página
 - Login por navegação de página inteira (`<a href="/api/auth/google?voltar=...">`), nunca por `fetch`; o token da sessão nunca é visível ao JavaScript
+- Rotas protegidas por `RequerConta` (CR-006, ADR-012): sem sessão, vão para a apresentação com `?voltar=<rota>`; erro de rede ao verificar a sessão não bloqueia a página (a API protege). Qualquer 401 `nao_autenticado` recarrega a sessão (`criarQueryClient`)
 
 ### Estilo de Código
 - **Backend:** `ruff check` com as regras padrão + `I` (imports), configurado no `pyproject.toml`
@@ -458,7 +459,7 @@ fisica:
   - Negativas: cada família nova custa desenvolvimento; figuras vetoriais e fórmulas dependem de recorte manual.
 
 ### ADR-004: Servidor sem estado do estudante
-- **Status:** Aceita; revista pelo ADR-011 (CR-005) só no histórico de quem entra com conta. Geração, correção e o simulado em andamento continuam sem estado no servidor
+- **Status:** Aceita; revista pelo ADR-011 (CR-005) só no histórico de quem entra com conta. Geração, correção e o simulado em andamento continuam sem estado no servidor. Desde o CR-006 (ADR-012), essas rotas exigem sessão, sem guardar nada dela
 - **Data:** 2026-09-29
 - **Contexto:** Público e sem login (PRD); o simulado precisa sobreviver a um recarregamento (US-005).
 - **Decisão:** `POST /api/simulados` devolve as questões sem gabarito e não grava nada além do contador anônimo. O SPA persiste IDs, respostas e timestamps no `localStorage` e, ao retomar, busca o conteúdo com `GET /api/questoes?ids=`. `POST /api/correcoes` recebe as respostas e devolve o resultado completo sem gravar nada. O histórico fica no `localStorage`.
@@ -540,6 +541,19 @@ fisica:
 - **Consequências:**
   - Positivas: páginas, resultado e painel leem uma lista só (`useHistorico`); funciona sem rede e com várias abas; limpar num dispositivo vale nos outros.
   - Negativas: mudanças de outro dispositivo só aparecem na próxima sincronização (carga da página ou volta do foco, `staleTime` de 60 s); uma entrada que o servidor recusar fica só naquele navegador.
+
+### ADR-012: Login obrigatório na interface e na API
+- **Status:** Aceita
+- **Data:** 2026-10-01
+- **Contexto:** O dono do produto decidiu que o uso do site exige login com Google (CR-006). Até então, o login era opcional (CR-005) e a API de conteúdo era anônima (ADR-004).
+- **Decisão:** a dependência `exigir_acesso`, aplicada nos routers de catálogo, simulados, questões, correções e reportes, decide pelo **modo de acesso**: `conta` (provedor Google configurado: exige sessão, senão 401 `nao_autenticado`), `indisponivel` (sem provedor, em produção: 503 `site_indisponivel`) ou `livre` (sem provedor, fora de produção: aberta, para desenvolvimento, testes e CI sem segredo). `GET /api/sessao` devolve o modo em `acesso`. No SPA, o porteiro `RequerConta` envolve as rotas: sem sessão, mostra a apresentação (no início) ou leva a ela com `?voltar=<rota>`; com `indisponivel`, mostra "temporariamente indisponível". `/api/health` (healthcheck), `/figuras` (conteúdo público da FUVEST), o login, `/api/sessao` e a `/privacidade` continuam públicos. Os reportes passam a exigir sessão, mas não gravam quem reportou.
+- **Alternativas Consideradas:**
+  - Exigir só na interface: descartada (D2 do CR-006), porque a API continuaria respondendo a quem a chamasse direto.
+  - Abrir o site quando o login não estiver configurado: descartada em produção (D3), porque a obrigatoriedade cairia sem aviso; mantida fora de produção para não exigir segredo no desenvolvimento.
+  - Catálogo público para a apresentação mostrar os números da base: descartada para seguir a D2; a apresentação é texto fixo.
+- **Consequências:**
+  - Positivas: a regra vale para qualquer cliente da API; o desenvolvimento continua sem segredo.
+  - Negativas: todo uso passa a depender do Google e do login; uma variável do Google ausente tira o site do ar em produção (smoke test do CI e Deploy Guide cobrem); a apresentação não mostra os números da base.
 
 ## 9. Deploy e Infraestrutura
 
@@ -632,4 +646,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend.*

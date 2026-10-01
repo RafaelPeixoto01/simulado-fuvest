@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.0
+**Versão:** 1.2
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v3.0 (RF-020, RF-022, RF-024 a RF-026, US-013, US-014, RN-012, RN-016, RNF-004, RNF-005)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.5 (ADR-004 revisto, ADR-010, ADR-011)
-**CR Ref:** CR-005 (Fase 3B do roadmap)
+**PRD Ref:** 01-PRD v4.0 (RF-020, RF-022, RF-024 a RF-026, US-013 a US-015, RN-012, RN-016, RN-017, RNF-004, RNF-005)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.6 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8)
 
 ---
 
@@ -161,12 +161,13 @@ class UsuarioPublico(BaseModel):
 class SessaoResponse(BaseModel):
     login_disponivel: bool
     usuario: UsuarioPublico | None
+    acesso: Literal["conta", "livre", "indisponivel"]  # CR-006, §8
 ```
 
 ```typescript
 // types.ts
 export interface Usuario { id: number; email: string; nome: string | null }
-export interface Sessao { login_disponivel: boolean; usuario: Usuario | null }
+export interface Sessao { login_disponivel: boolean; usuario: Usuario | null; acesso: 'conta' | 'livre' | 'indisponivel' }  // acesso: CR-006
 
 // storage/historicoStorage.ts
 export const CHAVE_CONTA = 'simulado-fuvest:v1:historico-conta'
@@ -437,3 +438,68 @@ sequenceDiagram
 - [x] Frontend: cabeçalho, `/conta`, `/privacidade`, Histórico, painel, resultado, finalizar
 - [x] Testes BT-047, BT-050 a BT-067, UT-030 a UT-037 + FT-013
 - [x] Cliente OAuth no Google Cloud + variáveis na Railway (usuário) + FT-014 (01/10/2026)
+
+---
+
+## 8. Login obrigatório (CR-006)
+
+Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção complementa as anteriores; onde elas dizem "sem conta, o site funciona como antes", vale o modo `livre` abaixo, que só existe fora de produção.
+
+### 8.1 Modo de acesso
+
+| Modo | Quando | API de conteúdo | Interface |
+|------|--------|-----------------|-----------|
+| `conta` | Provedor Google configurado | Exige sessão: sem ela, 401 `nao_autenticado` | Sem login: apresentação, Privacidade e Conta; o resto leva à apresentação |
+| `indisponivel` | Sem provedor, `ENVIRONMENT=production` (variável ausente, ou `PUBLIC_URL` sem https) | 503 `site_indisponivel` ("O site está temporariamente indisponível.") para todos, com ou sem sessão | "Temporariamente indisponível" no início e nas rotas protegidas; Conta e Privacidade abrem (quem já entrou ainda pode sair e excluir a conta) |
+| `livre` | Sem provedor, fora de produção (desenvolvimento, testes, CI) | Aberta, como antes do CR-006 | Como antes do CR-006 |
+
+- **Backend:** `modo_de_acesso(request)` em `app/dependencias.py`; `exigir_acesso` (dependência dos routers de catálogo, simulados, questões, correções e reportes) aplica a tabela. Erros de acesso vêm antes da validação do corpo (401/503 antes de 422).
+- **Públicos em qualquer modo:** `/api/health`, `/figuras/...`, `/api/auth/google`, o callback, `GET`/`DELETE /api/sessao`; `/api/historico` e `/api/conta` seguem exigindo sessão (§2.5).
+- **`GET /api/sessao`** devolve o modo em `acesso`.
+- Os reportes exigem sessão, mas não gravam quem reportou (RNF-005).
+
+### 8.2 Interface
+
+- **`RequerConta`** (`components/RequerConta.tsx`) envolve todas as rotas, menos `/`, `/conta`, `/privacidade` e a página não encontrada; `/simulado` (fora do `Layout`) também. Comportamento:
+  - Sessão carregando → `Carregando`.
+  - Erro ao buscar a sessão (rede) → mostra a página: a API continua protegida, e um estudante no meio de uma prova não é barrado por uma falha momentânea.
+  - `acesso: 'indisponivel'` → `SiteIndisponivel`.
+  - `acesso: 'conta'` sem usuário → `semConta` se foi passado (o início passa a apresentação); senão `<Navigate replace to="/?voltar=<rota>">`.
+  - Demais casos → a página.
+- **Início (`/`):** `<RequerConta semConta={<ApresentacaoPage />}><HomePage /></RequerConta>`.
+- **`ApresentacaoPage`:** `h1` "Treine com questões reais da 1ª fase da FUVEST"; texto curto do que o site faz (simulados com questões oficiais de anos anteriores, correção na hora, desempenho por disciplina e por assunto); com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar."; `BotaoGoogle` com o `voltar` da URL (só se começar com `/` e não com `//`; senão `/`); os 4 modos em texto fixo; "Para usar o site, entre com a sua conta Google. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade. Nenhum dado da base (o catálogo é protegido). Título da aba: "Simulado Fuvest".
+- **`SiteIndisponivel`** (`components/Estados.tsx`): `h1` "Site temporariamente indisponível" e "Tente de novo em alguns minutos."
+- **Cabeçalho:** com `acesso: 'conta'` e sem usuário, só o link "Entrar"; "Desempenho" e "Histórico" somem. Com `indisponivel` e sem usuário, nenhum link. Enquanto a sessão carrega, como antes.
+- **Sessão que acaba no meio do uso:** `criarQueryClient` (`queryClient.ts`) recarrega a sessão em qualquer erro 401 `nao_autenticado` de query ou mutation; o `RequerConta` leva à apresentação com `?voltar=`, e o login volta à página. O simulado em andamento continua no `localStorage`.
+- **Textos:** início com login, "O simulado em andamento fica salvo neste navegador." no lugar de "Não precisa criar conta…"; Conta sem login, "Entre com a sua conta Google para usar o site. O histórico fica na sua conta e aparece em qualquer dispositivo. Os simulados já feitos neste navegador vão para a sua conta."; Privacidade, a seção "Sem conta" vira "Sem entrar": só a apresentação e a Privacidade abrem, nenhum dado vai para o servidor e nenhum cookie é criado.
+
+### 8.3 Casos de borda
+
+| # | Cenário | Comportamento Esperado |
+|---|---------|------------------------|
+| 18 | Link direto (`/resultado/:id`) sem login | Apresentação com "Entre… para continuar"; depois do login, o resultado |
+| 19 | Simulado em andamento de antes do CR-006, sem conta | `/simulado` leva ao login; depois, a prova continua com as respostas salvas |
+| 20 | Variável do Google removida em produção | 503 na API de conteúdo; "temporariamente indisponível" no site; quem já entrou ainda sai e exclui a conta |
+| 21 | Sessão vence durante uma prova | A próxima chamada (questões, correção) dá 401 → sessão recarregada → login → volta a `/simulado`; nada se perde |
+| 22 | Falha de rede ao verificar a sessão | A página abre; as chamadas à API falham como qualquer erro de rede |
+
+### 8.4 Plano de testes
+
+| ID | Cenário | Alvo | Esperado |
+|----|---------|------|----------|
+| BT-070 | Sem sessão, com login configurado | GET /api/catalogo, POST /api/simulados, GET /api/questoes, POST /api/correcoes, POST /api/reportes | 401 `nao_autenticado` (antes do 422) |
+| BT-071 | Com sessão | Os mesmos | Respostas de antes do CR-006 |
+| BT-072 | Produção sem login configurado | Os mesmos + GET /api/sessao | 503 `site_indisponivel` (com ou sem sessão); `acesso: 'indisponivel'` |
+| BT-073 | Fora de produção sem login configurado | Os mesmos + GET /api/sessao | Abertos; `acesso: 'livre'` |
+| BT-074 | Públicos com login configurado e sem sessão | /api/health, /figuras, /api/sessao, /api/auth/google | 200/302 |
+| UT-040 | `RequerConta`: conta sem usuário (redireciona com `voltar`), com usuário, livre, indisponível, sessão carregando e com erro | Rotas | Página / apresentação / indisponível / carregando |
+| UT-041 | Apresentação: texto, botão com o `voltar` da URL (e `voltar` inválido vira `/`), Privacidade aberta; cabeçalho só com "Entrar" | `ApresentacaoPage`, `Layout` | Textos e links |
+| UT-042 | 401 numa chamada com sessão aparentemente válida | `criarQueryClient` | Sessão recarregada → apresentação com `voltar` |
+| FT-015 | Local com provedor falso: sem login, `/historico` → apresentação → login → `/historico`; API sem cookie → 401; sair → rotas voltam à apresentação; produção sem provedor → indisponível e 503; 360 px; console limpo | E2E (Playwright MCP) | Conforme §8.1–8.2 |
+
+### 8.5 Checklist (CR-006)
+
+- [ ] Backend: `modo_de_acesso`, `exigir_acesso`, `acesso` na sessão, routers de conteúdo
+- [ ] Frontend: `RequerConta`, apresentação, indisponível, cabeçalho, 401 global, textos
+- [ ] CI: smoke test do Docker confere 503 em produção sem login
+- [ ] Testes BT-070 a BT-074, UT-040 a UT-042 + FT-015

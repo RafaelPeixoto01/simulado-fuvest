@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v3.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014, RN-016)
+**PRD Ref:** 01-PRD v4.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014, RN-016)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-005, ADR-009)
-**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`)
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`), CR-006 (correção exige sessão; resultado e histórico atrás do login)
 
 ---
 
@@ -131,7 +131,7 @@ interface HistoricoEntry {
 
 **POST /api/correcoes**
 ```
-Auth: não | Rate limit: 120/minuto por IP (o Treino chama 1× por questão)
+Auth: sessão (CR-006, `specs/07` §8; 401 sem sessão, 503 em produção sem login configurado) | Rate limit: 120/minuto por IP (o Treino chama 1× por questão)
 Body: CorrecaoRequest
 Response 200: CorrecaoResponse
 Erros:

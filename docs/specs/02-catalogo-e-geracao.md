@@ -1,10 +1,10 @@
 # Especificação Técnica — Catálogo e Geração de Simulados
 
-**Versão:** 1.1
-**Data:** 2026-09-30
-**PRD Ref:** 01-PRD v2.0 (RF-008 a RF-012, US-001 a US-004, RN-002 a RN-005, RN-009, RN-013, RN-014)
+**Versão:** 1.2
+**Data:** 2026-10-01
+**PRD Ref:** 01-PRD v4.0 (RF-008 a RF-012, US-001 a US-004, RN-002 a RN-005, RN-009, RN-013, RN-014)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-006, ADR-009)
-**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`)
+**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`), CR-006 (os três endpoints exigem sessão)
 
 ---
 
@@ -162,13 +162,13 @@ class QuestoesResponse(BaseModel):
 
 **GET /api/catalogo**
 ```
-Auth: não
+Auth: sessão (CR-006, `specs/07` §8; 401 sem sessão, 503 em produção sem login configurado)
 Response 200: CatalogoResponse
 ```
 
 **POST /api/simulados**
 ```
-Auth: não | Rate limit: 30/minuto por IP
+Auth: sessão (CR-006, `specs/07` §8; 401 sem sessão, 503 em produção sem login configurado) | Rate limit: 30/minuto por IP
 Body: GerarCompleta | GerarPersonalizado | GerarAno | GerarTreino (discriminado por "modo")
 Response 200: SimuladoResponse
 Erros:
@@ -180,7 +180,7 @@ Erros:
 
 **GET /api/questoes?ids=2025-001,2025-002**
 ```
-Auth: não
+Auth: sessão (CR-006, `specs/07` §8; 401 sem sessão, 503 em produção sem login configurado)
 Query: ids — 1 a 90 ids separados por vírgula, cada um no formato ^\d{4}-\d{3}$
 Response 200: QuestoesResponse (ids inexistentes em nao_encontradas; ids repetidos devolvidos uma vez)
 Erros:

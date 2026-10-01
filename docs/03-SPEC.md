@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.5
+**Versão:** 1.6
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v3.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.5
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005
+**PRD Ref:** 01-PRD v4.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.6
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -12,7 +12,7 @@
 
 ## 1. Resumo
 
-MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login opcional com Google e histórico sincronizado com a conta.
+MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006.
 
 ### Specs por feature
 
@@ -30,19 +30,19 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 
 ## 2. Contratos da API (Visão Geral)
 
-Só as rotas de conta (spec 07) leem a sessão; as demais são anônimas e sem estado (ADR-004). "Sessão" = cookie de sessão obrigatório (401 sem ele); "Origin" = `POST`/`DELETE` que recusam `Origin` diferente de `PUBLIC_URL` (403) — ADR-010.
+Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, correções e reportes exigem sessão (**Acesso**): 401 `nao_autenticado` sem sessão, 503 `site_indisponivel` em produção sem login configurado. Continuam sem estado (ADR-004). Só `/api/health`, `/figuras`, o login e `/api/sessao` são públicos. "Sessão" = cookie de sessão obrigatório (401 sem ele); "Origin" = `POST`/`DELETE` que recusam `Origin` diferente de `PUBLIC_URL` (403) — ADR-010.
 
 | Método | Path | Rate limit | Body | Resposta | Spec |
 |--------|------|------------|------|----------|------|
 | `GET` | `/api/health` | — | — | `{"status":"ok","provas":n}` | §3 abaixo |
-| `GET` | `/api/catalogo` | — | — | `CatalogoResponse` (com assuntos por disciplina — CR-004) | 02, 06 |
-| `POST` | `/api/simulados` | 30/min/IP | `Gerar*` (por `modo`) | `SimuladoResponse` | 02 |
-| `GET` | `/api/questoes?ids=` | — | — | `QuestoesResponse` | 02 |
-| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) | 04, 06 |
-| `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) | 05 |
+| `GET` | `/api/catalogo` | — | — | `CatalogoResponse` (com assuntos por disciplina — CR-004) (Acesso) | 02, 06 |
+| `POST` | `/api/simulados` | 30/min/IP | `Gerar*` (por `modo`) | `SimuladoResponse` (Acesso) | 02 |
+| `GET` | `/api/questoes?ids=` | — | — | `QuestoesResponse` (Acesso) | 02 |
+| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) (Acesso) | 04, 06 |
+| `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) (Acesso) | 05 |
 | `GET` | `/api/auth/google?voltar=` | 20/min/IP | — | 302 para o Google (404 sem configuração) | 07 |
 | `GET` | `/api/auth/google/callback` | 20/min/IP | — | 302 para `voltar` + cookie de sessão, ou `/conta?erro=login` | 07 |
-| `GET` | `/api/sessao` | — | — | `SessaoResponse` (`no-store`) | 07 |
+| `GET` | `/api/sessao` | — | — | `SessaoResponse` com `acesso` (`no-store`) | 07 |
 | `DELETE` | `/api/sessao` | — | — | 204 (Origin) | 07 |
 | `GET` | `/api/historico` | 60/min/IP | — | `HistoricoResponse` (Sessão, `no-store`) | 07 |
 | `POST` | `/api/historico` | 30/min/IP | `HistoricoRequest` | `HistoricoResponse` (Sessão, Origin) | 07 |
@@ -51,7 +51,7 @@ Só as rotas de conta (spec 07) leem a sessão; as demais são anônimas e sem e
 | `GET` | `/figuras/{ano}/{arquivo}` | — | — | `image/webp` | §3 abaixo |
 | `GET` | `/*` (demais) | — | — | `index.html` (SPA) | §3 abaixo |
 
-**Formato de erro de domínio:** `{"detail": {"codigo": "<snake_case>", "mensagem": "<pt-BR>", ...extras}}`. Erros de validação usam o 422 padrão do FastAPI. Os códigos são `prova_nao_encontrada`, `questoes_insuficientes` e `questao_nao_encontrada`; o CR-005 acrescenta `login_indisponivel` (404), `nao_autenticado` (401) e `origem_invalida` (403).
+**Formato de erro de domínio:** `{"detail": {"codigo": "<snake_case>", "mensagem": "<pt-BR>", ...extras}}`. Erros de validação usam o 422 padrão do FastAPI. Os códigos são `prova_nao_encontrada`, `questoes_insuficientes` e `questao_nao_encontrada`; o CR-005 acrescenta `login_indisponivel` (404), `nao_autenticado` (401) e `origem_invalida` (403); o CR-006, `site_indisponivel` (503).
 
 ---
 
@@ -106,6 +106,7 @@ Só as rotas de conta (spec 07) leem a sessão; as demais são anônimas e sem e
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.6 | 2026-10-01 | CR-006: login obrigatório — coluna Acesso nos contratos, erro `site_indisponivel`, `SessaoResponse.acesso`; spec 07 v1.2 (§8), notas de acesso nas specs 02, 03, 04 e 05 |
 | 1.5 | 2026-10-01 | CR-005: spec 07 nova (contas e histórico sincronizado); contratos com sessão e Origin, erros `login_indisponivel`/`nao_autenticado`/`origem_invalida`, `Cache-Control: no-store`, migration 003; specs 03 v1.5, 04 v1.3 e 06 v1.1 |
 | 1.4 | 2026-09-30 | CR-004: spec 06 nova (assuntos e desempenho); spec 01 v1.1 (`assunto`, V11, taxonomia, `assuntos`), spec 02 v1.1 (assuntos no catálogo), spec 03 v1.4 (rota `/desempenho`), spec 04 v1.2 (correção por assunto, "Ver por assunto") |
 | 1.3 | 2026-09-30 | CR-003: spec 04 v1.1 (ordem do resultado, `FolhaCorrigida` em grade/bolhas, revisão uma por vez) e spec 03 v1.3 (banner do início, "Provas na base", figura ajustada à tela) |

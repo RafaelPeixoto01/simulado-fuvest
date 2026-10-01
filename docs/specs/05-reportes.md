@@ -1,10 +1,10 @@
 # Especificação Técnica — Reporte de Erro em Questões
 
-**Versão:** 1.0
-**Data:** 2026-09-29
-**PRD Ref:** 01-PRD v1.0 (RF-007, RF-021, US-008, US-010)
+**Versão:** 1.1
+**Data:** 2026-10-01
+**PRD Ref:** 01-PRD v4.0 (RF-007, RF-021, US-008, US-010, RN-017)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-006, ADR-008)
-**CR Ref:** —
+**CR Ref:** CR-006 (o reporte exige sessão, mas continua sem gravar quem reportou)
 
 ---
 
@@ -65,7 +65,7 @@ Rótulos na UI: `enunciado` → "Enunciado ou alternativa com erro"; `figura` �
 
 **POST /api/reportes**
 ```
-Auth: não | Rate limit: 10/hora por IP
+Auth: sessão (CR-006, `specs/07` §8; 401 sem sessão, 503 em produção sem login configurado) | Rate limit: 10/hora por IP
 Body: ReporteCreate
 Response 201: {"id": 123}
 Erros:
