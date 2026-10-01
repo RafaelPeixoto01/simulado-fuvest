@@ -103,7 +103,7 @@ O dono do produto decidiu que o uso do site exige login com Google.
 |------|--------------------|----------------------|
 | Modificar | `backend/app/dependencias.py` | `modo_de_acesso`, `exigir_acesso` |
 | Modificar | `backend/app/schemas.py`, `routers/conta.py` | `SessaoResponse.acesso` |
-| Modificar | `backend/app/routers/catalogo.py`, `simulados.py`, `questoes.py`, `correcoes.py`, `reportes.py` | `dependencies=[Depends(exigir_acesso)]` no router |
+| Modificar | `backend/app/routers/catalogo.py`, `simulados.py`, `questoes.py`, `correcoes.py`, `reportes.py` | `dependencies=[Depends(exigir_acesso)]` no router (+ `verificar_origem` nos POSTs) |
 | Criar | `backend/tests/test_acesso.py` | BT-070 a BT-074 |
 | Modificar | `.github/workflows/ci.yml` | Smoke test: `/api/catalogo` → 503 em produção sem login |
 | Modificar | `frontend/src/types.ts`, `test/apiFalsa.ts` | `Sessao.acesso`; sessão falsa padrão com `acesso: 'livre'` |
@@ -112,7 +112,9 @@ O dono do produto decidiu que o uso do site exige login com Google.
 | Modificar | `frontend/src/components/Estados.tsx` | `SiteIndisponivel` |
 | Modificar | `frontend/src/App.tsx` | Rotas protegidas por `RequerConta` |
 | Modificar | `frontend/src/components/Layout.tsx` | Cabeçalho sem login |
-| Modificar | `frontend/src/queryClient.ts`, `test/renderizar.tsx` | `criarQueryClient`: 401 em qualquer chamada recarrega a sessão |
+| Modificar | `frontend/src/services/api.ts`, `queryClient.ts`, `test/renderizar.tsx` | `definirAoErroDeAcesso` (401/503 em qualquer chamada) + `criarQueryClient`, que recarrega a sessão |
+| Modificar | `frontend/src/hooks/useSessao.ts` | `retryOnMount: false` (sem ciclo de remontagem com erro de rede) |
+| Remover | `frontend/src/components/ConviteConta.tsx` | Convite para entrar no Histórico e no painel: sem login, essas páginas nem abrem |
 | Modificar | `frontend/src/pages/HomePage.tsx`, `ContaPage.tsx`, `PrivacidadePage.tsx` | Textos |
 | Criar | `frontend/src/pages/acesso.test.tsx` | UT-040 a UT-042 |
 
@@ -138,19 +140,50 @@ O dono do produto decidiu que o uso do site exige login com Google.
 
 ## 8. Critérios de Aceite
 
-- [ ] Sem login, só a apresentação (`/`) e a Privacidade abrem; qualquer outra rota leva à apresentação, e o login volta para a rota pedida
-- [ ] Com login, o site funciona como antes (início, modos, Treino, resultado, histórico, painel, conta)
-- [ ] Sem sessão, a API de conteúdo responde 401 `nao_autenticado`; health, figuras, login e sessão continuam abertos
-- [ ] Em produção sem login configurado, a API de conteúdo responde 503 `site_indisponivel` e o site mostra "temporariamente indisponível"; fora de produção, sem configuração, o site fica aberto
-- [ ] Sessão que acaba no meio do uso leva à apresentação, e o simulado em andamento continua salvo
-- [ ] Sem login, o cabeçalho mostra só "Entrar"
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança — BT-070 a BT-074, UT-040 a UT-042
-- [ ] Fluxo afetado exercitado em runtime antes do merge — FT-015 (provedor falso local, Playwright) e chamadas HTTP
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints alterados e autenticação
-- [ ] Documentos afetados foram atualizados
-- [ ] CI verde na branch e em `master`; produção conferida (sem cookie: 401 na API e apresentação no navegador; com login: uso normal)
+- [x] Sem login, só a apresentação (`/`) e a Privacidade abrem; qualquer outra rota leva à apresentação, e o login volta para a rota pedida — UT-040, UT-041; FT-015 (`/historico` → `/?voltar=%2Fhistorico` → login → `/historico`)
+- [x] Com login, o site funciona como antes (início, modos, Treino, resultado, histórico, painel, conta) — BT-071; regressão (backend 323, frontend 206); FT-015 (início com os modos, Prova de 2025 finalizada, Treino)
+- [x] Sem sessão, a API de conteúdo responde 401 `nao_autenticado`; health, figuras, login e sessão continuam abertos — BT-070, BT-074; HTTP real abaixo
+- [x] Em produção sem login configurado, a API de conteúdo responde 503 `site_indisponivel` e o site mostra "temporariamente indisponível"; fora de produção, sem configuração, o site fica aberto — BT-072, BT-073, UT-040; smoke test do Docker no CI; FT-015 no modo produção sem login
+- [x] Sessão que acaba no meio do uso leva à apresentação, e o simulado em andamento continua salvo — UT-042 (query, chamada direta do Treino e 503); FT-015 (cookie apagado no meio da Prova de 2025 e do Treino)
+- [x] Sem login, o cabeçalho mostra só "Entrar" — UT-041; FT-015
+- [x] Testes existentes continuam passando (regressão) — backend 323, frontend 206 (4 testes do Histórico passaram a esperar a sessão; 2 cenários do CR-005 que não existem mais saíram)
+- [x] Novos testes cobrem a mudança — BT-070 a BT-075, UT-040 a UT-042
+- [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints alterados e autenticação — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v4.0, Arquitetura v1.6, 03-SPEC v1.6, specs 02/03/04/05 e 07 v1.2, Plano, Deploy Guide v1.3, CLAUDE.md, INDEX.md
+- [ ] CI verde na branch e em `master`; produção conferida (sem cookie: 401 na API e apresentação no navegador; com login: uso normal) — branch verde; `master` e produção pendentes do merge
+
+**Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
+- HTTP (curl), modo `conta`: `/api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo`, `GET /api/questoes`, `POST /api/correcoes` e `POST /api/reportes` → 401 `nao_autenticado`, e `POST /api/simulados` com corpo inválido também → 401 (antes do 422); `/api/health` e uma figura de 2025 → 200; com sessão, catálogo e questões → 200; depois da revisão, `POST /api/simulados` com `Origin` de outro site → 403 e com o do site → 200.
+- HTTP, modo produção sem login: `/api/sessao` → `acesso: "indisponivel"`; `/api/catalogo` → 503 `site_indisponivel`; health → 200.
+- Playwright (FT-015): sem cookie, `/historico` vai para `/?voltar=%2Fhistorico` com "Entre com a sua conta Google para continuar.", cabeçalho só com "Entrar" e nenhum cookie → "Entrar com Google" volta a `/historico` (cabeçalho "Desempenho, Histórico, Ana") → início com os modos e "O simulado em andamento fica salvo neste navegador." → Prova de 2025 com 2 respostas; o cookie de sessão é apagado e "Finalizar" leva a `/?voltar=%2Fsimulado` com o simulado ainda no navegador → login → `/simulado` com as 2 respostas → finalizado ("Você acertou 1 de 90 questões") → "Sair" → `/desempenho` leva à apresentação → apresentação a 360 e 320 px sem rolagem horizontal. Modo produção sem login: `/`, `/historico` e `/simulado` mostram "Site temporariamente indisponível"; `/privacidade` e `/conta` abrem. Depois da revisão: no Treino, cookie apagado e resposta → `/?voltar=%2Ftreino`. Console: só o registro do próprio navegador para as respostas 401 esperadas.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 10 achados: 9 corrigidos e 1 justificado (`b5fecc1`):**
+1. Corrigido: o 401 só recarregava a sessão nas chamadas do React Query; o Treino (`api.corrigir`) e o reporte (`api.reportar`) chamam a API direto. O aviso passou para o `requisitar` (`definirAoErroDeAcesso` em `services/api.ts`), registrado pelo `criarQueryClient` (UT-042, Treino).
+2. Corrigido: um 503 `site_indisponivel` com o site aberto não atualizava a sessão. O mesmo aviso cobre o 503 (UT-042).
+3. Corrigido: com o site indisponível, quem estava conectado via "Desempenho" e "Histórico", que só levam ao aviso. O cabeçalho mostra esses links só com acesso ao conteúdo (UT-042).
+4. **Justificado:** o `voltar` leva só o caminho, sem query string nem state. Nenhuma rota protegida usa query string, o state do router não sobrevive à ida ao Google (recarga de página inteira), e o servidor recusa `?` no `voltar` (`caminho_seguro`).
+5. Corrigido: `exigir_acesso` consultava (e às vezes apagava) a sessão em todos os modos; agora só no modo `conta`.
+6. Corrigido: os POSTs de conteúdo (simulados, correções, reportes) passaram a autenticar por cookie sem a verificação de `Origin` das rotas de conta; agora a têm (BT-075).
+7. Corrigido: o `Literal` dos modos estava duplicado; `ModoAcesso` fica só em `schemas.py`.
+8. Corrigido: checagem redundante em `exigir_acesso`.
+9. Corrigido: o Deploy Guide mandava conferir `GET /api/catalogo` sem cookie, que agora dá 401.
+10. Corrigido: `async` sobrando no `queryFn` do `useHistorico`.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum; nenhuma variável nova |
+| Validação de entrada | Inalterada (Pydantic); a autenticação vem antes da validação do corpo (401 antes do 422), então pedidos sem sessão nem chegam a ser avaliados |
+| Tokens / armazenamento | Inalterado (cookie `HttpOnly`, hash no banco — ADR-010) |
+| Autorização | Todas as rotas de conteúdo exigem sessão por dependência de router (`exigir_acesso`), e não rota a rota, o que evita esquecer uma; produção sem login configurado falha fechada (503) |
+| Ownership | Sem dado de usuário novo; os reportes continuam sem gravar quem reportou |
+| CSRF | `SameSite=Lax` + `Origin` conferido também nos POSTs de conteúdo (BT-075) |
+| SQL | Inalterado (ORM) |
+| CORS / headers | Inalterados |
+| Dependências | Nenhuma nova |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -210,3 +243,4 @@ O dono do produto decidiu que o uso do site exige login com Google.
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3 |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-04): backend, frontend, validação runtime (FT-015), revisão de código (10 achados) e de segurança; achado durante os testes: ciclo de remontagem da sessão com erro de rede (corrigido com `retryOnMount: false`); CI da branch verde |

@@ -453,7 +453,7 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
 | `indisponivel` | Sem provedor, `ENVIRONMENT=production` (variável ausente, ou `PUBLIC_URL` sem https) | 503 `site_indisponivel` ("O site está temporariamente indisponível.") para todos, com ou sem sessão | "Temporariamente indisponível" no início e nas rotas protegidas; Conta e Privacidade abrem (quem já entrou ainda pode sair e excluir a conta) |
 | `livre` | Sem provedor, fora de produção (desenvolvimento, testes, CI) | Aberta, como antes do CR-006 | Como antes do CR-006 |
 
-- **Backend:** `modo_de_acesso(request)` em `app/dependencias.py`; `exigir_acesso` (dependência dos routers de catálogo, simulados, questões, correções e reportes) aplica a tabela. Erros de acesso vêm antes da validação do corpo (401/503 antes de 422).
+- **Backend:** `modo_de_acesso(request)` em `app/dependencias.py` (tipo `ModoAcesso` em `schemas.py`); `exigir_acesso` (dependência dos routers de catálogo, simulados, questões, correções e reportes) aplica a tabela e só consulta a sessão no modo `conta`. Os POSTs de conteúdo (simulados, correções, reportes) também passam por `verificar_origem` (403 `origem_invalida`), como as rotas de conta. Erros de acesso vêm antes da validação do corpo (401/503 antes de 422).
 - **Públicos em qualquer modo:** `/api/health`, `/figuras/...`, `/api/auth/google`, o callback, `GET`/`DELETE /api/sessao`; `/api/historico` e `/api/conta` seguem exigindo sessão (§2.5).
 - **`GET /api/sessao`** devolve o modo em `acesso`.
 - Os reportes exigem sessão, mas não gravam quem reportou (RNF-005).
@@ -469,8 +469,9 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
 - **Início (`/`):** `<RequerConta semConta={<ApresentacaoPage />}><HomePage /></RequerConta>`.
 - **`ApresentacaoPage`:** `h1` "Treine com questões reais da 1ª fase da FUVEST"; texto curto do que o site faz (simulados com questões oficiais de anos anteriores, correção na hora, desempenho por disciplina e por assunto); com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar."; `BotaoGoogle` com o `voltar` da URL (só se começar com `/` e não com `//`; senão `/`); os 4 modos em texto fixo; "Para usar o site, entre com a sua conta Google. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade. Nenhum dado da base (o catálogo é protegido). Título da aba: "Simulado Fuvest".
 - **`SiteIndisponivel`** (`components/Estados.tsx`): `h1` "Site temporariamente indisponível" e "Tente de novo em alguns minutos."
-- **Cabeçalho:** com `acesso: 'conta'` e sem usuário, só o link "Entrar"; "Desempenho" e "Histórico" somem. Com `indisponivel` e sem usuário, nenhum link. Enquanto a sessão carrega, como antes.
-- **Sessão que acaba no meio do uso:** `criarQueryClient` (`queryClient.ts`) recarrega a sessão em qualquer erro 401 `nao_autenticado` de query ou mutation; o `RequerConta` leva à apresentação com `?voltar=`, e o login volta à página. O simulado em andamento continua no `localStorage`.
+- **Cabeçalho:** "Desempenho" e "Histórico" só aparecem com acesso ao conteúdo (`livre`, ou `conta` com usuário). Sem login, só "Entrar"; com `indisponivel`, só o nome de quem está conectado (que leva à Conta) ou nada. Enquanto a sessão carrega, como antes.
+- **Sessão que acaba no meio do uso, ou site que fecha:** o `requisitar` (`services/api.ts`) avisa (`definirAoErroDeAcesso`) em qualquer 401 `nao_autenticado` ou 503 `site_indisponivel`, inclusive nas chamadas feitas fora do React Query (Treino, reporte); o `criarQueryClient` (`queryClient.ts`) registra o tratamento, que recarrega a sessão. O `RequerConta` leva então à apresentação com `?voltar=` (e o login volta à página) ou mostra o aviso. O simulado em andamento continua no `localStorage`.
+- **Sessão com erro de rede:** `useSessao` usa `retryOnMount: false`. Sem isso, cada componente que monta refaria a busca, a sessão voltaria a "carregando", e o `RequerConta` desmontaria e remontaria a página sem fim. Ela volta sozinha quando a conexão retorna (`refetchOnReconnect`), num 401/503 ou ao recarregar.
 - **Textos:** início com login, "O simulado em andamento fica salvo neste navegador." no lugar de "Não precisa criar conta…"; Conta sem login, "Entre com a sua conta Google para usar o site. O histórico fica na sua conta e aparece em qualquer dispositivo. Os simulados já feitos neste navegador vão para a sua conta."; Privacidade, a seção "Sem conta" vira "Sem entrar": só a apresentação e a Privacidade abrem, nenhum dado vai para o servidor e nenhum cookie é criado.
 
 ### 8.3 Casos de borda
@@ -492,14 +493,15 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
 | BT-072 | Produção sem login configurado | Os mesmos + GET /api/sessao | 503 `site_indisponivel` (com ou sem sessão); `acesso: 'indisponivel'` |
 | BT-073 | Fora de produção sem login configurado | Os mesmos + GET /api/sessao | Abertos; `acesso: 'livre'` |
 | BT-074 | Públicos com login configurado e sem sessão | /api/health, /figuras, /api/sessao, /api/auth/google | 200/302 |
+| BT-075 | POST de conteúdo com `Origin` de outro site | POST /api/simulados, /api/correcoes, /api/reportes | 403 `origem_invalida` |
 | UT-040 | `RequerConta`: conta sem usuário (redireciona com `voltar`), com usuário, livre, indisponível, sessão carregando e com erro | Rotas | Página / apresentação / indisponível / carregando |
 | UT-041 | Apresentação: texto, botão com o `voltar` da URL (e `voltar` inválido vira `/`), Privacidade aberta; cabeçalho só com "Entrar" | `ApresentacaoPage`, `Layout` | Textos e links |
-| UT-042 | 401 numa chamada com sessão aparentemente válida | `criarQueryClient` | Sessão recarregada → apresentação com `voltar` |
+| UT-042 | 401 numa query e numa chamada direta (Treino); 503 com o site aberto; cabeçalho com o site indisponível | `services/api`, `criarQueryClient`, `Layout` | Sessão recarregada → apresentação com `voltar` / aviso de indisponível; só o nome no cabeçalho |
 | FT-015 | Local com provedor falso: sem login, `/historico` → apresentação → login → `/historico`; API sem cookie → 401; sair → rotas voltam à apresentação; produção sem provedor → indisponível e 503; 360 px; console limpo | E2E (Playwright MCP) | Conforme §8.1–8.2 |
 
 ### 8.5 Checklist (CR-006)
 
-- [ ] Backend: `modo_de_acesso`, `exigir_acesso`, `acesso` na sessão, routers de conteúdo
-- [ ] Frontend: `RequerConta`, apresentação, indisponível, cabeçalho, 401 global, textos
-- [ ] CI: smoke test do Docker confere 503 em produção sem login
-- [ ] Testes BT-070 a BT-074, UT-040 a UT-042 + FT-015
+- [x] Backend: `modo_de_acesso`, `exigir_acesso`, `acesso` na sessão, routers de conteúdo (+ `Origin` nos POSTs)
+- [x] Frontend: `RequerConta`, apresentação, indisponível, cabeçalho, 401/503 em qualquer chamada, textos
+- [x] CI: smoke test do Docker confere 503 em produção sem login
+- [x] Testes BT-070 a BT-075, UT-040 a UT-042 + FT-015

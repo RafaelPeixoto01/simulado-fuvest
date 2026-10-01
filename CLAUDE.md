@@ -298,6 +298,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **CR-002** — Contraste e tokens (Concluído, 2026-09-30): tokens `optico-texto` (#b8405f, texto do impresso), `borda-campo` (#848e9c) e `acerto` #17703f, com contraste conferido por `tokens.test.ts`; título próprio por rota (`useTituloPagina`)
 
 ### Última Tarefa Implementada
+- CR-006 (2026-10-01): login obrigatório para usar o site (apresentação pública, API de conteúdo com sessão, produção sem login configurado fica indisponível)
 - CR-005 (2026-10-01): contas com Google e histórico sincronizado (Fase 3B), com login real em produção. A Fase 3 do roadmap está completa
 - CR-004 (2026-10-01): assuntos e painel "Meu desempenho" (Fase 3A); 2023–2025 classificadas por Claude e aprovadas pelo usuário. 2022 e 2020 já devem ser publicadas com assunto (V11). Próximo da Fase 3: CR da Fase 3B (contas)
 - CR-003 (2026-09-30): resultado, figura ampliada e banner do início
@@ -323,6 +324,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
 - **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
 - **O banco tem dados de usuário (CR-005).** `usuarios`, `sessoes` e `simulados_concluidos` não se reconstroem do git: backup antes de migration destrutiva (Deploy Guide §6); nunca rodar `alembic downgrade` da `003` em produção sem backup. `GOOGLE_CLIENT_SECRET` só na Railway — nunca no repositório, em log ou no chat.
+- **Login obrigatório (CR-006).** Sem as variáveis do Google, o site abre sem login fora de produção (modo `livre`: dev, testes, CI) e fica indisponível em produção (503). Rotas novas de conteúdo devem entrar num router com `exigir_acesso` (e `verificar_origem` se forem POST); páginas novas, dentro do `RequerConta`.
 - **Validar o login localmente com provedor falso.** O login real só roda em produção. Para o Playwright, subir o app com `app.state.provedor_google` trocado por um falso (mesma interface de `tests/contas.ProvedorFalso`; `url_autorizacao` devolve o próprio callback com um `code`), servindo o build na porta 8001 com `PUBLIC_URL=http://localhost:8001`, e navegar por `localhost` (não `127.0.0.1`)
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
 

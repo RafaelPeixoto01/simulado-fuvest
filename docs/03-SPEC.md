@@ -36,10 +36,10 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 |--------|------|------------|------|----------|------|
 | `GET` | `/api/health` | — | — | `{"status":"ok","provas":n}` | §3 abaixo |
 | `GET` | `/api/catalogo` | — | — | `CatalogoResponse` (com assuntos por disciplina — CR-004) (Acesso) | 02, 06 |
-| `POST` | `/api/simulados` | 30/min/IP | `Gerar*` (por `modo`) | `SimuladoResponse` (Acesso) | 02 |
+| `POST` | `/api/simulados` | 30/min/IP | `Gerar*` (por `modo`) | `SimuladoResponse` (Acesso, Origin) | 02 |
 | `GET` | `/api/questoes?ids=` | — | — | `QuestoesResponse` (Acesso) | 02 |
-| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) (Acesso) | 04, 06 |
-| `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) (Acesso) | 05 |
+| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) (Acesso, Origin) | 04, 06 |
+| `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) (Acesso, Origin) | 05 |
 | `GET` | `/api/auth/google?voltar=` | 20/min/IP | — | 302 para o Google (404 sem configuração) | 07 |
 | `GET` | `/api/auth/google/callback` | 20/min/IP | — | 302 para `voltar` + cookie de sessão, ou `/conta?erro=login` | 07 |
 | `GET` | `/api/sessao` | — | — | `SessaoResponse` com `acesso` (`no-store`) | 07 |
