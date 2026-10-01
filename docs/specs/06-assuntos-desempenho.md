@@ -1,10 +1,10 @@
 # Especificação Técnica — Assuntos e Desempenho
 
-**Versão:** 1.0
-**Data:** 2026-09-30
-**PRD Ref:** 01-PRD v2.0 (RF-005, RF-018, RF-022, RF-023, US-011, US-012, RN-007, RN-014, RN-015)
+**Versão:** 1.1
+**Data:** 2026-10-01
+**PRD Ref:** 01-PRD v3.0 (RF-005, RF-018, RF-022, RF-023, US-011, US-012, RN-007, RN-014, RN-015)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-002, ADR-004, ADR-009)
-**CR Ref:** CR-004 (Fase 3A do roadmap)
+**CR Ref:** CR-004 (Fase 3A do roadmap), CR-005 (o painel soma o histórico sincronizado; `specs/07`)
 
 ---
 
@@ -213,14 +213,14 @@ Cada disciplina com `assuntos` não vazio ganha, abaixo da barra, um `<details>`
 | Elemento | Conteúdo |
 |----------|----------|
 | Título | `h1` "Meu desempenho"; `useTituloPagina('Meu desempenho')` |
-| Aviso | "Estes números somam os simulados concluídos neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga o histórico." |
+| Aviso | Sem conta: "Estes números somam os simulados concluídos neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga o histórico." (+ convite para entrar com o Google, se o login estiver disponível). Com conta: "Estes números somam os simulados concluídos guardados na sua conta, em todos os dispositivos." (CR-005) |
 | Vazio | Sem nenhuma questão contada: `Vazio` com "Nenhum simulado concluído ainda." + link "Começar um simulado" (`/`) |
 | Resumo | "N simulado(s) · T questões · P% de acerto" + nota "Questões anuladas não entram na conta. Assuntos com menos de 5 questões aparecem como “poucas questões”." |
 | Disciplinas | Uma `section` por disciplina (da pior para a melhor): `h2` com o nome, "a de t (p%)" e a barra (igual à do resultado); abaixo, a lista dos assuntos (nome, "a de t (p%)", barra fina) e o selo "poucas questões" quando `poucas` |
 | Ações | Link "Ver histórico" |
 
 - O catálogo (`useCatalogo`) só fornece os nomes atuais; enquanto carrega ou se falhar, a página usa os nomes gravados no histórico (nunca bloqueia).
-- A lista vem de `listarHistorico()` na montagem (o painel não muda enquanto está aberto).
+- A lista vem de `useHistorico()` (CR-005): o `localStorage` sem conta ou o histórico sincronizado com conta. O painel se atualiza quando a sincronização termina.
 
 ### Navegação
 - `Layout`: link "Desempenho" (`/desempenho`) antes de "Histórico" no cabeçalho, com o mesmo estilo de `NavLink` ativo. Abaixo de 640 px os dois links ficam empilhados, alinhados à direita (lado a lado estouravam 320 px).

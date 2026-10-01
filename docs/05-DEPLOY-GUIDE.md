@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.1
-**Data:** 2026-09-30
-**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-001, ADR-002, ADR-008, ADR-009, §9)
+**Versão:** 1.2
+**Data:** 2026-10-01
+**Arquitetura Ref:** 02-ARCHITECTURE v1.5 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, §9)
 
 ---
 
@@ -53,8 +53,11 @@ Não existe arquivo `.env`: todo default é local e seguro (SQLite). Produção 
 | `DATA_DIR` | Não | `/app/data/provas` (Dockerfile) | Pacotes e figuras |
 | `STATIC_DIR` | Não | `/app/backend/static` (Dockerfile) | Build do SPA |
 | `PORT` | Não | Injetada pela Railway | |
+| `GOOGLE_CLIENT_ID` | Para o login | ID do cliente OAuth (seção 3.1) | Sem ele (ou sem o segredo), o login fica desligado e "Entrar" some (CR-005) |
+| `GOOGLE_CLIENT_SECRET` | Para o login | Segredo do cliente OAuth | **Único segredo do projeto.** Definir só na Railway; nunca no repositório, em log ou no chat |
+| `PUBLIC_URL` | Para o login | `https://simulado-fuvest-production.up.railway.app` | Sem barra final. Monta o `redirect_uri` e é o único `Origin` aceito nos `POST`/`DELETE` com cookie |
 
-Não há segredos no MVP (sem autenticação nem integrações pagas).
+Trocar o domínio exige atualizar `PUBLIC_URL` **e** o URI de redirecionamento do cliente OAuth (seção 3.1).
 
 ---
 
@@ -74,6 +77,30 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 
 > Se a Railway não enxergar o repositório, o app da Railway no GitHub foi instalado só para repositórios selecionados: incluir `simulado-fuvest` em GitHub → Settings → Applications → Railway.
 
+### 3.1 Login com Google (uma vez, manual — CR-005)
+
+O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"; estes passos são feitos no console (https://console.cloud.google.com), com a conta do curador.
+
+1. **Projeto:** criar um projeto "Simulado Fuvest" (ou usar um existente).
+2. **Google Auth Platform → Branding (tela de consentimento):** nome do app "Simulado Fuvest"; e-mail de suporte; página inicial `https://simulado-fuvest-production.up.railway.app`; política de privacidade `https://simulado-fuvest-production.up.railway.app/privacidade`; domínio autorizado `simulado-fuvest-production.up.railway.app` (se o console recusar, `up.railway.app`).
+3. **Público-alvo:** tipo **Externo**, depois **Publicar app** ("Em produção"). Em "Teste", só os usuários de teste entram. Com os escopos `openid`, `email` e `profile`, que não são sensíveis, não há verificação do Google.
+4. **Acesso a dados:** nenhum escopo além de `openid`, `.../auth/userinfo.email` e `.../auth/userinfo.profile`.
+5. **Clientes → Criar cliente → Aplicativo da Web**, nome "Simulado Fuvest". **URIs de redirecionamento autorizados:**
+   - `https://simulado-fuvest-production.up.railway.app/api/auth/google/callback`
+   - `http://localhost:5173/api/auth/google/callback` (opcional: login real no ambiente local)
+
+   Nenhuma "origem JavaScript" é necessária (o site não usa o script do Google).
+6. **Variáveis na Railway**, rodadas pelo curador no próprio terminal (o segredo não passa pelo chat):
+   ```bash
+   railway variables -s simulado-fuvest \
+     --set GOOGLE_CLIENT_ID=<id>.apps.googleusercontent.com \
+     --set GOOGLE_CLIENT_SECRET=<segredo> \
+     --set PUBLIC_URL=https://simulado-fuvest-production.up.railway.app
+   ```
+   Definir variáveis dispara um redeploy. Sem o código do CR-005 no ar, elas são ignoradas.
+
+**Login local (opcional):** `GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=... DATABASE_URL="sqlite:///./local.db" .venv/Scripts/python -m uvicorn app.main:app --reload` + `npm run dev` (o `PUBLIC_URL` padrão já é `http://localhost:5173`). Sem as variáveis, o site local funciona sem login.
+
 ---
 
 ## 4. Checklist Pré-Deploy
@@ -82,7 +109,7 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 - [ ] Branch do CR mergeada em `master` com `--no-ff`
 - [ ] `pytest`, `ruff`, `tsc`, `eslint`, `vitest` verdes (o hook de commit já exige)
 - [ ] CI verde no push (`gh run watch`): jobs backend, frontend e docker
-- [ ] Nenhum `.env`, credencial ou `data/_cache/` no commit
+- [ ] Nenhum `.env`, credencial ou `data/_cache/` no commit (o `GOOGLE_CLIENT_SECRET` só existe na Railway)
 
 ### 4.2 Conteúdo (prova nova ou correção de questão)
 - [ ] Branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`)
@@ -112,9 +139,11 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 | Prova publicada com erro | `git revert` do commit do pacote (ou corrigir o `prova.yaml`) + push: a próxima sincronização deixa o banco igual ao repositório |
 | Migration precisa reverter | Backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade -1` (roda **dentro** do container, com a URL interna do banco) → reverter o código |
 | Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` (inclui taxonomia inválida: `TaxonomiaInvalida` no log da sincronização) |
+| Desligar o login sem reverter código (CR-005) | `railway variables -s simulado-fuvest --remove GOOGLE_CLIENT_ID`: "Entrar" some e os navegadores conectados voltam ao histórico local; contas e históricos ficam no banco |
+| Reverter o CR-005 (contas) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. **Não** rodar `alembic downgrade` da `003` sem backup: ele apaga contas e históricos |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
 
-O banco de questões é descartável: ele é reconstruído a cada start a partir de `data/provas`. Só `reportes` e `estatisticas_geracao` são dados próprios do banco.
+O banco de questões é descartável: ele é reconstruído a cada start a partir de `data/provas`. Os dados próprios do banco são `reportes`, `estatisticas_geracao` e, desde o CR-005, **as contas**: `usuarios`, `sessoes` e `simulados_concluidos`, que não podem ser reconstruídas.
 
 ---
 
@@ -128,7 +157,7 @@ pg_dump -Fc "<DATABASE_PUBLIC_URL>" > backup_$(date +%Y%m%d_%H%M%S).dump
 pg_restore --clean --if-exists -d "<DATABASE_PUBLIC_URL>" backup_AAAAMMDD_HHMMSS.dump
 ```
 
-Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instalado nesta máquina hoje**. Obrigatório antes de migration destrutiva. O que se perderia sem backup é pouco: só `reportes` e `estatisticas_geracao`, porque as questões são reconstruídas do git a cada start.
+Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instalado nesta máquina hoje**. Obrigatório antes de migration destrutiva. Desde o CR-005, o banco guarda contas e históricos de estudantes, e perdê-los é perder dados de usuários: além do backup manual antes de migrations, ligar os backups do volume do Postgres na Railway (Postgres → Backups, conforme o plano). O arquivo de backup tem dado pessoal: guardar fora do repositório e apagar quando não for mais necessário.
 
 ---
 
@@ -139,6 +168,8 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 - [ ] Prova completa ou de um ano: gerar, responder, recarregar (respostas mantidas), finalizar, resultado
 - [ ] Resultado com "Ver por assunto" e `/desempenho` somando o histórico (CR-004)
 - [ ] Treino: resposta imediata
+- [ ] Conta (CR-005): `GET /api/sessao` → `login_disponivel: true`; "Entrar" → Google → volta logado com o primeiro nome no cabeçalho; o histórico aparece em outro navegador depois de entrar; "Sair" limpa o histórico do navegador
+- [ ] Sem conta: nenhum cookie é criado ao navegar (DevTools → Application → Cookies)
 - [ ] Figuras carregam (`/figuras/AAAA/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 
@@ -186,3 +217,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 |------|-------|-----------|
 | 2026-09-30 | Claude | Documento criado (v1.0) — T-026 |
 | 2026-09-30 | Claude | v1.1 — CR-004: assunto obrigatório na publicação, checklist da taxonomia, rollback conjunto código + conteúdo, verificação dos assuntos |
+| 2026-10-01 | Claude | v1.2 — CR-005: variáveis do login (`GOOGLE_*`, `PUBLIC_URL`), cliente OAuth no Google Cloud (§3.1), backup com dados de usuário, rollback e verificação das contas |
