@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.4
-**Data:** 2026-09-30
-**PRD Ref:** 01-PRD v2.0
-**CR Ref:** CR-001, CR-002, CR-003, CR-004
+**Versão:** 1.5
+**Data:** 2026-10-01
+**PRD Ref:** 01-PRD v3.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005
 
 ---
 
@@ -16,13 +16,14 @@
 | Estilização | Tailwind CSS | 4.3 | Mesma stack; mobile-first (RNF-002) |
 | State/Fetch | TanStack Query | 5.104 | Cache das chamadas à API (catálogo, questões) |
 | Routing | react-router-dom | 7.18 | Rotas do SPA |
-| Estado local | Context + reducer + `localStorage` | — | Simulado em andamento e histórico só no navegador (RN-012, ADR-004) |
+| Estado local | Context + reducer + `localStorage` | — | Simulado em andamento só no navegador; histórico no navegador e, com conta, espelhado do servidor (RN-012, ADR-004, ADR-011) |
+| Login | Google OAuth 2.0 / OpenID Connect (code + PKCE) com `urllib` da stdlib | — | Login opcional por redirecionamento, sem script de terceiros nem dependência nova (ADR-010, CR-005) |
 | Backend | Python + FastAPI + uvicorn | Python 3.12, FastAPI 0.142, uvicorn 0.54 | Mesma stack; Python é o ecossistema natural para ler PDF |
 | ORM | SQLAlchemy (síncrono) | 2.1 | Mesma stack; colunas JSON portáveis entre SQLite e Postgres |
 | Banco de Dados | PostgreSQL (prod) + SQLite (dev/testes) | — | Postgres da Railway; SQLite local e in-memory nos testes |
 | Migrations | Alembic | 1.20 | Schema só via migration, nunca `create_all()` |
 | Validação | Pydantic | 2.13 | Schemas da API **e** do pacote de revisão (`prova.yaml`) |
-| Rate limit | slowapi | 0.1 | Limite por IP em `POST /api/reportes` e `POST /api/simulados` (RNF-004) |
+| Rate limit | slowapi | 0.1 | Limite por IP em `POST /api/reportes`, `POST /api/simulados`, `POST /api/correcoes`, no login e no histórico da conta (RNF-004) |
 | Pacote de revisão | PyYAML | 6.0 | Formato editável à mão pelo curador (RF-004) |
 | Leitura de PDF | pdfplumber (+ pypdfium2) | 0.11 / 5.13 | Texto com coordenadas, imagens embutidas e renderização de regiões; licenças MIT/Apache (ADR-003) |
 | Imagens | Pillow | 12.3 | Conversão das figuras para WebP otimizado (RNF-001) |
@@ -39,7 +40,7 @@
 Monorepo com dois subsistemas que compartilham o mesmo modelo de dados:
 
 1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009).
-2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. O servidor não guarda nenhum estado do estudante: gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento e o histórico vivem no `localStorage`.
+2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. Gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento vive no `localStorage`. O histórico também vive no `localStorage`; para quem entra com a conta Google (opcional, ADR-010), ele é guardado também no servidor, nas tabelas de conta, e o navegador vira um espelho dele (ADR-011, CR-005).
 
 ```mermaid
 graph TD
@@ -61,6 +62,8 @@ graph TD
 
     Browser[Navegador do estudante] -->|HTTPS| API
     Browser --> LS[(localStorage: simulado em andamento + histórico)]
+    Browser -.->|login opcional: redirecionamento| Google[Google OAuth / OpenID Connect]
+    API -.->|troca do código| Google
 ```
 
 **Fluxo de um simulado:**
@@ -80,6 +83,11 @@ sequenceDiagram
     API->>DB: busca gabarito + disciplinas
     API-->>E: resultado por questão + por disciplina + nota
     E->>LS: grava no histórico, limpa o simulado em andamento
+    opt com conta (CR-005)
+        E->>API: POST /api/historico {entradas pendentes}
+        API->>DB: grava (máx. 50 por conta)
+        API-->>E: histórico da conta (vira o espelho local)
+    end
 ```
 
 ---
@@ -107,15 +115,17 @@ Simulado Fuvest/
 │   ├── requirements-dev.txt        # -r dos dois + pytest, httpx, ruff, pip-audit
 │   ├── app/
 │   │   ├── main.py                 # app, middlewares, rota de figuras, fallback do SPA
-│   │   ├── config.py               # env vars (DATABASE_URL, DATA_DIR, ENVIRONMENT, ALLOWED_ORIGINS)
+│   │   ├── config.py               # env vars (DATABASE_URL, DATA_DIR, ENVIRONMENT, ALLOWED_ORIGINS, GOOGLE_*, PUBLIC_URL)
 │   │   ├── database.py             # engine/sessão; postgres:// -> postgresql+psycopg://
 │   │   ├── models.py               # SQLAlchemy
 │   │   ├── schemas.py              # Pydantic da API
 │   │   ├── disciplinas.py          # enum das 8 disciplinas + rótulos
 │   │   ├── rate_limit.py           # slowapi
 │   │   ├── security_headers.py     # middleware de headers HTTP
-│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health
-│   │   ├── services/               # catalogo, geracao, correcao, estatisticas
+│   │   ├── autenticacao.py         # cookies de sessão e de login, PKCE, caminho de volta (CR-005)
+│   │   ├── dependencias.py         # sessão do banco, taxonomia, usuário da sessão, verificação de Origin
+│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, auth, conta, historico
+│   │   ├── services/               # catalogo, geracao, correcao, estatisticas, google (OIDC), contas, historico
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
 │   │       ├── schema.py           # modelo Pydantic do prova.yaml
 │   │       ├── leitura.py          # carregar/salvar YAML
@@ -139,15 +149,18 @@ Simulado Fuvest/
     └── src/
         ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001), queryClient.ts, index.css (tokens @theme; contraste conferido por tokens.test.ts — CR-002), types.ts
         ├── services/api.ts         # cliente fetch + ApiError (código/dados do erro de domínio)
-        ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1)
+        ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1, marca da conta),
+        │                           #   sincronizacao.ts (espelho da conta — ADR-011)
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
-        │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina
-        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, estilos.ts
+        │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina,
+        │                           #   useSessao, useHistorico, useConta (CR-005)
+        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle, estilos.ts
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
-        ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004), NaoEncontrada
+        ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
+        │                           #   Conta, Privacidade (CR-005), NaoEncontrada
         ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
@@ -156,7 +169,7 @@ Simulado Fuvest/
 
 ## 4. Modelagem de Dados
 
-O banco guarda só o que é **derivado do repositório** (provas, textos-base, questões), mais duas tabelas escritas em runtime (reportes e estatística anônima). Não há tabela de usuário nem de resultados (RN-012). A taxonomia de assuntos não tem tabela: é lida do arquivo (ADR-009).
+O banco guarda o que é **derivado do repositório** (provas, textos-base, questões), duas tabelas anônimas escritas em runtime (reportes e estatística) e, desde o CR-005, as **tabelas de conta** (usuários, sessões e simulados concluídos), que só têm linhas para quem entra com o Google (RN-012, RN-016). A taxonomia de assuntos não tem tabela: é lida do arquivo (ADR-009). As tabelas de conta são os únicos dados do banco que não podem ser reconstruídos do git: elas entram no backup (Deploy Guide §6).
 
 ```mermaid
 erDiagram
@@ -200,9 +213,32 @@ erDiagram
         string modo PK
         int total
     }
+    USUARIOS {
+        int id PK
+        string google_sub UK
+        string email
+        string nome
+        datetime criado_em
+        datetime ultimo_acesso_em
+    }
+    SESSOES {
+        string token_hash PK
+        int usuario_id FK
+        datetime criado_em
+        datetime expira_em
+    }
+    SIMULADOS_CONCLUIDOS {
+        int usuario_id PK, FK
+        string id PK
+        bigint finalizado_em_ms
+        json dados
+        datetime recebido_em
+    }
     PROVAS ||--o{ QUESTOES : "contém"
     PROVAS ||--o{ TEXTOS_BASE : "contém"
     TEXTOS_BASE ||--o{ QUESTOES : "é base de"
+    USUARIOS ||--o{ SESSOES : "tem"
+    USUARIOS ||--o{ SIMULADOS_CONCLUIDOS : "guarda"
 ```
 
 ### Detalhamento das Entidades
@@ -257,6 +293,33 @@ erDiagram
 | modo | varchar(12) | PK (composta) | `completa`, `personalizado`, `ano`, `treino` |
 | total | int | NOT NULL | Contador (métrica anônima do PRD §2) |
 
+#### usuarios (CR-005)
+| Campo | Tipo | Restrições | Descrição |
+|-------|------|------------|-----------|
+| id | int | PK, autoincremento | Exposto só ao próprio usuário (`/api/sessao`), como marca da conta no navegador |
+| google_sub | varchar(255) | NOT NULL, UNIQUE | Claim `sub` do Google: a identidade da conta |
+| email | varchar(320) | NOT NULL | Atualizado a cada login |
+| nome | varchar(200) | NULL | Claim `name`; atualizado a cada login |
+| criado_em | timestamptz | NOT NULL, default now | |
+| ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login |
+
+#### sessoes (CR-005)
+| Campo | Tipo | Restrições | Descrição |
+|-------|------|------------|-----------|
+| token_hash | varchar(64) | PK | SHA-256 (hex) do token do cookie; o token não é guardado (ADR-010) |
+| usuario_id | int | FK → usuarios.id, ON DELETE CASCADE, index | |
+| criado_em | timestamptz | NOT NULL, default now | |
+| expira_em | timestamptz | NOT NULL | 90 dias após a criação |
+
+#### simulados_concluidos (CR-005)
+| Campo | Tipo | Restrições | Descrição |
+|-------|------|------------|-----------|
+| usuario_id | int | PK (composta), FK → usuarios.id, ON DELETE CASCADE | |
+| id | varchar(64) | PK (composta) | `HistoricoEntry.id` (UUID do navegador): reenviar não duplica |
+| finalizado_em_ms | bigint | NOT NULL, índice `(usuario_id, finalizado_em_ms)` | Ordenação e limite de 50 por conta |
+| dados | JSON | NOT NULL | `HistoricoEntry` validado (`specs/07`), guardado como chegou; imutável |
+| recebido_em | timestamptz | NOT NULL, default now | |
+
 ### Blocos de conteúdo
 
 Enunciados, textos-base e alternativas são **listas de blocos**, iguais no YAML e no JSON do banco:
@@ -309,8 +372,9 @@ fisica:
 
 ### API
 - Todas as rotas sob `/api/` (exceto `/figuras/...` e o SPA)
-- Sem autenticação: não há dados de usuário no servidor (RNF-005)
-- Geração e correção **sem estado** no servidor (ADR-004); a única escrita pública é `POST /api/reportes`
+- Catálogo, geração, questões, correção, reportes e figuras **não exigem autenticação** e não leem a sessão
+- Autenticação só nas rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
+- Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
 - O gabarito **nunca** vai na resposta de geração/consulta de questões; só em `POST /api/correcoes`
 - O assunto também não aparece na questão pública (resolução); ele só vem no catálogo e na correção (RN-014, CR-004)
@@ -320,7 +384,9 @@ fisica:
 - Estado do servidor com TanStack Query; estado do simulado com reducer em Context, persistido no `localStorage` a cada ação
 - Todo acesso ao `localStorage` passa por `storage/*` com chave versionada (`simulado-fuvest:v1:*`) e `try/catch`: o site funciona mesmo com o storage bloqueado (sem persistência)
 - Tempo sempre derivado de timestamps (`Date.now()`), nunca de contadores de `setInterval` (RN-009)
-- Agregações que o servidor não faz (painel "Meu desempenho", RN-015) ficam em funções puras em `utils/`, testadas no Vitest, e recebem o histórico como entrada (o mesmo código servirá ao histórico sincronizado da Fase 3B)
+- Agregações que o servidor não faz (painel "Meu desempenho", RN-015) ficam em funções puras em `utils/`, testadas no Vitest, e recebem o histórico como entrada (com conta, o histórico sincronizado — CR-005)
+- Páginas leem o histórico só por `useHistorico` (sessão + sincronização, ADR-011), nunca direto do `localStorage`; o `Layout` também o chama, para o envio de pendentes acontecer em qualquer página
+- Login por navegação de página inteira (`<a href="/api/auth/google?voltar=...">`), nunca por `fetch`; o token da sessão nunca é visível ao JavaScript
 
 ### Estilo de Código
 - **Backend:** `ruff check` com as regras padrão + `I` (imports), configurado no `pyproject.toml`
@@ -335,6 +401,7 @@ fisica:
 |---------|-----------|--------------|--------------|
 | Acervo FUVEST (fuvest.br) | Download dos PDFs de prova e gabarito, **só pela CLI de ingestão** (nunca em runtime) | Nenhuma (público) | https://www.fuvest.br/acervo/ |
 | Railway | Hospedagem do container + PostgreSQL | Conta Railway | https://docs.railway.com |
+| Google (OAuth 2.0 / OpenID Connect) | Login opcional (CR-005): redirecionamento para `accounts.google.com` e troca do código em `oauth2.googleapis.com/token`; escopos `openid email profile` | Cliente OAuth "Aplicativo da Web" (`GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`) | https://developers.google.com/identity/openid-connect/openid-connect |
 
 ---
 
@@ -391,7 +458,7 @@ fisica:
   - Negativas: cada família nova custa desenvolvimento; figuras vetoriais e fórmulas dependem de recorte manual.
 
 ### ADR-004: Servidor sem estado do estudante
-- **Status:** Aceita
+- **Status:** Aceita; revista pelo ADR-011 (CR-005) só no histórico de quem entra com conta. Geração, correção e o simulado em andamento continuam sem estado no servidor
 - **Data:** 2026-09-29
 - **Contexto:** Público e sem login (PRD); o simulado precisa sobreviver a um recarregamento (US-005).
 - **Decisão:** `POST /api/simulados` devolve as questões sem gabarito e não grava nada além do contador anônimo. O SPA persiste IDs, respostas e timestamps no `localStorage` e, ao retomar, busca o conteúdo com `GET /api/questoes?ids=`. `POST /api/correcoes` recebe as respostas e devolve o resultado completo sem gravar nada. O histórico fica no `localStorage`.
@@ -448,6 +515,32 @@ fisica:
   - Positivas: taxonomia e classificação mudam juntas num commit, com diff, CI (`validar --todas`) e rollback via git; nenhuma tabela nova.
   - Negativas: a API depende de um arquivo em disco (como as figuras). Renomear um slug em uso exige reclassificar as questões no mesmo commit (a V11 acusa).
 
+### ADR-010: Login com Google por redirecionamento e sessão no banco
+- **Status:** Aceita
+- **Data:** 2026-10-01
+- **Contexto:** A Fase 3B (CR-005) traz login opcional, só com Google (decisão de 30/09). O site não tem segredos, cookies nem scripts de terceiros (CSP `script-src 'self'`), e o RNF-005 promete não rastrear quem não entra.
+- **Decisão:** OpenID Connect com *authorization code*, PKCE (S256) e `state`, conduzido pelo servidor. `GET /api/auth/google` guarda `state` e o *verifier* num cookie `HttpOnly` de 10 min e redireciona para o Google; o callback confere o `state`, troca o código no endpoint de token com `urllib` da stdlib e valida as *claims* do `id_token` (`iss`, `aud`, `exp`, `sub`). A assinatura não é verificada porque o token chega direto do Google por TLS, numa chamada autenticada com o segredo do cliente (OIDC Core §3.1.3.7). A sessão é um token aleatório (`token_urlsafe(32)`) num cookie `HttpOnly`, `SameSite=Lax`, `Path=/`, com `Secure` e o prefixo `__Host-` em produção, que dura 90 dias; o banco guarda só o SHA-256 do token. CSRF: `SameSite=Lax` + verificação do `Origin` em `POST`/`DELETE`. Sem `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` (ou, em produção, com `PUBLIC_URL` sem `https`, o que fica registrado no log), o login fica desligado: 404 e "Entrar" escondido. Desligar bloqueia só logins novos; as sessões existentes continuam valendo, e trocar o segredo não desconecta ninguém. O provedor é um objeto em `app.state.provedor_google`, substituível nos testes e na validação local.
+- **Alternativas Consideradas:**
+  - Google Identity Services (botão/One Tap no navegador): descartada, porque carrega um script do Google em todas as páginas (CSP mais aberta e o Google vendo quem não entrou), contra o RNF-005.
+  - Sessão como JWT assinado no cookie: descartada, porque exige `SECRET_KEY` e não permite encerrar a sessão no servidor (sair e excluir conta precisam invalidar na hora).
+  - Bibliotecas (Authlib, google-auth, PyJWT): descartadas, porque o fluxo usa duas chamadas HTTP simples e a stdlib basta, sem nova dependência para auditar.
+- **Consequências:**
+  - Positivas: nenhum script de terceiros; o token nunca fica acessível ao JavaScript; sair e excluir conta valem na hora; dev, CI e Docker funcionam sem segredo.
+  - Negativas: o banco passa a ter dado pessoal e entra no backup; o cliente OAuth no Google Cloud é configurado à mão (o console não tem CLI para cliente web); a validação local do login usa um provedor falso, e o login real só é exercitado em produção.
+
+### ADR-011: Histórico da conta com espelho local e marca da conta
+- **Status:** Aceita
+- **Data:** 2026-10-01
+- **Contexto:** Com conta, o histórico (até 50 simulados, D4 do CR-005) precisa aparecer em todos os dispositivos e o painel tem de somá-lo, sem reescrever as páginas que hoje leem o `localStorage`. O estudante pode concluir um simulado sem internet, e o computador pode ser compartilhado.
+- **Decisão:** o servidor guarda cada `HistoricoEntry` como foi montado no navegador, imutável, com o `id` do simulado como chave por usuário (`INSERT ... ON CONFLICT DO NOTHING`), e mantém os 50 mais recentes. O navegador com conta guarda um **espelho** do histórico da conta no `localStorage` e uma **marca** `{conta, ids}` com os ids que o servidor já confirmou. Sincronizar = enviar o que não está na marca (pendentes), receber a lista da conta e substituir o espelho por ela (+ as pendentes recusadas). Só sai do navegador o que está na marca: uma pendente nunca é apagada por sincronização. Marca de outra conta → as entradas dela saem do navegador sem ir para a nova conta. Sem sessão, o espelho é removido e as pendentes ficam. "Sair" faz o mesmo depois de enviar as pendentes, de modo que só as recusadas pelo servidor (que não existem em outro lugar) ficam no navegador. Sincronizar, sair, limpar e excluir passam por uma fila no navegador, uma operação por vez, para nenhuma sincronização regravar o que acabou de ser apagado. A agregação do painel (RN-015) continua no navegador, sobre a mesma lista.
+- **Alternativas Consideradas:**
+  - Ler o histórico direto da API quando houver conta (sem espelho): descartada, porque o resultado e o painel ficariam vazios sem rede e o fluxo de finalizar teria dois caminhos.
+  - Painel agregado no servidor: descartada, porque duplicaria a RN-015 em Python; o histórico já cabe inteiro no navegador (50 entradas, ~1 MB).
+  - Sincronização por data de modificação e marcas de exclusão por entrada: descartada, porque as entradas são imutáveis e a única exclusão é "limpar tudo"; a marca de ids basta.
+- **Consequências:**
+  - Positivas: páginas, resultado e painel leem uma lista só (`useHistorico`); funciona sem rede e com várias abas; limpar num dispositivo vale nos outros.
+  - Negativas: mudanças de outro dispositivo só aparecem na próxima sincronização (carga da página ou volta do foco, `staleTime` de 60 s); uma entrada que o servidor recusar fica só naquele navegador.
+
 ## 9. Deploy e Infraestrutura
 
 ### 9.1 Plataforma de Produção
@@ -486,8 +579,11 @@ graph LR
 | `DATA_DIR` | Não | `../data/provas` (relativo a `backend/`) | Diretório dos pacotes e figuras |
 | `ENVIRONMENT` | Não | `development` | `production` desliga docs OpenAPI e CORS de dev |
 | `ALLOWED_ORIGINS` | Não | `http://localhost:5173` | CORS, só em desenvolvimento |
+| `GOOGLE_CLIENT_ID` | Para o login | — | Cliente OAuth do Google (CR-005). Sem ele, o login fica desligado |
+| `GOOGLE_CLIENT_SECRET` | Para o login | — | **Segredo.** Só na Railway; nunca no repositório, em log ou no chat |
+| `PUBLIC_URL` | Para o login | `http://localhost:5173` | Origem pública do site, sem barra final: monta o `redirect_uri` do Google e é o único `Origin` aceito em `POST`/`DELETE` com cookie |
 
-Não há segredos no MVP (sem autenticação nem integrações pagas). **Não existe arquivo `.env`:** todas as variáveis têm default local seguro (SQLite) e produção as define na Railway, de modo que nenhum comando local atinge produção por acidente (ADR-008).
+O único segredo é o `GOOGLE_CLIENT_SECRET` (CR-005). **Não existe arquivo `.env`:** todas as variáveis têm default local seguro (SQLite, login desligado) e produção as define na Railway, de modo que nenhum comando local atinge produção por acidente (ADR-008).
 
 **Ambiente Python local:** `backend/.venv` próprio do projeto. O Python global da máquina tem as versões pinadas do Meu Controle (FastAPI 0.139, SQLAlchemy 2.0), que este projeto não pode alterar.
 
@@ -536,4 +632,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`.*

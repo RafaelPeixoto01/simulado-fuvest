@@ -1,6 +1,7 @@
 import { vi } from 'vitest'
 
-import type { Catalogo, Questao, Simulado } from '../types'
+import type { HistoricoEntry } from '../simulado/tipos'
+import type { Catalogo, Questao, Sessao, Simulado } from '../types'
 
 type Manipulador = (corpo: unknown, url: URL) => Response | Promise<Response>
 
@@ -8,12 +9,17 @@ export function json(status: number, corpo: unknown): Response {
   return new Response(JSON.stringify(corpo), { status, headers: { 'Content-Type': 'application/json' } })
 }
 
-/** Substitui o fetch global roteando por "METODO /caminho". Devolve o mock para inspeção. */
+/** Sem conta e com o login desligado: o padrão de todo teste que não fala de conta (CR-005). */
+export const SESSAO_ANONIMA: Sessao = { login_disponivel: false, usuario: null }
+
+/** Substitui o fetch global roteando por "METODO /caminho". Devolve o mock para inspeção.
+ *  `GET /api/sessao` responde SESSAO_ANONIMA, a menos que o teste a substitua. */
 export function instalarApiFalsa(rotas: Record<string, Manipulador>) {
+  const todas: Record<string, Manipulador> = { 'GET /api/sessao': () => json(200, SESSAO_ANONIMA), ...rotas }
   const falso = vi.fn(async (entrada: RequestInfo | URL, init?: RequestInit) => {
     const url = new URL(String(entrada), 'http://localhost')
     const chave = `${init?.method ?? 'GET'} ${url.pathname}`
-    const manipulador = rotas[chave]
+    const manipulador = todas[chave]
     if (!manipulador) return json(404, { detail: `sem rota falsa para ${chave}` })
     const corpo = init?.body ? JSON.parse(String(init.body)) : undefined
     return manipulador(corpo, url)
@@ -86,5 +92,29 @@ export function simuladoFalso(ids: string[], extra: Partial<Simulado> = {}): Sim
     disponiveis: ids.length,
     semente: 1,
     ...extra,
+  }
+}
+
+/** Entrada de histórico mínima e válida (1 questão de Física, acertada). */
+export function entradaFalsa(id: string, finalizadoEm: number): HistoricoEntry {
+  return {
+    versao: 1,
+    id,
+    modo: 'ano',
+    descricao: `Simulado ${id}`,
+    iniciadoEm: finalizadoEm - 1000,
+    finalizadoEm,
+    tempoGastoMs: 1000,
+    tempoLimiteS: 18000,
+    finalizadoPorTempo: false,
+    questaoIds: ['2099-001'],
+    resultado: {
+      itens: [{ questao_id: '2099-001', resposta: 'A', correta: 'A', anulada: false, acertou: true, disciplina: 'fisica' }],
+      total: 1,
+      acertos: 1,
+      percentual: 100,
+      por_disciplina: [],
+      ignoradas: [],
+    },
   }
 }

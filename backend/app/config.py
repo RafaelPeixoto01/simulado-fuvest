@@ -21,10 +21,19 @@ class Settings:
     static_dir: Path = field(default_factory=lambda: RAIZ_BACKEND / "static")
     environment: str = "development"
     allowed_origins: tuple[str, ...] = ("http://localhost:5173",)
+    # Login com Google (CR-005, ADR-010): sem os dois, o login fica desligado
+    google_client_id: str | None = None
+    google_client_secret: str | None = None  # segredo: so em variavel da Railway
+    # Origem publica do site: monta o redirect_uri e e o unico Origin aceito com cookie
+    public_url: str = "http://localhost:5173"
 
     @property
     def producao(self) -> bool:
         return self.environment == "production"
+
+    @property
+    def login_disponivel(self) -> bool:
+        return bool(self.google_client_id and self.google_client_secret)
 
     @classmethod
     def from_env(cls, env: Mapping[str, str] | None = None) -> "Settings":
@@ -41,4 +50,7 @@ class Settings:
                 if origens
                 else padrao.allowed_origins
             ),
+            google_client_id=env.get("GOOGLE_CLIENT_ID") or None,
+            google_client_secret=env.get("GOOGLE_CLIENT_SECRET") or None,
+            public_url=(env.get("PUBLIC_URL") or padrao.public_url).rstrip("/"),
         )

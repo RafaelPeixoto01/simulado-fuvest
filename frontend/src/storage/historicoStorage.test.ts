@@ -7,7 +7,6 @@ import {
   adicionarAoHistorico,
   limparHistorico,
   listarHistorico,
-  obterDoHistorico,
 } from './historicoStorage'
 
 function entrada(id: string): HistoricoEntry {
@@ -30,13 +29,11 @@ describe('historicoStorage (UT-020)', () => {
   beforeEach(() => localStorage.clear())
   afterEach(() => vi.restoreAllMocks())
 
-  it('mais recente primeiro e busca por id', () => {
+  it('mais recente primeiro', () => {
     adicionarAoHistorico(entrada('a'))
     adicionarAoHistorico(entrada('b'))
 
     expect(listarHistorico().map((e) => e.id)).toEqual(['b', 'a'])
-    expect(obterDoHistorico('a')?.id).toBe('a')
-    expect(obterDoHistorico('z')).toBeNull()
     expect(CHAVE_HISTORICO).toBe('simulado-fuvest:v1:historico')
   })
 

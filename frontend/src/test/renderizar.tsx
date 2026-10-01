@@ -12,10 +12,11 @@ export function renderizar(
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   })
+  const [pathname, busca] = rota.split('?')
   return render(
     <QueryClientProvider client={queryClient}>
       <SimuladoProvider>
-        <MemoryRouter initialEntries={[{ pathname: rota, state: estado }]}>{ui}</MemoryRouter>
+        <MemoryRouter initialEntries={[{ pathname, search: busca ? `?${busca}` : '', state: estado }]}>{ui}</MemoryRouter>
       </SimuladoProvider>
     </QueryClientProvider>,
   )

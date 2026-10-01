@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.2
-**Data:** 2026-09-30
-**PRD Ref:** 01-PRD v2.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014)
+**Versão:** 1.3
+**Data:** 2026-10-01
+**PRD Ref:** 01-PRD v3.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014, RN-016)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-005, ADR-009)
-**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`)
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`)
 
 ---
 
@@ -107,12 +107,12 @@ interface HistoricoEntry {
 **Finalizar no frontend** (manual ou por tempo):
 1. `corrigir({respostas: questaoIds.map(id => ({questao_id: id, resposta: respostas[id] ?? null}))})`.
 2. Montar o `HistoricoEntry` (`tempoGastoMs` = `decorridoMs` limitado a `tempoLimiteS*1000`).
-3. Gravar no histórico (mais recente primeiro; máximo 50; ao passar, remove o mais antigo).
+3. Gravar no histórico (mais recente primeiro; máximo 50; ao passar, remove o mais antigo). Depois, `invalidateQueries(['historico'])`: com conta, a entrada é enviada ao servidor na sincronização seguinte (`specs/07` §2.4, CR-005).
 4. `DESCARTAR` o simulado em andamento → navegar para `/resultado/{id}`.
 5. Se o histórico não puder ser gravado (storage indisponível), o resultado é passado pelo state da navegação e a página avisa que ele não ficará salvo.
 
 **ResultadoPage (`/resultado/:id`):**
-- Lê a entrada do histórico (ou do state da navegação). Não encontrada → "Resultado não encontrado neste navegador" + link para `/historico`.
+- Lê a entrada do state da navegação ou de `useHistorico` (CR-005). Não encontrada enquanto o histórico sincroniza → `Carregando`; depois → "Resultado não encontrado neste navegador" + link para `/historico` (sem conta e com login disponível, sugere entrar com o Google — `specs/07` §3).
 - `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`.
 - Ações: "Novo simulado" (Home), "Ver histórico".
 - **Ordem (CR-003, P1.7):** resumo → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
@@ -120,9 +120,10 @@ interface HistoricoEntry {
 - **Estado da revisão (D6):** `{indice, filtro, disciplina}` fica na página e é compartilhado pela folha e pela revisão (`revisao.ts`). Tocar numa questão da folha abre aquela questão; se ela não passa nos filtros atuais, eles voltam para "Todas". Trocar os filtros mantém a questão se ela continua visível, senão abre a primeira da lista. Navegar (folha, Anterior/Próxima) rola até a revisão (`scrollIntoView`) e foca o título da questão; trocar de filtro não, para o foco continuar no filtro.
 
 **HistoricoPage (`/historico`):**
-- Aviso fixo: "O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros."
+- Fonte: `useHistorico` (CR-005): o `localStorage` sem conta ou o espelho da conta.
+- Aviso sem conta: "O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros." (+ convite para entrar com o Google, se o login estiver disponível). Com conta: o histórico está na conta e aparece em todos os dispositivos (`specs/07` §3).
 - Lista (mais recente primeiro): data/hora (pt-BR), descrição, nota e percentual; clique → `/resultado/:id`.
-- "Limpar histórico" com confirmação. Vazio → "Nenhum simulado concluído ainda" + link para a Home.
+- "Limpar histórico" com confirmação; com conta, apaga na conta, em todos os dispositivos, e a confirmação diz isso (CR-005). Vazio → "Nenhum simulado concluído ainda" + link para a Home.
 - Treino **não** entra no histórico (PRD RF-012).
 - Link "Ver meu desempenho" (`/desempenho`, `specs/06`) acima da lista quando ela não está vazia (CR-004).
 
@@ -200,7 +201,7 @@ Ver `specs/03-resolucao.md` §4 e o fluxo de simulado em `02-ARCHITECTURE.md` §
 | 2 | Prova de um ano com anulada respondida errado | Conta como acerto; selo "Anulada" |
 | 3 | Questão removida da base antes da correção | Vai em `ignoradas`; total reduzido; aviso no resultado |
 | 4 | Histórico com 50 entradas + nova | Remove a mais antiga |
-| 5 | Abrir `/resultado/:id` em outro navegador | "Resultado não encontrado neste navegador" |
+| 5 | Abrir `/resultado/:id` em outro navegador | Sem conta: "Resultado não encontrado neste navegador". Com conta: aparece depois da sincronização (CR-005) |
 | 6 | Treino corrigindo 1 item | Mesmo endpoint; resposta com 1 item |
 | 7 | Questão escolhida na folha fora do filtro atual | Filtros voltam para "Todas" e a questão abre (CR-003) |
 | 8 | Filtro sem nenhuma questão | "Nenhuma questão com esse filtro"; a questão aberta não muda (CR-003) |

@@ -2,23 +2,33 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ConfirmDialog } from '../components/ConfirmDialog'
+import { ConviteConta } from '../components/ConviteConta'
 import { Vazio } from '../components/Estados'
 import { BOTAO_SECUNDARIO, LINK } from '../components/estilos'
-import { limparHistorico, listarHistorico } from '../storage/historicoStorage'
+import { useHistorico, useLimparHistorico } from '../hooks/useHistorico'
 import { formatarDataHora, formatarPercentual } from '../utils/format'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 
 export function HistoricoPage() {
   useTituloPagina('Histórico')
-  const [lista, setLista] = useState(listarHistorico)
+  const { entradas: lista, usuario, loginDisponivel } = useHistorico()
+  const limpar = useLimparHistorico()
   const [confirmando, setConfirmando] = useState(false)
 
   return (
     <div className="max-w-3xl">
       <h1 className="text-2xl font-bold sm:text-3xl">Histórico</h1>
-      <p className="mt-2 text-tinta-suave">
-        O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros.
-      </p>
+      {usuario ? (
+        <p className="mt-2 text-tinta-suave">
+          O histórico está guardado na sua conta ({usuario.email}) e aparece em todos os dispositivos em que você
+          entrar.
+        </p>
+      ) : (
+        <p className="mt-2 text-tinta-suave">
+          O histórico fica só neste navegador. Trocar de dispositivo ou limpar os dados do navegador apaga os registros.
+          {loginDisponivel && <ConviteConta />}
+        </p>
+      )}
       {lista.length > 0 && (
         <Link to="/desempenho" className={`${LINK} mt-3 inline-block`}>
           Ver meu desempenho
@@ -54,9 +64,19 @@ export function HistoricoPage() {
                 </li>
               ))}
             </ul>
-            <button type="button" className={`${BOTAO_SECUNDARIO} mt-6`} onClick={() => setConfirmando(true)}>
+            <button
+              type="button"
+              className={`${BOTAO_SECUNDARIO} mt-6`}
+              disabled={limpar.isPending}
+              onClick={() => setConfirmando(true)}
+            >
               Limpar histórico
             </button>
+            {limpar.isError && (
+              <p role="alert" className="mt-3 rounded-md bg-erro-claro px-3 py-2 text-erro">
+                Não foi possível limpar o histórico da conta. Tente novamente.
+              </p>
+            )}
           </>
         )}
       </div>
@@ -68,12 +88,13 @@ export function HistoricoPage() {
           perigoso
           onCancelar={() => setConfirmando(false)}
           onConfirmar={() => {
-            limparHistorico()
-            setLista([])
             setConfirmando(false)
+            limpar.mutate()
           }}
         >
-          Os resultados salvos neste navegador serão apagados.
+          {usuario
+            ? 'Os resultados serão apagados da sua conta, em todos os dispositivos.'
+            : 'Os resultados salvos neste navegador serão apagados.'}
         </ConfirmDialog>
       )}
     </div>

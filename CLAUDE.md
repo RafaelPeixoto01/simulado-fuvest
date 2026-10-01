@@ -268,6 +268,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 | Migrations     | Alembic                          | 1.20   |
 | Validação      | Pydantic                         | 2.13   |
 | Rate limit     | slowapi                          | 0.1    |
+| Login (CR-005) | Google OAuth 2.0 / OpenID Connect (code + PKCE), stdlib `urllib` | — |
 | Ingestão (PDF) | pdfplumber + pypdfium2 + Pillow  | 0.11 / 5.13 / 12.3 |
 | Pacotes        | PyYAML                           | 6.0    |
 | Lint (BE)      | ruff                             | 0.16   |
@@ -281,21 +282,23 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ## Contexto Atual do Projeto
 
 ### Documentos Existentes
-- [x] PRD (`/docs/01-PRD.md`) — v2.0 (MVP + Fase 3A, CR-004); roadmap: Fase 3B (contas: só Google, sync só do histórico) é o próximo CR da Fase 3
-- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.4, ADR-001 a ADR-009
-- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..06`
+- [x] PRD (`/docs/01-PRD.md`) — v3.0 (MVP + Fase 3A, CR-004 + Fase 3B, CR-005)
+- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.5, ADR-001 a ADR-011
+- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..07`
 - [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
-- [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — provisionamento via CLI, rollback, operação do curador
+- [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — v1.2: provisionamento via CLI, cliente OAuth do Google (§3.1), rollback, backup, operação do curador
 
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
+- **CR-005** — Contas com Google e histórico sincronizado, Fase 3B do roadmap (Em Implementação, 2026-10-01): login opcional por redirecionamento (OIDC + PKCE, sem script do Google — ADR-010); sessão em cookie `HttpOnly` com hash no banco; tabelas `usuarios`, `sessoes`, `simulados_concluidos` (migration 003); `/api/sessao`, `/api/historico`, `/api/conta`; navegador com conta = espelho da conta com marca de ids e fila de operações (ADR-011); `/conta` e `/privacidade`. Decisões D1–D4: ao entrar, o local vai para a conta; ao sair, sai do navegador; guarda nome e e-mail; limite 50. **Pendentes:** cliente OAuth no Google Cloud + variáveis na Railway (usuário, Deploy Guide §3.1) e login real em produção (FT-014)
 - **CR-004** — Assuntos e desempenho, Fase 3A do roadmap (Concluído, 2026-10-01): taxonomia `data/provas/assuntos.yaml` (Gate 1 aprovado; 11–14 assuntos por disciplina, 5 em Inglês), exatamente 1 assunto por questão e V11 bloqueante; `questoes.assunto` (migration 002); assuntos no catálogo e na correção; "Ver por assunto" no resultado e painel `/desempenho` (RN-015); CLI `ingestao assuntos`. Classificação de 2023–2025 aprovada no Gate 2 (01/10)
 - **CR-003** — Resultado, figura e início (Concluído, 2026-09-30): resultado na ordem "Por disciplina" → folha corrigida → revisão; folha clicável (grade de células no celular, bolinhas na barra lateral do desktop — D5 do CR-003); revisão uma questão por vez com filtros; figura ampliada ajustada à tela; banner do início com o tempo restante; "Provas na base" com aviso de nova aba. Com ele, a revisão de design de 30/09 fica coberta até o P2; faltam P3 e D4
 - **CR-002** — Contraste e tokens (Concluído, 2026-09-30): tokens `optico-texto` (#b8405f, texto do impresso), `borda-campo` (#848e9c) e `acerto` #17703f, com contraste conferido por `tokens.test.ts`; título próprio por rota (`useTituloPagina`)
 - **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão.
 
 ### Última Tarefa Implementada
+- CR-005 (2026-10-01): contas com Google e histórico sincronizado (Fase 3B), validado localmente com provedor falso; aguardando o cliente OAuth do Google (usuário) e o FT-014 em produção para concluir
 - CR-004 (2026-10-01): assuntos e painel "Meu desempenho" (Fase 3A); 2023–2025 classificadas por Claude e aprovadas pelo usuário. 2022 e 2020 já devem ser publicadas com assunto (V11). Próximo da Fase 3: CR da Fase 3B (contas)
 - CR-003 (2026-09-30): resultado, figura ampliada e banner do início
 - CR-002 (2026-09-30): contraste dos tokens e título por rota
@@ -319,6 +322,8 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR. Desde o CR-004 toda questão publicada precisa de um assunto da taxonomia da sua disciplina (V11). Renomear ou remover um slug de `assuntos.yaml` exige reclassificar as questões no mesmo commit, senão as provas saem do ar na sincronização.
 - **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
 - **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
+- **O banco tem dados de usuário (CR-005).** `usuarios`, `sessoes` e `simulados_concluidos` não se reconstroem do git: backup antes de migration destrutiva (Deploy Guide §6); nunca rodar `alembic downgrade` da `003` em produção sem backup. `GOOGLE_CLIENT_SECRET` só na Railway — nunca no repositório, em log ou no chat.
+- **Validar o login localmente com provedor falso.** O login real só roda em produção. Para o Playwright, subir o app com `app.state.provedor_google` trocado por um falso (mesma interface de `tests/contas.ProvedorFalso`; `url_autorizacao` devolve o próprio callback com um `code`), servindo o build na porta 8001 com `PUBLIC_URL=http://localhost:8001`, e navegar por `localhost` (não `127.0.0.1`)
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
 
 ---
@@ -367,4 +372,5 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | Arquivo editado por script Python fica com CRLF (Git avisa "CRLF will be replaced by LF") | `Path.write_text` no Windows traduz `\n` para `\r\n` | Gravar com `write_text(..., newline="\n")` (ou `write_bytes`) |
 | Saída de script Python com `�` (ou `UnicodeEncodeError`) no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | A CLI `python -m ingestao` já força UTF-8 (CR-004). Para outros scripts, só com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |
 | Heredoc do Bash recusado ("unexpected EOF while looking for matching `''") ou `\\n` virando quebra de linha | A ferramenta Bash interpreta parte do conteúdo de heredocs longos | Gravar o script Python num arquivo com a ferramenta Write e rodá-lo (`python script.py`) em vez de heredoc |
+| Login local volta para `/conta?erro=login` mesmo com o provedor falso | O cookie de login foi gravado em `127.0.0.1`, mas o `redirect_uri` (montado do `PUBLIC_URL`) aponta para `localhost`: hosts diferentes, o cookie não vai | Usar o mesmo host do `PUBLIC_URL` no navegador/curl (`http://localhost:8001`) — é o `state` em cookie funcionando (CR-005) |
 | `prova.yaml` regravado por script fica com CRLF | `salvar_pacote` usa `write_text`, que no Windows grava `\r\n` | Depois de `salvar_pacote`, regravar trocando `\r\n` por `\n` (como em `data/_cache/curadoria/assuntos_2023_2025.py`); o Git normaliza no commit (`eol=lf`), mas a cópia de trabalho fica com diferença falsa |

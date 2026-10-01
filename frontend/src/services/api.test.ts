@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { ApiError, api } from './api'
+import { ApiError, api, urlEntrar } from './api'
 
 function respostaJson(status: number, corpo: unknown) {
   return new Response(JSON.stringify(corpo), {
@@ -70,5 +70,20 @@ describe('api', () => {
     const erro = await api.catalogo().catch((e: unknown) => e)
 
     expect(erro).toMatchObject({ status: 0, message: 'Sem conexão com o servidor. Verifique sua internet.' })
+  })
+
+  it('resposta 204 (sair, limpar, excluir) resolve sem corpo (UT-032)', async () => {
+    const fetchFalso = vi.fn().mockResolvedValue(new Response(null, { status: 204 }))
+    vi.stubGlobal('fetch', fetchFalso)
+
+    await expect(api.sair()).resolves.toBeUndefined()
+
+    const [url, init] = fetchFalso.mock.calls[0]
+    expect(url).toBe('/api/sessao')
+    expect(init.method).toBe('DELETE')
+  })
+
+  it('a URL de entrar leva o caminho de volta', () => {
+    expect(urlEntrar('/conta')).toBe('/api/auth/google?voltar=%2Fconta')
   })
 })

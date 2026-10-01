@@ -2,10 +2,10 @@
 
 **Versão:** 1.0
 **Data:** 2026-09-29
-**PRD Ref:** 01-PRD v2.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.4
-**Spec Ref:** 03-SPEC v1.4 (specs 01–06)
-**CR Ref:** CR-001, CR-002, CR-003, CR-004
+**PRD Ref:** 01-PRD v3.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.5
+**Spec Ref:** 03-SPEC v1.5 (specs 01–07)
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005
 
 ---
 
@@ -23,6 +23,7 @@
 | CR-002 | Contraste e tokens (pós-MVP, [CR](changes/CR-002-contraste-tokens.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-003 | Resultado, figura e início (pós-MVP, [CR](changes/CR-003-resultado-figura-inicio.md)) | CR-T-01 a CR-T-09 | Concluído |
 | CR-004 | Assuntos e desempenho — Fase 3A do roadmap ([CR](changes/CR-004-assuntos-desempenho.md), [spec 06](specs/06-assuntos-desempenho.md)) | CR-T-01 a CR-T-10 | Concluído |
+| CR-005 | Contas com Google e histórico sincronizado — Fase 3B do roadmap ([CR](changes/CR-005-contas-google.md), [spec 07](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-09 | Em andamento |
 
 > **Status:** Pendente / Em andamento / Concluído
 

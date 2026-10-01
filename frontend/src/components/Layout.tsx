@@ -1,11 +1,18 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
+import { useHistorico } from '../hooks/useHistorico'
+import { useSessao } from '../hooks/useSessao'
+import { primeiroNome } from '../utils/format'
 import { Marca } from './Marca'
 
 const itemNav = ({ isActive }: { isActive: boolean }) =>
   `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
 
 export function Layout() {
+  const { data: sessao } = useSessao()
+  // Com conta, envia as pendentes e traz o histórico da conta em qualquer página (ADR-011)
+  useHistorico()
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-linha bg-papel">
@@ -22,6 +29,11 @@ export function Layout() {
             <NavLink to="/historico" className={itemNav}>
               Histórico
             </NavLink>
+            {(sessao?.usuario || sessao?.login_disponivel) && (
+              <NavLink to="/conta" className={itemNav}>
+                {sessao.usuario ? primeiroNome(sessao.usuario.nome) : 'Entrar'}
+              </NavLink>
+            )}
           </nav>
         </div>
       </header>
@@ -39,7 +51,10 @@ export function Layout() {
           >
             acervo oficial da FUVEST
           </a>
-          .
+          .{' '}
+          <Link className="underline underline-offset-2 hover:text-tinta" to="/privacidade">
+            Privacidade
+          </Link>
         </p>
       </footer>
     </div>

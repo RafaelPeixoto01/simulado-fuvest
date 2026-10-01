@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
+import { Carregando } from '../components/Estados'
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, LINK } from '../components/estilos'
 import { DesempenhoDisciplinas } from '../components/resultado/DesempenhoDisciplinas'
 import { FolhaCorrigida } from '../components/resultado/FolhaCorrigida'
@@ -8,10 +9,10 @@ import { ResumoResultado } from '../components/resultado/ResumoResultado'
 import { abrirQuestao, REVISAO_INICIAL, trocarFiltros, type EstadoRevisao, type FiltroRevisao } from '../components/resultado/revisao'
 import { RevisaoQuestoes } from '../components/resultado/RevisaoQuestoes'
 import type { EstadoResultado } from '../hooks/useFinalizarSimulado'
+import { useHistorico } from '../hooks/useHistorico'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { useSimulado } from '../simulado/useSimulado'
-import { obterDoHistorico } from '../storage/historicoStorage'
 import type { Disciplina } from '../types'
 
 function Aviso({ children }: { children: string }) {
@@ -99,10 +100,12 @@ export function ResultadoPage() {
   useTituloPagina('Resultado')
   const { id = '' } = useParams()
   const estado = useLocation().state as EstadoResultado | null
-  // Recém-finalizado chega pelo state (funciona mesmo sem storage); depois, pelo histórico
+  // Recém-finalizado chega pelo state (funciona mesmo sem storage); depois, pelo histórico,
+  // que com conta pode vir de outro dispositivo depois da sincronização (CR-005)
+  const { entradas, sincronizando, usuario, loginDisponivel } = useHistorico()
   const entrada = useMemo(
-    () => (estado?.entrada?.id === id ? estado.entrada : obterDoHistorico(id)),
-    [estado, id],
+    () => (estado?.entrada?.id === id ? estado.entrada : (entradas.find((e) => e.id === id) ?? null)),
+    [estado, id, entradas],
   )
   const { simulado, despachar } = useSimulado()
 
@@ -112,11 +115,21 @@ export function ResultadoPage() {
   }, [entrada, simulado, despachar])
 
   if (!entrada) {
+    if (sincronizando) return <Carregando />
     return (
       <section className="max-w-prose">
         <h1 className="text-2xl font-bold">Resultado</h1>
         <p className="mt-2">Resultado não encontrado neste navegador.</p>
         <p className="mt-1 text-tinta-suave">O histórico fica guardado só no navegador em que o simulado foi feito.</p>
+        {!usuario && loginDisponivel && (
+          <p className="mt-1 text-tinta-suave">
+            Se você fez o simulado com a sua conta,{' '}
+            <Link to="/conta" className={LINK}>
+              entre com o Google
+            </Link>{' '}
+            para vê-lo aqui.
+          </p>
+        )}
         <Link to="/historico" className={`${LINK} mt-5 inline-block`}>Ver histórico</Link>
       </section>
     )

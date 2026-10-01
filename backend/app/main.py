@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -7,8 +9,22 @@ from slowapi.errors import RateLimitExceeded
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao
 from app.rate_limit import limite_excedido, limiter
-from app.routers import catalogo, correcoes, figuras, health, questoes, reportes, simulados
+from app.routers import (
+    auth,
+    catalogo,
+    conta,
+    correcoes,
+    figuras,
+    health,
+    historico,
+    questoes,
+    reportes,
+    simulados,
+)
 from app.security_headers import SecurityHeadersMiddleware
+from app.services.google import ProvedorGoogle
+
+log = logging.getLogger(__name__)
 
 
 def _servir_spa(app: FastAPI, settings: Settings) -> None:
@@ -29,6 +45,21 @@ def _servir_spa(app: FastAPI, settings: Settings) -> None:
         return FileResponse(static / "index.html")
 
 
+def _provedor_google(settings: Settings) -> ProvedorGoogle | None:
+    """None desliga o login (ADR-010). Em producao, PUBLIC_URL sem https (variavel esquecida
+    ou errada) quebraria o redirect_uri e a verificacao de Origin: o login fica desligado e
+    o motivo vai para o log, sem derrubar o site."""
+    if not settings.login_disponivel:
+        return None
+    if settings.producao and not settings.public_url.startswith("https://"):
+        log.error(
+            "Login com Google desligado: PUBLIC_URL precisa ser https em producao (%s)",
+            settings.public_url,
+        )
+        return None
+    return ProvedorGoogle(settings.google_client_id, settings.google_client_secret)
+
+
 def criar_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     sem_docs = {"docs_url": None, "redoc_url": None, "openapi_url": None}
@@ -38,6 +69,8 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
     app.state.settings = settings
     app.state.engine = engine
     app.state.fabrica_sessao = criar_fabrica_sessao(engine)
+    # Login com Google (ADR-010): None desliga o login; testes trocam por um provedor falso
+    app.state.provedor_google = _provedor_google(settings)
 
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, limite_excedido)
@@ -48,11 +81,13 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
         app.add_middleware(
             CORSMiddleware,
             allow_origins=list(settings.allowed_origins),
-            allow_methods=["GET", "POST"],
+            allow_methods=["GET", "POST", "DELETE"],
             allow_headers=["Content-Type"],
         )
 
-    for modulo in (health, catalogo, simulados, questoes, correcoes, reportes, figuras):
+    for modulo in (
+        health, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico, figuras
+    ):
         app.include_router(modulo.router)
     _servir_spa(app, settings)
     return app

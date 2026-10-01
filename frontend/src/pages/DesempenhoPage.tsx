@@ -1,12 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BarraPercentual, Placar } from '../components/BarraPercentual'
+import { ConviteConta } from '../components/ConviteConta'
 import { Vazio } from '../components/Estados'
 import { LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
+import { useHistorico } from '../hooks/useHistorico'
 import { useTituloPagina } from '../hooks/useTituloPagina'
-import { listarHistorico } from '../storage/historicoStorage'
 import { NOMES_DISCIPLINAS } from '../types'
 import { agregarDesempenho, MINIMO_QUESTOES_ASSUNTO, nomesDosAssuntos, type LinhaDisciplina } from '../utils/desempenho'
 import { formatarPercentual } from '../utils/format'
@@ -45,10 +46,11 @@ function SecaoDisciplina({ linha }: { linha: LinhaDisciplina }) {
   )
 }
 
-/** Painel "Meu desempenho" (RF-022, RN-015): soma o histórico deste navegador. */
+/** Painel "Meu desempenho" (RF-022, RN-015): soma o histórico deste navegador ou, com conta,
+ *  o da conta (CR-005). */
 export function DesempenhoPage() {
   useTituloPagina('Meu desempenho')
-  const [entradas] = useState(listarHistorico)
+  const { entradas, usuario, loginDisponivel } = useHistorico()
   // O catálogo só traz os nomes atuais dos assuntos: enquanto carrega (ou se falhar), valem os do histórico
   const { data: catalogo } = useCatalogo()
   const painel = useMemo(() => agregarDesempenho(entradas, nomesDosAssuntos(entradas, catalogo)), [entradas, catalogo])
@@ -56,10 +58,17 @@ export function DesempenhoPage() {
   return (
     <div className="max-w-3xl">
       <h1 className="text-2xl font-bold sm:text-3xl">Meu desempenho</h1>
-      <p className="mt-2 text-tinta-suave">
-        Estes números somam os simulados concluídos neste navegador. Trocar de dispositivo ou limpar os dados do
-        navegador apaga o histórico.
-      </p>
+      {usuario ? (
+        <p className="mt-2 text-tinta-suave">
+          Estes números somam os simulados concluídos guardados na sua conta, em todos os dispositivos.
+        </p>
+      ) : (
+        <p className="mt-2 text-tinta-suave">
+          Estes números somam os simulados concluídos neste navegador. Trocar de dispositivo ou limpar os dados do
+          navegador apaga o histórico.
+          {loginDisponivel && <ConviteConta />}
+        </p>
+      )}
 
       <div className="mt-6">
         {painel.total === 0 ? (

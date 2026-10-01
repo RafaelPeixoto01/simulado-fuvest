@@ -1,8 +1,9 @@
 """Schemas da API (specs/02, 04 e 05). O gabarito nunca aparece em schema de questao."""
 
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
-from pydantic import AfterValidator, BaseModel, Field, model_validator
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, model_validator
+from pydantic.alias_generators import to_camel
 
 from app.disciplinas import Disciplina
 from app.pacote.schema import Letra
@@ -203,3 +204,93 @@ class ReporteCreate(BaseModel):
 
 class ReporteCriado(BaseModel):
     id: int
+
+
+# --- Conta e historico sincronizado (CR-005, specs/07) ---
+
+
+class UsuarioPublico(BaseModel):
+    id: int
+    email: str
+    nome: str | None
+
+
+class SessaoResponse(BaseModel):
+    login_disponivel: bool
+    usuario: UsuarioPublico | None
+
+
+# Espelho do HistoricoEntry do navegador (specs/04 §2.2). extra="forbid" e limites de
+# tamanho: o servidor so guarda o que sabe ler, e nada maior que um simulado de 90 questoes
+Slug = Annotated[str, Field(pattern=r"^[a-z0-9-]+$", max_length=40)]
+Contagem = Annotated[int, Field(ge=0, le=90)]
+Percentual = Annotated[float, Field(ge=0, le=100)]
+Inteiro = Annotated[int, Field(ge=-(2**53), le=2**53)]
+Instante = Annotated[int, Field(ge=0, le=2**53)]  # epoch ms
+
+
+class _Estrito(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+
+class ItemHistorico(_Estrito):
+    questao_id: IdQuestao
+    resposta: Letra | None
+    correta: Letra | None
+    anulada: bool
+    acertou: bool
+    disciplina: Disciplina
+    assunto: Slug | None = None  # ausente nos resultados anteriores ao CR-004
+
+
+class AssuntoHistorico(_Estrito):
+    assunto: Slug
+    nome: Annotated[str, Field(min_length=1, max_length=60)]
+    total: Contagem
+    acertos: Contagem
+    percentual: Percentual
+
+
+class DisciplinaHistorico(_Estrito):
+    disciplina: Disciplina
+    total: Contagem
+    acertos: Contagem
+    percentual: Percentual
+    assuntos: Annotated[list[AssuntoHistorico], Field(max_length=20)] | None = None
+
+
+class ResultadoHistorico(_Estrito):
+    itens: Annotated[list[ItemHistorico], Field(max_length=90)]
+    total: Contagem
+    acertos: Contagem
+    percentual: Percentual
+    por_disciplina: Annotated[list[DisciplinaHistorico], Field(max_length=8)]
+    ignoradas: Annotated[list[IdQuestao], Field(max_length=90)]
+
+
+class EntradaHistorico(_Estrito):
+    """No JSON os campos sao camelCase, como no localStorage (alias)."""
+
+    model_config = ConfigDict(extra="forbid", alias_generator=to_camel)
+
+    versao: Literal[1]
+    id: Annotated[str, Field(pattern=r"^[A-Za-z0-9-]{1,64}$")]
+    modo: Literal["completa", "personalizado", "ano"]
+    descricao: Annotated[str, Field(min_length=1, max_length=200)]
+    iniciado_em: Instante
+    finalizado_em: Instante
+    tempo_gasto_ms: Inteiro
+    tempo_limite_s: Annotated[int, Field(ge=0, le=10**7)] | None
+    finalizado_por_tempo: bool
+    questao_ids: Annotated[list[IdQuestao], Field(min_length=1, max_length=90)]
+    resultado: ResultadoHistorico
+
+
+class HistoricoRequest(BaseModel):
+    # Validadas uma a uma no servico: uma entrada ruim nao trava as outras (specs/07 §2.4)
+    entradas: Annotated[list[dict[str, Any]], Field(min_length=1, max_length=50)]
+
+
+class HistoricoResponse(BaseModel):
+    entradas: list[dict[str, Any]]  # HistoricoEntry, do mais recente para o mais antigo
+    rejeitadas: list[str] = []

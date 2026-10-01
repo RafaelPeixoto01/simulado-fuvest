@@ -1,10 +1,11 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 import { api, type ApiError } from '../services/api'
 import type { HistoricoEntry, SimuladoEmAndamento } from '../simulado/tipos'
 import { adicionarAoHistorico } from '../storage/historicoStorage'
 import { decorridoMs } from '../utils/tempo'
+import { CHAVE_HISTORICO_QUERY } from './useHistorico'
 
 export interface EstadoResultado {
   entrada: HistoricoEntry
@@ -21,6 +22,7 @@ interface Opcoes {
  *  Se a correção falhar, nada é descartado: as respostas continuam salvas. */
 export function useFinalizarSimulado(simulado: SimuladoEmAndamento | null) {
   const navegar = useNavigate()
+  const queryClient = useQueryClient()
 
   const mutacao = useMutation<HistoricoEntry, ApiError, Opcoes>({
     mutationFn: async ({ porTempo }) => {
@@ -46,6 +48,9 @@ export function useFinalizarSimulado(simulado: SimuladoEmAndamento | null) {
     },
     onSuccess: (entrada, { expirouFora }) => {
       const salvo = adicionarAoHistorico(entrada)
+      // Com conta, a entrada nova (pendente) vai para o servidor na próxima sincronização,
+      // que a tela de resultado dispara ao montar o Layout (CR-005)
+      void queryClient.invalidateQueries({ queryKey: CHAVE_HISTORICO_QUERY })
       const estado: EstadoResultado = { entrada, naoSalvo: !salvo, expirouFora }
       // O descarte fica com a tela de resultado (ao montar): descartar aqui faria a
       // resolução, ainda montada, redirecionar para o início antes da navegação

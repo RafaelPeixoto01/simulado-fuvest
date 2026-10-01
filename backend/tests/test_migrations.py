@@ -5,7 +5,8 @@ from sqlalchemy import inspect
 from app.database import Base, criar_engine
 from tests.utils import aplicar_migrations
 
-TABELAS = {"provas", "textos_base", "questoes", "reportes", "estatisticas_geracao"}
+TABELAS_CONTA = {"usuarios", "sessoes", "simulados_concluidos"}
+TABELAS = {"provas", "textos_base", "questoes", "reportes", "estatisticas_geracao"} | TABELAS_CONTA
 
 
 def test_upgrade_head_cria_todas_as_tabelas(tmp_path):
@@ -50,3 +51,20 @@ def test_migration_002_acrescenta_e_remove_o_assunto(tmp_path):
     inspetor = inspect(engine)
     assert "assunto" not in {c["name"] for c in inspetor.get_columns("questoes")}
     assert "ix_questoes_assunto" not in {i["name"] for i in inspetor.get_indexes("questoes")}
+
+
+def test_migration_003_cria_e_remove_as_tabelas_de_conta(tmp_path):
+    """BT-047 (CR-005): 002 -> 003 -> 002, sem tocar nas tabelas anteriores."""
+    engine = criar_engine(f"sqlite:///{tmp_path / 'm.db'}")
+
+    aplicar_migrations(engine, "head")
+    inspetor = inspect(engine)
+    assert TABELAS_CONTA <= set(inspetor.get_table_names())
+    assert "ix_simulados_concluidos_usuario_finalizado" in {
+        i["name"] for i in inspetor.get_indexes("simulados_concluidos")
+    }
+
+    aplicar_migrations(engine, "002", downgrade=True)
+    restantes = set(inspect(engine).get_table_names())
+    assert TABELAS_CONTA.isdisjoint(restantes)
+    assert "questoes" in restantes

@@ -1,12 +1,20 @@
+import type { HistoricoEntry } from '../simulado/tipos'
 import type {
   Catalogo,
   Correcao,
   PedidoSimulado,
   QuestoesPorId,
   RespostaItem,
+  Sessao,
   Simulado,
   TipoReporte,
 } from '../types'
+
+/** Histórico da conta (CR-005): do mais recente para o mais antigo + ids recusados no envio. */
+export interface RespostaHistorico {
+  entradas: HistoricoEntry[]
+  rejeitadas: string[]
+}
 
 export class ApiError extends Error {
   readonly status: number
@@ -35,6 +43,7 @@ async function requisitar<T>(caminho: string, init?: RequestInit): Promise<T> {
     throw new ApiError(0, 'Sem conexão com o servidor. Verifique sua internet.')
   }
   if (resposta.ok) {
+    if (resposta.status === 204) return undefined as T // sair, limpar, excluir: sem corpo
     return (await resposta.json()) as T
   }
   let detalhe: unknown
@@ -55,6 +64,15 @@ function post<T>(caminho: string, corpo: unknown): Promise<T> {
   return requisitar<T>(caminho, { method: 'POST', body: JSON.stringify(corpo) })
 }
 
+function apagar(caminho: string): Promise<void> {
+  return requisitar<void>(caminho, { method: 'DELETE' })
+}
+
+/** O login é uma navegação de página inteira, nunca um fetch (ADR-010). */
+export function urlEntrar(voltar: string): string {
+  return `/api/auth/google?${new URLSearchParams({ voltar })}`
+}
+
 export const api = {
   catalogo: () => requisitar<Catalogo>('/api/catalogo'),
   gerarSimulado: (pedido: PedidoSimulado) => post<Simulado>('/api/simulados', pedido),
@@ -63,4 +81,11 @@ export const api = {
   corrigir: (respostas: RespostaItem[]) => post<Correcao>('/api/correcoes', { respostas }),
   reportar: (dados: { questao_id: string; tipo: TipoReporte; descricao?: string }) =>
     post<{ id: number }>('/api/reportes', dados),
+  // Conta (CR-005): o cookie de sessão vai sozinho (mesma origem)
+  sessao: () => requisitar<Sessao>('/api/sessao'),
+  sair: () => apagar('/api/sessao'),
+  historico: () => requisitar<RespostaHistorico>('/api/historico'),
+  enviarHistorico: (entradas: HistoricoEntry[]) => post<RespostaHistorico>('/api/historico', { entradas }),
+  limparHistoricoDaConta: () => apagar('/api/historico'),
+  excluirConta: () => apagar('/api/conta'),
 }
