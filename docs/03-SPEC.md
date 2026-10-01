@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-09-30
-**PRD Ref:** 01-PRD v1.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0
-**CR Ref:** CR-001, CR-002, CR-003
+**PRD Ref:** 01-PRD v2.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4
+**CR Ref:** CR-001, CR-002, CR-003, CR-004
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -12,7 +12,7 @@
 
 ## 1. Resumo
 
-MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros.
+MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho".
 
 ### Specs por feature
 
@@ -23,6 +23,7 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 | 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: rotas, Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
 | 04 | [Correção, Resultado e Histórico](specs/04-correcao-resultado.md) | RF-017–RF-020 | `POST /api/correcoes`, resultado por disciplina, folha corrigida clicável e revisão uma questão por vez (CR-003), histórico local |
 | 05 | [Reporte de Erro](specs/05-reportes.md) | RF-007, RF-021 | `POST /api/reportes`, modal, CLI de reportes |
+| 06 | [Assuntos e Desempenho](specs/06-assuntos-desempenho.md) | RF-005, RF-018, RF-022, RF-023 | Taxonomia `assuntos.yaml`, V11, `questoes.assunto`, assuntos no catálogo e na correção, CLI `assuntos`, "Ver por assunto" e painel `/desempenho` (CR-004) |
 
 ---
 
@@ -33,10 +34,10 @@ Nenhum endpoint exige autenticação (não há dados de usuário no servidor —
 | Método | Path | Rate limit | Body | Resposta | Spec |
 |--------|------|------------|------|----------|------|
 | `GET` | `/api/health` | — | — | `{"status":"ok","provas":n}` | §3 abaixo |
-| `GET` | `/api/catalogo` | — | — | `CatalogoResponse` | 02 |
+| `GET` | `/api/catalogo` | — | — | `CatalogoResponse` (com assuntos por disciplina — CR-004) | 02, 06 |
 | `POST` | `/api/simulados` | 30/min/IP | `Gerar*` (por `modo`) | `SimuladoResponse` | 02 |
 | `GET` | `/api/questoes?ids=` | — | — | `QuestoesResponse` | 02 |
-| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` | 04 |
+| `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) | 04, 06 |
 | `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) | 05 |
 | `GET` | `/figuras/{ano}/{arquivo}` | — | — | `image/webp` | §3 abaixo |
 | `GET` | `/*` (demais) | — | — | `index.html` (SPA) | §3 abaixo |
@@ -70,8 +71,8 @@ Nenhum endpoint exige autenticação (não há dados de usuário no servidor —
 | `Content-Security-Policy` | `default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'` |
 | `Strict-Transport-Security` | `max-age=31536000` (só em produção) |
 
-### 3.5 Migration inicial
-`001_schema_inicial` cria `provas`, `textos_base`, `questoes`, `reportes` e `estatisticas_geracao` conforme `02-ARCHITECTURE.md` §4. Testada com `upgrade head` + `downgrade base`.
+### 3.5 Migrations
+`001_schema_inicial` cria `provas`, `textos_base`, `questoes`, `reportes` e `estatisticas_geracao` conforme `02-ARCHITECTURE.md` §4. `002_assunto_questoes` (CR-004) acrescenta `questoes.assunto` e o índice `ix_questoes_assunto`. Testadas com `upgrade head` + `downgrade base`.
 
 ---
 
@@ -95,6 +96,7 @@ Nenhum endpoint exige autenticação (não há dados de usuário no servidor —
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.4 | 2026-09-30 | CR-004: spec 06 nova (assuntos e desempenho); spec 01 v1.1 (`assunto`, V11, taxonomia, `assuntos`), spec 02 v1.1 (assuntos no catálogo), spec 03 v1.4 (rota `/desempenho`), spec 04 v1.2 (correção por assunto, "Ver por assunto") |
 | 1.3 | 2026-09-30 | CR-003: spec 04 v1.1 (ordem do resultado, `FolhaCorrigida` em grade/bolhas, revisão uma por vez) e spec 03 v1.3 (banner do início, "Provas na base", figura ajustada à tela) |
 | 1.2 | 2026-09-30 | CR-002: spec 03 v1.2 — tokens de contraste (`optico-texto`, `borda-campo`, `acerto`) e título por rota |
 | 1.1 | 2026-09-30 | CR-001: spec 03 v1.1 — resolução em modo foco, barra inferior fixa, folha em colunas (desktop) e em painel (celular), pausa que esconde a questão |

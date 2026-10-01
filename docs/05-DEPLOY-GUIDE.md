@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.0
+**Versão:** 1.1
 **Data:** 2026-09-30
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-001, ADR-002, ADR-008, §9)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-001, ADR-002, ADR-008, ADR-009, §9)
 
 ---
 
@@ -86,6 +86,7 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 
 ### 4.2 Conteúdo (prova nova ou correção de questão)
 - [ ] Branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`)
+- [ ] Toda questão com disciplina **e assunto** da taxonomia `data/provas/assuntos.yaml` (V11, CR-004); revisar com `python -m ingestao assuntos --ano AAAA`
 - [ ] `python -m ingestao validar --ano AAAA` sem pendência bloqueante
 - [ ] `status: publicada` no `prova.yaml`
 - [ ] Conferido no site local: `python -m ingestao importar` + `npm run dev`
@@ -94,6 +95,10 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 ### 4.3 Migration
 - [ ] `upgrade head` e `downgrade -1` testados no SQLite local **e** no Postgres do CI (passo "Migrations no Postgres")
 - [ ] `downgrade()` implementado; se destrutiva, backup antes (seção 6)
+
+### 4.4 Taxonomia de assuntos (CR-004)
+- [ ] Mudou `data/provas/assuntos.yaml`? `python -m ingestao validar --todas` verde: renomear ou remover um slug em uso exige reclassificar as questões no mesmo commit (V11)
+- [ ] Taxonomia inválida em produção **não derruba o site**: a sincronização sai com erro antes de tocar o banco, o start falha e a Railway mantém o deploy anterior (ADR-009)
 
 > **Nunca aponte o banco local para produção.** Todos os comandos locais usam SQLite por padrão. O único comando que toca produção é `reportes`, e ele exige `--database-url` explícito (ADR-008).
 
@@ -106,7 +111,8 @@ railway domain -s simulado-fuvest                  # domínio *.up.railway.app
 | Código quebrou (sem migration) | Railway Dashboard → Deployments → "Redeploy" no deploy anterior; ou `git revert <hash>` + push |
 | Prova publicada com erro | `git revert` do commit do pacote (ou corrigir o `prova.yaml`) + push: a próxima sincronização deixa o banco igual ao repositório |
 | Migration precisa reverter | Backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade -1` (roda **dentro** do container, com a URL interna do banco) → reverter o código |
-| Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` |
+| Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` (inclui taxonomia inválida: `TaxonomiaInvalida` no log da sincronização) |
+| Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
 
 O banco de questões é descartável: ele é reconstruído a cada start a partir de `data/provas`. Só `reportes` e `estatisticas_geracao` são dados próprios do banco.
 
@@ -129,8 +135,9 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 ## 7. Verificação Pós-Deploy
 
 - [ ] `GET /api/health` → `{"status":"ok","provas":N}` com o N esperado de provas publicadas
-- [ ] Início carrega o catálogo (anos e questões por disciplina)
+- [ ] Início carrega o catálogo (anos e questões por disciplina); `GET /api/catalogo` traz `assuntos` em cada disciplina (CR-004)
 - [ ] Prova completa ou de um ano: gerar, responder, recarregar (respostas mantidas), finalizar, resultado
+- [ ] Resultado com "Ver por assunto" e `/desempenho` somando o histórico (CR-004)
 - [ ] Treino: resposta imediata
 - [ ] Figuras carregam (`/figuras/AAAA/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
@@ -178,3 +185,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | Data | Autor | Descrição |
 |------|-------|-----------|
 | 2026-09-30 | Claude | Documento criado (v1.0) — T-026 |
+| 2026-09-30 | Claude | v1.1 — CR-004: assunto obrigatório na publicação, checklist da taxonomia, rollback conjunto código + conteúdo, verificação dos assuntos |

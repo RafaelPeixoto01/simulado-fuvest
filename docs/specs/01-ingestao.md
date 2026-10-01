@@ -1,10 +1,10 @@
 # Especificação Técnica — Ingestão de Provas
 
-**Versão:** 1.0
-**Data:** 2026-09-29
-**PRD Ref:** 01-PRD v1.0 (RF-001 a RF-006, US-009, RN-001, RN-006, RN-007)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-002, ADR-003, ADR-006, ADR-008)
-**CR Ref:** —
+**Versão:** 1.1
+**Data:** 2026-09-30
+**PRD Ref:** 01-PRD v2.0 (RF-001 a RF-006, RF-023, US-009, US-012, RN-001, RN-006, RN-007, RN-014)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-002, ADR-003, ADR-006, ADR-008, ADR-009)
+**CR Ref:** CR-004 (assunto por questão, V11, taxonomia e comando `assuntos` — detalhe em `specs/06-assuntos-desempenho.md`)
 
 ---
 
@@ -30,7 +30,8 @@ CLI do curador (`python -m ingestao <comando>`, executada a partir de `backend/`
 | Criar | `backend/app/disciplinas.py` | Enum `Disciplina` (8 slugs) + rótulos em português |
 | Criar | `backend/app/pacote/schema.py` | Modelos Pydantic do pacote |
 | Criar | `backend/app/pacote/leitura.py` | `carregar_pacote(dir)`, `salvar_pacote(pacote, dir)`, `listar_pacotes(data_dir)` |
-| Criar | `backend/app/pacote/validacao.py` | `validar_pacote(pacote, dir_figuras) -> list[Pendencia]` |
+| Criar | `backend/app/pacote/validacao.py` | `validar_pacote(pacote, dir_figuras, taxonomia) -> list[Pendencia]` (a taxonomia entrou no CR-004) |
+| Criar (CR-004) | `backend/app/pacote/assuntos.py` | Taxonomia de assuntos: schema, `carregar_taxonomia`, `taxonomia_em_uso` (`specs/06` §2.2) |
 | Criar | `backend/app/pacote/sincronizar.py` | `sincronizar(session, data_dir, incluir_rascunhos=False) -> ResumoSincronizacao` + `__main__` |
 | Criar | `backend/ingestao/__main__.py`, `cli.py` | argparse com os subcomandos |
 | Criar | `backend/ingestao/baixar.py` | Download para `data/_cache/AAAA/` |
@@ -65,6 +66,7 @@ class TextoBase(BaseModel):
 class Questao(BaseModel):
     numero: int                    # 1..90
     disciplina: Disciplina | None = None
+    assunto: str | None = None     # slug da taxonomia da disciplina principal (CR-004; V11)
     disciplinas_secundarias: list[Disciplina] = []
     texto_base: str | None = None  # id "tbNN"
     enunciado: list[Bloco]
@@ -105,6 +107,7 @@ textos_base:
 questoes:
   - numero: 2
     disciplina: null
+    assunto: null
     disciplinas_secundarias: []
     texto_base: null
     enunciado:
@@ -127,7 +130,7 @@ questoes:
 ```python
 @dataclass(frozen=True)
 class Pendencia:
-    codigo: str            # "V01".."V10"
+    codigo: str            # "V01".."V11"
     questao: int | None    # None = pendência da prova
     mensagem: str
     bloqueante: bool
@@ -161,10 +164,11 @@ Registries (`layouts/__init__.py`, `gabarito/__init__.py`): `FAMILIAS: dict[int,
 | `extrair` | `--ano`, `[--forcar]` | Roda gabarito + layout da família do ano e grava `data/provas/AAAA/prova.yaml` (status `rascunho`) + `figuras/`. **Recusa** se `prova.yaml` já existir, a menos que receba `--forcar`, para proteger a revisão manual. Imprime o relatório de validação |
 | `preview` | `--ano`, `--pagina`, `[--grade 50]` | Renderiza a página do PDF em cache em `data/_cache/AAAA/preview-pNN.png`, com grade de coordenadas (em pontos PDF) a cada `--grade` pontos, para o curador achar a bbox de uma figura |
 | `recortar` | `--ano`, `--pagina`, `--bbox x0,y0,x1,y1`, `--nome qNNN-k` | Renderiza a região e grava `figuras/qNNN-k.webp`. **Não edita o YAML**: imprime o bloco `- figura: qNNN-k.webp` para o curador colar, preservando a formatação do arquivo |
-| `validar` | `--ano` ou `--todas` | Imprime o relatório. Exit 1 se houver pendência bloqueante em pacote `publicada` ou YAML inválido em qualquer pacote. Pacote `rascunho` só gera avisos |
-| `importar` | `[--incluir-rascunhos]` | Roda a sincronização no banco do `DATABASE_URL`. `--incluir-rascunhos` só é aceito com banco SQLite (recusa com erro caso contrário), para o curador ver no site local um rascunho já completo antes de publicá-lo |
+| `validar` | `--ano` ou `--todas` | Carrega a taxonomia (`data/provas/assuntos.yaml`; inválida ou ausente → exit 1) e imprime o relatório. Exit 1 se houver pendência bloqueante em pacote `publicada` ou YAML inválido em qualquer pacote. Pacote `rascunho` só gera avisos |
+| `importar` | `[--incluir-rascunhos]` | Roda a sincronização no banco do `DATABASE_URL`. `--incluir-rascunhos` só é aceito com banco SQLite (recusa com erro caso contrário), para o curador ver no site local um rascunho já completo antes de publicá-lo. Taxonomia inválida → exit 1 sem tocar o banco |
+| `assuntos` | `[--ano]` | Relatório da classificação por disciplina e assunto, para revisão (CR-004; formato em `specs/06` §2.5). Não toca o banco |
 
-**Pacotes sintéticos para desenvolvimento:** `backend/tests/fixtures/gerar_pacotes.py` gera, de forma determinística, pacotes válidos de anos fictícios (2098 e 2099), com 90 questões, textos-base, figuras placeholder, anuladas e todas as disciplinas. Esses pacotes alimentam os testes e o site local (`importar --data-dir tests/fixtures/provas`) antes de existir uma prova real curada.
+**Pacotes sintéticos para desenvolvimento:** `backend/tests/fixtures/gerar_pacotes.py` gera, de forma determinística, pacotes válidos de anos fictícios (2098 e 2099), com 90 questões, textos-base, figuras placeholder, anuladas e todas as disciplinas, além de uma taxonomia sintética (`assuntos.yaml`, 3 assuntos por disciplina) e um assunto em cada questão (CR-004). Esses pacotes alimentam os testes e o site local (`importar --data-dir tests/fixtures/provas`) antes de existir uma prova real curada.
 
 Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os testes.
 
@@ -177,7 +181,7 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
 4. Layout → `ResultadoExtracao`.
 5. Casar cada questão com o gabarito: letra → `resposta`; `"anulada"` → `anulada=True, resposta=None`; `None` → pendência "Marcação de gabarito não reconhecida".
 6. Gravar figuras (`figuras/`) e `prova.yaml` com `status: rascunho`.
-7. Imprimir o relatório de validação (todas as questões sairão com a pendência V05, sem disciplina, até a classificação).
+7. Imprimir o relatório de validação (todas as questões sairão com as pendências V05 e V11, sem disciplina e sem assunto, até a classificação). O YAML traz `assunto: null` em cada questão.
 
 **Parser `familia_2025` — prova** (heurísticas refinadas com as fixtures durante a implementação):
 1. Ignorar a capa e as páginas de instruções (sem marcadores de questão).
@@ -217,18 +221,20 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
 | V08 | `pendencias` vazia em todas as questões | Sim |
 | V09 | `disciplinas_secundarias` sem duplicatas e sem a principal | Sim |
 | V10 | Arquivo em `figuras/` não referenciado (órfão) | Não (aviso) |
+| V11 | `assunto` definido e presente na taxonomia da disciplina principal (RN-014, CR-004). Sem disciplina, só acusa a ausência do assunto | Sim |
 
 **Sincronizar (`app/pacote/sincronizar.py`)** — idempotente, em uma única transação:
-1. Listar `DATA_DIR/*/prova.yaml`; carregar e validar cada pacote.
+0. Carregar a taxonomia (`carregar_taxonomia(DATA_DIR)`). Inválida ou ausente → `TaxonomiaInvalida` **antes de tocar o banco**; `python -m app.pacote.sincronizar` sai com 1 e o start do container para (ADR-009, CR-004).
+1. Listar `DATA_DIR/*/prova.yaml`; carregar e validar cada pacote (com a taxonomia).
 2. Selecionar os pacotes **sem pendência bloqueante** com `status: publicada` (com `incluir_rascunhos`, também os `rascunho` sem pendência bloqueante, ou seja, completos mas ainda não publicados). YAML inválido ou pacote com pendência → ignorado, com log e o motivo (erro se `publicada`, informativo se `rascunho`).
-3. Para cada pacote selecionado: upsert em `provas`; apagar `textos_base` e `questoes` daquele ano e inserir de novo, com IDs `AAAA-NNN` e `AAAA-tbNN` (ADR-006).
+3. Para cada pacote selecionado: upsert em `provas`; apagar `textos_base` e `questoes` daquele ano e inserir de novo, com IDs `AAAA-NNN` e `AAAA-tbNN` (ADR-006) e o `assunto` de cada questão.
 4. Apagar de `provas` os anos que não estão entre os selecionados (cascade em questões e textos-base; `reportes` não são afetados).
 5. Retornar e logar `ResumoSincronizacao(sincronizadas=[anos], ignoradas={ano: motivo}, removidas=[anos])`.
-6. `python -m app.pacote.sincronizar`: exit 0 mesmo com pacotes ignorados (o CI já barra pacote inválido); exit 1 só em erro de banco.
+6. `python -m app.pacote.sincronizar`: exit 0 mesmo com pacotes ignorados (o CI já barra pacote inválido); exit 1 em erro de banco ou taxonomia inválida.
 
 ### 2.5 Banco de Dados
 
-Tabelas `provas`, `textos_base` e `questoes` conforme `02-ARCHITECTURE.md` §4, criadas na migration `001_schema_inicial` (junto com `reportes` e `estatisticas_geracao`). Índices: `questoes(prova_ano)`, `questoes(disciplina)`, `UNIQUE(questoes.prova_ano, questoes.numero)`.
+Tabelas `provas`, `textos_base` e `questoes` conforme `02-ARCHITECTURE.md` §4, criadas na migration `001_schema_inicial` (junto com `reportes` e `estatisticas_geracao`). Índices: `questoes(prova_ano)`, `questoes(disciplina)`, `UNIQUE(questoes.prova_ano, questoes.numero)`. A migration `002_assunto_questoes` (CR-004) acrescenta `questoes.assunto` (varchar 40, nullable) e o índice `ix_questoes_assunto`.
 
 ### 2.6 Validações da CLI
 
@@ -289,6 +295,8 @@ sequenceDiagram
 | 8 | Pacote removido do repositório | A próxima sincronização remove a prova e as questões; reportes antigos permanecem |
 | 9 | Ano sem família registrada | Erro listando os anos suportados |
 | 10 | `importar --incluir-rascunhos` com `DATABASE_URL` de Postgres | Recusa (ADR-008) |
+| 11 | `assuntos.yaml` ausente ou inválido | `validar`, `importar` e `assuntos` saem com 1; a sincronização do start aborta sem tocar o banco (CR-004) |
+| 12 | Slug renomeado na taxonomia sem reclassificar as questões | V11 acusa cada questão com o slug antigo; o pacote publicado não passa no CI (CR-004) |
 
 ---
 
@@ -309,6 +317,7 @@ sequenceDiagram
 | IT-011 | `extrair` com `prova.yaml` existente, sem `--forcar` | CLI | Exit ≠ 0; arquivo intacto |
 | IT-012 | `importar --incluir-rascunhos` com URL Postgres | CLI | Exit ≠ 0 com mensagem |
 | IT-013 | `recortar` com bbox fora da página | CLI | Exit ≠ 0 com mensagem |
+| IT-014 a IT-020 | Taxonomia, V11, `validar` com taxonomia, pacotes sintéticos, sincronização com assunto e com taxonomia inválida, comando `assuntos` | ver `specs/06` §6 | CR-004 |
 
 ---
 

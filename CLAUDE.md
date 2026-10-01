@@ -20,7 +20,8 @@
 | Frontend (dev) | `cd frontend && npm run dev` (porta 5173, proxy `/api` e `/figuras` → 8000) |
 | Testes backend | `cd backend && .venv/Scripts/python -m pytest` |
 | Lint backend | `cd backend && .venv/Scripts/python -m ruff check .` |
-| Validar pacotes | `cd backend && .venv/Scripts/python -m ingestao validar --todas` (ou `--ano AAAA`) |
+| Validar pacotes | `cd backend && .venv/Scripts/python -m ingestao validar --todas` (ou `--ano AAAA`) — valida também a taxonomia `data/provas/assuntos.yaml` |
+| Revisar assuntos | `cd backend && .venv/Scripts/python -m ingestao assuntos --ano AAAA` (classificação por disciplina e assunto, uma questão por linha; sem `--ano`, todos os pacotes) |
 | Dados sintéticos (dev) | `cd backend && .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos && .venv/Scripts/python -m ingestao importar --data-dir ../data/_cache/sinteticos` (provas fictícias 2098/2099 no `local.db`) |
 | Importar pacotes reais | `cd backend && .venv/Scripts/python -m ingestao importar` (usa `data/provas`; **o banco passa a espelhar o diretório** — provas fora dele são removidas) |
 | Testes frontend | `cd frontend && npm test` (Vitest) |
@@ -218,6 +219,7 @@ Simulado Fuvest/
 │   ├── changes/                #   Change Requests CR-XXX + INDEX.md
 │   └── templates/              #   Templates obrigatórios dos documentos
 ├── data/provas/AAAA/           # Pacotes de prova (prova.yaml + figuras/) — FONTE DA VERDADE das questões (ADR-002)
+├── data/provas/assuntos.yaml   # Taxonomia de assuntos por disciplina (ADR-009, CR-004)
 ├── data/_cache/                # PDFs baixados do acervo (gitignored)
 ├── backend/                    # FastAPI + SQLAlchemy + Alembic; app/pacote (schema/validação/sincronização); ingestao/ (CLI do curador)
 ├── frontend/                   # React + Vite + TS (SPA servido pelo FastAPI em produção)
@@ -279,20 +281,22 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ## Contexto Atual do Projeto
 
 ### Documentos Existentes
-- [x] PRD (`/docs/01-PRD.md`) — v1.0 aprovado em 2026-09-29
-- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.0, ADR-001 a ADR-008
-- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..05`
+- [x] PRD (`/docs/01-PRD.md`) — v2.0 (MVP + Fase 3A, CR-004); roadmap: Fase 3B (contas: só Google, sync só do histórico) é o próximo CR da Fase 3
+- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.4, ADR-001 a ADR-009
+- [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..06`
 - [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
 - [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — provisionamento via CLI, rollback, operação do curador
 
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
+- **CR-004** — Assuntos e desempenho, Fase 3A do roadmap (Em Implementação, 2026-10-01): taxonomia `data/provas/assuntos.yaml` (Gate 1 aprovado; 11–14 assuntos por disciplina, 5 em Inglês), exatamente 1 assunto por questão e V11 bloqueante; `questoes.assunto` (migration 002); assuntos no catálogo e na correção; "Ver por assunto" no resultado e painel `/desempenho` (RN-015); CLI `ingestao assuntos`. Classificação de 2023–2025 aprovada no Gate 2 (01/10)
 - **CR-003** — Resultado, figura e início (Concluído, 2026-09-30): resultado na ordem "Por disciplina" → folha corrigida → revisão; folha clicável (grade de células no celular, bolinhas na barra lateral do desktop — D5 do CR-003); revisão uma questão por vez com filtros; figura ampliada ajustada à tela; banner do início com o tempo restante; "Provas na base" com aviso de nova aba. Com ele, a revisão de design de 30/09 fica coberta até o P2; faltam P3 e D4
 - **CR-002** — Contraste e tokens (Concluído, 2026-09-30): tokens `optico-texto` (#b8405f, texto do impresso), `borda-campo` (#848e9c) e `acerto` #17703f, com contraste conferido por `tokens.test.ts`; título próprio por rota (`useTituloPagina`)
 - **CR-001** — Resolução: navegação, folha de respostas e pausa (Concluído, 2026-09-30). Revisão de design de 30/09 (canvas "Protótipo Simulado Fuvest", tela "Revisão de design · itens numerados"): `/simulado` em modo foco (fora do `Layout`), barra inferior fixa, folha em colunas no desktop e em painel no celular, pausa que esconde a questão.
 
 ### Última Tarefa Implementada
+- CR-004 (2026-10-01): assuntos e painel "Meu desempenho" (Fase 3A); 2023–2025 classificadas por Claude e aprovadas pelo usuário. 2022 e 2020 já devem ser publicadas com assunto (V11). Próximo da Fase 3: CR da Fase 3B (contas)
 - CR-003 (2026-09-30): resultado, figura ampliada e banner do início
 - CR-002 (2026-09-30): contraste dos tokens e título por rota
 - CR-001 (2026-09-30): resolução em modo foco, barra inferior, folha e pausa
@@ -312,7 +316,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **Não fabrique ferramentas.** Nunca invente ou adivinhe a existência de plugins, comandos CLI ou ferramentas. Se não tiver certeza, verifique a documentação primeiro. Se um comando falhar, reconheça o erro imediatamente.
 - **Planeje antes de codar.** Em tarefas complexas (3+ etapas), crie um plano TodoWrite detalhado antes de escrever qualquer código. Inclua: CR, arquivos a modificar, verificação de build, atualizações de docs, commit.
 - **Hook de qualidade ativo.** O hook `.claude/hooks/check-quality.js` intercepta `git commit` e executa os checks de `.claude/hooks/check-config.json` (pytest, ruff, tsc, eslint, vitest). Se o commit for bloqueado, corrija os erros antes de tentar novamente — **nunca use `--no-verify`**. Atenção: o hook dispara em qualquer comando Bash contendo a substring `git commit` (inclusive dentro de echo/printf ou de um JSON de simulação) — para simular o hook, passe o payload por arquivo (`node .claude/hooks/check-quality.js < payload.json`).
-- **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR.
+- **Conteúdo não é código.** Publicar prova nova ou corrigir questão reportada = branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote em `data/provas/` + CI verde (`validar --todas`), sem CR. Mudanças em parser/API/UI seguem o CR. Desde o CR-004 toda questão publicada precisa de um assunto da taxonomia da sua disciplina (V11). Renomear ou remover um slug de `assuntos.yaml` exige reclassificar as questões no mesmo commit, senão as provas saem do ar na sincronização.
 - **Ingestão sem IA (decisão do PRD).** O parser é determinístico por família de layout (`ingestao/layouts/`); o que ele não extrai vira `pendencias` no `prova.yaml` para o curador resolver.
 - **Deploy com `/deploy-railway`.** Push em `master` dispara o auto-deploy. O "Wait for CI" da Railway (toggle só no dashboard) é o gate; não há branch protection no GitHub, como no Meu Controle.
 - **Use `/sdd-pipeline` para novas features/CRs.** A skill é **global** (`C:\Users\Rafael\.claude\skills\sdd-pipeline\`): melhorias no pipeline devem ser feitas lá, não em cópia local.
@@ -361,4 +365,6 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 | Regex com `\b` virou backspace (`\x08`) ao editar via script Python em heredoc | Em string Python comum, `\b` é o caractere de controle backspace; o arquivo parecia certo mas o regex não casava | Editar regex com a ferramenta Edit ou com string raw (`r'...'`); conferir com `repr()` quando um Edit "não acha" o texto |
 | `npm install` avisa EBADENGINE do jsdom 30 | jsdom 30 exige Node ≥ 24.15; a máquina tem 24.11 | jsdom fixado em `^29.1` (Arquitetura §10) até atualizar o Node local |
 | Arquivo editado por script Python fica com CRLF (Git avisa "CRLF will be replaced by LF") | `Path.write_text` no Windows traduz `\n` para `\r\n` | Gravar com `write_text(..., newline="\n")` (ou `write_bytes`) |
-| Saída da CLI com `�` no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | Só acontece com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |
+| Saída de script Python com `�` (ou `UnicodeEncodeError`) no lugar de acentos/travessão | Python redirecionado (pipe) no Windows escreve em cp1252 | A CLI `python -m ingestao` já força UTF-8 (CR-004). Para outros scripts, só com pipe/redirecionamento: prefixar `PYTHONIOENCODING=utf-8`. No terminal interativo a saída é Unicode |
+| Heredoc do Bash recusado ("unexpected EOF while looking for matching `''") ou `\\n` virando quebra de linha | A ferramenta Bash interpreta parte do conteúdo de heredocs longos | Gravar o script Python num arquivo com a ferramenta Write e rodá-lo (`python script.py`) em vez de heredoc |
+| `prova.yaml` regravado por script fica com CRLF | `salvar_pacote` usa `write_text`, que no Windows grava `\r\n` | Depois de `salvar_pacote`, regravar trocando `\r\n` por `\n` (como em `data/_cache/curadoria/assuntos_2023_2025.py`); o Git normaliza no commit (`eol=lf`), mas a cópia de trabalho fica com diferença falsa |

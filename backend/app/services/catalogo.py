@@ -8,8 +8,9 @@ from sqlalchemy.orm import Session
 
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
 from app.models import Prova, Questao
+from app.pacote.assuntos import Taxonomia
 from app.pacote.validacao import TOTAL_QUESTOES
-from app.schemas import CatalogoResponse, DisciplinaCatalogo, ProvaCatalogo
+from app.schemas import AssuntoCatalogo, CatalogoResponse, DisciplinaCatalogo, ProvaCatalogo
 
 
 def distribuicao_completa(contagens_por_prova: list[dict[str, int]]) -> dict[str, int]:
@@ -38,15 +39,40 @@ def contagens_por_prova(sessao: Session) -> list[dict[str, int]]:
     return [dict(c) for _, c in sorted(por_prova.items())]
 
 
-def obter_catalogo(sessao: Session) -> CatalogoResponse:
+def _assuntos_catalogo(
+    taxonomia: Taxonomia | None, disciplina: Disciplina, por_assunto: Counter
+) -> list[AssuntoCatalogo]:
+    if taxonomia is None:
+        return []
+    return [
+        AssuntoCatalogo(
+            slug=a.slug, nome=a.nome, total_questoes=por_assunto[(disciplina.value, a.slug)]
+        )
+        for a in taxonomia.assuntos(disciplina)
+    ]
+
+
+def obter_catalogo(sessao: Session, taxonomia: Taxonomia | None) -> CatalogoResponse:
     provas = sessao.scalars(select(Prova).order_by(Prova.ano.desc())).all()
-    validas = Counter(
-        sessao.scalars(select(Questao.disciplina).where(Questao.anulada.is_(False)))
+    # Questoes nao anuladas por (disciplina, assunto): uma consulta serve as duas contagens
+    por_assunto = Counter(
+        (disciplina, assunto)
+        for disciplina, assunto in sessao.execute(
+            select(Questao.disciplina, Questao.assunto).where(Questao.anulada.is_(False))
+        )
     )
+    validas: Counter = Counter()
+    for (disciplina, _assunto), n in por_assunto.items():
+        validas[disciplina] += n
     total = sum(validas.values())
     disciplinas = sorted(
         (
-            DisciplinaCatalogo(slug=d, nome=NOMES_DISCIPLINAS[d], total_questoes=validas.get(d, 0))
+            DisciplinaCatalogo(
+                slug=d,
+                nome=NOMES_DISCIPLINAS[d],
+                total_questoes=validas.get(d, 0),
+                assuntos=_assuntos_catalogo(taxonomia, d, por_assunto),
+            )
             for d in Disciplina
         ),
         key=lambda d: d.nome,

@@ -49,3 +49,26 @@ def test_ano_sem_pacote_falha(tmp_path, capsys):
 def test_diretorio_sem_pacotes_passa(tmp_path, capsys):
     assert main(["validar", "--todas", "--data-dir", str(tmp_path / "vazio")]) == 0
     assert "Nenhum pacote" in capsys.readouterr().out
+
+
+def test_taxonomia_ausente_ou_invalida_falha(tmp_path, capsys):
+    """IT-016 (CR-004)."""
+    escrever_pacotes(tmp_path)
+    taxonomia = tmp_path / "assuntos.yaml"
+
+    taxonomia.write_text("fisica: [", encoding="utf-8")
+    assert main(["validar", "--todas", "--data-dir", str(tmp_path)]) == 1
+    taxonomia.unlink()
+    assert main(["validar", "--ano", "2098", "--data-dir", str(tmp_path)]) == 1
+    assert "Taxonomia" in capsys.readouterr().err
+
+
+def test_publicada_sem_assunto_falha_com_v11(tmp_path, capsys):
+    """IT-015 pela CLI: o CI barra pacote publicado sem assunto."""
+    d2098, _ = escrever_pacotes(tmp_path)
+    pacote = carregar_pacote(d2098)
+    pacote.questoes[0].assunto = None
+    salvar_pacote(pacote, d2098)
+
+    assert main(["validar", "--ano", "2098", "--data-dir", str(tmp_path)]) == 1
+    assert "V11" in capsys.readouterr().out

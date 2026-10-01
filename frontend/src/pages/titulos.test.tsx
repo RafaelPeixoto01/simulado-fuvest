@@ -31,6 +31,7 @@ describe('Título da página por rota', () => {
     ['/novo/ano', 'Prova de um ano · Simulado Fuvest'],
     ['/treino', 'Treino por questão · Simulado Fuvest'],
     ['/historico', 'Histórico · Simulado Fuvest'],
+    ['/desempenho', 'Meu desempenho · Simulado Fuvest'],
     ['/resultado/nao-existe', 'Resultado · Simulado Fuvest'],
     ['/rota-que-nao-existe', 'Página não encontrada · Simulado Fuvest'],
   ])('%s → "%s"', async (rota, titulo) => {

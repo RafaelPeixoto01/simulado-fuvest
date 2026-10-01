@@ -2,6 +2,7 @@
 
 O banco e um indice derivado de data/provas: depois de sincronizar, ele contem
 exatamente os pacotes publicados e validos. Idempotente e em uma transacao.
+Taxonomia de assuntos invalida aborta antes de tocar o banco (ADR-009).
 
 Uso no start do container: `python -m app.pacote.sincronizar`
 """
@@ -19,6 +20,7 @@ from sqlalchemy.orm import Session
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao
 from app.models import Prova, Questao, TextoBase
+from app.pacote.assuntos import Taxonomia, TaxonomiaInvalida, carregar_taxonomia
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
 from app.pacote.schema import Alternativa, Bloco, PacoteProva
 from app.pacote.validacao import TOTAL_QUESTOES, validar_pacote
@@ -34,7 +36,7 @@ class ResumoSincronizacao:
 
 
 def _selecionar(
-    data_dir: Path, incluir_rascunhos: bool, resumo: ResumoSincronizacao
+    data_dir: Path, taxonomia: Taxonomia, incluir_rascunhos: bool, resumo: ResumoSincronizacao
 ) -> dict[int, PacoteProva]:
     selecionados: dict[int, PacoteProva] = {}
     for dir_prova in listar_pacotes(data_dir):
@@ -50,7 +52,7 @@ def _selecionar(
             log.error("%s ignorado: %s", nome, resumo.ignoradas[nome])
             continue
         bloqueantes = [
-            p for p in validar_pacote(pacote, dir_prova / DIR_FIGURAS) if p.bloqueante
+            p for p in validar_pacote(pacote, dir_prova / DIR_FIGURAS, taxonomia) if p.bloqueante
         ]
         publicada = pacote.status == "publicada"
         if bloqueantes:
@@ -104,6 +106,7 @@ def _gravar(sessao: Session, pacote: PacoteProva, agora: datetime) -> None:
                 resposta=q.resposta,
                 anulada=q.anulada,
                 disciplina=q.disciplina.value,
+                assunto=q.assunto,
                 disciplinas_secundarias=[d.value for d in q.disciplinas_secundarias],
             )
         )
@@ -112,8 +115,11 @@ def _gravar(sessao: Session, pacote: PacoteProva, agora: datetime) -> None:
 def sincronizar(
     sessao: Session, data_dir: Path, *, incluir_rascunhos: bool = False
 ) -> ResumoSincronizacao:
+    # TaxonomiaInvalida sobe daqui, antes de qualquer escrita: o start do container falha
+    # e a Railway mantem o deploy anterior no ar
+    taxonomia = carregar_taxonomia(data_dir)
     resumo = ResumoSincronizacao()
-    selecionados = _selecionar(data_dir, incluir_rascunhos, resumo)
+    selecionados = _selecionar(data_dir, taxonomia, incluir_rascunhos, resumo)
     agora = datetime.now(UTC)
     try:
         existentes = set(sessao.scalars(select(Prova.ano)))
@@ -149,6 +155,9 @@ def main() -> int:
             resumo = sincronizar(sessao, settings.data_dir)
     except SQLAlchemyError:
         log.exception("Falha de banco na sincronização")
+        return 1
+    except TaxonomiaInvalida as erro:
+        log.error("Taxonomia de assuntos inválida; banco não alterado: %s", erro)
         return 1
     print(formatar_resumo(resumo))
     return 0

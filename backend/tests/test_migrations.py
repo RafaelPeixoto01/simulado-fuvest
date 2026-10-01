@@ -35,3 +35,18 @@ def test_models_em_sincronia_com_a_migration(tmp_path):
         diferencas = compare_metadata(MigrationContext.configure(conn), Base.metadata)
 
     assert diferencas == []
+
+
+def test_migration_002_acrescenta_e_remove_o_assunto(tmp_path):
+    """BT-047 (CR-004): 001 -> 002 -> 001."""
+    engine = criar_engine(f"sqlite:///{tmp_path / 'm.db'}")
+
+    aplicar_migrations(engine, "head")
+    colunas = {c["name"] for c in inspect(engine).get_columns("questoes")}
+    indices = {i["name"] for i in inspect(engine).get_indexes("questoes")}
+    assert "assunto" in colunas and "ix_questoes_assunto" in indices
+
+    aplicar_migrations(engine, "001", downgrade=True)
+    inspetor = inspect(engine)
+    assert "assunto" not in {c["name"] for c in inspetor.get_columns("questoes")}
+    assert "ix_questoes_assunto" not in {i["name"] for i in inspetor.get_indexes("questoes")}
