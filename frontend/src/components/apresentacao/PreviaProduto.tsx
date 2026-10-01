@@ -32,7 +32,7 @@ const BOTAO = 'rounded-[7px] px-2.5 py-1.5 text-[0.71875rem] lg:px-3 lg:py-[7px]
  *  tela, para acompanhar o visual. Decorativa: o leitor de tela recebe só a descrição. */
 export function PreviaProduto({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative lg:h-[35rem] ${className}`}>
+    <div className={`relative lg:h-[38.5rem] xl:h-[36.5rem] ${className}`}>
       <p className="sr-only">
         Prévia da tela de resolução: uma questão de História da FUVEST 2025 com a alternativa B marcada, o
         cronômetro, a folha de respostas e os botões Anterior, Revisar e Próxima.

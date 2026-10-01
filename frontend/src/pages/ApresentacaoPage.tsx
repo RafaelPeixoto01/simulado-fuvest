@@ -47,15 +47,16 @@ function NumerosBase({ vitrine }: { vitrine: Vitrine }) {
   ] as const
 
   return (
-    <dl className="mt-5 grid grid-cols-3 gap-2 sm:mt-7 sm:flex sm:gap-0">
+    // repeat(3, 1fr), e não grid-cols-3: o mínimo de cada cartão é o conteúdo, e o período não quebra em 320 px
+    <dl className="mt-5 grid grid-cols-[repeat(3,1fr)] gap-2 sm:mt-7 sm:flex sm:gap-0">
       {itens.map(([rotulo, valor], i) => (
         // Rótulo antes do número no DOM (o leitor de tela lê "questões reais: 270"), abaixo dele na tela
         <div
           key={i}
-          className="flex flex-col-reverse rounded-[10px] bg-papel px-3 py-2.5 sm:rounded-none sm:border-linha sm:bg-transparent sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0 sm:not-last:border-r"
+          className="flex flex-col-reverse rounded-[10px] bg-papel px-2.5 py-2.5 sm:rounded-none sm:border-linha sm:bg-transparent sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0 sm:not-last:border-r"
         >
           <dt className="text-[0.8125rem] text-tinta-suave sm:text-sm">{rotulo}</dt>
-          <dd className="text-[1.375rem] leading-tight font-bold tabular-nums sm:text-[1.75rem]">{valor}</dd>
+          <dd className="text-[1.375rem] leading-tight font-bold whitespace-nowrap tabular-nums sm:text-[1.75rem]">{valor}</dd>
         </div>
       ))}
     </dl>

@@ -25,9 +25,10 @@ export function Layout() {
     <div className="flex min-h-screen flex-col">
       {/* 56 px fixos no celular (O2.3); acima do conteúdo para o painel do menu */}
       <header className="relative z-30 h-14 border-b border-linha bg-papel sm:h-auto">
-        <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4 sm:py-3">
-          <Link to="/" className="flex items-center gap-2.5 font-bold tracking-tight text-tinta">
-            <Marca className="h-2.5 w-auto" />
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4 sm:py-3">
+          {/* Marca menor no celular (46 px, como no protótipo): com o botão "Menu", cabe em 320 px */}
+          <Link to="/" className="flex items-center gap-2.5 font-bold tracking-tight whitespace-nowrap text-tinta">
+            <Marca className="h-2 w-auto sm:h-2.5" />
             Simulado Fuvest
           </Link>
           {comMenu && <MenuCelular comConteudo={comConteudo} usuario={usuario} className="sm:hidden" />}
