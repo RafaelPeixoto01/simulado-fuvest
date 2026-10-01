@@ -1,12 +1,12 @@
 import { urlEntrar } from '../services/api'
 
 /** "Entrar com Google" (CR-005): link de página inteira para o login por redirecionamento.
- *  O "G" é SVG inline: o site não carrega nada do Google (ADR-010). */
+ *  O "G" é SVG inline: o site não carrega nada do Google (ADR-010). 52 px desde o CR-007 (O1.4). */
 export function BotaoGoogle({ voltar }: { voltar: string }) {
   return (
     <a
       href={urlEntrar(voltar)}
-      className="inline-flex h-12 items-center gap-3 rounded-md border border-borda-campo bg-papel px-5 font-semibold text-tinta hover:border-caneta hover:bg-fundo"
+      className="inline-flex h-13 items-center gap-3 rounded-md border border-borda-campo bg-papel px-6 font-semibold text-tinta hover:border-caneta hover:bg-fundo"
     >
       <svg aria-hidden="true" viewBox="0 0 48 48" className="h-5 w-5 shrink-0">
         <path

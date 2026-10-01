@@ -2,10 +2,10 @@
 
 **Versão:** 1.0
 **Data:** 2026-09-29
-**PRD Ref:** 01-PRD v4.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.6
-**Spec Ref:** 03-SPEC v1.6 (specs 01–07)
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006
+**PRD Ref:** 01-PRD v4.1
+**Arquitetura Ref:** 02-ARCHITECTURE v1.7
+**Spec Ref:** 03-SPEC v1.7 (specs 01–07)
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007
 
 ---
 
@@ -25,6 +25,7 @@
 | CR-004 | Assuntos e desempenho — Fase 3A do roadmap ([CR](changes/CR-004-assuntos-desempenho.md), [spec 06](specs/06-assuntos-desempenho.md)) | CR-T-01 a CR-T-10 | Concluído |
 | CR-005 | Contas com Google e histórico sincronizado — Fase 3B do roadmap ([CR](changes/CR-005-contas-google.md), [spec 07](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-09 | Concluído |
 | CR-006 | Login obrigatório para usar o site ([CR](changes/CR-006-login-obrigatorio.md), [spec 07 §8](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-05 | Concluído |
+| CR-007 | Apresentação, menu do celular e barra opaca ([CR](changes/CR-007-apresentacao-menu-barra.md), [spec 07 §9](specs/07-contas-sincronizacao.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Em andamento |
 
 > **Status:** Pendente / Em andamento / Concluído
 

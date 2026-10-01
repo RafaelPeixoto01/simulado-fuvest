@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 4.0
+**Versão:** 4.1
 **Data:** 2026-10-01
 **Status:** Aprovado
 **Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007
 
 ---
 
@@ -119,7 +119,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Se houver simulado em andamento no navegador, oferece retomar (RN-012), num aviso no topo da página com o progresso e o tempo restante (o relógio continua correndo com a aba fechada, RN-009); enquanto isso, os modos ficam em segundo plano (CR-003)
 - Os anos da base aparecem como links para o PDF oficial, avisando que abrem em outra aba (CR-003)
 - Rodapé com aviso de que o site não é afiliado à FUVEST/USP e com link para o acervo oficial
-- Sem login, o início é uma página de apresentação: o que é o site, os 4 modos e "Entrar com Google", sem dados da base, que ficam protegidos com o catálogo (RN-017, CR-006)
+- Sem login, o início é uma página de apresentação: o que é o site, os 4 modos e "Entrar com Google" (RN-017, CR-006). Desde o CR-007, ela mostra também os números da base (questões válidas, provas e anos, pela vitrine pública) e uma prévia da tela de resolução; o resto dos dados da base continua protegido com o catálogo
 
 ### Módulo: Geração de Simulados
 
@@ -269,7 +269,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RNF-001 | Geração de simulado em < 2 s (p95); figuras otimizadas para web e carregadas sob demanda | Performance |
 | RNF-002 | Layout responsivo, mobile-first, utilizável a partir de 360 px de largura | Usabilidade |
 | RNF-003 | Navegação completa por teclado, contraste WCAG AA, texto alternativo nas figuras (padrão: "Figura da questão N — FUVEST ano") | Acessibilidade |
-| RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico. Desde o CR-006, a API de conteúdo exige sessão (RN-017) | Segurança |
+| RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico. Desde o CR-006, a API de conteúdo exige sessão (RN-017); só os totais da base ficam públicos, para a apresentação (CR-007) | Segurança |
 | RNF-005 | Usar o site exige entrar com a conta Google (CR-006). O servidor guarda só o mínimo (CR-005): identificador da conta Google, nome, e-mail e o histórico de simulados concluídos, apagáveis pelo próprio estudante. Quem não entra vê só a apresentação e a Privacidade, sem cookie. Sem cookies de rastreamento nem scripts de terceiros | Privacidade (LGPD) |
 | RNF-006 | Questão publicada = questão validada (RN-006/RN-007); nada chega ao site sem passar pelas validações | Confiabilidade dos dados |
 | RNF-007 | Interface em português do Brasil | Localização |
@@ -368,6 +368,12 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Um link direto (ex.: um resultado) leva ao login e, depois de entrar, abre a página pedida
     - [ ] A API recusa catálogo, geração, questões, correção e reportes sem sessão
 
+- **US-016:** Como estudante que ainda não entrou, quero ver o tamanho da base e como é o simulado, para decidir se vale entrar com o Google (CR-007)
+  - Critérios de aceite:
+    - [ ] A apresentação mostra quantas questões, provas e anos a base tem, com os números atuais
+    - [ ] Vejo uma prévia da tela de resolução e os 4 modos antes de entrar
+    - [ ] Sem login, a API mostra só esses totais, nada das questões
+
 ---
 
 ## 7. Regras de Negócio
@@ -390,7 +396,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RN-014 | Cada disciplina tem uma lista fixa de assuntos (taxonomia versionada). Cada questão tem **exatamente um** assunto, da lista da sua disciplina principal; disciplinas secundárias não têm assunto. O assunto não aparece durante a resolução nem filtra a geração (CR-004) | Ingestão / Resultado / Desempenho |
 | RN-015 | O painel "Meu desempenho" agrega as questões dos simulados concluídos no histórico: anuladas ficam fora (não medem conhecimento), em branco conta como erro (RN-008). Usa o assunto gravado no resultado de cada simulado. Assunto com menos de 5 questões aparece como "poucas questões" e vai para o fim da lista da disciplina; questão de resultado antigo, sem assunto, entra só na disciplina (CR-004) | Desempenho |
 | RN-016 | Conta (CR-005): login só com Google, obrigatório desde o CR-006 (RN-017). A conta guarda os 50 simulados concluídos mais recentes; o navegador com conta mostra o histórico da conta. Ao entrar, os simulados feitos sem conta neste navegador vão para a conta; ao sair, o histórico deixa o navegador e continua na conta; com conta, limpar o histórico limpa na conta. O resultado de um simulado não muda depois de enviado. A sessão dura 90 dias | Conta / Histórico |
-| RN-017 | Acesso (CR-006): usar o site exige sessão. Sem sessão, abrem só a apresentação (início) e a Privacidade; qualquer outra página leva à apresentação, e o login volta para ela. A API de conteúdo (catálogo, geração, questões, correção e reportes) recusa pedidos sem sessão; health e figuras são públicos. Em produção sem login configurado, o site fica indisponível; fora de produção, aberto | Conta / Acesso |
+| RN-017 | Acesso (CR-006): usar o site exige sessão. Sem sessão, abrem só a apresentação (início) e a Privacidade; qualquer outra página leva à apresentação, e o login volta para ela. A API de conteúdo (catálogo, geração, questões, correção e reportes) recusa pedidos sem sessão; health, figuras e a vitrine (só os totais da base, CR-007) são públicos. Em produção sem login configurado, o site fica indisponível; fora de produção, aberto | Conta / Acesso |
 
 ---
 
@@ -434,7 +440,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - **Esforço de ingestão:** sem IA, anos com layout muito diferente (provas antigas, escaneadas ou com fórmulas complexas) podem custar mais de 3 h de curadoria. A meta de ≥ 5 provas no lançamento prioriza os anos recentes
 - **Figuras vetoriais e fórmulas** (Matemática, Física, Química) podem não sair como texto; nesse caso a região é recortada como imagem
 - **Dados pessoais (CR-005):** com as contas, o banco passa a guardar nome, e-mail e resultados de estudantes, em geral menores de idade. Mitigação: só o mínimo (RNF-005), exclusão pelo próprio estudante, página de privacidade e backup do banco. Desde o CR-006, todo estudante entrega esses dados para usar o site (LGPD art. 14: "melhor interesse" do adolescente)
-- **Alcance (CR-006):** exigir conta Google afasta quem não quer ou não pode entrar; a apresentação explica o site antes do login
+- **Alcance (CR-006):** exigir conta Google afasta quem não quer ou não pode entrar; a apresentação explica o site antes do login e, desde o CR-007, mostra a base e uma prévia do simulado
 
 ---
 
@@ -458,7 +464,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Painel de desempenho | Página "Meu desempenho", que soma os simulados concluídos por disciplina e por assunto (RF-022) |
 | Conta | Identidade opcional do estudante, criada ao entrar com o Google, que guarda o histórico no servidor (RF-024, RN-016) |
 | Sincronização | Envio dos simulados concluídos do navegador para a conta e cópia do histórico da conta para o navegador (RF-025) |
-| Página de apresentação | Início para quem não entrou: descreve o site e os modos e leva ao login (RN-017) |
+| Página de apresentação | Início para quem não entrou: descreve o site e os modos, mostra os números da base e uma prévia do simulado, e leva ao login (RN-017, CR-007) |
+| Vitrine | Totais públicos da base (questões válidas e anos publicados) que a apresentação mostra sem login (CR-007) |
 
 ---
 
@@ -487,4 +494,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário.*

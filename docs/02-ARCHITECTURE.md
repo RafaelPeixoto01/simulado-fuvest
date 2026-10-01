@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.6
+**Versão:** 1.7
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v4.0
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006
+**PRD Ref:** 01-PRD v4.1
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007
 
 ---
 
@@ -124,8 +124,8 @@ Simulado Fuvest/
 │   │   ├── security_headers.py     # middleware de headers HTTP
 │   │   ├── autenticacao.py         # cookies de sessão e de login, PKCE, caminho de volta (CR-005)
 │   │   ├── dependencias.py         # sessão do banco, taxonomia, usuário da sessão, verificação de Origin
-│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, auth, conta, historico
-│   │   ├── services/               # catalogo, geracao, correcao, estatisticas, google (OIDC), contas, historico
+│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), auth, conta, historico
+│   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas, google (OIDC), contas, historico
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
 │   │       ├── schema.py           # modelo Pydantic do prova.yaml
 │   │       ├── leitura.py          # carregar/salvar YAML
@@ -154,13 +154,15 @@ Simulado Fuvest/
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
         │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina,
-        │                           #   useSessao, useHistorico, useConta (CR-005)
-        ├── components/             # Layout, Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle, estilos.ts
+        │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007)
+        ├── components/             # Layout, MenuCelular (CR-007), Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle,
+        │                           #   RequerConta (CR-006), estilos.ts
+        │   ├── apresentacao/       #   PreviaProduto (miniatura da resolução e do resultado na apresentação — CR-007)
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
-        │                           #   Conta, Privacidade (CR-005), NaoEncontrada
+        │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NaoEncontrada
         ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
@@ -372,7 +374,7 @@ fisica:
 
 ### API
 - Todas as rotas sob `/api/` (exceto `/figuras/...` e o SPA)
-- Catálogo, geração, questões, correção e reportes **exigem sessão** desde o CR-006 (`exigir_acesso`, ADR-012): 401 `nao_autenticado` sem sessão; 503 `site_indisponivel` em produção sem login configurado; abertos fora de produção sem login configurado. `/api/health`, `/figuras`, o login e `/api/sessao` continuam públicos
+- Catálogo, geração, questões, correção e reportes **exigem sessão** desde o CR-006 (`exigir_acesso`, ADR-012): 401 `nao_autenticado` sem sessão; 503 `site_indisponivel` em produção sem login configurado; abertos fora de produção sem login configurado. `/api/health`, `/figuras`, o login e `/api/sessao` continuam públicos; desde o CR-007, também `GET /api/vitrine`, só com os totais da base para a apresentação. Rota pública nova não leva `exigir_acesso` e devolve só agregados, nunca conteúdo
 - Rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
 - Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
@@ -546,14 +548,14 @@ fisica:
 - **Status:** Aceita
 - **Data:** 2026-10-01
 - **Contexto:** O dono do produto decidiu que o uso do site exige login com Google (CR-006). Até então, o login era opcional (CR-005) e a API de conteúdo era anônima (ADR-004).
-- **Decisão:** a dependência `exigir_acesso`, aplicada nos routers de catálogo, simulados, questões, correções e reportes, decide pelo **modo de acesso**: `conta` (provedor Google configurado: exige sessão, senão 401 `nao_autenticado`), `indisponivel` (sem provedor, em produção: 503 `site_indisponivel`) ou `livre` (sem provedor, fora de produção: aberta, para desenvolvimento, testes e CI sem segredo). `GET /api/sessao` devolve o modo em `acesso`. No SPA, o porteiro `RequerConta` envolve as rotas: sem sessão, mostra a apresentação (no início) ou leva a ela com `?voltar=<rota>`; com `indisponivel`, mostra "temporariamente indisponível". `/api/health` (healthcheck), `/figuras` (conteúdo público da FUVEST), o login, `/api/sessao` e a `/privacidade` continuam públicos. Os reportes passam a exigir sessão, mas não gravam quem reportou. Os POSTs de conteúdo, agora autenticados por cookie, também conferem o `Origin`, como as rotas de conta.
+- **Decisão:** a dependência `exigir_acesso`, aplicada nos routers de catálogo, simulados, questões, correções e reportes, decide pelo **modo de acesso**: `conta` (provedor Google configurado: exige sessão, senão 401 `nao_autenticado`), `indisponivel` (sem provedor, em produção: 503 `site_indisponivel`) ou `livre` (sem provedor, fora de produção: aberta, para desenvolvimento, testes e CI sem segredo). `GET /api/sessao` devolve o modo em `acesso`. No SPA, o porteiro `RequerConta` envolve as rotas: sem sessão, mostra a apresentação (no início) ou leva a ela com `?voltar=<rota>`; com `indisponivel`, mostra "temporariamente indisponível". `/api/health` (healthcheck), `/figuras` (conteúdo público da FUVEST), o login, `/api/sessao` e a `/privacidade` continuam públicos; **emenda do CR-007:** `GET /api/vitrine` (só os totais da base: questões válidas e anos) também é pública, em qualquer modo, para a apresentação mostrar os números. Os reportes passam a exigir sessão, mas não gravam quem reportou. Os POSTs de conteúdo, agora autenticados por cookie, também conferem o `Origin`, como as rotas de conta.
 - **Alternativas Consideradas:**
   - Exigir só na interface: descartada (D2 do CR-006), porque a API continuaria respondendo a quem a chamasse direto.
   - Abrir o site quando o login não estiver configurado: descartada em produção (D3), porque a obrigatoriedade cairia sem aviso; mantida fora de produção para não exigir segredo no desenvolvimento.
-  - Catálogo público para a apresentação mostrar os números da base: descartada para seguir a D2; a apresentação é texto fixo.
+  - Catálogo público para a apresentação mostrar os números da base: descartada para seguir a D2. No CR-007, os números vieram de um endpoint próprio só com os totais (`/api/vitrine`), e não do catálogo, que segue protegido. Ampliar o `/api/health` com esses números também foi descartado, para não misturar monitoramento com conteúdo da página.
 - **Consequências:**
   - Positivas: a regra vale para qualquer cliente da API; o desenvolvimento continua sem segredo.
-  - Negativas: todo uso passa a depender do Google e do login; uma variável do Google ausente tira o site do ar em produção (smoke test do CI e Deploy Guide cobrem); a apresentação não mostra os números da base.
+  - Negativas: todo uso passa a depender do Google e do login; uma variável do Google ausente tira o site do ar em produção (smoke test do CI e Deploy Guide cobrem). Até o CR-007, a apresentação não mostrava os números da base.
 
 ## 9. Deploy e Infraestrutura
 
@@ -646,4 +648,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`.*

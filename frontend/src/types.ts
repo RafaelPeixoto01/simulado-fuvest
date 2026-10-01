@@ -67,6 +67,12 @@ export interface Catalogo {
   completa_disponivel: boolean
 }
 
+/** Totais públicos da base para a apresentação (CR-007, specs/07 §9.1). */
+export interface Vitrine {
+  total_questoes: number // não anuladas, como no catálogo
+  anos: number[] // em ordem crescente; o número de provas é anos.length
+}
+
 export type PedidoSimulado =
   | { modo: 'completa'; semente?: number }
   | {

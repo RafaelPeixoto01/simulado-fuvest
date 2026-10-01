@@ -359,6 +359,16 @@ describe('Resolução: navegação, folha e modo foco (CR-001)', () => {
     )
   })
 
+  it('a barra do topo é opaca: o texto rolado não aparece por trás (UT-046, CR-007)', async () => {
+    salvarSimulado()
+    renderizar(<App />, { rota: '/simulado' })
+    await screen.findByText('Enunciado da questão 2099-001')
+
+    const barra = screen.getByRole('button', { name: /^Folha/ }).closest('header')!
+    expect(barra).toHaveClass('bg-fundo')
+    expect(barra.className).not.toMatch(/bg-fundo\/|backdrop-blur/)
+  })
+
   it('"Marcada" usa as cores de alerta, sem as da forma neutra', async () => {
     salvarSimulado({ marcadas: ['2099-001'] })
     renderizar(<App />, { rota: '/simulado' })

@@ -3,14 +3,20 @@
 from collections import Counter
 from fractions import Fraction
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
 from app.models import Prova, Questao
 from app.pacote.assuntos import Taxonomia
 from app.pacote.validacao import TOTAL_QUESTOES
-from app.schemas import AssuntoCatalogo, CatalogoResponse, DisciplinaCatalogo, ProvaCatalogo
+from app.schemas import (
+    AssuntoCatalogo,
+    CatalogoResponse,
+    DisciplinaCatalogo,
+    ProvaCatalogo,
+    VitrineResponse,
+)
 
 
 def distribuicao_completa(contagens_por_prova: list[dict[str, int]]) -> dict[str, int]:
@@ -90,3 +96,12 @@ def obter_catalogo(sessao: Session, taxonomia: Taxonomia | None) -> CatalogoResp
         distribuicao_completa=distribuicao_completa(contagens_por_prova(sessao)),
         completa_disponivel=total >= TOTAL_QUESTOES,
     )
+
+
+def obter_vitrine(sessao: Session) -> VitrineResponse:
+    """Totais da base para a apresentacao, publicos (CR-007): os mesmos numeros do catalogo."""
+    total = sessao.scalar(
+        select(func.count()).select_from(Questao).where(Questao.anulada.is_(False))
+    )
+    anos = sessao.scalars(select(Prova.ano).order_by(Prova.ano)).all()
+    return VitrineResponse(total_questoes=total, anos=list(anos))

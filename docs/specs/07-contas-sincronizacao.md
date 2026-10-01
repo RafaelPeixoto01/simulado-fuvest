@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.2
+**Versão:** 1.3
 **Data:** 2026-10-01
-**PRD Ref:** 01-PRD v4.0 (RF-020, RF-022, RF-024 a RF-026, US-013 a US-015, RN-012, RN-016, RN-017, RNF-004, RNF-005)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.6 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
-**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8)
+**PRD Ref:** 01-PRD v4.1 (RF-008, RF-020, RF-022, RF-024 a RF-026, US-013 a US-016, RN-012, RN-016, RN-017, RNF-004, RNF-005)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9)
 
 ---
 
@@ -454,7 +454,7 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
 | `livre` | Sem provedor, fora de produção (desenvolvimento, testes, CI) | Aberta, como antes do CR-006 | Como antes do CR-006 |
 
 - **Backend:** `modo_de_acesso(request)` em `app/dependencias.py` (tipo `ModoAcesso` em `schemas.py`); `exigir_acesso` (dependência dos routers de catálogo, simulados, questões, correções e reportes) aplica a tabela e só consulta a sessão no modo `conta`. Os POSTs de conteúdo (simulados, correções, reportes) também passam por `verificar_origem` (403 `origem_invalida`), como as rotas de conta. Erros de acesso vêm antes da validação do corpo (401/503 antes de 422).
-- **Públicos em qualquer modo:** `/api/health`, `/figuras/...`, `/api/auth/google`, o callback, `GET`/`DELETE /api/sessao`; `/api/historico` e `/api/conta` seguem exigindo sessão (§2.5).
+- **Públicos em qualquer modo:** `/api/health`, `/api/vitrine` (só os totais da base, §9 — emenda do CR-007 à D2 do CR-006), `/figuras/...`, `/api/auth/google`, o callback, `GET`/`DELETE /api/sessao`; `/api/historico` e `/api/conta` seguem exigindo sessão (§2.5).
 - **`GET /api/sessao`** devolve o modo em `acesso`.
 - Os reportes exigem sessão, mas não gravam quem reportou (RNF-005).
 
@@ -467,7 +467,7 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
   - `acesso: 'conta'` sem usuário → `semConta` se foi passado (o início passa a apresentação); senão `<Navigate replace to="/?voltar=<rota>">`.
   - Demais casos → a página.
 - **Início (`/`):** `<RequerConta semConta={<ApresentacaoPage />}><HomePage /></RequerConta>`.
-- **`ApresentacaoPage`:** `h1` "Treine com questões reais da 1ª fase da FUVEST"; texto curto do que o site faz (simulados com questões oficiais de anos anteriores, correção na hora, desempenho por disciplina e por assunto); com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar."; `BotaoGoogle` com o `voltar` da URL (só se começar com `/` e não com `//`; senão `/`); os 4 modos em texto fixo; "Para usar o site, entre com a sua conta Google. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade. Nenhum dado da base (o catálogo é protegido). Título da aba: "Simulado Fuvest".
+- **`ApresentacaoPage`:** `h1` "Treine com questões reais da 1ª fase da FUVEST"; texto curto do que o site faz (simulados com questões oficiais de anos anteriores, correção na hora, desempenho por disciplina e por assunto); com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar."; `BotaoGoogle` com o `voltar` da URL (só se começar com `/` e não com `//`; senão `/`); os 4 modos em texto fixo; "Para usar o site, entre com a sua conta Google. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade. Nenhum dado da base (o catálogo é protegido). Título da aba: "Simulado Fuvest". **Desde o CR-007 (§9.2):** números da base pela vitrine, prévia do produto, modos em cartões, botão de 52 px e o aviso começando por "É grátis."; o catálogo continua protegido.
 - **`SiteIndisponivel`** (`components/Estados.tsx`): `h1` "Site temporariamente indisponível" e "Tente de novo em alguns minutos."
 - **Cabeçalho:** "Desempenho" e "Histórico" só aparecem com acesso ao conteúdo (`livre`, ou `conta` com usuário). Sem login, só "Entrar"; com `indisponivel`, só o nome de quem está conectado (que leva à Conta) ou nada. Enquanto a sessão carrega, como antes.
 - **Sessão que acaba no meio do uso, ou site que fecha:** o `requisitar` (`services/api.ts`) avisa (`definirAoErroDeAcesso`) em qualquer 401 `nao_autenticado` ou 503 `site_indisponivel`, inclusive nas chamadas feitas fora do React Query (Treino, reporte); o `criarQueryClient` (`queryClient.ts`) registra o tratamento, que recarrega a sessão. O `RequerConta` leva então à apresentação com `?voltar=` (e o login volta à página) ou mostra o aviso. O simulado em andamento continua no `localStorage`.
@@ -505,3 +505,86 @@ Desde o CR-006 (RN-017, ADR-012), usar o site exige sessão. Esta seção comple
 - [x] Frontend: `RequerConta`, apresentação, indisponível, cabeçalho, 401/503 em qualquer chamada, textos
 - [x] CI: smoke test do Docker confere 503 em produção sem login
 - [x] Testes BT-070 a BT-075, UT-040 a UT-042 + FT-015
+
+---
+
+## 9. Vitrine e apresentação (CR-007)
+
+Desde o CR-007 (D1, emenda à D2 do CR-006), a apresentação mostra os números da base, que vêm de um endpoint público só com os totais. Na apresentação, esta seção substitui o "Nenhum dado da base" do §8.2. O catálogo, a geração, as questões, a correção e os reportes continuam exigindo sessão (§8.1).
+
+### 9.1 `GET /api/vitrine`
+
+- Router `app/routers/vitrine.py`, **sem** `exigir_acesso`: público em qualquer modo de acesso (`conta`, `livre`, `indisponivel`), como o `/api/health`. Sem rate limit (duas consultas agregadas leves, como o health). Não lê nem cria cookie.
+- Serviço `obter_vitrine(sessao)` em `services/catalogo.py`:
+  - `total_questoes`: questões **não anuladas**, o mesmo `total_questoes` do catálogo (e do "270 questões de 3 provas" do início com login)
+  - `anos`: anos das provas sincronizadas, em ordem crescente. Cada prova é um ano, então o número de provas é `len(anos)`
+
+```python
+class VitrineResponse(BaseModel):
+    total_questoes: int
+    anos: list[int]
+```
+
+```ts
+export interface Vitrine { total_questoes: number; anos: number[] }  // api.vitrine(), useVitrine()
+```
+
+- Exemplo (produção em 01/10/2026): `{"total_questoes": 270, "anos": [2023, 2024, 2025]}`. Base vazia: `{"total_questoes": 0, "anos": []}`.
+- Mais nada: nem ids, nem texto, nem disciplinas ou assuntos. Um campo novo aqui é decisão de produto (emenda à D2), e não detalhe de implementação.
+
+### 9.2 Apresentação (`ApresentacaoPage`)
+
+Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do canvas "Protótipo Simulado Fuvest". O que elas mostram além dos itens O1.1 a O1.4 fica fora (CR-007 §4.3).
+
+- **Desktop (≥ 1024 px):** duas colunas, com o texto à esquerda (até 520 px) e a `PreviaProduto` à direita. Abaixo, "Quatro jeitos de treinar" em 4 colunas.
+- **Abaixo de 1024 px:** uma coluna (texto até 672 px); a prévia vem depois do aviso, e os modos em lista.
+
+**Coluna de texto, na ordem:**
+1. `h1` e subtítulo, sem mudança (§8.2).
+2. **Números (O1.1)**, por `useVitrine` (`staleTime: Infinity`: os totais só mudam com um deploy), só quando a vitrine responde com `anos.length > 0`. `<dl>` com três pares, o rótulo (`dt`) antes do número (`dd`) no DOM e abaixo dele na tela (`flex-col-reverse`):
+
+   | Número | Rótulo (≥ 640 px) | Rótulo (< 640 px) |
+   |--------|-------------------|-------------------|
+   | `total_questoes` | "questões reais" | "questões reais" |
+   | `anos.length` | "provas completas" ("prova completa" com 1) | "provas" ("prova") |
+   | período | "anos na base" ("ano na base" com 1) | "anos" ("ano") |
+
+   Período: `min–max` com meia-risca ("2023–2025"); abaixo de 640 px, o ano final com dois dígitos ("2023–25"); com um ano só, "2025". Números com `tabular-nums`. Abaixo de 640 px, três cartões brancos lado a lado (`repeat(3, 1fr)`: o mínimo de cada um é o conteúdo, e o período não quebra em 320 px); a partir de 640 px, em linha, com divisórias. Enquanto carrega, com erro ou com a base vazia, o bloco não aparece (nunca "0"), e a página não espera a vitrine.
+3. Com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar.", como antes.
+4. `BotaoGoogle` com 52 px de altura (O1.4). É o mesmo botão da página Conta, que também fica com 52 px.
+5. Aviso (O1.4): "É grátis. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade.
+
+**`PreviaProduto` (O1.2)** (`components/apresentacao/PreviaProduto.tsx`): HTML/CSS com os tokens do site, sem captura de tela nem chamada à API.
+- Texto para leitor de tela (`sr-only`): "Prévia da tela de resolução: uma questão de História da FUVEST 2025 com a alternativa B marcada, o cronômetro, a folha de respostas e os botões Anterior, Revisar e Próxima."
+- Miniatura (`aria-hidden`): barra do topo com "FUVEST 2025" (só a partir de 1024 px), o cronômetro "04:52:10" e "Folha 12/90"; "Questão 13 de 90" e "História · FUVEST 2025 (questão 13)"; o enunciado da questão 13 de 2025 na fonte de leitura; as alternativas A, B (marcada, como na resolução) e C, cortadas com reticências; e a barra inferior com "‹ Anterior", "Revisar" e "Próxima ›" (azul). O texto vem do pacote `data/provas/2025/prova.yaml`.
+- A coluna da prévia tem 616 px de altura entre 1024 e 1279 px e 584 px a partir daí, para o cartão de resultado ficar abaixo da alternativa marcada.
+- Cartão de resultado sobreposto (só a partir de 1024 px, embaixo e à esquerda da coluna): "Resultado", "58 de 90 acertos" e as barras de Inglês 40%, História 53%, Geografia 77% e Física 100% (números ilustrativos). Tem o próprio texto para leitor de tela: "Ao lado, o desempenho por disciplina de um resultado."
+
+**Modos (O1.3):** `h2` "Quatro jeitos de treinar" (como hoje) e os 4 modos em cartões (`li` com borda, fundo branco e cantos arredondados). Cada um tem uma bolinha da folha (letra A–D em `optico-texto`, borda `optico`, `aria-hidden`), o `h3` e a descrição. A partir de 1024 px, 4 colunas, com a bolinha acima do título; abaixo disso, lista, com a bolinha à esquerda.
+
+### 9.3 Casos de borda
+
+| # | Cenário | Comportamento esperado |
+|---|---------|------------------------|
+| 23 | Vitrine fora do ar ou com erro | Apresentação completa, sem os números |
+| 24 | Base vazia (nenhuma prova sincronizada) | Vitrine `{"total_questoes": 0, "anos": []}`; apresentação sem os números |
+| 25 | Uma prova só | "1 prova completa" e o período "2025" |
+| 26 | Questões anuladas | Ficam fora de `total_questoes`, como no catálogo |
+| 27 | Produção sem login configurado (`indisponivel`) | A vitrine responde; o início mostra o aviso de indisponível, e não a apresentação |
+
+### 9.4 Plano de testes
+
+| ID | Cenário | Alvo | Esperado |
+|----|---------|------|----------|
+| BT-076 | Vitrine com a base sintética | GET /api/vitrine | `total_questoes` igual ao do catálogo (sem anuladas); `anos` em ordem crescente |
+| BT-077 | Vitrine pública: com login configurado e sem sessão; em produção sem login | GET /api/vitrine | 200, só os dois campos, sem `Set-Cookie` |
+| BT-078 | Vitrine com a base vazia | GET /api/vitrine | `{"total_questoes": 0, "anos": []}` |
+| UT-043 | Apresentação com a vitrine: números e rótulos; um ano só; vitrine com erro e base vazia (sem números); aviso "É grátis." | `ApresentacaoPage` | Textos esperados |
+| UT-044 | Prévia `aria-hidden` com a descrição para leitor de tela; modos em cartões com as letras A–D | `ApresentacaoPage`, `PreviaProduto` | Estrutura acessível |
+| FT-021 | Apresentação em 1440, 1024, 390 e 320 px (números do servidor, prévia, cartões, sem rolagem horizontal nem sobreposição); menu do celular e barra opaca (`specs/03`); console limpo | E2E (Playwright MCP) | Conforme §9.2 e `specs/03` |
+
+### 9.5 Checklist (CR-007)
+
+- [x] Backend: `GET /api/vitrine` + smoke test do CI
+- [x] Frontend: `useVitrine` e a apresentação (números, prévia, modos, botão e aviso)
+- [x] Testes BT-076 a BT-078, UT-043 e UT-044 + FT-021

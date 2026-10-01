@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Data:** 2026-10-01
-**Arquitetura Ref:** 02-ARCHITECTURE v1.6 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, §9)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, §9)
 
 ---
 
@@ -174,6 +174,7 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 - [ ] Conta (CR-005): `GET /api/sessao` → `login_disponivel: true`; "Entrar" → Google → volta logado com o primeiro nome no cabeçalho; o histórico aparece em outro navegador depois de entrar; "Sair" limpa o histórico do navegador
 - [ ] Sem conta: nenhum cookie é criado ao navegar (DevTools → Application → Cookies)
 - [ ] Login obrigatório (CR-006): `GET /api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo` → 401; num navegador sem login, o início mostra a apresentação e `/historico` leva a ela
+- [ ] Vitrine (CR-007): sem cookie, `GET /api/vitrine` → 200 com `total_questoes` igual ao do catálogo e os `anos` publicados; a apresentação mostra esses números
 - [ ] Figuras carregam (`/figuras/AAAA/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 
@@ -224,7 +225,7 @@ Consultas sobre as contas devem mostrar só contagens: e-mails, nomes e históri
 |-----|--------|
 | backend | ruff → pytest → `ingestao validar --todas` → migrations num Postgres 17 (upgrade/downgrade/upgrade) → pip-audit (informativo) |
 | frontend | `npm ci` → tsc → eslint → vitest → npm audit (informativo) |
-| docker | `docker build` da mesma imagem da Railway → container com SQLite → smoke test (health, SPA, 404 JSON em `/api`, sem Swagger, CSP; `/api/catalogo` → 503, porque o container de produção do CI não tem login configurado — CR-006) |
+| docker | `docker build` da mesma imagem da Railway → container com SQLite → smoke test (health, SPA, 404 JSON em `/api`, sem Swagger, CSP; `/api/catalogo` → 503, porque o container de produção do CI não tem login configurado — CR-006; `/api/vitrine` → 200, porque é pública — CR-007) |
 
 Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 
@@ -239,3 +240,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.2 — CR-005: variáveis do login (`GOOGLE_*`, `PUBLIC_URL`), cliente OAuth no Google Cloud (§3.1), backup com dados de usuário, rollback e verificação das contas |
 | 2026-10-01 | Claude | v1.2 — CR-005 concluído: situação do cliente OAuth (§3.1) e comandos Python no container via base64 (§8.3) |
 | 2026-10-01 | Claude | v1.3 — CR-006: login obrigatório; sem as variáveis do Google, o site fica indisponível em produção; smoke test e verificação pós-deploy |
+| 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |

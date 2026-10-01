@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.6
+**Versão:** 1.7
 **Data:** 2026-10-01
 **PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca)
 
 ---
 
@@ -115,7 +115,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
 | `/treino` | `TreinoPage` | Filtros + sessão |
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
-| `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho" e "Histórico", nessa ordem |
+| `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho" e "Histórico", nessa ordem; no celular, eles ficam no menu (CR-007, §3 "Cabeçalho do `Layout`") |
 | `/conta`, `/privacidade` | ver `specs/07-contas-sincronizacao.md` | Conta e privacidade (CR-005). Com login disponível, o cabeçalho ganha um terceiro link ("Entrar" ou o primeiro nome) para `/conta`; o rodapé ganha "Privacidade". Sem login, só estas duas e a apresentação abrem: as demais rotas, inclusive `/simulado`, passam por `RequerConta` (CR-006, `specs/07` §8) |
 | `*` | 404 simples | Link para `/` |
 
@@ -137,6 +137,23 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `acerto` | #17703f | Texto, borda e preenchimento de acerto (≥ 4,5:1 sobre `acerto-claro`) |
 
 O `tokens.test.ts` calcula o contraste dos pares a partir do `index.css`. Para isso, o Vitest processa só esse arquivo (`css.include` no `vite.config.ts`).
+
+### Cabeçalho do `Layout` (CR-007)
+
+Protótipo: tela "Menu do cabeçalho · celular" do canvas "Protótipo Simulado Fuvest".
+
+- **A partir de 640 px:** como antes. Marca + "Simulado Fuvest" à esquerda; à direita, os links em linha: "Desempenho" e "Histórico" (com acesso ao conteúdo) e a conta ("Entrar" ou o primeiro nome). Altura e estilo dos links (`itemNav`) inalterados.
+- **Abaixo de 640 px:** o cabeçalho tem **56 px fixos**. Os links empilhados (CR-004) saem:
+  - **Sem conta** (`acesso: 'conta'` sem usuário): não há menu, só "Entrar", como hoje (O2.4).
+  - **Com conta, ou com links de conteúdo** (`livre`, ou `indisponivel` com alguém conectado): botão **"Menu"** (`MenuCelular`) com ícone de três traços e o texto "Menu", 44 px de altura, `aria-expanded` e `aria-controls="menu-principal"`. Aberto, o ícone vira um X e o botão fica com borda azul e fundo `caneta-clara` (O2.1).
+- **Painel** (`<nav id="menu-principal" aria-label="Menu">`, logo abaixo do cabeçalho, largura toda, sombra), sobre o conteúdo escurecido (`tinta` a 35%, a partir do fim do cabeçalho). Itens em linhas de 52 px com ícone (O2.2):
+  - "Início" (casa), "Desempenho" (barras) e "Histórico" (relógio). Desempenho e Histórico só com acesso ao conteúdo, como os links do desktop.
+  - A página atual fica destacada (fundo `caneta-clara`, texto `caneta-escura`, negrito) e leva `aria-current="page"`.
+  - Separada por uma linha, a conta (só com alguém conectado): a inicial do primeiro nome num círculo, o primeiro nome e "Conta e sair", levando a `/conta`.
+- **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão), qualquer troca de rota ou o foco saindo do painel e do botão (Tab depois do último item). O botão também alterna. Tab segue do botão para os itens do painel.
+- **Com o menu aberto**, a rolagem da página fica travada (`overflow: hidden` no `html`, como no `PainelFolha`): o cabeçalho não é fixo, e rolar levaria o painel embora.
+- **Enquanto a sessão carrega**, o celular mostra só a marca (nem "Menu" nem "Entrar").
+- **Marca no celular:** 46 px de largura (`h-2`), com 8 px até o botão, para o cabeçalho caber numa linha em 320 px; a partir de 640 px, como antes.
 
 ### Componente: Blocos
 
@@ -173,7 +190,7 @@ Monta: cabeçalho "Questão i de n · Disciplina · FUVEST AAAA, nº NN" (RN-013
 
 ### Estrutura da ResolucaoPage (CR-001)
 
-- **Barra do topo** (fixa; 60 px no celular, 64 px no desktop): no desktop, a descrição do simulado à esquerda e o `Cronometro` à direita; no celular, o `Cronometro` e o botão "Folha r/n", que abre o `PainelFolha`.
+- **Barra do topo** (fixa e opaca, `bg-fundo` sem transparência nem desfoque — CR-007, O3.1; 60 px no celular, 64 px no desktop): no desktop, a descrição do simulado à esquerda e o `Cronometro` à direita; no celular, o `Cronometro` e o botão "Folha r/n", que abre o `PainelFolha`.
 - **Barra inferior** (fixa no rodapé da coluna da questão): Anterior | Revisar | Próxima. "Próxima" é o único botão azul e ocupa o resto da linha no celular; na última questão vira "Finalizar" (rótulo acessível "Finalizar o simulado"). "Revisar" usa `aria-pressed` e mostra "Marcada" em laranja quando marcada. Botões de 48 px no celular e 44 px no desktop; abaixo de 380 px, "Anterior" fica só com o ícone. No desktop, a linha de atalhos aparece sob a barra.
 - **Trocar de questão** (botões, atalhos ← → ou folha): `window.scrollTo({top: 0})` e foco no título "Questão N de M" (`tabIndex=-1`, `focus({preventScroll: true})`), pelo `refTitulo` da `QuestaoView`.
 - **Desktop (≥ 1024 px):** coluna da questão e cartão da folha (408 px) fixo 24 px abaixo da barra, com título, `FolhaRespostas` no formato `bolhas` e "Finalizar simulado". A folha de 90 questões cabe inteira em 1440 × 900; a rolagem própria (`max-h`) só entra como reserva em telas baixas.
@@ -272,6 +289,8 @@ sequenceDiagram
 | UT-010 | Trocar de questão: `scrollTo({top: 0})` e foco no título | `ResolucaoPage` | Título focado (CR-001) |
 | UT-011 | `PainelFolha`: foco, Tab preso, Esc, clique e arrasto no fundo, trava da rolagem | `ResolucaoPage` | Comportamento de diálogo (CR-001) |
 | UT-012 | Pausa: questão oculta, atalhos desligados, folha escondida, reabrir pausado | `ResolucaoPage` | `TelaPausa` (CR-001) |
+| UT-045 | Menu do celular: botão com `aria-expanded`/`aria-controls`; painel com Início, Desempenho, Histórico e a conta; `aria-current` na página atual; fecha com Esc (foco no botão), toque fora, item e troca de rota; sem conta, só "Entrar" e nenhum menu | `Layout`, `MenuCelular` | Comportamento de O2.1–O2.4 (CR-007) |
+| UT-046 | Barra do topo da resolução opaca | `ResolucaoPage` | `bg-fundo`, sem transparência nem `backdrop-blur` (CR-007) |
 | FT-001 | Home → Prova completa → responder 3 → recarregar | E2E (Playwright MCP) | Respostas e tempo preservados |
 | FT-002 | Personalizado com filtros → grade → finalizar | E2E | Resultado exibido |
 | FT-003 | Personalizado insuficiente | E2E | Mensagem + "Gerar com N" |
@@ -280,6 +299,7 @@ sequenceDiagram
 | FT-006 | 320 e 390 px: barra inferior numa linha, painel da folha, última questão → Finalizar | E2E (CR-001) | Sem quebra nem rolagem horizontal |
 | FT-007 | 1440 × 900: folha de 90 questões inteira, sem rolagem própria, nunca sob a barra | E2E (CR-001) | Cartão visível ao rolar até o fim |
 | FT-008 | Personalizado: pausar, recarregar, retomar | E2E (CR-001) | Questão oculta; tempo não descontado |
+| FT-021 | Menu do celular em 390 e 320 px com conta (abrir, Esc, fora, item); 640 px com links em linha; barra da resolução opaca ao rolar uma questão longa | E2E (CR-007, junto com a apresentação — `specs/07` §9.4) | Conforme §3 "Cabeçalho do `Layout`" e "Estrutura da ResolucaoPage" |
 
 ---
 
