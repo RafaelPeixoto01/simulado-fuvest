@@ -6,7 +6,13 @@ from fastapi import APIRouter, Depends, Request, Response
 from sqlalchemy.orm import Session
 
 from app.autenticacao import apagar_cookie_sessao, nome_cookie_sessao
-from app.dependencias import exigir_usuario, obter_sessao, obter_usuario, verificar_origem
+from app.dependencias import (
+    exigir_usuario,
+    modo_de_acesso,
+    obter_sessao,
+    obter_usuario,
+    verificar_origem,
+)
 from app.models import Usuario
 from app.rate_limit import limiter
 from app.schemas import SessaoResponse, UsuarioPublico
@@ -29,6 +35,7 @@ def ler_sessao(
             if usuario
             else None
         ),
+        acesso=modo_de_acesso(request),
     )
 
 

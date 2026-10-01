@@ -96,6 +96,8 @@ jobs:
           curl -sf http://localhost:8000/ | grep -q '<div id="root">'
           curl -sf http://localhost:8000/historico | grep -q '<div id="root">'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/api/nada)" = 404
+          # Producao sem as variaveis do Google: o conteudo fica indisponivel (CR-006, D3)
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/api/catalogo)" = 503
           ! curl -s http://localhost:8000/docs | grep -qi swagger
           curl -sI http://localhost:8000/ | grep -qi content-security-policy
       - name: Logs do container

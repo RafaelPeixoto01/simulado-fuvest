@@ -3,12 +3,13 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.dependencias import obter_sessao, obter_taxonomia
+from app.dependencias import exigir_acesso, obter_sessao, obter_taxonomia
 from app.pacote.assuntos import Taxonomia
 from app.schemas import CatalogoResponse
 from app.services.catalogo import obter_catalogo
 
-router = APIRouter(prefix="/api", tags=["catalogo"])
+# Login obrigatorio (CR-006, ADR-012)
+router = APIRouter(prefix="/api", tags=["catalogo"], dependencies=[Depends(exigir_acesso)])
 
 
 @router.get("/catalogo")

@@ -218,6 +218,7 @@ class UsuarioPublico(BaseModel):
 class SessaoResponse(BaseModel):
     login_disponivel: bool
     usuario: UsuarioPublico | None
+    acesso: Literal["conta", "livre", "indisponivel"]  # CR-006, specs/07 §8
 
 
 # Espelho do HistoricoEntry do navegador (specs/04 §2.2). extra="forbid" e limites de

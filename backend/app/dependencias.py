@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 from datetime import UTC, datetime
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
@@ -39,6 +39,31 @@ def exigir_usuario(usuario: Annotated[Usuario | None, Depends(obter_usuario)]) -
             "mensagem": "Entre com sua conta Google para continuar.",
         })
     return usuario
+
+
+ModoAcesso = Literal["conta", "livre", "indisponivel"]
+
+
+def modo_de_acesso(request: Request) -> ModoAcesso:
+    """Login obrigatorio (CR-006, ADR-012): com o provedor Google configurado, o site exige
+    conta; sem ele, fecha em producao e abre fora dela (desenvolvimento, testes, CI)."""
+    if request.app.state.provedor_google is not None:
+        return "conta"
+    return "indisponivel" if request.app.state.settings.producao else "livre"
+
+
+def exigir_acesso(
+    request: Request, usuario: Annotated[Usuario | None, Depends(obter_usuario)]
+) -> None:
+    """Dependencia dos routers de conteudo (catalogo, simulados, questoes, correcoes, reportes)."""
+    modo = modo_de_acesso(request)
+    if modo == "indisponivel":
+        raise HTTPException(503, detail={
+            "codigo": "site_indisponivel",
+            "mensagem": "O site está temporariamente indisponível.",
+        })
+    if modo == "conta" and usuario is None:
+        exigir_usuario(usuario)  # 401 nao_autenticado
 
 
 def verificar_origem(request: Request) -> None:
