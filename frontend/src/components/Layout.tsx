@@ -14,7 +14,8 @@ export function Layout() {
             <Marca className="h-2.5 w-auto" />
             Simulado Fuvest
           </Link>
-          <nav className="flex gap-1">
+          {/* No celular os links ficam empilhados: lado a lado, estouram 320 px (CR-004) */}
+          <nav className="flex flex-col items-end sm:flex-row sm:gap-1">
             <NavLink to="/desempenho" className={itemNav}>
               Desempenho
             </NavLink>
