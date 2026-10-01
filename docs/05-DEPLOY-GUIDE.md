@@ -55,7 +55,7 @@ Não existe arquivo `.env`: todo default é local e seguro (SQLite). Produção 
 | `PORT` | Não | Injetada pela Railway | |
 | `GOOGLE_CLIENT_ID` | Para o login | ID do cliente OAuth (seção 3.1) | Sem ele (ou sem o segredo), o login fica desligado e "Entrar" some (CR-005) |
 | `GOOGLE_CLIENT_SECRET` | Para o login | Segredo do cliente OAuth | **Único segredo do projeto.** Definir só na Railway; nunca no repositório, em log ou no chat |
-| `PUBLIC_URL` | Para o login | `https://simulado-fuvest-production.up.railway.app` | Sem barra final. Monta o `redirect_uri` e é o único `Origin` aceito nos `POST`/`DELETE` com cookie |
+| `PUBLIC_URL` | Para o login | `https://simulado-fuvest-production.up.railway.app` | Sem barra final. Monta o `redirect_uri` e é o único `Origin` aceito nos `POST`/`DELETE` com cookie. Em produção, sem `https` o login fica desligado e o log mostra `PUBLIC_URL precisa ser https` |
 
 Trocar o domínio exige atualizar `PUBLIC_URL` **e** o URI de redirecionamento do cliente OAuth (seção 3.1).
 
@@ -139,7 +139,8 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 | Prova publicada com erro | `git revert` do commit do pacote (ou corrigir o `prova.yaml`) + push: a próxima sincronização deixa o banco igual ao repositório |
 | Migration precisa reverter | Backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade -1` (roda **dentro** do container, com a URL interna do banco) → reverter o código |
 | Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` (inclui taxonomia inválida: `TaxonomiaInvalida` no log da sincronização) |
-| Desligar o login sem reverter código (CR-005) | `railway variables -s simulado-fuvest --remove GOOGLE_CLIENT_ID`: "Entrar" some e os navegadores conectados voltam ao histórico local; contas e históricos ficam no banco |
+| Desligar o login sem reverter código (CR-005) | `railway variables -s simulado-fuvest --remove GOOGLE_CLIENT_ID`: "Entrar" some e ninguém novo entra; quem já entrou continua conectado (sincroniza, sai, exclui a conta). Trocar o segredo também não desconecta ninguém |
+| Desconectar todo mundo (ex.: suspeita de vazamento de sessões) | Apagar as sessões no banco: `railway ssh -s simulado-fuvest python -c "from sqlalchemy import text; from app.main import app; c = app.state.engine.connect(); c.execute(text('DELETE FROM sessoes')); c.commit()"`. Os históricos ficam; cada estudante entra de novo |
 | Reverter o CR-005 (contas) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. **Não** rodar `alembic downgrade` da `003` sem backup: ele apaga contas e históricos |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
 

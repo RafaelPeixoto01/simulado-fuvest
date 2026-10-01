@@ -129,7 +129,7 @@ O estudante estuda no celular e no computador (Persona 1), mas cada aparelho tem
 | Criar | `frontend/src/hooks/useSessao.ts`, `useHistorico.ts`, `useConta.ts` | Sessão, histórico unificado, sair/excluir |
 | Modificar | `frontend/src/hooks/useFinalizarSimulado.ts` | Invalida o histórico (dispara o envio) |
 | Modificar | `frontend/src/components/Layout.tsx` | Link da conta e "Privacidade" no rodapé |
-| Criar | `frontend/src/components/BotaoGoogle.tsx` | "Entrar com Google" (link, logo do Google inline) |
+| Criar | `frontend/src/components/BotaoGoogle.tsx`, `ConviteConta.tsx` | "Entrar com Google" (link, logo do Google inline); convite para entrar no Histórico e no painel |
 | Criar | `frontend/src/pages/ContaPage.tsx`, `PrivacidadePage.tsx` (+ testes) | Páginas novas |
 | Modificar | `frontend/src/pages/HistoricoPage.tsx`, `DesempenhoPage.tsx`, `ResultadoPage.tsx`, `App.tsx` | `useHistorico`, avisos, rotas |
 | Modificar | `frontend/src/test/apiFalsa.ts` | Sessão anônima por padrão |
@@ -153,7 +153,7 @@ CREATE TABLE usuarios (
   ultimo_acesso_em TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE TABLE sessoes (
-  token_hash CHAR(64) PRIMARY KEY,
+  token_hash VARCHAR(64) PRIMARY KEY,
   usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
   criado_em TIMESTAMPTZ NOT NULL DEFAULT now(),
   expira_em TIMESTAMPTZ NOT NULL
@@ -191,26 +191,60 @@ Migration só aditiva: o código anterior ignora as tabelas novas.
 
 ## 8. Critérios de Aceite
 
-- [ ] Sem conta, o site funciona como antes: nenhum cookie é criado, nenhum script de terceiros é carregado e nenhum dado pessoal vai para o servidor
-- [ ] "Entrar com Google" leva ao consentimento do Google e volta logado para a página de origem; o cabeçalho mostra o primeiro nome
-- [ ] A sessão fica num cookie `HttpOnly`/`SameSite=Lax` (`Secure` + `__Host-` em produção); o banco guarda só o hash do token
-- [ ] Ao entrar, os simulados deste navegador vão para a conta (D1) e o histórico passa a ser o da conta, inclusive em outro dispositivo
-- [ ] Simulado concluído com conta é enviado ao servidor; sem rede, fica pendente e é enviado na próxima sincronização
-- [ ] O servidor guarda no máximo os 50 simulados mais recentes por conta (D4); o painel "Meu desempenho" soma o histórico sincronizado
-- [ ] "Sair" envia os pendentes e apaga o histórico deste navegador (D2); entrar de novo o traz de volta
-- [ ] "Limpar histórico" com conta apaga na conta (todos os dispositivos), com confirmação que diz isso
-- [ ] "Excluir conta" apaga usuário, sessões e histórico no servidor, e o histórico do navegador
-- [ ] Um usuário nunca lê nem apaga o histórico de outro (ownership — BT-058)
-- [ ] Login desligado (sem as variáveis): "Entrar" não aparece e `/api/auth/google` responde 404
-- [ ] `/privacidade` descreve os dados guardados, a finalidade, o cookie de sessão e como excluir
-- [ ] Migration `003` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI)
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança — BT-047, BT-050 a BT-064, UT-030 a UT-036
-- [ ] Fluxo afetado exercitado em runtime antes do merge — FT-013 (provedor falso local, Playwright) e chamadas HTTP
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints novos, autenticação, cookies, sessões e dados de usuário
-- [ ] Documentos afetados foram atualizados
-- [ ] CI verde na branch e em `master`; login real com Google em produção conferido com o usuário (FT-014)
+- [x] Sem conta, o site funciona como antes: nenhum cookie é criado, nenhum script de terceiros é carregado e nenhum dado pessoal vai para o servidor — BT-050 (sem `Set-Cookie`); Playwright: simulado anônimo concluído com a lista de cookies vazia; CSP inalterada (o "G" do botão é SVG inline)
+- [ ] "Entrar com Google" leva ao consentimento do Google e volta logado para a página de origem; o cabeçalho mostra o primeiro nome — local com provedor falso ✅ (FT-013: volta a `/conta` e o cabeçalho mostra "Ana"); **com o Google real, pendente do FT-014** (depende do CR-T-08)
+- [x] A sessão fica num cookie `HttpOnly`/`SameSite=Lax` (`Secure` + `__Host-` em produção); o banco guarda só o hash do token — BT-052, BT-064; Playwright: cookie `sessao` `HttpOnly`, `Lax`, 90 dias, invisível ao `document.cookie`
+- [x] Ao entrar, os simulados deste navegador vão para a conta (D1) e o histórico passa a ser o da conta, inclusive em outro dispositivo — UT-030; FT-013 (2 entradas enviadas, uma delas no formato anterior ao CR-004; "outro dispositivo" com o `localStorage` zerado recebe histórico, painel e resultado)
+- [x] Simulado concluído com conta é enviado ao servidor; sem rede, fica pendente e é enviado na próxima sincronização — UT-036, UT-030; FT-013 (Prova de 2024 finalizada com conta chega ao servidor)
+- [x] O servidor guarda no máximo os 50 simulados mais recentes por conta (D4); o painel "Meu desempenho" soma o histórico sincronizado — BT-057, UT-030, UT-035; FT-013 (painel com 2 simulados, 180 questões)
+- [x] "Sair" envia os pendentes e tira do navegador o histórico da conta (D2); entrar de novo o traz de volta. As recusadas pelo servidor, que só existem no navegador, ficam (revisão de código) — UT-034; FT-013
+- [x] "Limpar histórico" com conta apaga na conta (todos os dispositivos), com confirmação que diz isso — BT-059, UT-035; revalidação no Playwright depois da revisão de código
+- [x] "Excluir conta" apaga usuário, sessões e histórico no servidor, e o histórico do navegador — BT-060, UT-034; FT-013 (as três tabelas vazias depois)
+- [x] Um usuário nunca lê nem apaga o histórico de outro (ownership) — BT-058; toda consulta filtra pelo `usuario_id` da sessão
+- [x] Login desligado (sem as variáveis): "Entrar" não aparece e `/api/auth/google` responde 404; quem já tinha entrado continua conectado e pode sair e excluir a conta (revisão de código) — BT-051, BT-065, UT-033, UT-034
+- [x] `/privacidade` descreve os dados guardados, a finalidade, o cookie de sessão e como excluir — conferida no navegador (360 e 320 px sem rolagem horizontal)
+- [x] Migration `003` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI) — local `002 → 003 → 002 → 003`; CI da branch verde (run 36879730377, passo "Migrations no Postgres")
+- [x] Testes existentes continuam passando (regressão) — backend 296, frontend 193
+- [x] Novos testes cobrem a mudança — BT-047, BT-050 a BT-067, UT-030 a UT-037
+- [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints novos, autenticação, cookies, sessões e dados de usuário — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v3.0, Arquitetura v1.5, 03-SPEC v1.5, specs 03/04/06/07, Plano, Deploy Guide v1.2, CLAUDE.md, INDEX.md
+- [ ] CI verde na branch e em `master`; login real com Google em produção conferido com o usuário (FT-014) — branch verde; `master` e FT-014 pendentes do merge e do CR-T-08
+
+**Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso injetado em `app.state.provedor_google` — todo o resto é o código de produção):**
+- HTTP (curl): `GET /api/sessao` → `{"login_disponivel": true, "usuario": null}` + `Cache-Control: no-store`, sem cookie; `GET /api/historico` sem sessão → 401 `nao_autenticado`; `GET /api/auth/google?voltar=//evil.com` → 302 com o cookie `login-google` (`HttpOnly`, `SameSite=lax`, `Max-Age=600`) e o caminho de volta reduzido a `/`; callback → 302 `/historico` + cookie `sessao` (`HttpOnly`, `Max-Age=7776000`); `POST /api/historico` com `Origin: https://evil.test` → 403 `origem_invalida`; entrada inválida → 200 com `rejeitadas: ["x"]`; `GET /api/auth/google/callback?error=access_denied` → 302 `/conta?erro=login`; `DELETE /api/sessao` → 204, cookie apagado, sessão removida do banco. Achado de ambiente: o cookie de login não vai de `127.0.0.1` para `localhost` (o `redirect_uri` usa o `PUBLIC_URL`), o que é o comportamento esperado do `state` em cookie.
+- Playwright (FT-013): simulado anônimo (2025) sem nenhum cookie → "Entrar" → "Entrar com Google" → volta a `/conta` com "Conectado como Ana Teste (ana.teste@exemplo.com)", "2 simulados na sua conta." (o anônimo + uma entrada injetada no formato anterior ao CR-004, aceita e devolvida sem `assunto`) e "Ana" no cabeçalho → `localStorage` zerado ("outro dispositivo"): Histórico, painel (2 simulados, 180 questões) e `/resultado/:id` voltam da conta → Prova de 2024 finalizada com conta chega ao servidor → 360 e 320 px sem rolagem horizontal em `/conta`, `/historico` e `/privacidade` → "Sair": status, cabeçalho com "Entrar", histórico e marca fora do navegador, Histórico vazio com "Entre com o Google" → entrar de novo: "3 simulados na sua conta." → "Excluir conta" com confirmação: status e as três tabelas vazias no banco → consentimento negado: `/conta?erro=login` com o aviso. Console sem erros nem avisos.
+- Depois das correções da revisão de código (build novo): entrar (D1), "Limpar histórico" com conta (confirmação "em todos os dispositivos", servidor com 0, marca `{conta, ids: []}`), "Sair" e "Excluir conta" de novo exercitados; console limpo.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 10 achados: 9 corrigidos e 1 corrigido em parte e justificado em parte (`b35db45`):**
+1. Corrigido: "Sair" apagava as entradas recusadas pelo servidor, que só existiam no navegador (perda de dado). Agora sai só o que a marca confirmou (`historicoSemConta`).
+2. Corrigido: uma sincronização em andamento podia regravar o espelho depois de "Sair"/"Limpar"/"Excluir" (o `cancelQueries` não interrompe a promessa). Sincronizar, sair, limpar e excluir rodam numa fila no navegador (`exclusivo`), uma por vez.
+3. Corrigido: entrada recusada era reenviada a cada sincronização (POST em vez de GET, gastando o limite). Agora é reenviada só depois de recarregar a página.
+4. Corrigido: conexão derrubada ou resposta cortada na troca do código escapavam como 500 no callback. `OSError` e `http.client.HTTPException` viram `ErroLoginGoogle` (teste com `RemoteDisconnected`, `IncompleteRead`, timeout e URLError).
+5. Corrigido: `PUBLIC_URL` esquecida em produção cairia no padrão `http://localhost:5173` e quebraria o login e a verificação de `Origin` em silêncio. Em produção, `PUBLIC_URL` sem `https` desliga o login e registra o motivo no log, sem derrubar o site (BT-066).
+6. Corrigido: com o login desligado, quem tinha conta não conseguia excluí-la (RF-026). Desligar o login passa a bloquear só logins novos; as sessões existentes continuam, e trocar o segredo não desconecta ninguém (BT-065). O cabeçalho mostra o nome de quem está conectado mesmo assim.
+7. Corrigido: dois primeiros logins simultâneos da mesma conta disputavam o `google_sub` único (500). O `INSERT` roda num savepoint e, em conflito, relê o usuário (BT-067).
+8. Corrigido em parte: com várias audiências no `id_token`, o `azp` precisa ser este cliente. **Justificado:** `email_verified` não é exigido, porque a identidade é o `sub` e o e-mail só aparece para o próprio dono da conta.
+9. Corrigido: o histórico do navegador era relido do `localStorage` a cada render enquanto a sessão carregava. Agora é um retrato tirado ao montar, com identidade estável.
+10. Corrigido: `obterDoHistorico` ficou sem uso (removido) e o convite para entrar estava duplicado no Histórico e no painel (`ConviteConta`).
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum. `GOOGLE_CLIENT_SECRET` só em variável da Railway; nunca em log nem em mensagem de erro (`ErroLoginGoogle` não carrega token, código nem segredo); a URL de autorização não leva o segredo (BT-051) |
+| Validação de entrada | Pydantic: `EntradaHistorico` com `extra="forbid"`, tamanhos (≤ 90 itens, ≤ 50 entradas), padrões de id/slug e enums; parâmetros do callback com limite de tamanho (422); `voltar` só caminho interno simples (sem redirecionamento aberto); cookie de sessão ≤ 128 caracteres |
+| Tokens / armazenamento | Sessão em cookie `HttpOnly`, `SameSite=Lax`, `Secure` + `__Host-` em produção; token aleatório de 256 bits e só o SHA-256 no banco; nenhum token no `localStorage` (a marca guarda só ids de simulados e o id interno da conta) |
+| Ownership | Toda leitura e escrita de histórico filtra pelo `usuario_id` da sessão; não existe parâmetro de usuário nas rotas (BT-058) |
+| Autenticação | OIDC com `state` (comparação em tempo constante) + PKCE S256; `iss`, `aud`, `azp`, `exp` e `sub` validados; `prompt=select_account` (computador compartilhado); sessão encerrada no servidor ao sair e ao excluir |
+| CSRF | `SameSite=Lax` + `Origin` conferido contra `PUBLIC_URL` em todo `POST`/`DELETE` com cookie (BT-061) + corpo JSON no `POST` |
+| SQL | Só ORM/`select()`/`delete()` e `insert().on_conflict_do_nothing()` parametrizados |
+| CORS | Produção sem CORS (mesma origem, inalterado). Dev: `DELETE` acrescentado aos métodos, sem `allow_credentials` |
+| Headers HTTP | Inalterados (CSP com `script-src 'self'`); `Cache-Control: no-store` nas respostas com dado pessoal |
+| Abuso | Rate limit por IP: login 20/min, histórico 60/30/10 por min, excluir conta 10/min (BT-063) |
+| Privacidade (LGPD) | Só `sub`, nome e e-mail (D3); exclusão pelo próprio usuário; página `/privacidade`; nenhum dado pessoal sem login |
+| Dependências | Nenhuma nova (stdlib `urllib`, `hashlib`, `secrets`) |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -248,7 +282,7 @@ Migration só aditiva: o código anterior ignora as tabelas novas.
 
 - **Migration afetada:** `003_contas.py`
 - **Comando de downgrade:** `alembic downgrade 002`
-- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local e Postgres no CI
 - **Downgrade é destrutivo?** [x] Sim (dados perdidos) / [ ] Nao — apaga contas, sessões e históricos do servidor
 
 Não é preciso reverter a migration para reverter o código: o código anterior ignora as tabelas. Reverter a migration só se for para apagar os dados de propósito, com backup antes.
@@ -279,3 +313,4 @@ Não é preciso reverter a migration para reverter o código: o código anterior
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D4 e as decisões técnicas (ADR-010, ADR-011) |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-07): backend, frontend, validação runtime com provedor falso, revisão de código (10 achados) e de segurança; CI da branch verde. Pendentes: CR-T-08 (cliente OAuth no Google Cloud, usuário) e FT-014 |

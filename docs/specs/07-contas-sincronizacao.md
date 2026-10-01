@@ -53,7 +53,7 @@ Fora desta iteração: outros provedores de login, e-mail/senha, sincronizar o s
 | | nome | varchar(200) | NULL | Claim `name`; atualizado a cada login (D3) |
 | | criado_em | timestamptz | NOT NULL, default now | |
 | | ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login |
-| `sessoes` | token_hash | char(64) | PK | SHA-256 (hex) do token do cookie; o token em si não é guardado |
+| `sessoes` | token_hash | varchar(64) | PK | SHA-256 (hex) do token do cookie; o token em si não é guardado |
 | | usuario_id | int | FK → usuarios.id ON DELETE CASCADE, index | |
 | | criado_em | timestamptz | NOT NULL, default now | |
 | | expira_em | timestamptz | NOT NULL | `criado_em` + 90 dias |
@@ -202,12 +202,14 @@ export function useLimparHistorico(), useSair(), useExcluirConta()  // mutations
 **Callback (`GET /api/auth/google/callback?code&state` ou `?error`):**
 1. Falha em qualquer passo → 302 para `/conta?erro=login`, apagando o cookie de login e sem sessão. Falhas: `error` presente, `code`/`state` ausentes, cookie ausente ou malformado, `state` diferente (comparação em tempo constante), `ErroLoginGoogle` na troca.
 2. `trocar_codigo` → `IdentidadeGoogle`.
-3. `registrar_login`: usuário por `google_sub`; cria se não existir; atualiza `email`, `nome` e `ultimo_acesso_em`. Remove as sessões expiradas desse usuário.
+3. `entrar`: usuário por `google_sub`; cria se não existir (num savepoint: dois primeiros logins simultâneos da mesma conta não dão erro, o segundo relê o usuário); atualiza `email`, `nome` e `ultimo_acesso_em`. Remove as sessões expiradas desse usuário.
 4. Se a requisição trouxer um cookie de sessão válido, essa sessão é encerrada (troca de conta no mesmo navegador).
 5. `criar_sessao`: token = `token_urlsafe(32)`; grava o SHA-256 e `expira_em` = agora + 90 dias.
 6. 302 para `voltar` (caminho relativo), com o cookie de sessão (`HttpOnly`, `SameSite=Lax`, `Path=/`, `Max-Age` de 90 dias; `Secure` e `__Host-` em produção) e o cookie de login apagado.
 
-**Sessão atual (`obter_usuario`):** cookie ausente, maior que 128 caracteres, hash desconhecido ou `expira_em` vencido → sem usuário (a sessão vencida é apagada). As datas do banco são normalizadas para UTC antes de comparar (o SQLite devolve sem fuso).
+**Sessão atual (`obter_usuario`):** cookie ausente, maior que 128 caracteres, hash desconhecido ou `expira_em` vencido → sem usuário (a sessão vencida é apagada). As datas do banco são normalizadas para UTC antes de comparar (o SQLite devolve sem fuso). Com o login desligado, a sessão continua valendo: desligar só impede logins novos, e quem já entrou ainda sincroniza, sai e exclui a conta (RF-026; revisão de código).
+
+**Provedor (`criar_app`):** `ProvedorGoogle` só com `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`; em produção, também exige `PUBLIC_URL` com `https` — senão o login fica desligado e o motivo vai para o log (uma variável esquecida não derruba o site). Falhas de rede na troca do código (`OSError`, `http.client.HTTPException`) e JSON inválido viram `ErroLoginGoogle`. Com várias audiências no `id_token`, o `azp` precisa ser este cliente. `email_verified` não é exigido: a identidade é o `sub`, e o e-mail só aparece para o próprio dono.
 
 **Histórico — `POST /api/historico` (`gravar`):**
 1. Cada item de `entradas` é validado com `EntradaHistorico`. Os inválidos vão para `rejeitadas` (o `id` deles, se for um texto; senão `"?"`) e não são gravados; o resto segue.
@@ -227,10 +229,12 @@ export function useLimparHistorico(), useSair(), useExcluirConta()  // mutations
 2. Se `marca.conta !== usuarioId` (espelho de outra conta, cuja sessão acabou sem "Sair"): remover de `local` as entradas de `marca.ids` e ignorar a marca. Elas são da outra conta e não vão para esta.
 3. `pendentes` = entradas de `local` fora de `marca.ids` (feitas sem conta, D1, ou que ainda não chegaram ao servidor).
 4. Com pendentes → `POST /api/historico {entradas: pendentes}`; sem → `GET /api/historico`.
-5. Novo histórico local = resposta do servidor + as pendentes recusadas (`rejeitadas`, que ficam só neste navegador), do mais recente para o mais antigo, no máximo 50. `marca` = `{conta: usuarioId, ids: ids da resposta}`.
+5. Novo histórico local = resposta do servidor + as pendentes recusadas (`rejeitadas`, que ficam só neste navegador e não são reenviadas até a página recarregar) + o que outra aba gravou enquanto a chamada andava, do mais recente para o mais antigo, no máximo 50. `marca` = `{conta: usuarioId, ids: ids da resposta}`.
 6. Erro (rede, 5xx) → o `localStorage` não muda e as pendentes continuam pendentes. 401 → a sessão é recarregada (`invalidateQueries(['sessao'])`).
 
 Consequências: entrada apagada em outro dispositivo ("Limpar histórico") some deste na próxima sincronização, porque está na marca e não volta do servidor. Entrada pendente nunca é apagada por sincronização.
+
+**Fila (`exclusivo`):** sincronizar, sair, limpar e excluir rodam uma de cada vez no navegador. Uma sincronização em andamento termina antes de "Sair"/"Limpar"/"Excluir" começar, e nenhuma começa no meio deles: sem a fila, ela regravaria o espelho (ou reenviaria entradas) depois de apagado (revisão de código).
 
 **Sem conta (`historicoSemConta`):** se existir marca (a sessão acabou sem "Sair", ou o login foi desligado), remove do `localStorage` as entradas de `marca.ids` e a marca. As pendentes ficam e vão para a próxima conta que entrar (D1). Devolve `listarHistorico()`.
 
@@ -238,11 +242,11 @@ Consequências: entrada apagada em outro dispositivo ("Limpar histórico") some 
 
 **Finalizar (complementa `specs/04` §2.3):** depois de `adicionarAoHistorico`, `invalidateQueries(['historico'])`. A tela de resultado (dentro do `Layout`) remonta a query, que envia a nova entrada (pendente).
 
-**Limpar histórico (`useLimparHistorico`):** com conta, `DELETE /api/historico`, depois `substituirHistorico([])` e marca `{conta, ids: []}`; se a chamada falhar, nada é apagado e a página mostra o erro. Sem conta, `limparHistorico()`, como hoje.
+**Limpar histórico (`useLimparHistorico`), na fila:** com conta, `DELETE /api/historico`, depois `substituirHistorico([])` e marca `{conta, ids: []}`; se a chamada falhar, nada é apagado e a página mostra o erro. Sem conta, `limparHistorico()`, como hoje.
 
-**Sair (`useSair`, D2):** `sincronizarHistorico` (envia as pendentes) → `DELETE /api/sessao` → `apagarHistoricoDoNavegador()` (remove histórico e marca). Se o envio falhar por rede, nada é apagado e a página avisa ("Não foi possível enviar os simulados pendentes; tente sair de novo com internet"). Se a sessão já tiver acabado (401), segue com `DELETE /api/sessao` + `historicoSemConta()` (remove só o espelho, mantém as pendentes). Depois: sessão anônima no cache e mensagem "Você saiu. Seu histórico continua na sua conta."
+**Sair (`useSair`, D2), na fila:** sincroniza (envia as pendentes) → `DELETE /api/sessao` → `historicoSemConta()`: sai do navegador tudo o que a marca confirmou; as recusadas pelo servidor, que só existem ali, ficam (revisão de código). Se o envio falhar por rede, nada é apagado e a página avisa ("Não foi possível enviar os simulados pendentes; tente sair de novo com internet"). Se a sessão já tiver acabado (401), segue do mesmo jeito. Depois: sessão anônima no cache e mensagem "Você saiu. Seu histórico continua na sua conta."
 
-**Excluir conta (`useExcluirConta`):** `DELETE /api/conta` → `apagarHistoricoDoNavegador()` → sessão anônima no cache → mensagem "Sua conta e o histórico guardado nela foram excluídos."
+**Excluir conta (`useExcluirConta`), na fila:** `DELETE /api/conta` → `apagarHistoricoDoNavegador()` (histórico e marca) → sessão anônima no cache → mensagem "Sua conta e o histórico guardado nela foram excluídos."
 
 ### 2.5 API Endpoints
 
@@ -300,7 +304,7 @@ Erros de domínio novos: `login_indisponivel` (404), `nao_autenticado` (401, "En
 ## 3. Componentes de UI
 
 ### Cabeçalho (`Layout`, complementa `specs/03`)
-- Terceiro link no `nav`, depois de "Histórico", só se `login_disponivel`: sem conta, **"Entrar"**; com conta, o **primeiro nome** (primeira palavra de `nome`; "Conta" se não houver). Os dois levam a `/conta` (`NavLink`, mesmo estilo). Enquanto a sessão carrega ou se ela falhar, o link não aparece. Abaixo de 640 px, os três ficam empilhados como os dois de hoje.
+- Terceiro link no `nav`, depois de "Histórico", se `login_disponivel` ou se já houver alguém conectado: sem conta, **"Entrar"**; com conta, o **primeiro nome** (primeira palavra de `nome`; "Conta" se não houver). Os dois levam a `/conta` (`NavLink`, mesmo estilo). Enquanto a sessão carrega ou se ela falhar, o link não aparece. Abaixo de 640 px, os três ficam empilhados como os dois de hoje.
 - Rodapé: link "Privacidade" (`/privacidade`) depois do aviso de não afiliação.
 
 ### Componente: BotaoGoogle
@@ -317,7 +321,7 @@ Link (`<a href="/api/auth/google?voltar=...">`, navegação de página inteira, 
 |----------|----------|
 | Sessão carregando | `Carregando` |
 | Erro de login (`?erro=login`) | Aviso "Não foi possível entrar com o Google. Tente novamente." acima do conteúdo |
-| Login indisponível | "O login com Google não está disponível no momento. O histórico continua guardado neste navegador." |
+| Login indisponível, sem ninguém conectado | "O login com Google não está disponível no momento. O histórico continua guardado neste navegador." (quem já está conectado vê a visão "Com conta") |
 | Sem conta | `h1` "Conta"; texto: entrar guarda o histórico na conta e mostra em qualquer dispositivo; "Os simulados já feitos neste navegador vão para a sua conta."; "Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos. O simulado em andamento continua só neste navegador."; `BotaoGoogle voltar="/conta"`; link "Privacidade" |
 | Com conta | `h1` "Conta"; "Conectado como **nome** (email)"; estado do histórico ("N simulados na sua conta" / "Sincronizando…" / "Não foi possível sincronizar agora. Tentaremos de novo."); botão "Sair" com a explicação "Ao sair, o histórico deixa este navegador e continua na sua conta."; seção "Excluir conta" com botão perigoso e `ConfirmDialog` ("Excluir a conta?" — "Seu nome, seu e-mail e todo o histórico guardado na conta serão apagados. Não dá para desfazer.") |
 | Depois de sair / excluir | Mensagem de status (`role="status"`) + a visão "Sem conta" |
@@ -382,7 +386,9 @@ sequenceDiagram
 | 12 | `localStorage` bloqueado, com conta | Histórico e painel vêm do servidor (em memória); finalizar com storage bloqueado continua avisando que o resultado não fica salvo (specs/04) |
 | 13 | `POST`/`DELETE` vindos de outro site | Cookie não vai (`SameSite=Lax`); `Origin` diferente → 403 |
 | 14 | `voltar=//evil.com` ou `https://...` | Vira `/` |
-| 15 | Login desligado em produção (variável removida) | "Entrar" some; com marca no navegador, o espelho é removido (caso 7); a conta continua no banco |
+| 15 | Login desligado em produção (variável removida, ou `PUBLIC_URL` sem `https`) | "Entrar" some para quem não está conectado; quem já entrou continua conectado (sincroniza, sai, exclui a conta) até a sessão vencer |
+| 16 | Sincronização em andamento quando o estudante clica em "Sair", "Limpar" ou "Excluir" | A operação espera a sincronização terminar (fila); nada é regravado depois |
+| 17 | Entrada recusada pelo servidor | Fica só neste navegador, não é reenviada até a página recarregar e não sai do navegador no "Sair" |
 
 ---
 
@@ -405,6 +411,9 @@ sequenceDiagram
 | BT-062 | Provedor Google: URL de autorização; `id_token` válido; `iss`/`aud`/`exp` errados; sem `sub`/`email`; resposta sem `id_token`; erro HTTP | `services/google` (sem rede) | Identidade / `ErroLoginGoogle` |
 | BT-063 | Limite do login | GET /api/auth/google ×21 | 429 |
 | BT-064 | Cookies em produção | `ENVIRONMENT=production` | `__Host-sessao`, `Secure` |
+| BT-065 | Login desligado com sessão existente | GET /api/sessao, /api/historico, DELETE /api/conta | Usuário continua; 200/204; `/api/auth/google` 404 |
+| BT-066 | Produção sem `PUBLIC_URL` https | `criar_app` | Provedor `None` + log de erro |
+| BT-067 | Primeiro login simultâneo; falha de rede na troca; `azp` | `contas.entrar`, `services/google` | Um usuário só; `ErroLoginGoogle`; recusa com `azp` de outro cliente |
 | BT-047 | Migrations `002` → `003` → `002` | alembic | Tabelas criadas e removidas; models em sincronia |
 | UT-030 | `sincronizarHistorico`: primeiro login envia o local; marca evita reenvio; removida em outro dispositivo sai; marca de outra conta não vai para a nova; erro de rede não muda nada; rejeitadas ficam locais; limite 50 | `sincronizacao` | Estados esperados |
 | UT-031 | `historicoSemConta` e `apagarHistoricoDoNavegador` | `sincronizacao` | Espelho removido, pendentes mantidas / tudo removido |
@@ -413,6 +422,7 @@ sequenceDiagram
 | UT-034 | Conta: sem conta (botão com `voltar`), erro de login, com conta, sair (D2), excluir com confirmação | `ContaPage` | Textos, chamadas e `localStorage` esperados |
 | UT-035 | Histórico e painel com conta: aviso da conta, lista sincronizada, limpar na conta | `HistoricoPage`, `DesempenhoPage` | Textos e chamadas esperados |
 | UT-036 | Finalizar com conta envia a entrada; resultado espera a sincronização | `useFinalizarSimulado`, `ResultadoPage` | `POST /api/historico` com a entrada; `Carregando` → resultado |
+| UT-037 | Fila: operação exclusiva espera a sincronização; recusadas não reenviadas na mesma carga; "Sair" mantém as recusadas; conectado com login desligado | `sincronizacao`, `ContaPage` | Ordem e estados esperados |
 | FT-013 | Local, provedor falso: anônimo finaliza → Entrar → histórico vai para a conta → "outro dispositivo" (contexto limpo) entra e vê histórico e painel → Sair apaga o navegador → Excluir conta; 360 px sem rolagem horizontal; console limpo | E2E (Playwright MCP) | Conforme §2.4 |
 | FT-014 | Produção: login real com Google e sincronização entre dois navegadores (com o usuário) | E2E manual | Histórico igual nos dois |
 
@@ -420,10 +430,10 @@ sequenceDiagram
 
 ## 7. Checklist de Implementação
 
-- [ ] Banco: migration `003` + models
-- [ ] Login e sessão: provedor, cookies, endpoints, dependências
-- [ ] Histórico no servidor
-- [ ] Frontend: tipos, api, sessão, sincronização
-- [ ] Frontend: cabeçalho, `/conta`, `/privacidade`, Histórico, painel, resultado, finalizar
-- [ ] Testes BT-047, BT-050 a BT-064, UT-030 a UT-036 + FT-013
+- [x] Banco: migration `003` + models
+- [x] Login e sessão: provedor, cookies, endpoints, dependências
+- [x] Histórico no servidor
+- [x] Frontend: tipos, api, sessão, sincronização (com fila)
+- [x] Frontend: cabeçalho, `/conta`, `/privacidade`, Histórico, painel, resultado, finalizar
+- [x] Testes BT-047, BT-050 a BT-067, UT-030 a UT-037 + FT-013
 - [ ] Cliente OAuth no Google Cloud + variáveis na Railway (usuário) + FT-014
