@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-09-30  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -172,7 +172,7 @@ A coluna é nullable porque a migration roda antes da sincronização no start d
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dois endpoints alterados — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v2.0, Arquitetura v1.4, 03-SPEC v1.4, specs 01/02/03/04/06, Plano, Deploy Guide v1.1, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; `/api/catalogo` em produção com os assuntos — branch verde (run 36870182478); falta `master` e produção
+- [x] CI verde na branch e em `master`; `/api/catalogo` em produção com os assuntos — branch verde (runs 36870182478 e 36871841546), `master` verde no merge `128550c` (run 36873133200). Em produção (01/10): 3 provas e 270 questões; em todas as disciplinas os assuntos somam o total; `POST /api/correcoes` com `assunto` por item e nomes da taxonomia; `/desempenho` → 200
 
 **Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025):**
 - HTTP: `GET /api/health` → 3 provas; `GET /api/catalogo` → em todas as disciplinas a soma dos assuntos é igual ao total (Física: 31); `POST /api/correcoes` com 5 questões de 2025 → `assunto` em cada item e Física com "Física moderna e radiações 0/1", "Óptica 1/2", "Impulso e quantidade de movimento 1/1" (do pior para o melhor); payload inválido → 422; `/desempenho` → 200 (SPA).
@@ -266,4 +266,5 @@ Sem o downgrade, o código anterior também funciona: ele ignora a coluna extra.
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D6 |
 | 2026-09-30 | Rafael Peixoto (com Claude) | Gate 1: taxonomia aprovada como proposta (Inglês com 5 assuntos) |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Implementação concluída (CR-T-01 a CR-T-08), primeira passada da classificação (CR-T-09), validação runtime, revisão de código e de segurança; CI da branch verde |
-| 2026-10-01 | Rafael Peixoto (com Claude) | Gate 2: classificação de 2023–2025 aprovada sem ajustes; merge em `master` autorizado. Pendente: CI de `master` e conferência em produção |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Gate 2: classificação de 2023–2025 aprovada sem ajustes; merge em `master` autorizado |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Merge `128550c`, CI de `master` verde e conferência em produção — validação ✅, status Concluído |
