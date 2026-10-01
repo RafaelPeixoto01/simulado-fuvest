@@ -223,7 +223,7 @@ Cada disciplina com `assuntos` não vazio ganha, abaixo da barra, um `<details>`
 - A lista vem de `listarHistorico()` na montagem (o painel não muda enquanto está aberto).
 
 ### Navegação
-- `Layout`: link "Desempenho" (`/desempenho`) antes de "Histórico" no cabeçalho, com o mesmo estilo de `NavLink` ativo.
+- `Layout`: link "Desempenho" (`/desempenho`) antes de "Histórico" no cabeçalho, com o mesmo estilo de `NavLink` ativo. Abaixo de 640 px os dois links ficam empilhados, alinhados à direita (lado a lado estouravam 320 px).
 - `HistoricoPage`: link "Ver meu desempenho" acima da lista quando ela não está vazia.
 
 ---
@@ -285,12 +285,12 @@ sequenceDiagram
 
 ## 7. Checklist de Implementação
 
-- [ ] Taxonomia: `app/pacote/assuntos.py` + `data/provas/assuntos.yaml` (Gate 1: usuário revisa)
-- [ ] Pacote: `Questao.assunto`, V11, `validar` com taxonomia, pacotes sintéticos
-- [ ] Banco: migration `002`, model, sincronização
-- [ ] API: catálogo e correção
-- [ ] CLI `assuntos`
-- [ ] Resultado: "Ver por assunto"
-- [ ] Painel `/desempenho` + links
-- [ ] Classificação de 2023–2025 (Gate 2: usuário revisa)
-- [ ] Testes IT-014 a IT-020, BT-025, BT-026, BT-047, UT-024 a UT-026 + FT-012
+- [x] Taxonomia: `app/pacote/assuntos.py` + `data/provas/assuntos.yaml` (Gate 1 aprovado em 30/09)
+- [x] Pacote: `Questao.assunto`, V11, `validar` com taxonomia, pacotes sintéticos
+- [x] Banco: migration `002`, model, sincronização
+- [x] API: catálogo e correção
+- [x] CLI `assuntos`
+- [x] Resultado: "Ver por assunto"
+- [x] Painel `/desempenho` + links (no celular, os links do cabeçalho ficam empilhados abaixo de 640 px: lado a lado, estouravam 320 px)
+- [ ] Classificação de 2023–2025 (Gate 2: usuário revisa) — primeira passada feita
+- [x] Testes IT-014 a IT-020, BT-025, BT-026, BT-047, UT-024 a UT-026 + FT-012

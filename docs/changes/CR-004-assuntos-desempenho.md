@@ -156,23 +156,52 @@ A coluna é nullable porque a migration roda antes da sincronização no start d
 
 ## 8. Critérios de Aceite
 
-- [ ] Toda questão publicada (2023, 2024 e 2025) tem exatamente 1 assunto, da taxonomia da sua disciplina principal, e `validar --todas` passa com a V11 ativa
-- [ ] Pacote publicado sem assunto, ou com assunto de outra disciplina, é bloqueado pela V11 (CLI, CI e sincronização)
-- [ ] Taxonomia inválida é recusada por `validar` e faz a sincronização terminar com erro sem alterar o banco
-- [ ] `GET /api/catalogo` traz os assuntos de cada disciplina com o total de questões não anuladas
-- [ ] `POST /api/correcoes` traz o assunto de cada item e os assuntos de cada disciplina, do pior para o melhor
-- [ ] No resultado, "Ver por assunto" mostra os acertos por assunto de cada disciplina; resultado antigo, sem assunto, abre sem erro
-- [ ] `/desempenho` agrega o histórico local por disciplina e assunto (RN-015): anuladas fora, em branco como erro, "poucas questões" abaixo de 5, estado vazio e aviso de histórico local
-- [ ] O Treino não entra no painel, e o assunto não aparece durante a resolução
-- [ ] `python -m ingestao assuntos --ano AAAA` lista a classificação para revisão
-- [ ] Migration `002` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI)
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge (HTTP real no catálogo e na correção; Playwright no resultado e no painel)
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dois endpoints alterados
-- [ ] Documentos afetados foram atualizados
-- [ ] CI verde na branch e em `master`; `/api/catalogo` em produção com os assuntos
+- [ ] Toda questão publicada (2023, 2024 e 2025) tem exatamente 1 assunto, da taxonomia da sua disciplina principal, e `validar --todas` passa com a V11 ativa — primeira passada feita (270/270, `validar --todas` verde, 0 questão sem assunto no banco local); **falta o Gate 2 (revisão do usuário)**
+- [x] Pacote publicado sem assunto, ou com assunto de outra disciplina, é bloqueado pela V11 (CLI, CI e sincronização) — IT-015, `test_publicada_sem_assunto_falha_com_v11`
+- [x] Taxonomia inválida é recusada por `validar` e faz a sincronização terminar com erro sem alterar o banco — IT-016, IT-019
+- [x] `GET /api/catalogo` traz os assuntos de cada disciplina com o total de questões não anuladas — BT-025; HTTP real abaixo
+- [x] `POST /api/correcoes` traz o assunto de cada item e os assuntos de cada disciplina, do pior para o melhor — BT-026; HTTP real abaixo
+- [x] No resultado, "Ver por assunto" mostra os acertos por assunto de cada disciplina; resultado antigo, sem assunto, abre sem erro — UT-024; Playwright abaixo
+- [x] `/desempenho` agrega o histórico local por disciplina e assunto (RN-015): anuladas fora, em branco como erro, "poucas questões" abaixo de 5, estado vazio e aviso de histórico local — UT-025, UT-026; Playwright abaixo
+- [x] O Treino não entra no painel, e o assunto não aparece durante a resolução — o painel lê só o histórico (o Treino não grava nele, RF-012); `GET /api/questoes` e `POST /api/simulados` sem `assunto` (conferido por HTTP)
+- [x] `python -m ingestao assuntos --ano AAAA` lista a classificação para revisão — IT-020
+- [x] Migration `002` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI) — local `001 → 002 → 001 → 002` em 30/09; CI da branch verde (job "Backend ... migrations no Postgres")
+- [x] Testes existentes continuam passando (regressão) — backend 217 testes, frontend 159
+- [x] Novos testes cobrem a mudança — IT-014 a IT-020, BT-025, BT-026, BT-047, UT-024 a UT-026 + 2 da revisão de código
+- [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dois endpoints alterados — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v2.0, Arquitetura v1.4, 03-SPEC v1.4, specs 01/02/03/04/06, Plano, Deploy Guide v1.1, CLAUDE.md, INDEX.md
+- [ ] CI verde na branch e em `master`; `/api/catalogo` em produção com os assuntos — branch verde (run 36870182478); falta `master` e produção
+
+**Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025):**
+- HTTP: `GET /api/health` → 3 provas; `GET /api/catalogo` → em todas as disciplinas a soma dos assuntos é igual ao total (Física: 31); `POST /api/correcoes` com 5 questões de 2025 → `assunto` em cada item e Física com "Física moderna e radiações 0/1", "Óptica 1/2", "Impulso e quantidade de movimento 1/1" (do pior para o melhor); payload inválido → 422; `/desempenho` → 200 (SPA).
+- Playwright (FT-012): Prova de um ano 2025 → 4 respostas pelo teclado → "Finalizar simulado" → resultado com "Ver por assunto" recolhido em cada disciplina; aberto em Geografia, 11 assuntos do pior para o melhor. Link "Desempenho" do cabeçalho → painel com 2 simulados (o novo e um anterior ao CR-004, já no navegador), 180 questões; Geografia com "poucas questões" e "Sem assunto 1 de 13" por último; nomes do catálogo. Console sem erros nem avisos.
+- **Achado e corrigido:** a 320 px, os dois links do cabeçalho estouravam a largura (documento com 340 px). Abaixo de 640 px os links ficaram empilhados (`da8f190`); a 320 px o documento passou a 305 px e a 360 px ficou sem rolagem; a 1440 px, os links continuam lado a lado.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 8 achados, 6 corrigidos e 2 justificados (`17d2dee`):**
+1. Corrigido: `ingestao assuntos` quebrava com `UnicodeEncodeError` quando a saída era redirecionada no Windows (cp1252). A CLI passou a escrever em UTF-8 (teste com subprocesso).
+2. Justificado: renomear um slug na taxonomia sem reclassificar tira as provas do banco na sincronização (exit 0). É o mesmo comportamento de qualquer pendência V01–V10 (ADR-002, spec 01 caso de borda 7); o portão é o CI (`validar --todas`), e o caso está documentado (spec 01 caso 12, Deploy Guide §4.4).
+3. Corrigido: o comentário de `calcularPercentual` prometia o mesmo arredondamento do servidor, mas os empates exatos diferem (Python arredonda para o par). O comentário agora diz isso, porque o painel não é comparado número a número com a API.
+4. Corrigido: a docstring de `validar_pacote` não batia com o `extrair`, que agora passa `None` (o rascunho não tem assunto; sem aviso de taxonomia ausente no stderr).
+5. Justificado: um `stat` do `assuntos.yaml` por requisição custa pouco e deixa a taxonomia ser trocada sem reiniciar no desenvolvimento e nos testes, cujos dados entram depois de o app ser criado.
+6. Corrigido: a escolha dos diretórios ficou num helper único, `_diretorios_alvo`, usado por `validar` e `assuntos`.
+7. Corrigido: `Placar` único para "a de t (p%)", usado no resultado e no painel.
+8. Corrigido: questão sem disciplina aparecia em "Sem disciplina" e de novo em "Sem assunto"; agora só na primeira (teste novo).
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum segredo novo; nenhuma variável de ambiente nova |
+| Validação de entrada | Corpos das requisições inalterados (Pydantic). A taxonomia é conteúdo do repositório, validada por Pydantic (`extra="forbid"`, slug `^[a-z0-9-]+$`) no CI e na sincronização |
+| Tokens / ownership | N/A: sem usuário nem dado pessoal (ADR-004 inalterado); o painel lê só o `localStorage` |
+| SQL | Só ORM/`select()` parametrizado (`select(Questao.disciplina, Questao.assunto)`) |
+| Caminho de arquivo | `DATA_DIR/assuntos.yaml`, fixo, sem entrada do usuário |
+| XSS | Nomes de assunto renderizados como texto pelo React; nada de HTML |
+| Exposição de dados | Gabarito continua só em `POST /api/correcoes`; o assunto não vai na questão pública |
+| CORS / headers | Inalterados |
+| Dependências | Nenhuma nova (PyYAML já era usado) |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -205,7 +234,7 @@ A coluna é nullable porque a migration roda antes da sincronização no start d
 
 - **Migration afetada:** `002_assunto_questoes.py`
 - **Comando de downgrade:** `alembic downgrade 001`
-- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local e Postgres no CI
 - **Downgrade é destrutivo?** [ ] Sim / [x] Nao — a coluna só tem dado derivado do repositório, recriado na sincronização
 
 Sem o downgrade, o código anterior também funciona: ele ignora a coluna extra.
@@ -235,3 +264,5 @@ Sem o downgrade, o código anterior também funciona: ele ignora a coluna extra.
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-09-30 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D6 |
+| 2026-09-30 | Rafael Peixoto (com Claude) | Gate 1: taxonomia aprovada como proposta (Inglês com 5 assuntos) |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação concluída (CR-T-01 a CR-T-08), primeira passada da classificação (CR-T-09), validação runtime, revisão de código e de segurança; CI da branch verde. Pendentes: Gate 2, merge e conferência em produção |
