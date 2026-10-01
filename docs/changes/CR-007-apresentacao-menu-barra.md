@@ -66,6 +66,13 @@ A consequência anotada no CR-006 ("a apresentação não mostra números da bas
 - A prévia usa o texto da questão 13 de 2025 tirado do pacote (`data/provas/2025/prova.yaml`): o protótipo resumia as alternativas. As alternativas aparecem cortadas com reticências pelo CSS. O cartão de resultado tem números ilustrativos, como no protótipo.
 - No modo `livre` (só desenvolvimento e testes, sem login), o menu do celular mostra Início, Desempenho e Histórico, sem a linha da conta. Com o site `indisponivel` e alguém conectado, o menu mostra Início e a conta, como os links de hoje.
 
+**Ajustes da validação e da revisão de código (Claude, 01/10/2026):**
+- Em 320 px, "Simulado Fuvest" quebrava em duas linhas ao lado do botão "Menu". Abaixo de 640 px, a marca fica com 46 px, como nos três protótipos do celular, e o espaço entre a marca e o botão cai para 8 px. Com isso, o cabeçalho cabe numa linha com 56 px.
+- Em 1024 px, o cartão de resultado cobria a alternativa B marcada. A coluna da prévia tem 616 px de altura entre 1024 e 1279 px e 584 px a partir daí, e o cartão fica sempre abaixo da alternativa marcada.
+- Em 390 px, o período "2023–25" quebrava em duas linhas. Os três números usam `repeat(3, 1fr)` (o mínimo de cada cartão é o conteúdo) e o período não quebra.
+- Com o menu aberto, a rolagem da página fica travada: o cabeçalho não é fixo, e rolar levaria o painel embora e deixaria só o fundo escuro. O menu também fecha quando o foco sai dele (Tab depois do último item), para o conteúdo coberto não receber o foco.
+- Enquanto a sessão carrega, o celular mostra só a marca. Antes, o botão "Menu" aparecia e virava "Entrar" logo depois.
+
 ---
 
 ## 4. Detalhamento da Mudança
@@ -175,22 +182,54 @@ Diferenças das telas "Apresentação · desktop", "Apresentação · celular" e
 
 ## 8. Critérios de Aceite
 
-- [ ] `GET /api/vitrine` responde, sem sessão e em qualquer modo de acesso, só `{total_questoes, anos}` (questões válidas e anos em ordem crescente), sem cookie; base vazia → `{0, []}`
-- [ ] O1.1: a apresentação mostra os números da vitrine abaixo do subtítulo (270 · 3 · 2023–2025 com a base de produção); sem vitrine, ou com a base vazia, mostra a página sem os números
-- [ ] O1.2: prévia da resolução à direita no desktop, com o cartão de resultado sobreposto, e depois do botão no celular; `aria-hidden`, com descrição em texto
-- [ ] O1.3: modos em cartões com as bolinhas A–D, 4 colunas no desktop e lista no celular
-- [ ] O1.4: botão do Google com 52 px; aviso começando por "É grátis."
-- [ ] O2.1–O2.3: abaixo de 640 px, com conta, botão "Menu" de 44 px (`aria-expanded`, `aria-controls`) que abre o painel com Início, Desempenho, Histórico (52 px, ícone, `aria-current`) e a conta; fecha com Esc (foco no botão), toque fora, item e troca de rota; cabeçalho com 56 px
-- [ ] O2.4: sem conta, só "Entrar"; a partir de 640 px, links em linha como hoje
-- [ ] O3.1: barra do topo da resolução opaca, sem desfoque
-- [ ] Sem rolagem horizontal em 320 e 390 px; nada se sobrepõe na apresentação em 1024 e 1440 px
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança — BT-076 a BT-078, UT-043 a UT-046
-- [ ] Fluxo afetado exercitado em runtime antes do merge (FT-021) — registrar abaixo
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — registrar abaixo
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoint público novo — registrar abaixo
-- [ ] Documentos afetados foram atualizados
+- [x] `GET /api/vitrine` responde, sem sessão e em qualquer modo de acesso, só `{total_questoes, anos}` (questões válidas e anos em ordem crescente), sem cookie; base vazia → `{0, []}` — BT-076 a BT-078; HTTP real abaixo
+- [x] O1.1: a apresentação mostra os números da vitrine abaixo do subtítulo (270 · 3 · 2023–2025 com a base de produção); sem vitrine, ou com a base vazia, mostra a página sem os números — UT-043; FT-021
+- [x] O1.2: prévia da resolução à direita no desktop, com o cartão de resultado sobreposto, e depois do botão no celular; `aria-hidden`, com descrição em texto — UT-044; FT-021
+- [x] O1.3: modos em cartões com as bolinhas A–D, 4 colunas no desktop e lista no celular — UT-044; FT-021
+- [x] O1.4: botão do Google com 52 px; aviso começando por "É grátis." — UT-043; FT-021 (52 px medidos)
+- [x] O2.1–O2.3: abaixo de 640 px, com conta, botão "Menu" de 44 px (`aria-expanded`, `aria-controls`) que abre o painel com Início, Desempenho, Histórico (52 px, ícone, `aria-current`) e a conta; fecha com Esc (foco no botão), toque fora, item e troca de rota; cabeçalho com 56 px — UT-045; FT-021
+- [x] O2.4: sem conta, só "Entrar"; a partir de 640 px, links em linha como hoje — UT-045; FT-021 (640 px: links em linha, cabeçalho com os mesmos 53 px)
+- [x] O3.1: barra do topo da resolução opaca, sem desfoque — UT-046; FT-021
+- [x] Sem rolagem horizontal em 320 e 390 px; nada se sobrepõe na apresentação em 1024 e 1440 px — FT-021 (o cartão de resultado fica 15 a 58 px abaixo da alternativa marcada entre 1024 e 1440 px)
+- [x] Testes existentes continuam passando (regressão) — backend 327, frontend 225
+- [x] Novos testes cobrem a mudança — BT-076 a BT-078 (4 testes), UT-043 a UT-046 (19 testes)
+- [x] Fluxo afetado exercitado em runtime antes do merge (FT-021) — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoint público novo — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v4.1, Arquitetura v1.7, 03-SPEC v1.7, specs 07 v1.3 e 03 v1.7, CR-006 (nota da emenda), Plano, Deploy Guide v1.4, CLAUDE.md, INDEX.md
 - [ ] CI verde na branch e em `master`
+
+**Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
+- HTTP (curl), modo `conta`, sem cookie: `GET /api/vitrine` → 200 `{"total_questoes":270,"anos":[2023,2024,2025]}`, sem `Set-Cookie`, com os headers de segurança; `POST /api/vitrine` → 405; parâmetro na URL é ignorado (200). `GET /api/catalogo` continua 401 e `/api/sessao` → `acesso: "conta"`.
+- Playwright, apresentação sem login: em 1440 px, duas colunas ("270 · 3 · 2023–2025" com "questões reais", "provas completas" e "anos na base"; botão do Google com 52 px; aviso "É grátis."; prévia à direita com o cartão "58 de 90 acertos" sobreposto) e os 4 modos em cartões A–D em 4 colunas. Em 1024, 1180, 1280 e 1440 px, o cartão de resultado fica abaixo da alternativa B, sem rolagem horizontal. Em 390 e 320 px: cartões "270 · 3 · 2023–25" com "provas" e "anos", prévia depois do aviso, sem o cartão de resultado, modos em lista, sem rolagem horizontal.
+- Playwright, menu (com login pelo provedor falso): em 390 px, o cabeçalho tem 56 px e só o botão "Menu" (44 px). O painel mostra Início (`aria-current`), Desempenho e Histórico com 52 px e "R · Rafael · Conta e sair" com 56 px. Esc fecha e devolve o foco ao botão; o toque no fundo escuro fecha sem sair de `/`; "Histórico" navega, fecha e devolve o foco; o voltar do navegador com o menu aberto fecha. Depois da revisão, com o menu aberto, a página não rola, e Tab depois da conta fecha o menu. Em 320 px, a marca e o botão cabem numa linha. Em 640 px, sem menu e com os links em linha (53 px, como antes).
+- Playwright, resolução (Prova de 2025, 1440 px, página rolada até o meio da questão 1): barra do topo com fundo `rgb(245, 246, 248)` e `backdrop-filter: none`; o texto rolado não aparece por trás dela.
+- Console: nenhum erro nem aviso.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 9 achados: 6 corrigidos, 3 justificados (`0e45afe`):**
+1. Corrigido: o fundo escuro é fixo e o cabeçalho não. Rolar com o menu aberto levava o painel embora e deixava só o fundo. Com o menu aberto, a rolagem da página fica travada, como no painel da folha (UT-045).
+2. Corrigido: enquanto a sessão carregava, o celular mostrava "Menu" (que depois virava "Entrar"). Agora mostra só a marca até a sessão chegar (UT-045).
+3. Corrigido: Tab depois do último item levava o foco ao conteúdo coberto pelo fundo. O menu fecha quando o foco sai dele (UT-045).
+4. Corrigido em parte: a vitrine não tem rate limit nem cache, e o React Query a buscava de novo a cada volta à aba. Agora usa `staleTime: Infinity`, porque os totais só mudam com um deploy. **Justificado** sem rate limit: são duas consultas leves (contagem e anos), como o `/api/health`, que também não tem limite. Um limite por IP também barraria escolas inteiras atrás do mesmo IP na página de entrada.
+5. **Justificado:** `obter_vitrine` conta as questões válidas com a própria consulta, e não com a do catálogo. O catálogo conta agrupando por disciplina e assunto, e reaproveitar essa contagem exigiria montar a lista inteira. O BT-076 confere que os dois totais são iguais.
+6. Corrigido: o Esc repetia o fechamento dos itens; agora os dois usam a mesma função. **Justificado:** o ouvinte de clique continua no documento, e não só no fundo, porque o fundo não cobre o cabeçalho (a marca também deve fechar o menu).
+7. **Justificado:** o menu tem a própria lista de links, separada da do desktop. A apresentação é diferente (ícones, Início, linha da conta), e a visibilidade segue a mesma regra (`comConteudo`). Sem conta, os dois mostram só "Entrar". UT-045 cobre os modos.
+8. **Incorreto:** `comMenu` não é sempre igual a `comConteudo`. Com o site `indisponivel` e alguém conectado, `comConteudo` é falso e há usuário (UT-042 do CR-006). O comentário no `Layout` passou a citar o caso.
+9. Corrigido: `Math.min`/`Math.max` nos anos, que já vêm em ordem crescente pelo contrato; agora o primeiro e o último.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum; nenhuma variável nova |
+| Validação de entrada | A vitrine não recebe entrada (só `GET`, sem parâmetros; outros métodos → 405) |
+| Tokens / armazenamento | Inalterado; a vitrine não lê nem cria cookie (BT-077) |
+| Autorização | Pública por decisão (D1, emenda à D2 do CR-006). O router não tem `exigir_acesso`, e o contrato fica fechado em dois agregados (`VitrineResponse`): nenhum id, texto, gabarito ou dado pessoal. As demais rotas de conteúdo continuam com `exigir_acesso` |
+| Ownership | Sem dado de usuário |
+| SQL | ORM (`select`, `func.count`), sem SQL montado |
+| CORS / headers | Inalterados; headers de segurança presentes na resposta da vitrine |
+| Rate limit / abuso | Sem limite, como o `/api/health` (achado 4 da revisão) |
+| Dependências | Nenhuma nova |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -249,3 +288,4 @@ Diferenças das telas "Apresentação · desktop", "Apresentação · celular" e
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com os itens O1 a O3, a D1 (vitrine), a D2 (extras do protótipo fora de escopo) e a emenda à D2 do CR-006 |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-05): vitrine, apresentação, menu do celular e barra opaca; validação runtime (FT-021) com 3 ajustes de layout (cabeçalho em 320 px, cartão de resultado em 1024 px, período em 390 px); revisão de código (9 achados) e de segurança |

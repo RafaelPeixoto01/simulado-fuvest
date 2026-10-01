@@ -541,7 +541,7 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
 
 **Coluna de texto, na ordem:**
 1. `h1` e subtítulo, sem mudança (§8.2).
-2. **Números (O1.1)**, por `useVitrine`, só quando a vitrine responde com `anos.length > 0`. `<dl>` com três pares, o rótulo (`dt`) antes do número (`dd`) no DOM e abaixo dele na tela (`flex-col-reverse`):
+2. **Números (O1.1)**, por `useVitrine` (`staleTime: Infinity`: os totais só mudam com um deploy), só quando a vitrine responde com `anos.length > 0`. `<dl>` com três pares, o rótulo (`dt`) antes do número (`dd`) no DOM e abaixo dele na tela (`flex-col-reverse`):
 
    | Número | Rótulo (≥ 640 px) | Rótulo (< 640 px) |
    |--------|-------------------|-------------------|
@@ -549,7 +549,7 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
    | `anos.length` | "provas completas" ("prova completa" com 1) | "provas" ("prova") |
    | período | "anos na base" ("ano na base" com 1) | "anos" ("ano") |
 
-   Período: `min–max` com meia-risca ("2023–2025"); abaixo de 640 px, o ano final com dois dígitos ("2023–25"); com um ano só, "2025". Números com `tabular-nums`. Abaixo de 640 px, três cartões brancos lado a lado; a partir de 640 px, em linha, com divisórias. Enquanto carrega, com erro ou com a base vazia, o bloco não aparece (nunca "0"), e a página não espera a vitrine.
+   Período: `min–max` com meia-risca ("2023–2025"); abaixo de 640 px, o ano final com dois dígitos ("2023–25"); com um ano só, "2025". Números com `tabular-nums`. Abaixo de 640 px, três cartões brancos lado a lado (`repeat(3, 1fr)`: o mínimo de cada um é o conteúdo, e o período não quebra em 320 px); a partir de 640 px, em linha, com divisórias. Enquanto carrega, com erro ou com a base vazia, o bloco não aparece (nunca "0"), e a página não espera a vitrine.
 3. Com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar.", como antes.
 4. `BotaoGoogle` com 52 px de altura (O1.4). É o mesmo botão da página Conta, que também fica com 52 px.
 5. Aviso (O1.4): "É grátis. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade.
@@ -557,6 +557,7 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
 **`PreviaProduto` (O1.2)** (`components/apresentacao/PreviaProduto.tsx`): HTML/CSS com os tokens do site, sem captura de tela nem chamada à API.
 - Texto para leitor de tela (`sr-only`): "Prévia da tela de resolução: uma questão de História da FUVEST 2025 com a alternativa B marcada, o cronômetro, a folha de respostas e os botões Anterior, Revisar e Próxima."
 - Miniatura (`aria-hidden`): barra do topo com "FUVEST 2025" (só a partir de 1024 px), o cronômetro "04:52:10" e "Folha 12/90"; "Questão 13 de 90" e "História · FUVEST 2025 (questão 13)"; o enunciado da questão 13 de 2025 na fonte de leitura; as alternativas A, B (marcada, como na resolução) e C, cortadas com reticências; e a barra inferior com "‹ Anterior", "Revisar" e "Próxima ›" (azul). O texto vem do pacote `data/provas/2025/prova.yaml`.
+- A coluna da prévia tem 616 px de altura entre 1024 e 1279 px e 584 px a partir daí, para o cartão de resultado ficar abaixo da alternativa marcada.
 - Cartão de resultado sobreposto (só a partir de 1024 px, embaixo e à esquerda da coluna): "Resultado", "58 de 90 acertos" e as barras de Inglês 40%, História 53%, Geografia 77% e Física 100% (números ilustrativos). Tem o próprio texto para leitor de tela: "Ao lado, o desempenho por disciplina de um resultado."
 
 **Modos (O1.3):** `h2` "Quatro jeitos de treinar" (como hoje) e os 4 modos em cartões (`li` com borda, fundo branco e cantos arredondados). Cada um tem uma bolinha da folha (letra A–D em `optico-texto`, borda `optico`, `aria-hidden`), o `h3` e a descrição. A partir de 1024 px, 4 colunas, com a bolinha acima do título; abaixo disso, lista, com a bolinha à esquerda.
@@ -584,6 +585,6 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
 
 ### 9.5 Checklist (CR-007)
 
-- [ ] Backend: `GET /api/vitrine` + smoke test do CI
-- [ ] Frontend: `useVitrine` e a apresentação (números, prévia, modos, botão e aviso)
-- [ ] Testes BT-076 a BT-078, UT-043 e UT-044 + FT-021
+- [x] Backend: `GET /api/vitrine` + smoke test do CI
+- [x] Frontend: `useVitrine` e a apresentação (números, prévia, modos, botão e aviso)
+- [x] Testes BT-076 a BT-078, UT-043 e UT-044 + FT-021

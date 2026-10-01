@@ -150,7 +150,10 @@ Protótipo: tela "Menu do cabeçalho · celular" do canvas "Protótipo Simulado 
   - "Início" (casa), "Desempenho" (barras) e "Histórico" (relógio). Desempenho e Histórico só com acesso ao conteúdo, como os links do desktop.
   - A página atual fica destacada (fundo `caneta-clara`, texto `caneta-escura`, negrito) e leva `aria-current="page"`.
   - Separada por uma linha, a conta (só com alguém conectado): a inicial do primeiro nome num círculo, o primeiro nome e "Conta e sair", levando a `/conta`.
-- **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão) ou qualquer troca de rota. O botão também alterna. O menu não prende o foco: Tab segue do botão para os itens do painel.
+- **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão), qualquer troca de rota ou o foco saindo do painel e do botão (Tab depois do último item). O botão também alterna. Tab segue do botão para os itens do painel.
+- **Com o menu aberto**, a rolagem da página fica travada (`overflow: hidden` no `html`, como no `PainelFolha`): o cabeçalho não é fixo, e rolar levaria o painel embora.
+- **Enquanto a sessão carrega**, o celular mostra só a marca (nem "Menu" nem "Entrar").
+- **Marca no celular:** 46 px de largura (`h-2`), com 8 px até o botão, para o cabeçalho caber numa linha em 320 px; a partir de 640 px, como antes.
 
 ### Componente: Blocos
 
