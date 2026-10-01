@@ -169,7 +169,7 @@ function Resolucao({ simulado }: { simulado: SimuladoEmAndamento }) {
   return (
     // Modo foco (D5): a resolução não usa o cabeçalho nem o rodapé do site
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-20 border-b border-linha bg-fundo/95 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-linha bg-fundo">
         <div className="mx-auto flex h-15 max-w-6xl items-center justify-between gap-2 px-3 sm:px-4 lg:h-16">
           <p className="hidden min-w-0 truncate font-bold lg:block">{simulado.descricao}</p>
           <Cronometro

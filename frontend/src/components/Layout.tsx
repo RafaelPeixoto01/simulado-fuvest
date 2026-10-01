@@ -4,6 +4,7 @@ import { useHistorico } from '../hooks/useHistorico'
 import { useSessao } from '../hooks/useSessao'
 import { primeiroNome } from '../utils/format'
 import { Marca } from './Marca'
+import { MenuCelular } from './MenuCelular'
 
 const itemNav = ({ isActive }: { isActive: boolean }) =>
   `rounded px-2 py-1 text-sm ${isActive ? 'text-caneta underline underline-offset-4' : 'text-tinta-suave hover:text-tinta'}`
@@ -15,17 +16,22 @@ export function Layout() {
   // Login obrigatório (CR-006): Desempenho e Histórico só aparecem com acesso ao conteúdo
   // (sem conta, levariam à apresentação; com o site indisponível, ao aviso)
   const comConteudo = !sessao || sessao.acesso === 'livre' || (sessao.acesso === 'conta' && !!sessao.usuario)
+  // Abaixo de 640 px os links não cabem em linha (CR-004): vão para o menu (CR-007, O2).
+  // Sem conta não há menu, só "Entrar" (O2.4)
+  const usuario = sessao?.usuario ?? null
+  const comMenu = comConteudo || !!usuario
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-linha bg-papel">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      {/* 56 px fixos no celular (O2.3); acima do conteúdo para o painel do menu */}
+      <header className="relative z-30 h-14 border-b border-linha bg-papel sm:h-auto">
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4 sm:py-3">
           <Link to="/" className="flex items-center gap-2.5 font-bold tracking-tight text-tinta">
             <Marca className="h-2.5 w-auto" />
             Simulado Fuvest
           </Link>
-          {/* No celular os links ficam empilhados: lado a lado, estouram 320 px (CR-004) */}
-          <nav className="flex flex-col items-end sm:flex-row sm:gap-1">
+          {comMenu && <MenuCelular comConteudo={comConteudo} usuario={usuario} className="sm:hidden" />}
+          <nav className={`items-center gap-1 ${comMenu ? 'hidden sm:flex' : 'flex'}`}>
             {comConteudo && (
               <>
                 <NavLink to="/desempenho" className={itemNav}>
