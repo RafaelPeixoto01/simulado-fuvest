@@ -24,10 +24,8 @@ export function useHistorico() {
 
   const consulta = useQuery<HistoricoEntry[], Error>({
     queryKey: chave(usuario?.id),
-    queryFn: async () => {
-      // Um 401 (sessão vencida) recarrega a sessão pelo QueryCache (criarQueryClient, CR-006)
-      return usuario ? sincronizarHistorico(usuario.id) : historicoSemConta()
-    },
+    // Um 401 (sessão vencida) recarrega a sessão (services/api + criarQueryClient, CR-006)
+    queryFn: () => (usuario ? sincronizarHistorico(usuario.id) : historicoSemConta()),
     // Só depois de saber quem está conectado: "sem conta" apaga o espelho de uma conta
     enabled: sessao.isSuccess,
     placeholderData: doNavegador,

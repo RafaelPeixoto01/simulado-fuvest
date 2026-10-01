@@ -32,6 +32,22 @@ export class ApiError extends Error {
 
 const MENSAGEM_PADRAO = 'Não foi possível completar a operação. Tente novamente.'
 
+// Login obrigatório (CR-006): a sessão acabou (401 nao_autenticado) ou o site fechou
+// (503 site_indisponivel). Vale para qualquer chamada, inclusive as feitas fora do React Query
+// (Treino, reporte); o app registra aqui o que fazer (recarregar a sessão — queryClient.ts)
+let aoErroDeAcesso: ((erro: ApiError) => void) | null = null
+
+export function definirAoErroDeAcesso(tratar: ((erro: ApiError) => void) | null) {
+  aoErroDeAcesso = tratar
+}
+
+function erroDeAcesso(erro: ApiError): boolean {
+  return (
+    (erro.status === 401 && erro.codigo === 'nao_autenticado') ||
+    (erro.status === 503 && erro.codigo === 'site_indisponivel')
+  )
+}
+
 async function requisitar<T>(caminho: string, init?: RequestInit): Promise<T> {
   let resposta: Response
   try {
@@ -55,7 +71,9 @@ async function requisitar<T>(caminho: string, init?: RequestInit): Promise<T> {
   // Erro de dominio: {codigo, mensagem, ...}; 429 e outros: detail em texto
   if (detalhe && typeof detalhe === 'object' && 'codigo' in detalhe) {
     const d = detalhe as Record<string, unknown>
-    throw new ApiError(resposta.status, String(d.mensagem ?? MENSAGEM_PADRAO), String(d.codigo), d)
+    const erro = new ApiError(resposta.status, String(d.mensagem ?? MENSAGEM_PADRAO), String(d.codigo), d)
+    if (erroDeAcesso(erro)) aoErroDeAcesso?.(erro)
+    throw erro
   }
   throw new ApiError(resposta.status, typeof detalhe === 'string' ? detalhe : MENSAGEM_PADRAO)
 }

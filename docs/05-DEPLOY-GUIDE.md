@@ -167,7 +167,7 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 ## 7. Verificação Pós-Deploy
 
 - [ ] `GET /api/health` → `{"status":"ok","provas":N}` com o N esperado de provas publicadas
-- [ ] Início carrega o catálogo (anos e questões por disciplina); `GET /api/catalogo` traz `assuntos` em cada disciplina (CR-004)
+- [ ] Com login, o início carrega o catálogo (anos e questões por disciplina), e o catálogo traz `assuntos` em cada disciplina (CR-004). Desde o CR-006, `GET /api/catalogo` sem cookie responde 401: confira no navegador logado (ou com o cookie de sessão)
 - [ ] Prova completa ou de um ano: gerar, responder, recarregar (respostas mantidas), finalizar, resultado
 - [ ] Resultado com "Ver por assunto" e `/desempenho` somando o histórico (CR-004)
 - [ ] Treino: resposta imediata

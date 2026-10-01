@@ -1,21 +1,14 @@
-import { MutationCache, QueryCache, QueryClient, type DefaultOptions } from '@tanstack/react-query'
+import { QueryClient, type DefaultOptions } from '@tanstack/react-query'
 
 import { CHAVE_SESSAO } from './hooks/useSessao'
-import { ApiError } from './services/api'
+import { definirAoErroDeAcesso } from './services/api'
 
-/** Login obrigatório (CR-006): um 401 em qualquer chamada recarrega a sessão. Se ela acabou,
- *  o RequerConta leva à apresentação, e o login volta para a página. */
+/** Login obrigatório (CR-006): um 401 `nao_autenticado` ou um 503 `site_indisponivel` em
+ *  qualquer chamada recarrega a sessão; o RequerConta leva então à apresentação (e o login volta
+ *  para a página) ou mostra "temporariamente indisponível". */
 export function criarQueryClient(padroes: DefaultOptions) {
-  const recarregarSessao = (erro: unknown) => {
-    if (erro instanceof ApiError && erro.status === 401) {
-      void cliente.invalidateQueries({ queryKey: CHAVE_SESSAO })
-    }
-  }
-  const cliente: QueryClient = new QueryClient({
-    queryCache: new QueryCache({ onError: recarregarSessao }),
-    mutationCache: new MutationCache({ onError: recarregarSessao }),
-    defaultOptions: padroes,
-  })
+  const cliente = new QueryClient({ defaultOptions: padroes })
+  definirAoErroDeAcesso(() => void cliente.invalidateQueries({ queryKey: CHAVE_SESSAO }))
   return cliente
 }
 

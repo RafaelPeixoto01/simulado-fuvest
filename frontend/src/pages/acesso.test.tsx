@@ -1,10 +1,11 @@
 import { screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../App'
 import type { SimuladoEmAndamento } from '../simulado/tipos'
 import { CHAVE_SIMULADO } from '../storage/simuladoStorage'
-import { CATALOGO, instalarApiFalsa, json } from '../test/apiFalsa'
+import { CATALOGO, instalarApiFalsa, json, simuladoFalso } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 import type { Sessao } from '../types'
 
@@ -159,5 +160,50 @@ describe('Sessão que acaba no meio do uso (UT-042)', () => {
       'href',
       '/api/auth/google?voltar=%2Fhistorico',
     )
+  })
+
+  it('vale também para chamadas fora do React Query (Treino corrige direto pela API)', async () => {
+    let sessao = COM_LOGIN
+    api(sessao, {
+      'GET /api/sessao': () => json(200, sessao),
+      'POST /api/simulados': () =>
+        json(200, simuladoFalso(['2099-001', '2099-002'], { modo: 'treino', tempo_limite_s: null })),
+      'POST /api/correcoes': () => {
+        sessao = SEM_LOGIN
+        return json(401, { detail: { codigo: 'nao_autenticado', mensagem: 'Entre com sua conta Google para continuar.' } })
+      },
+    })
+    renderizar(<App />, { rota: '/treino' })
+    await userEvent.click(await screen.findByRole('button', { name: 'Começar treino' }))
+    await userEvent.click(await screen.findByRole('radio', { name: /Alternativa B/ }))
+
+    await apresentacao()
+    expect(screen.getByRole('link', { name: 'Entrar com Google' })).toHaveAttribute(
+      'href',
+      '/api/auth/google?voltar=%2Ftreino',
+    )
+  })
+
+  it('um 503 site_indisponivel recarrega a sessão e mostra o aviso', async () => {
+    let sessao = COM_LOGIN
+    api(sessao, {
+      'GET /api/sessao': () => json(200, sessao),
+      'GET /api/catalogo': () => {
+        sessao = INDISPONIVEL // o login foi desligado em produção com o site aberto
+        return json(503, { detail: { codigo: 'site_indisponivel', mensagem: 'O site está temporariamente indisponível.' } })
+      },
+    })
+    renderizar(<App />, { rota: '/' })
+
+    expect(await screen.findByRole('heading', { name: 'Site temporariamente indisponível' })).toBeInTheDocument()
+  })
+
+  it('com o site indisponível, quem está conectado vê só o próprio nome no cabeçalho', async () => {
+    api({ login_disponivel: false, usuario: ANA, acesso: 'indisponivel' })
+    renderizar(<App />, { rota: '/conta' })
+
+    await screen.findByText(/Conectado como/)
+    const nav = screen.getByRole('navigation')
+    expect(within(nav).getAllByRole('link').map((l) => l.textContent)).toEqual(['Ana'])
   })
 })

@@ -115,3 +115,16 @@ def test_publicos_com_login_configurado_e_sem_sessao(client, provedor_falso, bas
         "login_disponivel": True, "usuario": None, "acesso": "conta"
     }
     assert iniciar(client).status_code == 302
+
+
+@pytest.mark.parametrize(
+    ("metodo", "caminho", "corpo"),
+    [c for c in CONTEUDO if c[0] == "POST"],
+    ids=["simulados", "correcoes", "reportes"],
+)
+def test_post_de_conteudo_de_outro_site_e_recusado(client_logado, base_sintetica, metodo, caminho, corpo):
+    """BT-075 (revisao de codigo): mesma verificacao de Origin das rotas de conta (CR-005)."""
+    resposta = client_logado.request(metodo, caminho, json=corpo, headers={"Origin": "https://evil.test"})
+
+    assert resposta.status_code == 403
+    assert resposta.json()["detail"]["codigo"] == "origem_invalida"
