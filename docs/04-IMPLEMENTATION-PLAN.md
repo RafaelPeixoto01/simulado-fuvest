@@ -22,7 +22,7 @@
 | CR-001 | Resolução: navegação, folha de respostas e pausa (pós-MVP, [CR](changes/CR-001-resolucao-navegacao.md)) | CR-T-01 a CR-T-10 | Concluído |
 | CR-002 | Contraste e tokens (pós-MVP, [CR](changes/CR-002-contraste-tokens.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-003 | Resultado, figura e início (pós-MVP, [CR](changes/CR-003-resultado-figura-inicio.md)) | CR-T-01 a CR-T-09 | Concluído |
-| CR-004 | Assuntos e desempenho — Fase 3A do roadmap ([CR](changes/CR-004-assuntos-desempenho.md), [spec 06](specs/06-assuntos-desempenho.md)) | CR-T-01 a CR-T-10 | Em andamento |
+| CR-004 | Assuntos e desempenho — Fase 3A do roadmap ([CR](changes/CR-004-assuntos-desempenho.md), [spec 06](specs/06-assuntos-desempenho.md)) | CR-T-01 a CR-T-10 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 

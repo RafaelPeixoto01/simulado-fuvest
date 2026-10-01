@@ -416,7 +416,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 ### Fase 3 — Contas e estatísticas
 Dividida em duas partes independentes; os assuntos vieram primeiro porque não coletam dado pessoal.
 
-**Fase 3A — Assuntos e desempenho (CR-004)**
+**Fase 3A — Assuntos e desempenho (CR-004, concluída em 2026-10-01)**
 - Classificação por assunto dentro da disciplina (RF-005, RF-023) e estatísticas por assunto no resultado e no painel "Meu desempenho" (RF-018, RF-022)
 
 **Fase 3B — Contas (CR próprio, a desenhar)**
