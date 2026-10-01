@@ -436,4 +436,4 @@ sequenceDiagram
 - [x] Frontend: tipos, api, sessão, sincronização (com fila)
 - [x] Frontend: cabeçalho, `/conta`, `/privacidade`, Histórico, painel, resultado, finalizar
 - [x] Testes BT-047, BT-050 a BT-067, UT-030 a UT-037 + FT-013
-- [ ] Cliente OAuth no Google Cloud + variáveis na Railway (usuário) + FT-014
+- [x] Cliente OAuth no Google Cloud + variáveis na Railway (usuário) + FT-014 (01/10/2026)

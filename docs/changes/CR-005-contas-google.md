@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-01  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -192,7 +192,7 @@ Migration só aditiva: o código anterior ignora as tabelas novas.
 ## 8. Critérios de Aceite
 
 - [x] Sem conta, o site funciona como antes: nenhum cookie é criado, nenhum script de terceiros é carregado e nenhum dado pessoal vai para o servidor — BT-050 (sem `Set-Cookie`); Playwright: simulado anônimo concluído com a lista de cookies vazia; CSP inalterada (o "G" do botão é SVG inline)
-- [ ] "Entrar com Google" leva ao consentimento do Google e volta logado para a página de origem; o cabeçalho mostra o primeiro nome — local com provedor falso ✅ (FT-013: volta a `/conta` e o cabeçalho mostra "Ana"); **com o Google real, pendente do FT-014** (depende do CR-T-08)
+- [x] "Entrar com Google" leva ao consentimento do Google e volta logado para a página de origem; o cabeçalho mostra o primeiro nome — local com provedor falso (FT-013); em produção com o Google real, FT-014 feito pelo usuário em 01/10 (abaixo)
 - [x] A sessão fica num cookie `HttpOnly`/`SameSite=Lax` (`Secure` + `__Host-` em produção); o banco guarda só o hash do token — BT-052, BT-064; Playwright: cookie `sessao` `HttpOnly`, `Lax`, 90 dias, invisível ao `document.cookie`
 - [x] Ao entrar, os simulados deste navegador vão para a conta (D1) e o histórico passa a ser o da conta, inclusive em outro dispositivo — UT-030; FT-013 (2 entradas enviadas, uma delas no formato anterior ao CR-004; "outro dispositivo" com o `localStorage` zerado recebe histórico, painel e resultado)
 - [x] Simulado concluído com conta é enviado ao servidor; sem rede, fica pendente e é enviado na próxima sincronização — UT-036, UT-030; FT-013 (Prova de 2024 finalizada com conta chega ao servidor)
@@ -210,7 +210,12 @@ Migration só aditiva: o código anterior ignora as tabelas novas.
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: endpoints novos, autenticação, cookies, sessões e dados de usuário — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v3.0, Arquitetura v1.5, 03-SPEC v1.5, specs 03/04/06/07, Plano, Deploy Guide v1.2, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; login real com Google em produção conferido com o usuário (FT-014) — branch verde; `master` e FT-014 pendentes do merge e do CR-T-08
+- [x] CI verde na branch e em `master`; login real com Google em produção conferido com o usuário (FT-014) — branch verde; `master` verde no merge `2c2a35d` (run 36883856626); migration `003` aplicada em produção (`alembic current` → `003 (head)`); FT-014 abaixo
+
+**Produção (01/10/2026):**
+- Antes das variáveis (login desligado): `GET /api/sessao` → `{"login_disponivel": false, "usuario": null}` com `no-store`; `/api/auth/google` → 404 `login_indisponivel`; `/api/historico` → 401; `/conta` e `/privacidade` → 200; CSP e HSTS inalterados; 3 provas no `/api/health`.
+- CR-T-08 (usuário, com o Claude no navegador seguindo o Deploy Guide §3.1): cliente OAuth "Aplicativo da Web" criado, app publicado ("Em produção"), `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e `PUBLIC_URL` definidas na Railway pelo próprio usuário (o segredo não passou pelo chat). Depois: `/api/sessao` → `login_disponivel: true`; `/api/auth/google` → 302 para `accounts.google.com` com o `client_id`, o `redirect_uri` de produção, `scope=openid email profile` e PKCE S256, e cookie `__Host-login-google` com `Secure`; a tela de login do Google abre sem `redirect_uri_mismatch` nem `invalid_client` ("Prosseguir para simulado-fuvest-production.up.railway.app": sem verificação de marca, o Google mostra o domínio no lugar do nome do app).
+- **FT-014 (usuário, login real):** navegador A sem conta → simulado curto finalizado → "Entrar com Google" → volta a `/conta` conectado, "1 simulado na sua conta", primeiro nome no cabeçalho (D1) → navegador B com a mesma conta vê o simulado no Histórico e no painel → simulado novo no B aparece no A ao recarregar → "Sair" no A: mensagem, "Entrar" no cabeçalho e Histórico vazio (D2). Todos os passos funcionaram. Banco de produção conferido só por contagem: 1 usuário, 2 simulados guardados, 1 sessão ativa (a do B).
 
 **Validação runtime (01/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso injetado em `app.state.provedor_google` — todo o resto é o código de produção):**
 - HTTP (curl): `GET /api/sessao` → `{"login_disponivel": true, "usuario": null}` + `Cache-Control: no-store`, sem cookie; `GET /api/historico` sem sessão → 401 `nao_autenticado`; `GET /api/auth/google?voltar=//evil.com` → 302 com o cookie `login-google` (`HttpOnly`, `SameSite=lax`, `Max-Age=600`) e o caminho de volta reduzido a `/`; callback → 302 `/historico` + cookie `sessao` (`HttpOnly`, `Max-Age=7776000`); `POST /api/historico` com `Origin: https://evil.test` → 403 `origem_invalida`; entrada inválida → 200 com `rejeitadas: ["x"]`; `GET /api/auth/google/callback?error=access_denied` → 302 `/conta?erro=login`; `DELETE /api/sessao` → 204, cookie apagado, sessão removida do banco. Achado de ambiente: o cookie de login não vai de `127.0.0.1` para `localhost` (o `redirect_uri` usa o `PUBLIC_URL`), o que é o comportamento esperado do `state` em cookie.
@@ -296,7 +301,7 @@ Não é preciso reverter a migration para reverter o código: o código anterior
 
 ### 10.4 Rollback de Variaveis de Ambiente
 
-- **Variáveis novas/alteradas:** `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `PUBLIC_URL`
+- **Variáveis novas/alteradas:** `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `PUBLIC_URL` (definidas em 01/10/2026)
 - **Ação de rollback:** podem ficar (o código anterior as ignora). Para desligar só o login sem reverter código: remover `GOOGLE_CLIENT_ID` (o site esconde "Entrar")
 
 ### 10.5 Verificacao Pos-Rollback
@@ -314,3 +319,5 @@ Não é preciso reverter a migration para reverter o código: o código anterior
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D4 e as decisões técnicas (ADR-010, ADR-011) |
 | 2026-10-01 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-07): backend, frontend, validação runtime com provedor falso, revisão de código (10 achados) e de segurança; CI da branch verde. Pendentes: CR-T-08 (cliente OAuth no Google Cloud, usuário) e FT-014 |
+| 2026-10-01 | Rafael Peixoto (com Claude) | Merge `2c2a35d`, CI de `master` verde, deploy com o login desligado e migration `003` em produção |
+| 2026-10-01 | Rafael Peixoto (com Claude) | CR-T-08: cliente OAuth criado e variáveis definidas pelo usuário; FT-014 com login real feito pelo usuário — validação ✅, status Concluído |

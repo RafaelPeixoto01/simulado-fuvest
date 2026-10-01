@@ -464,7 +464,7 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 **Fase 3A — Assuntos e desempenho (CR-004, concluída em 2026-10-01)**
 - Classificação por assunto dentro da disciplina (RF-005, RF-023) e estatísticas por assunto no resultado e no painel "Meu desempenho" (RF-018, RF-022)
 
-**Fase 3B — Contas (CR-005, em implementação)**
+**Fase 3B — Contas (CR-005, concluída em 2026-10-01)**
 - Login opcional com histórico no servidor e sincronização entre dispositivos (RF-024 a RF-026, RN-016)
 - Decisões de 30/09/2026: login **só com Google** (sem senha nem e-mail de recuperação); o servidor guarda **só o histórico concluído** (o simulado em andamento continua no navegador). O painel da Fase 3A passa a somar o histórico sincronizado
 - Decisões de 01/10/2026: ao entrar, os simulados deste navegador vão para a conta; ao sair, o histórico deixa o navegador; a conta guarda nome e e-mail; limite de 50 simulados

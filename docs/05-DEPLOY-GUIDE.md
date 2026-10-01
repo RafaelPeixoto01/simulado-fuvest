@@ -99,6 +99,8 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
    ```
    Definir variáveis dispara um redeploy. Sem o código do CR-005 no ar, elas são ignoradas.
 
+**Situação (01/10/2026, CR-005):** cliente criado e app publicado; as três variáveis estão definidas. A tela de login do Google mostra o domínio no lugar de "Simulado Fuvest" porque a marca não foi verificada; isso não impede o login. Para mostrar o nome, pedir a verificação da marca em "Branding".
+
 **Login local (opcional):** `GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=... DATABASE_URL="sqlite:///./local.db" .venv/Scripts/python -m uvicorn app.main:app --reload` + `npm run dev` (o `PUBLIC_URL` padrão já é `http://localhost:5173`). Sem as variáveis, o site local funciona sem login.
 
 ---
@@ -140,7 +142,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 | Migration precisa reverter | Backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade -1` (roda **dentro** do container, com a URL interna do banco) → reverter o código |
 | Deploy não sobe (healthcheck falha) | A Railway mantém o deploy anterior no ar; ver `railway logs` (inclui taxonomia inválida: `TaxonomiaInvalida` no log da sincronização) |
 | Desligar o login sem reverter código (CR-005) | `railway variables -s simulado-fuvest --remove GOOGLE_CLIENT_ID`: "Entrar" some e ninguém novo entra; quem já entrou continua conectado (sincroniza, sai, exclui a conta). Trocar o segredo também não desconecta ninguém |
-| Desconectar todo mundo (ex.: suspeita de vazamento de sessões) | Apagar as sessões no banco: `railway ssh -s simulado-fuvest python -c "from sqlalchemy import text; from app.main import app; c = app.state.engine.connect(); c.execute(text('DELETE FROM sessoes')); c.commit()"`. Os históricos ficam; cada estudante entra de novo |
+| Desconectar todo mundo (ex.: suspeita de vazamento de sessões) | Apagar as linhas de `sessoes` com um comando Python no container (seção 8.3): `with app.state.engine.begin() as c: c.execute(text("DELETE FROM sessoes"))`. Os históricos ficam; cada estudante entra de novo |
 | Reverter o CR-005 (contas) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. **Não** rodar `alembic downgrade` da `003` sem backup: ele apaga contas e históricos |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
 
@@ -198,6 +200,21 @@ railway status
 
 ---
 
+### 8.3 Comandos Python no container
+
+O `railway ssh` repassa o comando a um `sh` remoto e perde as aspas: `python -c "...(...)"` falha com `Syntax error: "(" unexpected`. Mande o código em base64:
+
+```bash
+CODIGO='from sqlalchemy import text
+from app.main import app
+c = app.state.engine.connect()
+print({t: c.execute(text("select count(*) from " + t)).scalar() for t in ("usuarios", "sessoes", "simulados_concluidos")})'
+B64=$(printf '%s' "$CODIGO" | base64 -w0)
+railway ssh -s simulado-fuvest "python -c 'exec(__import__(\"base64\").b64decode(\"$B64\"))'"
+```
+
+Consultas sobre as contas devem mostrar só contagens: e-mails, nomes e históricos são dados pessoais e não vão para o terminal nem para o chat.
+
 ## 9. Integração Contínua
 
 `.github/workflows/ci.yml` roda em push de **qualquer branch** e em PRs:
@@ -219,3 +236,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-09-30 | Claude | Documento criado (v1.0) — T-026 |
 | 2026-09-30 | Claude | v1.1 — CR-004: assunto obrigatório na publicação, checklist da taxonomia, rollback conjunto código + conteúdo, verificação dos assuntos |
 | 2026-10-01 | Claude | v1.2 — CR-005: variáveis do login (`GOOGLE_*`, `PUBLIC_URL`), cliente OAuth no Google Cloud (§3.1), backup com dados de usuário, rollback e verificação das contas |
+| 2026-10-01 | Claude | v1.2 — CR-005 concluído: situação do cliente OAuth (§3.1) e comandos Python no container via base64 (§8.3) |
