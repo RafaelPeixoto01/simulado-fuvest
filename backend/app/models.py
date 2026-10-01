@@ -4,10 +4,12 @@ from datetime import date, datetime
 
 from sqlalchemy import (
     JSON,
+    BigInteger,
     Boolean,
     Date,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     String,
     Text,
@@ -102,3 +104,57 @@ class EstatisticaGeracao(Base):
     dia: Mapped[date] = mapped_column(Date, primary_key=True)
     modo: Mapped[str] = mapped_column(String(12), primary_key=True)
     total: Mapped[int] = mapped_column(Integer, default=0)
+
+
+class Usuario(Base):
+    """Conta opcional, criada ao entrar com o Google (CR-005, ADR-010)."""
+
+    __tablename__ = "usuarios"
+    __table_args__ = (UniqueConstraint("google_sub", name="uq_usuarios_google_sub"),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    google_sub: Mapped[str] = mapped_column(String(255))
+    email: Mapped[str] = mapped_column(String(320))
+    nome: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    criado_em: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    ultimo_acesso_em: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+class SessaoUsuario(Base):
+    """Sessao de login. Guarda so o SHA-256 do token do cookie (ADR-010)."""
+
+    __tablename__ = "sessoes"
+
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(
+        ForeignKey("usuarios.id", ondelete="CASCADE"), index=True
+    )
+    criado_em: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    expira_em: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+    usuario: Mapped[Usuario] = relationship()
+
+
+class SimuladoConcluido(Base):
+    """Entrada do historico da conta (ADR-011): o HistoricoEntry como o navegador o montou."""
+
+    __tablename__ = "simulados_concluidos"
+    __table_args__ = (
+        Index("ix_simulados_concluidos_usuario_finalizado", "usuario_id", "finalizado_em_ms"),
+    )
+
+    usuario_id: Mapped[int] = mapped_column(
+        ForeignKey("usuarios.id", ondelete="CASCADE"), primary_key=True
+    )
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)  # id do simulado (UUID)
+    finalizado_em_ms: Mapped[int] = mapped_column(BigInteger)
+    dados: Mapped[dict] = mapped_column(JSON)
+    recebido_em: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )

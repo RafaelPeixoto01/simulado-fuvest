@@ -7,8 +7,20 @@ from slowapi.errors import RateLimitExceeded
 from app.config import Settings
 from app.database import criar_engine, criar_fabrica_sessao
 from app.rate_limit import limite_excedido, limiter
-from app.routers import catalogo, correcoes, figuras, health, questoes, reportes, simulados
+from app.routers import (
+    auth,
+    catalogo,
+    conta,
+    correcoes,
+    figuras,
+    health,
+    historico,
+    questoes,
+    reportes,
+    simulados,
+)
 from app.security_headers import SecurityHeadersMiddleware
+from app.services.google import ProvedorGoogle
 
 
 def _servir_spa(app: FastAPI, settings: Settings) -> None:
@@ -38,6 +50,12 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
     app.state.settings = settings
     app.state.engine = engine
     app.state.fabrica_sessao = criar_fabrica_sessao(engine)
+    # Login com Google (ADR-010): None desliga o login; testes trocam por um provedor falso
+    app.state.provedor_google = (
+        ProvedorGoogle(settings.google_client_id, settings.google_client_secret)
+        if settings.login_disponivel
+        else None
+    )
 
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, limite_excedido)
@@ -48,11 +66,13 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
         app.add_middleware(
             CORSMiddleware,
             allow_origins=list(settings.allowed_origins),
-            allow_methods=["GET", "POST"],
+            allow_methods=["GET", "POST", "DELETE"],
             allow_headers=["Content-Type"],
         )
 
-    for modulo in (health, catalogo, simulados, questoes, correcoes, reportes, figuras):
+    for modulo in (
+        health, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico, figuras
+    ):
         app.include_router(modulo.router)
     _servir_spa(app, settings)
     return app

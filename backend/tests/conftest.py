@@ -38,6 +38,24 @@ def client(app):
 
 
 @pytest.fixture
+def provedor_falso(app):
+    """Liga o login com um provedor Google falso (CR-005): sem rede, sem segredo."""
+    from tests.contas import ProvedorFalso
+
+    app.state.provedor_google = ProvedorFalso()
+    return app.state.provedor_google
+
+
+@pytest.fixture
+def client_logado(client, provedor_falso):
+    """Client com a sessao da Ana (o login passa pelo fluxo real de cookies)."""
+    from tests.contas import entrar
+
+    assert entrar(client).status_code == 302
+    return client
+
+
+@pytest.fixture
 def sessao(app):
     with app.state.fabrica_sessao() as s:
         yield s
