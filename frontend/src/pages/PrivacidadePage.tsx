@@ -37,9 +37,10 @@ export function PrivacidadePage() {
 
       <Secao titulo="Com a conta Google">
         <p>
-          Guardamos o identificador da sua conta Google, seu nome, seu e-mail e os 50 simulados concluídos mais
-          recentes (respostas, acertos e datas). Servem só para mostrar o seu histórico e o seu desempenho em qualquer
-          dispositivo em que você entrar.
+          Guardamos o identificador da sua conta Google, seu nome, seu e-mail, os 50 simulados concluídos mais
+          recentes (respostas, acertos e datas) e a carreira-alvo que você escolher nas notas de corte (não guardamos a
+          sua modalidade de concorrência). Servem só para mostrar o seu histórico e o seu desempenho e comparar a nota
+          dos simulados com o corte dessa carreira em qualquer dispositivo em que você entrar.
         </p>
         <p>
           Do Google recebemos só o nome e o e-mail. Não temos acesso à sua senha nem a nenhum outro dado da conta. Não

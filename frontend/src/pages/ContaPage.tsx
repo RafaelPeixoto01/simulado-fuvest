@@ -21,8 +21,7 @@ function SemConta() {
         dispositivo. Os simulados já feitos neste navegador vão para a sua conta.
       </p>
       <p className="mt-3 text-tinta-suave">
-        Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos. O simulado em andamento continua só
-        neste navegador.{' '}
+        Guardamos só seu nome, seu e-mail, os resultados dos simulados concluídos e a carreira-alvo, se você escolher uma. O simulado em andamento continua só neste navegador.{' '}
         <Link to="/privacidade" className={LINK}>
           Privacidade
         </Link>
