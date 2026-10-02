@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-01  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -207,7 +207,7 @@ Diferenças das telas de referência que a especificação não pede (D2). Fica 
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dependência nova — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v4.2, Arquitetura v1.8 (ADR-013), 03-SPEC v1.8, specs 03 v1.8, 04 v1.5 e 07 v1.4, Plano, CLAUDE.md, INDEX.md; Deploy Guide sem mudança (nada de variável, migration ou procedimento)
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` — branch verde (run 37018719655); `master` verde no merge `17b579f` (run 37018904288). Produção depois do deploy, sem login: favicon novo, `/api/health` 200, apresentação com fundo creme, marca de uma bolinha, "reais" circulado e `h1` em `Fraunces Variable` (fonte carregada pelo próprio site, sem erro de CSP no console)
 
 **Validação runtime (02/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
 - Início com conta, 1440 px: "Olá, Rafael." em itálico rosa acima do título, "reais" circulado, Prova completa em cartão maior com a bolinha A e 8 marcas de sincronismo, os outros modos em cartões B, C e D, "Provas na base" e "Questões por disciplina" em Fraunces. Com um simulado em andamento (aviso com borda azul-marinho), o botão da Prova completa fica secundário; sem ele, primário.
@@ -298,3 +298,4 @@ Diferenças das telas de referência que a especificação não pede (D2). Fica 
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com os itens I1 a I5, a D1 (I6.1 a I6.3 incluídos) e a D2 (extras do protótipo fora de escopo) |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-05): tokens, Fraunces, marca, componentes, motivos e início com conta; validação runtime (FT-022) com o ajuste do círculo de caneta; revisão de código (9 achados) e de segurança |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Merge `17b579f`, CI de `master` verde; produção conferida sem login — validação ✅, status Concluído |
