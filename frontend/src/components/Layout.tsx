@@ -13,7 +13,7 @@ export function Layout() {
   const { data: sessao, isPending: sessaoCarregando } = useSessao()
   // Com conta, envia as pendentes e traz o histórico da conta em qualquer página (ADR-011)
   useHistorico()
-  // Login obrigatório (CR-006): Desempenho e Histórico só aparecem com acesso ao conteúdo
+  // Login obrigatório (CR-006): Desempenho, Histórico e Notas de corte (CR-010) só aparecem com acesso ao conteúdo
   // (sem conta, levariam à apresentação; com o site indisponível, ao aviso)
   const comConteudo = !sessao || sessao.acesso === 'livre' || (sessao.acesso === 'conta' && !!sessao.usuario)
   // Abaixo de 640 px os links não cabem em linha (CR-004): vão para o menu (CR-007, O2).
@@ -47,6 +47,9 @@ export function Layout() {
                 </NavLink>
                 <NavLink to="/historico" className={itemNav}>
                   Histórico
+                </NavLink>
+                <NavLink to="/notas-de-corte" className={itemNav}>
+                  Notas de corte
                 </NavLink>
               </>
             )}

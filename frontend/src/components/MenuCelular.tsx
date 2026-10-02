@@ -127,6 +127,18 @@ export function MenuCelular({
                   >
                     Histórico
                   </Item>
+                  <Item
+                    para="/notas-de-corte"
+                    aoEscolher={fecharDevolvendoFoco}
+                    icone={
+                      <>
+                        <circle cx="12" cy="12" r="8.5" />
+                        <circle cx="12" cy="12" r="4" />
+                      </>
+                    }
+                  >
+                    Notas de corte
+                  </Item>
                 </>
               )}
               {nome && (

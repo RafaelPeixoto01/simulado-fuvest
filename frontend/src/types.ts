@@ -154,11 +154,41 @@ export interface Correcao {
 
 export type TipoReporte = 'enunciado' | 'figura' | 'gabarito' | 'outro'
 
+/** Notas de corte da 1ª fase (CR-010, specs/08): corte null = modalidade sem convocados. */
+export interface CortesModalidades {
+  ac: number | null
+  ep: number | null
+  ppi: number | null
+}
+
+export interface CarreiraCorte {
+  codigo: number
+  nome: string
+  vagas: number
+  cortes: CortesModalidades
+}
+
+export interface NotasCorte {
+  anos: number[] // do mais recente para o mais antigo
+  recente: number | null
+  ano: number | null // o devolvido: o pedido, se publicado; senão o mais recente
+  fonte: string | null
+  carreiras: CarreiraCorte[]
+}
+
+/** Só a carreira, nunca a modalidade (CR-010, D4). `carreira` null: saiu dos cortes publicados. */
+export interface CarreiraAlvo {
+  ano: number
+  codigo: number
+  carreira: CarreiraCorte | null
+}
+
 /** Conta com Google (CR-005, specs/07). O id só serve de marca da conta no navegador. */
 export interface Usuario {
   id: number
   email: string
   nome: string | null
+  carreira_alvo?: CarreiraAlvo | null // CR-010; o servidor sempre manda
 }
 
 /** Modo de acesso (CR-006, ADR-012): `conta` exige login; `livre` é o desenvolvimento sem login

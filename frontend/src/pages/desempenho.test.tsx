@@ -112,7 +112,7 @@ describe('Painel "Meu desempenho" (UT-026, RF-022)', () => {
     await screen.findByRole('heading', { level: 1, name: 'Histórico' }) // depois da sessão (CR-006)
 
     const nav = screen.getByRole('navigation')
-    expect(within(nav).getAllByRole('link').map((l) => l.textContent)).toEqual(['Desempenho', 'Histórico'])
+    expect(within(nav).getAllByRole('link').map((l) => l.textContent)).toEqual(['Desempenho', 'Histórico', 'Notas de corte'])
 
     await userEvent.click(screen.getByRole('link', { name: 'Ver meu desempenho' }))
     expect(await screen.findByRole('heading', { level: 1, name: 'Meu desempenho' })).toBeInTheDocument()

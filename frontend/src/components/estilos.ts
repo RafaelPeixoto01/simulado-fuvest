@@ -5,6 +5,10 @@ export const BOTAO_PRIMARIO =
 export const BOTAO_SECUNDARIO =
   'inline-flex items-center justify-center rounded-md border border-borda-campo bg-papel px-4 py-2 font-semibold text-tinta hover:border-caneta disabled:cursor-not-allowed disabled:text-tinta-suave'
 
+// Secundário menor, para ações dentro de listas e tabelas (notas de corte, CR-010)
+export const BOTAO_PEQUENO =
+  'inline-flex items-center justify-center rounded-md border border-borda-campo bg-papel px-3 py-1 text-sm font-semibold text-tinta hover:border-caneta disabled:cursor-not-allowed disabled:text-tinta-suave'
+
 export const LINK = 'font-semibold text-caneta underline underline-offset-4 hover:text-caneta-escura'
 
 // Cartão (CR-008, I4): papel, borda linha, cantos de 16 px, sem sombra. Padding fica com quem usa
