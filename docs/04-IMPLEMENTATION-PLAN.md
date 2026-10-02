@@ -27,7 +27,7 @@
 | CR-006 | Login obrigatório para usar o site ([CR](changes/CR-006-login-obrigatorio.md), [spec 07 §8](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-007 | Apresentação, menu do celular e barra opaca ([CR](changes/CR-007-apresentacao-menu-barra.md), [spec 07 §9](specs/07-contas-sincronizacao.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
-| CR-009 | Rolagem ao trocar de página e extras do início ([CR](changes/CR-009-rolagem-inicio-extras.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Em Implementação |
+| CR-009 | Rolagem ao trocar de página e extras do início ([CR](changes/CR-009-rolagem-inicio-extras.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 
