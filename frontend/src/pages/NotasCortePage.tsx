@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { CortesEmLinha } from '../components/notasCorte/ComparacaoCorte'
@@ -7,12 +7,16 @@ import { BOTAO_PEQUENO, CARTAO, LINK } from '../components/estilos'
 import { useCarreiraAlvo, useNotasCorte } from '../hooks/useNotasCorte'
 import { useSessao } from '../hooks/useSessao'
 import { useTituloPagina } from '../hooks/useTituloPagina'
+import type { ApiError } from '../services/api'
 import type { CarreiraAlvo, CarreiraCorte } from '../types'
 import { filtrarCarreiras, MODALIDADES } from '../utils/notasCorte'
 
 function anoDaUrl(valor: string | null): number | null {
   return valor && /^\d{4}$/.test(valor) ? Number(valor) : null
 }
+
+// A API só aceita anos de 1977 a 2100 (422 fora disso): fora da faixa, pede o mais recente e avisa
+const naFaixaDaApi = (ano: number) => ano >= 1977 && ano <= 2100
 
 function Corte({ valor }: { valor: number | null }) {
   return valor === null ? <abbr title="sem convocados">—</abbr> : <>{valor}</>
@@ -124,12 +128,14 @@ export function NotasCortePage() {
   useTituloPagina('Notas de corte')
   const [params, setParams] = useSearchParams()
   const pedido = anoDaUrl(params.get('ano'))
-  const { data, isPending, isError, refetch } = useNotasCorte(pedido)
+  const consulta = pedido !== null && naFaixaDaApi(pedido) ? pedido : null
+  const { data, isPending, isError, isPlaceholderData, refetch } = useNotasCorte(consulta)
   const usuario = useSessao().data?.usuario ?? null
   const alvo = usuario?.carreira_alvo ?? null
   const { definir, remover } = useCarreiraAlvo()
   const [busca, setBusca] = useState('')
   const [mensagem, setMensagem] = useState<{ erro: boolean; texto: string } | null>(null)
+  const carreiras = useMemo(() => filtrarCarreiras(data?.carreiras ?? [], busca), [data?.carreiras, busca])
 
   if (isPending) return <Carregando />
   if (isError || !data) {
@@ -137,11 +143,21 @@ export function NotasCortePage() {
   }
 
   const ano = data.ano
-  const carreiras = filtrarCarreiras(data.carreiras, busca)
+  // Trocando de ano, a tabela anterior fica na tela até a nova chegar (keepPreviousData): o seletor
+  // já mostra o ano escolhido e o aviso de "ano fora da base" espera a resposta
+  const carregandoOutroAno = isPlaceholderData && consulta !== null
   // A carreira-alvo só sai da lista mais recente (RN-019); sem usuário (modo livre), não há conta onde guardar
   const comAcao = !!usuario && ano !== null && ano === data.recente
   const salvando = definir.isPending || remover.isPending
-  const falhou = () => setMensagem({ erro: true, texto: 'Não foi possível salvar a carreira-alvo. Tente novamente.' })
+  const falhou = (erro: ApiError) =>
+    setMensagem({
+      erro: true,
+      texto:
+        // Saiu a lista de um ano novo depois que a página abriu: o hook já pediu a lista nova
+        erro.codigo === 'carreira_invalida'
+          ? `A lista de notas de corte mudou. ${erro.message}`
+          : 'Não foi possível salvar a carreira-alvo. Tente novamente.',
+    })
 
   const definirAlvo = (carreira: CarreiraCorte) => {
     setMensagem(null)
@@ -192,7 +208,7 @@ export function NotasCortePage() {
             <label className="flex flex-col gap-1 text-sm font-semibold">
               Ano
               <select
-                value={ano}
+                value={carregandoOutroAno ? consulta : ano}
                 onChange={(e) => setParams({ ano: e.target.value }, { replace: true })}
                 className="rounded-md border border-borda-campo bg-papel px-3 py-2 text-base font-normal"
               >
@@ -214,7 +230,7 @@ export function NotasCortePage() {
               />
             </label>
           </div>
-          {pedido !== null && pedido !== ano && (
+          {pedido !== null && pedido !== ano && !carregandoOutroAno && (
             <p className="mt-3 text-sm text-alerta">
               Não há notas de corte de {pedido} na base. Mostrando FUVEST {ano}.
             </p>
@@ -226,7 +242,10 @@ export function NotasCortePage() {
           {carreiras.length === 0 ? (
             <p className="mt-3">Nenhuma carreira encontrada.</p>
           ) : (
-            <table className="mt-2 w-full border-collapse text-left">
+            <table
+              aria-busy={carregandoOutroAno}
+              className={`mt-2 w-full border-collapse text-left ${carregandoOutroAno ? 'opacity-60' : ''}`}
+            >
               <caption className="sr-only">Notas de corte FUVEST {ano}, por carreira</caption>
               <thead className="sr-only sm:not-sr-only">
                 <tr className="border-b border-linha text-sm text-tinta-suave">

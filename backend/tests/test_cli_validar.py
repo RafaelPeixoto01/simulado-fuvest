@@ -132,3 +132,15 @@ def test_ano_valida_so_os_cortes_do_ano(tmp_path, capsys):
     assert main(["validar", "--ano", "2098", "--data-dir", str(tmp_path)]) == 0
     saida = capsys.readouterr().out
     assert "== cortes 2098" in saida and "cortes 2099" not in saida
+
+
+def test_ano_so_com_notas_de_corte(tmp_path, capsys):
+    """Revisao de codigo: cortes de um ano sem pacote de prova (ex.: 2021, que exige OCR)."""
+    from tests.fixtures.gerar_pacotes import escrever_notas_corte
+
+    escrever_pacotes(tmp_path)
+    escrever_notas_corte(tmp_path, anos=(2097,))
+
+    assert main(["validar", "--ano", "2097", "--data-dir", str(tmp_path)]) == 0
+    saida = capsys.readouterr().out
+    assert "== cortes 2097 — publicada" in saida and "== 2098" not in saida

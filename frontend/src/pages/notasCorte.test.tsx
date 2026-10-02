@@ -37,7 +37,12 @@ function servidor(inicial: Sessao, extra: Parameters<typeof instalarApiFalsa>[0]
   const fetch = instalarApiFalsa({
     'GET /api/sessao': () => json(200, sessao),
     'GET /api/historico': () => json(200, { entradas: [], rejeitadas: [] }),
-    'GET /api/notas-corte': (_c, url) => json(200, NOTAS[Number(url.searchParams.get('ano'))] ?? NOTAS[2025]),
+    'GET /api/notas-corte': (_c, url) => {
+      const ano = url.searchParams.get('ano')
+      // Como o backend: fora de 1977-2100, 422 de validação
+      if (ano && (Number(ano) < 1977 || Number(ano) > 2100)) return json(422, { detail: [{ msg: 'fora da faixa' }] })
+      return json(200, NOTAS[Number(ano)] ?? NOTAS[2025])
+    },
     'PUT /api/conta/carreira-alvo': (corpo) => {
       const { ano, codigo } = corpo as { ano: number; codigo: number }
       const alvo: CarreiraAlvo = { ano, codigo, carreira: NOTAS[2025].carreiras.find((c) => c.codigo === codigo)! }
@@ -121,6 +126,58 @@ describe('Página de notas de corte (UT-057)', () => {
     renderizar(<App />, { rota: '/notas-de-corte' })
 
     expect(await screen.findByText('As notas de corte ainda não estão disponíveis.')).toBeInTheDocument()
+  })
+})
+
+describe('Revisão de código (CR-010)', () => {
+  it('ano da URL fora da faixa da API mostra o mais recente com aviso, não o erro', async () => {
+    servidor(sessaoCom())
+    renderizar(<App />, { rota: '/notas-de-corte?ano=1950' })
+
+    expect(await screen.findByText('Não há notas de corte de 1950 na base. Mostrando FUVEST 2025.')).toBeInTheDocument()
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+
+  it('enquanto o ano novo carrega, o seletor mostra o escolhido e não há aviso', async () => {
+    let liberar: () => void = () => {}
+    servidor(sessaoCom(), {
+      'GET /api/notas-corte': (_c, url) =>
+        url.searchParams.get('ano') === '2024'
+          ? new Promise<Response>((resolver) => {
+              liberar = () => resolver(json(200, NOTAS[2024]))
+            })
+          : json(200, NOTAS[2025]),
+    })
+    renderizar(<App />, { rota: '/notas-de-corte' })
+    await screen.findByText('3 carreiras')
+
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Ano' }), '2024')
+
+    expect(screen.getByRole('combobox', { name: 'Ano' })).toHaveValue('2024')
+    expect(screen.queryByText(/Não há notas de corte/)).toBeNull()
+    liberar()
+    await waitFor(() => expect(nomesDasLinhas()).toEqual([MEDICINA_2024.nome]))
+  })
+
+  it('carreira de uma lista que ficou velha: mensagem do servidor e a lista recarrega', async () => {
+    const { chamadas } = servidor(sessaoCom(), {
+      'PUT /api/conta/carreira-alvo': () =>
+        json(422, {
+          detail: { codigo: 'carreira_invalida', mensagem: 'Escolha uma carreira da lista mais recente de notas de corte.' },
+        }),
+    })
+    renderizar(<App />, { rota: '/notas-de-corte' })
+    const buscas = () => vi.mocked(fetch).mock.calls.filter(([u]) => String(u).startsWith('/api/notas-corte')).length
+    await screen.findByText('3 carreiras')
+    const antes = buscas()
+
+    await userEvent.click(screen.getByRole('button', { name: `Definir ${MEDICINA.nome} como carreira-alvo` }))
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'A lista de notas de corte mudou. Escolha uma carreira da lista mais recente de notas de corte.',
+    )
+    await waitFor(() => expect(buscas()).toBeGreaterThan(antes))
+    expect(chamadas('PUT')).toHaveLength(1)
   })
 })
 

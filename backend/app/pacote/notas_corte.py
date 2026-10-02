@@ -18,6 +18,7 @@ DIRETORIO_NOTAS_CORTE = "notas_corte"
 MINIMO_FUVEST = 27  # menos de 30% da 1a fase elimina (Resolucao FUVEST 2025, art. 11 par. 3)
 PONTOS_PROVA = 90
 CHAVES_MODALIDADES = ("ac", "ep", "ppi")
+PADRAO_FONTE = r"^https://www\.fuvest\.br/\S+\.pdf$"  # PDF do acervo oficial
 
 log = logging.getLogger("notas_corte")
 
@@ -72,7 +73,7 @@ class NotasCorteAno(BaseModel):
 
     ano: int = Field(ge=2000, le=2100)
     status: Literal["rascunho", "publicada"]
-    fonte: str = Field(pattern=r"^https://www\.fuvest\.br/\S+\.pdf$")
+    fonte: str = Field(pattern=PADRAO_FONTE)
     pendencias: list[str] = Field(default_factory=list)
     carreiras: list[CarreiraCorte] = Field(min_length=1, max_length=300)
 

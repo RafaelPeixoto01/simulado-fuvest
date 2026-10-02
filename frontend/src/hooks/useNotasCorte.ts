@@ -26,6 +26,10 @@ export function useCarreiraAlvo() {
   const definir = useMutation<CarreiraAlvo, ApiError, { ano: number; codigo: number }>({
     mutationFn: api.definirCarreiraAlvo,
     onSuccess: guardar,
+    // Saiu a lista de um ano novo depois que a página abriu (RN-019): busca a lista nova
+    onError: (erro) => {
+      if (erro.codigo === 'carreira_invalida') void queryClient.invalidateQueries({ queryKey: ['notas-corte'] })
+    },
   })
   const remover = useMutation<void, ApiError>({
     mutationFn: api.removerCarreiraAlvo,

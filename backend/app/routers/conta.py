@@ -35,7 +35,6 @@ def ler_sessao(
     request: Request,
     response: Response,
     usuario: Annotated[Usuario | None, Depends(obter_usuario)],
-    notas_corte: Annotated[BaseNotasCorte, Depends(obter_notas_corte)],
 ) -> SessaoResponse:
     response.headers["Cache-Control"] = "no-store"
     return SessaoResponse(
@@ -45,7 +44,8 @@ def ler_sessao(
                 id=usuario.id,
                 email=usuario.email,
                 nome=usuario.nome,
-                carreira_alvo=resolver_carreira_alvo(notas_corte, usuario),
+                # So com usuario: quem nao entrou (apresentacao) nao le os arquivos de cortes
+                carreira_alvo=resolver_carreira_alvo(obter_notas_corte(request), usuario),
             )
             if usuario
             else None

@@ -13,11 +13,11 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.pacote.notas_corte import CarreiraCorte, NotasCorteAno
-from ingestao.baixar import ErroDownload, _obter_http
+from app.pacote.notas_corte import PADRAO_FONTE, CarreiraCorte, NotasCorteAno
+from ingestao.baixar import ErroDownload, _obter_http, obter_pdf
 
 ARQUIVO_PDF = "notas_corte.pdf"
-RE_URL = re.compile(r"^https://www\.fuvest\.br/\S+\.pdf$")
+RE_URL = re.compile(PADRAO_FONTE)
 RE_CARREIRA = re.compile(r"^(\d{3})\s*[−-]\s*(.+)$")
 MODALIDADES = {
     "Ampla Concorrência": "ac",
@@ -156,23 +156,27 @@ def montar_rascunho(carreiras: list[CarreiraExtraida], ano: int, fonte: str) -> 
 def extrair_notas_corte(pdf: Path, ano: int, fonte: str) -> NotasCorteAno:
     import pdfplumber
 
-    with pdfplumber.open(pdf) as documento:
-        paginas = [pagina.extract_words() for pagina in documento.pages]
+    try:
+        with pdfplumber.open(pdf) as documento:
+            paginas = [pagina.extract_words() for pagina in documento.pages]
+    except Exception as erro:  # pdfminer tem varias excecoes de PDF malformado; todas viram erro da CLI
+        raise ErroLayout(f"PDF ilegível ({erro.__class__.__name__}): apague {pdf} e baixe de novo") from erro
     return montar_rascunho(extrair_de_palavras(paginas), ano, fonte)
 
 
 def baixar_pdf(
     ano: int, url: str, cache_dir: Path, obter: Callable[[str], bytes] = _obter_http
 ) -> Path:
-    """`cache_dir/AAAA/notas_corte.pdf`; reaproveita o arquivo se ja existir."""
+    """`cache_dir/AAAA/notas_corte.pdf`, com a URL de origem ao lado (`.url`): o cache so vale
+    para a mesma URL; outra URL baixa de novo."""
     if not RE_URL.match(url):
         raise ErroDownload(f"URL deve ser um PDF em https://www.fuvest.br/: {url}")
     destino = cache_dir / str(ano) / ARQUIVO_PDF
-    if destino.is_file():
+    origem = destino.with_name(f"{ARQUIVO_PDF}.url")
+    if destino.is_file() and origem.is_file() and origem.read_text(encoding="utf-8") == url:
         return destino
-    dados = obter(url)
-    if not dados.startswith(b"%PDF"):
-        raise ErroDownload(f"{url}: conteúdo não é um PDF")
+    dados = obter_pdf(url, obter)
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_bytes(dados)
+    origem.write_text(url, encoding="utf-8")
     return destino

@@ -25,6 +25,7 @@ def pdf_em_cache(data_dir):
     caminho = data_dir.parent / "_cache" / "2099" / extrator.ARQUIVO_PDF
     caminho.parent.mkdir(parents=True)
     caminho.write_bytes(PDF_FALSO)
+    caminho.with_name(f"{caminho.name}.url").write_text(URL, encoding="utf-8")  # baixado desta URL
     return caminho
 
 
@@ -129,3 +130,26 @@ def test_pdfs_reais_em_cache(ano):
     assert len(notas.carreiras) == total
     carreira = next(c for c in notas.carreiras if c.codigo == codigo)
     assert getattr(carreira, modalidade).corte == corte
+
+
+def test_baixar_pdf_com_outra_url_baixa_de_novo(tmp_path):
+    """Revisao de codigo: o cache vale para a URL de onde veio, nao so para o ano."""
+    outra = URL.replace("fuvest_2099", "fuvest2099")
+    urls = []
+
+    def obter(url):
+        urls.append(url)
+        return PDF_FALSO + url.encode()
+
+    extrator.baixar_pdf(2099, URL, tmp_path, obter=obter)
+    caminho = extrator.baixar_pdf(2099, outra, tmp_path, obter=obter)
+
+    assert urls == [URL, outra]
+    assert caminho.read_bytes().endswith(outra.encode())
+
+
+def test_pdf_ilegivel_falha_sem_traceback(data_dir, pdf_em_cache, capsys):
+    """Revisao de codigo: PDF corrompido no cache vira erro da CLI, nao excecao."""
+    assert _cortes(data_dir) == 1
+    assert "Não foi possível extrair as notas de corte" in capsys.readouterr().err
+    assert not (data_dir / "notas_corte").exists()

@@ -87,10 +87,12 @@ def _cortes_alvo(args: argparse.Namespace) -> list[Path]:
 
 
 def _cmd_validar(args: argparse.Namespace) -> int:
-    diretorios = _diretorios_alvo(args)
+    cortes = _cortes_alvo(args)
+    # Ano so com notas de corte (sem pacote de prova, ex.: 2021): valida so os cortes
+    so_cortes = args.ano is not None and cortes and not (args.data_dir / str(args.ano)).is_dir()
+    diretorios = [] if so_cortes else _diretorios_alvo(args)
     if diretorios is None:
         return 1
-    cortes = _cortes_alvo(args)
     if not diretorios and not cortes:
         print(f"Nenhum pacote encontrado em {args.data_dir}")
         return 0
