@@ -159,7 +159,7 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 
 ## 8. Critérios de Aceite
 
-- [ ] As notas de corte de 2020, 2022, 2023, 2024 e 2025 estão em `data/provas/notas_corte/`, publicadas, sem pendências, com nomes únicos em cada ano (campus completado) e conferidas por amostragem com o PDF; `validar --todas` passa — extraídas (106, 107, 107, 85 e 75 carreiras), nomes completados (174 ajustes: campus de todas as 160 carreiras de 2024–2025, atribuído pela soma das vagas dos cursos, que fecha em todas; 18 nomes cortados lidos nos manuais e no guia), `validar --todas` sem problema. **Aguardando o Gate 1** (revisão dos nomes pelo usuário) para trocar `rascunho` por `publicada`
+- [x] As notas de corte de 2020, 2022, 2023, 2024 e 2025 estão em `data/provas/notas_corte/`, publicadas, sem pendências, com nomes únicos em cada ano (campus completado) e conferidas por amostragem com o PDF; `validar --todas` passa — extraídas (106, 107, 107, 85 e 75 carreiras), nomes completados (174 ajustes: campus de todas as 160 carreiras de 2024–2025, atribuído pela soma das vagas dos cursos, que fecha em todas; 18 nomes cortados lidos nos manuais e no guia), `validar --todas` sem problema. **Gate 1 aprovado pelo usuário em 02/10**, sem ajustes (2020 mantém o estilo do PDF daquele ano, "Nome − Cidade"); os cinco arquivos publicados
 - [x] Arquivo de cortes inválido (fora do schema, corte abaixo de 27 ou acima do máximo, nome repetido, publicado com pendência) é recusado por `validar` e pelo CI — IT-021, IT-022, IT-024
 - [x] `python -m ingestao cortes --ano AAAA --url URL` gera o rascunho com as pendências e não sobrescreve um arquivo existente sem `--forcar` — IT-027; rodado de verdade para os 5 anos (os testes com os PDFs reais passam quando eles estão no cache)
 - [x] `GET /api/notas-corte` devolve os anos publicados e as carreiras do ano pedido (o mais recente sem `ano`); exige sessão no modo `conta` (401) e fica indisponível em `indisponivel` (503) — BT-079 a BT-081 (BT-080 em `test_acesso.py`); HTTP real abaixo
@@ -169,7 +169,7 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 - [x] O cartão "Seu último simulado" mostra a linha dos cortes quando o último simulado tem 90 questões e há carreira-alvo — UT-060; Playwright abaixo
 - [x] A página explica o que é o corte, o mínimo de 27 pontos e que é referência para ir à 2ª fase, não previsão de aprovação; funciona a 360 px sem rolagem horizontal — UT-057; Playwright (documento com 345 px a 360 px)
 - [x] Apresentação, Conta e Privacidade dizem que a conta guarda também a carreira-alvo; excluir a conta a apaga — UT-061, BT-086
-- [ ] Migration `004` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI) — local `003 → 004 → 003 → 004` em 02/10 (alembic) e BT-047 (`004 → 003` sem perder as contas); **falta o Postgres do CI**
+- [x] Migration `004` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI) — local `003 → 004 → 003 → 004` em 02/10 (alembic) e BT-047 (`004 → 003` sem perder as contas); CI da branch verde no Postgres (run 37064793416, job "Backend ... migrations no Postgres")
 - [x] Testes existentes continuam passando (regressão) — backend 410 testes, frontend 286
 - [x] Novos testes cobrem a mudança — IT-021 a IT-027, BT-079 a BT-086, BT-047 (004), UT-055 a UT-061 e 9 da revisão de código
 - [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
@@ -241,7 +241,7 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 
 - **Migration afetada:** `004_carreira_alvo.py`
 - **Comando de downgrade:** `alembic downgrade 003`
-- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic e BT-047); Postgres no CI após o push
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic e BT-047) e Postgres no CI (run 37064793416)
 - **Downgrade é destrutivo?** [x] Sim / [ ] Nao — apaga só as carreiras-alvo escolhidas; contas, sessões e históricos ficam
 
 Sem o downgrade, o código anterior também funciona: ele ignora as colunas extras.
@@ -274,3 +274,4 @@ Sem o downgrade, o código anterior também funciona: ele ignora as colunas extr
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D4 e o resultado do teste dos dados |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR e spec 08 aprovados pelo usuário |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-08), primeira passada do conteúdo (CR-T-04, em rascunho), validação runtime, revisão de código (9 corrigidos, 1 justificado) e de segurança, documentos atualizados. Os PDFs reais mostraram modalidades sem vagas e sem convocados (spec 08 §2.4) e que de 2024 em diante o PDF não traz o campus de nenhuma carreira |
+| 2026-10-02 | Rafael Peixoto (com Claude) | CI da branch verde (run 37064793416). Gate 1: nomes aprovados pelo usuário sem ajustes; os cinco arquivos de cortes publicados; merge em `master` autorizado |

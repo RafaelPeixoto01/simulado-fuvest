@@ -301,7 +301,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **CR-006** — Login obrigatório para usar o site (Concluído, 2026-10-01): sem login, só a apresentação (início) e a Privacidade (D1); API de conteúdo exige sessão — 401 `nao_autenticado` (D2); sem login configurado, o site fecha em produção (503 `site_indisponivel`) e abre em desenvolvimento (D3). `exigir_acesso` com modos `conta`/`livre`/`indisponivel` (ADR-012), `SessaoResponse.acesso`, `RequerConta` e `ApresentacaoPage`
 
 ### Última Tarefa Implementada
-- CR-010 (2026-10-02): notas de corte por carreira (Fase 4) — página `/notas-de-corte`, carreira-alvo na conta e comparação no resultado e no início; conteúdo de 2020 e 2022–2025 em rascunho até a revisão dos nomes pelo usuário
+- CR-010 (2026-10-02): notas de corte por carreira (Fase 4) — página `/notas-de-corte`, carreira-alvo na conta e comparação no resultado e no início; notas de corte de 2020 e 2022–2025 publicadas, com os nomes revisados pelo usuário (Gate 1)
 - CR-009 (2026-10-02): página nova sempre no topo (bug da rolagem herdada) e extras do início (cartão da Prova completa com miniatura da folha, lateral de 340 px, modos em linhas no celular), círculo de um algarismo e marcas do painel da folha
 - CR-008 (2026-10-02): identidade visual "Papel & Caneta" e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque
 - CR-007 (2026-10-01): apresentação com os números da base (vitrine pública) e a prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca
