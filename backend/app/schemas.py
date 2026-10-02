@@ -216,10 +216,46 @@ class ReporteCriado(BaseModel):
 # --- Conta e historico sincronizado (CR-005, specs/07) ---
 
 
+# Notas de corte e carreira-alvo (CR-010, specs/08)
+class CortesModalidades(BaseModel):
+    ac: int | None  # None: modalidade sem convocados
+    ep: int | None
+    ppi: int | None
+
+
+class CarreiraCorteResposta(BaseModel):
+    codigo: int
+    nome: str
+    vagas: int  # soma das tres modalidades
+    cortes: CortesModalidades
+
+
+class NotasCorteResponse(BaseModel):
+    anos: list[int]  # publicados, do mais recente para o mais antigo
+    recente: int | None
+    ano: int | None  # o devolvido: o pedido, se publicado; senao o mais recente
+    fonte: str | None
+    carreiras: list[CarreiraCorteResposta]
+
+
+class CarreiraAlvoRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ano: Ano
+    codigo: int = Field(ge=100, le=999)
+
+
+class CarreiraAlvo(BaseModel):
+    ano: int
+    codigo: int
+    carreira: CarreiraCorteResposta | None  # None: o par nao esta mais nos cortes publicados
+
+
 class UsuarioPublico(BaseModel):
     id: int
     email: str
     nome: str | None
+    carreira_alvo: CarreiraAlvo | None = None
 
 
 # Login obrigatorio (CR-006, ADR-012): `conta` exige sessao; `livre` e o desenvolvimento sem

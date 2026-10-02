@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.autenticacao import TAMANHO_MAXIMO_TOKEN, nome_cookie_sessao, origem_publica
 from app.models import Usuario
 from app.pacote.assuntos import Taxonomia, taxonomia_em_uso
+from app.pacote.notas_corte import BaseNotasCorte, notas_corte_em_uso
 from app.schemas import ModoAcesso
 from app.services.contas import usuario_da_sessao
 
@@ -20,6 +21,11 @@ def obter_sessao(request: Request) -> Iterator[Session]:
 def obter_taxonomia(request: Request) -> Taxonomia | None:
     """Taxonomia de assuntos do DATA_DIR (ADR-009); None se faltar ou for invalida."""
     return taxonomia_em_uso(request.app.state.settings.data_dir)
+
+
+def obter_notas_corte(request: Request) -> BaseNotasCorte:
+    """Notas de corte publicadas do DATA_DIR (ADR-014); arquivo invalido fica fora."""
+    return notas_corte_em_uso(request.app.state.settings.data_dir)
 
 
 def obter_usuario(

@@ -17,6 +17,7 @@ from app.routers import (
     figuras,
     health,
     historico,
+    notas_corte,
     questoes,
     reportes,
     simulados,
@@ -87,8 +88,8 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
         )
 
     for modulo in (
-        health, vitrine, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico,
-        figuras,
+        health, vitrine, catalogo, simulados, questoes, correcoes, reportes, notas_corte, auth, conta,
+        historico, figuras,
     ):
         app.include_router(modulo.router)
     _servir_spa(app, settings)
