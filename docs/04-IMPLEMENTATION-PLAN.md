@@ -26,7 +26,7 @@
 | CR-005 | Contas com Google e histórico sincronizado — Fase 3B do roadmap ([CR](changes/CR-005-contas-google.md), [spec 07](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-09 | Concluído |
 | CR-006 | Login obrigatório para usar o site ([CR](changes/CR-006-login-obrigatorio.md), [spec 07 §8](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-007 | Apresentação, menu do celular e barra opaca ([CR](changes/CR-007-apresentacao-menu-barra.md), [spec 07 §9](specs/07-contas-sincronizacao.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
-| CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Em andamento |
+| CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 
