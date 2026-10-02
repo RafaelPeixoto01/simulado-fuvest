@@ -1,6 +1,6 @@
 ano: 2022
 versao: V
-status: rascunho
+status: publicada
 fonte:
   url_prova: https://www.fuvest.br/wp-content/uploads/fuvest_2022_primeira_fase_tipo_V.pdf
   url_gabarito: https://www.fuvest.br/wp-content/uploads/fuvest_2022_primeira_fase_gabarito_retificado.pdf
@@ -13,15 +13,59 @@ textos_base:
   conteudo:
   - texto: |-
       No modelo hegemônico, quase todo o treinamento é reservado para o desenvolvimento muscular, sobrando muito pouco tempo para a mobilidade, a flexibilidade, o treino restaurativo, o relaxamento e o treinamento cardiovascular. Na teoria, seria algo em torno de 70% para o fortalecimento, 20% para o cárdio e 10% para a flexibilidade e outros. Na prática, muitos alunos direcionam 100% do tempo para o fortalecimento. Como a prática cardiovascular é infinitamente mais significativa e determinante para a nossa saúde orgânica como um todo, podendo ser considerada o “coração” de um treinamento consciente e saudável, essa ordem deveria ser revista.
-      Nuno Cobra Jr. “ Fitness não é saúde”. Uol . 06/05/2021. Adaptado.
+      Nuno Cobra Jr. “Fitness não é saúde”. Uol. 06/05/2021. Adaptado.
+- id: tb07
+  questoes:
+  - 20
+  - 21
+  - 22
+  conteudo:
+  - texto: |-
+      I.
+      Suave mari magno*
+
+      Lembra-me que, em certo dia,
+      Na rua, ao sol de verão,
+      Envenenado morria
+      Um pobre cão.
+
+      Arfava, espumava e ria,
+      De um riso espúrio e bufão,
+      Ventre e pernas sacudia
+      Na convulsão.
+
+      Nenhum, nenhum curioso
+      Passava, sem se deter,
+      Silencioso,
+
+      Junto ao cão que ia morrer,
+      Como se lhe desse gozo
+      Ver padecer.
+      Machado de Assis. Ocidentais.
+      *Expressão latina, retirada de Lucrécio (Da natureza das coisas), a qual aparece no seguinte trecho: Suave, mari magno, turbantibus aequora ventis/ E terra magnum alterius spectare laborem. (“É agradável, enquanto no mar revoltoso os ventos levantam as águas, observar da terra os grandes esforços de um outro.”).
+
+      II.
+      Tão certo é que a paisagem depende do ponto de vista, e que o melhor modo de apreciar o chicote é ter-lhe o cabo na mão.
+      Machado de Assis. Quincas Borba, cap. XVIII.
+
+      III.
+      Sofia soltou um grito de horror e acordou. Tinha ao pé do leito o marido:
+      – Que foi? perguntou ele.
+      – Ah! respirou Sofia. Gritei, não gritei?
+      (...)
+      – Sonhei que estavam matando você.
+      Palha ficou enternecido. Havê-la feito padecer por ele, ainda que em sonhos, encheu-o de piedade, mas de uma piedade gostosa, um sentimento particular, íntimo, profundo, – que o faria desejar outros pesadelos, para que o assassinassem aos olhos dela, e para que ela gritasse angustiada, convulsa, cheia de dor e de pavor.
+      Machado de Assis. Quincas Borba, cap. CLXI.
 - id: tb02
   questoes:
   - 25
   - 26
   conteudo:
   - texto: |-
-      A taxação de livros tem um efeito cascata que acaba custando caro não apenas ao leitor, como também ao mercado editorial – que há anos não anda bem das pernas – e, em última instância, ao desenvolvimento econômico do país. A gente explica. Taxar um produto significa, quase sempre, um aumento no valor do produto final. Isso porque ao menos uma parte desse imposto será repassada ao consumidor, especialmente se considerarmos que as editoras e livrarias enfrentam há anos uma crise que agora está intensificada pela pandemia e não poderiam retirar o valor desse imposto de seu já apertado lucro. Livros mais caros também resultam em queda de vendas, que , por sua vez, enfraquece ainda mais editoras e as impede de investir em novas publicações – especialmente aquelas de menor apelo comercial, mas igualmente importantes para a pluralidade de ideias. Já deu para perceber a confusão, não é? Mas, além disso, qual seria o custo de uma sociedade com menos leitores e menos livros?
-      Taís Ilhéu. “Por que taxar os livros pode gerar retrocesso social e econômico no país”. Guia do Estudante . Setembro/2020. Adaptado.
+      A taxação de livros tem um efeito cascata que acaba custando caro não apenas ao leitor, como também ao mercado editorial – que há anos não anda bem das pernas – e, em última instância, ao desenvolvimento econômico do país. A gente explica. Taxar um produto significa, quase sempre, um aumento no valor do produto final. Isso porque ao menos uma parte desse imposto será repassada ao consumidor, especialmente se considerarmos que as editoras e livrarias enfrentam há anos uma crise que agora está intensificada pela pandemia e não poderiam retirar o valor desse imposto de seu já apertado lucro. Livros mais caros também resultam em queda de vendas, que, por sua vez, enfraquece ainda mais editoras e as impede de investir em novas publicações – especialmente aquelas de menor apelo comercial, mas igualmente importantes para a pluralidade de ideias. Já deu para perceber a confusão, não é? Mas, além disso, qual seria o custo de uma sociedade com menos leitores e menos livros?
+      Taís Ilhéu. “Por que taxar os livros pode gerar retrocesso social e econômico no país”. Guia do Estudante. Setembro/2020. Adaptado.
+  - texto: '(No original, estão em negrito, nesta ordem: o “que” de “efeito cascata que acaba”, o de “mercado
+      editorial – que há anos”, o de “uma crise que agora” e o de “queda de vendas, que, por sua vez”.)'
 - id: tb03
   questoes:
   - 28
@@ -29,36 +73,24 @@ textos_base:
   conteudo:
   - texto: |-
       A escrita faz de tal modo parte de nossa civilização que poderia servir de definição dela própria. A história da humanidade se divide em duas imensas eras: antes e a partir da escrita. Talvez venha o dia de uma terceira era — depois da escrita. Vivemos os séculos da civilização escrita. Todas as nossas sociedades baseiam-se no escrito. A lei escrita substitui a lei oral, o contrato escrito substitui a convenção verbal, a religião escrita se seguiu à tradição lendária. E sobretudo não existe história que não se funde sobre textos.
-      Charles Higounet. A história da escrita . Adaptado.
+      Charles Higounet. A história da escrita. Adaptado.
 - id: tb04
   questoes:
   - 42
   - 43
   - 44
   conteudo:
-  - texto: |-
-      Fatbergs
-      are
-      a
-      growing scourge infesting
   - figura: tb04-1.webp
   - texto: |-
-      cities around the world—
-      some are more than 800
-      feet long and weigh more
-      than four humpback
-  - figura: tb04-2.webp
-  - texto: |-
-      whales. These gross globs,
-      which can cause sewer
-      systems to block up and even overflow, have been plaguing the U.S., Great Britain and Australia for the past decade, forcing governments and utilities companies to send workers down into the sewers armed with water hoses, vacuums and scrapers with the unenviable task of prying them loose.
+      Fatbergs are a growing scourge infesting cities around the world—some are more than 800 feet long and weigh more than four humpback whales. These gross globs, which can cause sewer systems to block up and even overflow, have been plaguing the U.S., Great Britain and Australia for the past decade, forcing governments and utilities companies to send workers down into the sewers armed with water hoses, vacuums and scrapers with the unenviable task of prying them loose.
       "It is hard not to think of [fatbergs] as a tangible symbol of the way we live now, the ultimate product of our disposable, out of sight, out of mind culture," wrote journalist Tim Adams in The Guardian.
       At their core, fatbergs are the accumulation of oil and grease that's been poured down the drain, congealing around flushed nonbiological waste like tampons, condoms and baby wipes. When fat sticks to the side of sewage pipes, the wipes and other detritus get stuck, accumulating layer upon layer of gunk in a sort of slimy snowball effect.
       Fatbergs also collect other kinds of debris—London fatbergs have been cracked open to reveal pens, false teeth and even watches.
       Restaurants are a big contributor to fatbergs: Thames Water, the London utilities company, found nine out of 10 fast-food eateries lacked adequate grease traps to stop fat from entering the sewers. Homeowners also contribute to the problem by pouring grease and fat down the sink.
-      Even though its component materials are soft, fatbergs themselves can be tough as rocks. Researchers have found a host of dangerous bacteria in fatbergs, including listeria and e.coli. Fatbergs are notorious for their fetid smell, which can make even the hardiest sewer workers gag, and chipping away at one can release noxious gases.
+      Even though its component materials are soft, fatbergs themselves can be tough as rocks. Researchers have found a host of dangerous bacteria in fatbergs, including listeria and e.coli.
+      Fatbergs are notorious for their fetid smell, which can make even the hardiest sewer workers gag, and chipping away at one can release noxious gases.
       The key to fatberg prevention is remembering the four Ps: Pee, poo, puke and (toilet) paper are the only things that should be flushed.
-      Newsweek , 14 March, 2019. Adaptado.
+      Newsweek, 14 March, 2019. Adaptado.
 - id: tb05
   questoes:
   - 45
@@ -69,28 +101,20 @@ textos_base:
       If you take a look at my smartphone, you’ll know that I like to order out. But am I helping the small local businesses? You would think that if you own a restaurant you’d be thrilled to have an outsourced service that would take care of your delivery operations while leveraging their marketing might to expand your businesses’ brand. However, restaurant owners have complained of lack of quality control once their food goes out the door. They don’t like that the delivery people are the face of their product when it gets into the customer’s hand. Some of the delivery services have been accused of listing restaurants on their apps without the owners’ permission, and oftentimes publish menu items and prices that are incorrect or out of date.
       But there is another reason why restaurant owners aren’t fond of delivery services. It’s the costs, which, for some, are becoming unsustainable. Even with the increased revenues from the delivery services, the fees wind up killing a restaurant’s margins to the extent that it’s at best marginally profitable. Therefore, some restaurants are pushing harder to drive orders from their own websites and offering special deals for customers that use their in-house delivery people.
       The simple fact is that these delivery apps are here to stay. They are enormously popular and have significantly grown. I believe that restaurant owners that resist these apps are hurting their brands by missing out on potential customers. The good news is that the delivery platforms are not as evil as some would portray them. They have some skin in the game. They are competing against other services. They want their listed restaurants to profit. Maybe instead of fighting, the nation’s restaurant industry needs to proactively embrace the delivery service industry and figure out ways to profitably work together.
-      The Guardian . 02 December, 2020. Adaptado.
+      The Guardian. 02 December, 2020. Adaptado.
 - id: tb06
   questoes:
   - 70
   - 71
   conteudo:
-  - texto: |-
-      Oxigênio (O ) e ozônio (O ) estão em constante processo de consumo e produção na estratosfera, como representado pelas equações químicas a seguir. As reações I e II ilustram etapas da produção de ozônio a partir de oxigênio, e a reação III mostra a restauração de oxigênio a partir de ozônio.
-      ΔH (kcal/mol de O )
-      Reação
-      I
-      −118
-      O → 2 O
-      II
-      ΔH
-      2 O + 2 O → 2 O
-      III
-      2O → 3O
-      +21
+  - texto: Oxigênio (O₂) e ozônio (O₃) estão em constante processo de consumo e produção na estratosfera,
+      como representado pelas equações químicas a seguir. As reações I e II ilustram etapas da produção
+      de ozônio a partir de oxigênio, e a reação III mostra a restauração de oxigênio a partir de ozônio.
+  - figura: tb06-1.webp
 questoes:
 - numero: 1
-  disciplina: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -101,8 +125,11 @@ questoes:
       varia de acordo com as áreas mostradas no mapa:'
   - figura: q001-1.webp
   - texto: |-
-      Dombrowski, J G et al . (2017), Malar J , 16:253, doi:10.1186/s12936-017-1889-6 e Monteiro, W M et al . (2014), Mem Inst Oswaldo Cruz , 109:5, 553-568, doi:10.1590/0074-0276140123. Adaptados.
+      Dombrowski, J G et al. (2017), Malar J, 16:253, doi:10.1186/s12936-017-1889-6 e Monteiro, W M et al. (2014), Mem Inst Oswaldo Cruz, 109:5, 553-568, doi:10.1590/0074-0276140123. Adaptados.
       Indique a afirmação correta sobre a segurança da prescrição de cloroquina nesse contexto.
+  - texto: |-
+      Note e adote:
+      População de três regiões brasileiras: Norte = 18 milhões; Nordeste = 58 milhões; Centro-Oeste = 17 milhões.
   alternativas:
     A:
       texto: Não é necessário fazer o teste do pezinho expandido em filhos de casais da região Nordeste
@@ -118,23 +145,21 @@ questoes:
         possuírem o alelo recessivo e podem ser tratados com cloroquina em áreas onde a malária não seja
         endêmica.
     E:
-      texto: |-
-        Os pacientes do sexo masculino devem ser investigados quanto à presença de anemia hemolítica na família paterna caso vivam em regiões onde a malária é endêmica.
-        Note e adote:
-        População de três regiões brasileiras: Norte = 18 milhões; Nordeste = 58 milhões; Centro-Oeste = 17 milhões.
+      texto: Os pacientes do sexo masculino devem ser investigados quanto à presença de anemia hemolítica
+        na família paterna caso vivam em regiões onde a malária é endêmica.
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 2, y≈726–760
+  pendencias: []
 - numero: 2
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Por mais bem informado que você possa ser, não dá para baixar a guarda. Mas por que as notícias falsas – mesmo aquelas mais improváveis – parecem tão convincentes para tantas pessoas? Van Bavel, professor de psicologia e ciência neural da Universidade de Nova York, se especializou em entender como as crenças políticas e identidades de grupo influenciam a mente, e descobriu que a identificação com posições políticas pode interferir em como o cérebro processa as informações.
       Tendemos a rejeitar fatos que ameaçam nosso senso de identidade e sempre buscar informações que confirmem nossas próprias crenças, seja por meio de memórias seletivas, leituras de fontes que estão do nosso lado ou mesmo interpretando os fatos de determinada maneira. Isso tudo está relacionado a não querermos ter nossas ideias, gostos, identidade questionados, e por isso temos dificuldade em aceitar o que contradiz aquilo em que acreditamos.
-      Ana Prado. “A ciência explica por que caímos em fake news ”. Superinteressante . 15/06/2018. Adaptado.
+      Ana Prado. “A ciência explica por que caímos em fake news”. Superinteressante. 15/06/2018. Adaptado.
       De acordo com o texto,
   alternativas:
     A:
@@ -156,7 +181,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 3
-  disciplina: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -184,7 +210,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -205,11 +232,12 @@ questoes:
       texto: o transporte público é responsável pela mobilidade urbana.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 3, y≈88, 137, 198: conferir o texto'
+  pendencias: []
 - numero: 5
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: estatistica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: "O gráfico mostra dados coletados na cidade do Rio de Janeiro, entre fevereiro e abril de 2020,
@@ -217,35 +245,36 @@ questoes:
       de COVID-19. Para cada dia, representado por um símbolo no gráfico, foram coletadas duas grandezas:
       uma média da energia de vibração sísmica durante o dia (na abscissa) e o índice \U0001D439 (na ordenada),
       que é a fração de pessoas que saiu de casa alguma vez naquele dia. A energia sísmica média foi medida
-      em (nm/s) na faixa de frequências que tem causas humanas. Os triângulos representam domingos e feriados;
-      os quadrados referem-se aos sábados; e os círculos correspondem aos dias úteis da semana. Para cada
-      um desses subconjuntos de dados, uma reta média foi obtida, expressando a relação aproximada entre
-      as duas grandezas medidas."
+      em (nm/s)² na faixa de frequências que tem causas humanas. Os triângulos representam domingos e
+      feriados; os quadrados referem-se aos sábados; e os círculos correspondem aos dias úteis da semana.
+      Para cada um desses subconjuntos de dados, uma reta média foi obtida, expressando a relação aproximada
+      entre as duas grandezas medidas."
   - figura: q005-1.webp
-  - texto: Dias, F L et al . (2020), Geophysical Research Letters , 47:16, doi:10.1029/2020GL088748. Adaptado.
+  - texto: |-
+      Dias, F L et al. (2020), Geophysical Research Letters, 47:16, doi:10.1029/2020GL088748. Adaptado.
       Sobre o estudo descrito, o que é possível inferir a partir dos dados apresentados?
   alternativas:
     A:
-      texto: Em nenhum sábado, a energia sísmica média registrada superou 380 (nm/s) .
+      texto: Em nenhum sábado, a energia sísmica média registrada superou 380 (nm/s)².
     B:
       texto: Em todos os dias úteis da semana, pelo menos 20% das pessoas permaneceram o tempo todo em
         casa.
     C:
-      texto: Em alguns dos dias de domingo ou feriado, a energia sísmica média foi maior do que 600 (nm/s)
-        .
+      texto: Em alguns dos dias de domingo ou feriado, a energia sísmica média foi maior do que 600 (nm/s)².
     D:
       texto: Em dias úteis da semana, a energia sísmica média foi maior ou igual do que em sábados, domingos
         e feriados, para o mesmo número de pessoas que saiu de casa em um dia.
     E:
-      texto: Aos sábados, uma medição de energia sísmica média de 190 (nm/s) indica que mais de 60% das
+      texto: Aos sábados, uma medição de energia sísmica média de 190 (nm/s)² indica que mais de 60% das
         pessoas saíram de casa nesse dia.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 3, y≈439: conferir o texto'
+  pendencias: []
 - numero: 6
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: espaco-urbano
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: Os mapas mostram uma parte do município de São Paulo. O mapa I refere-se à população vacinada
@@ -253,9 +282,6 @@ questoes:
       ao Índice de Desenvolvimento Humano. Tons mais claros indicam valores menores e tons mais escuros,
       valores maiores.
   - figura: q006-1.webp
-  - figura: q006-2.webp
-  - figura: q006-3.webp
-  - figura: q006-4.webp
   - texto: |-
       Disponível em https://www.labcidade.fau.usp.br/. Maio/2021. Adaptado.
       A partir desses dados, é correto afirmar que
@@ -274,39 +300,46 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: questoes-ambientais
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
-  - texto: |-
-      Um aumento no consumo de água e produtos agrícolas por parte da população brasileira geralmente vem atrelado a um aumento na pressão exercida sobre o meio ambiente. Selecione a alternativa que apresenta duas soluções sustentáveis, de amplo alcance nacional e economicamente viáveis, para diminuir a expansão dos cultivos sobre a vegetação nativa e para garantir recursos hídricos de qualidade para as gerações futuras.
-      I - Aumento da exportação de produtos agropecuários.
+  - texto: Um aumento no consumo de água e produtos agrícolas por parte da população brasileira geralmente
+      vem atrelado a um aumento na pressão exercida sobre o meio ambiente. Selecione a alternativa que
+      apresenta duas soluções sustentáveis, de amplo alcance nacional e economicamente viáveis, para diminuir
+      a expansão dos cultivos sobre a vegetação nativa e para garantir recursos hídricos de qualidade
+      para as gerações futuras.
   alternativas:
     A:
       texto: |-
+        I - Aumento da exportação de produtos agropecuários.
         II - Criação em larga escala de represas de pequeno porte.
-        I - Aumento progressivo da produtividade dos cultivos já existentes.
     B:
       texto: |-
+        I - Aumento progressivo da produtividade dos cultivos já existentes.
         II - Programa amplo de preservação de matas ciliares.
-        I - Diminuição do comércio interno de produtos agrícolas.
     C:
       texto: |-
+        I - Diminuição do comércio interno de produtos agrícolas.
         II - Aumento da utilização dos aquíferos para abastecimento dos cultivos.
-        I - Aumento da exportação de produtos agropecuários.
     D:
       texto: |-
+        I - Aumento da exportação de produtos agropecuários.
         II - Programa amplo de preservação de matas ciliares.
-        I - Diminuição do comércio interno de produtos agrícolas.
     E:
-      texto: II - Criação em larga escala de represas de pequeno porte.
+      texto: |-
+        I - Diminuição do comércio interno de produtos agrícolas.
+        II - Criação em larga escala de represas de pequeno porte.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 4, y≈165–441
+  pendencias: []
 - numero: 8
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ecologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: 'Os gráficos mostram três trajetórias distintas com relação ao número de espécies animais e
@@ -334,14 +367,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'O gráfico representa o volume celular de um protozoário ciliado em um gradiente de salinidade:'
   - figura: q009-1.webp
-  - figura: q009-2.webp
   - texto: A partir desses dados, é correto afirmar que o protozoário ciliado é
+  - texto: |-
+      Note e adote:
+      O volume celular do ciliado em seu habitat natural é o referencial 1.
+      0% corresponde a água doce pura.
   alternativas:
     A:
       texto: de água salobra e seu equilíbrio osmótico ocorre por difusão passiva em ambientes hiposmóticos.
@@ -352,18 +389,15 @@ questoes:
     D:
       texto: de água doce e não possui mecanismos de controle osmótico em ambientes hiposmóticos.
     E:
-      texto: |-
-        marinho e não possui mecanismos de controle osmótico em ambientes hiposmóticos.
-        Note e adote:
-        O volume celular do ciliado em seu habitat natural é o referencial 1.
-        0% corresponde a água doce pura.
+      texto: marinho e não possui mecanismos de controle osmótico em ambientes hiposmóticos.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 4, y≈607–643
+  pendencias: []
 - numero: 10
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ambiente
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
   - texto: O gráfico mostra linhas de tendência de cinco parâmetros da água (eixo y), medidos por pesquisadores,
@@ -372,9 +406,6 @@ questoes:
       os técnicos da companhia de saneamento notaram que nem todas as tendências mostradas no gráfico
       estão corretas.
   - figura: q010-1.webp
-  - figura: q010-2.webp
-  - figura: q010-3.webp
-  - figura: q010-4.webp
   - texto: São corretas apenas as linhas de tendência representadas em
   alternativas:
     A:
@@ -389,11 +420,10 @@ questoes:
       texto: 3, 4 e 5.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 5, y≈305, 329: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 5, y≈312: conferir o texto'
+  pendencias: []
 - numero: 11
-  disciplina: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -401,13 +431,12 @@ questoes:
       humanos (1 e 2), bem como o efeito do tratamento do tecido 2 com uma substância que afeta a divisão
       celular:'
   - figura: q011-1.webp
-  - figura: q011-2.webp
   - texto: 'Os tecidos 1 e 2 e uma aplicação médica do efeito do tratamento são, respectivamente:'
   alternativas:
     A:
       texto: muscular, tumoral e quimioterapia.
     B:
-      texto: ósseo, ovariano e fertilização in vitro .
+      texto: ósseo, ovariano e fertilização in vitro.
     C:
       texto: nervoso, tumoral e transplante.
     D:
@@ -418,58 +447,39 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 12
-  disciplina: null
+  disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Analise o esquema e as estruturas (X, Y e Z) da planta para completar a frase a seguir.
   - figura: q012-1.webp
-  - figura: q012-2.webp
   - texto: |-
-      Às 14h de um dia ensolarado, em condições hídricas ótimas, a estrutura identificada por _I_ encontra-se _II_, possibilitando a absorção de água do solo e entrada de CO , que é utilizado pela estrutura representada por _III_ para realização da fotossíntese.
+      Às 14h de um dia ensolarado, em condições hídricas ótimas, a estrutura identificada por ___I___ encontra-se ___II___, possibilitando a absorção de água do solo e entrada de CO₂, que é utilizado pela estrutura representada por ___III___ para realização da fotossíntese.
       As lacunas I, II e III podem ser preenchidas corretamente por:
-      I
-      II
-      III
   alternativas:
     A:
-      texto: |-
-        Z
-        aberta
-        Y
+      texto: I – Z; II – aberta; III – Y
     B:
-      texto: |-
-        Z
-        fechada
-        X
+      texto: I – Z; II – fechada; III – X
     C:
-      texto: |-
-        Y
-        vazia
-        X
+      texto: I – Y; II – vazia; III – X
     D:
-      texto: |-
-        X
-        cheia
-        Z
+      texto: I – X; II – cheia; III – Z
     E:
-      texto: |-
-        X
-        vazia
-        Y
+      texto: I – X; II – vazia; III – Y
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 5, y≈367–462
+  pendencias: []
 - numero: 13
-  disciplina: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'O esquema a seguir representa o aparecimento de bactérias mutantes em uma colônia e o resultado
       de sua exposição a quatro diferentes condições de cultura:'
   - figura: q013-1.webp
-  - figura: q013-2.webp
   - texto: |-
       Disponível em https://edepot.wur.nl/376546/. Adaptado.
       Assinale a alternativa com a relação correta entre as mutações e as condições de cultura.
@@ -490,14 +500,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 14
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: atomistica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: O quadrinho a seguir mostra uma paródia entre situações cotidianas e descobertas científicas.
   - figura: q014-1.webp
-  - figura: q014-2.webp
-  - figura: q014-3.webp
   - texto: Quais feitos científicos de Mendeleev, de Watson e Crick e de Thomson estão relacionados com
       o quadrinho?
   alternativas:
@@ -517,17 +527,18 @@ questoes:
         em uma Tabela Periódica.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈262, 477: conferir o texto'
+  pendencias: []
 - numero: 15
-  disciplina: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       No texto do filósofo francês Maurice Merleau-Ponty é estabelecida uma conexão entre as relações sociais e a racionalidade dos indivíduos:
       A sociedade humana não é uma comunidade de espíritos racionais, só se pode compreendê-la assim nos países favorecidos, em que o equilíbrio vital e econômico foi obtido localmente e por certo tempo.
-      Maurice Merleau-Ponty, Fenomenologia da percepção , p.89. Qual sentença, se tomada como verdadeira, reforça a posição exprimida pelo filósofo no trecho?
+      Maurice Merleau-Ponty, Fenomenologia da percepção, p.89.
+      Qual sentença, se tomada como verdadeira, reforça a posição exprimida pelo filósofo no trecho?
   alternativas:
     A:
       texto: A racionalidade é uma potência espiritual que se impõe sobre as circunstâncias históricas.
@@ -543,19 +554,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'A figura sintetiza, de forma simplificada, a variação da pressão sanguínea (mmHg), da velocidade
-      de circulação sanguínea (cm/s) e da área total (cm ) em relação aos diversos tipos de vasos do sistema
+      de circulação sanguínea (cm/s) e da área total (cm²) em relação aos diversos tipos de vasos do sistema
       sanguíneo humano (artérias, arteríolas, capilares, vênulas e veias):'
   - figura: q016-1.webp
-  - figura: q016-2.webp
   - texto: Com base na figura, é correto afirmar que
   alternativas:
     A:
-      texto: a velocidade aumenta nas vênulas, o que permite às hemoglobinas descarregarem o O .
+      texto: a velocidade aumenta nas vênulas, o que permite às hemoglobinas descarregarem o O₂.
     B:
       texto: a pressão sanguínea cai nos capilares, vênulas e veias pela presença de válvulas nesses vasos.
     C:
@@ -568,7 +579,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
+  disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -598,29 +610,30 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
-  - texto: 'Dentre as expressões destacadas, a que exerce a mesma função sintática do termo sublinhado
+  - texto: 'Dentre as expressões destacadas, a que exerce a mesma função sintática do termo “restaurativo”
       em “o treino restaurativo, o relaxamento e o treinamento cardiovascular” é:'
   alternativas:
     A:
-      texto: um atleta de seleção precisa de treinamento intenso.
+      texto: um atleta “de seleção” precisa de treinamento intenso.
     B:
-      texto: o amor ao esporte é fundamental para o atleta.
+      texto: o amor “ao esporte” é fundamental para o atleta.
     C:
-      texto: a população incorpora radicalmente atitudes saudáveis.
+      texto: a população incorpora “radicalmente” atitudes saudáveis.
     D:
-      texto: muitas pessoas se beneficiam de alimentos verdes.
+      texto: muitas “pessoas” se beneficiam de alimentos verdes.
     E:
-      texto: todo tipo de atividade física faz bem à saúde mental.
+      texto: todo tipo de atividade física faz “bem” à saúde mental.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 7, y≈452: formatação perdida no texto puro'
+  pendencias: []
 - numero: 19
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -638,45 +651,15 @@ questoes:
     D:
       texto: Nove noites e Terra sonâmbula
     E:
-      texto: |-
-        Quincas Borba e Angústia
-        LEIA OS SEGUINTES TEXTOS DE MACHADO DE ASSIS PARA RESPONDER ÀS QUESTÕES DE 20 A 22:
-        I.
-        Suave mari magno *
-        Lembra-me que, em certo dia,
-        Na rua, ao sol de verão,
-        Envenenado morria
-        Um pobre cão.
-        Arfava, espumava e ria,
-        De um riso espúrio e bufão,
-        Ventre e pernas sacudia
-        Na convulsão.
-        Nenhum, nenhum curioso
-        Passava, sem se deter,
-        Silencioso,
-        Junto ao cão que ia morrer,
-        Como se lhe desse gozo
-        Ver padecer.
-        Machado de Assis. Ocidentais .
-        *Expressão latina, retirada de Lucrécio ( Da natureza das coisas ), a qual aparece no seguinte trecho: Suave, mari magno, turbantibus aequora ventis/ E terra magnum alterius spectare laborem. (“É agradável, enquanto no mar revoltoso os ventos levantam as águas, observar da terra os grandes esforços de um outro.”).
-        II.
-        Tão certo é que a paisagem depende do ponto de vista, e que o melhor modo de apreciar o chicote é ter-lhe o cabo na mão.
-        Machado de Assis. Quincas Borba , cap. XVIII.
-        III.
-        Sofia soltou um grito de horror e acordou. Tinha ao pé do leito o marido:
-        – Que foi? perguntou ele.
-        – Ah! respirou Sofia. Gritei, não gritei?
-        (...)
-        – Sonhei que estavam matando você.
-        Palha ficou enternecido. Havê-la feito padecer por ele, ainda que em sonhos, encheu-o de piedade, mas de uma piedade gostosa, um sentimento particular, íntimo, profundo, – que o faria desejar outros pesadelos, para que o assassinassem aos olhos dela, e para que ela gritasse angustiada, convulsa, cheia de dor e de pavor.
-        Machado de Assis. Quincas Borba , cap. CLXI.
+      texto: Quincas Borba e Angústia
   resposta: D
   anulada: false
   pendencias: []
 - numero: 20
-  disciplina: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: A visão do eu-lírico no texto I
   alternativas:
@@ -694,9 +677,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: A analogia consiste em um recurso de expressão comumente utilizado para ilustrar um raciocínio
       por meio da semelhança que se observa entre dois fatos ou ideias. No texto II, a analogia construída
@@ -716,9 +700,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 22
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: No texto III, ao analisar a interioridade de Palha, o narrador descobre, no pensamento oculto
       do negociante,
@@ -737,7 +722,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -746,13 +732,16 @@ questoes:
       Peno, e calo, tão fino, e tão atento,
       Que fazendo disfarce do tormento
       Mostro que o não padeço, e sei que o sinto.
+
       O mal, que fora encubro, ou que desminto,
       Dentro no coração é que o sustento:
       Com que, para penar é sentimento,
       Para não se entender, é labirinto.
+
       Ninguém sufoca a voz nos seus retiros;
       Da tempestade é o estrondo efeito:
       Lá tem ecos a terra, o mar suspiros.
+
       Mas oh do meu segredo alto conceito!
       Pois não me chegam a vir à boca os tiros
       Dos combates que vão dentro no peito.
@@ -776,26 +765,30 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Nun´Álvares Pereira
+
       Que auréola te cerca?
       É a espada que, volteando,
       Faz que o ar alto perca
       Seu azul negro e brando.
+
       Mas que espada é que, erguida,
       Faz esse halo no céu?
       É Excalibur, a ungida,
       Que o Rei Artur te deu.
+
       ´Sperança consumada,
       S. Portugal em ser,
       Ergue a luz da tua espada
       Para a estrada se ver!
-      Fernando Pessoa. In: “A Coroa”, Parte I, Mensagem .
-      A primeira parte de Mensagem , organizada como um correlativo poético do Brasão das Armas de Portugal, perfila uma série de figuras míticas e históricas que teriam sido responsáveis pela formação nacional portuguesa. A seleção de Nun´Álvares Pereira para ocupar o lugar da Coroa
+      Fernando Pessoa. In: “A Coroa”, Parte I, Mensagem.
+      A primeira parte de Mensagem, organizada como um correlativo poético do Brasão das Armas de Portugal, perfila uma série de figuras míticas e históricas que teriam sido responsáveis pela formação nacional portuguesa. A seleção de Nun´Álvares Pereira para ocupar o lugar da Coroa
   alternativas:
     A:
       texto: sugere, pela imagem do halo de luz, que a verdadeira nobreza é de espírito.
@@ -811,7 +804,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 25
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -836,7 +830,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
+  disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -856,12 +851,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 27
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Chega um momento em que a tensão eu/mundo se exprime mediante uma perspectiva crítica, imanente à escrita, o que torna o romance não mais uma variante literária da rotina social, mas o seu avesso; logo, o oposto do discurso ideológico do homem médio. O romancista “imitaria” a vida, sim, mas qual vida? Aquela cujo sentido dramático escapa a homens e mulheres entorpecidos ou automatizados por seus hábitos cotidianos. A vida como objeto de busca e construção, e não a vida como encadeamento de tempos vazios e inertes. Caso essa pobre vidamorte deva ser tematizada, ela aparecerá como tal, degradada, sem a aura positiva com que as palavras “realismo” e “realidade” são usadas nos discursos que fazem a apologia conformista da “vida como ela é”... A escrita da resistência, a narrativa atravessada pela tensão crítica, mostra, sem retórica nem alarde ideológico, que essa “vida como ela é” é, quase sempre, o ramerrão de um mecanismo alienante, precisamente o contrário da vida plena e digna de ser vivida.
+      Chega um momento em que a tensão eu/mundo se exprime mediante uma perspectiva crítica, imanente à escrita, o que torna o romance não mais uma variante literária da rotina social, mas o seu avesso; logo, o oposto do discurso ideológico do homem médio. O romancista “imitaria” a vida, sim, mas qual vida? Aquela cujo sentido dramático escapa a homens e mulheres entorpecidos ou automatizados por seus hábitos cotidianos. A vida como objeto de busca e construção, e não a vida como encadeamento de tempos vazios e inertes. Caso essa pobre vida-morte deva ser tematizada, ela aparecerá como tal, degradada, sem a aura positiva com que as palavras “realismo” e “realidade” são usadas nos discursos que fazem a apologia conformista da “vida como ela é”... A escrita da resistência, a narrativa atravessada pela tensão crítica, mostra, sem retórica nem alarde ideológico, que essa “vida como ela é” é, quase sempre, o ramerrão de um mecanismo alienante, precisamente o contrário da vida plena e digna de ser vivida.
       É nesse sentido que se pode dizer que a narrativa descobre a vida verdadeira, e que esta abraça e transcende a vida real. A literatura, com ser ficção, resiste à mentira. É nesse horizonte que o espaço da literatura, considerado em geral como lugar da fantasia, pode ser o lugar da verdade mais exigente.
       Alfredo Bosi. “Narrativa e resistência”. Adaptado.
       O conceito de resistência, expresso pela tensão do indivíduo perante o mundo, adquire perspectiva crítica na escrita do romance quando o autor
@@ -880,7 +876,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 28
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -900,7 +897,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
+  disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -921,18 +919,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
+  disciplina: matematica
+  assunto: combinatoria-e-probabilidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Atualmente, no Brasil, coexistem dois sistemas de placas de identificação de automóveis: o
-      padrão Mercosul (o mais recente) e aquele que se iniciou em 1990 (o sistema anterior , usado ainda
+      padrão Mercosul (o mais recente) e aquele que se iniciou em 1990 (o sistema anterior, usado ainda
       pela maioria dos carros em circulação). No sistema anterior, utilizavam-se 3 letras (em um alfabeto
       de 26 letras) seguidas de 4 algarismos (de 0 a 9). No padrão Mercosul adotado no Brasil para automóveis,
       são usadas 4 letras e 3 algarismos, com 3 letras nas primeiras 3 posições e a quarta letra na quinta
       posição, podendo haver repetições de letras ou de números. A figura ilustra os dois tipos de placas.'
   - figura: q030-1.webp
-  - figura: q030-2.webp
   - texto: Dessa forma, o número de placas possíveis do padrão Mercosul brasileiro de automóveis é maior
       do que o do sistema anterior em
   alternativas:
@@ -950,8 +948,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: aritmetica
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: O sistema de numeração conhecido como chinês científico (ou em barras) surgiu provavelmente
@@ -963,7 +963,7 @@ questoes:
       Dinastia Sung (960-1126).
   - figura: q031-1.webp
   - texto: |-
-      Howard Eves, Introdução à História da Matemática . Tradução: Hygino H. Domingues. Editora Unicamp, 2011 (5ª ed.).
+      Howard Eves, Introdução à História da Matemática. Tradução: Hygino H. Domingues. Editora Unicamp, 2011 (5ª ed.).
       Assinale a alternativa que representa o número 91625 nesse sistema de numeração.
   alternativas:
     A:
@@ -978,10 +978,10 @@ questoes:
       figura: q031-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 10, y≈80, 212: conferir o texto'
+  pendencias: []
 - numero: 32
-  disciplina: null
+  disciplina: matematica
+  assunto: razao-e-proporcao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1002,16 +1002,17 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 33
-  disciplina: null
+  disciplina: matematica
+  assunto: porcentagem
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Uma indústria produz três modelos de cadeiras (indicadas por \U0001D440 ,\U0001D440 e \U0001D440
-      ), cada um deles em duas opções de cores: preta e vermelha (indicadas por P e V, respectivamente).
+  - texto: "Uma indústria produz três modelos de cadeiras (indicadas por \U0001D440₁, \U0001D440₂ e \U0001D440₃),
+      cada um deles em duas opções de cores: preta e vermelha (indicadas por P e V, respectivamente).
       A tabela mostra o número de cadeiras produzidas semanalmente conforme a cor e o modelo:"
   - figura: q033-1.webp
-  - texto: "As porcentagens de cadeiras com defeito são de 2% do modelo \U0001D440 , 5% do modelo \U0001D440
-      e 8% do modelo \U0001D440 . As cadeiras que não apresentam defeito são denominadas boas.\nA tabela
+  - texto: "As porcentagens de cadeiras com defeito são de 2% do modelo \U0001D440₁, 5% do modelo \U0001D440₂
+      e 8% do modelo \U0001D440₃. As cadeiras que não apresentam defeito são denominadas boas.\nA tabela
       que indica o número de cadeiras produzidas semanalmente com defeito (D) e boas (B), de acordo com
       a cor, é:"
   alternativas:
@@ -1029,7 +1030,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 34
-  disciplina: null
+  disciplina: matematica
+  assunto: algebra
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1052,7 +1054,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
+  disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1072,15 +1075,18 @@ questoes:
       texto: 27 m
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈65: conferir o texto'
+  pendencias: []
 - numero: 36
-  disciplina: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Um deltaedro é um poliedro cujas faces são todas triângulos equiláteros. Se um deltaedro convexo
       possui 8 vértices, então o número de faces desse deltaedro é:'
+  - texto: "Note e adote:\nEm poliedros convexos, vale a relação de Euler \U0001D439 − \U0001D434 + \U0001D449
+      = 2, em que \U0001D439 é o número de faces, \U0001D434 é o número de arestas e \U0001D449 é o número
+      de vértices do poliedro."
   alternativas:
     A:
       texto: '4'
@@ -1091,55 +1097,50 @@ questoes:
     D:
       texto: '10'
     E:
-      texto: "12\nNote e adote:\nEm poliedros convexos, vale a relação de Euler \U0001D439−\U0001D434+\U0001D449=2
-        , em que \U0001D439 é o número de faces, \U0001D434 é o número de arestas e \U0001D449 é o número
-        de vértices do poliedro."
+      texto: '12'
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 11, y≈341–394
+  pendencias: []
 - numero: 37
-  disciplina: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "A figura mostra um quadrado e um círculo, ambos com centro no ponto \U0001D442 . O quadrado
+  - texto: "A figura mostra um quadrado e um círculo, ambos com centro no ponto \U0001D442. O quadrado
       tem lado medindo 1 unidade de medida (u.m.) e o círculo tem raio igual a 2 u.m. O ponto \U0001D434
       está sobre o contorno do quadrado, o ponto \U0001D435 está sobre o contorno do círculo, e o segmento
       \U0001D434\U0001D435 tem tamanho 2 u.m."
   - figura: q037-1.webp
-  - texto: "Quando o ângulo \U0001D703 =\U0001D434\U0001D442\U0001D435 for máximo, seu cosseno será:"
+  - texto: "Quando o ângulo \U0001D703 = AÔB for máximo, seu cosseno será:"
   alternativas:
     A:
-      texto: ''
+      texto: 1/8
     B:
-      texto: ''
+      texto: 1/4
     C:
-      texto: √
+      texto: 1/2
     D:
-      texto: √
+      texto: √2/2
     E:
-      texto: ''
+      texto: √3/2
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 11, y≈660, 673, 687, 696, 709, 718, 731, 743,
-    756, 768, 781: recortar como figura'
-  - 'Texto sublinhado na página 11, y≈674, 683, 688, 701, 706, 715, 728, 752, 778: formatação perdida
-    no texto puro'
+  pendencias: []
 - numero: 38
-  disciplina: null
+  disciplina: matematica
+  assunto: algebra
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Suponha que o polinômio \U0001D45D(\U0001D465)=\U0001D465 +\U0001D45A\U0001D465−2 , em que
-      \U0001D45A é um número real, tenha uma raiz real dupla \U0001D44E e uma raiz real simples \U0001D44F
-      . O valor da soma de \U0001D45A com \U0001D44E é:"
+  - texto: "Suponha que o polinômio \U0001D45D(\U0001D465) = \U0001D465³ + \U0001D45A\U0001D465 − 2, em
+      que \U0001D45A é um número real, tenha uma raiz real dupla \U0001D44E e uma raiz real simples \U0001D44F.
+      O valor da soma de \U0001D45A com \U0001D44E é:"
   alternativas:
     A:
       texto: '0'
     B:
-      texto: –1
+      texto: −1
     C:
       texto: −2
     D:
@@ -1150,7 +1151,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
+  disciplina: matematica
+  assunto: geometria-plana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1159,34 +1161,33 @@ questoes:
       ambos com 30 m de lado. Uma fita de isolamento, esticada e paralela ao solo, envolve os 4 tanques,
       dando uma volta completa (linha em laranja na figura).
   - figura: q039-1.webp
-  - figura: q039-2.webp
-  - figura: q039-3.webp
-  - figura: q039-4.webp
-  - figura: q039-5.webp
   - texto: 'O comprimento da fita, em metros, é:'
   alternativas:
     A:
-      texto: "20\U0001D70B+30(3+√2)"
+      texto: "20\U0001D70B + 30(3 + √2)"
     B:
-      texto: "20\U0001D70B+30(4+√2)"
+      texto: "20\U0001D70B + 30(4 + √2)"
     C:
-      texto: "25\U0001D70B+15(4+√2)"
+      texto: "25\U0001D70B + 15(4 + √2)"
     D:
-      texto: "25\U0001D70B+30(4+√2)"
+      texto: "25\U0001D70B + 30(4 + √2)"
     E:
-      texto: "25\U0001D70B+30(4+2√2)"
+      texto: "25\U0001D70B + 30(4 + 2√2)"
   resposta: B
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: razao-e-proporcao
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: |-
-      Em fevereiro de 2021, um grupo de físicos da Universidade Federal de Minas Gerais (UFMG) publicou um artigo que foi capa da importante revista Nature . O texto a seguir foi retirado de uma reportagem do site da UFMG sobre o artigo:
+      Em fevereiro de 2021, um grupo de físicos da Universidade Federal de Minas Gerais (UFMG) publicou um artigo que foi capa da importante revista Nature. O texto a seguir foi retirado de uma reportagem do site da UFMG sobre o artigo:
       O nanoscópio, prossegue Ado Jorio (professor da UFMG), ilumina a amostra com um microscópio óptico usual. O foco da luz tem o tamanho de um círculo de 1 micrômetro de diâmetro. “O que o nanoscópio faz é inserir uma nanoantena, que tem uma ponta com diâmetro de 10 nanômetros, dentro desse foco de 1 micrômetro e escanear essa ponta. A imagem com resolução nanométrica é formada por esse processo de escaneamento da nanoantena, que localiza o campo eletromagnético da luz em seu ápice”, afirma o professor.
-      Itamar Rigueira Jr. “Nanoscópio da UFMG possibilita compreender estrutura que torna grafeno supercondutor”. Adaptado. Disponível em https://ufmg.br/comunicacao/noticias/. Gadelha A C et al . (2021), Nature , 590, 405-409, doi: 10.1038/s41586-021-03252-5.
+      Itamar Rigueira Jr. “Nanoscópio da UFMG possibilita compreender estrutura que torna grafeno supercondutor”. Adaptado. Disponível em https://ufmg.br/comunicacao/noticias/.
+      Gadelha A C et al. (2021), Nature, 590, 405-409, doi: 10.1038/s41586-021-03252-5.
       Com base nos dados mencionados no texto, a razão entre o diâmetro do foco da luz de um microscópio óptico usual e o diâmetro da ponta da nanoantena utilizada no nanoscópio é da ordem de:
   alternativas:
     A:
@@ -1203,19 +1204,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: "A quantidade de bactérias em um líquido é diretamente proporcional à medida da turbidez desse
       líquido. O gráfico mostra, em escala logarítmica, o crescimento da turbidez \U0001D465 de um líquido
-      ao longo do tempo \U0001D461 (medido em minutos), isto é, mostra log \U0001D465 em função de \U0001D461
-      . Os dados foram coletados de 30 em 30 minutos, e uma curva de interpolação foi obtida para inferir
+      ao longo do tempo \U0001D461 (medido em minutos), isto é, mostra log₁₀ \U0001D465 em função de \U0001D461.
+      Os dados foram coletados de 30 em 30 minutos, e uma curva de interpolação foi obtida para inferir
       valores intermediários."
   - figura: q041-1.webp
-  - figura: q041-2.webp
-  - texto: "Disponível em https://fankhauserblog.wordpress.com/. Com base no gráfico, em quantas vezes
-      a população de bactérias aumentou, do instante \U0001D461 para o instante \U0001D461 ?"
+  - texto: "Disponível em https://fankhauserblog.wordpress.com/.\nCom base no gráfico, em quantas vezes
+      a população de bactérias aumentou, do instante \U0001D461₀ para o instante \U0001D461₁?"
   alternativas:
     A:
       texto: '2'
@@ -1229,10 +1231,10 @@ questoes:
       texto: '100'
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈483, 716: conferir o texto'
+  pendencias: []
 - numero: 42
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1252,12 +1254,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
-  - texto: De acordo com o texto, o processo de bloqueio do fluxo de esgoto, provocado pelos fatbergs
-      , ocorre
+  - texto: De acordo com o texto, o processo de bloqueio do fluxo de esgoto, provocado pelos fatbergs,
+      ocorre
   alternativas:
     A:
       texto: por falha no sistema de limpeza das galerias a cargo das prefeituras.
@@ -1273,7 +1276,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1294,7 +1298,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1313,10 +1318,10 @@ questoes:
       texto: possuem uma estrutura de marketing que possibilita expansão do círculo de clientes.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto-base tb05: Texto sublinhado na página 13, y≈449: formatação perdida no texto puro'
+  pendencias: []
 - numero: 46
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1339,13 +1344,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
+  disciplina: ingles
+  assunto: expressoes
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
   - texto: 'Em “I believe that restaurant owners that resist these apps are hurting their brands by missing
-      out on potential customers” (3º parágrafo), a expressão sublinhada pode ser substituída, sem prejuízo
-      de sentido, por:'
+      out on potential customers” (3º parágrafo), a expressão “missing out” pode ser substituída, sem
+      prejuízo de sentido, por:'
   alternativas:
     A:
       texto: harming.
@@ -1361,7 +1367,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1393,7 +1400,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1413,17 +1421,20 @@ questoes:
       texto: expressão sarcástica em protesto pela ausência de interlocução.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈119: conferir o texto'
+  pendencias: []
 - numero: 50
-  disciplina: null
+  disciplina: fisica
+  assunto: termologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um bom café deve ser preparado a uma temperatura pouco acima de 80 C. Para evitar queimaduras
+  - texto: Um bom café deve ser preparado a uma temperatura pouco acima de 80 °C. Para evitar queimaduras
       na boca, deve ser consumido a uma temperatura mais baixa. Uma xícara contém 60 mL de café a uma
-      temperatura de 80 C. Qual a quantidade de leite gelado (a uma temperatura de 5 C) deve ser misturada
-      ao café para que a temperatura final do café com leite seja de 65 C?
+      temperatura de 80 °C. Qual a quantidade de leite gelado (a uma temperatura de 5 °C) deve ser misturada
+      ao café para que a temperatura final do café com leite seja de 65 °C?
+  - texto: |-
+      Note e adote:
+      Considere que o calor específico e a densidade do café e do leite sejam idênticos.
   alternativas:
     A:
       texto: 5 mL
@@ -1434,17 +1445,13 @@ questoes:
     D:
       texto: 20 mL
     E:
-      texto: |-
-        25 mL
-        Note e adote:
-        Considere que o calor específico e a densidade do café e do leite sejam idênticos.
+      texto: 25 mL
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈428, 452, 465, 477: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈553–582
+  pendencias: []
 - numero: 51
-  disciplina: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1465,21 +1472,25 @@ questoes:
       texto: A maçã mais pesada possui um quarto da energia cinética da maçã mais leve.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈659: conferir o texto'
+  pendencias: []
 - numero: 52
-  disciplina: null
+  disciplina: fisica
+  assunto: quantidade-de-movimento
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma bola de bilhar vermelha está inicialmente em repouso a 40 cm de duas das bordas (lateral
       e superior da figura) de uma mesa de bilhar, como mostra a figura. Uma bola branca de mesma massa
-      e tamanho é lançada em direção à vermelha com velocidade \U0001D463⃗ paralela à borda lateral.\nAs
+      e tamanho é lançada em direção à vermelha com velocidade \U0001D463⃗₀ paralela à borda lateral.\nAs
       duas bolas colidem e, algum tempo depois, a bola vermelha está prestes a cair na caçapa posicionada
       na junção das duas bordas. No mesmo instante, a bola branca toca a borda superior da mesa a uma
-      distância d da bola vermelha, conforme figura."
+      distância \U0001D451 da bola vermelha, conforme figura."
   - figura: q052-1.webp
-  - texto: 'O valor de d é aproximadamente:'
+  - texto: "O valor de \U0001D451 é aproximadamente:"
+  - texto: |-
+      Note e adote:
+      Despreze efeitos dissipativos (como deslizamentos com atrito) e considere a colisão entre as bolas como sendo perfeitamente elástica.
+      Considere que o diâmetro das bolas seja muito menor que as distâncias mencionadas e que não ocorram outras colisões intermediárias.
   alternativas:
     A:
       texto: 20 cm
@@ -1490,87 +1501,71 @@ questoes:
     D:
       texto: 80 cm
     E:
-      texto: |-
-        100 cm
-        Note e adote:
-        Despreze efeitos dissipativos (como deslizamentos com atrito) e considere a colisão entre as bolas como sendo perfeitamente elástica.
-        Considere que o diâmetro das bolas seja muito menor que as distâncias mencionadas e que não ocorram outras colisões intermediárias.
+      texto: 100 cm
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈384–442
+  pendencias: []
 - numero: 53
-  disciplina: null
+  disciplina: fisica
+  assunto: dinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Considere a situação indi-
-      cada na figura, em que um
-      motor, com o auxílio de uma
-      polia, ergue verticalmente
-      uma caixa de massa 12 kg. A
-      caixa contém materiais frá-
+  - texto: Considere a situação indicada na figura, em que um motor, com o auxílio de uma polia, ergue
+      verticalmente uma caixa de massa 12 kg. A caixa contém materiais frágeis e deve ser erguida com
+      velocidade constante. Qual é a magnitude da força vertical que o motor deve exercer para realizar
+      a tarefa?
   - figura: q053-1.webp
   - texto: |-
-      geis e deve ser erguida com
-      velocidade constante. Qual é
-      a magnitude da força vertical
-      que o motor deve exercer
-      para realizar a tarefa?
+      Note e adote:
+      Despreze efeitos de atrito.
+      Aceleração da gravidade: g = 10 m/s².
   alternativas:
     A:
-      texto: |-
-        0N
-        Note e adote:
+      texto: 0 N
     B:
-      texto: |-
-        30 N
-        Despreze efeitos de atrito.
+      texto: 30 N
     C:
-      texto: |-
-        60 N
-        Aceleração da gravidade: g = 10 m/s .
+      texto: 60 N
     D:
       texto: 120 N
     E:
       texto: 240 N
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈632–671
+  pendencias: []
 - numero: 54
-  disciplina: null
+  disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Dois fios muito longos transportam, cada um deles, uma corrente elétrica de intensidade I ,
-      conforme indicado na figura. Uma partícula de carga + Q , situada a uma distância R de cada um dos
+  - texto: Dois fios muito longos transportam, cada um deles, uma corrente elétrica de intensidade I,
+      conforme indicado na figura. Uma partícula de carga +Q, situada a uma distância R de cada um dos
       fios, move-se com velocidade constante ao longo da direção z.
   - figura: q054-1.webp
   - texto: 'O módulo e sentido da força magnética atuando sobre a carga devido ao campo magnético produzido
       pelos fios são dados por:'
+  - texto: |-
+      Note e adote:
+      O campo magnético produzido por um fio muito longo transportando uma corrente de valor I tem módulo aproximadamente dado por μ₀I/2πr, sendo r a distância do fio até o ponto e μ₀ corresponde a constante de permeabilidade magnética.
   alternativas:
     A:
       texto: '0'
     B:
-      texto: Qμ I/πR e aponta na direção −y
+      texto: Qμ₀I/πR e aponta na direção −y
     C:
-      texto: Qμ I/πR e aponta na direção y
+      texto: Qμ₀I/πR e aponta na direção y
     D:
-      texto: Qμ I/πR e aponta na direção −x
+      texto: Qμ₀I/πR e aponta na direção −x
     E:
-      texto: |-
-        Qμ I/πR e aponta na direção x
-        Note e adote:
-        O campo magnético produzido por um fio muito longo transportando uma corrente de valor I tem módulo aproximadamente dado por μ I/2πr, sendo r a distância do fio até o ponto e μ corresponde a constante de permeabilidade magnética.
+      texto: Qμ₀I/πR e aponta na direção x
   resposta: null
   anulada: true
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 15, y≈296, 308, 320, 332, 378, 388: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 15, y≈351–409
+  pendencias: []
 - numero: 55
-  disciplina: null
+  disciplina: fisica
+  assunto: eletrodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1591,10 +1586,10 @@ questoes:
       texto: 1,2 Ω
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 15, y≈502: conferir o texto'
+  pendencias: []
 - numero: 56
-  disciplina: null
+  disciplina: fisica
+  assunto: gravitacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1609,6 +1604,10 @@ questoes:
   - texto: Qual deveria ser a velocidade inicial de um projétil lançado horizontalmente do alto do Everest
       (a uma distância aproximada de 6.400 km do centro da Terra) para colocá-lo em órbita em torno da
       Terra?
+  - texto: |-
+      Note e adote:
+      Despreze a resistência do ar.
+      Aceleração da gravidade: g = 10 m/s².
   alternativas:
     A:
       texto: 8 km/s
@@ -1619,18 +1618,15 @@ questoes:
     D:
       texto: 112 km/s
     E:
-      texto: |-
-        8.000 km/s
-        Note e adote:
-        Despreze a resistência do ar.
-        Aceleração da gravidade: g = 10 m/s .
+      texto: 8.000 km/s
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 15, y≈475–514
+  pendencias: []
 - numero: 57
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: cinematica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: Em virtude do movimento das placas tectônicas, a distância entre a América do Sul e a África
@@ -1638,6 +1634,9 @@ questoes:
       ao longo do tempo, e tomando uma distância atual de cerca de 5.000 km entre os limites dessas duas
       massas continentais, indique a melhor estimativa para quanto tempo teria transcorrido desde quando
       ambas estavam unidas em um único supercontinente.
+  - texto: |-
+      Note e adote:
+      O valor obtido, embora da ordem de magnitude correta, não é o mesmo calculado por estimativas mais precisas.
   alternativas:
     A:
       texto: 250.000 anos
@@ -1648,17 +1647,13 @@ questoes:
     D:
       texto: 250.000.000 anos
     E:
-      texto: |-
-        2.500.000.000 anos
-        Note e adote:
-        O valor obtido, embora da ordem de magnitude correta, não é o mesmo
-        calculado por estimativas mais precisas.
+      texto: 2.500.000.000 anos
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 15, y≈715–753
+  pendencias: []
 - numero: 58
-  disciplina: null
+  disciplina: geografia
+  assunto: hidrografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1686,7 +1681,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 59
-  disciplina: null
+  disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1709,7 +1705,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
+  disciplina: geografia
+  assunto: hidrografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1717,7 +1714,6 @@ questoes:
       inteiras, tanto em ambientes rurais como urbanos. Dentre esses eventos, pode-se destacar as inundações
       na Alemanha no mês de julho, com regiões acometidas por fortes chuvas.
   - figura: q060-1.webp
-  - figura: q060-2.webp
   - texto: |-
       Área urbana de Schuld, Oeste da Alemanha, antes (à esquerda) e depois (à direita) da inundação de julho/2021. Disponível em https://www.dw.com/.
       Um dos motivos que podem ser relacionados ao evento de inundação da área destacada é:
@@ -1745,7 +1741,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 61
-  disciplina: null
+  disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1756,23 +1753,25 @@ questoes:
   - texto: 'O cenário a ser visto pelo observador, considerando os aspectos evidenciados no mapa, é:'
   alternativas:
     A:
-      texto: (D)
       figura: q061-a.webp
     B:
-      texto: (E)
       figura: q061-b.webp
     C:
       figura: q061-c.webp
+    D:
+      figura: q061-d.webp
+    E:
+      figura: q061-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - Só 3 alternativa(s) detectada(s)
+  pendencias: []
 - numero: 62
-  disciplina: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: No dia 23 de março de 2021 o mega navio Ever Given , de 220.000 toneladas e 400 m de comprimento,
+  - texto: No dia 23 de março de 2021 o mega navio Ever Given, de 220.000 toneladas e 400 m de comprimento,
       encalhou no Canal de Suez no Egito em rota para o porto de Rotterdam, Holanda, ficando atravessado
       e preso pelas extremidades. O navio reflutuou no dia 29 do mesmo mês em razão das condições de vento
       e maré, além da operação promovida por rebocadores.
@@ -1780,7 +1779,7 @@ questoes:
   - figura: q062-2.webp
   - texto: |-
       Disponível em https://www.noaa.gov/, https://edition.cnn.com/ e https://www.tide-forecast.com/. Adaptados.
-      Com base nos dados fornecidos e em seus conhecimentos, podese atribuir o reflutuamento do Ever Given às seguintes condições:
+      Com base nos dados fornecidos e em seus conhecimentos, pode-se atribuir o reflutuamento do Ever Given às seguintes condições:
   alternativas:
     A:
       texto: Formação de um gradiente de pressão entre Ásia e África, com ventos de Sudoeste e rebaixamento
@@ -1801,17 +1800,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: biomas
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
-  - texto: Uma forma de conservação do Cerrado é a prática de queimadas controladas que simulam o ciclo
-      natural do fogo. Observe a imagem que retrata os efeitos visuais de uma queimada controlada em um
-      trecho de Cerrado da Estação Ecológica de Santa Bárbara, no interior do estado de São Paulo.
+  - texto: |-
+      Uma forma de conservação do Cerrado é a prática de queimadas controladas que simulam o ciclo natural do fogo.
+      Observe a imagem que retrata os efeitos visuais de uma queimada controlada em um trecho de Cerrado da Estação Ecológica de Santa Bárbara, no interior do estado de São Paulo.
   - figura: q063-1.webp
   - texto: |-
       Nessa área foram conduzidos experimentos com queimadas controladas, e os resultados sugerem que essa prática é benéfica para a flora, cujas plantas rebrotam rapidamente depois da passagem do fogo. Nos grupos vegetais em que as queimadas produziram mais efeitos positivos foi registrado até um discreto aumento de espécies vegetais. Antes das queimadas, os pesquisadores contabilizaram 38 espécies de gramíneas e 68 de outras ervas. Depois, esses números subiram para 44 e 74, respectivamente.
-      Durigan G et al . (2020), Front. For. Glob. Change , 3:13, doi:10.3389/ffgc.2020.00013. Adaptado.
+      Durigan G et al. (2020), Front. For. Glob. Change, 3:13, doi:10.3389/ffgc.2020.00013. Adaptado.
       No bioma Cerrado, de acordo com a informação do texto, a prática de queimadas controladas
   alternativas:
     A:
@@ -1828,7 +1829,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
+  disciplina: geografia
+  assunto: populacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1851,8 +1853,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: geopolitica
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
@@ -1865,8 +1869,10 @@ questoes:
       Qué o comando dessas banda?
       'Sa noite cês vão ver mais sangue
       Do que Hotel Ruanda
+
       Texto 2
       Não sei onde ela tinha ido à escola, mas ela sabia ler e escrever. Saber escrever era algo perigoso se você tinha um pai exilado no Burundi. Logo começam a suspeitar que está se correspondendo com os tutsis que preparam seu retorno a Ruanda, que você é uma espiã dando informações aos que estão desse lado da fronteira e poderia facilitar a volta dos tutsis.
+
       Esses textos foram retirados, respectivamente, da música “Pantera Negra”, de Emicida, e do livro “A mulher de pés descalços”, de Scholastique Mukasonga, e fazem referência à guerra civil em Ruanda. Sobre esse conflito, é correto afirmar:
   alternativas:
     A:
@@ -1888,8 +1894,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: economia-mundial
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: A pandemia da COVID-19 acendeu o alerta sobre os impactos que a rápida disseminação de enfermidades
@@ -1899,8 +1907,9 @@ questoes:
       tropicais negligenciadas (total de casos por milhão de habitantes) e o Produto Interno Bruto (PIB)
       per capita dos respectivos países.
   - figura: q066-1.webp
-  - texto: 'Fabrício Marques. “Uma agenda para as doenças esquecidas”. Revista Pesquisa FAPESP , abril/2021.
-      Adaptado. Em relação à incidência de doenças tropicais negligenciadas, é correto afirmar:'
+  - texto: |-
+      Fabrício Marques. “Uma agenda para as doenças esquecidas”. Revista Pesquisa FAPESP, abril/2021. Adaptado.
+      Em relação à incidência de doenças tropicais negligenciadas, é correto afirmar:
   alternativas:
     A:
       texto: Na África, é maior nos países com os maiores PIB per capita, em especial na região subsaariana.
@@ -1917,16 +1926,17 @@ questoes:
         a Austrália.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈495, 508: conferir o texto'
+  pendencias: []
 - numero: 67
-  disciplina: null
+  disciplina: geografia
+  assunto: economia-mundial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A escassez global de semicondutores continua a ter estranhas repercussões, sobretudo do ponto de vista geopolítico. Há um ano as indústrias lutam para se abastecer com chips eletrônicos que equipam aparelhos do dia a dia, de computadores a torradeiras, passando pelas máquinas de lavar e consoles de videogames. O episódio atual, no entanto, surge em um contexto marcado por um questionamento geral a respeito dos benefícios da globalização e do declínio da atividade industrial no Ocidente.
-      Evgeny Morzorov. “Devemos temer um colapso eletrônico?”. Le Monde Diplomatique Brasil , agosto/2021. Adaptado. O texto refere-se a uma questão geopolítica contemporânea: a disputa pelos semicondutores na indústria mundial. Sobre esse assunto, indique a alternativa correta:
+      Evgeny Morzorov. “Devemos temer um colapso eletrônico?”. Le Monde Diplomatique Brasil, agosto/2021. Adaptado.
+      O texto refere-se a uma questão geopolítica contemporânea: a disputa pelos semicondutores na indústria mundial. Sobre esse assunto, indique a alternativa correta:
   alternativas:
     A:
       texto: A produção de semicondutores está concentrada no sudeste asiático, nos países da 1ª e 2ª
@@ -1948,13 +1958,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
+  disciplina: quimica
+  assunto: atomistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q068-1.webp
   - texto: |-
-      A produção do vidro tem por base a modificação da estrutura cristalina do quartzo (SiO ) por meio do seu aquecimento e da adição de óxidos alcalinos, dentre eles o Na O. Esse processo adiciona cátions sódio à estrutura do quartzo, tornando-a amorfa. Alguns vidros, como os utilizados em telas de smartphones , passam ainda por processo de troca iônica para aumentar a resistência a quedas e riscos. Para isso, o vidro é banhado em uma solução salina contendo íons potássio. Dessa forma, o potássio substitui o sódio na estrutura, sem que o volume do vidro se altere.
+      A produção do vidro tem por base a modificação da estrutura cristalina do quartzo (SiO₂) por meio do seu aquecimento e da adição de óxidos alcalinos, dentre eles o Na₂O. Esse processo adiciona cátions sódio à estrutura do quartzo, tornando-a amorfa. Alguns vidros, como os utilizados em telas de smartphones, passam ainda por processo de troca iônica para aumentar a resistência a quedas e riscos. Para isso, o vidro é banhado em uma solução salina contendo íons potássio. Dessa forma, o potássio substitui o sódio na estrutura, sem que o volume do vidro se altere.
       Com base nessas informações, é correto afirmar que os íons potássio
   alternativas:
     A:
@@ -1975,16 +1986,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 69
-  disciplina: null
+  disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Uma das formulações para os adesivos “silicones” usados na construção civil é chamada de “silicone acético”. Essa nomenclatura é utilizada porque o componente ativo libera ácido acético durante a formação do precursor, espécie que promoverá
-      a
-      polimerização,
-      como
-      representado genericamente a seguir.
+  - texto: Uma das formulações para os adesivos “silicones” usados na construção civil é chamada de “silicone
+      acético”. Essa nomenclatura é utilizada porque o componente ativo libera ácido acético durante a
+      formação do precursor, espécie que promoverá a polimerização, como representado genericamente a
+      seguir.
   - figura: q069-1.webp
   - texto: |-
       (R = cadeia orgânica)
@@ -2002,12 +2012,10 @@ questoes:
       figura: q069-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈67, 135, 145, 148, 159, 161, 162, 175, 238, 250,
-    262, 274, 286, 331, 343, 356, 591, 614, 618, 642, 654, 666, 678, 691, 729: conferir o texto'
-  - 'Texto sublinhado na página 20, y≈182: formatação perdida no texto puro'
+  pendencias: []
 - numero: 70
-  disciplina: null
+  disciplina: quimica
+  assunto: termoquimica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -2015,26 +2023,25 @@ questoes:
       é:'
   alternativas:
     A:
-      texto: 3 O → O
+      texto: 3 O → O₃
     B:
-      texto: 4 O → 4 O
+      texto: 4 O₂ → 4 O₃
     C:
-      texto: 2 O → 3 O
+      texto: 2 O₃ → 3 O₂
     D:
-      texto: 3 O → 2 O
+      texto: 3 O₂ → 2 O₃
     E:
-      texto: 3 O → 2 O
+      texto: 3 O₃ → 2 O₂
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto-base tb06: Possível figura vetorial (tabela/gráfico) na página 20, y≈128–182'
+  pendencias: []
 - numero: 71
-  disciplina: null
+  disciplina: quimica
+  assunto: termoquimica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
-  - texto: 'O ΔH , relacionado à reação II, pode ser calculado a partir dos dados fornecidos para as reações
-      I e III. O valor de ΔH , em kcal/mol de O consumido, é igual a:'
+  - figura: q071-1.webp
   alternativas:
     A:
       texto: −90,5
@@ -2050,33 +2057,39 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 72
-  disciplina: null
+  disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
+  - texto: "Alguns equipamentos de visão noturna têm seu funcionamento baseado no efeito fotoelétrico,
+      uma das primeiras descobertas que contribuíram para o surgimento da mecânica quântica. Nesses equipamentos,
+      fótons de frequência \U0001D453 emitidos por um objeto incidem sobre uma superfície metálica. Elétrons
+      são então liberados da superfície e acelerados por um campo elétrico. Em seguida, o sinal eletrônico
+      é amplificado e produz uma imagem do objeto.\nDiferentemente do que a física clássica prevê, apenas
+      os elétrons com energia ℎ\U0001D453 acima de uma certa energia mínima \U0001D438₀ são liberados
+      da superfície metálica.\nConsiderando a incidência de fótons com frequência da ordem de 10¹⁴ Hz,
+      a ordem de grandeza do valor limite de \U0001D438₀ para que o equipamento funcione deve ser:"
   - texto: |-
-      Alguns equipamentos de visão noturna têm seu funcionamento baseado no efeito fotoelétrico, uma das primeiras descobertas que contribuíram para o surgimento da mecânica quântica. Nesses equipamentos, fótons de frequência f emitidos por um objeto incidem sobre uma superfície metálica. Elétrons são então liberados da superfície e acelerados por um campo elétrico. Em seguida, o sinal eletrônico é amplificado e produz uma imagem do objeto. Diferentemente do que a física clássica prevê, apenas os elétrons com energia hf acima de uma certa energia mínima E são liberados da superfície metálica.
-      Considerando a incidência de fótons com frequência da ordem de 10 Hz, a ordem de grandeza do valor limite de E para que o equipamento funcione deve ser:
+      Note e adote:
+      Constante de Planck: ℎ = 6,63 × 10⁻³⁴ J.s
   alternativas:
     A:
-      texto: 10 J
+      texto: 10⁻⁵⁰ J
     B:
-      texto: 10 J
+      texto: 10⁻⁴⁰ J
     C:
-      texto: 10 J
+      texto: 10⁻³⁰ J
     D:
-      texto: 10 J
+      texto: 10⁻²⁰ J
     E:
-      texto: |-
-        10 J
-        Note e adote:
-        Constante de Planck: h = 6,63 × 10 J.s
+      texto: 10⁻¹⁰ J
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 20, y≈713–742
+  pendencias: []
 - numero: 73
-  disciplina: null
+  disciplina: quimica
+  assunto: cinetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2099,54 +2112,52 @@ questoes:
       figura: q073-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈81, 93, 102, 150, 166, 181, 194, 206, 218, 230,
-    280, 761: conferir o texto'
+  pendencias: []
 - numero: 74
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: equilibrio
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: Cálculos renais, conhecidos popularmente por “pedras nos rins”, consistem principalmente em
-      oxalato de cálcio, CaC O , espécie cuja constante de solubilidade (K ) é de aproximadamente 2 ×
-      10 . Os íons oxalato, presentes em muitos vegetais, reagem com os íons cálcio para formar oxalato
+      oxalato de cálcio, CaC₂O₄, espécie cuja constante de solubilidade (Kₚₛ) é de aproximadamente 2 ×
+      10⁻⁹. Os íons oxalato, presentes em muitos vegetais, reagem com os íons cálcio para formar oxalato
       de cálcio, que pode gradualmente se acumular nos rins. Supondo que a concentração de íons cálcio
-      no plasma sanguíneo seja de cerca de 5 × 10 mol/L, qual seria a concentração mínima, em mol/L, de
-      íons oxalato para que CaC O precipitasse?
+      no plasma sanguíneo seja de cerca de 5 × 10⁻³ mol/L, qual seria a concentração mínima, em mol/L,
+      de íons oxalato para que CaC₂O₄ precipitasse?
+  - texto: |-
+      Note e adote:
+      Desconsidere a presença de quaisquer outros íons e considere que a concentração no plasma é determinante para a precipitação do oxalato.
   alternativas:
     A:
-      texto: |-
-        4×10
-        Note e adote:
+      texto: 4 × 10⁻¹³
     B:
-      texto: |-
-        10 × 10
-        Desconsidere a presença de quaisquer
+      texto: 10 × 10⁻¹²
     C:
-      texto: |-
-        4 × 10
-        outros íons e considere que a
+      texto: 4 × 10⁻⁷
     D:
-      texto: |-
-        2,5 × 10
-        concentração no plasma é determinante para a precipitação do oxalato.
+      texto: 2,5 × 10⁻⁶
     E:
-      texto: 1 × 10
+      texto: 1 × 10⁻⁵
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 21, y≈179–247
+  pendencias: []
 - numero: 75
-  disciplina: null
+  disciplina: quimica
+  assunto: radioatividade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um marcador radioativo ( Na) foi injetado em um ponto de um cano de água subterrâneo e, na
+  - texto: Um marcador radioativo (²⁴Na) foi injetado em um ponto de um cano de água subterrâneo e, na
       sequência, com um detector sobre o solo, foi medida a radioatividade ao longo do percurso do cano.
       A figura a seguir esquematiza o local de injeção do marcador e o perfil da radioatividade detectada
       ao longo do cano.
   - figura: q075-1.webp
   - texto: Assinale a alternativa que melhor explica o perfil da radioatividade.
+  - texto: |-
+      Note e adote:
+      Tempo de meia-vida do ²⁴Na = 15 horas.
   alternativas:
     A:
       texto: No trecho 2 o cano está completamente entupido, por isso a radioatividade diminui no trecho
@@ -2161,26 +2172,23 @@ questoes:
       texto: No trecho 3 a radioatividade é menor porque foi consumida por reações químicas ao longo do
         trecho 2.
     E:
-      texto: |-
-        No trecho 2 a radioatividade diminui devido ao fato de a meia-vida do marcador ser curta.
-        Note e adote:
-        Tempo de meia-vida do Na = 15 horas.
+      texto: No trecho 2 a radioatividade diminui devido ao fato de a meia-vida do marcador ser curta.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 21, y≈743–772
+  pendencias: []
 - numero: 76
-  disciplina: null
+  disciplina: quimica
+  assunto: funcoes-inorganicas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: O hidróxido de alumínio (A l (OH) ), ao precipitar em solução aquosa, forma um sólido gelatinoso
+  - texto: O hidróxido de alumínio (Aℓ(OH)₃), ao precipitar em solução aquosa, forma um sólido gelatinoso
       que pode ser usado como agente floculante no tratamento de água. Essa precipitação pode ocorrer
       pela adição de um hidróxido solúvel a uma solução aquosa ácida contendo um sal de alumínio solúvel,
-      como o A l C l . Entretanto, adicionando-se excesso de hidróxido ao meio, há a formação de íons
-      A l (OH) , espécie solúvel em água, e o precipitado se solubiliza novamente. Dessa forma, dependendo
-      do pH do meio, uma dentre as espécies A l (OH) (aq), A l (OH) (s) e A l (aq) estará presente na
-      solução em quantidade maior que as demais, como exemplificado no esquema.
+      como o AℓCℓ₃. Entretanto, adicionando-se excesso de hidróxido ao meio, há a formação de íons Aℓ(OH)₄⁻,
+      espécie solúvel em água, e o precipitado se solubiliza novamente. Dessa forma, dependendo do pH
+      do meio, uma dentre as espécies Aℓ(OH)₄⁻(aq), Aℓ(OH)₃(s) e Aℓ³⁺(aq) estará presente na solução em
+      quantidade maior que as demais, como exemplificado no esquema.
   - figura: q076-1.webp
   - texto: 'A alternativa que mostra corretamente qual das espécies estará em quantidade maior que as
       duas outras em cada faixa de pH é:'
@@ -2197,13 +2205,10 @@ questoes:
       figura: q076-e.webp
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈65, 67, 94, 107, 115, 117, 139, 142, 155, 164, 168,
-    178, 198, 362, 374, 387, 400, 413: conferir o texto'
-  - 'Texto sublinhado na página 22, y≈219, 243, 268, 293, 419: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈271–488
+  pendencias: []
 - numero: 77
-  disciplina: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2226,69 +2231,43 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 78
-  disciplina: null
+  disciplina: quimica
+  assunto: funcoes-inorganicas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      O cátion Ba pode apresentar toxicidade aos humanos, dependendo de sua concentração e forma química. Por exemplo, BaSO é pouco tóxico, sendo usado como contraste radiológico, por ser insolúvel em solução aquosa, enquanto BaCO e Ba(NO ) são muito tóxicos, pois liberam Ba no organismo. Em um laboratório foram feitos dois testes de solubilidade para identificar o conteúdo de três frascos não rotulados que poderiam ser de Ba(NO ) , BaCO ou BaSO . Os resultados dos dois testes de solubilidade são apresentados a seguir.
-      Teste I:
-      Teste II:
-      Frasco Adição de H O destilada
-      Adição de HC l diluído à temperatura ambiente à temperatura ambiente 1
-      Insolúvel, não houve
-      Insolúvel, não houve liberação de gás
-      liberação de gás
-      2
-      Insolúvel, não houve
-      Solúvel, houve liberação liberação de gás
-      de gás incolor
-      3
-      Solúvel, não houve
-      Solúvel, nãohouve liberação de gás
-      liberação de gás
-      Considerando os ensaios realizados, indique quais são os compostos contidos nos frascos 1, 2 e 3, respectivamente.
-      Frascos
-      1
-      2
-      3
+  - texto: O cátion Ba²⁺ pode apresentar toxicidade aos humanos, dependendo de sua concentração e forma
+      química. Por exemplo, BaSO₄ é pouco tóxico, sendo usado como contraste radiológico, por ser insolúvel
+      em solução aquosa, enquanto BaCO₃ e Ba(NO₃)₂ são muito tóxicos, pois liberam Ba²⁺ no organismo.
+      Em um laboratório foram feitos dois testes de solubilidade para identificar o conteúdo de três frascos
+      não rotulados que poderiam ser de Ba(NO₃)₂, BaCO₃ ou BaSO₄. Os resultados dos dois testes de solubilidade
+      são apresentados a seguir.
+  - figura: q078-1.webp
+  - texto: Considerando os ensaios realizados, indique quais são os compostos contidos nos frascos 1,
+      2 e 3, respectivamente.
   alternativas:
     A:
-      texto: |-
-        BaSO
-        BaCO
-        Ba(NO )
+      texto: 1 – BaSO₄; 2 – BaCO₃; 3 – Ba(NO₃)₂
     B:
-      texto: |-
-        BaCO
-        BaSO
-        Ba(NO )
+      texto: 1 – BaCO₃; 2 – BaSO₄; 3 – Ba(NO₃)₂
     C:
-      texto: |-
-        Ba(NO )
-        BaCO
-        BaSO
+      texto: 1 – Ba(NO₃)₂; 2 – BaCO₃; 3 – BaSO₄
     D:
-      texto: |-
-        BaSO
-        Ba(NO )
-        BaCO
+      texto: 1 – BaSO₄; 2 – Ba(NO₃)₂; 3 – BaCO₃
     E:
-      texto: |-
-        BaCO
-        Ba(NO )
-        BaSO
+      texto: 1 – BaCO₃; 2 – Ba(NO₃)₂; 3 – BaSO₄
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈180–420
+  pendencias: []
 - numero: 79
-  disciplina: null
+  disciplina: historia
+  assunto: revolucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Ao opor operários sob vigilância e operários a domicílio, a fábrica reduziu os seus custos sem se ver necessariamente obrigada a adotar uma tecnologia mais eficaz. O argumento da superioridade tecnológica não é, portanto, nem necessário nem suficiente para explicar o advento e o êxito da fábrica. Stephen Marglin. “Origens e funções do parcelamento das tarefas”. Revista de Administração de Empresas , v.18, nº4. Rio de Janeiro, 1978, p.14. Adaptado.
+      Ao opor operários sob vigilância e operários a domicílio, a fábrica reduziu os seus custos sem se ver necessariamente obrigada a adotar uma tecnologia mais eficaz. O argumento da superioridade tecnológica não é, portanto, nem necessário nem suficiente para explicar o advento e o êxito da fábrica.
+      Stephen Marglin. “Origens e funções do parcelamento das tarefas”. Revista de Administração de Empresas, v.18, nº4. Rio de Janeiro, 1978, p.14. Adaptado.
       De acordo com o economista norte-americano, o triunfo da organização econômica fabril deve ser compreendido
   alternativas:
     A:
@@ -2310,13 +2289,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 80
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q080-1.webp
   - texto: |-
-      Cândido Portinari. “Os retirantes” (1944). In: Marília Balbi. Portinari: pintor do Brasil . São Paulo: Boitempo, 2003, p. 142.
+      Cândido Portinari. “Os retirantes” (1944). In: Marília Balbi. Portinari: pintor do Brasil. São Paulo: Boitempo, 2003, p. 142.
       Identifique a alternativa mais adequada para expressar as relações entre arte e sociedade no quadro:
   alternativas:
     A:
@@ -2336,7 +2316,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2344,7 +2325,8 @@ questoes:
       Antônio Vicente Mendes Maciel, Conselheiro de alcunha, (...) era cearense e nasceu (...) a 13 de março de 1830. (...) Aprendeu a ler, escrever e contar. (...) Andou estudando latim, enxertando frases da língua de Horácio nos seus longos "conselhos", geralmente baseados na Bíblia sagrada, que conhecia razoavelmente. (...) Era apenas um peregrino, acompanhado de numeroso séquito; pequenos agricultores, negros 13 de Maio, caboclos de aldeamentos, gente sem recursos, doentes. (...)
       Em 1893 (...) Antônio Vicente se estabeleceu em Canudos (...). Rebatizou a localidade, dando-lhe o nome de Belo Monte. Criou um clima de tranquilidade local. Respeitavam-no. Seu monarquismo era utopia.
       De vários pontos do sertão apareciam os conselheiristas (...). Caminhavam para lá movidos pela fé. Queriam morar ali, sem pensar em conquistar novas terras. Nem restaurar a monarquia. Cá de fora, não entenderam assim. Interesses políticos e patrimoniais deram novos rumos e destino sangrento ao sertão do Conselheiro. (...)
-      José Calazans. “O Bom Jesus do sertão”. Caderno Mais , Folha de S. Paulo. São Paulo, 21/09/1997. O texto sugere que Antonio Conselheiro
+      José Calazans. “O Bom Jesus do sertão”. Caderno Mais, Folha de S. Paulo. São Paulo, 21/09/1997.
+      O texto sugere que Antonio Conselheiro
   alternativas:
     A:
       texto: representou a luta da Igreja Católica contra o regime republicano recém-instaurado no Brasil.
@@ -2361,13 +2343,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Se vamos à essência da nossa formação, veremos que na realidade nos constituímos para fornecer açúcar, tabaco, alguns outros gêneros; mais tarde ouro e diamantes; depois, algodão, e em seguida café, para o comércio europeu.
-      Caio Prado Jr. Formação do Brasil Contemporâneo . São Paulo: Companhia das Letras, 2011, p. 29. Sobre o sentido da colonização do Brasil, é correto afirmar:
+      Caio Prado Jr. Formação do Brasil Contemporâneo. São Paulo: Companhia das Letras, 2011, p. 29.
+      Sobre o sentido da colonização do Brasil, é correto afirmar:
   alternativas:
     A:
       texto: Permitiu o desenvolvimento de um extenso parque industrial.
@@ -2383,7 +2367,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 83
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2408,7 +2393,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 84
-  disciplina: null
+  disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2433,13 +2419,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 85
-  disciplina: null
+  disciplina: historia
+  assunto: idade-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q085-1.webp
   - texto: |-
-      Leonardo da Vinci : Leben und Werk . Stuttgart, Zürich: Belser Verlag, 1989, p. 171.
+      Leonardo da Vinci: Leben und Werk. Stuttgart, Zürich: Belser Verlag, 1989, p. 171.
       O “Homem Vitruviano” foi desenhado por Leonardo da Vinci (1452-1519) com base em um tratado sobre Arquitetura escrito e ilustrado por Marcus Vitruvius no século I a.C., na Roma Antiga. A obra ganhou versões impressas e traduções nos séculos XV e XVI.
       O desenho de Da Vinci expressa propostas do movimento Renascentista ao
   alternativas:
@@ -2457,7 +2444,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 86
-  disciplina: null
+  disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2487,14 +2475,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 87
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: america-latina
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
       Martín Fierro acredita na importância da contribuição intelectual da América, prévia tesourada a todo cordão umbilical. Acentuar e generalizar para as demais manifestações intelectuais o movimento de independência iniciado, no idioma, por Ruben Darío, não significa, entretanto, que haveremos de renunciar, nem muito menos que finjamos desconhecer que todas as manhãs nos servimos de um creme dental sueco, de umas toalhas francesas e de um sabonete inglês.
       Martín Fierro tem fé em nossa fonética, em nossa visão, em nossas maneiras, em nosso ouvido, em nossa capacidade digestiva e de assimilação.
-      “Manifesto Martín Fierro”, de Oliverio Girondo, 15/5/1924. In: Jorge Schwartz, Vanguardas latino-americanas : polêmicas, manifestos e textos críticos . São Paulo: EDUSP; Iluminuras; FAPESP, 1995, p. 116.
+      “Manifesto Martín Fierro”, de Oliverio Girondo, 15/5/1924. In: Jorge Schwartz, Vanguardas latino-americanas: polêmicas, manifestos e textos críticos. São Paulo: EDUSP; Iluminuras; FAPESP, 1995, p. 116.
       A revista de vanguarda literária Martín Fierro foi fundada em Buenos Aires, na Argentina, em 1924. O “Manifesto”, publicado no seu nº 4, apresentava sintonias com o movimento modernista paulistano, ao
   alternativas:
     A:
@@ -2516,17 +2506,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q088-1.webp
-  - texto: 'Robert Capa. Omaha Beach, 6 de junho de 1944. In: Robert Capa . São Paulo, Cosac Naify, 2012;
+  - texto: 'Robert Capa. Omaha Beach, 6 de junho de 1944. In: Robert Capa. São Paulo, Cosac Naify, 2012;
       foto 39.'
   - figura: q088-2.webp
   - texto: |-
-      Yevgeny Khaldei. Berlim, maio de 1945. In: Letícia Yazbek, Aventuras da História . Disponível em https://aventurasnahistoria.uol.com.br/noticias/historia-hoje/.
-      As fotos de Robert Capa e de Yevgeny Khaldei foram produzidas para documentar eventos da Segunda Guerra Mundial. Referemse, respectivamente,
+      Yevgeny Khaldei. Berlim, maio de 1945. In: Letícia Yazbek, Aventuras da História. Disponível em https://aventurasnahistoria.uol.com.br/noticias/historia-hoje/.
+      As fotos de Robert Capa e de Yevgeny Khaldei foram produzidas para documentar eventos da Segunda Guerra Mundial. Referem-se, respectivamente,
   alternativas:
     A:
       texto: ao desembarque dos Aliados para libertar a França da ocupação nazista e ao avanço decisivo
@@ -2547,14 +2538,17 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 89
-  disciplina: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       No cerne da ideologia Bannon há uma série de contrastes extraordinariamente simplificadores entre bom e mau, sagrado e profano. Essa série semiótica cria perigosos outros, cuja existência contínua ameaça a boa gente que constitui o que Bannon descreve como a “verdadeira América”(...). Numa ordem social democrática, o conflito entre oponentes partidários é agonístico, não antagonístico. Bannon vê de outra forma. Não há espaço para a cortesia em seu universo (...).
-      Jeffrey Alexander. “Vociferando contra o iluminismo: A ideologia de Steve Bannon”. Sociologia & Antropologia , vol. 08, n. 3, set-dez, 2018. O antagonismo é a luta entre inimigos, enquanto o agonismo representa a luta entre adversários. (...) o propósito da política democrática é transformar antagonismo em agonismo. Isso demanda oferecer canais por meio dos quais às paixões coletivas serão dados mecanismos de expressarem-se sobre questões que, ainda que permitindo possibilidade suficiente de identificação, não construirão o opositor como inimigo, mas como adversário. Chantal Mouffe. “Por um modelo agonístico de democracia”. Revista de Sociologia e Política , Curitiba, n. 25, nov. 2005, p. 11-23.
-      A primeira citação foi retirada de um texto em que o sociólogo Jeffrey Alexander desenvolve o que compreende ser a ideologia de Steve Bannon, assessor do ex-presidente norteamericano Donald Trump. A segunda citação foi extraída de um artigo em que a cientista política Chantal Mouffe desenvolve a noção de “pluralismo agonístico”. A partir da perspectiva apresentada nas citações, é correto afirmar que a ideologia de Steve Bannon
+      Jeffrey Alexander. “Vociferando contra o iluminismo: A ideologia de Steve Bannon”. Sociologia & Antropologia, vol. 08, n. 3, set-dez, 2018.
+      O antagonismo é a luta entre inimigos, enquanto o agonismo representa a luta entre adversários. (...) o propósito da política democrática é transformar antagonismo em agonismo. Isso demanda oferecer canais por meio dos quais às paixões coletivas serão dados mecanismos de expressarem-se sobre questões que, ainda que permitindo possibilidade suficiente de identificação, não construirão o opositor como inimigo, mas como adversário.
+      Chantal Mouffe. “Por um modelo agonístico de democracia”. Revista de Sociologia e Política, Curitiba, n. 25, nov. 2005, p. 11-23.
+      A primeira citação foi retirada de um texto em que o sociólogo Jeffrey Alexander desenvolve o que compreende ser a ideologia de Steve Bannon, assessor do ex-presidente norte-americano Donald Trump. A segunda citação foi extraída de um artigo em que a cientista política Chantal Mouffe desenvolve a noção de “pluralismo agonístico”. A partir da perspectiva apresentada nas citações, é correto afirmar que a ideologia de Steve Bannon
   alternativas:
     A:
       texto: defende uma ordem social agonística baseada na divisão entre grupos e nos conflitos entre
@@ -2573,13 +2567,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O IPHAN - Instituto do Patrimônio Histórico e Artístico Nacional e a Prefeitura da Cidade do Rio de Janeiro envidaram esforços no sentido de deixar exposta para a contemplação da população parte do Sítio Arqueológico do Cais do Valongo, com o objetivo de apresentar ao visitante, através daquele pequeno, mas representativo espaço, a materialização do momento mais trágico da nossa história, fazendo com que ele não seja esquecido. (...)
-      A história do Cais do Valongo e do seu entorno está indissoluvelmente ligada à história universal, por ter sido a porta de entrada do maior volume de africanos escravizados nas Américas. O Rio de Janeiro era, então, a mais afroatlântica das cidades costeiras do território brasileiro (...).
+      A história do Cais do Valongo e do seu entorno está indissoluvelmente ligada à história universal, por ter sido a porta de entrada do maior volume de africanos escravizados nas Américas. O Rio de Janeiro era, então, a mais afro-atlântica das cidades costeiras do território brasileiro (...).
       Disponível em http://portal.iphan.gov.br/.
       O texto integra a proposta elaborada pelo IPHAN, em 2016, para inscrição do Sítio Arqueológico do Cais do Valongo na lista do Patrimônio Mundial. Com base no documento, a história do Cais do Valongo se entrelaça à história universal, pois se relaciona ao
   alternativas:
