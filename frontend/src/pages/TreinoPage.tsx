@@ -224,7 +224,7 @@ export function TreinoPage() {
   return (
     <div className="max-w-3xl">
       <Link to="/" className={`${LINK} text-sm`}>Voltar ao início</Link>
-      <h1 className="mt-3 text-2xl font-bold sm:text-3xl">Treino por questão</h1>
+      <h1 className="mt-3 text-2xl sm:text-3xl">Treino por questão</h1>
       <p className="mt-2 text-tinta-suave">Uma questão por vez, sem cronômetro, com a resposta na hora. O treino não vai para o histórico.</p>
       {catalogo.isPending && <Carregando />}
       {catalogo.isError && <ErroCarregamento mensagem="Não foi possível carregar as provas." onTentar={() => catalogo.refetch()} />}

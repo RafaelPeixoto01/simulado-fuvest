@@ -76,14 +76,14 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
 
   return (
     <section ref={secao} aria-labelledby={idTitulo} className="scroll-mt-4">
-      <h2 id={idTitulo} className="text-xl font-bold">
+      <h2 id={idTitulo} className="text-xl">
         Revisão das questões
       </h2>
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <fieldset className="flex overflow-hidden rounded-md border border-borda-campo">
           <legend className="sr-only">Mostrar</legend>
           {FILTROS.map((f) => (
-            <label key={f.valor} className="cursor-pointer border-r border-linha px-3 py-1.5 text-sm last:border-r-0 has-checked:bg-caneta has-checked:text-papel has-focus-visible:outline-2 has-focus-visible:outline-caneta">
+            <label key={f.valor} className="cursor-pointer border-r border-linha px-3 py-1.5 text-sm last:border-r-0 has-checked:bg-caneta has-checked:text-papel has-focus-visible:outline-2 has-focus-visible:outline-foco">
               <input
                 type="radio"
                 name="filtro-revisao"

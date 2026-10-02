@@ -78,7 +78,7 @@ export function PainelFolha({ onFechar, children, rodape }: Props) {
         className="flex max-h-[88dvh] flex-col rounded-t-2xl bg-papel shadow-[0_-8px_24px_rgb(29_36_48/0.18)]"
       >
         <div className="flex items-center justify-between pt-2 pr-2 pl-4">
-          <h2 id={idTitulo} className="text-lg font-bold">
+          <h2 id={idTitulo} className="text-lg">
             Folha de respostas
           </h2>
           <button

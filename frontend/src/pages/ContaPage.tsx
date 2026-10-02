@@ -67,7 +67,7 @@ function Conectado({ usuario, sair, excluir, aoSair, aoExcluir }: PropsConectado
       </div>
 
       <section aria-labelledby="conta-sair" className="mt-8">
-        <h2 id="conta-sair" className="text-lg font-bold">
+        <h2 id="conta-sair" className="text-lg">
           Sair
         </h2>
         <p className="mt-1 text-tinta-suave">Ao sair, o histórico deixa este navegador e continua na sua conta.</p>
@@ -87,7 +87,7 @@ function Conectado({ usuario, sair, excluir, aoSair, aoExcluir }: PropsConectado
       </section>
 
       <section aria-labelledby="conta-excluir" className="mt-8 border-t border-linha pt-6">
-        <h2 id="conta-excluir" className="text-lg font-bold">
+        <h2 id="conta-excluir" className="text-lg">
           Excluir conta
         </h2>
         <p className="mt-1 text-tinta-suave">
@@ -171,7 +171,7 @@ export function ContaPage() {
   const erroLogin = parametros.get('erro') === 'login' && !sessao.data?.usuario && !status
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold sm:text-3xl">Conta</h1>
+      <h1 className="text-2xl sm:text-3xl">Conta</h1>
       {status && (
         <p role="status" className="mt-4 rounded-md bg-acerto-claro px-3 py-2 text-acerto">
           {status}

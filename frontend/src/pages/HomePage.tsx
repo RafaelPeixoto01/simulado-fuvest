@@ -17,7 +17,7 @@ function Modo({ titulo, descricao, acao }: { titulo: string; descricao: ReactNod
   return (
     <li className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
       <div>
-        <h2 className="text-lg font-bold">{titulo}</h2>
+        <h2 className="text-lg">{titulo}</h2>
         <div className="mt-0.5 text-tinta-suave">{descricao}</div>
       </div>
       <div className="shrink-0">{acao}</div>
@@ -56,7 +56,7 @@ function SimuladoEmAndamento() {
         <span aria-hidden="true" className="size-2 rounded-full bg-caneta" />
         Simulado em andamento
       </p>
-      <h2 id={idTitulo} className="mt-1 text-xl font-bold">
+      <h2 id={idTitulo} className="mt-1 text-xl">
         {simulado.descricao}
       </h2>
       <div aria-hidden="true" className="mt-3 h-2 overflow-hidden rounded-full bg-papel">
@@ -92,7 +92,7 @@ function NaBase({ catalogo }: { catalogo: Catalogo }) {
   return (
     <aside className="space-y-6 lg:border-l lg:border-linha lg:pl-8">
       <section>
-        <h2 className="font-bold">Provas na base</h2>
+        <h2>Provas na base</h2>
         <ul className="mt-2 flex flex-col gap-0.5">
           {catalogo.provas.map((p) => (
             <li key={p.ano}>
@@ -115,7 +115,7 @@ function NaBase({ catalogo }: { catalogo: Catalogo }) {
         </ul>
       </section>
       <section>
-        <h2 className="font-bold">Questões por disciplina</h2>
+        <h2>Questões por disciplina</h2>
         <dl className="mt-2 grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 text-sm">
           {catalogo.disciplinas.map((d) => (
             <div key={d.slug} className="contents">
@@ -142,7 +142,7 @@ export function HomePage() {
   return (
     <div>
       <SimuladoEmAndamento />
-      <h1 className="max-w-2xl text-3xl leading-tight font-bold sm:text-4xl">
+      <h1 className="max-w-2xl text-3xl leading-tight sm:text-4xl">
         Treine com questões reais da 1ª fase da FUVEST
       </h1>
       {catalogo.data && catalogo.data.provas.length > 0 && (

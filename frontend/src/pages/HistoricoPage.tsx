@@ -16,7 +16,7 @@ export function HistoricoPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold sm:text-3xl">Histórico</h1>
+      <h1 className="text-2xl sm:text-3xl">Histórico</h1>
       {usuario ? (
         <p className="mt-2 text-tinta-suave">
           O histórico está guardado na sua conta ({usuario.email}) e aparece em todos os dispositivos em que você

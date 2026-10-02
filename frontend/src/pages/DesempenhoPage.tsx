@@ -17,7 +17,7 @@ function SecaoDisciplina({ linha }: { linha: LinhaDisciplina }) {
   return (
     <section aria-labelledby={id}>
       <div className="flex items-baseline justify-between gap-4">
-        <h2 id={id} className="text-lg font-bold">
+        <h2 id={id} className="text-lg">
           {nome}
         </h2>
         <Placar {...linha} />
@@ -56,7 +56,7 @@ export function DesempenhoPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold sm:text-3xl">Meu desempenho</h1>
+      <h1 className="text-2xl sm:text-3xl">Meu desempenho</h1>
       {usuario ? (
         <p className="mt-2 text-tinta-suave">
           Estes números somam os simulados concluídos guardados na sua conta, em todos os dispositivos.

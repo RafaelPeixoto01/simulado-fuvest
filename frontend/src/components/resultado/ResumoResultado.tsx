@@ -10,7 +10,7 @@ export function ResumoResultado({ entrada }: { entrada: HistoricoEntry }) {
       <p className="text-sm text-tinta-suave">
         {entrada.descricao}, {formatarDataHora(entrada.finalizadoEm)}
       </p>
-      <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
+      <h1 className="mt-1 text-3xl sm:text-4xl">
         Você acertou {acertos} de {total} {total === 1 ? 'questão' : 'questões'}
       </h1>
       <dl className="mt-5 flex flex-wrap gap-x-10 gap-y-3">

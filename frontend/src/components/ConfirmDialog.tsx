@@ -49,7 +49,7 @@ export function ConfirmDialog({
         aria-labelledby={idTitulo}
         className="w-full max-w-md rounded-xl border border-linha bg-papel p-5 shadow-lg"
       >
-        <h2 id={idTitulo} className="text-lg font-bold">
+        <h2 id={idTitulo} className="text-lg">
           {titulo}
         </h2>
         {children && <div className="mt-2 text-tinta-suave">{children}</div>}

@@ -13,7 +13,7 @@ export function TelaPausa({ onRetomar }: { onRetomar: () => void }) {
       <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-full bg-caneta-clara text-caneta">
         <IconePausa className="size-7" />
       </span>
-      <h2 id={idTitulo} className="text-2xl font-bold">
+      <h2 id={idTitulo} className="text-2xl">
         Simulado pausado
       </h2>
       <p className="max-w-sm text-tinta-suave">O cronômetro está parado e a questão fica oculta até você retomar.</p>

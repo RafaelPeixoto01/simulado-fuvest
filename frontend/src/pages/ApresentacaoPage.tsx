@@ -79,7 +79,7 @@ export function ApresentacaoPage() {
     <div>
       <div className="lg:grid lg:grid-cols-[minmax(0,32.5rem)_minmax(0,1fr)] lg:items-center lg:gap-x-12 xl:gap-x-18">
         <div className="max-w-2xl">
-          <h1 className="text-3xl leading-tight font-bold sm:text-4xl">Treine com questões reais da 1ª fase da FUVEST</h1>
+          <h1 className="text-3xl leading-tight sm:text-4xl">Treine com questões reais da 1ª fase da FUVEST</h1>
           <p className="mt-3 text-lg text-tinta-suave">
             Simulados com questões das provas oficiais de anos anteriores, corrigidos na hora, com o seu desempenho
             por disciplina e por assunto.
@@ -106,7 +106,7 @@ export function ApresentacaoPage() {
       </div>
 
       <section aria-labelledby={idModos} className="mt-10 lg:mt-20">
-        <h2 id={idModos} className="text-lg font-bold">
+        <h2 id={idModos} className="text-lg">
           Quatro jeitos de treinar
         </h2>
         <ul className="mt-3 flex flex-col gap-2.5 lg:mt-4 lg:grid lg:grid-cols-4 lg:gap-4">

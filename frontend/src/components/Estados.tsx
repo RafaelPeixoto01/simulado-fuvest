@@ -42,7 +42,7 @@ export function SiteIndisponivel() {
   useTituloPagina('Site indisponível')
   return (
     <section className="max-w-prose px-4 py-10 sm:px-0">
-      <h1 className="text-2xl font-bold">Site temporariamente indisponível</h1>
+      <h1 className="text-2xl">Site temporariamente indisponível</h1>
       <p className="mt-2 text-tinta-suave">Tente de novo em alguns minutos.</p>
     </section>
   )

@@ -24,7 +24,7 @@ function PorAssunto({ disciplina, assuntos }: { disciplina: string; assuntos: De
 export function DesempenhoDisciplinas({ dados }: { dados: DesempenhoDisciplina[] }) {
   return (
     <section>
-      <h2 className="text-xl font-bold">Por disciplina</h2>
+      <h2 className="text-xl">Por disciplina</h2>
       <p className="text-sm text-tinta-suave">Da que mais precisa de estudo para a que foi melhor.</p>
       <ul aria-label="Desempenho por disciplina" className="mt-4 space-y-3">
         {dados.map((d) => (

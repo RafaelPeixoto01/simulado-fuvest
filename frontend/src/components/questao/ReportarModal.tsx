@@ -55,7 +55,7 @@ export function ReportarModal({ questaoId, descricao, onFechar }: { questaoId: s
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-tinta/40 p-4 sm:items-center">
       <div role="dialog" aria-modal="true" aria-labelledby={idTitulo} className="w-full max-w-md rounded-xl border border-linha bg-papel p-5 shadow-lg">
-        <h2 id={idTitulo} className="text-lg font-bold">Reportar problema na questão</h2>
+        <h2 id={idTitulo} className="text-lg">Reportar problema na questão</h2>
         <p className="text-sm text-tinta-suave">{descricao}</p>
 
         {estado === 'enviado' ? (

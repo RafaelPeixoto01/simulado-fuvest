@@ -153,7 +153,7 @@ export function ConfigurarPersonalizadoPage() {
   return (
     <div className="max-w-2xl">
       <Link to="/" className={`${LINK} text-sm`}>Voltar ao início</Link>
-      <h1 className="mt-3 text-2xl font-bold sm:text-3xl">Simulado personalizado</h1>
+      <h1 className="mt-3 text-2xl sm:text-3xl">Simulado personalizado</h1>
       {catalogo.isPending && <Carregando />}
       {catalogo.isError && (
         <ErroCarregamento mensagem="Não foi possível carregar as provas." onTentar={() => catalogo.refetch()} />
