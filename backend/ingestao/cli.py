@@ -20,6 +20,7 @@ from app.pacote.notas_corte import (
     arquivos_de_notas_corte,
     carregar_ano,
     problemas_de_publicacao,
+    salvar_ano,
 )
 from app.pacote.schema import PacoteProva, Questao
 from app.pacote.sincronizar import formatar_resumo, sincronizar
@@ -213,6 +214,32 @@ def _pagina_valida(pdf: Path, pagina: int) -> bool:
         _erro(f"Página fora do intervalo 1–{total}")
         return False
     return True
+
+
+def _cmd_cortes(args: argparse.Namespace) -> int:
+    """Notas de corte de um ano: PDF do acervo -> notas_corte/AAAA.yaml em rascunho (CR-010)."""
+    from ingestao import notas_corte as extrator
+    from ingestao.baixar import ErroDownload
+
+    destino = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.ano}.yaml"
+    if destino.exists() and not args.forcar:
+        _erro(f"{destino} já existe e pode ter nomes revisados. Use --forcar para sobrescrever.")
+        return 1
+    try:
+        pdf = extrator.baixar_pdf(args.ano, args.url, args.data_dir.parent / "_cache")
+        notas = extrator.extrair_notas_corte(pdf, args.ano, args.url)
+    except (ErroDownload, OSError) as erro:
+        _erro(f"Falha no download: {erro}")
+        return 1
+    except extrator.ErroLayout as erro:
+        _erro(f"Não foi possível extrair as notas de corte: {erro}")
+        return 1
+    salvar_ano(notas, destino)
+    n = len(notas.pendencias)
+    print(f"{destino}: {len(notas.carreiras)} carreiras, {n} pendência{'' if n == 1 else 's'}")
+    for pendencia in notas.pendencias:
+        print(f"  {pendencia}")
+    return 0
 
 
 def _cmd_baixar(args: argparse.Namespace) -> int:
@@ -444,6 +471,13 @@ def _parser() -> argparse.ArgumentParser:
     baixar.add_argument("--gabarito-url", required=True)
     baixar.add_argument("--versao", default="V1")
     baixar.set_defaults(func=_cmd_baixar)
+
+    cortes = sub.add_parser("cortes", help="Extrai as notas de corte de um ano para notas_corte/AAAA.yaml")
+    cortes.add_argument("--ano", type=_ano, required=True)
+    cortes.add_argument("--url", required=True, help="PDF \"Notas de Corte\" do acervo (o padrão muda por ano)")
+    cortes.add_argument("--forcar", action="store_true",
+                        help="Sobrescreve o arquivo existente (perde a revisão dos nomes)")
+    cortes.set_defaults(func=_cmd_cortes)
 
     preview = sub.add_parser("preview", help="Renderiza uma página com grade de coordenadas")
     preview.add_argument("--ano", type=_ano, required=True)

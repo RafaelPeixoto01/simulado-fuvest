@@ -108,7 +108,7 @@ def test_salvar_e_carregar_preservam_o_conteudo(tmp_path):
         {"vagas": 10, "convocados": 30, "corte": 50, "maximo": 91},  # acima de 90
         {"vagas": 10, "convocados": 0, "corte": 30, "maximo": 40},  # corte sem convocados
         {"vagas": 10, "convocados": 30, "corte": None, "maximo": None},  # convocados sem corte
-        {"vagas": 0, "convocados": 0, "corte": None, "maximo": None},  # sem vagas
+        {"vagas": 0, "convocados": 3, "corte": 40, "maximo": 50},  # convocados sem vagas
     ],
 )
 def test_c04_vale_ate_no_rascunho(tmp_path, modalidade):
@@ -126,6 +126,16 @@ def test_modalidade_sem_convocados_aceita_corte_vazio(tmp_path):
 
     sem_convocados = [c for c in notas.carreiras if c.ppi.convocados == 0]
     assert sem_convocados and sem_convocados[0].ppi.corte is None
+
+
+def test_modalidade_sem_vagas_e_aceita(tmp_path):
+    """2020/150 e 2022/185: PPI sem vagas, celulas "−−−" no PDF."""
+    dados = _dados()
+    dados["carreiras"][0]["ppi"] = {"vagas": 0, "convocados": 0, "corte": None, "maximo": None}
+
+    notas = carregar_ano(_gravar(tmp_path, dados))
+
+    assert notas.carreiras[0].ppi.vagas == 0
 
 
 def _problemas(alterar) -> list[str]:

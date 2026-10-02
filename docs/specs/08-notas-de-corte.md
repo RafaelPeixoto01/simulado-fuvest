@@ -82,11 +82,12 @@ MINIMO_FUVEST = 27      # menos de 30% da 1a fase elimina (Resolucao FUVEST 2025
 PONTOS_PROVA = 90
 
 class Modalidade(BaseModel):              # extra="forbid"
-    vagas: int                            # 1..2000
+    vagas: int                            # 0..2000 (0: sem vagas nessa modalidade, ex.: 2020/150 PPI)
     convocados: int                       # 0..20000
     corte: int | None                     # MINIMO_FUVEST..90
     maximo: int | None                    # MINIMO_FUVEST..90
-    # C04: convocados > 0 -> corte e maximo presentes e corte <= maximo; convocados == 0 -> os dois None
+    # C04: vagas == 0 -> convocados == 0; convocados > 0 -> corte e maximo presentes e corte <= maximo;
+    #      convocados == 0 -> os dois None
 
 class CarreiraCorte(BaseModel):           # extra="forbid"
     codigo: int                           # 100..999
@@ -203,10 +204,10 @@ export function filtrarCarreiras(carreiras: CarreiraCorte[], busca: string): Car
 2. Colunas pela posição x, conferidas no cabeçalho de cada página ("CÓDIGO E NOME DA CARREIRA", "VAGAS", "CONVOC", "MÍNIMO", "MÁXIMO"): nome à esquerda de "VAGAS"; vagas, inscritos, ausentes, convocados e convocados por vaga na faixa numérica; ponto mínimo na coluna de "MÍNIMO" e máximo na de "MÁXIMO". Cabeçalho ausente ou fora das posições de 2020–2025 → erro "layout desconhecido" com a página.
 3. Linha `NNN−Nome` (código ≥ 100) abre uma carreira; os números dessa linha (totais, de 2024 em diante) são ignorados.
 4. Linha só com um inteiro na coluna do mínimo guarda o mínimo da próxima modalidade (de 2022 em diante ele sai cerca de 4 pt acima da linha).
-5. Linha "− Ampla Concorrência", "− Candidatos de Escola Pública" ou "− Candidatos de Escola Pública − Grupo PPI" fecha a modalidade com vagas, convocados, o mínimo guardado (ou o da própria linha, em 2020) e o máximo. Célula sem número ("−−−") → `None`.
+5. Linha "− Ampla Concorrência", "− Candidatos de Escola Pública" ou "− Candidatos de Escola Pública − Grupo PPI" fecha a modalidade com vagas, convocados, o mínimo guardado (ou o da própria linha, em 2020) e o máximo. Célula sem número ("−−−") → `None`. Outra modalidade → erro "modalidade desconhecida". **Modalidade sem convocados:** corte e máximo ficam vazios. O PDF imprime nela o piso (27) e a maior nota de quem ficou abaixo dele (2024/710 PPI: 5 vagas, 0 convocados, "27" e "22"), ou "−−−" quando não há vagas (2020/150 e 2022/185 PPI).
 6. A linha "Total" encerra a tabela: o que vem depois (os totais e, em 2025, a segunda tabela, por código e sem modalidades) é ignorado.
 7. Ficam fora as carreiras de treineiro (nome começando por "Treinamento"; códigos terminados em 99).
-8. Pendências do rascunho: carreira sem as três modalidades; nome terminado em "..." ("nome cortado no PDF — completar pelo Guia de Carreiras"); nome repetido no ano, uma pendência por código ("nome repetido (Medicina) — completar o campus pelo Guia de Carreiras").
+8. Carreira sem as três modalidades, ou com valores fora do schema (C04), → erro com o código da carreira: é sinal de layout novo, e nada é gravado. Pendências do rascunho: nome com "..." ("nome cortado no PDF — completar pelo Guia de Carreiras"); nome repetido no ano, uma pendência por código ("nome repetido (Medicina) — completar o campus pelo Guia de Carreiras").
 9. Saída: `NotasCorteAno` com `status: rascunho`, gravado em YAML (UTF-8, LF, nomes sem escape), com o comentário de cabeçalho da §2.2.
 
 **Comando `cortes`:** `python -m ingestao cortes --ano AAAA --url URL [--forcar]`
@@ -269,7 +270,7 @@ Migration `004_carreira_alvo` (down_revision `003`), com `op.batch_alter_table` 
 | C01 | Arquivo `AAAA.yaml` legível, YAML válido, no schema (campos extras recusados) e `ano` igual ao nome do arquivo | Sempre (arquivo inválido) |
 | C02 | Códigos únicos; nomes únicos no ano (sem diferenciar maiúsculas); nenhuma carreira de treineiro | Publicado |
 | C03 | Nome sem "..." nem "…" (nome cortado) | Publicado |
-| C04 | Por modalidade: com convocados, `27 ≤ corte ≤ maximo ≤ 90`; sem convocados, corte e máximo vazios | Sempre (schema) |
+| C04 | Por modalidade: sem vagas, sem convocados; com convocados, `27 ≤ corte ≤ maximo ≤ 90`; sem convocados, corte e máximo vazios | Sempre (schema) |
 | C05 | `pendencias` vazia | Publicado |
 
 | Campo (API) | Regra | Resultado |

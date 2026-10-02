@@ -27,13 +27,15 @@ class Modalidade(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    vagas: int = Field(ge=1, le=2000)
+    vagas: int = Field(ge=0, le=2000)  # 0: carreira sem vagas nessa modalidade (2020/150, PPI)
     convocados: int = Field(ge=0, le=20000)
     corte: int | None = Field(default=None, ge=MINIMO_FUVEST, le=PONTOS_PROVA)
     maximo: int | None = Field(default=None, ge=MINIMO_FUVEST, le=PONTOS_PROVA)
 
     @model_validator(mode="after")
     def _c04(self) -> "Modalidade":
+        if self.vagas == 0 and self.convocados > 0:
+            raise ValueError("C04: convocados sem vagas")
         if self.convocados == 0:
             if self.corte is not None or self.maximo is not None:
                 raise ValueError("C04: sem convocados, corte e máximo ficam vazios")
