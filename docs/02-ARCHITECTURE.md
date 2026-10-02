@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.8
-**Data:** 2026-10-01
+**Versão:** 1.9
+**Data:** 2026-10-02
 **PRD Ref:** 01-PRD v4.2
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009
 
 ---
 
@@ -148,7 +148,7 @@ Simulado Fuvest/
 └── frontend/
     ├── package.json, vite.config.ts, tsconfig.json, tsconfig.app.json, eslint.config.js, index.html
     └── src/
-        ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001), queryClient.ts, index.css (tokens @theme; contraste conferido por tokens.test.ts — CR-002; identidade "Papel & Caneta" e h1/h2 em Fraunces — CR-008, ADR-013), types.ts
+        ├── main.tsx, App.tsx (rotas; /simulado fora do Layout, em modo foco — CR-001; RolarAoTopo — CR-009), queryClient.ts, index.css (tokens @theme; contraste conferido por tokens.test.ts — CR-002; identidade "Papel & Caneta" e h1/h2 em Fraunces — CR-008, ADR-013), types.ts
         ├── services/api.ts         # cliente fetch + ApiError (código/dados do erro de domínio)
         ├── storage/                # storage.ts (try/catch), simuladoStorage.ts, historicoStorage.ts (chaves v1, marca da conta),
         │                           #   sincronizacao.ts (espelho da conta — ADR-011)
@@ -157,8 +157,8 @@ Simulado Fuvest/
         │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina,
         │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007)
         ├── components/             # Layout, MenuCelular (CR-007), Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle,
-        │                           #   RequerConta (CR-006), CirculoCaneta e MarcasSincronismo (motivos — CR-008), estilos.ts
-        │   ├── inicio/             #   UltimoSimulado ("Seu último simulado" — CR-008)
+        │                           #   RequerConta (CR-006), CirculoCaneta e MarcasSincronismo (motivos — CR-008), RolarAoTopo (CR-009), estilos.ts
+        │   ├── inicio/             #   UltimoSimulado ("Seu último simulado" — CR-008), MiniFolha (miniatura da folha na Prova completa — CR-009)
         │   ├── apresentacao/       #   PreviaProduto (miniatura da resolução e do resultado na apresentação — CR-007)
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
@@ -392,6 +392,7 @@ fisica:
 - Páginas leem o histórico só por `useHistorico` (sessão + sincronização, ADR-011), nunca direto do `localStorage`; o `Layout` também o chama, para o envio de pendentes acontecer em qualquer página
 - Login por navegação de página inteira (`<a href="/api/auth/google?voltar=...">`), nunca por `fetch`; o token da sessão nunca é visível ao JavaScript
 - Aparência só por tokens (`index.css`, nomes estáveis desde o CR-002; valores "Papel & Caneta" desde o CR-008, ADR-013). `optico` só em anéis e na marca; texto rosa usa `optico-texto`. Fraunces só em títulos e números de destaque (`h1`/`h2` pela base, `font-titulo` no resto). Estilos repetidos de botão e cartão ficam em `components/estilos.ts`
+- Toda mudança de caminho começa no topo da página (`RolarAoTopo` no `App`, CR-009): o `BrowserRouter` não restaura nem zera a rolagem sozinho. Rolagens dentro de uma página (trocar de questão na resolução) ficam com a página
 - Rotas protegidas por `RequerConta` (CR-006, ADR-012): sem sessão, vão para a apresentação com `?voltar=<rota>`; erro de rede ao verificar a sessão não bloqueia a página (a API protege). Qualquer 401 `nao_autenticado` ou 503 `site_indisponivel`, em qualquer chamada, recarrega a sessão (`definirAoErroDeAcesso` em `services/api.ts`, registrado pelo `criarQueryClient`)
 
 ### Estilo de Código
@@ -663,4 +664,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`. v1.9 (2026-10-02, CR-009): `RolarAoTopo` (padrão de rolagem ao trocar de rota) e `inicio/MiniFolha`.*
