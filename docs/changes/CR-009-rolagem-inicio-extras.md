@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-02  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -171,7 +171,7 @@ Diferenças das telas de referência que o pedido não cita (regra do CR-007/CR-
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] ~~Revisão de segurança~~: N/A — só UI, sem endpoint, autenticação, dados de usuário novos ou dependência nova
 - [x] Documentos afetados foram atualizados — Arquitetura v1.9, 03-SPEC v1.9, specs 03 v1.9 e 04 v1.6, Plano, CLAUDE.md, INDEX.md; PRD e Deploy Guide sem mudança (justificativa no §5)
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` — branch verde (run 37025862224); `master` verde no merge `a3de864` (run 37026078631). Produção depois do deploy, sem login: bundle novo no ar, `/api/health` 200, `history.scrollRestoration` em `manual`, apresentação rolada → Privacidade em 0 → voltar em 0, console sem erro nem aviso
 
 **Validação runtime (02/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
 - **Rolagem:** no início rolado até o fim (364 px), o link "histórico" abre o histórico em 0. O voltar devolve o início em 0 e o avançar, o histórico em 0. O primeiro teste do voltar deu 364 px e levou ao ajuste do `scrollRestoration`. "Continuar simulado" abre a prova em 0. Com a prova rolada até o fim (427 px), "Finalizar simulado" → "Finalizar e ver o resultado" abre o resultado em 0.
@@ -250,3 +250,4 @@ Diferenças das telas de referência que o pedido não cita (regra do CR-007/CR-
 |------------|--------|-----------|
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com R1, E4 (miniatura, sobretítulo e etiquetas), E6, E7, A1 e A2 |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-05); validação runtime (FT-023) com os ajustes do voltar do navegador e da lateral; revisão de código (8 achados) |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Merge `a3de864`, CI de `master` verde; produção conferida sem login — validação ✅, status Concluído |
