@@ -2,8 +2,10 @@ import { useId } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
 import { PreviaProduto } from '../components/apresentacao/PreviaProduto'
+import { BolinhaLetra } from '../components/BolinhaLetra'
 import { BotaoGoogle } from '../components/BotaoGoogle'
-import { LINK } from '../components/estilos'
+import { CirculoCaneta } from '../components/CirculoCaneta'
+import { CARTAO, LINK } from '../components/estilos'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useVitrine } from '../hooks/useVitrine'
 import type { Vitrine } from '../types'
@@ -57,7 +59,7 @@ function NumerosBase({ vitrine }: { vitrine: Vitrine }) {
           className="flex flex-col-reverse rounded-[10px] bg-papel px-2.5 py-2.5 sm:rounded-none sm:border-linha sm:bg-transparent sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0 sm:not-last:border-r"
         >
           <dt className="text-[0.8125rem] text-tinta-suave sm:text-sm">{rotulo}</dt>
-          <dd className="text-[1.375rem] leading-tight font-bold whitespace-nowrap tabular-nums sm:text-[1.75rem]">{valor}</dd>
+          <dd className="font-titulo text-[1.375rem] leading-tight font-[650] whitespace-nowrap tabular-nums sm:text-[1.75rem]">{valor}</dd>
         </div>
       ))}
     </dl>
@@ -79,7 +81,9 @@ export function ApresentacaoPage() {
     <div>
       <div className="lg:grid lg:grid-cols-[minmax(0,32.5rem)_minmax(0,1fr)] lg:items-center lg:gap-x-12 xl:gap-x-18">
         <div className="max-w-2xl">
-          <h1 className="text-3xl leading-tight sm:text-4xl">Treine com questões reais da 1ª fase da FUVEST</h1>
+          <h1 className="text-3xl leading-tight sm:text-4xl">
+            Treine com questões <CirculoCaneta>reais</CirculoCaneta> da 1ª fase da FUVEST
+          </h1>
           <p className="mt-3 text-lg text-tinta-suave">
             Simulados com questões das provas oficiais de anos anteriores, corrigidos na hora, com o seu desempenho
             por disciplina e por assunto.
@@ -111,19 +115,12 @@ export function ApresentacaoPage() {
         </h2>
         <ul className="mt-3 flex flex-col gap-2.5 lg:mt-4 lg:grid lg:grid-cols-4 lg:gap-4">
           {MODOS.map(([titulo, descricao], i) => (
-            <li
-              key={titulo}
-              className="flex gap-3 rounded-xl border border-linha bg-papel p-3.5 lg:flex-col lg:gap-3 lg:p-4.5"
-            >
+            <li key={titulo} className={`${CARTAO} flex gap-3 p-3.5 lg:flex-col lg:gap-3 lg:p-4.5`}>
               {/* Bolinha da folha de respostas (O1.3) */}
-              <span
-                aria-hidden="true"
-                className="flex size-6.5 shrink-0 items-center justify-center rounded-full border-2 border-optico text-xs font-bold text-optico-texto lg:size-7 lg:text-[0.8125rem]"
-              >
-                {'ABCD'[i]}
-              </span>
+              <BolinhaLetra letra={'ABCD'[i]} className="size-6.5 text-xs lg:size-7 lg:text-[0.8125rem]" />
               <div>
-                <h3 className="font-bold lg:text-[1.0625rem]">{titulo}</h3>
+                {/* Título de cartão em Fraunces (CR-008, I2) */}
+                <h3 className="font-titulo text-[1.0625rem] font-[650] lg:text-lg">{titulo}</h3>
                 <p className="mt-0.5 text-[0.9375rem] leading-normal text-tinta-suave lg:mt-1">{descricao}</p>
               </div>
             </li>

@@ -1,5 +1,5 @@
 import type { HistoricoEntry } from '../simulado/tipos'
-import type { Catalogo, Disciplina } from '../types'
+import type { Catalogo, DesempenhoDisciplina, Disciplina } from '../types'
 
 /** RN-015: abaixo disto, o assunto aparece como "poucas questões" e vai para o fim da lista. */
 export const MINIMO_QUESTOES_ASSUNTO = 5
@@ -125,4 +125,20 @@ export function agregarDesempenho(entradas: HistoricoEntry[], nomes: Map<string,
     percentual: calcularPercentual(geral.acertos, geral.total),
     disciplinas,
   }
+}
+
+/** "Seu último simulado" no início (CR-008, I6.2): o de finalização mais recente. */
+export function ultimoSimulado(entradas: HistoricoEntry[]): HistoricoEntry | null {
+  return entradas.reduce<HistoricoEntry | null>(
+    (ultimo, e) => (!ultimo || e.finalizadoEm > ultimo.finalizadoEm ? e : ultimo),
+    null,
+  )
+}
+
+/** As disciplinas de menor aproveitamento, com empate pelo slug: a ordem do resultado (CR-008). */
+export function disciplinasMaisFracas(entrada: HistoricoEntry, quantas = 2): DesempenhoDisciplina[] {
+  return [...entrada.resultado.por_disciplina]
+    .filter((d) => d.total > 0)
+    .sort((a, b) => a.percentual - b.percentual || a.disciplina.localeCompare(b.disciplina))
+    .slice(0, quantas)
 }

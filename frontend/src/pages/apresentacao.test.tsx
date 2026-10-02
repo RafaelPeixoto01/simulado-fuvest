@@ -77,7 +77,7 @@ describe('Prévia e modos da apresentação (UT-044, O1.2 e O1.3)', () => {
     await apresentacao()
     expect(screen.getByText(/^Prévia da tela de resolução: uma questão de História da FUVEST 2025/)).toBeInTheDocument()
     expect(screen.getByText('Ao lado, o desempenho por disciplina de um resultado.')).toBeInTheDocument()
-    for (const visual of ['Questão 13 de 90', 'Folha 12/90', '58 de 90 acertos']) {
+    for (const visual of ['de 90', 'Folha 12/90', '58 de 90 acertos']) {
       expect(screen.getByText(visual).closest('[aria-hidden="true"]')).not.toBeNull()
     }
     // Nada da miniatura vira controle de verdade

@@ -3,8 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../App'
 import type { SimuladoEmAndamento } from '../simulado/tipos'
+import { CHAVE_HISTORICO } from '../storage/historicoStorage'
 import { CHAVE_SIMULADO } from '../storage/simuladoStorage'
-import { instalarApiFalsa, json, questaoFalsa } from '../test/apiFalsa'
+import { entradaFalsa, instalarApiFalsa, json, questaoFalsa } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 
 const IDS = ['2099-001', '2099-002', '2099-003']
@@ -51,6 +52,27 @@ describe('Identidade "Papel & Caneta" (UT-048, CR-008)', () => {
     renderizar(<App />, { rota: '/simulado' })
 
     expect(await screen.findByRole('timer')).toHaveClass('font-titulo')
+  })
+
+  it('o círculo de caneta nos acertos é decorativo: o título do resultado continua inteiro (UT-051)', async () => {
+    const entrada = entradaFalsa('sim-9', Date.now())
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([entrada]))
+    apiDeQuestoes()
+    renderizar(<App />, { rota: '/resultado/sim-9' })
+
+    const h1 = await screen.findByRole('heading', { level: 1, name: 'Você acertou 1 de 1 questão' })
+    const circulo = h1.querySelector('svg')!
+    expect(circulo).toHaveAttribute('aria-hidden', 'true')
+    expect(circulo.parentElement).toHaveTextContent(/^1$/) // em volta do número de acertos
+    expect(h1.querySelectorAll('svg')).toHaveLength(1) // no máximo um por tela
+  })
+
+  it('na apresentação, o círculo fica em "reais" (UT-051)', async () => {
+    instalarApiFalsa({ 'GET /api/sessao': () => json(200, { login_disponivel: true, usuario: null, acesso: 'conta' }) })
+    renderizar(<App />, { rota: '/' })
+
+    const h1 = await screen.findByRole('heading', { level: 1, name: 'Treine com questões reais da 1ª fase da FUVEST' })
+    expect(h1.querySelector('svg')!.parentElement).toHaveTextContent(/^reais$/)
   })
 
   it('a marca é uma bolinha só (anel e miolo), com o nome em Fraunces', async () => {

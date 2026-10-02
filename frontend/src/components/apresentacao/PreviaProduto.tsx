@@ -45,13 +45,19 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
           <span className="hidden text-[0.8125rem] font-bold lg:inline">FUVEST 2025</span>
           {/* No celular, o cronômetro e a folha vão para as pontas da barra */}
           <span className="contents lg:flex lg:items-center lg:gap-2">
-            <span className={`${CHIP} font-bold tabular-nums`}>04:52:10</span>
+            <span className={`${CHIP} font-titulo font-[650] tabular-nums`}>04:52:10</span>
             <span className={`${CHIP} font-semibold`}>Folha 12/90</span>
           </span>
         </div>
 
         <div className="px-3.5 pt-3.5 pb-1 lg:px-5 lg:pt-4.5 lg:pb-1.5">
-          <p className="text-[0.9375rem] font-bold lg:text-base">Questão 13 de 90</p>
+          {/* Como a resolução (CR-008): o número numa bolinha */}
+          <p className="flex items-center gap-2 font-titulo text-[0.9375rem] font-[650] lg:text-base">
+            <span className="flex size-7 items-center justify-center rounded-full border-2 border-optico text-[0.8125rem] font-bold text-optico-texto lg:size-8">
+              13
+            </span>
+            <span className="font-medium text-tinta-suave">de 90</span>
+          </p>
           <p className="mt-px mb-2 text-[0.71875rem] text-tinta-suave lg:mb-2.5 lg:text-xs">
             História · FUVEST 2025<span className="max-lg:hidden"> (questão 13)</span>
           </p>
