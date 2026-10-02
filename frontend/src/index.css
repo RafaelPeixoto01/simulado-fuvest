@@ -1,31 +1,33 @@
 @import "tailwindcss";
 
-/* Tokens (plano de design do T-018):
-   papel e tinta para leitura; azul de caneta esferografica para acoes e selecao;
-   rosa "dropout" do impresso optico so na folha de respostas. */
+/* Identidade "Papel & Caneta" (CR-008, ADR-013): papel creme, tinta azul-marinho para texto,
+   ação e seleção; rosa "dropout" do impresso óptico nas bolinhas e na marca.
+   Os nomes são os do CR-002: trocar a identidade é trocar valores, não componentes. */
 @theme {
   --font-sans: "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
   --font-leitura: "Literata Variable", Georgia, "Times New Roman", serif;
+  --font-titulo: "Fraunces Variable", Georgia, "Times New Roman", serif; /* títulos e números de destaque */
 
   --color-papel: #ffffff;
-  --color-fundo: #f5f6f8;
-  --color-tinta: #1d2430;
-  --color-tinta-suave: #5a6472;
-  --color-linha: #dde1e7;
-  --color-caneta: #1e4fd8;
-  --color-caneta-escura: #173da8;
-  --color-caneta-clara: #e8eefc;
-  --color-optico: #d9667f; /* só decorativo: círculos, bordas das bolinhas, contornos */
-  --color-optico-texto: #b8405f; /* letras e números do impresso: 5,33:1 no branco (CR-002) */
-  --color-optico-claro: #fcecef;
-  --color-grafite: #2b2f36;
-  --color-borda-campo: #848e9c; /* borda de input, select e textarea: ≥ 3:1 (CR-002) */
-  --color-acerto: #17703f; /* era #1b7f4b: 4,43:1 sobre acerto-claro (CR-002) */
-  --color-acerto-claro: #e6f4ec;
-  --color-erro: #c23b3b;
-  --color-erro-claro: #fbeaea;
-  --color-alerta: #9a5b00;
-  --color-alerta-claro: #fff4e0;
+  --color-fundo: #fbf7ef;
+  --color-tinta: #14213d;
+  --color-tinta-suave: #55607a;
+  --color-linha: #e6dfd0;
+  --color-caneta: #14213d; /* ação e seleção em tinta azul-marinho */
+  --color-caneta-escura: #0b1428;
+  --color-caneta-clara: #f3efe4;
+  --color-optico: #d6336c; /* só decorativo: anéis das bolinhas, marca, círculo de caneta */
+  --color-optico-texto: #a61e4d; /* letras e números do impresso: 7,21:1 no branco */
+  --color-optico-claro: #fce8ef;
+  --color-grafite: #14213d;
+  --color-borda-campo: #8c8577; /* campos e botão secundário: 3,43:1 no fundo */
+  --color-acerto: #1f7a4d;
+  --color-acerto-claro: #e7f3ec;
+  --color-erro: #b42318;
+  --color-erro-claro: #fce9e7;
+  --color-alerta: #8a5a00;
+  --color-alerta-claro: #fff1d6;
+  --color-foco: #a61e4d; /* anel de foco: aparece em volta do botão azul-marinho */
 }
 
 @layer base {
@@ -36,8 +38,15 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* Títulos de página, seção e cartão em Fraunces (I2): sem font-bold nos h1/h2 */
+  h1,
+  h2 {
+    font-family: var(--font-titulo);
+    font-weight: 650;
+  }
+
   :focus-visible {
-    outline: 3px solid var(--color-caneta);
+    outline: 3px solid var(--color-foco);
     outline-offset: 2px;
     border-radius: 4px;
   }

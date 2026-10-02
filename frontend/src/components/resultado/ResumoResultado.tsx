@@ -1,6 +1,7 @@
 import type { HistoricoEntry } from '../../simulado/tipos'
 import { formatarDataHora, formatarPercentual } from '../../utils/format'
 import { formatarDuracao } from '../../utils/tempo'
+import { CirculoCaneta } from '../CirculoCaneta'
 
 export function ResumoResultado({ entrada }: { entrada: HistoricoEntry }) {
   const { acertos, total, percentual } = entrada.resultado
@@ -10,21 +11,24 @@ export function ResumoResultado({ entrada }: { entrada: HistoricoEntry }) {
       <p className="text-sm text-tinta-suave">
         {entrada.descricao}, {formatarDataHora(entrada.finalizadoEm)}
       </p>
-      <h1 className="mt-1 text-3xl font-bold sm:text-4xl">
-        Você acertou {acertos} de {total} {total === 1 ? 'questão' : 'questões'}
+      <h1 className="mt-1 text-3xl sm:text-4xl">
+        Você acertou{' '}
+        {/* Círculo de caneta no número de acertos (CR-008, I5) */}
+        <CirculoCaneta folga="justa">{acertos}</CirculoCaneta> de {total}{' '}
+        {total === 1 ? 'questão' : 'questões'}
       </h1>
       <dl className="mt-5 flex flex-wrap gap-x-10 gap-y-3">
         <div>
           <dt className="text-sm text-tinta-suave">Aproveitamento</dt>
-          <dd className="text-2xl font-bold tabular-nums">{formatarPercentual(percentual)}</dd>
+          <dd className="font-titulo text-2xl font-[650] tabular-nums">{formatarPercentual(percentual)}</dd>
         </div>
         <div>
           <dt className="text-sm text-tinta-suave">Tempo gasto</dt>
-          <dd className="text-2xl font-bold tabular-nums">{formatarDuracao(entrada.tempoGastoMs)}</dd>
+          <dd className="font-titulo text-2xl font-[650] tabular-nums">{formatarDuracao(entrada.tempoGastoMs)}</dd>
         </div>
         <div>
           <dt className="text-sm text-tinta-suave">Tempo médio por questão</dt>
-          <dd className="text-2xl font-bold tabular-nums">{formatarDuracao(medio)}</dd>
+          <dd className="font-titulo text-2xl font-[650] tabular-nums">{formatarDuracao(medio)}</dd>
         </div>
       </dl>
       {entrada.finalizadoPorTempo && (

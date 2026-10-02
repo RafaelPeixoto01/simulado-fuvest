@@ -118,7 +118,7 @@ export function ResultadoPage() {
     if (sincronizando) return <Carregando />
     return (
       <section className="max-w-prose">
-        <h1 className="text-2xl font-bold">Resultado</h1>
+        <h1 className="text-2xl">Resultado</h1>
         {usuario ? (
           <>
             <p className="mt-2">Resultado não encontrado no seu histórico.</p>

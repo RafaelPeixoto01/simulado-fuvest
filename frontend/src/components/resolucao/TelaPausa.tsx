@@ -13,14 +13,14 @@ export function TelaPausa({ onRetomar }: { onRetomar: () => void }) {
       <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-full bg-caneta-clara text-caneta">
         <IconePausa className="size-7" />
       </span>
-      <h2 id={idTitulo} className="text-2xl font-bold">
+      <h2 id={idTitulo} className="text-2xl">
         Simulado pausado
       </h2>
       <p className="max-w-sm text-tinta-suave">O cronômetro está parado e a questão fica oculta até você retomar.</p>
       <button
         type="button"
         onClick={onRetomar}
-        className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-caneta px-8 font-bold text-papel hover:bg-caneta-escura"
+        className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-caneta px-8 font-bold text-fundo hover:bg-caneta-escura"
       >
         Retomar
       </button>

@@ -1,5 +1,6 @@
 import { formatarPercentual } from '../../utils/format'
 import { BarraPercentual } from '../BarraPercentual'
+import { BolinhaLetra } from '../BolinhaLetra'
 
 // Questão 13 da FUVEST 2025, como está em data/provas/2025/prova.yaml. No celular, o meio do
 // enunciado vira reticências, como no protótipo
@@ -45,13 +46,17 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
           <span className="hidden text-[0.8125rem] font-bold lg:inline">FUVEST 2025</span>
           {/* No celular, o cronômetro e a folha vão para as pontas da barra */}
           <span className="contents lg:flex lg:items-center lg:gap-2">
-            <span className={`${CHIP} font-bold tabular-nums`}>04:52:10</span>
+            <span className={`${CHIP} font-titulo font-[650] tabular-nums`}>04:52:10</span>
             <span className={`${CHIP} font-semibold`}>Folha 12/90</span>
           </span>
         </div>
 
         <div className="px-3.5 pt-3.5 pb-1 lg:px-5 lg:pt-4.5 lg:pb-1.5">
-          <p className="text-[0.9375rem] font-bold lg:text-base">Questão 13 de 90</p>
+          {/* Como a resolução (CR-008): o número numa bolinha */}
+          <p className="flex items-center gap-2 font-titulo text-[0.9375rem] font-[650] lg:text-base">
+            <BolinhaLetra letra="13" className="size-7 text-[0.8125rem] lg:size-8" />
+            <span className="font-medium text-tinta-suave">de 90</span>
+          </p>
           <p className="mt-px mb-2 text-[0.71875rem] text-tinta-suave lg:mb-2.5 lg:text-xs">
             História · FUVEST 2025<span className="max-lg:hidden"> (questão 13)</span>
           </p>
@@ -70,7 +75,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
                   className={`flex items-center gap-2 rounded-lg border px-2 py-1.5 lg:gap-2.5 lg:px-2.5 lg:py-[7px] ${marcada ? 'border-caneta bg-caneta-clara' : 'border-linha'}`}
                 >
                   <span
-                    className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] text-[0.625rem] font-bold lg:size-5 lg:text-[0.6875rem] ${marcada ? 'border-caneta bg-caneta text-papel' : 'border-optico text-optico-texto'}`}
+                    className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] text-[0.625rem] font-bold lg:size-5 lg:text-[0.6875rem] ${marcada ? 'border-caneta bg-caneta text-fundo' : 'border-optico text-optico-texto'}`}
                   >
                     {letra}
                   </span>
@@ -84,7 +89,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
         <div className="mt-2 flex gap-1.5 border-t border-linha px-3 py-2 lg:mt-2.5 lg:px-4 lg:py-2.5">
           <span className={`${BOTAO} border border-linha font-semibold`}>‹ Anterior</span>
           <span className={`${BOTAO} border border-linha font-semibold`}>Revisar</span>
-          <span className={`${BOTAO} grow bg-caneta text-center font-bold text-papel`}>Próxima ›</span>
+          <span className={`${BOTAO} grow bg-caneta text-center font-bold text-fundo`}>Próxima ›</span>
         </div>
       </div>
 

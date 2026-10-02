@@ -16,7 +16,7 @@ export function EscolherAnoPage() {
   return (
     <div className="max-w-2xl">
       <Link to="/" className={`${LINK} text-sm`}>Voltar ao início</Link>
-      <h1 className="mt-3 text-2xl font-bold sm:text-3xl">Prova de um ano</h1>
+      <h1 className="mt-3 text-2xl sm:text-3xl">Prova de um ano</h1>
       <p className="mt-2 text-tinta-suave">
         A prova original, na ordem em que caiu, com 5 horas. Questões anuladas pela FUVEST contam como acerto.
       </p>
@@ -33,7 +33,7 @@ export function EscolherAnoPage() {
             {catalogo.data.provas.map((p) => (
               <li key={p.ano} className="flex flex-wrap items-center justify-between gap-3 py-4">
                 <div>
-                  <h2 className="text-lg font-bold">FUVEST {p.ano}</h2>
+                  <h2 className="text-lg">FUVEST {p.ano}</h2>
                   <a
                     href={p.url_prova}
                     target="_blank"

@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.7
+**Versão:** 1.8
 **Data:** 2026-10-01
 **PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta)
 
 ---
 
@@ -109,7 +109,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 | Rota | Página | Observação |
 |------|--------|------------|
-| `/` | `HomePage` | Sem login (CR-006): página de apresentação (`specs/07` §8). Com login: com simulado em andamento, banner no topo (CR-003, P1.9): "Simulado em andamento", descrição, barra de progresso, "r de n respondidas · m para revisar", tempo ("Restam 4 h 52 min. O relógio continua correndo mesmo com a aba fechada." / "Pausado com 58 min restantes." / "O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas."; sem cronômetro, nada), "Continuar simulado" e "Descartar"; atualiza a cada 30 s e mostra minutos (`formatarRestante`); os 4 modos ficam com botão secundário. Depois, catálogo e 4 modos. "Provas na base": "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela (P2.6) |
+| `/` | `HomePage` | Sem login (CR-006): página de apresentação (`specs/07` §8). Com login: com simulado em andamento, banner no topo (CR-003, P1.9): "Simulado em andamento", descrição, barra de progresso, "r de n respondidas · m para revisar", tempo ("Restam 4 h 52 min. O relógio continua correndo mesmo com a aba fechada." / "Pausado com 58 min restantes." / "O tempo acabou: ao continuar, o simulado é finalizado com as respostas marcadas."; sem cronômetro, nada), "Continuar simulado" e "Descartar"; atualiza a cada 30 s e mostra minutos (`formatarRestante`); os 4 modos ficam com botão secundário. Depois, catálogo e 4 modos; com conta, saudação, Prova completa em destaque e "Seu último simulado" (CR-008, §3 "Início com conta"). "Provas na base": "FUVEST ‹ano› · PDF oficial" com ícone de link externo e "(abre em nova aba)" para leitor de tela (P2.6) |
 | `/novo/personalizado` | `ConfigurarPersonalizadoPage` | Disciplinas (checkbox, mín. 1), anos (dois selects com os anos do catálogo), quantidade (1–90, default 20), cronômetro (default ligado; mostra o tempo calculado) |
 | `/novo/ano` | `EscolherAnoPage` | Lista de anos publicados; cada item com o link do PDF oficial (RN-013) |
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
@@ -127,16 +127,43 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 ## 3. Componentes de UI
 
-### Tokens de contraste (CR-002)
+### Identidade visual e tokens (CR-002, CR-008)
+
+Direção "Papel & Caneta" (CR-008, ADR-013). As cores só mudam pelos tokens do `index.css`; os nomes são os do CR-002.
 
 | Token | Valor | Uso |
 |-------|-------|-----|
-| `optico` | #d9667f | Só decorativo: círculos da marca, bordas das bolinhas, contornos da folha |
-| `optico-texto` | #b8405f | Letras A–E das alternativas e números das folhas (5,33:1 no branco) |
-| `borda-campo` | #848e9c | Borda de `input`, `select`, `textarea` e do seletor segmentado (≥ 3:1) |
-| `acerto` | #17703f | Texto, borda e preenchimento de acerto (≥ 4,5:1 sobre `acerto-claro`) |
+| `fundo` | #FBF7EF | Papel creme da página |
+| `papel` | #ffffff | Cartões e superfícies |
+| `tinta` | #14213D | Texto (14,95:1 no fundo) |
+| `tinta-suave` | #55607A | Texto secundário (5,88:1 no fundo; 5,47:1 na seleção) |
+| `linha` | #E6DFD0 | Divisórias e bordas de cartão |
+| `caneta` / `caneta-escura` / `caneta-clara` | #14213D / #0B1428 / #F3EFE4 | Ação e seleção em tinta azul-marinho; hover do primário; fundo da alternativa marcada e da linha atual |
+| `optico` | #D6336C | Só decorativo: anéis das bolinhas, marca, círculo de caneta (4,62:1 no branco; ≥ 3:1 como gráfico) |
+| `optico-texto` / `optico-claro` | #A61E4D / #FCE8EF | Letras A–E, números das folhas e da questão (7,21:1 no branco) |
+| `grafite` | #14213D | Miolo da marca |
+| `borda-campo` | #8C8577 | Bordas de campo, botão secundário e botões neutros da barra (3,43:1 no fundo) |
+| `acerto` / `acerto-claro` | #1F7A4D / #E7F3EC | 4,67:1 entre si |
+| `erro` / `erro-claro` | #B42318 / #FCE9E7 | 5,62:1 entre si |
+| `alerta` / `alerta-claro` | #8A5A00 / #FFF1D6 | Revisar e tempo (5,31:1 entre si) |
+| `foco` | #A61E4D | Anel de foco (`:focus-visible`, 3 px, afastamento de 2 px): 6,74:1 no fundo e 7,21:1 no papel |
 
 O `tokens.test.ts` calcula o contraste dos pares a partir do `index.css`. Para isso, o Vitest processa só esse arquivo (`css.include` no `vite.config.ts`).
+
+- **Fontes:** Atkinson Hyperlegible Next (interface), Literata (texto das questões) e Fraunces 650 (`--font-titulo`), todas por `@fontsource-variable` no `main.tsx`. Fraunces vale para a marca, `h1` e `h2` (regra de base no `index.css`), títulos de cartão, número da questão, cronômetro e números de destaque (classe `font-titulo`). Nunca em texto corrido, botões ou rótulos.
+- **Marca** (`Marca.tsx`): uma bolinha, anel `optico` e miolo `tinta`, 30 px no desktop e 26 px no celular, com "Simulado Fuvest" em `font-titulo`. O favicon (`public/favicon.svg`) é a mesma bolinha sobre `fundo`, com cantos de 7 px.
+- **Botões** (`estilos.ts`): primário `caneta` com texto `fundo`, cantos de 6 px e hover `caneta-escura`; secundário `papel` com borda `borda-campo`. Os botões neutros da barra da resolução (inclusive "Folha" e "Pausar") e o "cancelar" dos diálogos também usam `borda-campo`.
+- **Cartões** (`CARTAO`): `papel`, borda `linha`, cantos de 16 px, sem sombra. O aviso de simulado em andamento mantém o fundo `caneta-clara`, agora com borda `caneta` (no creme, o fundo sozinho não se destaca).
+- **Marcas de sincronismo** (`MarcasSincronismo`, `aria-hidden`): barrinhas `tinta` de 12–14 × 4–5 px na borda esquerda, distribuídas na altura. Só no cartão da Prova completa do início e na borda da folha de respostas (cartão no desktop, painel no celular).
+- **Círculo de caneta** (`CirculoCaneta`, `aria-hidden`): traço à mão em `optico` em volta de uma palavra de título, no máximo um por tela: "reais" na apresentação e no início, o número de acertos no resultado. Fica centrado na palavra, com folga fixa (12 px em palavras, 8 px em números) e 4 px de margem na palavra circulada, para não cortar as vizinhas. O texto do título não muda.
+
+### Início com conta (CR-008)
+
+Protótipos "A · Início" e "A · Início · celular"; o que eles mostram além da especificação fica fora (CR-008 §4.3).
+
+- **Saudação (I6.1):** "Olá, ‹primeiro nome›." acima do `h1`, em `font-titulo` itálico `optico-texto`, só com uma conta que tenha nome (`sessao.usuario.nome`). Sem conta ou sem nome, nada.
+- **Prova completa em destaque (I6.3):** uma `section` em cartão maior (padding maior, `h2` em `text-2xl`/`text-3xl`), com as marcas de sincronismo à esquerda, a bolinha "A", a descrição e o botão de hoje ("Começar prova completa": primário, ou secundário com simulado em andamento; desabilitado com "Disponível quando a base tiver 90 questões válidas"). Abaixo, Prova de um ano, Personalizado e Treino em três cartões menores (3 colunas a partir de 640 px, lista abaixo disso), com as bolinhas B, C e D, `h2`, descrição e o botão secundário de hoje.
+- **"Seu último simulado" (I6.2)** (`components/inicio/UltimoSimulado.tsx`): no topo da lateral (no celular, depois dos modos e do link do histórico). Usa `useHistorico` e `ultimoSimulado` (o de maior `finalizadoEm`). Mostra o `h2` "Seu último simulado", "‹descrição› · dd/mm", os acertos em `font-titulo` ("58 de 90"), "64,4% de aproveitamento", "Para estudar" com as duas disciplinas mais fracas (`disciplinasMaisFracas`: menor `percentual`, empate pelo slug, como no resultado; sem as que não tiveram questão contada nem as de 100%, e sem a parte se não sobrar nenhuma) com percentual e barra, e os links "Ver o resultado" (`/resultado/:id`) e "Meu desempenho" (`/desempenho`). Sem histórico, não aparece. Com só uma disciplina, mostra uma.
 
 ### Cabeçalho do `Layout` (CR-007)
 
@@ -153,7 +180,7 @@ Protótipo: tela "Menu do cabeçalho · celular" do canvas "Protótipo Simulado 
 - **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão), qualquer troca de rota ou o foco saindo do painel e do botão (Tab depois do último item). O botão também alterna. Tab segue do botão para os itens do painel.
 - **Com o menu aberto**, a rolagem da página fica travada (`overflow: hidden` no `html`, como no `PainelFolha`): o cabeçalho não é fixo, e rolar levaria o painel embora.
 - **Enquanto a sessão carrega**, o celular mostra só a marca (nem "Menu" nem "Entrar").
-- **Marca no celular:** 46 px de largura (`h-2`), com 8 px até o botão, para o cabeçalho caber numa linha em 320 px; a partir de 640 px, como antes.
+- **Marca no celular:** a bolinha de 26 px (30 px a partir de 640 px, CR-008), com 8 px até o botão, para o cabeçalho caber numa linha em 320 px.
 
 ### Componente: Blocos
 
@@ -188,11 +215,14 @@ Texto renderizado como texto React (escapado) com `whitespace-pre-line`; **nunca
 
 Monta: cabeçalho "Questão i de n · Disciplina · FUVEST AAAA, nº NN" (RN-013) → texto-base (se houver, em caixa destacada) → enunciado → alternativas. Mostra o botão "Reportar problema" (`specs/05-reportes.md`).
 
+**Título (`TituloQuestao`, CR-008):** o número numa bolinha de anel `optico` (2,5 px) em `font-titulo` `optico-texto`, seguido de "de n" em `tinta-suave`; um "Questão" só para leitor de tela mantém o nome acessível "Questão i de n". Vale na resolução, na questão removida e na revisão do resultado.
+
 ### Estrutura da ResolucaoPage (CR-001)
 
 - **Barra do topo** (fixa e opaca, `bg-fundo` sem transparência nem desfoque — CR-007, O3.1; 60 px no celular, 64 px no desktop): no desktop, a descrição do simulado à esquerda e o `Cronometro` à direita; no celular, o `Cronometro` e o botão "Folha r/n", que abre o `PainelFolha`.
 - **Barra inferior** (fixa no rodapé da coluna da questão): Anterior | Revisar | Próxima. "Próxima" é o único botão azul e ocupa o resto da linha no celular; na última questão vira "Finalizar" (rótulo acessível "Finalizar o simulado"). "Revisar" usa `aria-pressed` e mostra "Marcada" em laranja quando marcada. Botões de 48 px no celular e 44 px no desktop; abaixo de 380 px, "Anterior" fica só com o ícone. No desktop, a linha de atalhos aparece sob a barra.
 - **Trocar de questão** (botões, atalhos ← → ou folha): `window.scrollTo({top: 0})` e foco no título "Questão N de M" (`tabIndex=-1`, `focus({preventScroll: true})`), pelo `refTitulo` da `QuestaoView`.
+- **Marcas de sincronismo (CR-008):** na borda esquerda do cartão da folha (desktop, por fora do cartão, fixas com ele) e do painel da folha (celular).
 - **Desktop (≥ 1024 px):** coluna da questão e cartão da folha (408 px) fixo 24 px abaixo da barra, com título, `FolhaRespostas` no formato `bolhas` e "Finalizar simulado". A folha de 90 questões cabe inteira em 1440 × 900; a rolagem própria (`max-h`) só entra como reserva em telas baixas.
 
 ### Componente: FolhaRespostas
@@ -221,7 +251,7 @@ Ocupa o lugar do conteúdo enquanto o simulado está pausado (D3): ícone, títu
 
 ### Componente: Cronometro
 
-Mostra `hh:mm:ss` restante (ou o decorrido, sem limite; o prefixo "Tempo:" some abaixo de 640 px), "Oculto" quando escondido e "Pausado" quando pausado. Botão "Ocultar/Mostrar" (continua contando) e "Pausar/Retomar" só quando `pausavel`; no celular, os dois são só ícone, com 44 px. Estado de aviso (≤ 15 min) em cor de alerta.
+Mostra `hh:mm:ss` restante (ou o decorrido, sem limite; o prefixo "Tempo:" some abaixo de 640 px), "Oculto" quando escondido e "Pausado" quando pausado. Botão "Ocultar/Mostrar" (continua contando) e "Pausar/Retomar" só quando `pausavel`; no celular, os dois são só ícone, com 44 px. Estado de aviso (≤ 15 min) em cor de alerta. O tempo usa `font-titulo` (CR-008).
 
 ### Atalhos (ResolucaoPage e TreinoPage)
 
@@ -291,6 +321,10 @@ sequenceDiagram
 | UT-012 | Pausa: questão oculta, atalhos desligados, folha escondida, reabrir pausado | `ResolucaoPage` | `TelaPausa` (CR-001) |
 | UT-045 | Menu do celular: botão com `aria-expanded`/`aria-controls`; painel com Início, Desempenho, Histórico e a conta; `aria-current` na página atual; fecha com Esc (foco no botão), toque fora, item e troca de rota; sem conta, só "Entrar" e nenhum menu | `Layout`, `MenuCelular` | Comportamento de O2.1–O2.4 (CR-007) |
 | UT-046 | Barra do topo da resolução opaca | `ResolucaoPage` | `bg-fundo`, sem transparência nem `backdrop-blur` (CR-007) |
+| UT-047 | Contraste dos tokens novos, incluindo `foco` sobre `fundo` e `papel` e `optico` ≥ 3:1 | `tokens.test.ts` | Pares da especificação (CR-008) |
+| UT-048 | Título da questão na bolinha com o nome acessível "Questão i de n"; marca de uma bolinha | `QuestaoView`, `Layout` | Estrutura acessível (CR-008) |
+| UT-049 | Início com conta: saudação (com nome; sem nome e sem conta, nada); Prova completa em destaque com A e marcas `aria-hidden`; B–D em cartões; regras do botão mantidas | `HomePage` | Textos e estrutura (CR-008) |
+| UT-050 | "Seu último simulado": o mais recente, acertos, aproveitamento, as duas mais fracas, links; sem histórico, ausente; `ultimoSimulado` e `disciplinasMaisFracas` | `UltimoSimulado`, `utils/desempenho` | Valores e links (CR-008) |
 | FT-001 | Home → Prova completa → responder 3 → recarregar | E2E (Playwright MCP) | Respostas e tempo preservados |
 | FT-002 | Personalizado com filtros → grade → finalizar | E2E | Resultado exibido |
 | FT-003 | Personalizado insuficiente | E2E | Mensagem + "Gerar com N" |
@@ -299,6 +333,7 @@ sequenceDiagram
 | FT-006 | 320 e 390 px: barra inferior numa linha, painel da folha, última questão → Finalizar | E2E (CR-001) | Sem quebra nem rolagem horizontal |
 | FT-007 | 1440 × 900: folha de 90 questões inteira, sem rolagem própria, nunca sob a barra | E2E (CR-001) | Cartão visível ao rolar até o fim |
 | FT-008 | Personalizado: pausar, recarregar, retomar | E2E (CR-001) | Questão oculta; tempo não descontado |
+| FT-022 | Identidade em 1440, 390 e 320 px: apresentação, início com conta, Prova completa (desktop e celular, com a folha), resultado; foco visível no botão primário; sem rolagem horizontal; console limpo | E2E (CR-008) | Conforme §3 "Identidade visual e tokens" e "Início com conta" |
 | FT-021 | Menu do celular em 390 e 320 px com conta (abrir, Esc, fora, item); 640 px com links em linha; barra da resolução opaca ao rolar uma questão longa | E2E (CR-007, junto com a apresentação — `specs/07` §9.4) | Conforme §3 "Cabeçalho do `Layout`" e "Estrutura da ResolucaoPage" |
 
 ---

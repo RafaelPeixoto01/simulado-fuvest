@@ -27,9 +27,12 @@ export function Layout() {
       {/* 56 px fixos no celular (O2.3); acima do conteúdo para o painel do menu */}
       <header className="relative z-30 h-14 border-b border-linha bg-papel sm:h-auto">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4 sm:py-3">
-          {/* Marca menor no celular (46 px, como no protótipo): com o botão "Menu", cabe em 320 px */}
-          <Link to="/" className="flex items-center gap-2.5 font-bold tracking-tight whitespace-nowrap text-tinta">
-            <Marca className="h-2 w-auto sm:h-2.5" />
+          {/* Marca de uma bolinha e nome em Fraunces (CR-008, I3); no celular, menor: com o "Menu", cabe em 320 px */}
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-titulo text-lg font-[650] whitespace-nowrap text-tinta sm:gap-2.5 sm:text-[1.3125rem]"
+          >
+            <Marca className="size-[26px] sm:size-[30px]" />
             Simulado Fuvest
           </Link>
           {/* Enquanto a sessão carrega, o celular mostra só a marca: nem "Menu" nem "Entrar" piscam */}

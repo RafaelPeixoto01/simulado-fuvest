@@ -80,7 +80,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                     <span
                       aria-hidden="true"
                       className={`flex size-[22px] items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
-                        resposta ? 'border-caneta bg-caneta text-papel' : 'border-optico'
+                        resposta ? 'border-caneta bg-caneta text-fundo' : 'border-optico'
                       }`}
                     >
                       {resposta ?? ''}

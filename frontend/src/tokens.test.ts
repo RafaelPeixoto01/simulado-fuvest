@@ -26,26 +26,33 @@ function contraste(a: string, b: string): number {
 
 describe('contraste dos tokens (WCAG AA)', () => {
   it.each([
+    ['tinta', 'fundo'],
+    ['tinta-suave', 'fundo'],
+    ['tinta-suave', 'papel'],
+    ['tinta-suave', 'caneta-clara'], // texto secundário na seleção (CR-008)
     ['optico-texto', 'papel'], // P2.1: letras A–E e números da folha
+    ['optico-texto', 'fundo'], // número da questão na bolinha (CR-008)
     ['optico-texto', 'caneta-clara'], // número da questão atual na folha
     ['acerto', 'acerto-claro'], // P2.3: "Correta"
     ['acerto', 'papel'],
     ['erro', 'erro-claro'],
     ['alerta', 'alerta-claro'],
-    ['tinta-suave', 'fundo'],
-    ['caneta', 'papel'],
+    ['caneta', 'papel'], // links
+    ['fundo', 'caneta'], // texto do botão primário (CR-008)
   ])('texto %s sobre %s ≥ 4,5:1', (texto, fundo) => {
     expect(contraste(texto, fundo)).toBeGreaterThanOrEqual(4.5)
   })
 
   it.each([
     ['borda-campo', 'papel'], // P2.4: borda de campo
-    ['borda-campo', 'fundo'],
-  ])('borda %s sobre %s ≥ 3:1', (borda, fundo) => {
-    expect(contraste(borda, fundo)).toBeGreaterThanOrEqual(3)
-  })
-
-  it('o rosa decorativo continua abaixo do mínimo de texto: por isso só serve para círculos e bordas', () => {
-    expect(contraste('optico', 'papel')).toBeLessThan(4.5)
+    ['borda-campo', 'fundo'], // e do botão secundário no creme (CR-008)
+    // Anel de foco (CR-008): com 2 px de afastamento, encosta no fundo ou no papel, não no botão
+    ['foco', 'fundo'],
+    ['foco', 'papel'],
+    // Rosa decorativo (anéis das bolinhas, marca): é gráfico, não texto (WCAG 1.4.11)
+    ['optico', 'papel'],
+    ['optico', 'fundo'],
+  ])('%s sobre %s ≥ 3:1', (cor, fundo) => {
+    expect(contraste(cor, fundo)).toBeGreaterThanOrEqual(3)
   })
 })

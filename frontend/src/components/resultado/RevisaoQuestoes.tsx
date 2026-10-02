@@ -6,6 +6,7 @@ import { Carregando, ErroCarregamento, Vazio } from '../Estados'
 import { BARRA_NEUTRO, BOTAO_BARRA_FORMA } from '../estilos'
 import { Icone } from '../Icone'
 import { QuestaoView } from '../questao/QuestaoView'
+import { TituloQuestao } from '../questao/TituloQuestao'
 import { filtrarRevisao, situacao, type EstadoRevisao, type FiltroRevisao, type Situacao } from './revisao'
 
 const FILTROS: { valor: FiltroRevisao; rotulo: string; nome: string }[] = [
@@ -76,14 +77,14 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
 
   return (
     <section ref={secao} aria-labelledby={idTitulo} className="scroll-mt-4">
-      <h2 id={idTitulo} className="text-xl font-bold">
+      <h2 id={idTitulo} className="text-xl">
         Revisão das questões
       </h2>
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <fieldset className="flex overflow-hidden rounded-md border border-borda-campo">
           <legend className="sr-only">Mostrar</legend>
           {FILTROS.map((f) => (
-            <label key={f.valor} className="cursor-pointer border-r border-linha px-3 py-1.5 text-sm last:border-r-0 has-checked:bg-caneta has-checked:text-papel has-focus-visible:outline-2 has-focus-visible:outline-caneta">
+            <label key={f.valor} className="cursor-pointer border-r border-linha px-3 py-1.5 text-sm last:border-r-0 has-checked:bg-caneta has-checked:text-fundo has-focus-visible:outline-2 has-focus-visible:outline-foco">
               <input
                 type="radio"
                 name="filtro-revisao"
@@ -133,9 +134,7 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
               />
             ) : (
               <div className="max-w-[68ch] rounded-lg border border-dashed border-linha px-4 py-4">
-                <h3 ref={titulo} tabIndex={-1} className="text-xl font-bold focus:outline-none">
-                  Questão {estado.indice + 1} de {questaoIds.length}
-                </h3>
+                <TituloQuestao atual={estado.indice + 1} total={questaoIds.length} nivel={3} refTitulo={titulo} />
                 {complemento}
                 <p className="mt-2 text-tinta-suave">
                   {item

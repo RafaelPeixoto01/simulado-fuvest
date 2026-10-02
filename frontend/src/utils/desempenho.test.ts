@@ -3,7 +3,13 @@ import { describe, expect, it } from 'vitest'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { CATALOGO } from '../test/apiFalsa'
 import type { DesempenhoDisciplina, Disciplina, ItemCorrigido } from '../types'
-import { agregarDesempenho, calcularPercentual, nomesDosAssuntos } from './desempenho'
+import {
+  agregarDesempenho,
+  calcularPercentual,
+  disciplinasMaisFracas,
+  nomesDosAssuntos,
+  ultimoSimulado,
+} from './desempenho'
 
 let proximo = 0
 
@@ -142,4 +148,37 @@ it('calcularPercentual arredonda em 1 casa e trata total zero', () => {
   expect(calcularPercentual(1, 3)).toBe(33.3)
   expect(calcularPercentual(2, 3)).toBe(66.7)
   expect(calcularPercentual(0, 0)).toBe(0)
+})
+
+describe('"Seu último simulado" (UT-050, CR-008)', () => {
+  const linha = (disciplina: Disciplina, total: number, acertos: number): DesempenhoDisciplina => ({
+    disciplina,
+    total,
+    acertos,
+    percentual: calcularPercentual(acertos, total),
+  })
+
+  it('ultimoSimulado pega o de finalização mais recente, em qualquer ordem; sem histórico, nenhum', () => {
+    const a = { ...entrada([]), id: 'a', finalizadoEm: 5 }
+    const b = { ...entrada([]), id: 'b', finalizadoEm: 9 }
+    const c = { ...entrada([]), id: 'c', finalizadoEm: 7 }
+    expect(ultimoSimulado([a, b, c])?.id).toBe('b')
+    expect(ultimoSimulado([])).toBeNull()
+  })
+
+  it('disciplinasMaisFracas: menor aproveitamento, empate pelo slug, só as que tiveram questão', () => {
+    const e = entrada(
+      [],
+      [linha('fisica', 4, 4), linha('historia', 4, 2), linha('biologia', 4, 2), linha('quimica', 0, 0), linha('ingles', 5, 1)],
+    )
+    expect(disciplinasMaisFracas(e).map((d) => d.disciplina)).toEqual(['ingles', 'biologia'])
+    expect(disciplinasMaisFracas(e, 3).map((d) => d.disciplina)).toEqual(['ingles', 'biologia', 'historia'])
+    expect(disciplinasMaisFracas(entrada([], [linha('fisica', 2, 1)]))).toHaveLength(1)
+  })
+
+  it('disciplina a 100% não entra em "Para estudar" (revisão de código)', () => {
+    const e = entrada([], [linha('fisica', 10, 10), linha('quimica', 10, 9)])
+    expect(disciplinasMaisFracas(e).map((d) => d.disciplina)).toEqual(['quimica'])
+    expect(disciplinasMaisFracas(entrada([], [linha('fisica', 10, 10)]))).toEqual([])
+  })
 })

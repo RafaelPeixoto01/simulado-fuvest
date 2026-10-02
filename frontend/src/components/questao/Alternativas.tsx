@@ -24,7 +24,7 @@ const ESTILOS: Record<Estado, { linha: string; bolinha: string }> = {
   },
   marcada: {
     linha: 'border-caneta bg-caneta-clara',
-    bolinha: 'border-caneta bg-caneta text-papel',
+    bolinha: 'border-caneta bg-caneta text-fundo',
   },
   correta: {
     linha: 'border-acerto bg-acerto-claro',

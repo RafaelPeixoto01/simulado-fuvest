@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { BarraPercentual, Placar } from '../components/BarraPercentual'
 import { Vazio } from '../components/Estados'
-import { LINK } from '../components/estilos'
+import { CARTAO, LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useHistorico } from '../hooks/useHistorico'
 import { useTituloPagina } from '../hooks/useTituloPagina'
@@ -17,7 +17,7 @@ function SecaoDisciplina({ linha }: { linha: LinhaDisciplina }) {
   return (
     <section aria-labelledby={id}>
       <div className="flex items-baseline justify-between gap-4">
-        <h2 id={id} className="text-lg font-bold">
+        <h2 id={id} className="text-lg">
           {nome}
         </h2>
         <Placar {...linha} />
@@ -56,7 +56,7 @@ export function DesempenhoPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold sm:text-3xl">Meu desempenho</h1>
+      <h1 className="text-2xl sm:text-3xl">Meu desempenho</h1>
       {usuario ? (
         <p className="mt-2 text-tinta-suave">
           Estes números somam os simulados concluídos guardados na sua conta, em todos os dispositivos.
@@ -78,18 +78,18 @@ export function DesempenhoPage() {
           </Vazio>
         ) : (
           <>
-            <dl className="grid grid-cols-3 gap-2 rounded-xl border border-linha bg-papel p-4 text-center">
+            <dl className={`${CARTAO} grid grid-cols-3 gap-2 p-4 text-center`}>
               <div>
                 <dt className="text-sm text-tinta-suave">Simulados</dt>
-                <dd className="text-2xl font-bold tabular-nums">{painel.simulados}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{painel.simulados}</dd>
               </div>
               <div>
                 <dt className="text-sm text-tinta-suave">Questões</dt>
-                <dd className="text-2xl font-bold tabular-nums">{painel.total}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{painel.total}</dd>
               </div>
               <div>
                 <dt className="text-sm text-tinta-suave">Acertos</dt>
-                <dd className="text-2xl font-bold tabular-nums">{formatarPercentual(painel.percentual)}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{formatarPercentual(painel.percentual)}</dd>
               </div>
             </dl>
             <p className="mt-3 text-sm text-tinta-suave">

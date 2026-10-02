@@ -258,6 +258,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 | Frontend       | React + TypeScript               | React 19.3, TS ~6.0 (não 7 — ADR-007) |
 | Build/Dev      | Vite + @vitejs/plugin-react      | 8.x / 6.x |
 | Estilização    | Tailwind CSS                     | 4.x    |
+| Fontes         | Atkinson Hyperlegible Next, Literata e Fraunces (`@fontsource-variable`, no build — CSP `self`) | 5.x |
 | State/Fetch    | TanStack Query                   | 5.x    |
 | Routing        | react-router-dom                 | 7.x    |
 | Lint (FE)      | ESLint + typescript-eslint       | 10.x / 8.x |
@@ -282,8 +283,8 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ## Contexto Atual do Projeto
 
 ### Documentos Existentes
-- [x] PRD (`/docs/01-PRD.md`) — v4.1 (MVP + Fase 3A, CR-004 + Fase 3B, CR-005 + login obrigatório, CR-006 + apresentação com a base, CR-007)
-- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.7, ADR-001 a ADR-012 (ADR-012 emendado pelo CR-007)
+- [x] PRD (`/docs/01-PRD.md`) — v4.2 (MVP + Fase 3A, CR-004 + Fase 3B, CR-005 + login obrigatório, CR-006 + apresentação com a base, CR-007 + identidade "Papel & Caneta", CR-008)
+- [x] Arquitetura (`/docs/02-ARCHITECTURE.md`) — v1.8, ADR-001 a ADR-013 (ADR-012 emendado pelo CR-007; ADR-013 identidade por tokens e fontes no próprio site)
 - [x] Spec Técnica (`/docs/03-SPEC.md`) — índice + `/docs/specs/01..07`
 - [x] Plano de Implementação (`/docs/04-IMPLEMENTATION-PLAN.md`) — T-001 a T-030, branch `feat/mvp`
 - [x] Guia de Deploy (`/docs/05-DEPLOY-GUIDE.md`) — v1.4: provisionamento via CLI, cliente OAuth do Google (§3.1), rollback, backup, operação do curador
@@ -291,13 +292,14 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 ### Change Requests
 > **Histórico completo em [`docs/changes/INDEX.md`](docs/changes/INDEX.md)** — mantido aqui apenas os 5 mais recentes. Ao concluir um CR novo: adicionar aqui, mover o mais antigo dos 5 para o INDEX.md.
 
+- **CR-008** — Identidade visual "Papel & Caneta" (Em Implementação, 2026-10-02): direção A do canvas, itens I1–I5 e os opcionais I6.1–I6.3 (D1). Tokens do CR-002 com valores novos (papel creme, tinta e ação azul-marinho, rosa #D6336C) e token `foco`; Fraunces 650 em `h1`/`h2` (regra de base), títulos de cartão, número da questão (`TituloQuestao`, na bolinha), cronômetro e números de destaque (ADR-013); marca de uma bolinha; `CARTAO`, `BolinhaLetra`, `CirculoCaneta`, `MarcasSincronismo`; no início, saudação, "Seu último simulado" e Prova completa em destaque. Extras do protótipo fora de escopo (D2, §4.3 do CR)
 - **CR-007** — Apresentação, menu do celular e barra opaca (Concluído, 2026-10-01): itens O1–O3 das observações de 01/10 do canvas. Apresentação com os números da base pela vitrine pública `GET /api/vitrine` (D1; emenda à D2 do CR-006: health, figuras e vitrine são públicos), prévia da resolução em HTML/CSS (`PreviaProduto`), modos em cartões A–D e botão do Google de 52 px; abaixo de 640 px, botão "Menu" com painel (`MenuCelular`) e cabeçalho de 56 px; barra do topo da resolução opaca. Extras do protótipo fora dos itens ficaram fora de escopo (D2, §4.3 do CR)
 - **CR-006** — Login obrigatório para usar o site (Concluído, 2026-10-01): sem login, só a apresentação (início) e a Privacidade (D1); API de conteúdo exige sessão — 401 `nao_autenticado` (D2); sem login configurado, o site fecha em produção (503 `site_indisponivel`) e abre em desenvolvimento (D3). `exigir_acesso` com modos `conta`/`livre`/`indisponivel` (ADR-012), `SessaoResponse.acesso`, `RequerConta` e `ApresentacaoPage`
 - **CR-005** — Contas com Google e histórico sincronizado, Fase 3B do roadmap (Concluído, 2026-10-01): login opcional por redirecionamento (OIDC + PKCE, sem script do Google — ADR-010); sessão em cookie `HttpOnly` com hash no banco; tabelas `usuarios`, `sessoes`, `simulados_concluidos` (migration 003); `/api/sessao`, `/api/historico`, `/api/conta`; navegador com conta = espelho da conta com marca de ids e fila de operações (ADR-011); `/conta` e `/privacidade`. Decisões D1–D4: ao entrar, o local vai para a conta; ao sair, sai do navegador; guarda nome e e-mail; limite 50. Cliente OAuth criado e login real conferido pelo usuário em produção (FT-014)
 - **CR-004** — Assuntos e desempenho, Fase 3A do roadmap (Concluído, 2026-10-01): taxonomia `data/provas/assuntos.yaml` (Gate 1 aprovado; 11–14 assuntos por disciplina, 5 em Inglês), exatamente 1 assunto por questão e V11 bloqueante; `questoes.assunto` (migration 002); assuntos no catálogo e na correção; "Ver por assunto" no resultado e painel `/desempenho` (RN-015); CLI `ingestao assuntos`. Classificação de 2023–2025 aprovada no Gate 2 (01/10)
-- **CR-003** — Resultado, figura e início (Concluído, 2026-09-30): resultado na ordem "Por disciplina" → folha corrigida → revisão; folha clicável (grade de células no celular, bolinhas na barra lateral do desktop — D5 do CR-003); revisão uma questão por vez com filtros; figura ampliada ajustada à tela; banner do início com o tempo restante; "Provas na base" com aviso de nova aba. Com ele, a revisão de design de 30/09 fica coberta até o P2; faltam P3 e D4
 
 ### Última Tarefa Implementada
+- CR-008 (2026-10-02): identidade visual "Papel & Caneta" e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque
 - CR-007 (2026-10-01): apresentação com os números da base (vitrine pública) e a prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca
 - CR-006 (2026-10-01): login obrigatório para usar o site (apresentação pública, API de conteúdo com sessão, produção sem login configurado fica indisponível)
 - CR-005 (2026-10-01): contas com Google e histórico sincronizado (Fase 3B), com login real em produção. A Fase 3 do roadmap está completa

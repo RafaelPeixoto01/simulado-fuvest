@@ -7,7 +7,7 @@ import { useTituloPagina } from '../hooks/useTituloPagina'
 function Secao({ titulo, children }: { titulo: string; children: ReactNode }) {
   return (
     <section className="mt-8">
-      <h2 className="text-lg font-bold">{titulo}</h2>
+      <h2 className="text-lg">{titulo}</h2>
       <div className="mt-2 space-y-2 text-tinta-suave">{children}</div>
     </section>
   )
@@ -19,7 +19,7 @@ export function PrivacidadePage() {
 
   return (
     <div className="max-w-prose">
-      <h1 className="text-2xl font-bold sm:text-3xl">Privacidade</h1>
+      <h1 className="text-2xl sm:text-3xl">Privacidade</h1>
       <p className="mt-2 text-tinta-suave">
         O Simulado Fuvest é gratuito e não tem publicidade. Esta página diz o que guardamos sobre você e como apagar.
       </p>

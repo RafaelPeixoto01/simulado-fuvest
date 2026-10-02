@@ -71,7 +71,7 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
 
   const cabecalho = (
     <>
-      <h2 id={idTitulo} className={formato === 'grade' ? 'text-xl font-bold' : 'font-bold'}>
+      <h2 id={idTitulo} className={formato === 'grade' ? 'text-xl' : ''}>
         Folha corrigida
       </h2>
       <p className="text-sm text-tinta-suave">
