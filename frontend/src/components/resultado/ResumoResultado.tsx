@@ -13,8 +13,8 @@ export function ResumoResultado({ entrada }: { entrada: HistoricoEntry }) {
       </p>
       <h1 className="mt-1 text-3xl sm:text-4xl">
         Você acertou{' '}
-        {/* Círculo de caneta no número de acertos (CR-008, I5); um algarismo pede um círculo mais largo */}
-        <CirculoCaneta largura={acertos < 10 ? 'w-[220%]' : 'w-[160%]'}>{acertos}</CirculoCaneta> de {total}{' '}
+        {/* Círculo de caneta no número de acertos (CR-008, I5) */}
+        <CirculoCaneta folga="justa">{acertos}</CirculoCaneta> de {total}{' '}
         {total === 1 ? 'questão' : 'questões'}
       </h1>
       <dl className="mt-5 flex flex-wrap gap-x-10 gap-y-3">
