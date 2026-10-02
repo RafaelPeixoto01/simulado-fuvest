@@ -10,7 +10,7 @@ export function RolarAoTopo() {
   const anterior = useRef(pathname)
 
   // No voltar, o navegador restaurava a posição antiga logo depois do popstate, por cima do topo:
-  // a rolagem passa a ser só nossa (por isso recarregar também começa no topo)
+  // a rolagem passa a ser só nossa. Recarregar já começava no topo (os dados chegam depois da carga)
   useEffect(() => {
     if (!('scrollRestoration' in window.history)) return
     const antes = window.history.scrollRestoration

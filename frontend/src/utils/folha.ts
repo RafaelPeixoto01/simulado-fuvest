@@ -5,5 +5,8 @@ export function colunasDaFolha(total: number): number {
   return total > 15 ? 2 : 1
 }
 
+/** Número da questão nas folhas ópticas, com dois algarismos (01, 02…). */
+export const numeroDaFolha = (n: number) => String(n).padStart(2, '0')
+
 /** Trilha do CSS grid para `colunas` colunas de largura igual. */
 export const trilhaDaFolha = (colunas: number) => `repeat(${colunas}, minmax(0, 1fr))`

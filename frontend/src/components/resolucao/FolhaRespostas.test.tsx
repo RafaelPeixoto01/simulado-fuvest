@@ -69,7 +69,7 @@ describe('Marcas de sincronismo do painel (UT-054, CR-009 A2)', () => {
     render(<FolhaRespostas formato="grade" questaoIds={ids(n)} respostas={{}} marcadas={[]} atual={0} onIr={() => {}} />)
   const marcasDa = (nav: HTMLElement) => nav.parentElement!.querySelector<HTMLElement>('[aria-hidden="true"].absolute')!
 
-  it('ficam na altura da grade, abaixo do resumo e da legenda, fora da área que rola', () => {
+  it('ficam na altura visível da grade, abaixo do resumo e da legenda, fora da área que rola', () => {
     grade(90)
     const nav = screen.getByRole('navigation', { name: 'Folha de respostas' })
     const marcas = marcasDa(nav)
@@ -79,7 +79,7 @@ describe('Marcas de sincronismo do painel (UT-054, CR-009 A2)', () => {
     expect(marcas.children).toHaveLength(14) // 18 linhas: no máximo 14
   })
 
-  it('são 2 por linha da grade, para não se amontoarem num simulado curto', () => {
+  it('num simulado curto, em que a grade cabe inteira, são no máximo 2 por linha, para não se amontoarem', () => {
     const { unmount } = grade(3)
     expect(marcasDa(screen.getByRole('navigation')).children).toHaveLength(2)
     unmount()

@@ -1,12 +1,10 @@
 import { useId } from 'react'
 
 import { LETRAS, type ItemCorrigido, type Letra } from '../../types'
-import { colunasDaFolha, trilhaDaFolha } from '../../utils/folha'
+import { colunasDaFolha, numeroDaFolha, trilhaDaFolha } from '../../utils/folha'
 import { CabecalhoLetras } from '../CabecalhoLetras'
 import { Icone } from '../Icone'
 import { situacao, type Situacao } from './revisao'
-
-const dois = (n: number) => String(n).padStart(2, '0')
 
 function rotulo(numero: number, item: ItemCorrigido | undefined): string {
   if (!item) return `Questão ${numero}: removida da base`
@@ -117,7 +115,7 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
                     i === atual ? 'ring-2 ring-caneta ring-offset-2' : ''
                   }`}
                 >
-                  <span className="text-[11px] tabular-nums text-tinta-suave">{dois(i + 1)}</span>
+                  <span className="text-[11px] tabular-nums text-tinta-suave">{numeroDaFolha(i + 1)}</span>
                   <span aria-hidden="true" className="flex items-center gap-0.5 text-sm font-bold">
                     {s === 'acerto' && <IconeCerto className="size-3 [stroke-width:3]" />}
                     {s === 'erro' && <IconeErrado className="size-[11px] [stroke-width:3]" />}
@@ -159,7 +157,7 @@ export function FolhaCorrigida({ questaoIds, itens, atual, onIr, formato }: Prop
                 } ${s === 'removida' ? 'opacity-40' : ''}`}
               >
                 <span className="w-[1.125rem] shrink-0 text-right text-[11.5px] font-bold tabular-nums text-optico-texto">
-                  {dois(i + 1)}
+                  {numeroDaFolha(i + 1)}
                 </span>
                 <span aria-hidden="true" className="flex gap-[3px]">
                   {LETRAS.map((letra) => (

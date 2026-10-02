@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 import { LETRAS, type Letra } from '../../types'
-import { colunasDaFolha, trilhaDaFolha } from '../../utils/folha'
+import { colunasDaFolha, numeroDaFolha, trilhaDaFolha } from '../../utils/folha'
 import { CabecalhoLetras } from '../CabecalhoLetras'
 import { MarcasSincronismo } from '../MarcasSincronismo'
 
@@ -14,8 +14,6 @@ interface Props {
   /** `bolhas`: folha óptica do desktop, em colunas; `grade`: botões de 48 px do painel do celular (D2, CR-001) */
   formato: 'bolhas' | 'grade'
 }
-
-const dois = (n: number) => String(n).padStart(2, '0')
 
 function Legenda() {
   return (
@@ -60,8 +58,9 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
       <div className="flex min-h-0 flex-col gap-2.5">
         <p className="text-sm text-tinta-suave">{resumo}</p>
         <Legenda />
-        {/* Marcas de sincronismo do painel (CR-008, I5) na altura da grade, abaixo da legenda e fora da
-            área que rola (CR-009, A2); 2 por linha, para não se amontoarem num simulado curto */}
+        {/* Marcas de sincronismo do painel (CR-008, I5) na altura visível da grade, abaixo da legenda e fora
+            da área que rola (CR-009, A2): ficam paradas, como as do impresso. Até 14; num simulado curto,
+            em que a grade cabe inteira, no máximo 2 por linha, para não se amontoarem */}
         <div className="relative flex min-h-0 flex-col">
           <MarcasSincronismo
             quantidade={Math.min(14, 2 * Math.ceil(total / 5))}
@@ -85,7 +84,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                         eAtual ? 'border-2 border-caneta bg-caneta-clara' : 'border border-linha bg-papel'
                       }`}
                     >
-                      <span className="text-sm font-bold tabular-nums text-optico-texto">{dois(i + 1)}</span>
+                      <span className="text-sm font-bold tabular-nums text-optico-texto">{numeroDaFolha(i + 1)}</span>
                       <span
                         aria-hidden="true"
                         className={`flex size-[22px] items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
@@ -138,7 +137,7 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
                   }`}
                 >
                   <span className="w-[1.125rem] shrink-0 text-right text-[11.5px] font-bold tabular-nums text-optico-texto">
-                    {dois(i + 1)}
+                    {numeroDaFolha(i + 1)}
                   </span>
                   <span aria-hidden="true" className="flex gap-[3px]">
                     {LETRAS.map((letra) => (

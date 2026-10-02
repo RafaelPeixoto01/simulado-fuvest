@@ -1,4 +1,5 @@
 import { LETRAS } from '../../types'
+import { numeroDaFolha } from '../../utils/folha'
 
 // Uma marca a caneta por linha, como numa folha já preenchida: B, D, A, C, E
 const MARCADAS = [1, 3, 0, 2, 4]
@@ -8,7 +9,9 @@ const MARCADAS = [1, 3, 0, 2, 4]
 export function MiniFolha({ className = '' }: { className?: string }) {
   return (
     <div aria-hidden="true" className={`rounded-[10px] border border-linha bg-fundo px-4 py-3.5 ${className}`}>
-      <div className="flex gap-1.5 pl-[1.625rem] text-[10px] font-bold text-tinta-suave">
+      {/* O cabeçalho repete a coluna do número (w-5) e o espaço das linhas: as letras ficam sobre as bolinhas */}
+      <div className="flex gap-1.5 text-[10px] font-bold text-tinta-suave">
+        <span className="w-5" />
         {LETRAS.map((letra) => (
           <span key={letra} className="w-4 text-center">
             {letra}
@@ -19,7 +22,7 @@ export function MiniFolha({ className = '' }: { className?: string }) {
         {MARCADAS.map((marcada, i) => (
           <div key={i} className="flex items-center gap-1.5">
             <span className="w-5 text-right text-[11px] font-bold tabular-nums text-optico-texto">
-              {String(i + 1).padStart(2, '0')}
+              {numeroDaFolha(i + 1)}
             </span>
             {LETRAS.map((letra, j) => (
               <span
