@@ -56,12 +56,17 @@ Os itens I1 a I6 da especificação, descritos em §4.1. A referência visual s�
 **Consequências das decisões (Claude):**
 - **Títulos (I2):** `h1` e `h2` usam Fraunces 650 por uma regra de base no `index.css`, e não classe a classe. Valem para todo o site, inclusive os diálogos e a pausa (que são `h2`). Títulos de cartão em `h3`, como os modos da apresentação, levam a classe `font-titulo`. Os números de destaque também: acertos e totais no resultado, no painel "Meu desempenho", na apresentação e no "Seu último simulado".
 - **Botão secundário (I4):** a borda `borda-campo` vale também para os botões neutros da barra da resolução e para o "cancelar" dos diálogos, pelo mesmo motivo (`linha` some no creme). A forma desses botões (CR-001) não muda.
-- **Cartões (I4):** `papel`, borda `linha`, cantos de 16 px e sem sombra. Vale para os cartões do início e da apresentação, o aviso de simulado em andamento e os diálogos. As miniaturas da prévia da apresentação (CR-007) continuam com sombra, porque são uma imagem do site, e não um cartão.
+- **Cartões (I4):** `papel`, borda `linha`, cantos de 16 px e sem sombra (`CARTAO`). Vale para os cartões do início, da apresentação, da Conta e do painel "Meu desempenho" e para os diálogos. O aviso de simulado em andamento ganha os cantos de 16 px, mas mantém o fundo de destaque (ver os ajustes abaixo). As miniaturas da prévia da apresentação (CR-007) continuam com sombra, porque são uma imagem do site, e não um cartão.
 - **Folha (I4):** a especificação diz "sem mudança de forma, só as cores novas", então o cartão da folha no desktop mantém a borda rosa (`optico`), agora no tom novo.
 - **Bolinhas A–D (I5):** o cartão da Prova completa também ganha a bolinha "A" (a especificação diz A–D nos cartões dos modos), embora o protótipo a omita.
 - **Saudação (I6.1):** só com uma conta que tenha nome. Sem nome no Google, não há saudação (e nunca "Olá, Conta.").
 - **"Seu último simulado" (I6.2):** é o simulado mais recente do histórico (`finalizadoEm`). As "mais fracas" são as duas disciplinas de menor aproveitamento, com empate pelo nome, na mesma ordem do resultado. Sem histórico, o cartão não aparece. O formato é o mesmo no celular e no desktop.
 - **Prévia da apresentação (CR-007):** a miniatura da resolução acompanha a resolução nova (número na bolinha e cronômetro em Fraunces). As cores vêm pelos tokens.
+- **Ajustes da validação e da revisão de código (Claude, 02/10/2026):**
+  - O círculo de caneta fica centrado na palavra, com folga fixa (12 px em palavras, 8 px em números) e 4 px de margem na palavra circulada. Com largura percentual, o círculo de um algarismo nos acertos cortava "acertou" e "de".
+  - "Para estudar" deixa de fora as disciplinas a 100%, onde não há o que estudar. Se todas estiverem a 100%, a parte some.
+  - Com o creme, o fundo `caneta-clara` do aviso de simulado em andamento quase não se distinguia da página (1,05:1). A borda passa a `caneta`.
+  - O botão "Folha" da barra da resolução e o "Pausar" do cronômetro no desktop também usam a borda `borda-campo`, como os outros botões neutros da barra.
 - **Teste de contraste:** o rosa decorativo passa a ter 4,62:1 no branco. A trava "`optico` abaixo de 4,5:1" do CR-002 não vale mais e vira "`optico` ≥ 3:1" (anel gráfico, WCAG 1.4.11). A regra de usar `optico` só em anéis e na marca continua.
 
 ---
@@ -153,16 +158,16 @@ Diferenças das telas de referência que a especificação não pede (D2). Fica 
 | Modificar | `frontend/public/favicon.svg` | Bolinha única |
 | Modificar | `frontend/src/components/Marca.tsx`, `Layout.tsx` | Marca nova e nome em `font-titulo` |
 | Modificar | `frontend/src/components/estilos.ts` | Primário, secundário, botões neutros da barra, `CARTAO` |
-| Criar | `frontend/src/components/CirculoCaneta.tsx`, `MarcasSincronismo.tsx` | Motivos do I5 |
-| Modificar | `frontend/src/components/questao/QuestaoView.tsx` | `TituloQuestao` (número na bolinha) |
+| Criar | `frontend/src/components/CirculoCaneta.tsx`, `MarcasSincronismo.tsx`, `BolinhaLetra.tsx` | Motivos do I5 |
+| Criar/Modificar | `frontend/src/components/questao/TituloQuestao.tsx`, `QuestaoView.tsx` | Número na bolinha (resolução, questão removida e revisão) |
 | Modificar | `frontend/src/components/resolucao/Cronometro.tsx`, `PainelFolha.tsx`, `TelaPausa.tsx`; `pages/ResolucaoPage.tsx` | Fonte do cronômetro, marcas da folha, botão primário |
-| Modificar | `frontend/src/components/ConfirmDialog.tsx` | Botões e cartão |
+| Modificar | `frontend/src/components/ConfirmDialog.tsx`, `questao/ReportarModal.tsx`, `questao/Alternativas.tsx`, `resolucao/FolhaRespostas.tsx`; `pages/ContaPage.tsx` e os `h1`/`h2` das demais páginas | Botões e cartões; texto `fundo` sobre `caneta`; `h1`/`h2` sem `font-bold` |
 | Modificar | `frontend/src/pages/HomePage.tsx` | I6.1, I6.3, I5 e cartões |
 | Criar | `frontend/src/components/inicio/UltimoSimulado.tsx` | I6.2 |
-| Modificar | `frontend/src/utils/desempenho.ts` | `ultimoSimulado` e `disciplinasMaisFracas` |
+| Modificar | `frontend/src/utils/desempenho.ts`, `utils/format.ts` | `ultimoSimulado`, `disciplinasMaisFracas`, `formatarDiaMes`, `primeiroNomeOuNada` |
 | Modificar | `frontend/src/pages/ApresentacaoPage.tsx`, `components/apresentacao/PreviaProduto.tsx` | Círculo em "reais", títulos e números, cartões, miniatura |
 | Modificar | `frontend/src/components/resultado/ResumoResultado.tsx`, `RevisaoQuestoes.tsx`; `pages/DesempenhoPage.tsx` | Círculo nos acertos, números em Fraunces, foco dos filtros |
-| Criar/Modificar | `frontend/src/pages/inicio.test.tsx`, `pages/identidade.test.tsx`, `utils/desempenho.test.ts` | UT-048 a UT-051 |
+| Criar/Modificar | `frontend/src/pages/identidade.test.tsx` (UT-048, UT-051), `pages/inicioConta.test.tsx` (UT-049, UT-050), `utils/desempenho.test.ts` (UT-050), `pages/apresentacao.test.tsx` | Testes do CR-008 |
 
 ### 6.2 Banco de Dados
 
@@ -187,22 +192,52 @@ Diferenças das telas de referência que a especificação não pede (D2). Fica 
 
 ## 8. Critérios de Aceite
 
-- [ ] I1: tokens com os valores da especificação; anel de foco `foco` visível em volta do botão azul-marinho; contrastes da especificação conferidos pelo `tokens.test.ts`
-- [ ] I2: Fraunces 650 na marca, nos `h1`/`h2`, nos títulos de cartão, no número da questão, no cronômetro e nos números de destaque; nunca em texto corrido, botões ou rótulos; carregada do próprio site (CSP inalterada)
-- [ ] I3: marca de uma bolinha no cabeçalho (desktop e celular) e favicon novo
-- [ ] I4: botões primário e secundário, cartões, alternativas e número da questão na bolinha (resolução e revisão), com o nome acessível "Questão N de M"
-- [ ] I5: marcas de sincronismo só no cartão da Prova completa e na folha (desktop e celular); círculo de caneta só em "reais" (apresentação e início) e nos acertos (resultado); bolinhas A–D nos modos
-- [ ] I6.1: "Olá, ‹primeiro nome›." com conta com nome; nada sem conta ou sem nome
-- [ ] I6.2: "Seu último simulado" com o mais recente, acertos, aproveitamento e as duas disciplinas mais fracas, com os dois links; ausente sem histórico
-- [ ] I6.3: Prova completa em destaque e os outros três modos em cartões menores, com as ações e as regras de hoje
-- [ ] Sem rolagem horizontal em 320 e 390 px; console limpo
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança — UT-047 a UT-051
-- [ ] Fluxo afetado exercitado em runtime antes do merge (FT-022) — registrar abaixo
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — registrar abaixo
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dependência nova — registrar abaixo
-- [ ] Documentos afetados foram atualizados
+- [x] I1: tokens com os valores da especificação; anel de foco `foco` visível em volta do botão azul-marinho; contrastes da especificação conferidos pelo `tokens.test.ts` — UT-047; FT-022 (anel #A61E4D de 3 px no "Próxima")
+- [x] I2: Fraunces 650 na marca, nos `h1`/`h2`, nos títulos de cartão, no número da questão, no cronômetro e nos números de destaque; nunca em texto corrido, botões ou rótulos; carregada do próprio site (CSP inalterada) — UT-048; FT-022
+- [x] I3: marca de uma bolinha no cabeçalho (desktop e celular) e favicon novo — UT-048; FT-022
+- [x] I4: botões primário e secundário, cartões, alternativas e número da questão na bolinha (resolução e revisão), com o nome acessível "Questão N de M" — UT-048 e os testes da resolução e do resultado (que buscam o título pelo nome); FT-022
+- [x] I5: marcas de sincronismo só no cartão da Prova completa e na folha (desktop e celular); círculo de caneta só em "reais" (apresentação e início) e nos acertos (resultado); bolinhas A–D nos modos — UT-049, UT-051; FT-022
+- [x] I6.1: "Olá, ‹primeiro nome›." com conta com nome; nada sem conta ou sem nome — UT-049; FT-022
+- [x] I6.2: "Seu último simulado" com o mais recente, acertos, aproveitamento e as duas disciplinas mais fracas, com os dois links; ausente sem histórico — UT-050; FT-022
+- [x] I6.3: Prova completa em destaque e os outros três modos em cartões menores, com as ações e as regras de hoje — UT-049 e os testes do início; FT-022 (secundário com simulado em andamento, primário sem)
+- [x] Sem rolagem horizontal em 320 e 390 px; console limpo — FT-022
+- [x] Testes existentes continuam passando (regressão) — backend 327, frontend 225 → 247 (o teste da prévia passou a procurar "de 90", porque o número foi para a bolinha)
+- [x] Novos testes cobrem a mudança — UT-047 a UT-051 (22 testes novos)
+- [x] Fluxo afetado exercitado em runtime antes do merge (FT-022) — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: dependência nova — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v4.2, Arquitetura v1.8 (ADR-013), 03-SPEC v1.8, specs 03 v1.8, 04 v1.5 e 07 v1.4, Plano, CLAUDE.md, INDEX.md; Deploy Guide sem mudança (nada de variável, migration ou procedimento)
 - [ ] CI verde na branch e em `master`
+
+**Validação runtime (02/10/2026, build servido pelo FastAPI na porta 8001, SQLite local com 2023–2025, provedor Google falso — o resto é o código de produção):**
+- Início com conta, 1440 px: "Olá, Rafael." em itálico rosa acima do título, "reais" circulado, Prova completa em cartão maior com a bolinha A e 8 marcas de sincronismo, os outros modos em cartões B, C e D, "Provas na base" e "Questões por disciplina" em Fraunces. Com um simulado em andamento (aviso com borda azul-marinho), o botão da Prova completa fica secundário; sem ele, primário.
+- Resultado: o simulado em andamento (tempo esgotado) foi finalizado ao continuar; "Você acertou 0 de 90 questões" com o círculo no 0 (`aria-hidden`), sem cortar "acertou" e "de" depois do ajuste, e os três números em `Fraunces Variable`. Depois, o início mostra "Seu último simulado" com "FUVEST 2025 · 02/10", "0 de 90", "0% de aproveitamento" e "Para estudar" (Biologia e Física), no topo da lateral no desktop e depois dos modos no celular.
+- Prova completa, 1440 px: número na bolinha ("1 de 90"), cronômetro em Fraunces, marcas de sincronismo por fora do cartão da folha, botões neutros com borda `borda-campo`; foco no "Próxima" com anel `rgb(166, 30, 77)` de 3 px e afastamento de 2 px, texto do botão `rgb(251, 247, 239)` sobre `rgb(20, 33, 61)`. Celular, 390 px: painel da folha com as marcas na borda, botão "Folha" com borda `borda-campo`.
+- 320 px: marca e "Simulado Fuvest" numa linha ao lado do "Menu" (cabeçalho de 56 px); início e apresentação sem rolagem horizontal. A grade do painel tem a mesma largura de antes do CR.
+- Apresentação sem login: "reais" circulado, "270 · 3 · 2023–2025" em Fraunces, cartões dos modos com títulos em Fraunces e a miniatura com o número na bolinha; o cartão de resultado da prévia fica 7 px (1024) e 18 px (1440) abaixo da alternativa marcada; 390 px sem rolagem horizontal.
+- Console: nenhum erro nem aviso.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 9 achados: 8 corrigidos, 1 justificado (`4e37bf2`):**
+1. Corrigido: a questão removida na revisão do resultado ainda tinha o título antigo; agora usa `TituloQuestao`.
+2. Corrigido: o botão "Folha" da barra e o "Pausar" do cronômetro ficaram com a borda `linha` (1,3:1); passaram a `borda-campo`. **Justificado** nas alternativas: a borda delas é de cartão (`linha`), e o hover já escurece.
+3. Corrigido: "Para estudar" podia listar uma disciplina a 100%; elas ficam de fora (teste novo).
+4. Corrigido: o respiro do painel da folha tinha passado de 16 para 22 px por causa das marcas, o que tirava 6 px da grade em 320 px. As marcas, mais finas, cabem nos 16 px de antes. Com a barra de rolagem clássica (Chrome de desktop a 320 px), a bolinha da grade aperta como já apertava no `master`.
+5. Corrigido: o fundo do aviso de simulado em andamento quase sumia no creme; a borda passa a `caneta`.
+6. Corrigido: a bolinha do número na prévia repetia as classes de `BolinhaLetra`; agora usa o componente.
+7. Corrigido: Conta, painel e diálogos repetiam a classe de `CARTAO`; agora usam a constante.
+8. Corrigido: a saudação repetia a regra de "tem nome" do `primeiroNome`; as duas usam `primeiroNomeOuNada`.
+9. **Justificado:** o "Seu último simulado" fica na lateral, que só aparece com o catálogo carregado. Se o catálogo falhar, a página mostra o erro com "Tentar de novo", e o Histórico continua no cabeçalho.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum; nenhuma variável nova |
+| Validação de entrada | Sem entrada nova; nenhum endpoint mudou |
+| Tokens / armazenamento | Inalterado; o "Seu último simulado" lê o histórico pelo `useHistorico`, que já separa por conta (ADR-011) |
+| Ownership / SQL | Sem mudança no backend |
+| CORS / headers | Inalterados; a fonte vai no build e é servida pelo próprio site (CSP `default-src 'self'` sem exceção) |
+| Dependências | `@fontsource-variable/fraunces` 5.3.0 (OFL-1.1): só CSS e arquivos de fonte, sem código executável; `npm audit`: 0 vulnerabilidades |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -262,3 +297,4 @@ Diferenças das telas de referência que a especificação não pede (D2). Fica 
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-01 | Rafael Peixoto (com Claude) | CR criado com os itens I1 a I5, a D1 (I6.1 a I6.3 incluídos) e a D2 (extras do protótipo fora de escopo) |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-05): tokens, Fraunces, marca, componentes, motivos e início com conta; validação runtime (FT-022) com o ajuste do círculo de caneta; revisão de código (9 achados) e de segurança |

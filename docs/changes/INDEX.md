@@ -4,6 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
+| [CR-008](CR-008-identidade-papel-caneta.md) | Identidade visual "Papel & Caneta" | Em Implementação | 2026-10-02 |
 | [CR-007](CR-007-apresentacao-menu-barra.md) | Apresentação, menu do celular e barra opaca | Concluído | 2026-10-01 |
 | [CR-006](CR-006-login-obrigatorio.md) | Login obrigatório para usar o site | Concluído | 2026-10-01 |
 | [CR-005](CR-005-contas-google.md) | Contas com Google e histórico sincronizado (Fase 3B do roadmap) | Concluído | 2026-10-01 |
