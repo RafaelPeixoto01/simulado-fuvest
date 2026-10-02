@@ -165,7 +165,7 @@ Simulado Fuvest/
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
         │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NaoEncontrada
-        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
+        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
@@ -392,7 +392,7 @@ fisica:
 - Páginas leem o histórico só por `useHistorico` (sessão + sincronização, ADR-011), nunca direto do `localStorage`; o `Layout` também o chama, para o envio de pendentes acontecer em qualquer página
 - Login por navegação de página inteira (`<a href="/api/auth/google?voltar=...">`), nunca por `fetch`; o token da sessão nunca é visível ao JavaScript
 - Aparência só por tokens (`index.css`, nomes estáveis desde o CR-002; valores "Papel & Caneta" desde o CR-008, ADR-013). `optico` só em anéis e na marca; texto rosa usa `optico-texto`. Fraunces só em títulos e números de destaque (`h1`/`h2` pela base, `font-titulo` no resto). Estilos repetidos de botão e cartão ficam em `components/estilos.ts`
-- Toda mudança de caminho começa no topo da página (`RolarAoTopo` no `App`, CR-009): o `BrowserRouter` não restaura nem zera a rolagem sozinho. Rolagens dentro de uma página (trocar de questão na resolução) ficam com a página
+- Toda mudança de caminho começa no topo da página (`RolarAoTopo` no `App`, CR-009): o `BrowserRouter` não restaura nem zera a rolagem sozinho, e a restauração do navegador fica desligada (`history.scrollRestoration = 'manual'`), porque no voltar ela devolvia a posição antiga por cima do topo. Rolagens dentro de uma página (trocar de questão na resolução) ficam com a página
 - Rotas protegidas por `RequerConta` (CR-006, ADR-012): sem sessão, vão para a apresentação com `?voltar=<rota>`; erro de rede ao verificar a sessão não bloqueia a página (a API protege). Qualquer 401 `nao_autenticado` ou 503 `site_indisponivel`, em qualquer chamada, recarrega a sessão (`definirAoErroDeAcesso` em `services/api.ts`, registrado pelo `criarQueryClient`)
 
 ### Estilo de Código
