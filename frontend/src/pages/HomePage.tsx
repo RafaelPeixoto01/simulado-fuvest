@@ -231,8 +231,9 @@ export function HomePage() {
         )}
         {catalogo.data && catalogo.data.provas.length === 0 && <Vazio>Ainda não há provas publicadas.</Vazio>}
         {catalogo.data && catalogo.data.provas.length > 0 && (
-          // Lateral de 340 px (CR-009, E7)
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+          // Lateral de 340 px a partir de 1280 px (CR-009, E7); entre 1024 e 1279, 256 px: com 340, os cartões
+          // dos modos ficavam com 188 px e "Montar simulado" quebrava em duas linhas
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem] xl:grid-cols-[minmax(0,1fr)_340px]">
             <div>
               {erro && <ErroCarregamento mensagem={erro.message} />}
               <ProvaCompleta

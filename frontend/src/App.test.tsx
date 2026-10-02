@@ -87,6 +87,15 @@ describe('Rolagem ao trocar de página (CR-009, R1)', () => {
     expect(window.scrollTo).toHaveBeenCalledTimes(2)
   })
 
+  it('tira do navegador a restauração da rolagem, que no voltar devolvia a posição antiga por cima do topo', () => {
+    window.history.scrollRestoration = 'auto'
+    const { unmount } = renderizar(<RolarAoTopo />)
+    expect(window.history.scrollRestoration).toBe('manual')
+
+    unmount()
+    expect(window.history.scrollRestoration).toBe('auto')
+  })
+
   it('vale para as rotas do site: o link da página não encontrada leva ao início no topo', async () => {
     renderizar(<App />, { rota: '/nao-existe' })
     expect(window.scrollTo).not.toHaveBeenCalled()
