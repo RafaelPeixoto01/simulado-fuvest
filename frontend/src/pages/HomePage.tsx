@@ -6,6 +6,7 @@ import { CirculoCaneta } from '../components/CirculoCaneta'
 import { ErroCarregamento, Carregando, Vazio } from '../components/Estados'
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, CARTAO, LINK } from '../components/estilos'
 import { Icone } from '../components/Icone'
+import { MiniFolha } from '../components/inicio/MiniFolha'
 import { UltimoSimulado } from '../components/inicio/UltimoSimulado'
 import { MarcasSincronismo } from '../components/MarcasSincronismo'
 import { useAgora } from '../hooks/useAgora'
@@ -19,33 +20,73 @@ import type { Catalogo } from '../types'
 import { primeiroNomeOuNada } from '../utils/format'
 import { formatarRestante, restanteMs } from '../utils/tempo'
 
-/** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). */
-function ProvaCompleta({ descricao, acao }: { descricao: string; acao: ReactNode }) {
+/** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). Desde o
+ *  CR-009 (E4): sobretítulo, etiquetas e, a partir de 640 px, a miniatura da folha à direita. */
+function ProvaCompleta({ descricao, disciplinas, acao }: { descricao: string; disciplinas: number; acao: ReactNode }) {
   const idTitulo = useId()
+  const etiquetas = ['90 questões', '5 horas']
+  if (disciplinas > 0) etiquetas.push(`${disciplinas} ${disciplinas === 1 ? 'disciplina' : 'disciplinas'}`)
   return (
-    <section aria-labelledby={idTitulo} className={`${CARTAO} relative py-6 pr-5 pl-11 sm:py-7 sm:pr-8 sm:pl-14`}>
+    <section
+      aria-labelledby={idTitulo}
+      className={`${CARTAO} relative py-6 pr-5 pl-11 sm:grid sm:grid-cols-[minmax(0,1fr)_190px] sm:items-center sm:gap-x-7 sm:py-7 sm:pr-8 sm:pl-14`}
+    >
       <MarcasSincronismo
         posicao="left-3.5 top-6 bottom-6 sm:left-[1.125rem] sm:top-7 sm:bottom-7"
         tamanho="h-1 w-3 sm:h-[5px] sm:w-3.5"
       />
-      <BolinhaLetra letra="A" className="size-[30px] text-[0.8125rem]" />
-      <h2 id={idTitulo} className="mt-3 text-2xl sm:text-[2rem] sm:leading-tight">
-        Prova completa
-      </h2>
-      <p className="mt-1.5 text-tinta-suave sm:text-[1.0625rem]">{descricao}</p>
-      <div className="mt-5">{acao}</div>
+      <div>
+        <div className="flex items-center gap-2.5">
+          <BolinhaLetra letra="A" className="size-[30px] text-[0.8125rem]" />
+          {/* Caixa alta só no CSS: o leitor de tela lê a frase, e não letra por letra */}
+          <p className="text-xs font-bold tracking-[0.1em] text-optico-texto uppercase sm:text-[0.78125rem]">
+            A mais próxima da prova real
+          </p>
+        </div>
+        <h2 id={idTitulo} className="mt-3 text-2xl sm:text-[2rem] sm:leading-tight">
+          Prova completa
+        </h2>
+        <p className="mt-1.5 text-tinta-suave sm:text-[1.0625rem]">{descricao}</p>
+        <ul className="mt-3 flex flex-wrap gap-1.5 sm:mt-3.5 sm:gap-2">
+          {etiquetas.map((etiqueta) => (
+            <li
+              key={etiqueta}
+              className="rounded-full border border-linha bg-fundo px-2.5 py-0.5 text-[0.84375rem] sm:px-3 sm:py-1 sm:text-sm"
+            >
+              {etiqueta}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-5">{acao}</div>
+      </div>
+      <MiniFolha className="hidden sm:block" />
     </section>
   )
 }
 
-/** Os outros três modos em cartões menores (CR-008, I6.3), com as bolinhas B–D (I5). */
-function Modo({ letra, titulo, descricao, acao }: { letra: string; titulo: string; descricao: string; acao: ReactNode }) {
+// Abaixo de 640 px (CR-009, E6), o link deixa de parecer botão: o ::after cobre o cartão (relative),
+// a seta toma o lugar do texto, e o anel de foco vai para o ::after, em volta do cartão
+const ACAO_MODO_CELULAR =
+  'max-sm:border-0 max-sm:bg-transparent max-sm:p-0 after:absolute after:inset-0 after:rounded-2xl sm:after:hidden max-sm:focus-visible:outline-none max-sm:focus-visible:after:outline-3 max-sm:focus-visible:after:outline-offset-2 max-sm:focus-visible:after:outline-foco'
+
+/** Os outros três modos em cartões menores (CR-008, I6.3), com as bolinhas B–D (I5); no celular,
+ *  linhas compactas inteiras clicáveis (CR-009, E6). O nome do link continua sendo a ação. */
+function Modo({ letra, titulo, descricao, para, acao }: { letra: string; titulo: string; descricao: string; para: string; acao: string }) {
   return (
-    <li className={`${CARTAO} flex flex-col p-5`}>
+    <li className={`${CARTAO} relative flex items-center gap-3 p-4 sm:flex-col sm:items-start sm:gap-0 sm:p-5`}>
       <BolinhaLetra letra={letra} className="size-[30px] text-[0.8125rem]" />
-      <h2 className="mt-3 text-xl">{titulo}</h2>
-      <p className="mt-1 mb-4 flex-1 text-[0.9375rem] text-tinta-suave">{descricao}</p>
-      <div>{acao}</div>
+      <div className="min-w-0 flex-1 sm:flex sm:w-full sm:flex-col">
+        <h2 className="text-[1.1875rem] max-sm:leading-snug sm:mt-3 sm:text-xl">{titulo}</h2>
+        <p className="mt-0.5 text-[0.90625rem] text-tinta-suave sm:mt-1 sm:mb-4 sm:flex-1 sm:text-[0.9375rem]">
+          {descricao}
+        </p>
+      </div>
+      <Link to={para} className={`${BOTAO_SECUNDARIO} ${ACAO_MODO_CELULAR}`}>
+        <span className="max-sm:sr-only">{acao}</span>
+        <Icone className="size-5 text-tinta-suave sm:hidden">
+          <path d="M9 6l6 6-6 6" />
+        </Icone>
+      </Link>
     </li>
   )
 }
@@ -190,7 +231,9 @@ export function HomePage() {
         )}
         {catalogo.data && catalogo.data.provas.length === 0 && <Vazio>Ainda não há provas publicadas.</Vazio>}
         {catalogo.data && catalogo.data.provas.length > 0 && (
-          <div className="grid gap-10 lg:grid-cols-[1fr_16rem]">
+          // Lateral de 340 px a partir de 1280 px (CR-009, E7); entre 1024 e 1279, 256 px: com 340, os cartões
+          // dos modos ficavam com 188 px e "Montar simulado" quebrava em duas linhas
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem] xl:grid-cols-[minmax(0,1fr)_340px]">
             <div>
               {erro && <ErroCarregamento mensagem={erro.message} />}
               <ProvaCompleta
@@ -199,6 +242,7 @@ export function HomePage() {
                     ? '90 questões na distribuição da prova real, com 5 horas.'
                     : '90 questões com 5 horas. Disponível quando a base tiver 90 questões válidas.'
                 }
+                disciplinas={Object.values(catalogo.data.distribuicao_completa).filter((n) => (n ?? 0) > 0).length}
                 acao={
                   <button
                     type="button"
@@ -210,24 +254,27 @@ export function HomePage() {
                   </button>
                 }
               />
-              <ul className="mt-4 grid gap-3 sm:grid-cols-3 sm:gap-4">
+              <ul className="mt-4 grid gap-2.5 sm:grid-cols-3 sm:gap-4">
                 <Modo
                   letra="B"
                   titulo="Prova de um ano"
                   descricao="Refaça a prova original de um ano, na ordem em que caiu, com 5 horas."
-                  acao={<Link to="/novo/ano" className={BOTAO_SECUNDARIO}>Escolher o ano</Link>}
+                  para="/novo/ano"
+                  acao="Escolher o ano"
                 />
                 <Modo
                   letra="C"
                   titulo="Personalizado"
                   descricao="Escolha disciplinas, anos e quantidade de questões."
-                  acao={<Link to="/novo/personalizado" className={BOTAO_SECUNDARIO}>Montar simulado</Link>}
+                  para="/novo/personalizado"
+                  acao="Montar simulado"
                 />
                 <Modo
                   letra="D"
                   titulo="Treino por questão"
                   descricao="Uma questão por vez, sem cronômetro, com a resposta na hora."
-                  acao={<Link to="/treino" className={BOTAO_SECUNDARIO}>Treinar</Link>}
+                  para="/treino"
+                  acao="Treinar"
                 />
               </ul>
               <p className="mt-4 text-sm text-tinta-suave">

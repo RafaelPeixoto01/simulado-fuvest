@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.8
-**Data:** 2026-10-01
+**Versão:** 1.9
+**Data:** 2026-10-02
 **PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta), CR-009 (rolagem ao trocar de página, extras do início, círculo de um algarismo, marcas do painel)
 
 ---
 
@@ -42,6 +42,8 @@ SPA React: tela inicial com catálogo, configuração dos modos, tela de resolu�
 | Criar (CR-001) | `frontend/src/components/Icone.tsx` | Ícones de traço comuns (`Icone`, `IconePausa`) |
 | Criar (CR-002) | `frontend/src/hooks/useTituloPagina.ts` | Título da aba por página |
 | Criar (CR-002) | `frontend/src/tokens.test.ts` | Contraste WCAG dos pares de tokens, lido do `index.css` |
+| Criar (CR-009) | `frontend/src/components/RolarAoTopo.tsx` | Rolagem ao topo a cada mudança de caminho |
+| Criar (CR-009) | `frontend/src/components/inicio/MiniFolha.tsx` | Miniatura decorativa da folha óptica no cartão da Prova completa |
 
 ### 2.2 Interfaces / Types
 
@@ -123,6 +125,8 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 
 "Prova completa" inicia direto da Home (sem configuração); fica desabilitada com a explicação "Disponível quando a base tiver 90 questões válidas" se `completa_disponivel=false`.
 
+**Rolagem ao trocar de página (CR-009, R1):** o `RolarAoTopo`, renderizado no `App` antes das rotas, chama `window.scrollTo({top: 0})` num `useLayoutEffect` a cada mudança de `pathname`, inclusive ao voltar e avançar pelo navegador. Vale também para a resolução, que fica fora do `Layout`. Não rola na primeira renderização nem quando muda só a busca. Enquanto montado, põe `history.scrollRestoration = 'manual'`: no voltar, o navegador restaurava a posição antiga logo depois do `popstate`, por cima do topo. Recarregar continua começando no topo, como já começava (os dados chegam depois da carga). O foco não muda. A rolagem da resolução ao trocar de questão (P1.1, §3 "Estrutura da ResolucaoPage") é à parte.
+
 ---
 
 ## 3. Componentes de UI
@@ -154,15 +158,20 @@ O `tokens.test.ts` calcula o contraste dos pares a partir do `index.css`. Para i
 - **Marca** (`Marca.tsx`): uma bolinha, anel `optico` e miolo `tinta`, 30 px no desktop e 26 px no celular, com "Simulado Fuvest" em `font-titulo`. O favicon (`public/favicon.svg`) é a mesma bolinha sobre `fundo`, com cantos de 7 px.
 - **Botões** (`estilos.ts`): primário `caneta` com texto `fundo`, cantos de 6 px e hover `caneta-escura`; secundário `papel` com borda `borda-campo`. Os botões neutros da barra da resolução (inclusive "Folha" e "Pausar") e o "cancelar" dos diálogos também usam `borda-campo`.
 - **Cartões** (`CARTAO`): `papel`, borda `linha`, cantos de 16 px, sem sombra. O aviso de simulado em andamento mantém o fundo `caneta-clara`, agora com borda `caneta` (no creme, o fundo sozinho não se destaca).
-- **Marcas de sincronismo** (`MarcasSincronismo`, `aria-hidden`): barrinhas `tinta` de 12–14 × 4–5 px na borda esquerda, distribuídas na altura. Só no cartão da Prova completa do início e na borda da folha de respostas (cartão no desktop, painel no celular).
-- **Círculo de caneta** (`CirculoCaneta`, `aria-hidden`): traço à mão em `optico` em volta de uma palavra de título, no máximo um por tela: "reais" na apresentação e no início, o número de acertos no resultado. Fica centrado na palavra, com folga fixa (12 px em palavras, 8 px em números) e 4 px de margem na palavra circulada, para não cortar as vizinhas. O texto do título não muda.
+- **Marcas de sincronismo** (`MarcasSincronismo`, `aria-hidden`): barrinhas `tinta` de 12–14 × 4–5 px na borda esquerda, distribuídas na altura. Só no cartão da Prova completa do início e na borda da folha de respostas (cartão no desktop, painel no celular). No painel, ficam na altura visível da grade, abaixo do resumo e da legenda (CR-009, A2): até 14 e, quando a grade cabe inteira (simulado curto), no máximo 2 por linha.
+- **Círculo de caneta** (`CirculoCaneta`, `aria-hidden`): traço à mão em `optico` em volta de uma palavra de título, no máximo um por tela: "reais" na apresentação e no início, o número de acertos no resultado. Fica centrado na palavra, com folga fixa (12 px em palavras, 8 px em números) e 4 px de margem na palavra circulada, para não cortar as vizinhas. Números de um algarismo (CR-009, A1) ganham folga de 16 px e margem de 12 px: com 8 px, o círculo ficava estreito em volta do número. A folga sai do conteúdo (`children` texto ou número), e não de quem chama. O texto do título não muda.
 
 ### Início com conta (CR-008)
 
-Protótipos "A · Início" e "A · Início · celular"; o que eles mostram além da especificação fica fora (CR-008 §4.3).
+Protótipos "A · Início" e "A · Início · celular"; o que eles mostram além da especificação fica fora (CR-008 §4.3). Desses extras, o CR-009 trouxe parte do E4 (sobretítulo, etiquetas e miniatura da folha), o E6 (linhas no celular) e o E7 (lateral de 340 px); o resto continua fora (CR-009 §4.3).
 
 - **Saudação (I6.1):** "Olá, ‹primeiro nome›." acima do `h1`, em `font-titulo` itálico `optico-texto`, só com uma conta que tenha nome (`sessao.usuario.nome`). Sem conta ou sem nome, nada.
-- **Prova completa em destaque (I6.3):** uma `section` em cartão maior (padding maior, `h2` em `text-2xl`/`text-3xl`), com as marcas de sincronismo à esquerda, a bolinha "A", a descrição e o botão de hoje ("Começar prova completa": primário, ou secundário com simulado em andamento; desabilitado com "Disponível quando a base tiver 90 questões válidas"). Abaixo, Prova de um ano, Personalizado e Treino em três cartões menores (3 colunas a partir de 640 px, lista abaixo disso), com as bolinhas B, C e D, `h2`, descrição e o botão secundário de hoje.
+- **Prova completa em destaque (I6.3):** uma `section` em cartão maior (padding maior, `h2` em `text-2xl`/`text-3xl`), com as marcas de sincronismo à esquerda, a bolinha "A", a descrição e o botão de hoje ("Começar prova completa": primário, ou secundário com simulado em andamento; desabilitado com "Disponível quando a base tiver 90 questões válidas").
+  - **Extras do E4 (CR-009):** na linha da bolinha "A", o sobretítulo "A mais próxima da prova real" (caixa alta pelo CSS, `optico-texto`, negrito, espaçamento de 0,1em). Entre a descrição e o botão, uma lista de etiquetas em pílula (borda `linha`, fundo `fundo`): "90 questões", "5 horas" e "‹n› disciplinas", com n = disciplinas com questões na `distribuicao_completa` do catálogo ("1 disciplina" no singular; sem distribuição, essa etiqueta some). A partir de 640 px, o cartão tem duas colunas: o texto e a `MiniFolha` (`components/inicio/`, `aria-hidden`), de 190 px, centrada na altura. Ela é uma caixa `fundo` com borda `linha` e cantos de 10 px, com o cabeçalho A–E e cinco linhas (01 a 05), cada uma com uma bolinha preenchida a caneta (B, D, A, C, E) e as outras com o anel `optico`. No celular, a miniatura não aparece.
+- **Outros modos:** Prova de um ano, Personalizado e Treino, com as bolinhas B, C e D, `h2`, descrição e a ação de hoje ("Escolher o ano", "Montar simulado", "Treinar").
+  - **A partir de 640 px:** três cartões menores em 3 colunas, com a bolinha em cima e a ação como botão secundário.
+  - **Abaixo de 640 px (E6, CR-009):** linhas compactas, com a bolinha à esquerda, o título (19 px) e a descrição no meio e uma seta à direita. O link é o mesmo, mas o texto da ação vira `sr-only` (o nome acessível continua sendo a ação) e um `::after` absoluto cobre o cartão: tocar em qualquer ponto abre o modo. O anel de foco fica no `::after`, em volta do cartão.
+- **Lateral (E7, CR-009):** 340 px a partir de 1280 px, com a borda `linha` e o recuo de hoje. Entre 1024 e 1279 px, continua com 256 px: com 340, os cartões dos modos ficavam com 188 px e "Montar simulado" quebrava.
 - **"Seu último simulado" (I6.2)** (`components/inicio/UltimoSimulado.tsx`): no topo da lateral (no celular, depois dos modos e do link do histórico). Usa `useHistorico` e `ultimoSimulado` (o de maior `finalizadoEm`). Mostra o `h2` "Seu último simulado", "‹descrição› · dd/mm", os acertos em `font-titulo` ("58 de 90"), "64,4% de aproveitamento", "Para estudar" com as duas disciplinas mais fracas (`disciplinasMaisFracas`: menor `percentual`, empate pelo slug, como no resultado; sem as que não tiveram questão contada nem as de 100%, e sem a parte se não sobrar nenhuma) com percentual e barra, e os links "Ver o resultado" (`/resultado/:id`) e "Meu desempenho" (`/desempenho`). Sem histórico, não aparece. Com só uma disciplina, mostra uma.
 
 ### Cabeçalho do `Layout` (CR-007)
@@ -239,11 +248,11 @@ Monta: cabeçalho "Questão i de n · Disciplina · FUVEST AAAA, nº NN" (RN-013
 Resumo "r respondida(s) · b em branco · m para revisar" e legenda (respondida, em branco, para revisar). Cada questão é um botão com o rótulo "Questão N: respondida X" ou "Questão N: em branco", seguido de ", marcada para revisar" quando for o caso.
 
 - **`bolhas`**: 3 colunas acima de 40 questões, 2 acima de 15 e 1 até 15, preenchidas de cima para baixo; cabeçalho A–E em cada coluna; linhas de 20 px com o número, cinco bolinhas sem letra (a marcada preenchida a caneta) e o ponto laranja de revisar.
-- **`grade`**: 5 colunas de botões de 48 px com o número e uma bolinha com a letra marcada; ponto laranja no canto = revisar; a questão atual rola para a vista ao abrir.
+- **`grade`**: 5 colunas de botões de 48 px com o número e uma bolinha com a letra marcada; ponto laranja no canto = revisar; a questão atual rola para a vista ao abrir. As marcas de sincronismo do painel ficam aqui, fora da área que rola e paradas, na altura visível da grade e abaixo da legenda: até 14 e, com a grade inteira à vista, no máximo 2 por linha (CR-009, A2). O número das folhas (01, 02…) vem de `numeroDaFolha` (`utils/folha.ts`).
 
 ### Componente: PainelFolha
 
-Painel inferior do celular (`role="dialog"`, `aria-modal`, título "Folha de respostas"). Ao abrir, põe o foco no botão "Fechar folha" e `overflow: hidden` no `<html>`. Tab e Shift+Tab circulam dentro do painel. Esc, o botão Fechar e o clique que começa e termina no fundo fecham. Ao fechar, o foco volta ao botão "Folha", ou ao título se a questão mudou. A grade rola dentro do painel (`overscroll-contain`), e o rodapé traz "Finalizar simulado".
+Painel inferior do celular (`role="dialog"`, `aria-modal`, título "Folha de respostas"). Ao abrir, põe o foco no botão "Fechar folha" e `overflow: hidden` no `<html>`. Tab e Shift+Tab circulam dentro do painel. Esc, o botão Fechar e o clique que começa e termina no fundo fecham. Ao fechar, o foco volta ao botão "Folha", ou ao título se a questão mudou. A grade rola dentro do painel (`overscroll-contain`), e o rodapé traz "Finalizar simulado". As marcas de sincronismo vêm da `FolhaRespostas` no formato `grade` (CR-009); o painel não tem marcas próprias.
 
 ### Componente: TelaPausa
 
@@ -325,6 +334,9 @@ sequenceDiagram
 | UT-048 | Título da questão na bolinha com o nome acessível "Questão i de n"; marca de uma bolinha | `QuestaoView`, `Layout` | Estrutura acessível (CR-008) |
 | UT-049 | Início com conta: saudação (com nome; sem nome e sem conta, nada); Prova completa em destaque com A e marcas `aria-hidden`; B–D em cartões; regras do botão mantidas | `HomePage` | Textos e estrutura (CR-008) |
 | UT-050 | "Seu último simulado": o mais recente, acertos, aproveitamento, as duas mais fracas, links; sem histórico, ausente; `ultimoSimulado` e `disciplinasMaisFracas` | `UltimoSimulado`, `utils/desempenho` | Valores e links (CR-008) |
+| UT-052 | Rolagem ao topo a cada mudança de caminho (link e voltar), não na primeira renderização nem com mudança só da busca; `scrollRestoration` em `manual` enquanto montado | `App`, `RolarAoTopo` | `scrollTo({top: 0})` (CR-009) |
+| UT-053 | Prova completa com sobretítulo, etiquetas ("‹n› disciplinas" da distribuição) e `MiniFolha` `aria-hidden`; modos B–D com o link de nome da ação e o `::after` que cobre o cartão no celular | `HomePage` | Textos e estrutura (CR-009) |
+| UT-054 | Círculo de caneta com mais folga e margem nos acertos de um algarismo e a folga dos números com dois; marcas do painel depois da legenda, fora da área que rola, até 14 e 2 por linha num simulado curto | `ResumoResultado`, `FolhaRespostas` | Estrutura (CR-009) |
 | FT-001 | Home → Prova completa → responder 3 → recarregar | E2E (Playwright MCP) | Respostas e tempo preservados |
 | FT-002 | Personalizado com filtros → grade → finalizar | E2E | Resultado exibido |
 | FT-003 | Personalizado insuficiente | E2E | Mensagem + "Gerar com N" |
@@ -334,6 +346,7 @@ sequenceDiagram
 | FT-007 | 1440 × 900: folha de 90 questões inteira, sem rolagem própria, nunca sob a barra | E2E (CR-001) | Cartão visível ao rolar até o fim |
 | FT-008 | Personalizado: pausar, recarregar, retomar | E2E (CR-001) | Questão oculta; tempo não descontado |
 | FT-022 | Identidade em 1440, 390 e 320 px: apresentação, início com conta, Prova completa (desktop e celular, com a folha), resultado; foco visível no botão primário; sem rolagem horizontal; console limpo | E2E (CR-008) | Conforme §3 "Identidade visual e tokens" e "Início com conta" |
+| FT-023 | Início rolado → Prova completa abre no topo; prova rolada → finalizar → resultado no topo; voltar do navegador no topo. Início com conta em 1440, 1024, 390 e 320 px (sobretítulo, etiquetas, miniatura, lateral de 340 px a partir de 1280, linhas no celular com toque no cartão); círculo com 1 e com 2 algarismos; painel da folha em 390 px; console limpo | E2E (CR-009) | Conforme §2.4 "Rolagem" e §3 "Início com conta" |
 | FT-021 | Menu do celular em 390 e 320 px com conta (abrir, Esc, fora, item); 640 px com links em linha; barra da resolução opaca ao rolar uma questão longa | E2E (CR-007, junto com a apresentação — `specs/07` §9.4) | Conforme §3 "Cabeçalho do `Layout`" e "Estrutura da ResolucaoPage" |
 
 ---

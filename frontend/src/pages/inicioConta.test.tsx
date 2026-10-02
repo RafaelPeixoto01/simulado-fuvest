@@ -6,15 +6,15 @@ import type { HistoricoEntry } from '../simulado/tipos'
 import { CHAVE_HISTORICO } from '../storage/historicoStorage'
 import { CATALOGO, entradaFalsa, instalarApiFalsa, json } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
-import type { DesempenhoDisciplina, Sessao } from '../types'
+import type { Catalogo, DesempenhoDisciplina, Sessao } from '../types'
 
 const ANA = { id: 7, email: 'ana@exemplo.com', nome: 'Ana Souza' }
 const COM_LOGIN: Sessao = { login_disponivel: true, usuario: ANA, acesso: 'conta' }
 
-function api(sessao?: Sessao, historico: HistoricoEntry[] = []) {
+function api(sessao?: Sessao, historico: HistoricoEntry[] = [], catalogo: Catalogo = CATALOGO) {
   return instalarApiFalsa({
     ...(sessao ? { 'GET /api/sessao': () => json(200, sessao) } : {}),
-    'GET /api/catalogo': () => json(200, CATALOGO),
+    'GET /api/catalogo': () => json(200, catalogo),
     'GET /api/historico': () => json(200, { entradas: historico, rejeitadas: [] }),
     'POST /api/historico': () => json(200, { entradas: historico, rejeitadas: [] }),
   })
@@ -46,6 +46,9 @@ function simulado(id: string, finalizadoEm: number, descricao = 'FUVEST 2025'): 
 }
 
 const titulo = () => screen.findByRole('heading', { level: 1, name: 'Treine com questões reais da 1ª fase da FUVEST' })
+
+/** A lista dos outros modos, logo depois do cartão da Prova completa. */
+const modos = (destaque: HTMLElement) => destaque.nextElementSibling as HTMLElement
 
 beforeEach(() => localStorage.clear())
 afterEach(() => vi.unstubAllGlobals())
@@ -81,11 +84,12 @@ describe('Início com conta: saudação e modos (UT-049, CR-008)', () => {
 
     const destaque = await screen.findByRole('region', { name: 'Prova completa' })
     expect(within(destaque).getByRole('button', { name: 'Começar prova completa' })).toBeEnabled()
-    expect(within(destaque).getByText('A')).toHaveAttribute('aria-hidden', 'true')
+    // A bolinha A (a miniatura da folha também tem um "A", no cabeçalho)
+    expect(within(destaque).getAllByText('A').some((e) => e.getAttribute('aria-hidden') === 'true')).toBe(true)
     const marcas = destaque.querySelector('[aria-hidden="true"].absolute')!
     expect(marcas.children).toHaveLength(8)
 
-    const cartoes = within(destaque.parentElement!).getAllByRole('listitem')
+    const cartoes = within(modos(destaque)).getAllByRole('listitem')
     expect(cartoes.map((c) => within(c).getByRole('heading', { level: 2 }).textContent)).toEqual([
       'Prova de um ano',
       'Personalizado',
@@ -93,6 +97,77 @@ describe('Início com conta: saudação e modos (UT-049, CR-008)', () => {
     ])
     cartoes.forEach((c, i) => expect(within(c).getByText('BCD'[i])).toHaveAttribute('aria-hidden', 'true'))
     expect(within(cartoes[0]).getByRole('link', { name: 'Escolher o ano' })).toHaveAttribute('href', '/novo/ano')
+  })
+})
+
+describe('Extras do início (UT-053, CR-009)', () => {
+  it('a Prova completa tem o sobretítulo, as etiquetas e a miniatura decorativa da folha', async () => {
+    api(COM_LOGIN)
+    renderizar(<App />)
+
+    const destaque = await screen.findByRole('region', { name: 'Prova completa' })
+    // Caixa alta só no CSS: o leitor de tela lê a frase, e não letra por letra
+    const sobretitulo = within(destaque).getByText('A mais próxima da prova real')
+    expect(sobretitulo).toHaveClass('uppercase')
+    const h2 = within(destaque).getByRole('heading', { level: 2, name: 'Prova completa' })
+    expect(sobretitulo.compareDocumentPosition(h2) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    // "8 disciplinas" vem da distribuição da prova completa
+    const etiquetas = within(destaque).getByRole('list')
+    expect(within(etiquetas).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+      '90 questões',
+      '5 horas',
+      '8 disciplinas',
+    ])
+
+    const miniatura = within(destaque).getByText('01').closest('[aria-hidden="true"]')!
+    expect(miniatura).not.toBeNull()
+    expect(within(miniatura as HTMLElement).getAllByText(/^0[1-5]$/)).toHaveLength(5)
+    // Uma bolinha marcada a caneta em cada linha
+    expect(miniatura.querySelectorAll('.bg-caneta')).toHaveLength(5)
+  })
+
+  it('a etiqueta das disciplinas segue a distribuição: singular com uma, ausente sem nenhuma', async () => {
+    api(COM_LOGIN, [], { ...CATALOGO, distribuicao_completa: { biologia: 90, fisica: 0 } })
+    const { unmount } = renderizar(<App />)
+    let destaque = await screen.findByRole('region', { name: 'Prova completa' })
+    expect(within(within(destaque).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+      '90 questões',
+      '5 horas',
+      '1 disciplina',
+    ])
+    unmount()
+
+    api(COM_LOGIN, [], { ...CATALOGO, distribuicao_completa: {} })
+    renderizar(<App />)
+    destaque = await screen.findByRole('region', { name: 'Prova completa' })
+    expect(within(within(destaque).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+      '90 questões',
+      '5 horas',
+    ])
+  })
+
+  it('no celular, o link de cada modo cobre o cartão e mostra a seta; o nome continua sendo a ação', async () => {
+    api(COM_LOGIN)
+    renderizar(<App />)
+
+    const destaque = await screen.findByRole('region', { name: 'Prova completa' })
+    const cartoes = within(modos(destaque)).getAllByRole('listitem')
+    const acoes = [
+      ['Escolher o ano', '/novo/ano'],
+      ['Montar simulado', '/novo/personalizado'],
+      ['Treinar', '/treino'],
+    ]
+    cartoes.forEach((cartao, i) => {
+      const [nome, rota] = acoes[i]
+      const link = within(cartao).getByRole('link', { name: nome })
+      expect(link).toHaveAttribute('href', rota)
+      // O ::after absoluto do link ocupa o cartão (relative) abaixo de 640 px
+      expect(cartao).toHaveClass('relative')
+      expect(link).toHaveClass('after:absolute', 'after:inset-0', 'sm:after:hidden')
+      // O texto da ação some da tela no celular (fica para o leitor de tela) e a seta aparece
+      expect(within(link).getByText(nome)).toHaveClass('max-sm:sr-only')
+      expect(link.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')
+    })
   })
 })
 

@@ -3,9 +3,9 @@
 **Versão:** 1.0
 **Data:** 2026-09-29
 **PRD Ref:** 01-PRD v4.2
-**Arquitetura Ref:** 02-ARCHITECTURE v1.8
-**Spec Ref:** 03-SPEC v1.8 (specs 01–07)
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008
+**Arquitetura Ref:** 02-ARCHITECTURE v1.9
+**Spec Ref:** 03-SPEC v1.9 (specs 01–07)
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009
 
 ---
 
@@ -27,6 +27,7 @@
 | CR-006 | Login obrigatório para usar o site ([CR](changes/CR-006-login-obrigatorio.md), [spec 07 §8](specs/07-contas-sincronizacao.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-007 | Apresentação, menu do celular e barra opaca ([CR](changes/CR-007-apresentacao-menu-barra.md), [spec 07 §9](specs/07-contas-sincronizacao.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
+| CR-009 | Rolagem ao trocar de página e extras do início ([CR](changes/CR-009-rolagem-inicio-extras.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Em Implementação |
 
 > **Status:** Pendente / Em andamento / Concluído
 

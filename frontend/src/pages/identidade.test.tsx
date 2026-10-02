@@ -67,6 +67,25 @@ describe('Identidade "Papel & Caneta" (UT-048, CR-008)', () => {
     expect(h1.querySelectorAll('svg')).toHaveLength(1) // no máximo um por tela
   })
 
+  it('com um algarismo, o círculo ganha mais folga e margem; com dois, a folga dos números (UT-054, CR-009 A1)', async () => {
+    const umAlgarismo = entradaFalsa('sim-1', Date.now())
+    const doisAlgarismos = entradaFalsa('sim-2', Date.now())
+    doisAlgarismos.resultado = { ...doisAlgarismos.resultado, total: 90, acertos: 58, percentual: 64.4 }
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([umAlgarismo, doisAlgarismos]))
+    apiDeQuestoes()
+    const { unmount } = renderizar(<App />, { rota: '/resultado/sim-1' })
+
+    let circulo = (await screen.findByRole('heading', { level: 1, name: 'Você acertou 1 de 1 questão' })).querySelector('svg')!
+    expect(circulo).toHaveClass('-left-4', 'w-[calc(100%+2rem)]')
+    expect(circulo.parentElement).toHaveClass('mx-3')
+    unmount()
+
+    renderizar(<App />, { rota: '/resultado/sim-2' })
+    circulo = (await screen.findByRole('heading', { level: 1, name: 'Você acertou 58 de 90 questões' })).querySelector('svg')!
+    expect(circulo).toHaveClass('-left-2', 'w-[calc(100%+1rem)]')
+    expect(circulo.parentElement).toHaveClass('mx-1')
+  })
+
   it('na apresentação, o círculo fica em "reais" (UT-051)', async () => {
     instalarApiFalsa({ 'GET /api/sessao': () => json(200, { login_disponivel: true, usuario: null, acesso: 'conta' }) })
     renderizar(<App />, { rota: '/' })

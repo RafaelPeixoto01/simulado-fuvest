@@ -1,7 +1,10 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { useNavigate } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from './App'
+import { RolarAoTopo } from './components/RolarAoTopo'
 import { renderizar } from './test/renderizar'
 
 describe('App', () => {
@@ -37,5 +40,68 @@ describe('App', () => {
     renderizar(<App />)
 
     expect(screen.getByRole('link', { name: 'Histórico' })).toHaveAttribute('href', '/historico')
+  })
+})
+
+/** Botões que navegam como os links e o voltar do navegador. */
+function Navegacao() {
+  const navegar = useNavigate()
+  return (
+    <>
+      <button type="button" onClick={() => navegar('/historico')}>outra página</button>
+      <button type="button" onClick={() => navegar('/historico?filtro=1')}>só a busca</button>
+      <button type="button" onClick={() => navegar(-1)}>voltar</button>
+    </>
+  )
+}
+
+describe('Rolagem ao trocar de página (CR-009, R1)', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    vi.mocked(window.scrollTo).mockClear()
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('a página nova abre no topo, inclusive ao voltar; não rola ao abrir nem quando muda só a busca', async () => {
+    renderizar(
+      <>
+        <RolarAoTopo />
+        <Navegacao />
+      </>,
+    )
+    expect(window.scrollTo).not.toHaveBeenCalled()
+
+    await userEvent.click(screen.getByRole('button', { name: 'outra página' }))
+    expect(window.scrollTo).toHaveBeenCalledTimes(1)
+    expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0 })
+
+    await userEvent.click(screen.getByRole('button', { name: 'só a busca' }))
+    expect(window.scrollTo).toHaveBeenCalledTimes(1)
+
+    await userEvent.click(screen.getByRole('button', { name: 'voltar' }))
+    await userEvent.click(screen.getByRole('button', { name: 'voltar' }))
+    // /historico?filtro=1 → /historico (mesmo caminho) → / (caminho novo)
+    expect(window.scrollTo).toHaveBeenCalledTimes(2)
+  })
+
+  it('tira do navegador a restauração da rolagem, que no voltar devolvia a posição antiga por cima do topo', () => {
+    window.history.scrollRestoration = 'auto'
+    const { unmount } = renderizar(<RolarAoTopo />)
+    expect(window.history.scrollRestoration).toBe('manual')
+
+    unmount()
+    expect(window.history.scrollRestoration).toBe('auto')
+  })
+
+  it('vale para as rotas do site: o link da página não encontrada leva ao início no topo', async () => {
+    renderizar(<App />, { rota: '/nao-existe' })
+    expect(window.scrollTo).not.toHaveBeenCalled()
+
+    await userEvent.click(screen.getByRole('link', { name: 'Voltar ao início' }))
+
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 })
   })
 })

@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef, type MouseEvent, type ReactNode } from 'react'
 
 import { Icone } from '../Icone'
-import { MarcasSincronismo } from '../MarcasSincronismo'
 
 const FOCAVEIS = 'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
 
@@ -94,11 +93,8 @@ export function PainelFolha({ onFechar, children, rodape }: Props) {
             </Icone>
           </button>
         </div>
-        {/* Marcas de sincronismo na borda do painel (CR-008, I5) */}
-        <div className="relative flex min-h-0 flex-1 flex-col px-4 pb-4">
-          <MarcasSincronismo quantidade={14} posicao="left-1 top-2 bottom-6" tamanho="h-1 w-2" />
-          {children}
-        </div>
+        {/* As marcas de sincronismo vêm da grade (FolhaRespostas), abaixo da legenda (CR-009, A2) */}
+        <div className="flex min-h-0 flex-1 flex-col px-4 pb-4">{children}</div>
         {rodape && <div className="border-t border-linha px-4 pt-3 pb-4">{rodape}</div>}
       </div>
     </div>
