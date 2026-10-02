@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { BotaoGoogle } from '../components/BotaoGoogle'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { Carregando, ErroCarregamento } from '../components/Estados'
-import { BOTAO_SECUNDARIO, LINK } from '../components/estilos'
+import { BOTAO_SECUNDARIO, CARTAO, LINK } from '../components/estilos'
 import { useExcluirConta, useSair } from '../hooks/useConta'
 import { useHistorico } from '../hooks/useHistorico'
 import { useSessao } from '../hooks/useSessao'
@@ -49,7 +49,7 @@ function Conectado({ usuario, sair, excluir, aoSair, aoExcluir }: PropsConectado
 
   return (
     <>
-      <div className="mt-6 rounded-2xl border border-linha bg-papel p-5">
+      <div className={`${CARTAO} mt-6 p-5`}>
         <p>
           Conectado como <strong>{usuario.nome ?? usuario.email}</strong>
           {usuario.nome && <span className="text-tinta-suave"> ({usuario.email})</span>}

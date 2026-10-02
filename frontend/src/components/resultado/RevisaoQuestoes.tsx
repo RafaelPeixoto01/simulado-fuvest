@@ -6,6 +6,7 @@ import { Carregando, ErroCarregamento, Vazio } from '../Estados'
 import { BARRA_NEUTRO, BOTAO_BARRA_FORMA } from '../estilos'
 import { Icone } from '../Icone'
 import { QuestaoView } from '../questao/QuestaoView'
+import { TituloQuestao } from '../questao/TituloQuestao'
 import { filtrarRevisao, situacao, type EstadoRevisao, type FiltroRevisao, type Situacao } from './revisao'
 
 const FILTROS: { valor: FiltroRevisao; rotulo: string; nome: string }[] = [
@@ -133,9 +134,7 @@ export function RevisaoQuestoes({ questaoIds, itens, estado, onFiltros, onIr, pe
               />
             ) : (
               <div className="max-w-[68ch] rounded-lg border border-dashed border-linha px-4 py-4">
-                <h3 ref={titulo} tabIndex={-1} className="text-xl font-bold focus:outline-none">
-                  Questão {estado.indice + 1} de {questaoIds.length}
-                </h3>
+                <TituloQuestao atual={estado.indice + 1} total={questaoIds.length} nivel={3} refTitulo={titulo} />
                 {complemento}
                 <p className="mt-2 text-tinta-suave">
                   {item

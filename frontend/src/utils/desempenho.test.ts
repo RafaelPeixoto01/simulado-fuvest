@@ -175,4 +175,10 @@ describe('"Seu último simulado" (UT-050, CR-008)', () => {
     expect(disciplinasMaisFracas(e, 3).map((d) => d.disciplina)).toEqual(['ingles', 'biologia', 'historia'])
     expect(disciplinasMaisFracas(entrada([], [linha('fisica', 2, 1)]))).toHaveLength(1)
   })
+
+  it('disciplina a 100% não entra em "Para estudar" (revisão de código)', () => {
+    const e = entrada([], [linha('fisica', 10, 10), linha('quimica', 10, 9)])
+    expect(disciplinasMaisFracas(e).map((d) => d.disciplina)).toEqual(['quimica'])
+    expect(disciplinasMaisFracas(entrada([], [linha('fisica', 10, 10)]))).toEqual([])
+  })
 })

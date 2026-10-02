@@ -16,7 +16,7 @@ import { useSessao } from '../hooks/useSessao'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Catalogo } from '../types'
-import { primeiroNome } from '../utils/format'
+import { primeiroNomeOuNada } from '../utils/format'
 import { formatarRestante, restanteMs } from '../utils/tempo'
 
 /** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). */
@@ -76,7 +76,7 @@ function SimuladoEmAndamento() {
     )
 
   return (
-    <section aria-labelledby={idTitulo} className="mb-8 max-w-2xl rounded-2xl border border-caneta/30 bg-caneta-clara p-4 sm:p-5">
+    <section aria-labelledby={idTitulo} className="mb-8 max-w-2xl rounded-2xl border border-caneta bg-caneta-clara p-4 sm:p-5">
       <p className="flex items-center gap-1.5 text-sm font-bold text-caneta-escura">
         <span aria-hidden="true" className="size-2 rounded-full bg-caneta" />
         Simulado em andamento
@@ -163,7 +163,7 @@ export function HomePage() {
   const { simulado } = useSimulado()
   const { data: sessao } = useSessao()
   // Saudação (CR-008, I6.1): só com uma conta que tenha nome; nunca "Olá, Conta."
-  const nome = sessao?.usuario?.nome?.trim() ? primeiroNome(sessao.usuario.nome) : null
+  const nome = primeiroNomeOuNada(sessao?.usuario?.nome)
 
   const anos = catalogo.data?.provas.map((p) => p.ano) ?? []
   const periodo = anos.length > 1 ? ` (${Math.min(...anos)} a ${Math.max(...anos)})` : anos.length ? ` (${anos[0]})` : ''

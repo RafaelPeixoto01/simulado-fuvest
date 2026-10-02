@@ -135,10 +135,11 @@ export function ultimoSimulado(entradas: HistoricoEntry[]): HistoricoEntry | nul
   )
 }
 
-/** As disciplinas de menor aproveitamento, com empate pelo slug: a ordem do resultado (CR-008). */
+/** As disciplinas de menor aproveitamento, com empate pelo slug: a ordem do resultado (CR-008).
+ *  Fora as sem questão contada e as de 100%: nelas não há o que estudar. */
 export function disciplinasMaisFracas(entrada: HistoricoEntry, quantas = 2): DesempenhoDisciplina[] {
   return [...entrada.resultado.por_disciplina]
-    .filter((d) => d.total > 0)
+    .filter((d) => d.total > 0 && d.percentual < 100)
     .sort((a, b) => a.percentual - b.percentual || a.disciplina.localeCompare(b.disciplina))
     .slice(0, quantas)
 }

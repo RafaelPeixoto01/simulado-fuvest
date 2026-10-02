@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { BarraPercentual, Placar } from '../components/BarraPercentual'
 import { Vazio } from '../components/Estados'
-import { LINK } from '../components/estilos'
+import { CARTAO, LINK } from '../components/estilos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useHistorico } from '../hooks/useHistorico'
 import { useTituloPagina } from '../hooks/useTituloPagina'
@@ -78,7 +78,7 @@ export function DesempenhoPage() {
           </Vazio>
         ) : (
           <>
-            <dl className="grid grid-cols-3 gap-2 rounded-2xl border border-linha bg-papel p-4 text-center">
+            <dl className={`${CARTAO} grid grid-cols-3 gap-2 p-4 text-center`}>
               <div>
                 <dt className="text-sm text-tinta-suave">Simulados</dt>
                 <dd className="font-titulo text-2xl font-[650] tabular-nums">{painel.simulados}</dd>

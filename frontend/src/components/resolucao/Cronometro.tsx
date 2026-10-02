@@ -66,7 +66,7 @@ export function Cronometro({ simulado, agora, onPausar, onRetomar }: Props) {
           type="button"
           onClick={pausado ? onRetomar : onPausar}
           aria-label={pausado ? 'Retomar' : 'Pausar'}
-          className={`${FORMA_ICONE} text-tinta-suave hover:text-tinta sm:border sm:border-linha sm:bg-papel sm:px-3 sm:font-semibold sm:text-tinta sm:hover:border-caneta/50`}
+          className={`${FORMA_ICONE} text-tinta-suave hover:text-tinta sm:border sm:border-borda-campo sm:bg-papel sm:px-3 sm:font-semibold sm:text-tinta sm:hover:border-caneta`}
         >
           {pausado ? (
             <Icone>

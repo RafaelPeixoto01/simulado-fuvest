@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 
+import { CARTAO } from './estilos'
+
 interface Props {
   titulo: string
   children?: ReactNode
@@ -47,7 +49,7 @@ export function ConfirmDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby={idTitulo}
-        className="w-full max-w-md rounded-2xl border border-linha bg-papel p-5"
+        className={`${CARTAO} w-full max-w-md p-5`}
       >
         <h2 id={idTitulo} className="text-lg">
           {titulo}

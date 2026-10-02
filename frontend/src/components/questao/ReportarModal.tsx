@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 
 import { api, ApiError } from '../../services/api'
 import type { TipoReporte } from '../../types'
-import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO } from '../estilos'
+import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, CARTAO } from '../estilos'
 
 const TIPOS: { valor: TipoReporte; rotulo: string }[] = [
   { valor: 'enunciado', rotulo: 'Enunciado ou alternativa com erro' },
@@ -54,7 +54,7 @@ export function ReportarModal({ questaoId, descricao, onFechar }: { questaoId: s
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-tinta/40 p-4 sm:items-center">
-      <div role="dialog" aria-modal="true" aria-labelledby={idTitulo} className="w-full max-w-md rounded-2xl border border-linha bg-papel p-5">
+      <div role="dialog" aria-modal="true" aria-labelledby={idTitulo} className={`${CARTAO} w-full max-w-md p-5`}>
         <h2 id={idTitulo} className="text-lg">Reportar problema na questão</h2>
         <p className="text-sm text-tinta-suave">{descricao}</p>
 

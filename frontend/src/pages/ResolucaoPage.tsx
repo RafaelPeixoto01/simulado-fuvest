@@ -186,7 +186,7 @@ function Resolucao({ simulado }: { simulado: SimuladoEmAndamento }) {
               type="button"
               aria-haspopup="dialog"
               onClick={() => setFolhaAberta(true)}
-              className="inline-flex h-11 items-center gap-2 rounded-lg border border-linha bg-papel px-3 text-[0.9375rem] font-semibold hover:border-caneta/50 lg:hidden"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-borda-campo bg-papel px-3 text-[0.9375rem] font-semibold hover:border-caneta lg:hidden"
             >
               <IconeFolha />
               <span>

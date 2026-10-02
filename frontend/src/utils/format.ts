@@ -20,5 +20,10 @@ export function formatarDiaMes(epochMs: number): string {
 
 /** Primeiro nome para o cabeçalho (CR-005, D3); "Conta" se o Google não mandou nome. */
 export function primeiroNome(nome: string | null): string {
-  return nome?.trim().split(/\s+/)[0] || 'Conta'
+  return primeiroNomeOuNada(nome) ?? 'Conta'
+}
+
+/** O primeiro nome, ou null se o Google não mandou nome: a saudação do início some (CR-008). */
+export function primeiroNomeOuNada(nome: string | null | undefined): string | null {
+  return nome?.trim().split(/\s+/)[0] || null
 }
