@@ -70,7 +70,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
                   className={`flex items-center gap-2 rounded-lg border px-2 py-1.5 lg:gap-2.5 lg:px-2.5 lg:py-[7px] ${marcada ? 'border-caneta bg-caneta-clara' : 'border-linha'}`}
                 >
                   <span
-                    className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] text-[0.625rem] font-bold lg:size-5 lg:text-[0.6875rem] ${marcada ? 'border-caneta bg-caneta text-papel' : 'border-optico text-optico-texto'}`}
+                    className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border-[1.5px] text-[0.625rem] font-bold lg:size-5 lg:text-[0.6875rem] ${marcada ? 'border-caneta bg-caneta text-fundo' : 'border-optico text-optico-texto'}`}
                   >
                     {letra}
                   </span>
@@ -84,7 +84,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
         <div className="mt-2 flex gap-1.5 border-t border-linha px-3 py-2 lg:mt-2.5 lg:px-4 lg:py-2.5">
           <span className={`${BOTAO} border border-linha font-semibold`}>‹ Anterior</span>
           <span className={`${BOTAO} border border-linha font-semibold`}>Revisar</span>
-          <span className={`${BOTAO} grow bg-caneta text-center font-bold text-papel`}>Próxima ›</span>
+          <span className={`${BOTAO} grow bg-caneta text-center font-bold text-fundo`}>Próxima ›</span>
         </div>
       </div>
 

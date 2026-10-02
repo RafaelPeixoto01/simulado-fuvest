@@ -44,7 +44,7 @@ export function Cronometro({ simulado, agora, onPausar, onRetomar }: Props) {
       <span
         role="timer"
         aria-label={restante === null ? 'Tempo decorrido' : 'Tempo restante'}
-        className={`min-w-[5.5rem] rounded-lg border px-2.5 py-1.5 text-center font-bold tabular-nums sm:text-lg ${cor}`}
+        className={`min-w-[5.5rem] rounded-lg border px-2.5 py-1.5 text-center font-titulo text-[1.0625rem] font-[650] tabular-nums sm:text-lg ${cor}`}
       >
         {pausado ? 'Pausado' : oculto ? 'Oculto' : tempo}
       </span>

@@ -51,7 +51,7 @@ function SimuladoEmAndamento() {
     )
 
   return (
-    <section aria-labelledby={idTitulo} className="mb-8 max-w-2xl rounded-xl border border-caneta/30 bg-caneta-clara p-4 sm:p-5">
+    <section aria-labelledby={idTitulo} className="mb-8 max-w-2xl rounded-2xl border border-caneta/30 bg-caneta-clara p-4 sm:p-5">
       <p className="flex items-center gap-1.5 text-sm font-bold text-caneta-escura">
         <span aria-hidden="true" className="size-2 rounded-full bg-caneta" />
         Simulado em andamento

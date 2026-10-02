@@ -47,7 +47,7 @@ export function ConfirmDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby={idTitulo}
-        className="w-full max-w-md rounded-xl border border-linha bg-papel p-5 shadow-lg"
+        className="w-full max-w-md rounded-2xl border border-linha bg-papel p-5"
       >
         <h2 id={idTitulo} className="text-lg">
           {titulo}
@@ -58,14 +58,14 @@ export function ConfirmDialog({
             ref={botaoCancelar}
             type="button"
             onClick={onCancelar}
-            className="rounded-md border border-linha px-4 py-2 font-semibold hover:bg-fundo"
+            className="rounded-md border border-borda-campo bg-papel px-4 py-2 font-semibold hover:border-caneta"
           >
             {cancelar}
           </button>
           <button
             type="button"
             onClick={onConfirmar}
-            className={`rounded-md px-4 py-2 font-semibold text-papel ${perigoso ? 'bg-erro hover:bg-erro/90' : 'bg-caneta hover:bg-caneta-escura'}`}
+            className={`rounded-md px-4 py-2 font-semibold text-fundo ${perigoso ? 'bg-erro hover:bg-erro/90' : 'bg-caneta hover:bg-caneta-escura'}`}
           >
             {confirmar}
           </button>

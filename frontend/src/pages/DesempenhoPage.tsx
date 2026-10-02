@@ -78,18 +78,18 @@ export function DesempenhoPage() {
           </Vazio>
         ) : (
           <>
-            <dl className="grid grid-cols-3 gap-2 rounded-xl border border-linha bg-papel p-4 text-center">
+            <dl className="grid grid-cols-3 gap-2 rounded-2xl border border-linha bg-papel p-4 text-center">
               <div>
                 <dt className="text-sm text-tinta-suave">Simulados</dt>
-                <dd className="text-2xl font-bold tabular-nums">{painel.simulados}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{painel.simulados}</dd>
               </div>
               <div>
                 <dt className="text-sm text-tinta-suave">Questões</dt>
-                <dd className="text-2xl font-bold tabular-nums">{painel.total}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{painel.total}</dd>
               </div>
               <div>
                 <dt className="text-sm text-tinta-suave">Acertos</dt>
-                <dd className="text-2xl font-bold tabular-nums">{formatarPercentual(painel.percentual)}</dd>
+                <dd className="font-titulo text-2xl font-[650] tabular-nums">{formatarPercentual(painel.percentual)}</dd>
               </div>
             </dl>
             <p className="mt-3 text-sm text-tinta-suave">

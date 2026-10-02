@@ -20,7 +20,7 @@ export function TelaPausa({ onRetomar }: { onRetomar: () => void }) {
       <button
         type="button"
         onClick={onRetomar}
-        className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-caneta px-8 font-bold text-papel hover:bg-caneta-escura"
+        className="mt-2 inline-flex h-12 items-center justify-center rounded-lg bg-caneta px-8 font-bold text-fundo hover:bg-caneta-escura"
       >
         Retomar
       </button>

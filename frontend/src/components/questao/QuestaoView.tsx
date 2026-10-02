@@ -4,6 +4,7 @@ import { NOMES_DISCIPLINAS, type Letra, type Questao, type TextoBase } from '../
 import { Alternativas, type CorrecaoAlternativas } from './Alternativas'
 import { Blocos } from './Blocos'
 import { ReportarModal } from './ReportarModal'
+import { TituloQuestao } from './TituloQuestao'
 
 interface Props {
   questao: Questao
@@ -33,7 +34,6 @@ export function QuestaoView({
   nivelTitulo = 2,
   complemento,
 }: Props) {
-  const Titulo = nivelTitulo === 3 ? 'h3' : 'h2'
   const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, FUVEST ${questao.ano} (questão ${questao.numero})`
   const alt = `Figura da questão ${questao.numero}, FUVEST ${questao.ano}`
   const [reportando, setReportando] = useState(false)
@@ -42,11 +42,9 @@ export function QuestaoView({
     <article className="max-w-[68ch]">
       <header className="mb-5">
         {posicao && (
-          <Titulo ref={refTitulo} tabIndex={refTitulo ? -1 : undefined} className="text-xl font-bold focus:outline-none">
-            Questão {posicao.atual} de {posicao.total}
-          </Titulo>
+          <TituloQuestao atual={posicao.atual} total={posicao.total} nivel={nivelTitulo} refTitulo={refTitulo} />
         )}
-        <p className="text-sm text-tinta-suave">{fonte}</p>
+        <p className={`text-sm text-tinta-suave ${posicao ? 'mt-1.5' : ''}`}>{fonte}</p>
         {complemento}
       </header>
 

@@ -12,7 +12,9 @@ import {
   BOTAO_SECUNDARIO,
 } from '../components/estilos'
 import { Icone } from '../components/Icone'
+import { MarcasSincronismo } from '../components/MarcasSincronismo'
 import { QuestaoView } from '../components/questao/QuestaoView'
+import { TituloQuestao } from '../components/questao/TituloQuestao'
 import { AVISO_MS, Cronometro } from '../components/resolucao/Cronometro'
 import { FolhaRespostas } from '../components/resolucao/FolhaRespostas'
 import { PainelFolha } from '../components/resolucao/PainelFolha'
@@ -226,9 +228,7 @@ function Resolucao({ simulado }: { simulado: SimuladoEmAndamento }) {
                 )}
                 {removida && (
                   <div className="max-w-[68ch] rounded-lg border border-dashed border-linha px-4 py-6">
-                    <h2 ref={titulo} tabIndex={-1} className="text-xl focus:outline-none">
-                      Questão {indice + 1} de {total}
-                    </h2>
+                    <TituloQuestao atual={indice + 1} total={total} refTitulo={titulo} />
                     <p className="mt-2 text-tinta-suave">
                       Esta questão foi removida da base depois que o simulado começou e vai contar como em branco.
                     </p>
@@ -291,10 +291,14 @@ function Resolucao({ simulado }: { simulado: SimuladoEmAndamento }) {
 
             {/* P1.4/D2: a folha inteira cabe abaixo da barra; rolagem própria só em telas baixas */}
             <aside className="hidden w-[25.5rem] shrink-0 lg:block">
-              <div className="sticky top-[5.5rem] my-6 max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-xl border border-optico/45 bg-papel p-4">
-                <h2>Folha de respostas</h2>
-                {folha('bolhas')}
-                {botaoFinalizarSimulado('mt-3 h-10')}
+              {/* As marcas de sincronismo (CR-008, I5) ficam por fora do cartão, que rola: o sticky é o pai */}
+              <div className="sticky top-[5.5rem] my-6">
+                <MarcasSincronismo quantidade={18} posicao="-left-6 top-4 bottom-4" tamanho="h-[5px] w-3" />
+                <div className="max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-xl border border-optico/45 bg-papel p-4">
+                  <h2>Folha de respostas</h2>
+                  {folha('bolhas')}
+                  {botaoFinalizarSimulado('mt-3 h-10')}
+                </div>
               </div>
             </aside>
           </>

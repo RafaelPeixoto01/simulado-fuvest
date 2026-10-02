@@ -49,7 +49,7 @@ function Conectado({ usuario, sair, excluir, aoSair, aoExcluir }: PropsConectado
 
   return (
     <>
-      <div className="mt-6 rounded-xl border border-linha bg-papel p-5">
+      <div className="mt-6 rounded-2xl border border-linha bg-papel p-5">
         <p>
           Conectado como <strong>{usuario.nome ?? usuario.email}</strong>
           {usuario.nome && <span className="text-tinta-suave"> ({usuario.email})</span>}
