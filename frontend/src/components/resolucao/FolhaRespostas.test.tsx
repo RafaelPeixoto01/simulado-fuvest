@@ -63,3 +63,33 @@ describe('FolhaRespostas (CR-001, D2)', () => {
     expect(onIr).toHaveBeenCalledWith(2)
   })
 })
+
+describe('Marcas de sincronismo do painel (UT-054, CR-009 A2)', () => {
+  const grade = (n: number) =>
+    render(<FolhaRespostas formato="grade" questaoIds={ids(n)} respostas={{}} marcadas={[]} atual={0} onIr={() => {}} />)
+  const marcasDa = (nav: HTMLElement) => nav.parentElement!.querySelector<HTMLElement>('[aria-hidden="true"].absolute')!
+
+  it('ficam na altura da grade, abaixo do resumo e da legenda, fora da área que rola', () => {
+    grade(90)
+    const nav = screen.getByRole('navigation', { name: 'Folha de respostas' })
+    const marcas = marcasDa(nav)
+    expect(nav.contains(marcas)).toBe(false)
+    const legenda = screen.getByText('para revisar').closest('p')!
+    expect(legenda.compareDocumentPosition(marcas) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(marcas.children).toHaveLength(14) // 18 linhas: no máximo 14
+  })
+
+  it('são 2 por linha da grade, para não se amontoarem num simulado curto', () => {
+    const { unmount } = grade(3)
+    expect(marcasDa(screen.getByRole('navigation')).children).toHaveLength(2)
+    unmount()
+
+    grade(10)
+    expect(marcasDa(screen.getByRole('navigation')).children).toHaveLength(4)
+  })
+
+  it('não aparecem na folha do desktop, que tem as marcas do cartão', () => {
+    render(<FolhaRespostas formato="bolhas" questaoIds={ids(10)} respostas={{}} marcadas={[]} atual={0} onIr={() => {}} />)
+    expect(document.querySelector('[aria-hidden="true"].absolute')).toBeNull()
+  })
+})

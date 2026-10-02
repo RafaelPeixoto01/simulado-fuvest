@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { LETRAS, type Letra } from '../../types'
 import { colunasDaFolha, trilhaDaFolha } from '../../utils/folha'
 import { CabecalhoLetras } from '../CabecalhoLetras'
+import { MarcasSincronismo } from '../MarcasSincronismo'
 
 interface Props {
   questaoIds: string[]
@@ -59,44 +60,53 @@ export function FolhaRespostas({ questaoIds, respostas, marcadas, atual, onIr, f
       <div className="flex min-h-0 flex-col gap-2.5">
         <p className="text-sm text-tinta-suave">{resumo}</p>
         <Legenda />
-        <nav aria-label="Folha de respostas" className="-mx-1 min-h-0 overflow-y-auto overscroll-contain px-1 pt-1.5 pb-1">
-          <ol className="grid grid-cols-5 gap-2">
-            {questaoIds.map((id, i) => {
-              const resposta = respostas[id]
-              const eAtual = i === atual
-              return (
-                <li key={id} className="relative">
-                  <button
-                    ref={eAtual ? botaoAtual : undefined}
-                    type="button"
-                    onClick={() => onIr(i)}
-                    aria-label={rotulo(id, i)}
-                    aria-current={eAtual ? 'step' : undefined}
-                    className={`flex h-12 w-full items-center justify-between rounded-lg px-1.5 ${
-                      eAtual ? 'border-2 border-caneta bg-caneta-clara' : 'border border-linha bg-papel'
-                    }`}
-                  >
-                    <span className="text-sm font-bold tabular-nums text-optico-texto">{dois(i + 1)}</span>
-                    <span
-                      aria-hidden="true"
-                      className={`flex size-[22px] items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
-                        resposta ? 'border-caneta bg-caneta text-fundo' : 'border-optico'
+        {/* Marcas de sincronismo do painel (CR-008, I5) na altura da grade, abaixo da legenda e fora da
+            área que rola (CR-009, A2); 2 por linha, para não se amontoarem num simulado curto */}
+        <div className="relative flex min-h-0 flex-col">
+          <MarcasSincronismo
+            quantidade={Math.min(14, 2 * Math.ceil(total / 5))}
+            posicao="-left-3 top-1.5 bottom-1"
+            tamanho="h-1 w-2"
+          />
+          <nav aria-label="Folha de respostas" className="-mx-1 min-h-0 overflow-y-auto overscroll-contain px-1 pt-1.5 pb-1">
+            <ol className="grid grid-cols-5 gap-2">
+              {questaoIds.map((id, i) => {
+                const resposta = respostas[id]
+                const eAtual = i === atual
+                return (
+                  <li key={id} className="relative">
+                    <button
+                      ref={eAtual ? botaoAtual : undefined}
+                      type="button"
+                      onClick={() => onIr(i)}
+                      aria-label={rotulo(id, i)}
+                      aria-current={eAtual ? 'step' : undefined}
+                      className={`flex h-12 w-full items-center justify-between rounded-lg px-1.5 ${
+                        eAtual ? 'border-2 border-caneta bg-caneta-clara' : 'border border-linha bg-papel'
                       }`}
                     >
-                      {resposta ?? ''}
-                    </span>
-                  </button>
-                  {revisar.has(id) && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute -top-1 -right-1 size-3 rounded-full border-2 border-papel bg-alerta"
-                    />
-                  )}
-                </li>
-              )
-            })}
-          </ol>
-        </nav>
+                      <span className="text-sm font-bold tabular-nums text-optico-texto">{dois(i + 1)}</span>
+                      <span
+                        aria-hidden="true"
+                        className={`flex size-[22px] items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
+                          resposta ? 'border-caneta bg-caneta text-fundo' : 'border-optico'
+                        }`}
+                      >
+                        {resposta ?? ''}
+                      </span>
+                    </button>
+                    {revisar.has(id) && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute -top-1 -right-1 size-3 rounded-full border-2 border-papel bg-alerta"
+                      />
+                    )}
+                  </li>
+                )
+              })}
+            </ol>
+          </nav>
+        </div>
       </div>
     )
   }
