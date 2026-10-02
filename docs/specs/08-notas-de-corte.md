@@ -64,7 +64,7 @@ fonte: https://www.fuvest.br/wp-content/uploads/fuvest_2025_notas_de_corte.pdf
 pendencias: []               # textos; a publicação exige a lista vazia (C05)
 carreiras:                   # na ordem do PDF (por código)
   - codigo: 111
-    nome: Medicina (São Paulo, Ribeirão Preto, Bauru)
+    nome: Medicina (São Paulo, Bauru, Ribeirão Preto)
     ac: {vagas: 147, convocados: 586, corte: 79, maximo: 88}
     ep: {vagas: 61, convocados: 298, corte: 71, maximo: 86}
     ppi: {vagas: 36, convocados: 163, corte: 60, maximo: 83}
@@ -91,7 +91,7 @@ class Modalidade(BaseModel):              # extra="forbid"
 
 class CarreiraCorte(BaseModel):           # extra="forbid"
     codigo: int                           # 100..999
-    nome: str                             # 1..160 caracteres, sem espaços nas pontas
+    nome: str                             # 1..200 caracteres, sem espaços nas pontas
     ac: Modalidade
     ep: Modalidade
     ppi: Modalidade
@@ -217,7 +217,7 @@ export function filtrarCarreiras(carreiras: CarreiraCorte[], busca: string): Car
 
 **`validar`:** `--todas` valida também todos os arquivos de `notas_corte/`; `--ano AAAA` valida o pacote e, se existir, o arquivo de cortes do ano. Para cada arquivo, imprime `== cortes AAAA — <status>` e os problemas. Falha (exit 1) com arquivo inválido (C01, C04) ou publicado com problema (C02, C03, C05), como os pacotes publicados com pendência bloqueante.
 
-**Curadoria dos nomes (conteúdo, não código):** o curador completa o campus dos nomes repetidos e os nomes cortados pelo Guia de Carreiras e Cursos do ano (`fuvestAAAA_guia-carreiras.pdf`, que lista os cursos e o campus de cada código), zera `pendencias` e muda para `publicada`. Formato do nome: o da FUVEST, com o campus entre parênteses quando faltar (ex.: "Psicologia (Ribeirão Preto)"; carreira com vários campi: "Medicina (São Paulo, Ribeirão Preto, Bauru)"). As notas de corte de um ano novo seguem o fluxo de conteúdo: branch `conteudo/cortes-AAAA`, CI verde, sem CR.
+**Curadoria dos nomes (conteúdo, não código):** o curador completa os nomes cortados e, quando o PDF não traz o campus, o campus de **todas** as carreiras do ano (de 2024 em diante a FUVEST tirou o campus do nome; até 2023 ele vem no nome). Fontes: o Guia de Carreiras e Cursos (2025, `fuvest2025_guia-carreiras.pdf`) ou o Manual do Candidato (até 2024), que listam os cursos de cada carreira com o campus e as vagas; a soma das vagas dos cursos tem que bater com as vagas da carreira no PDF de notas de corte, o que confere a atribuição. Depois zera `pendencias` e muda para `publicada`. Formato do nome: o da FUVEST; quando faltar o campus, as cidades entre parênteses, São Paulo primeiro e as demais em ordem alfabética (ex.: "Psicologia (Ribeirão Preto)", "Medicina (São Paulo, Bauru, Ribeirão Preto)"). As notas de corte de um ano novo seguem o fluxo de conteúdo: branch `conteudo/cortes-AAAA`, CI verde, sem CR.
 
 **Carreira-alvo (RN-019):**
 - `PUT` aceita só um par (ano, código) presente nos cortes publicados **e** com `ano == recente`; senão 422 `carreira_invalida`. Grava os dois campos juntos; uma por conta (substitui a anterior).

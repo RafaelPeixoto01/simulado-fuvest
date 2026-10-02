@@ -50,7 +50,7 @@ class CarreiraCorte(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     codigo: int = Field(ge=100, le=999)
-    nome: str = Field(min_length=1, max_length=160)
+    nome: str = Field(min_length=1, max_length=200)  # o mais longo, Química (Ribeirão Preto), tem ~170
     ac: Modalidade
     ep: Modalidade
     ppi: Modalidade
