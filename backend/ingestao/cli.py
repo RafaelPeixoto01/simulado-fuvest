@@ -14,6 +14,13 @@ from app.database import criar_engine, criar_fabrica_sessao, normalizar_database
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
 from app.pacote.assuntos import Taxonomia, TaxonomiaInvalida, carregar_taxonomia
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
+from app.pacote.notas_corte import (
+    DIRETORIO_NOTAS_CORTE,
+    NotasCorteInvalidas,
+    arquivos_de_notas_corte,
+    carregar_ano,
+    problemas_de_publicacao,
+)
 from app.pacote.schema import PacoteProva, Questao
 from app.pacote.sincronizar import formatar_resumo, sincronizar
 from app.pacote.validacao import formatar_relatorio, tem_bloqueante, validar_pacote
@@ -54,17 +61,45 @@ def _diretorios_alvo(args: argparse.Namespace) -> list[Path] | None:
     return [dir_prova]
 
 
+def _validar_cortes(caminho: Path) -> bool:
+    """Relatorio das notas de corte (CR-010); False se impede o CI (invalido ou publicado com problema)."""
+    try:
+        notas = carregar_ano(caminho)
+    except NotasCorteInvalidas as erro:
+        print(f"== cortes {caminho.stem} — ARQUIVO INVÁLIDO\n  {erro.detalhe}")
+        return False
+    problemas = problemas_de_publicacao(notas)
+    cabecalho = f"== cortes {notas.ano} — {notas.status} — {len(notas.carreiras)} carreiras"
+    linhas = [cabecalho if problemas else f"{cabecalho}, OK"]
+    linhas += [f"  {problema}" for problema in problemas]
+    linhas += [f"  pendência: {pendencia}" for pendencia in notas.pendencias]
+    print("\n".join(linhas))
+    return not (notas.status == "publicada" and problemas)
+
+
+def _cortes_alvo(args: argparse.Namespace) -> list[Path]:
+    """Sem --ano: todos os arquivos de notas de corte. Com --ano: o do ano, se existir."""
+    if args.ano is None:
+        return arquivos_de_notas_corte(args.data_dir)
+    caminho = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.ano}.yaml"
+    return [caminho] if caminho.is_file() else []
+
+
 def _cmd_validar(args: argparse.Namespace) -> int:
     diretorios = _diretorios_alvo(args)
     if diretorios is None:
         return 1
-    if not diretorios:
+    cortes = _cortes_alvo(args)
+    if not diretorios and not cortes:
         print(f"Nenhum pacote encontrado em {args.data_dir}")
         return 0
-    taxonomia = _carregar_taxonomia(args.data_dir)
-    if taxonomia is None:
-        return 1
-    resultados = [_validar_um(d, taxonomia) for d in diretorios]
+    resultados = []
+    if diretorios:
+        taxonomia = _carregar_taxonomia(args.data_dir)
+        if taxonomia is None:
+            return 1
+        resultados += [_validar_um(d, taxonomia) for d in diretorios]
+    resultados += [_validar_cortes(c) for c in cortes]
     return 0 if all(resultados) else 1
 
 

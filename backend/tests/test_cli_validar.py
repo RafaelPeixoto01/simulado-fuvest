@@ -1,3 +1,5 @@
+import yaml
+
 from app.pacote.leitura import carregar_pacote, salvar_pacote
 from ingestao.cli import main
 from tests.fixtures.gerar_pacotes import escrever_pacotes
@@ -72,3 +74,61 @@ def test_publicada_sem_assunto_falha_com_v11(tmp_path, capsys):
 
     assert main(["validar", "--ano", "2098", "--data-dir", str(tmp_path)]) == 1
     assert "V11" in capsys.readouterr().out
+
+
+# IT-024 (CR-010): validar tambem as notas de corte (specs/08 §2.4)
+
+
+def _cortes(data_dir, ano):
+    return data_dir / "notas_corte" / f"{ano}.yaml"
+
+
+def _alterar_cortes(caminho, alterar):
+    dados = yaml.safe_load(caminho.read_text(encoding="utf-8"))
+    alterar(dados)
+    caminho.write_text(yaml.safe_dump(dados, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
+
+def test_todas_valida_as_notas_de_corte(tmp_path, capsys):
+    escrever_pacotes(tmp_path)
+
+    assert main(["validar", "--todas", "--data-dir", str(tmp_path)]) == 0
+    saida = capsys.readouterr().out
+    assert "== cortes 2098 — publicada" in saida and "== cortes 2099 — publicada" in saida
+
+
+def test_cortes_publicados_com_problema_falham(tmp_path, capsys):
+    escrever_pacotes(tmp_path)
+    _alterar_cortes(_cortes(tmp_path, 2099), lambda d: d["carreiras"][1].update(nome=d["carreiras"][0]["nome"]))
+
+    assert main(["validar", "--todas", "--data-dir", str(tmp_path)]) == 1
+    assert "C02: nome repetido" in capsys.readouterr().out
+
+
+def test_cortes_em_rascunho_com_problema_so_avisam(tmp_path, capsys):
+    escrever_pacotes(tmp_path)
+    _alterar_cortes(_cortes(tmp_path, 2099), lambda d: d.update(status="rascunho", pendencias=["conferir"]))
+
+    assert main(["validar", "--ano", "2099", "--data-dir", str(tmp_path)]) == 0
+    saida = capsys.readouterr().out
+    assert "== cortes 2099 — rascunho" in saida and "C05" in saida and "conferir" in saida
+
+
+def test_cortes_invalidos_falham_mesmo_em_rascunho(tmp_path, capsys):
+    escrever_pacotes(tmp_path)
+    _alterar_cortes(
+        _cortes(tmp_path, 2098),
+        lambda d: d.update(status="rascunho") or d["carreiras"][0]["ac"].update(corte=20),
+    )
+
+    assert main(["validar", "--todas", "--data-dir", str(tmp_path)]) == 1
+    assert "== cortes 2098 — ARQUIVO INVÁLIDO" in capsys.readouterr().out
+
+
+def test_ano_valida_so_os_cortes_do_ano(tmp_path, capsys):
+    escrever_pacotes(tmp_path)
+    _cortes(tmp_path, 2099).write_text("ano: [", encoding="utf-8")
+
+    assert main(["validar", "--ano", "2098", "--data-dir", str(tmp_path)]) == 0
+    saida = capsys.readouterr().out
+    assert "== cortes 2098" in saida and "cortes 2099" not in saida

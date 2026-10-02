@@ -3,6 +3,7 @@
 Deterministicos por ano. Cobrem: as 8 disciplinas, anuladas, textos-base (um com
 figura), disciplinas secundarias, figuras no enunciado e em alternativa, e um assunto
 por questao da taxonomia sintetica (3 temas por disciplina, gravada em assuntos.yaml).
+Gravam tambem as notas de corte sinteticas de cada ano (notas_corte/AAAA.yaml, CR-010).
 
 Uso no dev local (site com dados antes de existir prova real curada):
     .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos
@@ -20,6 +21,13 @@ from PIL import Image
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
 from app.pacote.assuntos import ARQUIVO_TAXONOMIA, Taxonomia
 from app.pacote.leitura import DIR_FIGURAS, salvar_pacote
+from app.pacote.notas_corte import (
+    DIRETORIO_NOTAS_CORTE,
+    CarreiraCorte,
+    Modalidade,
+    NotasCorteAno,
+    salvar_ano,
+)
 from app.pacote.schema import LETRAS, Alternativa, Bloco, Fonte, PacoteProva, Questao, TextoBase
 
 TEXTOS_BASE = {"tb01": [10, 11], "tb02": [30, 31, 32]}
@@ -37,6 +45,48 @@ def escrever_taxonomia(destino: Path) -> None:
     destino.mkdir(parents=True, exist_ok=True)
     texto = yaml.safe_dump(taxonomia_sintetica().model_dump(mode="json"), allow_unicode=True)
     (destino / ARQUIVO_TAXONOMIA).write_text(texto, encoding="utf-8")
+
+
+# codigo, nome e (vagas, convocados, corte, maximo) de ac, ep e ppi
+CARREIRAS_SINTETICAS = (
+    (101, "Ciências Biológicas (São Paulo)", (40, 120, 60, 80), (20, 70, 45, 70), (10, 30, 33, 60)),
+    (102, "Medicina (São Paulo, Ribeirão Preto)", (100, 400, 79, 88), (40, 160, 71, 86), (20, 80, 60, 83)),
+    (103, "Música (Ribeirão Preto)", (15, 40, 27, 70), (8, 10, 27, 55), (4, 0, None, None)),
+    (104, "Física (São Carlos)", (30, 90, 27, 75), (12, 30, 27, 60), (6, 12, 27, 50)),
+)
+
+
+def notas_corte_sinteticas(ano: int) -> NotasCorteAno:
+    """Cortes publicados com uma modalidade sem convocados; o corte muda um pouco com o ano."""
+    ajuste = ano % 3
+
+    def modalidade(vagas, convocados, corte, maximo) -> Modalidade:
+        return Modalidade(
+            vagas=vagas,
+            convocados=convocados,
+            corte=None if corte is None else corte + ajuste,
+            maximo=maximo,
+        )
+
+    return NotasCorteAno(
+        ano=ano,
+        status="publicada",
+        fonte=f"https://www.fuvest.br/wp-content/uploads/fuvest_{ano}_notas_de_corte.pdf",
+        pendencias=[],
+        carreiras=[
+            CarreiraCorte(codigo=codigo, nome=nome, ac=modalidade(*ac), ep=modalidade(*ep), ppi=modalidade(*ppi))
+            for codigo, nome, ac, ep, ppi in CARREIRAS_SINTETICAS
+        ],
+    )
+
+
+def escrever_notas_corte(destino: Path, anos: tuple[int, ...] = (2098, 2099)) -> list[Path]:
+    caminhos = []
+    for ano in anos:
+        caminho = destino / DIRETORIO_NOTAS_CORTE / f"{ano}.yaml"
+        salvar_ano(notas_corte_sinteticas(ano), caminho)
+        caminhos.append(caminho)
+    return caminhos
 
 
 def _disciplinas_por_numero(rng: random.Random) -> list[Disciplina]:
@@ -125,6 +175,7 @@ def _webp_placeholder(nome: str) -> bytes:
 
 def escrever_pacotes(destino: Path, anos: tuple[int, ...] = (2098, 2099)) -> list[Path]:
     escrever_taxonomia(destino)
+    escrever_notas_corte(destino, anos)
     diretorios = []
     for ano in anos:
         pacote = gerar_pacote(ano)
