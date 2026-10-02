@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.9
+**Versão:** 1.10
 **Data:** 2026-10-02
-**PRD Ref:** 01-PRD v4.2
-**Arquitetura Ref:** 02-ARCHITECTURE v1.9
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009
+**PRD Ref:** 01-PRD v5.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.10
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -12,7 +12,7 @@
 
 ## 1. Resumo
 
-MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca. CR-008: identidade visual "Papel & Caneta" (tokens, Fraunces, marca, motivos) e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque. CR-009: rolagem ao topo a cada mudança de página e extras do início (sobretítulo, etiquetas e miniatura da folha na Prova completa, lateral de 340 px, modos em linhas no celular).
+MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca. CR-008: identidade visual "Papel & Caneta" (tokens, Fraunces, marca, motivos) e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque. CR-009: rolagem ao topo a cada mudança de página e extras do início (sobretítulo, etiquetas e miniatura da folha na Prova completa, lateral de 340 px, modos em linhas no celular). CR-010 (Fase 4): notas de corte da 1ª fase por carreira, página `/notas-de-corte` e carreira-alvo na conta, com a comparação no resultado e no início.
 
 ### Specs por feature
 
@@ -25,12 +25,13 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 | 05 | [Reporte de Erro](specs/05-reportes.md) | RF-007, RF-021 | `POST /api/reportes`, modal, CLI de reportes |
 | 06 | [Assuntos e Desempenho](specs/06-assuntos-desempenho.md) | RF-005, RF-018, RF-022, RF-023 | Taxonomia `assuntos.yaml`, V11, `questoes.assunto`, assuntos no catálogo e na correção, CLI `assuntos`, "Ver por assunto" e painel `/desempenho` (CR-004) |
 | 07 | [Contas e Histórico Sincronizado](specs/07-contas-sincronizacao.md) | RF-008, RF-020, RF-022, RF-024–RF-026 | Login Google (OIDC + PKCE), sessão em cookie, `/api/sessao`, `/api/historico`, `/api/conta`, sincronização com espelho local, `/conta`, `/privacidade` (CR-005); login obrigatório (CR-006); vitrine e apresentação (CR-007) |
+| 08 | [Notas de Corte e Carreira-alvo](specs/08-notas-de-corte.md) | RF-027–RF-029 | `data/provas/notas_corte/AAAA.yaml` (C01–C05), extrator e comando `cortes`, `GET /api/notas-corte`, `PUT`/`DELETE /api/conta/carreira-alvo`, migration 004, `/notas-de-corte`, comparação no resultado e no início (CR-010) |
 
 ---
 
 ## 2. Contratos da API (Visão Geral)
 
-Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, correções e reportes exigem sessão (**Acesso**): 401 `nao_autenticado` sem sessão, 503 `site_indisponivel` em produção sem login configurado. Continuam sem estado (ADR-004). Só `/api/health`, `/api/vitrine` (só os totais da base — CR-007, emenda à D2 do CR-006), `/figuras`, o login e `/api/sessao` são públicos. "Sessão" = cookie de sessão obrigatório (401 sem ele); "Origin" = `POST`/`DELETE` que recusam `Origin` diferente de `PUBLIC_URL` (403) — ADR-010.
+Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, correções, reportes e, desde o CR-010, notas de corte exigem sessão (**Acesso**): 401 `nao_autenticado` sem sessão, 503 `site_indisponivel` em produção sem login configurado. Continuam sem estado (ADR-004). Só `/api/health`, `/api/vitrine` (só os totais da base — CR-007, emenda à D2 do CR-006), `/figuras`, o login e `/api/sessao` são públicos. "Sessão" = cookie de sessão obrigatório (401 sem ele); "Origin" = `POST`/`DELETE` que recusam `Origin` diferente de `PUBLIC_URL` (403) — ADR-010.
 
 | Método | Path | Rate limit | Body | Resposta | Spec |
 |--------|------|------------|------|----------|------|
@@ -41,18 +42,21 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 | `GET` | `/api/questoes?ids=` | — | — | `QuestoesResponse` (Acesso) | 02 |
 | `POST` | `/api/correcoes` | 120/min/IP | `CorrecaoRequest` | `CorrecaoResponse` (com assunto por item e por disciplina — CR-004) (Acesso, Origin) | 04, 06 |
 | `POST` | `/api/reportes` | 10/hora/IP | `ReporteCreate` | `{id}` (201) (Acesso, Origin) | 05 |
+| `GET` | `/api/notas-corte?ano=` | — | — | `NotasCorteResponse` (Acesso — CR-010) | 08 |
 | `GET` | `/api/auth/google?voltar=` | 20/min/IP | — | 302 para o Google (404 sem configuração) | 07 |
 | `GET` | `/api/auth/google/callback` | 20/min/IP | — | 302 para `voltar` + cookie de sessão, ou `/conta?erro=login` | 07 |
-| `GET` | `/api/sessao` | — | — | `SessaoResponse` com `acesso` (`no-store`) | 07 |
+| `GET` | `/api/sessao` | — | — | `SessaoResponse` com `acesso` e, com usuário, `carreira_alvo` (CR-010) (`no-store`) | 07, 08 |
 | `DELETE` | `/api/sessao` | — | — | 204 (Origin) | 07 |
 | `GET` | `/api/historico` | 60/min/IP | — | `HistoricoResponse` (Sessão, `no-store`) | 07 |
 | `POST` | `/api/historico` | 30/min/IP | `HistoricoRequest` | `HistoricoResponse` (Sessão, Origin) | 07 |
 | `DELETE` | `/api/historico` | 10/min/IP | — | 204 (Sessão, Origin) | 07 |
 | `DELETE` | `/api/conta` | 10/min/IP | — | 204 (Sessão, Origin) | 07 |
+| `PUT` | `/api/conta/carreira-alvo` | 30/min/IP | `CarreiraAlvoRequest` | `CarreiraAlvo` (Acesso, Sessão, Origin, `no-store` — CR-010) | 08 |
+| `DELETE` | `/api/conta/carreira-alvo` | 30/min/IP | — | 204 (Acesso, Sessão, Origin — CR-010) | 08 |
 | `GET` | `/figuras/{ano}/{arquivo}` | — | — | `image/webp` | §3 abaixo |
 | `GET` | `/*` (demais) | — | — | `index.html` (SPA) | §3 abaixo |
 
-**Formato de erro de domínio:** `{"detail": {"codigo": "<snake_case>", "mensagem": "<pt-BR>", ...extras}}`. Erros de validação usam o 422 padrão do FastAPI. Os códigos são `prova_nao_encontrada`, `questoes_insuficientes` e `questao_nao_encontrada`; o CR-005 acrescenta `login_indisponivel` (404), `nao_autenticado` (401) e `origem_invalida` (403); o CR-006, `site_indisponivel` (503).
+**Formato de erro de domínio:** `{"detail": {"codigo": "<snake_case>", "mensagem": "<pt-BR>", ...extras}}`. Erros de validação usam o 422 padrão do FastAPI. Os códigos são `prova_nao_encontrada`, `questoes_insuficientes` e `questao_nao_encontrada`; o CR-005 acrescenta `login_indisponivel` (404), `nao_autenticado` (401) e `origem_invalida` (403); o CR-006, `site_indisponivel` (503); o CR-010, `carreira_invalida` (422).
 
 ---
 
@@ -83,7 +87,7 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 | `Cache-Control` | `no-store` nas respostas com dado pessoal (`/api/sessao`, `/api/historico`) — CR-005 |
 
 ### 3.5 Migrations
-`001_schema_inicial` cria `provas`, `textos_base`, `questoes`, `reportes` e `estatisticas_geracao` conforme `02-ARCHITECTURE.md` §4. `002_assunto_questoes` (CR-004) acrescenta `questoes.assunto` e o índice `ix_questoes_assunto`. `003_contas` (CR-005) cria `usuarios`, `sessoes` e `simulados_concluidos` (downgrade destrutivo: apaga contas e históricos). Testadas com `upgrade head` + `downgrade base`.
+`001_schema_inicial` cria `provas`, `textos_base`, `questoes`, `reportes` e `estatisticas_geracao` conforme `02-ARCHITECTURE.md` §4. `002_assunto_questoes` (CR-004) acrescenta `questoes.assunto` e o índice `ix_questoes_assunto`. `003_contas` (CR-005) cria `usuarios`, `sessoes` e `simulados_concluidos` (downgrade destrutivo: apaga contas e históricos). `004_carreira_alvo` (CR-010) acrescenta `usuarios.carreira_alvo_ano` e `carreira_alvo_codigo` (downgrade apaga só as carreiras-alvo). Testadas com `upgrade head` + `downgrade base`.
 
 ---
 
@@ -107,6 +111,7 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.10 | 2026-10-02 | CR-010: spec 08 nova (notas de corte e carreira-alvo); contratos `GET /api/notas-corte`, `PUT`/`DELETE /api/conta/carreira-alvo` e `carreira_alvo` na sessão, erro `carreira_invalida`, migration 004; notas nas specs 01, 03, 04 e 07 |
 | 1.9 | 2026-10-02 | CR-009: spec 03 v1.9 (rolagem ao topo a cada mudança de caminho, extras E4/E6/E7 do início, círculo de um algarismo, marcas do painel abaixo da legenda) e spec 04 v1.6 (círculo de um algarismo no resultado). Nenhum contrato da API muda |
 | 1.8 | 2026-10-01 | CR-008: identidade "Papel & Caneta" — spec 03 v1.8 (tokens, fontes, marca, motivos, início com conta), spec 04 v1.5 (resultado e revisão) e spec 07 v1.4 (apresentação). Nenhum contrato da API muda |
 | 1.7 | 2026-10-01 | CR-007: `GET /api/vitrine` pública (emenda à D2 do CR-006); spec 07 v1.3 (§9: vitrine e apresentação) e spec 03 v1.7 (menu do cabeçalho no celular, barra do topo da resolução opaca) |

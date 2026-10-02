@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.9
+**Versão:** 1.10
 **Data:** 2026-10-02
-**PRD Ref:** 01-PRD v4.2
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009
+**PRD Ref:** 01-PRD v5.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010
 
 ---
 
@@ -40,7 +40,7 @@
 
 Monorepo com dois subsistemas que compartilham o mesmo modelo de dados:
 
-1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009).
+1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009). As notas de corte de cada ano seguem o mesmo caminho: extraídas do PDF oficial por um comando da CLI, revisadas e commitadas em `data/provas/notas_corte/` (ADR-014, CR-010).
 2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. Gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento vive no `localStorage`. O histórico também vive no `localStorage`; para quem entra com a conta Google (ADR-010), obrigatória para usar o site desde o CR-006 (ADR-012), ele é guardado também no servidor, nas tabelas de conta, e o navegador vira um espelho dele (ADR-011, CR-005).
 
 ```mermaid
@@ -103,6 +103,7 @@ Simulado Fuvest/
 ├── data/
 │   ├── provas/                     # FONTE DA VERDADE das questões (versionado)
 │   │   ├── assuntos.yaml           # taxonomia de assuntos por disciplina (ADR-009, CR-004)
+│   │   ├── notas_corte/            # AAAA.yaml: notas de corte da 1ª fase por carreira (ADR-014, CR-010)
 │   │   └── 2025/
 │   │       ├── prova.yaml          # pacote de revisão (schema em app/pacote/schema.py)
 │   │       └── figuras/            # q037-1.webp, q052-b.webp, tb03-1.webp
@@ -124,18 +125,20 @@ Simulado Fuvest/
 │   │   ├── rate_limit.py           # slowapi
 │   │   ├── security_headers.py     # middleware de headers HTTP
 │   │   ├── autenticacao.py         # cookies de sessão e de login, PKCE, caminho de volta (CR-005)
-│   │   ├── dependencias.py         # sessão do banco, taxonomia, usuário da sessão, verificação de Origin
-│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), auth, conta, historico
-│   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas, google (OIDC), contas, historico
+│   │   ├── dependencias.py         # sessão do banco, taxonomia, notas de corte, usuário da sessão, verificação de Origin
+│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), notas_corte (CR-010), auth, conta (+ carreira-alvo), historico
+│   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas, google (OIDC), contas, historico, notas_corte (CR-010)
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
 │   │       ├── schema.py           # modelo Pydantic do prova.yaml
 │   │       ├── leitura.py          # carregar/salvar YAML
 │   │       ├── assuntos.py         # taxonomia: schema, carregar_taxonomia (estrito), taxonomia_em_uso (API)
+│   │       ├── notas_corte.py      # notas de corte: schema (C01–C05), carregar_ano (estrito), notas_corte_em_uso (API), salvar_ano
 │   │       ├── validacao.py        # regras RN-007 (V01–V11) + relatório de pendências
 │   │       └── sincronizar.py      # repo -> banco (idempotente); `python -m app.pacote.sincronizar`
 │   ├── ingestao/                   # CLI do curador: `python -m ingestao <comando>`
-│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, assuntos, reportes
+│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, assuntos, cortes (CR-010), reportes
 │   │   ├── baixar.py
+│   │   ├── notas_corte.py          # extrator do PDF "Notas de Corte" (família 2020–2025) e rascunho com pendências
 │   │   ├── pdf_util.py             # colunas, ordem de leitura, limpeza de texto, render de região
 │   │   ├── figuras.py              # imagens embutidas + recorte de região -> WebP
 │   │   ├── gabarito/               # parsers de gabarito por família (registry por ano)
@@ -155,17 +158,19 @@ Simulado Fuvest/
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
         │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina,
-        │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007)
+        │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007), useNotasCorte (+ useCarreiraAlvo, CR-010)
         ├── components/             # Layout, MenuCelular (CR-007), Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle,
         │                           #   RequerConta (CR-006), CirculoCaneta e MarcasSincronismo (motivos — CR-008), RolarAoTopo (CR-009), estilos.ts
         │   ├── inicio/             #   UltimoSimulado ("Seu último simulado" — CR-008), MiniFolha (miniatura da folha na Prova completa — CR-009)
+        │   ├── notasCorte/         #   ComparacaoCorte (resultado), LinhaCortes (início), CortesEmLinha (CR-010)
         │   ├── apresentacao/       #   PreviaProduto (miniatura da resolução e do resultado na apresentação — CR-007)
         │   ├── questao/            #   Blocos, Figura, ModalFigura, Alternativas, QuestaoView, ReportarModal
         │   ├── resolucao/          #   FolhaRespostas (folha óptica: bolhas/grade), PainelFolha (celular), TelaPausa, Cronometro
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
-        │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NaoEncontrada
-        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015)
+        │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NotasCorte (CR-010), NaoEncontrada
+        ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015),
+        │                           #   notasCorte.ts (pontos comparáveis, situação, busca — CR-010)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
@@ -224,6 +229,8 @@ erDiagram
         string nome
         datetime criado_em
         datetime ultimo_acesso_em
+        int carreira_alvo_ano
+        int carreira_alvo_codigo
     }
     SESSOES {
         string token_hash PK
@@ -306,6 +313,8 @@ erDiagram
 | nome | varchar(200) | NULL | Claim `name`; atualizado a cada login |
 | criado_em | timestamptz | NOT NULL, default now | |
 | ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login |
+| carreira_alvo_ano | smallint | NULL | Carreira-alvo (CR-010, migration 004): ano da lista de onde foi escolhida |
+| carreira_alvo_codigo | smallint | NULL | Código da carreira naquele ano; gravado e apagado junto com o ano. Nunca a modalidade (RN-018) |
 
 #### sessoes (CR-005)
 | Campo | Tipo | Restrições | Descrição |
@@ -352,6 +361,10 @@ fisica:
 - Cada questão tem exatamente um assunto, da lista da sua disciplina principal (RN-014). Filosofia e Sociologia, que o curador classifica em História, têm assuntos próprios dentro de História; lógica e falácias ficam em Português.
 - Quem usa: a validação (V11), a sincronização (aborta se a taxonomia for inválida), a CLI (`validar`, `assuntos`) e a API (nomes e contagens no catálogo, nomes na correção). A API lê o arquivo do `DATA_DIR` com cache invalidado pelo mtime (`taxonomia_em_uso`).
 
+### Notas de corte (conteúdo, CR-010)
+
+`data/provas/notas_corte/AAAA.yaml`, um por ano (2020 e 2022–2025): `ano`, `status` (`rascunho`/`publicada`), `fonte` (PDF oficial), `pendencias` e, por carreira, `codigo`, `nome` (com o campus) e `ac`/`ep`/`ppi` com `vagas`, `convocados`, `corte` e `maximo` (corte e máximo vazios sem convocados). Não há tabela (ADR-014): a API lê os arquivos publicados e sem problema com cache pelo mtime (`notas_corte_em_uso`), e a conta guarda só o par (ano, código) da carreira-alvo. Os códigos e nomes das carreiras mudam entre anos: não há equivalência entre eles (RN-019).
+
 ---
 
 ## 5. Padrões e Convenções
@@ -378,7 +391,8 @@ fisica:
 - Todas as rotas sob `/api/` (exceto `/figuras/...` e o SPA)
 - Catálogo, geração, questões, correção e reportes **exigem sessão** desde o CR-006 (`exigir_acesso`, ADR-012): 401 `nao_autenticado` sem sessão; 503 `site_indisponivel` em produção sem login configurado; abertos fora de produção sem login configurado. `/api/health`, `/figuras`, o login e `/api/sessao` continuam públicos; desde o CR-007, também `GET /api/vitrine`, só com os totais da base para a apresentação. Rota pública nova não leva `exigir_acesso` e devolve só agregados, nunca conteúdo
 - Rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
-- Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta
+- Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta e a carreira-alvo (CR-010)
+- `GET /api/notas-corte` é conteúdo (`exigir_acesso`); `PUT`/`DELETE /api/conta/carreira-alvo` exigem, além disso, um usuário (401 também no modo `livre`), conferem o `Origin` e respondem com `no-store`. `GET /api/sessao` traz a carreira-alvo resolvida com os cortes (CR-010)
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
 - O gabarito **nunca** vai na resposta de geração/consulta de questões; só em `POST /api/correcoes`
 - O assunto também não aparece na questão pública (resolução); ele só vem no catálogo e na correção (RN-014, CR-004)
@@ -573,6 +587,19 @@ fisica:
   - Positivas: uma direção visual nova (escura, a C do canvas) cabe num CR de tokens; o `tokens.test.ts` acompanha qualquer troca.
   - Negativas: `caneta` e `tinta` passam a ter o mesmo valor; links e itens ativos dependem do sublinhado, e não da cor, para se distinguir do texto.
 
+### ADR-014: Notas de corte como conteúdo versionado, sem tabela
+- **Status:** Aceita
+- **Data:** 2026-10-02
+- **Contexto:** O CR-010 traz as notas de corte da 1ª fase de cada ano, publicadas pela FUVEST em PDF. Mudam uma vez por ano, precisam de revisão (de 2024 em diante o PDF não traz o campus das carreiras) e não dependem do estudante.
+- **Decisão:** Um arquivo por ano em `data/provas/notas_corte/AAAA.yaml`, dentro do `DATA_DIR`, como a taxonomia (ADR-009): entra na imagem sem mudar o Dockerfile e não é tomado por um pacote, porque `listar_pacotes` só considera diretórios com `prova.yaml`. `app/pacote/notas_corte.py` define o schema (Pydantic, `extra="forbid"`, regras C01–C05), a carga estrita usada pelo `validar` (CI) e a carga tolerante com cache pelo mtime usada pela API, que fica só com os anos publicados e sem problema. O extrator (`ingestao/notas_corte.py`, comando `cortes`) gera o rascunho a partir do PDF, por posição de palavra, com as colunas tiradas do cabeçalho. A conta guarda só o par (ano, código) da carreira-alvo, em duas colunas de `usuarios` (migration 004).
+- **Alternativas Consideradas:**
+  - Tabela `notas_corte` sincronizada como as provas: descartada pelos mesmos motivos do ADR-009 (mais uma migration e um passo de sincronização para dado que só muda por commit).
+  - Ler o PDF em tempo de execução: descartada, porque os nomes precisam de revisão e o servidor não leva as bibliotecas de PDF.
+  - Guardar a modalidade de concorrência para personalizar a comparação: descartada (D4 do CR-010). A autodeclaração PPI é dado pessoal sensível (LGPD, art. 11); o site mostra sempre as três modalidades.
+- **Consequências:**
+  - Positivas: um ano novo de cortes é uma mudança de conteúdo (branch `conteudo/cortes-AAAA`, CI e deploy), sem CR nem código novo; nenhuma tabela nova para os cortes.
+  - Negativas: arquivo inválido some da API sem derrubar o deploy (o CI é o portão); a carreira-alvo de um ano antigo não acompanha a renumeração das carreiras e o estudante escolhe de novo (RN-019).
+
 ## 9. Deploy e Infraestrutura
 
 ### 9.1 Plataforma de Produção
@@ -664,4 +691,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`. v1.9 (2026-10-02, CR-009): `RolarAoTopo` (padrão de rolagem ao trocar de rota) e `inicio/MiniFolha`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`. v1.9 (2026-10-02, CR-009): `RolarAoTopo` (padrão de rolagem ao trocar de rota) e `inicio/MiniFolha`. v1.10 (2026-10-02, CR-010): notas de corte — ADR-014 (conteúdo versionado em `data/provas/notas_corte/`, sem tabela), `app/pacote/notas_corte.py`, `ingestao/notas_corte.py` e comando `cortes`, `usuarios.carreira_alvo_*` (migration 004), padrões da API (`/api/notas-corte`, `/api/conta/carreira-alvo`), `NotasCortePage`, `components/notasCorte/` e `utils/notasCorte.ts`.*

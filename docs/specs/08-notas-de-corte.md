@@ -31,23 +31,23 @@ Fora desta iteração (CR-010 §3, D1–D4): equivalência de carreiras entre an
 | Ação | Caminho | Descrição |
 |------|---------|-----------|
 | Criar | `data/provas/notas_corte/{2020,2022,2023,2024,2025}.yaml` | Conteúdo (nomes revisados pelo usuário) |
-| Criar | `backend/app/pacote/notas_corte.py` | Schema, `carregar_ano`, `validar_notas_corte`, `notas_corte_em_uso`, `BaseNotasCorte` |
+| Criar | `backend/app/pacote/notas_corte.py` | Schema, `PADRAO_FONTE`, `carregar_ano`, `problemas_de_publicacao`, `salvar_ano`, `notas_corte_em_uso`, `BaseNotasCorte` |
 | Criar | `backend/ingestao/notas_corte.py` | Extrator por posição de palavra e rascunho com pendências |
-| Modificar | `backend/ingestao/cli.py` | Comando `cortes`; `validar` com os cortes |
+| Modificar | `backend/ingestao/cli.py`, `backend/ingestao/baixar.py` | Comando `cortes`; `validar` com os cortes; `obter_pdf` (download de PDF compartilhado com o `baixar`) |
 | Modificar | `backend/app/models.py` + criar `backend/alembic/versions/004_carreira_alvo.py` | `usuarios.carreira_alvo_ano`, `usuarios.carreira_alvo_codigo` |
 | Modificar | `backend/app/schemas.py` | `CortesModalidades`, `CarreiraCorteResposta`, `NotasCorteResponse`, `CarreiraAlvoRequest`, `CarreiraAlvo`; `UsuarioPublico.carreira_alvo` |
 | Criar | `backend/app/services/notas_corte.py` | Resposta da API, resolução e gravação da carreira-alvo |
 | Criar | `backend/app/routers/notas_corte.py` | `GET /api/notas-corte` |
 | Modificar | `backend/app/routers/conta.py`, `backend/app/dependencias.py`, `backend/app/main.py` | `PUT`/`DELETE /api/conta/carreira-alvo`; `obter_notas_corte`; sessão com a carreira-alvo; registro do router |
-| Modificar | `backend/tests/fixtures/gerar_pacotes.py` | `notas_corte/2099.yaml` sintético (dados de desenvolvimento) |
+| Modificar | `backend/tests/fixtures/gerar_pacotes.py` | `notas_corte/AAAA.yaml` sintéticos dos anos dos pacotes (testes e desenvolvimento) |
 | Criar | `backend/tests/test_notas_corte_pacote.py`, `test_notas_corte_extrator.py`, `test_cli_cortes.py`, `test_api_notas_corte.py`, `test_carreira_alvo.py` | Testes |
-| Modificar | `backend/tests/test_migrations.py` | Migration 004 |
+| Modificar | `backend/tests/test_migrations.py`, `test_acesso.py`, `test_auth.py`, `test_cli_validar.py` | Migration 004; `/api/notas-corte` nas rotas de conteúdo; `carreira_alvo` na sessão; `validar` com os cortes |
 | Modificar | `frontend/src/types.ts`, `services/api.ts`, `test/apiFalsa.ts` | Tipos, chamadas e API falsa |
 | Criar | `frontend/src/utils/notasCorte.ts` (+ `notasCorte.test.ts`) | Modalidades, pontos comparáveis, situação, busca |
-| Criar | `frontend/src/hooks/useNotasCorte.ts`, `hooks/useCarreiraAlvo.ts` | Consulta e mutações |
+| Criar | `frontend/src/hooks/useNotasCorte.ts` | `useNotasCorte` (consulta) e `useCarreiraAlvo` (mutações) |
 | Criar | `frontend/src/pages/NotasCortePage.tsx` (+ `notasCorte.test.tsx`) | Página |
-| Criar | `frontend/src/components/notasCorte/ComparacaoCorte.tsx` | Bloco do resultado e linha do início |
-| Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx` | Rota e links |
+| Criar | `frontend/src/components/notasCorte/ComparacaoCorte.tsx` (+ `pages/comparacaoCorte.test.tsx`) | `ComparacaoCorte` (resultado), `LinhaCortes` (início) e `CortesEmLinha` |
+| Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx`, `components/estilos.ts` | Rota, links e `BOTAO_PEQUENO` |
 | Modificar | `frontend/src/pages/ResultadoPage.tsx`, `components/inicio/UltimoSimulado.tsx` | Comparação |
 | Modificar | `frontend/src/pages/ApresentacaoPage.tsx`, `ContaPage.tsx`, `PrivacidadePage.tsx` (+ testes) | Textos |
 
@@ -78,6 +78,7 @@ Os quatro números de cada modalidade transcrevem a linha do PDF. A interface mo
 
 ```python
 DIRETORIO_NOTAS_CORTE = "notas_corte"
+PADRAO_FONTE = r"^https://www\.fuvest\.br/\S+\.pdf$"   # fonte do arquivo e URL aceita pelo comando `cortes`
 MINIMO_FUVEST = 27      # menos de 30% da 1a fase elimina (Resolucao FUVEST 2025, art. 11 par. 3)
 PONTOS_PROVA = 90
 
@@ -91,7 +92,7 @@ class Modalidade(BaseModel):              # extra="forbid"
 
 class CarreiraCorte(BaseModel):           # extra="forbid"
     codigo: int                           # 100..999
-    nome: str                             # 1..200 caracteres, sem espaços nas pontas
+    nome: str                             # 1..200 caracteres, sem espaços nas pontas (o mais longo tem ~170)
     ac: Modalidade
     ep: Modalidade
     ppi: Modalidade
@@ -102,7 +103,7 @@ class CarreiraCorte(BaseModel):           # extra="forbid"
 class NotasCorteAno(BaseModel):           # extra="forbid"
     ano: int                              # 2000..2100
     status: Literal["rascunho", "publicada"]
-    fonte: str                            # ^https://www\.fuvest\.br/\S+\.pdf$
+    fonte: str                            # PADRAO_FONTE
     pendencias: list[str]
     carreiras: list[CarreiraCorte]        # 1..300
 
@@ -152,7 +153,7 @@ class NotasCorteResponse(BaseModel):
     carreiras: list[CarreiraCorteResposta]   # ordem do arquivo (por código)
 
 class CarreiraAlvoRequest(BaseModel):     # extra="forbid"
-    ano: int                              # 2000..2100
+    ano: int                              # 1977..2100 (o `Ano` da API)
     codigo: int                           # 100..999
 
 class CarreiraAlvo(BaseModel):
@@ -211,11 +212,11 @@ export function filtrarCarreiras(carreiras: CarreiraCorte[], busca: string): Car
 9. Saída: `NotasCorteAno` com `status: rascunho`, gravado em YAML (UTF-8, LF, nomes sem escape), com o comentário de cabeçalho da §2.2.
 
 **Comando `cortes`:** `python -m ingestao cortes --ano AAAA --url URL [--forcar]`
-- Baixa o PDF para `data/_cache/AAAA/notas_corte.pdf` (reaproveita se já existir), com as regras do `baixar` (só https) e a URL em `www.fuvest.br`. As URLs mudam de padrão entre anos (`fuvest_2020_nota_de_corte.pdf` × `fuvest2023_notas_de_corte.pdf`), por isso são informadas.
+- Baixa o PDF para `data/_cache/AAAA/notas_corte.pdf`, com a URL de origem ao lado (`notas_corte.pdf.url`): o cache só é reaproveitado para a mesma URL. Só aceita PDF em `https://www.fuvest.br/` (`PADRAO_FONTE`; o download é o `obter_pdf` do `baixar`). PDF ilegível vira erro da CLI ("PDF ilegível", com o caminho a apagar), sem traceback. As URLs mudam de padrão entre anos (`fuvest_2020_nota_de_corte.pdf` × `fuvest2023_notas_de_corte.pdf`), por isso são informadas.
 - Grava `data/provas/notas_corte/AAAA.yaml`. Se o arquivo já existir, recusa sem `--forcar` (exit 1): protege os nomes revisados.
 - Imprime o resumo ("N carreiras, P pendências") e as pendências.
 
-**`validar`:** `--todas` valida também todos os arquivos de `notas_corte/`; `--ano AAAA` valida o pacote e, se existir, o arquivo de cortes do ano. Para cada arquivo, imprime `== cortes AAAA — <status>` e os problemas. Falha (exit 1) com arquivo inválido (C01, C04) ou publicado com problema (C02, C03, C05), como os pacotes publicados com pendência bloqueante.
+**`validar`:** `--todas` valida também todos os arquivos de `notas_corte/`; `--ano AAAA` valida o pacote e, se existir, o arquivo de cortes do ano; num ano só com cortes (sem pacote de prova, ex.: 2021), valida só os cortes. Para cada arquivo, imprime `== cortes AAAA — <status>` e os problemas. Falha (exit 1) com arquivo inválido (C01, C04) ou publicado com problema (C02, C03, C05), como os pacotes publicados com pendência bloqueante.
 
 **Curadoria dos nomes (conteúdo, não código):** o curador completa os nomes cortados e, quando o PDF não traz o campus, o campus de **todas** as carreiras do ano (de 2024 em diante a FUVEST tirou o campus do nome; até 2023 ele vem no nome). Fontes: o Guia de Carreiras e Cursos (2025, `fuvest2025_guia-carreiras.pdf`) ou o Manual do Candidato (até 2024), que listam os cursos de cada carreira com o campus e as vagas; a soma das vagas dos cursos tem que bater com as vagas da carreira no PDF de notas de corte, o que confere a atribuição. Depois zera `pendencias` e muda para `publicada`. Formato do nome: o da FUVEST; quando faltar o campus, as cidades entre parênteses, São Paulo primeiro e as demais em ordem alfabética (ex.: "Psicologia (Ribeirão Preto)", "Medicina (São Paulo, Bauru, Ribeirão Preto)"). As notas de corte de um ano novo seguem o fluxo de conteúdo: branch `conteudo/cortes-AAAA`, CI verde, sem CR.
 
@@ -236,7 +237,7 @@ export function filtrarCarreiras(carreiras: CarreiraCorte[], busca: string): Car
 ```
 GET /api/notas-corte?ano=AAAA
 Auth: Acesso (specs/07 §8: 401 nao_autenticado sem sessão no modo conta; 503 site_indisponivel)
-Query: ano opcional, inteiro 2000..2100 (fora disso -> 422)
+Query: ano opcional, inteiro 1977..2100 (fora disso -> 422)
 200: NotasCorteResponse
      - sem `ano`, ou `ano` não publicado -> o ano mais recente (o cliente compara `ano` com o pedido)
      - nenhum ano publicado -> {"anos": [], "recente": null, "ano": null, "fonte": null, "carreiras": []}
@@ -275,8 +276,8 @@ Migration `004_carreira_alvo` (down_revision `003`), com `op.batch_alter_table` 
 
 | Campo (API) | Regra | Resultado |
 |-------------|-------|-----------|
-| `ano` (query) | inteiro 2000..2100 | 422 |
-| `ano`, `codigo` (body) | 2000..2100 e 100..999; campos extras recusados | 422 |
+| `ano` (query) | inteiro 1977..2100 | 422 |
+| `ano`, `codigo` (body) | 1977..2100 e 100..999; campos extras recusados | 422 |
 | Par (ano, código) | publicado e `ano == recente` | 422 `carreira_invalida` |
 
 ---
@@ -290,13 +291,13 @@ Dentro do `RequerConta`. `useTituloPagina('Notas de corte')`. Lê e grava `?ano=
 | Parte | Conteúdo |
 |-------|----------|
 | Cabeçalho | `h1` "Notas de corte"; "1ª fase da FUVEST: a menor nota entre os convocados para a 2ª fase, por carreira e modalidade." |
-| Ano | `<select>` "Ano" com `anos` (padrão: o `?ano=` se publicado, senão o mais recente). `?ano=` não publicado → aviso "Não há notas de corte de AAAA na base. Mostrando FUVEST {recente}." |
+| Ano | `<select>` "Ano" com `anos` (padrão: o `?ano=` se publicado, senão o mais recente). `?ano=` não publicado → aviso "Não há notas de corte de AAAA na base. Mostrando FUVEST {recente}."; `?ano=` fora de 1977–2100 nem vai à API (seria 422): pede o mais recente, com o mesmo aviso. Trocando de ano, a tabela anterior fica na tela, esmaecida (`aria-busy`), até a nova chegar; o seletor já mostra o ano escolhido e o aviso espera a resposta |
 | Carreira-alvo | Com alvo: "Sua carreira-alvo: **nome** · FUVEST {ano}", os três cortes com as siglas e o botão "Remover". Alvo de um ano anterior ao mais recente: "Sua carreira-alvo é da lista de {ano}. Escolha de novo na lista de {recente}: os códigos e os nomes das carreiras mudam de um ano para outro." Alvo fora da lista (`carreira: null`): "Sua carreira-alvo não está mais na lista. Escolha outra." Sem alvo: "Escolha uma carreira-alvo para comparar a nota dos seus simulados com o corte." |
 | Busca | Campo "Buscar carreira" (nome ou código, sem diferenciar acento nem maiúscula); "N carreiras" (`aria-live="polite"`); sem resultado: "Nenhuma carreira encontrada." |
 | Tabela | Colunas Carreira, Vagas, AC, EP, PPI e, só no ano mais recente e com usuário, a coluna de ação. Linhas ordenadas por nome. Corte `null` → "—" com `title` "sem convocados". A linha da carreira-alvo mostra "Sua carreira-alvo" (texto, não só cor); as outras, o botão "Definir como alvo" (`aria-label` "Definir {nome} como carreira-alvo") |
 | Como ler | "Corte é a menor nota (de 0 a 90) entre os candidatos chamados para a 2ª fase naquela carreira e modalidade." · "Quem faz menos de 27 pontos (30% da prova) é eliminado; corte 27 quer dizer que todos os que atingiram o mínimo foram chamados." · "AC: ampla concorrência. EP: escola pública. PPI: escola pública, pretos, pardos e indígenas." · "É uma referência para a 1ª fase, não uma previsão de aprovação: a aprovação depende da 2ª fase." · "Fonte: FUVEST, Notas de Corte {ano}" (link para `fonte`, avisando que abre em outra aba, como os PDFs do início) |
 
-**Estados:** carregando (`Carregando`); erro da consulta (estado de erro com "Tentar de novo"); nenhum ano publicado ("As notas de corte ainda não estão disponíveis."); salvando (botões da linha desabilitados); salvo (`role="status"`: "{nome} agora é a sua carreira-alvo." / "Carreira-alvo removida."); erro ao salvar (`role="alert"`: "Não foi possível salvar a carreira-alvo. Tente novamente.").
+**Estados:** carregando (`Carregando`); erro da consulta (estado de erro com "Tentar de novo"); nenhum ano publicado ("As notas de corte ainda não estão disponíveis."); salvando (botões da linha desabilitados); salvo (`role="status"`: "{nome} agora é a sua carreira-alvo." / "Carreira-alvo removida."); erro ao salvar (`role="alert"`: "Não foi possível salvar a carreira-alvo. Tente novamente."); 422 `carreira_invalida` (saiu a lista de um ano novo depois que a página abriu): "A lista de notas de corte mudou. {mensagem do servidor}", e a lista é buscada de novo.
 
 **Sem usuário** (só no modo `livre`, fora de produção): a tabela aparece, sem o bloco da carreira-alvo e sem a coluna de ação.
 
@@ -304,24 +305,25 @@ Dentro do `RequerConta`. `useTituloPagina('Notas de corte')`. Lê e grava `?ano=
 
 **Depois de salvar:** a mutação atualiza a sessão em cache (`['sessao']`) com a `CarreiraAlvo` devolvida (ou `null` no `DELETE`), e o resultado e o início passam a usar a nova.
 
-### Componente: ComparacaoCorte
+### Componente: ComparacaoCorte (resultado)
 
 | Prop | Tipo | Obrigatório | Descrição |
 |------|------|-------------|-----------|
 | pontos | `number` | Sim | `pontosComparaveis(entrada)` |
 | alvo | `CarreiraAlvo \| null` | Sim | `sessao.usuario?.carreira_alvo ?? null` |
-| variante | `'resultado' \| 'inicio'` | Sim | Bloco completo ou linha curta |
-| anoDaProva | `number \| null` | Não | Na Prova de um ano, para o link dos cortes daquele ano |
+| anoDaProva | `number \| null` | Sim | `anoDaProva(entrada)`: na Prova de um ano, para o link dos cortes daquele ano |
 | comUsuario | `boolean` | Sim | Sem usuário (modo livre), sem convite para escolher |
 
-**Variante `resultado`** (no `ResultadoPage`, logo depois do `ResumoResultado`; só com `pontos` não nulo):
-- `h2` "Notas de corte".
-- Com `alvo.carreira`: "Sua carreira-alvo: **nome** · corte FUVEST {alvo.ano}" e uma linha por modalidade: "{nome da modalidade}: corte {c} — atingiu (+{acima})" / "— faltam {faltam}" / "— sem convocados". A situação é escrita, não só indicada por cor (tokens `acerto` e `erro` como reforço).
+No `ResultadoPage`, depois do resumo e dos botões "Novo simulado" e "Ver histórico", antes de "Por disciplina"; só com `pontos` não nulo. `section` com `h2` "Notas de corte":
+- Com `alvo.carreira`: "Sua carreira-alvo: **nome** · corte FUVEST {alvo.ano}" e a lista "Cortes da carreira-alvo", uma linha por modalidade: "{nome da modalidade}: corte {c} — atingiu (+{acima})" / "— faltam {faltam}", ou "{nome da modalidade}: sem convocados". A situação é escrita, não só indicada por cor (tokens `acerto` e `erro` como reforço). Depois, "Referência para ir à 2ª fase, não previsão de aprovação." e o link "Ver todas as notas de corte".
 - Com alvo e `carreira: null`: "Sua carreira-alvo não está mais na lista." + link "Escolher de novo" (`/notas-de-corte`).
-- Sem alvo, com usuário: "Compare sua nota com o corte da carreira que você quer." + link "Escolher carreira-alvo" (`/notas-de-corte`).
-- Sempre: "Referência para ir à 2ª fase, não previsão de aprovação." e link "Ver todas as notas de corte" (`/notas-de-corte`). Na Prova de um ano, também "Ver as notas de corte de {anoDaProva}" (`/notas-de-corte?ano={anoDaProva}`).
+- Sem alvo, com usuário: "Compare sua nota com o corte da carreira que você quer." + link "Escolher carreira-alvo" (`/notas-de-corte`). Sem usuário (modo livre): só o link "Ver as notas de corte".
+- Na Prova de um ano, em todos os casos, também "Ver as notas de corte de {anoDaProva}" (`/notas-de-corte?ano={anoDaProva}`).
 
-**Variante `inicio`** (no cartão `UltimoSimulado`, abaixo do aproveitamento): só com `alvo.carreira` e `pontos` não nulo. Uma linha: "Corte {alvo.ano} · {nome}: AC 79 (faltam 18) · EP 71 (faltam 10) · PPI 60 (atingiu)", com `<abbr>` nas siglas.
+### Componentes: LinhaCortes (início) e CortesEmLinha
+
+- **`LinhaCortes`** (`pontos`, `alvo`), no cartão `UltimoSimulado`, abaixo do aproveitamento: só com `alvo.carreira` e `pontos` não nulo. Uma linha: "Corte {alvo.ano} · {nome}: AC 79 (faltam 18) · EP 71 (faltam 10) · PPI 60 (atingiu)". Sem os dados da carreira, nada: o cartão é só um lembrete, e o aviso de escolher de novo fica no resultado e na página.
+- **`CortesEmLinha`** (`cortes`, `pontos?`): "AC 79 · EP 71 · PPI 60", com `<abbr>` nas siglas e "—" sem convocados; com `pontos`, a situação curta depois de cada corte. Usado no cartão da carreira-alvo da página e pela `LinhaCortes`.
 
 ### Cabeçalho e menu do celular (complementam `specs/03`)
 Link "Notas de corte" (`/notas-de-corte`) depois de "Histórico", com as mesmas regras de visibilidade de "Desempenho" e "Histórico" (só com acesso ao conteúdo); o mesmo item no `MenuCelular`.
@@ -388,6 +390,9 @@ sequenceDiagram
 | 11 | `cortes` com o arquivo já existente | Recusa sem `--forcar` (exit 1) |
 | 12 | PDF com layout novo | Erro "layout desconhecido" com a página; nada é gravado |
 | 13 | Nome de carreira com HTML | Gravado e mostrado como texto (React) |
+| 14 | `?ano=1950` (fora da faixa da API) | Mostra o mais recente com o aviso, sem chamar a API com o ano |
+| 15 | Saem os cortes de um ano novo com a página aberta e o estudante clica "Definir como alvo" | 422 `carreira_invalida`: "A lista de notas de corte mudou…" e a lista nova é buscada |
+| 16 | `cortes` rodado de novo com outra URL, ou com o PDF do cache corrompido | Outra URL baixa de novo; PDF ilegível → erro da CLI, nada gravado |
 
 ---
 
@@ -403,7 +408,7 @@ sequenceDiagram
 | IT-024 | `validar --todas` e `--ano` com cortes válidos, inválidos e publicados com problema | CLI | Exit 0 / 1 e relatório `== cortes AAAA` |
 | IT-025 | Extrator, variante 2020 (mínimo e máximo na linha da modalidade), com palavras sintéticas | `ingestao/notas_corte.py` | Carreiras e modalidades corretas |
 | IT-026 | Extrator, variante 2022+ (mínimo acima da linha, totais na linha da carreira, "Total" encerra a tabela, treineiros fora, pendências de nome cortado e repetido, cabeçalho desconhecido → erro) | `ingestao/notas_corte.py` | Idem + pendências |
-| IT-027 | Comando `cortes` (download falso): grava o rascunho em LF; recusa sobrescrever sem `--forcar`; URL fora de `www.fuvest.br` → erro | CLI | Exit e arquivo conforme |
+| IT-027 | Comando `cortes` (download falso): grava o rascunho em LF; recusa sobrescrever sem `--forcar`; URL fora de `www.fuvest.br` → erro; cache por URL; PDF ilegível → erro; conferência com os 5 PDFs reais quando estão no cache local | CLI | Exit e arquivo conforme |
 | BT-079 | Sem `ano` → mais recente; com `ano` publicado; `ano` não publicado → mais recente; sem arquivos → listas vazias | GET /api/notas-corte | 200 com `anos`, `recente`, `ano`, `fonte`, `carreiras` |
 | BT-080 | Acesso: sem sessão no modo `conta`; modo `indisponivel` | GET /api/notas-corte | 401 / 503 |
 | BT-081 | `ano=abc`, `ano=1800` | GET /api/notas-corte | 422 |
@@ -420,8 +425,8 @@ sequenceDiagram
 |----|---------|------|----------|
 | UT-055 | `pontosComparaveis` (completa, ano, personalizado, total ≠ 90), `anoDaProva`, `situacao` (igual, acima, abaixo, sem corte) | Vitest | Conforme RN-018 |
 | UT-056 | `normalizarBusca` e `filtrarCarreiras` (sem acento, por código, ordem por nome) | Vitest | Conforme |
-| UT-057 | Página: ano padrão, troca de ano (`?ano=`), ano não publicado com aviso, busca e contagem, tabela, "—", "Como ler" e link da fonte | Vitest + Testing Library | Conforme §3 |
-| UT-058 | Página com carreira-alvo: definir (só no ano mais recente), remover, alvo de ano anterior, alvo fora da lista, erro ao salvar; link "Notas de corte" no cabeçalho e no menu do celular | Vitest + Testing Library | Conforme §3 |
+| UT-057 | Página: ano padrão, troca de ano (`?ano=`), ano não publicado ou fora da faixa com aviso, seletor durante a carga, busca e contagem, tabela, "—", "Como ler" e link da fonte | Vitest + Testing Library | Conforme §3 |
+| UT-058 | Página com carreira-alvo: definir (só no ano mais recente), remover, alvo de ano anterior, alvo fora da lista, erro ao salvar, lista que ficou velha (422); link "Notas de corte" no cabeçalho e no menu do celular | Vitest + Testing Library | Conforme §3 |
 | UT-059 | Resultado: bloco com alvo (três cortes, "faltam"/"atingiu"), sem alvo (convite), alvo fora da lista, link do ano na Prova de um ano, sem bloco no Personalizado | Vitest + Testing Library | Conforme §3 |
 | UT-060 | Início: linha dos cortes com 90 questões e alvo; sem linha no Personalizado ou sem alvo | Vitest + Testing Library | Conforme §3 |
 | UT-061 | Textos da apresentação, Conta e Privacidade com a carreira-alvo | Vitest + Testing Library | Conforme §3 |
@@ -431,11 +436,11 @@ sequenceDiagram
 
 ## 7. Checklist de Implementação
 
-- [ ] Schema, carga e validação dos cortes + `validar` (IT-021 a IT-024)
-- [ ] Extrator + comando `cortes` (IT-025 a IT-027)
+- [x] Schema, carga e validação dos cortes + `validar` (IT-021 a IT-024)
+- [x] Extrator + comando `cortes` (IT-025 a IT-027)
 - [ ] Conteúdo 2020, 2022–2025 com os nomes revisados (Gate 1 do CR-010)
-- [ ] `GET /api/notas-corte` (BT-079 a BT-081)
-- [ ] Migration 004 + carreira-alvo + sessão (BT-082 a BT-086, BT-047)
-- [ ] Página, links (UT-055 a UT-058)
-- [ ] Resultado, início e textos (UT-059 a UT-061)
-- [ ] FT-024 exercitado
+- [x] `GET /api/notas-corte` (BT-079 a BT-081)
+- [x] Migration 004 + carreira-alvo + sessão (BT-082 a BT-086, BT-047)
+- [x] Página, links (UT-055 a UT-058)
+- [x] Resultado, início e textos (UT-059 a UT-061)
+- [x] FT-024 exercitado

@@ -1,10 +1,10 @@
 # Especificação Técnica — Início, Configuração e Resolução do Simulado (Frontend)
 
-**Versão:** 1.9
+**Versão:** 1.10
 **Data:** 2026-10-02
 **PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta), CR-009 (rolagem ao trocar de página, extras do início, círculo de um algarismo, marcas do painel)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta), CR-009 (rolagem ao trocar de página, extras do início, círculo de um algarismo, marcas do painel), CR-010 (rota `/notas-de-corte`, link "Notas de corte" no cabeçalho e no menu, linha dos cortes em "Seu último simulado" — detalhe em `specs/08-notas-de-corte.md`)
 
 ---
 
@@ -117,7 +117,8 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/simulado` | `ResolucaoPage` | Fora do `Layout` (modo foco, CR-001 D5): sem o cabeçalho e o rodapé do site. Sem simulado em andamento → redireciona para `/` |
 | `/treino` | `TreinoPage` | Filtros + sessão |
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
-| `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho" e "Histórico", nessa ordem; no celular, eles ficam no menu (CR-007, §3 "Cabeçalho do `Layout`") |
+| `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho", "Histórico" e, desde o CR-010, "Notas de corte", nessa ordem; no celular, eles ficam no menu (CR-007, §3 "Cabeçalho do `Layout`") |
+| `/notas-de-corte` | ver `specs/08-notas-de-corte.md` | Notas de corte por ano e carreira e escolha da carreira-alvo (CR-010); `?ano=AAAA` escolhe o ano |
 | `/conta`, `/privacidade` | ver `specs/07-contas-sincronizacao.md` | Conta e privacidade (CR-005). Com login disponível, o cabeçalho ganha um terceiro link ("Entrar" ou o primeiro nome) para `/conta`; o rodapé ganha "Privacidade". Sem login, só estas duas e a apresentação abrem: as demais rotas, inclusive `/simulado`, passam por `RequerConta` (CR-006, `specs/07` §8) |
 | `*` | 404 simples | Link para `/` |
 
@@ -172,18 +173,18 @@ Protótipos "A · Início" e "A · Início · celular"; o que eles mostram além
   - **A partir de 640 px:** três cartões menores em 3 colunas, com a bolinha em cima e a ação como botão secundário.
   - **Abaixo de 640 px (E6, CR-009):** linhas compactas, com a bolinha à esquerda, o título (19 px) e a descrição no meio e uma seta à direita. O link é o mesmo, mas o texto da ação vira `sr-only` (o nome acessível continua sendo a ação) e um `::after` absoluto cobre o cartão: tocar em qualquer ponto abre o modo. O anel de foco fica no `::after`, em volta do cartão.
 - **Lateral (E7, CR-009):** 340 px a partir de 1280 px, com a borda `linha` e o recuo de hoje. Entre 1024 e 1279 px, continua com 256 px: com 340, os cartões dos modos ficavam com 188 px e "Montar simulado" quebrava.
-- **"Seu último simulado" (I6.2)** (`components/inicio/UltimoSimulado.tsx`): no topo da lateral (no celular, depois dos modos e do link do histórico). Usa `useHistorico` e `ultimoSimulado` (o de maior `finalizadoEm`). Mostra o `h2` "Seu último simulado", "‹descrição› · dd/mm", os acertos em `font-titulo` ("58 de 90"), "64,4% de aproveitamento", "Para estudar" com as duas disciplinas mais fracas (`disciplinasMaisFracas`: menor `percentual`, empate pelo slug, como no resultado; sem as que não tiveram questão contada nem as de 100%, e sem a parte se não sobrar nenhuma) com percentual e barra, e os links "Ver o resultado" (`/resultado/:id`) e "Meu desempenho" (`/desempenho`). Sem histórico, não aparece. Com só uma disciplina, mostra uma.
+- **"Seu último simulado" (I6.2)** (`components/inicio/UltimoSimulado.tsx`): no topo da lateral (no celular, depois dos modos e do link do histórico). Usa `useHistorico` e `ultimoSimulado` (o de maior `finalizadoEm`). Mostra o `h2` "Seu último simulado", "‹descrição› · dd/mm", os acertos em `font-titulo` ("58 de 90"), "64,4% de aproveitamento", "Para estudar" com as duas disciplinas mais fracas (`disciplinasMaisFracas`: menor `percentual`, empate pelo slug, como no resultado; sem as que não tiveram questão contada nem as de 100%, e sem a parte se não sobrar nenhuma) com percentual e barra, e os links "Ver o resultado" (`/resultado/:id`) e "Meu desempenho" (`/desempenho`). Sem histórico, não aparece. Com só uma disciplina, mostra uma. CR-010: com carreira-alvo e um último simulado de 90 questões (Prova completa ou Prova de um ano), abaixo do aproveitamento, a linha dos três cortes (`LinhaCortes`, `specs/08` §3).
 
 ### Cabeçalho do `Layout` (CR-007)
 
 Protótipo: tela "Menu do cabeçalho · celular" do canvas "Protótipo Simulado Fuvest".
 
-- **A partir de 640 px:** como antes. Marca + "Simulado Fuvest" à esquerda; à direita, os links em linha: "Desempenho" e "Histórico" (com acesso ao conteúdo) e a conta ("Entrar" ou o primeiro nome). Altura e estilo dos links (`itemNav`) inalterados.
+- **A partir de 640 px:** como antes. Marca + "Simulado Fuvest" à esquerda; à direita, os links em linha: "Desempenho", "Histórico" e "Notas de corte" (com acesso ao conteúdo; o terceiro desde o CR-010) e a conta ("Entrar" ou o primeiro nome). Altura e estilo dos links (`itemNav`) inalterados.
 - **Abaixo de 640 px:** o cabeçalho tem **56 px fixos**. Os links empilhados (CR-004) saem:
   - **Sem conta** (`acesso: 'conta'` sem usuário): não há menu, só "Entrar", como hoje (O2.4).
   - **Com conta, ou com links de conteúdo** (`livre`, ou `indisponivel` com alguém conectado): botão **"Menu"** (`MenuCelular`) com ícone de três traços e o texto "Menu", 44 px de altura, `aria-expanded` e `aria-controls="menu-principal"`. Aberto, o ícone vira um X e o botão fica com borda azul e fundo `caneta-clara` (O2.1).
 - **Painel** (`<nav id="menu-principal" aria-label="Menu">`, logo abaixo do cabeçalho, largura toda, sombra), sobre o conteúdo escurecido (`tinta` a 35%, a partir do fim do cabeçalho). Itens em linhas de 52 px com ícone (O2.2):
-  - "Início" (casa), "Desempenho" (barras) e "Histórico" (relógio). Desempenho e Histórico só com acesso ao conteúdo, como os links do desktop.
+  - "Início" (casa), "Desempenho" (barras), "Histórico" (relógio) e "Notas de corte" (alvo, CR-010). Os três últimos só com acesso ao conteúdo, como os links do desktop.
   - A página atual fica destacada (fundo `caneta-clara`, texto `caneta-escura`, negrito) e leva `aria-current="page"`.
   - Separada por uma linha, a conta (só com alguém conectado): a inicial do primeiro nome num círculo, o primeiro nome e "Conta e sair", levando a `/conta`.
 - **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão), qualquer troca de rota ou o foco saindo do painel e do botão (Tab depois do último item). O botão também alterna. Tab segue do botão para os itens do painel.

@@ -1,10 +1,10 @@
 # Especificação Técnica — Ingestão de Provas
 
-**Versão:** 1.1
-**Data:** 2026-09-30
+**Versão:** 1.2
+**Data:** 2026-10-02
 **PRD Ref:** 01-PRD v2.0 (RF-001 a RF-006, RF-023, US-009, US-012, RN-001, RN-006, RN-007, RN-014)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-002, ADR-003, ADR-006, ADR-008, ADR-009)
-**CR Ref:** CR-004 (assunto por questão, V11, taxonomia e comando `assuntos` — detalhe em `specs/06-assuntos-desempenho.md`)
+**CR Ref:** CR-004 (assunto por questão, V11, taxonomia e comando `assuntos` — detalhe em `specs/06-assuntos-desempenho.md`), CR-010 (notas de corte: comando `cortes` e `validar` com os cortes — detalhe em `specs/08-notas-de-corte.md`)
 
 ---
 
@@ -167,6 +167,7 @@ Registries (`layouts/__init__.py`, `gabarito/__init__.py`): `FAMILIAS: dict[int,
 | `validar` | `--ano` ou `--todas` | Carrega a taxonomia (`data/provas/assuntos.yaml`; inválida ou ausente → exit 1) e imprime o relatório. Exit 1 se houver pendência bloqueante em pacote `publicada` ou YAML inválido em qualquer pacote. Pacote `rascunho` só gera avisos |
 | `importar` | `[--incluir-rascunhos]` | Roda a sincronização no banco do `DATABASE_URL`. `--incluir-rascunhos` só é aceito com banco SQLite (recusa com erro caso contrário), para o curador ver no site local um rascunho já completo antes de publicá-lo. Taxonomia inválida → exit 1 sem tocar o banco |
 | `assuntos` | `[--ano]` | Relatório da classificação por disciplina e assunto, para revisão (CR-004; formato em `specs/06` §2.5). Não toca o banco |
+| `cortes` | `--ano --url [--forcar]` | Baixa o PDF "Notas de Corte" do ano e grava `data/provas/notas_corte/AAAA.yaml` em rascunho, com as pendências de nome (CR-010; `specs/08` §2.4). Não sobrescreve sem `--forcar`; não toca o banco. `validar` passa a relatar também os cortes (`== cortes AAAA — status`, regras C01–C05) |
 
 **Pacotes sintéticos para desenvolvimento:** `backend/tests/fixtures/gerar_pacotes.py` gera, de forma determinística, pacotes válidos de anos fictícios (2098 e 2099), com 90 questões, textos-base, figuras placeholder, anuladas e todas as disciplinas, além de uma taxonomia sintética (`assuntos.yaml`, 3 assuntos por disciplina) e um assunto em cada questão (CR-004). Esses pacotes alimentam os testes e o site local (`importar --data-dir tests/fixtures/provas`) antes de existir uma prova real curada.
 

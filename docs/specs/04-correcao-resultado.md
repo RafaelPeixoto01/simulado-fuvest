@@ -1,10 +1,10 @@
 # Especificação Técnica — Correção, Resultado e Histórico Local
 
-**Versão:** 1.6
+**Versão:** 1.7
 **Data:** 2026-10-02
 **PRD Ref:** 01-PRD v4.0 (RF-017 a RF-020, US-006, US-007, US-011, RN-002, RN-008, RN-012, RN-014, RN-016)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-005, ADR-009)
-**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`), CR-006 (correção exige sessão; resultado e histórico atrás do login), CR-008 (identidade: círculo nos acertos, números em Fraunces, número da questão na bolinha), CR-009 (círculo de um algarismo)
+**CR Ref:** CR-003 (resultado: ordem, folha corrigida clicável e revisão uma questão por vez), CR-004 (desempenho por assunto; painel em `specs/06-assuntos-desempenho.md`), CR-005 (histórico com conta: envio ao finalizar, avisos, limpar na conta; detalhes em `specs/07-contas-sincronizacao.md`), CR-006 (correção exige sessão; resultado e histórico atrás do login), CR-008 (identidade: círculo nos acertos, números em Fraunces, número da questão na bolinha), CR-009 (círculo de um algarismo), CR-010 (bloco "Notas de corte" no resultado — `specs/08-notas-de-corte.md`)
 
 ---
 
@@ -115,7 +115,7 @@ interface HistoricoEntry {
 - Lê a entrada do state da navegação ou de `useHistorico` (CR-005). Não encontrada enquanto o histórico sincroniza → `Carregando`; depois → "Resultado não encontrado neste navegador" + link para `/historico` (sem conta e com login disponível, sugere entrar com o Google — `specs/07` §3).
 - `ResumoResultado`: nota `acertos/total`, percentual, tempo gasto, tempo médio por questão (`tempoGastoMs / total`), selo "Finalizado por tempo" quando for o caso, aviso de `ignoradas`. CR-008: o número de acertos no `h1` ganha o círculo de caneta (`CirculoCaneta`, `aria-hidden`; o nome do título não muda) e os três números ficam em `font-titulo`. CR-009: com um algarismo (0 a 9 acertos), o círculo ganha mais folga e margem; com dois, fica como antes. O `CirculoCaneta` decide pelo número (`specs/03` §3).
 - Ações: "Novo simulado" (Home), "Ver histórico".
-- **Ordem (CR-003, P1.7):** resumo → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
+- **Ordem (CR-003, P1.7):** resumo → (CR-010) `ComparacaoCorte`, só na Prova completa e na Prova de um ano com 90 questões (`specs/08` §3) → `DesempenhoDisciplinas` → `FolhaCorrigida` (só no celular) → `RevisaoQuestoes`. No desktop (≥ 1024 px), a `FolhaCorrigida` fica num cartão fixo na barra lateral. O conteúdo tem chave pelo `id` do resultado: trocar de resultado zera a revisão.
 - `DesempenhoDisciplinas`: barras horizontais por disciplina (da pior para a melhor), com `acertos/total` e o percentual em texto; em cada disciplina, "Ver por assunto" recolhido (CR-004).
 - **Estado da revisão (D6):** `{indice, filtro, disciplina}` fica na página e é compartilhado pela folha e pela revisão (`revisao.ts`). Tocar numa questão da folha abre aquela questão; se ela não passa nos filtros atuais, eles voltam para "Todas". Trocar os filtros mantém a questão se ela continua visível, senão abre a primeira da lista. Navegar (folha, Anterior/Próxima) rola até a revisão (`scrollIntoView`) e foca o título da questão; trocar de filtro não, para o foco continuar no filtro.
 

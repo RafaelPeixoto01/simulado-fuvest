@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-02  
-**Status:** Rascunho  
+**Status:** Em Implementação  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -110,8 +110,8 @@ Primeiro item da Fase 4 do roadmap do PRD ("Referência de notas de corte por ca
 | Ação | Caminho do Arquivo | Descrição da Mudança |
 |------|--------------------|----------------------|
 | Criar | `backend/app/pacote/notas_corte.py` | Schema (`Modalidade`, `CarreiraCorte`, `NotasCorteAno`), `carregar_notas_corte` (estrita), `notas_corte_em_uso` (tolerante, cache por mtime), `MINIMO_FUVEST = 27` |
-| Criar | `backend/ingestao/notas_corte.py` | Extrator por posição de palavra (2020–2025) e geração do rascunho com pendências |
-| Modificar | `backend/ingestao/cli.py` | Comando `cortes`; `validar --todas` valida os cortes |
+| Criar | `backend/ingestao/notas_corte.py` | Extrator por posição de palavra (2020–2025), geração do rascunho com pendências e download com cache por URL |
+| Modificar | `backend/ingestao/cli.py`, `backend/ingestao/baixar.py` | Comando `cortes`; `validar` com os cortes; `obter_pdf` compartilhado |
 | Criar | `data/provas/notas_corte/2020.yaml`, `2022.yaml`, `2023.yaml`, `2024.yaml`, `2025.yaml` | Conteúdo (nomes revisados pelo usuário — Gate 1) |
 | Modificar | `backend/app/models.py` + criar `backend/alembic/versions/004_carreira_alvo.py` | Colunas da carreira-alvo |
 | Modificar | `backend/app/schemas.py` | `NotasCorteResponse`, `CarreiraCorteResposta`, `CarreiraAlvoRequest`, `CarreiraAlvo`; `UsuarioPublico.carreira_alvo` |
@@ -120,10 +120,10 @@ Primeiro item da Fase 4 do roadmap do PRD ("Referência de notas de corte por ca
 | Criar | `backend/tests/test_notas_corte_pacote.py`, `test_notas_corte_extrator.py`, `test_cli_cortes.py`, `test_api_notas_corte.py`, `test_carreira_alvo.py` | Testes |
 | Modificar | `backend/tests/test_migrations.py`, `backend/tests/fixtures/gerar_pacotes.py` | Migration 004; cortes sintéticos para o desenvolvimento |
 | Modificar | `frontend/src/types.ts`, `services/api.ts`, `test/apiFalsa.ts` | Tipos e chamadas |
-| Criar | `frontend/src/hooks/useNotasCorte.ts`, `hooks/useCarreiraAlvo.ts` | Consulta e mutação |
+| Criar | `frontend/src/hooks/useNotasCorte.ts` | `useNotasCorte` (consulta) e `useCarreiraAlvo` (mutações) |
 | Criar | `frontend/src/utils/notasCorte.ts` (+ teste) | Pontos comparáveis do simulado, diferença, busca sem acento |
 | Criar | `frontend/src/pages/NotasCortePage.tsx` (+ teste) | Página |
-| Criar | `frontend/src/components/notasCorte/ComparacaoCorte.tsx` | Bloco do resultado e linha do início |
+| Criar | `frontend/src/components/notasCorte/ComparacaoCorte.tsx` | `ComparacaoCorte` (resultado), `LinhaCortes` (início), `CortesEmLinha`; `BOTAO_PEQUENO` em `estilos.ts` |
 | Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx`, `pages/ResultadoPage.tsx`, `components/inicio/UltimoSimulado.tsx`, `pages/ContaPage.tsx`, `pages/PrivacidadePage.tsx`, `pages/ApresentacaoPage.tsx` (+ testes) | Rota, links, comparação e textos |
 
 ### 6.2 Banco de Dados
@@ -159,24 +159,55 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 
 ## 8. Critérios de Aceite
 
-- [ ] As notas de corte de 2020, 2022, 2023, 2024 e 2025 estão em `data/provas/notas_corte/`, publicadas, sem pendências, com nomes únicos em cada ano (campus completado) e conferidas por amostragem com o PDF; `validar --todas` passa
-- [ ] Arquivo de cortes inválido (fora do schema, corte abaixo de 27 ou acima do máximo, nome repetido, publicado com pendência) é recusado por `validar` e pelo CI
-- [ ] `python -m ingestao cortes --ano AAAA --url URL` gera o rascunho com as pendências e não sobrescreve um arquivo existente sem `--forcar`
-- [ ] `GET /api/notas-corte` devolve os anos publicados e as carreiras do ano pedido (o mais recente sem `ano`); exige sessão no modo `conta` (401) e fica indisponível em `indisponivel` (503)
-- [ ] O estudante define e remove a carreira-alvo na página; só carreiras do ano mais recente são aceitas (422 `carreira_invalida`); a escolha aparece em outro dispositivo (vem na sessão)
-- [ ] A modalidade de concorrência não é perguntada nem guardada; o resultado e o início mostram sempre os três cortes
-- [ ] O resultado da Prova completa e da Prova de um ano com 90 questões mostra os três cortes da carreira-alvo com "faltam N" ou "atingiu"; sem carreira-alvo, o convite; na Prova de um ano, o link para os cortes daquele ano; Personalizado não mostra o bloco
-- [ ] O cartão "Seu último simulado" mostra a linha dos cortes quando o último simulado tem 90 questões e há carreira-alvo
-- [ ] A página explica o que é o corte, o mínimo de 27 pontos e que é referência para ir à 2ª fase, não previsão de aprovação; funciona a 360 px sem rolagem horizontal
-- [ ] Apresentação, Conta e Privacidade dizem que a conta guarda também a carreira-alvo; excluir a conta a apaga
-- [ ] Migration `004` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI)
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge — descrever o que foi validado e o resultado (Playwright para UI, chamada HTTP para endpoints) (CR-037)
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados (CR-040)
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: três endpoints novos e uma coluna nova com dado de usuário
-- [ ] Documentos afetados foram atualizados
+- [ ] As notas de corte de 2020, 2022, 2023, 2024 e 2025 estão em `data/provas/notas_corte/`, publicadas, sem pendências, com nomes únicos em cada ano (campus completado) e conferidas por amostragem com o PDF; `validar --todas` passa — extraídas (106, 107, 107, 85 e 75 carreiras), nomes completados (174 ajustes: campus de todas as 160 carreiras de 2024–2025, atribuído pela soma das vagas dos cursos, que fecha em todas; 18 nomes cortados lidos nos manuais e no guia), `validar --todas` sem problema. **Aguardando o Gate 1** (revisão dos nomes pelo usuário) para trocar `rascunho` por `publicada`
+- [x] Arquivo de cortes inválido (fora do schema, corte abaixo de 27 ou acima do máximo, nome repetido, publicado com pendência) é recusado por `validar` e pelo CI — IT-021, IT-022, IT-024
+- [x] `python -m ingestao cortes --ano AAAA --url URL` gera o rascunho com as pendências e não sobrescreve um arquivo existente sem `--forcar` — IT-027; rodado de verdade para os 5 anos (os testes com os PDFs reais passam quando eles estão no cache)
+- [x] `GET /api/notas-corte` devolve os anos publicados e as carreiras do ano pedido (o mais recente sem `ano`); exige sessão no modo `conta` (401) e fica indisponível em `indisponivel` (503) — BT-079 a BT-081 (BT-080 em `test_acesso.py`); HTTP real abaixo
+- [x] O estudante define e remove a carreira-alvo na página; só carreiras do ano mais recente são aceitas (422 `carreira_invalida`); a escolha aparece em outro dispositivo (vem na sessão) — BT-082 a BT-086, UT-058; HTTP real e Playwright abaixo
+- [x] A modalidade de concorrência não é perguntada nem guardada; o resultado e o início mostram sempre os três cortes — `CarreiraAlvoRequest` recusa campo extra (BT-083, `modalidade`); UT-059, UT-060
+- [x] O resultado da Prova completa e da Prova de um ano com 90 questões mostra os três cortes da carreira-alvo com "faltam N" ou "atingiu"; sem carreira-alvo, o convite; na Prova de um ano, o link para os cortes daquele ano; Personalizado não mostra o bloco — UT-059; Playwright abaixo
+- [x] O cartão "Seu último simulado" mostra a linha dos cortes quando o último simulado tem 90 questões e há carreira-alvo — UT-060; Playwright abaixo
+- [x] A página explica o que é o corte, o mínimo de 27 pontos e que é referência para ir à 2ª fase, não previsão de aprovação; funciona a 360 px sem rolagem horizontal — UT-057; Playwright (documento com 345 px a 360 px)
+- [x] Apresentação, Conta e Privacidade dizem que a conta guarda também a carreira-alvo; excluir a conta a apaga — UT-061, BT-086
+- [ ] Migration `004` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI) — local `003 → 004 → 003 → 004` em 02/10 (alembic) e BT-047 (`004 → 003` sem perder as contas); **falta o Postgres do CI**
+- [x] Testes existentes continuam passando (regressão) — backend 410 testes, frontend 286
+- [x] Novos testes cobrem a mudança — IT-021 a IT-027, BT-079 a BT-086, BT-047 (004), UT-055 a UT-061 e 9 da revisão de código
+- [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: três endpoints novos e uma coluna nova com dado de usuário — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v5.0, Arquitetura v1.10 (ADR-014), 03-SPEC v1.10, specs 01/03/04/07 e 08 nova, Plano, Deploy Guide v1.5, CLAUDE.md, INDEX.md
 - [ ] CI verde na branch e em `master`; em produção, `/notas-de-corte` com os 5 anos e a carreira-alvo funcionando com o login real
+
+**Validação runtime (02/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso, SQLite novo com as provas 2022–2025 e uma cópia de `data/provas` com os cortes marcados como publicados — o repositório continuou em rascunho):**
+- HTTP: sem sessão, `GET /api/notas-corte` e `PUT /api/conta/carreira-alvo` → 401. Logado: `GET /api/notas-corte` → anos `[2025, 2024, 2023, 2022, 2020]`, 75 carreiras, Medicina (código 111) com cortes 79/71/60 e 244 vagas; `?ano=2021` → 2025; `?ano=abc` → 422. `PUT {2025, 111}` → 200 com `Cache-Control: no-store`; `PUT {2024, 460}` → 422 `carreira_invalida`; `Origin` de outro site → 403; `GET /api/sessao` com a carreira-alvo resolvida; `DELETE` duas vezes → 204, 204, e `carreira_alvo: null`.
+- Playwright (FT-024), 1280 px: login falso → `/notas-de-corte` com as 75 carreiras de 2025, "Como ler" e a fonte → busca "medicina" (2 carreiras) → "Definir como alvo" → cartão "Sua carreira-alvo" e a mensagem de confirmação; a 360 px, documento com 345 px e as carreiras em blocos. Prova de um ano 2022 finalizada em branco → resultado "Você acertou 1 de 90" (a anulada) com o bloco "Notas de corte": corte FUVEST 2025, "faltam 78/70/59" e os links "Ver todas as notas de corte" e "Ver as notas de corte de 2022" → o link abre 2022 (107 carreiras, sem os botões de carreira-alvo, com o cartão da carreira-alvo de 2025) → início com "Corte 2025 · Medicina (…): AC 79 (faltam 78) · EP 71 (faltam 70) · PPI 60 (faltam 59)". Console sem erros nem avisos.
+
+**Revisão de código (`/code-review high`, diff `master...HEAD`) — 10 achados, 9 corrigidos e 1 justificado (`b140feb`):**
+1. Corrigido: `?ano=` fora de 1977–2100 ia à API (422) e a página mostrava a tela de erro; agora pede o mais recente e avisa (teste novo).
+2. Corrigido: com `keepPreviousData`, ao trocar de ano o seletor voltava ao ano anterior e o aviso de "ano fora da base" piscava; o seletor mostra o escolhido, a tabela fica esmaecida (`aria-busy`) e o aviso espera a resposta (teste novo).
+3. Corrigido: o 422 `carreira_invalida` (lista que ficou velha com a página aberta) aparecia como erro genérico e a lista não recarregava; agora a mensagem diz que a lista mudou e a lista nova é buscada (teste novo).
+4. Corrigido: o cache do PDF do `cortes` valia por ano, e rodar com outra URL reaproveitava o PDF antigo; agora vale para a mesma URL (`.url` ao lado). PDF ilegível virou erro da CLI, sem traceback (dois testes novos).
+5. Corrigido: `validar --ano` de um ano só com cortes (sem pacote de prova) falhava antes de olhar os cortes (teste novo).
+6. Justificado: o cartão do início fica sem a linha quando a carreira-alvo saiu da lista. É o desenho da spec 08 §3: o cartão é um lembrete curto, e o aviso de escolher de novo fica no resultado e na página.
+7. Corrigido: o padrão da URL e o download do PDF estavam duplicados; agora há um `PADRAO_FONTE` só e o `obter_pdf` do `baixar`.
+8. Corrigido: a marcação das modalidades estava repetida em três lugares; o `CortesEmLinha` ganhou a situação opcional e a `LinhaCortes` passou a usá-lo.
+9. Corrigido: `GET /api/sessao` lia o diretório de cortes até para quem não entrou; agora só com usuário.
+10. Corrigido: a busca refazia a normalização e a ordenação a cada render; agora com `useMemo`.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum segredo novo; nenhuma variável de ambiente nova |
+| Validação de entrada | `CarreiraAlvoRequest` (Pydantic, `extra="forbid"`, ano 1977–2100, código 100–999); `ano` da query com a mesma faixa; o par (ano, código) só é aceito se estiver nos cortes publicados e for do ano mais recente |
+| Tokens / ownership | PUT e DELETE agem só sobre o usuário da sessão (`exigir_usuario`), sem id do cliente; a sessão só devolve a carreira-alvo do próprio usuário; `Cache-Control: no-store` |
+| SQL | Só ORM (atribuição de atributos e `commit`) |
+| CSRF / CORS | `verificar_origem` no PUT e no DELETE (403 `origem_invalida`); PUT acrescentado só ao CORS de desenvolvimento; produção sem CORS |
+| Caminho de arquivo | `DATA_DIR/notas_corte/*.yaml`, fixo; o `ano` da query só é chave de dicionário. O comando `cortes` só baixa de `https://www.fuvest.br/*.pdf` para o cache |
+| XSS | Nomes das carreiras (conteúdo do repositório) renderizados como texto pelo React |
+| Rate limit | 30/min por IP no PUT e no DELETE |
+| Dado pessoal (LGPD) | Só a carreira (não é dado sensível); a modalidade nunca é pedida nem guardada (D4); Privacidade, Conta e apresentação atualizadas; apagada com a conta |
+| Dependências | Nenhuma nova (pdfplumber e PyYAML já eram usados): `pip audit` e `npm audit` não se aplicam |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -210,7 +241,7 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 
 - **Migration afetada:** `004_carreira_alvo.py`
 - **Comando de downgrade:** `alembic downgrade 003`
-- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic e BT-047); Postgres no CI após o push
 - **Downgrade é destrutivo?** [x] Sim / [ ] Nao — apaga só as carreiras-alvo escolhidas; contas, sessões e históricos ficam
 
 Sem o downgrade, o código anterior também funciona: ele ignora as colunas extras.
@@ -241,3 +272,5 @@ Sem o downgrade, o código anterior também funciona: ele ignora as colunas extr
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D4 e o resultado do teste dos dados |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR e spec 08 aprovados pelo usuário |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-08), primeira passada do conteúdo (CR-T-04, em rascunho), validação runtime, revisão de código (9 corrigidos, 1 justificado) e de segurança, documentos atualizados. Os PDFs reais mostraram modalidades sem vagas e sem convocados (spec 08 §2.4) e que de 2024 em diante o PDF não traz o campus de nenhuma carreira |
