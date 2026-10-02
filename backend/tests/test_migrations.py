@@ -53,6 +53,28 @@ def test_migration_002_acrescenta_e_remove_o_assunto(tmp_path):
     assert "ix_questoes_assunto" not in {i["name"] for i in inspetor.get_indexes("questoes")}
 
 
+def test_migration_004_acrescenta_e_remove_a_carreira_alvo(tmp_path):
+    """BT-047 (CR-010): 003 -> 004 -> 003, sem perder as contas."""
+    from sqlalchemy import text
+
+    engine = criar_engine(f"sqlite:///{tmp_path / 'm.db'}")
+    aplicar_migrations(engine, "head")
+    colunas = {c["name"] for c in inspect(engine).get_columns("usuarios")}
+    assert {"carreira_alvo_ano", "carreira_alvo_codigo"} <= colunas
+    with engine.begin() as conn:
+        conn.execute(text(
+            "INSERT INTO usuarios (google_sub, email, carreira_alvo_ano, carreira_alvo_codigo) "
+            "VALUES ('sub', 'a@b.c', 2025, 111)"
+        ))
+
+    aplicar_migrations(engine, "003", downgrade=True)
+
+    colunas = {c["name"] for c in inspect(engine).get_columns("usuarios")}
+    assert "carreira_alvo_ano" not in colunas and "carreira_alvo_codigo" not in colunas
+    with engine.connect() as conn:
+        assert conn.execute(text("SELECT email FROM usuarios")).scalar() == "a@b.c"
+
+
 def test_migration_003_cria_e_remove_as_tabelas_de_conta(tmp_path):
     """BT-047 (CR-005): 002 -> 003 -> 002, sem tocar nas tabelas anteriores."""
     engine = criar_engine(f"sqlite:///{tmp_path / 'm.db'}")

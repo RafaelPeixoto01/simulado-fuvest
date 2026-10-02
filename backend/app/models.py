@@ -11,6 +11,7 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     Integer,
+    SmallInteger,
     String,
     Text,
     UniqueConstraint,
@@ -122,6 +123,10 @@ class Usuario(Base):
     ultimo_acesso_em: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    # Carreira-alvo das notas de corte (CR-010): so a carreira, nunca a modalidade (D4).
+    # Gravados e apagados juntos; o ano e o da lista de onde a carreira foi escolhida
+    carreira_alvo_ano: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
+    carreira_alvo_codigo: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
 
 
 class SessaoUsuario(Base):
