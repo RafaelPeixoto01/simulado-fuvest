@@ -20,6 +20,16 @@ def _obter_http(url: str) -> bytes:
         return resposta.read()
 
 
+def obter_pdf(url: str, obter: Callable[[str], bytes] = _obter_http) -> bytes:
+    """Baixa um PDF por https; ErroDownload se a URL nao usar https ou o conteudo nao for PDF."""
+    if not url.startswith("https://"):
+        raise ErroDownload(f"URL deve usar https: {url}")
+    dados = obter(url)
+    if not dados.startswith(b"%PDF"):
+        raise ErroDownload(f"{url}: conteúdo não é um PDF")
+    return dados
+
+
 def baixar(
     ano: int,
     url_prova: str,
@@ -32,12 +42,9 @@ def baixar(
     for url in (url_prova, url_gabarito):
         if not url.startswith("https://"):
             raise ErroDownload(f"URL deve usar https: {url}")
-    conteudos = {}
-    for nome, url in (("prova.pdf", url_prova), ("gabarito.pdf", url_gabarito)):
-        dados = obter(url)
-        if not dados.startswith(b"%PDF"):
-            raise ErroDownload(f"{url}: conteúdo não é um PDF")
-        conteudos[nome] = dados
+    conteudos = {
+        nome: obter_pdf(url, obter) for nome, url in (("prova.pdf", url_prova), ("gabarito.pdf", url_gabarito))
+    }
 
     destino = cache_dir / str(ano)
     destino.mkdir(parents=True, exist_ok=True)

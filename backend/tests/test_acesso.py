@@ -15,8 +15,9 @@ CONTEUDO = [
     ("GET", "/api/questoes?ids=2099-001", None),
     ("POST", "/api/correcoes", {"respostas": [{"questao_id": "2099-001", "resposta": "A"}]}),
     ("POST", "/api/reportes", {"questao_id": "2099-001", "tipo": "outro"}),
+    ("GET", "/api/notas-corte", None),  # BT-080 (CR-010)
 ]
-IDS = ["catalogo", "simulados", "questoes", "correcoes", "reportes"]
+IDS = ["catalogo", "simulados", "questoes", "correcoes", "reportes", "notas-corte"]
 
 
 def _chamar(client, metodo, caminho, corpo):

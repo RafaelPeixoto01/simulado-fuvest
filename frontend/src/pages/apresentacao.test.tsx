@@ -62,7 +62,7 @@ describe('Números da base na apresentação (UT-043, O1.1)', () => {
 
     await apresentacao()
     expect(
-      screen.getByText(/^É grátis\. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos\./),
+      screen.getByText(/^É grátis\. Guardamos só seu nome, seu e-mail, os resultados dos simulados concluídos e a carreira-alvo/),
     ).toBeInTheDocument()
     expect(screen.queryByText(/Para usar o site, entre com a sua conta Google/)).toBeNull()
     expect(screen.getByRole('link', { name: 'Entrar com Google' })).toHaveClass('h-13')

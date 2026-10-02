@@ -100,7 +100,7 @@ export function ApresentacaoPage() {
             <BotaoGoogle voltar={voltar} />
           </div>
           <p className="mt-2.5 text-sm text-tinta-suave sm:mt-3.5">
-            É grátis. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos.{' '}
+            É grátis. Guardamos só seu nome, seu e-mail, os resultados dos simulados concluídos e a carreira-alvo, se você escolher uma.{' '}
             <Link to="/privacidade" className={LINK}>
               Privacidade
             </Link>

@@ -2,22 +2,27 @@ import { useId } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useHistorico } from '../../hooks/useHistorico'
+import { useSessao } from '../../hooks/useSessao'
 import { NOMES_DISCIPLINAS } from '../../types'
 import { disciplinasMaisFracas, ultimoSimulado } from '../../utils/desempenho'
 import { formatarDiaMes, formatarPercentual } from '../../utils/format'
+import { pontosComparaveis } from '../../utils/notasCorte'
 import { BarraPercentual } from '../BarraPercentual'
 import { CARTAO, LINK } from '../estilos'
+import { LinhaCortes } from '../notasCorte/ComparacaoCorte'
 
 /** "Seu último simulado" no início (CR-008, I6.2): acertos, aproveitamento e as duas disciplinas
  *  mais fracas do simulado mais recente do histórico (o da conta, com conta — ADR-011). */
 export function UltimoSimulado() {
   const { entradas } = useHistorico()
   const idTitulo = useId()
+  const alvo = useSessao().data?.usuario?.carreira_alvo ?? null
   const entrada = ultimoSimulado(entradas)
   if (!entrada) return null
 
   const { acertos, total, percentual } = entrada.resultado
   const fracas = disciplinasMaisFracas(entrada)
+  const pontos = pontosComparaveis(entrada)
 
   return (
     <section aria-labelledby={idTitulo} className={`${CARTAO} p-5`}>
@@ -31,6 +36,8 @@ export function UltimoSimulado() {
         {acertos} <span className="text-xl font-medium text-tinta-suave">de {total}</span>
       </p>
       <p className="text-sm text-tinta-suave">{formatarPercentual(percentual)} de aproveitamento</p>
+      {/* Notas de corte (CR-010): com carreira-alvo e um simulado de 90 questões */}
+      {alvo && pontos !== null && <LinhaCortes pontos={pontos} alvo={alvo} />}
 
       {fracas.length > 0 && (
         <>

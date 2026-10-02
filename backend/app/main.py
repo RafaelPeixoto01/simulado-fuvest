@@ -17,6 +17,7 @@ from app.routers import (
     figuras,
     health,
     historico,
+    notas_corte,
     questoes,
     reportes,
     simulados,
@@ -82,13 +83,13 @@ def criar_app(settings: Settings | None = None) -> FastAPI:
         app.add_middleware(
             CORSMiddleware,
             allow_origins=list(settings.allowed_origins),
-            allow_methods=["GET", "POST", "DELETE"],
+            allow_methods=["GET", "POST", "PUT", "DELETE"],
             allow_headers=["Content-Type"],
         )
 
     for modulo in (
-        health, vitrine, catalogo, simulados, questoes, correcoes, reportes, auth, conta, historico,
-        figuras,
+        health, vitrine, catalogo, simulados, questoes, correcoes, reportes, notas_corte, auth, conta,
+        historico, figuras,
     ):
         app.include_router(modulo.router)
     _servir_spa(app, settings)

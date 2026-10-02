@@ -1,7 +1,9 @@
 import type { HistoricoEntry } from '../simulado/tipos'
 import type {
+  CarreiraAlvo,
   Catalogo,
   Correcao,
+  NotasCorte,
   PedidoSimulado,
   QuestoesPorId,
   RespostaItem,
@@ -83,6 +85,10 @@ function post<T>(caminho: string, corpo: unknown): Promise<T> {
   return requisitar<T>(caminho, { method: 'POST', body: JSON.stringify(corpo) })
 }
 
+function put<T>(caminho: string, corpo: unknown): Promise<T> {
+  return requisitar<T>(caminho, { method: 'PUT', body: JSON.stringify(corpo) })
+}
+
 function apagar(caminho: string): Promise<void> {
   return requisitar<void>(caminho, { method: 'DELETE' })
 }
@@ -109,4 +115,10 @@ export const api = {
   enviarHistorico: (entradas: HistoricoEntry[]) => post<RespostaHistorico>('/api/historico', { entradas }),
   limparHistoricoDaConta: () => apagar('/api/historico'),
   excluirConta: () => apagar('/api/conta'),
+  // Notas de corte e carreira-alvo (CR-010): sem ano, o mais recente
+  notasCorte: (ano: number | null) =>
+    requisitar<NotasCorte>(ano ? `/api/notas-corte?${new URLSearchParams({ ano: String(ano) })}` : '/api/notas-corte'),
+  definirCarreiraAlvo: (pedido: { ano: number; codigo: number }) =>
+    put<CarreiraAlvo>('/api/conta/carreira-alvo', pedido),
+  removerCarreiraAlvo: () => apagar('/api/conta/carreira-alvo'),
 }

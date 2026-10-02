@@ -36,7 +36,7 @@ beforeEach(() => localStorage.clear())
 afterEach(() => vi.unstubAllGlobals())
 
 describe('Menu do cabeçalho no celular (UT-045, O2)', () => {
-  it('o botão abre o painel com Início, Desempenho, Histórico e a conta, e marca a página atual', async () => {
+  it('o botão abre o painel com Início, Desempenho, Histórico, Notas de corte (CR-010) e a conta, e marca a página atual', async () => {
     api(COM_LOGIN)
     renderizar(<App />, { rota: '/historico' })
 
@@ -50,7 +50,7 @@ describe('Menu do cabeçalho no celular (UT-045, O2)', () => {
     expect(botao).toHaveAttribute('aria-expanded', 'true')
     expect(painel()).toHaveAttribute('id', 'menu-principal')
     const links = within(painel()).getAllByRole('link')
-    expect(links.map((l) => l.textContent)).toEqual(['Início', 'Desempenho', 'Histórico', 'AAna Conta e sair'])
+    expect(links.map((l) => l.textContent)).toEqual(['Início', 'Desempenho', 'Histórico', 'Notas de corte', 'AAna Conta e sair'])
     expect(within(painel()).getByRole('link', { name: 'Histórico' })).toHaveAttribute('aria-current', 'page')
     expect(within(painel()).getByRole('link', { name: 'Início' })).not.toHaveAttribute('aria-current')
     expect(within(painel()).getByRole('link', { name: /Conta e sair/ })).toHaveAttribute('href', '/conta')
@@ -88,7 +88,7 @@ describe('Menu do cabeçalho no celular (UT-045, O2)', () => {
     renderizar(<App />, { rota: '/' })
     await abrir()
 
-    for (let i = 0; i < 5; i++) await userEvent.tab() // botão → 4 itens → fora
+    for (let i = 0; i < 6; i++) await userEvent.tab() // botão → 5 itens → fora
 
     expect(screen.queryByRole('navigation', { name: 'Menu' })).toBeNull()
   })
@@ -168,6 +168,7 @@ describe('Menu do cabeçalho no celular (UT-045, O2)', () => {
       'Início',
       'Desempenho',
       'Histórico',
+      'Notas de corte',
     ])
   })
 })

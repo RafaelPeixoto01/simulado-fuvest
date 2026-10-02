@@ -14,6 +14,14 @@ from app.database import criar_engine, criar_fabrica_sessao, normalizar_database
 from app.disciplinas import NOMES_DISCIPLINAS, Disciplina
 from app.pacote.assuntos import Taxonomia, TaxonomiaInvalida, carregar_taxonomia
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
+from app.pacote.notas_corte import (
+    DIRETORIO_NOTAS_CORTE,
+    NotasCorteInvalidas,
+    arquivos_de_notas_corte,
+    carregar_ano,
+    problemas_de_publicacao,
+    salvar_ano,
+)
 from app.pacote.schema import PacoteProva, Questao
 from app.pacote.sincronizar import formatar_resumo, sincronizar
 from app.pacote.validacao import formatar_relatorio, tem_bloqueante, validar_pacote
@@ -54,17 +62,47 @@ def _diretorios_alvo(args: argparse.Namespace) -> list[Path] | None:
     return [dir_prova]
 
 
+def _validar_cortes(caminho: Path) -> bool:
+    """Relatorio das notas de corte (CR-010); False se impede o CI (invalido ou publicado com problema)."""
+    try:
+        notas = carregar_ano(caminho)
+    except NotasCorteInvalidas as erro:
+        print(f"== cortes {caminho.stem} — ARQUIVO INVÁLIDO\n  {erro.detalhe}")
+        return False
+    problemas = problemas_de_publicacao(notas)
+    cabecalho = f"== cortes {notas.ano} — {notas.status} — {len(notas.carreiras)} carreiras"
+    linhas = [cabecalho if problemas else f"{cabecalho}, OK"]
+    linhas += [f"  {problema}" for problema in problemas]
+    linhas += [f"  pendência: {pendencia}" for pendencia in notas.pendencias]
+    print("\n".join(linhas))
+    return not (notas.status == "publicada" and problemas)
+
+
+def _cortes_alvo(args: argparse.Namespace) -> list[Path]:
+    """Sem --ano: todos os arquivos de notas de corte. Com --ano: o do ano, se existir."""
+    if args.ano is None:
+        return arquivos_de_notas_corte(args.data_dir)
+    caminho = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.ano}.yaml"
+    return [caminho] if caminho.is_file() else []
+
+
 def _cmd_validar(args: argparse.Namespace) -> int:
-    diretorios = _diretorios_alvo(args)
+    cortes = _cortes_alvo(args)
+    # Ano so com notas de corte (sem pacote de prova, ex.: 2021): valida so os cortes
+    so_cortes = args.ano is not None and cortes and not (args.data_dir / str(args.ano)).is_dir()
+    diretorios = [] if so_cortes else _diretorios_alvo(args)
     if diretorios is None:
         return 1
-    if not diretorios:
+    if not diretorios and not cortes:
         print(f"Nenhum pacote encontrado em {args.data_dir}")
         return 0
-    taxonomia = _carregar_taxonomia(args.data_dir)
-    if taxonomia is None:
-        return 1
-    resultados = [_validar_um(d, taxonomia) for d in diretorios]
+    resultados = []
+    if diretorios:
+        taxonomia = _carregar_taxonomia(args.data_dir)
+        if taxonomia is None:
+            return 1
+        resultados += [_validar_um(d, taxonomia) for d in diretorios]
+    resultados += [_validar_cortes(c) for c in cortes]
     return 0 if all(resultados) else 1
 
 
@@ -178,6 +216,32 @@ def _pagina_valida(pdf: Path, pagina: int) -> bool:
         _erro(f"Página fora do intervalo 1–{total}")
         return False
     return True
+
+
+def _cmd_cortes(args: argparse.Namespace) -> int:
+    """Notas de corte de um ano: PDF do acervo -> notas_corte/AAAA.yaml em rascunho (CR-010)."""
+    from ingestao import notas_corte as extrator
+    from ingestao.baixar import ErroDownload
+
+    destino = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.ano}.yaml"
+    if destino.exists() and not args.forcar:
+        _erro(f"{destino} já existe e pode ter nomes revisados. Use --forcar para sobrescrever.")
+        return 1
+    try:
+        pdf = extrator.baixar_pdf(args.ano, args.url, args.data_dir.parent / "_cache")
+        notas = extrator.extrair_notas_corte(pdf, args.ano, args.url)
+    except (ErroDownload, OSError) as erro:
+        _erro(f"Falha no download: {erro}")
+        return 1
+    except extrator.ErroLayout as erro:
+        _erro(f"Não foi possível extrair as notas de corte: {erro}")
+        return 1
+    salvar_ano(notas, destino)
+    n = len(notas.pendencias)
+    print(f"{destino}: {len(notas.carreiras)} carreiras, {n} pendência{'' if n == 1 else 's'}")
+    for pendencia in notas.pendencias:
+        print(f"  {pendencia}")
+    return 0
 
 
 def _cmd_baixar(args: argparse.Namespace) -> int:
@@ -409,6 +473,13 @@ def _parser() -> argparse.ArgumentParser:
     baixar.add_argument("--gabarito-url", required=True)
     baixar.add_argument("--versao", default="V1")
     baixar.set_defaults(func=_cmd_baixar)
+
+    cortes = sub.add_parser("cortes", help="Extrai as notas de corte de um ano para notas_corte/AAAA.yaml")
+    cortes.add_argument("--ano", type=_ano, required=True)
+    cortes.add_argument("--url", required=True, help="PDF \"Notas de Corte\" do acervo (o padrão muda por ano)")
+    cortes.add_argument("--forcar", action="store_true",
+                        help="Sobrescreve o arquivo existente (perde a revisão dos nomes)")
+    cortes.set_defaults(func=_cmd_cortes)
 
     preview = sub.add_parser("preview", help="Renderiza uma página com grade de coordenadas")
     preview.add_argument("--ano", type=_ano, required=True)

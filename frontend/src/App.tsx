@@ -11,6 +11,7 @@ import { EscolherAnoPage } from './pages/EscolherAnoPage'
 import { HistoricoPage } from './pages/HistoricoPage'
 import { HomePage } from './pages/HomePage'
 import { NaoEncontradaPage } from './pages/NaoEncontradaPage'
+import { NotasCortePage } from './pages/NotasCortePage'
 import { PrivacidadePage } from './pages/PrivacidadePage'
 import { ResolucaoPage } from './pages/ResolucaoPage'
 import { ResultadoPage } from './pages/ResultadoPage'
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="resultado/:id" element={<ResultadoPage />} />
             <Route path="historico" element={<HistoricoPage />} />
             <Route path="desempenho" element={<DesempenhoPage />} />
+            <Route path="notas-de-corte" element={<NotasCortePage />} />
           </Route>
           <Route path="*" element={<NaoEncontradaPage />} />
         </Route>

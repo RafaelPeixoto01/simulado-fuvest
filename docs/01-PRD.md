@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 4.2
-**Data:** 2026-10-01
+**Versão:** 5.0
+**Data:** 2026-10-02
 **Status:** Aprovado
-**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008
+**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010)
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010
 
 ---
 
@@ -14,7 +14,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **Problema:** as provas antigas existem só como PDFs soltos, um por ano. Para treinar, o estudante imprime ou lê o PDF, confere as respostas à mão no gabarito e não tem nenhuma visão do próprio desempenho por disciplina. Também não dá para montar uma prova misturando anos, nem treinar só uma matéria.
 
-**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, assunto, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho por disciplina e por assunto, em cada simulado e somando os simulados já feitos (CR-004). Para usar o site, o estudante entra com a conta Google, que guarda o histórico e o mostra em qualquer dispositivo (CR-005, CR-006).
+**Solução:** uma base de questões estruturada (enunciado, alternativas, figuras, gabarito, disciplina, assunto, ano), alimentada por um processo de ingestão dos PDFs oficiais, sobre a qual o site gera quatro tipos de simulado. O próprio site corrige e mostra o desempenho por disciplina e por assunto, em cada simulado e somando os simulados já feitos (CR-004). Para usar o site, o estudante entra com a conta Google, que guarda o histórico e o mostra em qualquer dispositivo (CR-005, CR-006). O site também traz as notas de corte da 1ª fase de cada carreira da USP, e o resultado compara a nota do simulado com o corte da carreira-alvo escolhida pelo estudante (CR-010).
 
 **Público-alvo:** estudantes que vão prestar a FUVEST (3º ano do ensino médio, cursinho, treineiros).
 
@@ -40,7 +40,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ### Persona 1: Estudante vestibulando
 - **Perfil:** 16–19 anos, 3º ano do ensino médio ou cursinho, vai prestar a FUVEST. Estuda no celular e no computador. Entra com a conta Google, obrigatória desde o CR-006, e vê o mesmo histórico em qualquer aparelho.
-- **Necessidades:** treinar com questões reais no formato da prova; fazer provas completas cronometradas para ganhar ritmo; focar nas disciplinas em que vai pior; saber na hora o que errou.
+- **Necessidades:** treinar com questões reais no formato da prova; fazer provas completas cronometradas para ganhar ritmo; focar nas disciplinas em que vai pior; saber na hora o que errou; saber se a nota do simulado chegaria ao corte da carreira que quer (CR-010).
 - **Frustrações:** PDFs dispersos por ano; correção manual pelo gabarito; nenhuma estatística por disciplina; não conseguir montar uma lista só de Física ou só de anos recentes.
 
 ### Persona 2: Curador da base (dono do produto)
@@ -250,6 +250,31 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - "Excluir conta" na página Conta, com confirmação: apaga na hora o nome, o e-mail e todo o histórico guardado no servidor, e também o histórico deste navegador
 - Página Privacidade (link no rodapé): o que é guardado, para quê, cookies, como excluir e contato
 
+### Módulo: Notas de Corte (CR-010)
+
+| ID     | Requisito | Prioridade | Persona |
+|--------|-----------|------------|---------|
+| RF-027 | Extrair do PDF oficial as notas de corte da 1ª fase de um ano, revisar os nomes das carreiras e publicá-las | Alta | Curador |
+| RF-028 | Consultar as notas de corte por ano e carreira | Alta | Estudante |
+| RF-029 | Escolher uma carreira-alvo e comparar a nota dos simulados de 90 questões com o corte dela | Alta | Estudante |
+
+**RF-027 — Detalhamento:**
+- Um comando baixa o PDF "Notas de Corte" do acervo (URL informada, como as das provas) e gera um rascunho por ano, com as três modalidades de cada carreira (ampla concorrência, escola pública e escola pública PPI): vagas, convocados, corte (menor nota entre os convocados para a 2ª fase) e maior nota
+- Ficam de fora as carreiras de treineiro. Modalidade sem convocados fica sem corte
+- O rascunho aponta os nomes cortados e os repetidos no ano. O curador completa o nome e, quando o PDF não traz o campus (de 2024 em diante), o campus de todas as carreiras, pelo Guia de Carreiras ou pelo Manual do Candidato do ano
+- As notas de corte ficam no repositório, como os pacotes das provas, e só são publicadas sem pendências e com nomes únicos no ano (validação no CI)
+
+**RF-028 — Detalhamento:**
+- Página "Notas de corte" (cabeçalho e menu do celular): escolha do ano (o mais recente por padrão), busca pelo nome ou código da carreira, tabela com vagas e o corte de cada modalidade
+- Explica o que é o corte, o mínimo de 27 pontos (menos de 30% elimina) e que é referência para a 1ª fase, não previsão de aprovação; link para o PDF oficial
+- Exige login, como o resto do conteúdo (RN-017)
+
+**RF-029 — Detalhamento:**
+- A carreira-alvo é escolhida na página, entre as carreiras do ano mais recente, e fica guardada na conta (RN-019)
+- O resultado da Prova completa e da Prova de um ano com 90 questões mostra os três cortes da carreira-alvo e quanto falta para cada um, ou se a nota atingiu o corte (RN-018); na Prova de um ano, um link leva aos cortes daquele ano
+- O cartão "Seu último simulado" do início mostra a mesma comparação numa linha
+- Sem carreira-alvo, o resultado convida a escolher uma
+
 ### Módulo: Reporte de Erro
 
 | ID     | Requisito | Prioridade | Persona |
@@ -271,7 +296,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RNF-002 | Layout responsivo, mobile-first, utilizável a partir de 360 px de largura | Usabilidade |
 | RNF-003 | Navegação completa por teclado, contraste WCAG AA (conferido a partir dos tokens; anel de foco próprio, visível sobre a ação azul-marinho — CR-008), texto alternativo nas figuras (padrão: "Figura da questão N — FUVEST ano") | Acessibilidade |
 | RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico. Desde o CR-006, a API de conteúdo exige sessão (RN-017); só os totais da base ficam públicos, para a apresentação (CR-007) | Segurança |
-| RNF-005 | Usar o site exige entrar com a conta Google (CR-006). O servidor guarda só o mínimo (CR-005): identificador da conta Google, nome, e-mail e o histórico de simulados concluídos, apagáveis pelo próprio estudante. Quem não entra vê só a apresentação e a Privacidade, sem cookie. Sem cookies de rastreamento nem scripts de terceiros | Privacidade (LGPD) |
+| RNF-005 | Usar o site exige entrar com a conta Google (CR-006). O servidor guarda só o mínimo (CR-005): identificador da conta Google, nome, e-mail, o histórico de simulados concluídos e a carreira-alvo (CR-010; nunca a modalidade de concorrência), apagáveis pelo próprio estudante. Quem não entra vê só a apresentação e a Privacidade, sem cookie. Sem cookies de rastreamento nem scripts de terceiros | Privacidade (LGPD) |
 | RNF-006 | Questão publicada = questão validada (RN-006/RN-007); nada chega ao site sem passar pelas validações | Confiabilidade dos dados |
 | RNF-007 | Interface em português do Brasil | Localização |
 | RNF-008 | Suporte às 2 últimas versões de Chrome, Edge, Firefox e Safari (desktop e mobile) | Compatibilidade |
@@ -381,6 +406,23 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Vejo os acertos e o aproveitamento do último simulado e as duas disciplinas em que fui pior
     - [ ] Chego ao resultado completo e ao painel "Meu desempenho" a partir dali
 
+- **US-018:** Como estudante, quero consultar as notas de corte da 1ª fase por carreira, para saber quanto preciso fazer (CR-010)
+  - Critérios de aceite:
+    - [ ] Vejo, por ano, o corte de cada carreira na ampla concorrência, na escola pública e na escola pública PPI
+    - [ ] Encontro a carreira pelo nome, sem me preocupar com acentos
+    - [ ] A página explica o que é o corte e que ele não prevê a aprovação
+
+- **US-019:** Como estudante, quero escolher uma carreira-alvo e ver no resultado quanto falta para o corte dela, para saber se estou no caminho (CR-010)
+  - Critérios de aceite:
+    - [ ] Escolho a carreira-alvo na lista mais recente e ela aparece em qualquer dispositivo
+    - [ ] No resultado da Prova completa e da Prova de um ano, vejo os três cortes e quanto falta para cada um
+    - [ ] O site não pergunta nem guarda a minha modalidade de concorrência
+
+- **US-020:** Como curador, quero transformar o PDF de notas de corte de um ano em dados revisados, para publicar os cortes do ano novo com pouco trabalho (CR-010)
+  - Critérios de aceite:
+    - [ ] Um comando baixa o PDF e gera o rascunho com os nomes a revisar apontados
+    - [ ] A publicação recusa arquivo com pendência, nome repetido ou corte fora da faixa
+
 ---
 
 ## 7. Regras de Negócio
@@ -404,6 +446,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RN-015 | O painel "Meu desempenho" agrega as questões dos simulados concluídos no histórico: anuladas ficam fora (não medem conhecimento), em branco conta como erro (RN-008). Usa o assunto gravado no resultado de cada simulado. Assunto com menos de 5 questões aparece como "poucas questões" e vai para o fim da lista da disciplina; questão de resultado antigo, sem assunto, entra só na disciplina (CR-004) | Desempenho |
 | RN-016 | Conta (CR-005): login só com Google, obrigatório desde o CR-006 (RN-017). A conta guarda os 50 simulados concluídos mais recentes; o navegador com conta mostra o histórico da conta. Ao entrar, os simulados feitos sem conta neste navegador vão para a conta; ao sair, o histórico deixa o navegador e continua na conta; com conta, limpar o histórico limpa na conta. O resultado de um simulado não muda depois de enviado. A sessão dura 90 dias | Conta / Histórico |
 | RN-017 | Acesso (CR-006): usar o site exige sessão. Sem sessão, abrem só a apresentação (início) e a Privacidade; qualquer outra página leva à apresentação, e o login volta para ela. A API de conteúdo (catálogo, geração, questões, correção e reportes) recusa pedidos sem sessão; health, figuras e a vitrine (só os totais da base, CR-007) são públicos. Em produção sem login configurado, o site fica indisponível; fora de produção, aberto | Conta / Acesso |
+| RN-018 | Comparação com o corte (CR-010): só nos simulados de 90 questões da Prova completa e da Prova de um ano; a nota é o número de acertos (na Prova de um ano, a anulada conta como acerto, RN-002). Compara sempre com o corte do ano da carreira-alvo, nas três modalidades, e a nota atinge o corte quando é igual ou maior. A modalidade não é perguntada nem guardada. O texto fala em referência para ir à 2ª fase, nunca em aprovação | Notas de Corte |
+| RN-019 | Carreira-alvo (CR-010): uma por conta, escolhida entre as carreiras do ano mais recente. Quando sai a lista de um ano novo, os códigos e nomes das carreiras mudam e nada é migrado: a carreira-alvo continua comparando com o corte do ano dela até o estudante escolher de novo. Sai com a exclusão da conta | Notas de Corte |
 
 ---
 
@@ -417,7 +461,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Extração de questões com IA (decisão do MVP: parser determinístico + revisão manual)
 - Área administrativa web (curadoria só por linha de comando)
 - Resoluções ou comentários das questões (a FUVEST não publica resolução da 1ª fase)
-- Nota de corte, simulação de aprovação ou classificação por carreira
+- ~~Nota de corte~~ — referência por carreira implementada no CR-010 (RF-027 a RF-029). Continuam fora: simulação de aprovação, classificação por carreira, notas mínimas de aprovação por chamada (dependem da 2ª fase), equivalência de carreiras entre anos e guardar a modalidade de concorrência (decisões de 02/10/2026)
 - ~~Classificação por assunto dentro da disciplina (ex.: "Genética" em Biologia)~~ — implementada no CR-004 (RF-005, RF-022, RF-023)
 - Filtro por assunto ao gerar Personalizado ou Treino (decisão do CR-004)
 - Outros vestibulares (Unicamp, ENEM etc.)
@@ -430,7 +474,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 ## 9. Dependências e Premissas
 
 ### Dependências
-- **Acervo oficial da FUVEST** (`fuvest.br/acervo-vestibular-AAAA/`): PDFs da prova da 1ª fase e do gabarito, de 1977 a 2026
+- **Acervo oficial da FUVEST** (`fuvest.br/acervo-vestibular-AAAA/`): PDFs da prova da 1ª fase e do gabarito, de 1977 a 2026; desde o CR-010, também o PDF "Notas de Corte" de cada ano e, para os nomes das carreiras, o Guia de Carreiras ou o Manual do Candidato
 - **Railway:** hospedagem da aplicação e do PostgreSQL
 - **Bibliotecas Python de leitura de PDF:** extração de texto, imagens e renderização de páginas (escolha na Arquitetura)
 - **Google (OAuth 2.0 / OpenID Connect):** login obrigatório (CR-005, CR-006). Exige um cliente OAuth no Google Cloud com o app publicado; sem ele, o site fica indisponível em produção
@@ -473,6 +517,10 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Sincronização | Envio dos simulados concluídos do navegador para a conta e cópia do histórico da conta para o navegador (RF-025) |
 | Página de apresentação | Início para quem não entrou: descreve o site e os modos, mostra os números da base e uma prévia do simulado, e leva ao login (RN-017, CR-007) |
 | Vitrine | Totais públicos da base (questões válidas e anos publicados) que a apresentação mostra sem login (CR-007) |
+| Nota de corte | Menor nota (de 0 a 90) entre os candidatos chamados para a 2ª fase, por carreira e modalidade, publicada pela FUVEST a cada ano (CR-010) |
+| Modalidade | Forma de concorrência na FUVEST: ampla concorrência (AC), escola pública (EP) ou escola pública PPI — pretos, pardos e indígenas |
+| Carreira | Agrupamento de cursos da USP com uma única nota de corte por modalidade; o código e o nome mudam entre anos (em 2025, Medicina juntou os três campi) |
+| Carreira-alvo | Carreira escolhida pelo estudante, entre as do ano mais recente, para comparar a nota dos simulados com o corte (RN-019) |
 | Papel & Caneta | Identidade visual do site (CR-008): papel creme, tinta azul-marinho, a bolinha rosa da folha óptica e títulos em Fraunces; a marca é uma bolinha preenchida |
 
 ---
@@ -498,8 +546,8 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 ### Fase 4 — Escala da base
 - Extração assistida por IA para acelerar a ingestão de anos antigos
 - Área administrativa web para curadoria e reportes
-- Referência de notas de corte por carreira
+- ~~Referência de notas de corte por carreira~~ — CR-010 (02/10/2026): notas de corte de 2020 e 2022–2025, página de consulta e carreira-alvo na conta. Decisões de 02/10/2026: carreira-alvo só da lista mais recente, sem equivalência entre anos; sempre as três modalidades, sem guardar a do estudante
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap.*

@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.4
-**Data:** 2026-10-01
+**Versão:** 1.5
+**Data:** 2026-10-02
 **PRD Ref:** 01-PRD v4.1 (RF-008, RF-020, RF-022, RF-024 a RF-026, US-013 a US-016, RN-012, RN-016, RN-017, RNF-004, RNF-005)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
-**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2), CR-010 (carreira-alvo na conta e nos textos de privacidade — `specs/08-notas-de-corte.md`)
 
 ---
 
@@ -157,6 +157,7 @@ class UsuarioPublico(BaseModel):
     id: int
     email: str
     nome: str | None
+    carreira_alvo: CarreiraAlvo | None = None  # CR-010, specs/08 §2.3; resolvida só quando há usuário
 
 class SessaoResponse(BaseModel):
     login_disponivel: bool
@@ -323,14 +324,14 @@ Link (`<a href="/api/auth/google?voltar=...">`, navegação de página inteira, 
 | Sessão carregando | `Carregando` |
 | Erro de login (`?erro=login`) | Aviso "Não foi possível entrar com o Google. Tente novamente." acima do conteúdo |
 | Login indisponível, sem ninguém conectado | "O login com Google não está disponível no momento. O histórico continua guardado neste navegador." (quem já está conectado vê a visão "Com conta") |
-| Sem conta | `h1` "Conta"; texto: entrar guarda o histórico na conta e mostra em qualquer dispositivo; "Os simulados já feitos neste navegador vão para a sua conta."; "Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos. O simulado em andamento continua só neste navegador."; `BotaoGoogle voltar="/conta"`; link "Privacidade" |
+| Sem conta | `h1` "Conta"; texto: entrar guarda o histórico na conta e mostra em qualquer dispositivo; "Os simulados já feitos neste navegador vão para a sua conta."; "Guardamos só seu nome, seu e-mail, os resultados dos simulados concluídos e a carreira-alvo, se você escolher uma. O simulado em andamento continua só neste navegador." (carreira-alvo desde o CR-010); `BotaoGoogle voltar="/conta"`; link "Privacidade" |
 | Com conta | `h1` "Conta"; "Conectado como **nome** (email)"; estado do histórico ("N simulados na sua conta" / "Sincronizando…" / "Não foi possível sincronizar agora. Tentaremos de novo."); botão "Sair" com a explicação "Ao sair, o histórico deixa este navegador e continua na sua conta."; seção "Excluir conta" com botão perigoso e `ConfirmDialog` ("Excluir a conta?" — "Seu nome, seu e-mail e todo o histórico guardado na conta serão apagados. Não dá para desfazer.") |
 | Depois de sair / excluir | Mensagem de status (`role="status"`) + a visão "Sem conta" |
 
 `useTituloPagina('Conta')`.
 
 ### Página: PrivacidadePage (`/privacidade`)
-`h1` "Privacidade" e seções curtas: **Sem conta** (nada pessoal no servidor; simulado e histórico só no navegador; reportes anônimos; contagem anônima de simulados gerados); **Com conta Google** (o que guardamos: identificador da conta Google, nome, e-mail e os 50 simulados concluídos mais recentes; para quê: mostrar o histórico e o desempenho em qualquer dispositivo; do Google recebemos só nome e e-mail, sem acesso à senha nem a outros dados; não compartilhamos nem usamos para publicidade); **Cookies** (só para quem entra: um de sessão por 90 dias e um temporário durante o login; nenhum cookie de rastreamento); **Excluir seus dados** (Conta → "Excluir conta" apaga tudo na hora; "Sair" tira o histórico deste navegador); **Contato** (issues do repositório público no GitHub). `useTituloPagina('Privacidade')`.
+`h1` "Privacidade" e seções curtas: **Sem conta** (nada pessoal no servidor; simulado e histórico só no navegador; reportes anônimos; contagem anônima de simulados gerados); **Com conta Google** (o que guardamos: identificador da conta Google, nome, e-mail, os 50 simulados concluídos mais recentes e, desde o CR-010, a carreira-alvo das notas de corte, sem a modalidade de concorrência; para quê: mostrar o histórico e o desempenho e comparar a nota com o corte da carreira-alvo em qualquer dispositivo; do Google recebemos só nome e e-mail, sem acesso à senha nem a outros dados; não compartilhamos nem usamos para publicidade); **Cookies** (só para quem entra: um de sessão por 90 dias e um temporário durante o login; nenhum cookie de rastreamento); **Excluir seus dados** (Conta → "Excluir conta" apaga tudo na hora; "Sair" tira o histórico deste navegador); **Contato** (issues do repositório público no GitHub). `useTituloPagina('Privacidade')`.
 
 ### HistoricoPage e DesempenhoPage (complementam `specs/04` e `specs/06`)
 - Fonte: `useHistorico().entradas` (no lugar de `listarHistorico`).
@@ -552,7 +553,7 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
    Período: `min–max` com meia-risca ("2023–2025"); abaixo de 640 px, o ano final com dois dígitos ("2023–25"); com um ano só, "2025". Números com `tabular-nums`. Abaixo de 640 px, três cartões brancos lado a lado (`repeat(3, 1fr)`: o mínimo de cada um é o conteúdo, e o período não quebra em 320 px); a partir de 640 px, em linha, com divisórias. Enquanto carrega, com erro ou com a base vazia, o bloco não aparece (nunca "0"), e a página não espera a vitrine.
 3. Com `?voltar=` diferente de `/`, o aviso "Entre com a sua conta Google para continuar.", como antes.
 4. `BotaoGoogle` com 52 px de altura (O1.4). É o mesmo botão da página Conta, que também fica com 52 px.
-5. Aviso (O1.4): "É grátis. Guardamos só seu nome, seu e-mail e os resultados dos simulados concluídos." + link Privacidade.
+5. Aviso (O1.4): "É grátis. Guardamos só seu nome, seu e-mail, os resultados dos simulados concluídos e a carreira-alvo, se você escolher uma." + link Privacidade (carreira-alvo desde o CR-010).
 
 **`PreviaProduto` (O1.2)** (`components/apresentacao/PreviaProduto.tsx`): HTML/CSS com os tokens do site, sem captura de tela nem chamada à API.
 - Texto para leitor de tela (`sr-only`): "Prévia da tela de resolução: uma questão de História da FUVEST 2025 com a alternativa B marcada, o cronômetro, a folha de respostas e os botões Anterior, Revisar e Próxima."
