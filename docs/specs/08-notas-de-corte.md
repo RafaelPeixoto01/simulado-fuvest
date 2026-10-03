@@ -92,7 +92,7 @@ class Modalidade(BaseModel):              # extra="forbid"
 
 class CarreiraCorte(BaseModel):           # extra="forbid"
     codigo: int                           # 100..999
-    nome: str                             # 1..200 caracteres, sem espaços nas pontas (o mais longo tem ~170)
+    nome: str                             # 1..250 caracteres, sem espaços nas pontas (2026/313 passa de 200)
     ac: Modalidade
     ep: Modalidade
     ppi: Modalidade
