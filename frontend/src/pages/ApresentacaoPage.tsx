@@ -9,10 +9,11 @@ import { CARTAO, LINK } from '../components/estilos'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useVitrine } from '../hooks/useVitrine'
 import type { Vitrine } from '../types'
+import { QUESTOES_PROVA_COMPLETA } from '../utils/formato'
 
 const MODOS = [
-  ['Prova completa', '90 questões na distribuição da prova real, com 5 horas.'],
-  ['Prova de um ano', 'A prova original de um ano, na ordem em que caiu, com 5 horas.'],
+  ['Prova completa', `${QUESTOES_PROVA_COMPLETA} questões na distribuição da prova real, com 5 horas.`],
+  ['Prova de um ano', 'A prova original de um ano ou um simulado oficial da FUVEST, com 5 horas.'],
   ['Personalizado', 'Disciplinas, anos e quantidade de questões à sua escolha.'],
   ['Treino por questão', 'Uma questão por vez, sem cronômetro, com a resposta na hora.'],
 ] as const

@@ -17,14 +17,16 @@ export type Modo = 'completa' | 'personalizado' | 'ano' | 'treino'
 
 export interface Bloco {
   texto: string | null
-  figura: string | null // URL /figuras/AAAA/arquivo.webp
+  figura: string | null // URL /figuras/CODIGO/arquivo.webp
 }
 
 export type Alternativa = Bloco
 
 export interface Questao {
-  id: string
-  ano: number
+  id: string // "2025-037" ou "2027s1-037": código da prova + número (CR-011)
+  prova: string // código: "2025", "2027s1"
+  origem: string // "FUVEST 2025", "Simulado FUVEST 2027 · 1ª edição" (RN-013)
+  ano: number // ano FUVEST de referência
   numero: number
   disciplina: Disciplina
   disciplinas_secundarias: Disciplina[]
@@ -38,8 +40,13 @@ export interface TextoBase {
   conteudo: Bloco[]
 }
 
+/** Prova do vestibular ou simulado oficial da FUVEST (CR-011). */
 export interface ProvaCatalogo {
-  ano: number
+  codigo: string // "2025", "2027s1"
+  ano: number // ano FUVEST de referência
+  tipo: 'vestibular' | 'simulado'
+  edicao: number | null // só no simulado
+  rotulo: string // "FUVEST 2025", "Simulado FUVEST 2027 · 1ª edição"
   versao: string
   total_questoes: number
   url_prova: string
@@ -69,8 +76,8 @@ export interface Catalogo {
 
 /** Totais públicos da base para a apresentação (CR-007, specs/07 §9.1). */
 export interface Vitrine {
-  total_questoes: number // não anuladas, como no catálogo
-  anos: number[] // em ordem crescente; o número de provas é anos.length
+  total_questoes: number // não anuladas, como no catálogo (inclui as dos simulados oficiais)
+  anos: number[] // dos vestibulares, em ordem crescente; o número de provas é anos.length (CR-011)
 }
 
 export type PedidoSimulado =
@@ -84,7 +91,7 @@ export type PedidoSimulado =
       cronometro: boolean
       semente?: number
     }
-  | { modo: 'ano'; ano: number }
+  | { modo: 'ano'; prova: string } // código da prova (CR-011)
   | {
       modo: 'treino'
       disciplinas?: Disciplina[]
@@ -172,6 +179,7 @@ export interface NotasCorte {
   anos: number[] // do mais recente para o mais antigo
   recente: number | null
   ano: number | null // o devolvido: o pedido, se publicado; senão o mais recente
+  pontos_prova: number | null // pontos da 1ª fase daquele ano: 90 até 2026, 80 em 2027 (CR-011)
   fonte: string | null
   carreiras: CarreiraCorte[]
 }
@@ -180,6 +188,7 @@ export interface NotasCorte {
 export interface CarreiraAlvo {
   ano: number
   codigo: number
+  pontos_prova: number // escala dos cortes daquele ano (CR-011)
   carreira: CarreiraCorte | null
 }
 

@@ -11,6 +11,7 @@ const MEDICINA = 'Medicina (São Paulo, Bauru, Ribeirão Preto)'
 const ALVO: CarreiraAlvo = {
   ano: 2025,
   codigo: 111,
+  pontos_prova: 90,
   carreira: { codigo: 111, nome: MEDICINA, vagas: 244, cortes: { ac: 79, ep: 71, ppi: 60 } },
 }
 
@@ -18,8 +19,8 @@ function sessao(carreira_alvo: CarreiraAlvo | null): Sessao {
   return { login_disponivel: true, usuario: { id: 7, email: 'ana@exemplo.com', nome: 'Ana Souza', carreira_alvo }, acesso: 'conta' }
 }
 
-/** Simulado com `total` questões e 61 acertos; o ano sai dos ids (Prova de um ano). */
-function entrada(modo: HistoricoEntry['modo'], total = 90, ano = 2022): HistoricoEntry {
+/** Simulado com `total` questões e 61 acertos; a prova sai dos ids (Prova de um ano). */
+function entrada(modo: HistoricoEntry['modo'], total = 90, ano: number | string = 2022): HistoricoEntry {
   const id = `${ano}-001`
   return {
     versao: 1,
@@ -101,7 +102,7 @@ describe('Notas de corte no resultado (UT-059)', () => {
   })
 
   it('carreira-alvo que saiu da lista', async () => {
-    api(sessao({ ano: 2025, codigo: 999, carreira: null }), [entrada('ano')])
+    api(sessao({ ano: 2025, codigo: 999, pontos_prova: 90, carreira: null }), [entrada('ano')])
     renderizar(<App />, { rota: '/resultado/sim-ano' })
 
     const regiao = await bloco()
@@ -109,16 +110,45 @@ describe('Notas de corte no resultado (UT-059)', () => {
     expect(within(regiao).getByRole('link', { name: 'Escolher de novo' })).toHaveAttribute('href', '/notas-de-corte')
   })
 
-  it('Personalizado, ou prova com menos de 90 questões, não mostra o bloco', async () => {
-    api(sessao(ALVO), [entrada('personalizado'), entrada('ano', 89)])
-    const { unmount } = renderizar(<App />, { rota: '/resultado/sim-personalizado' })
+  it('Personalizado não mostra o bloco', async () => {
+    api(sessao(ALVO), [entrada('personalizado')])
+    renderizar(<App />, { rota: '/resultado/sim-personalizado' })
     expect(await screen.findByRole('heading', { level: 1, name: /Você acertou 61 de 90/ })).toBeInTheDocument()
     expect(screen.queryByRole('region', { name: 'Notas de corte' })).toBeNull()
-    unmount()
+  })
+})
 
+describe('Comparação proporcional (UT-063, CR-011)', () => {
+  it('Prova completa de 80 com a lista de 90: a nota convertida, com 1 casa, como estimativa', async () => {
+    api(sessao(ALVO), [entrada('completa', 80)])
+    renderizar(<App />, { rota: '/resultado/sim-completa' })
+
+    const regiao = await bloco()
+    expect(regiao).toHaveTextContent('Sua nota: 61 de 80 · equivale a 68,6 de 90 (estimativa)')
+    const itens = within(within(regiao).getByRole('list', { name: 'Cortes da carreira-alvo' })).getAllByRole('listitem')
+    expect(itens.map((i) => i.textContent)).toEqual([
+      'Ampla concorrência: corte 79 — faltam 10,4',
+      'Escola pública: corte 71 — faltam 2,4',
+      'Escola pública PPI: corte 60 — atingiu (+8,6)',
+    ])
+  })
+
+  it('na mesma escala (80 e lista de 80) compara direto, sem estimativa', async () => {
+    api(sessao({ ...ALVO, ano: 2027, pontos_prova: 80 }), [entrada('completa', 80)])
+    renderizar(<App />, { rota: '/resultado/sim-completa' })
+
+    const regiao = await bloco()
+    expect(regiao).not.toHaveTextContent('estimativa')
+    expect(within(regiao).getAllByRole('listitem')[0]).toHaveTextContent('Ampla concorrência: corte 79 — faltam 18')
+  })
+
+  it('simulado oficial na Prova de um ano: convertido e sem o link de uma lista do ano', async () => {
+    api(sessao(ALVO), [entrada('ano', 80, '2027s1')])
     renderizar(<App />, { rota: '/resultado/sim-ano' })
-    expect(await screen.findByRole('heading', { level: 1, name: /Você acertou 61 de 89/ })).toBeInTheDocument()
-    expect(screen.queryByRole('region', { name: 'Notas de corte' })).toBeNull()
+
+    const regiao = await bloco()
+    expect(regiao).toHaveTextContent('equivale a 68,6 de 90 (estimativa)')
+    expect(within(regiao).queryByRole('link', { name: /Ver as notas de corte de/ })).toBeNull()
   })
 })
 
@@ -132,6 +162,16 @@ describe('Notas de corte no início (UT-060)', () => {
     expect(await cartao()).toHaveTextContent(
       `Corte 2025 · ${MEDICINA}: AC 79 (faltam 18) · EP 71 (faltam 10) · PPI 60 (atingiu)`,
     )
+    expect(await cartao()).not.toHaveTextContent('estimativa')
+  })
+
+  it('último simulado de 80 questões com a lista de 90: a linha com a nota convertida (UT-064)', async () => {
+    api(sessao(ALVO), [entrada('completa', 80)])
+    renderizar(<App />)
+
+    const texto = (await cartao()).textContent
+    expect(texto).toContain(`Corte 2025 · ${MEDICINA}: AC 79 (faltam 10,4) · EP 71 (faltam 2,4) · PPI 60 (atingiu)`)
+    expect(texto).toContain('Sua nota: 61 de 80 · equivale a 68,6 de 90 (estimativa)')
   })
 
   it('sem carreira-alvo, ou com o último simulado Personalizado, sem a linha', async () => {

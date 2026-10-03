@@ -18,13 +18,14 @@ import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Catalogo } from '../types'
 import { primeiroNomeOuNada } from '../utils/format'
+import { QUESTOES_PROVA_COMPLETA } from '../utils/formato'
 import { formatarRestante, restanteMs } from '../utils/tempo'
 
 /** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). Desde o
  *  CR-009 (E4): sobretítulo, etiquetas e, a partir de 640 px, a miniatura da folha à direita. */
 function ProvaCompleta({ descricao, disciplinas, acao }: { descricao: string; disciplinas: number; acao: ReactNode }) {
   const idTitulo = useId()
-  const etiquetas = ['90 questões', '5 horas']
+  const etiquetas = [`${QUESTOES_PROVA_COMPLETA} questões`, '5 horas']
   if (disciplinas > 0) etiquetas.push(`${disciplinas} ${disciplinas === 1 ? 'disciplina' : 'disciplinas'}`)
   return (
     <section
@@ -162,14 +163,14 @@ function NaBase({ catalogo }: { catalogo: Catalogo }) {
         <h2>Provas na base</h2>
         <ul className="mt-2 flex flex-col gap-0.5">
           {catalogo.provas.map((p) => (
-            <li key={p.ano}>
+            <li key={p.codigo}>
               <a
                 href={p.url_prova}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 py-1.5 font-semibold text-caneta underline underline-offset-3 hover:text-caneta-escura"
               >
-                FUVEST {p.ano} · PDF oficial
+                {p.rotulo} · PDF oficial
                 <Icone className="size-4">
                   <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
                 </Icone>
@@ -206,7 +207,10 @@ export function HomePage() {
   // Saudação (CR-008, I6.1): só com uma conta que tenha nome; nunca "Olá, Conta."
   const nome = primeiroNomeOuNada(sessao?.usuario?.nome)
 
-  const anos = catalogo.data?.provas.map((p) => p.ano) ?? []
+  // Provas e período só dos vestibulares; os simulados oficiais à parte (CR-011, P4)
+  const provas = catalogo.data?.provas ?? []
+  const anos = provas.filter((p) => p.tipo === 'vestibular').map((p) => p.ano)
+  const simulados = provas.filter((p) => p.tipo === 'simulado').length
   const periodo = anos.length > 1 ? ` (${Math.min(...anos)} a ${Math.max(...anos)})` : anos.length ? ` (${anos[0]})` : ''
 
   return (
@@ -218,9 +222,10 @@ export function HomePage() {
       </h1>
       {catalogo.data && catalogo.data.provas.length > 0 && (
         <p className="mt-3 max-w-2xl text-lg text-tinta-suave">
-          {catalogo.data.total_questoes} questões de {catalogo.data.provas.length}{' '}
-          {catalogo.data.provas.length === 1 ? 'prova' : 'provas'}
-          {periodo}. O simulado em andamento fica salvo neste navegador.
+          {catalogo.data.total_questoes} questões de {anos.length} {anos.length === 1 ? 'prova' : 'provas'}
+          {periodo}
+          {simulados > 0 && ` e ${simulados} ${simulados === 1 ? 'simulado oficial' : 'simulados oficiais'}`}. O
+          simulado em andamento fica salvo neste navegador.
         </p>
       )}
 
@@ -239,8 +244,8 @@ export function HomePage() {
               <ProvaCompleta
                 descricao={
                   catalogo.data.completa_disponivel
-                    ? '90 questões na distribuição da prova real, com 5 horas.'
-                    : '90 questões com 5 horas. Disponível quando a base tiver 90 questões válidas.'
+                    ? `${QUESTOES_PROVA_COMPLETA} questões na distribuição da prova real, com 5 horas.`
+                    : `${QUESTOES_PROVA_COMPLETA} questões com 5 horas. Disponível quando a base tiver ${QUESTOES_PROVA_COMPLETA} questões válidas.`
                 }
                 disciplinas={Object.values(catalogo.data.distribuicao_completa).filter((n) => (n ?? 0) > 0).length}
                 acao={
@@ -258,7 +263,7 @@ export function HomePage() {
                 <Modo
                   letra="B"
                   titulo="Prova de um ano"
-                  descricao="Refaça a prova original de um ano, na ordem em que caiu, com 5 horas."
+                  descricao="Refaça a prova original de um ano ou um simulado oficial da FUVEST, com 5 horas."
                   para="/novo/ano"
                   acao="Escolher o ano"
                 />

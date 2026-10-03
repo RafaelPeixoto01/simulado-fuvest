@@ -7,6 +7,11 @@ export function formatarPercentual(valor: number): string {
   return `${numero.format(valor)}%`
 }
 
+/** Pontos com até 1 casa: "79", "67,5" (nota convertida para a escala do corte — CR-011). */
+export function formatarPontos(valor: number): string {
+  return numero.format(valor)
+}
+
 /** "29/09/2026 22:05" */
 export function formatarDataHora(epochMs: number): string {
   const d = new Date(epochMs)

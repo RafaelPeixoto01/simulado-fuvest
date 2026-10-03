@@ -34,8 +34,9 @@ export function QuestaoView({
   nivelTitulo = 2,
   complemento,
 }: Props) {
-  const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, FUVEST ${questao.ano} (questão ${questao.numero})`
-  const alt = `Figura da questão ${questao.numero}, FUVEST ${questao.ano}`
+  // Origem (RN-013): "FUVEST 2025" ou "Simulado FUVEST 2027 · 1ª edição" (CR-011)
+  const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, ${questao.origem} (questão ${questao.numero})`
+  const alt = `Figura da questão ${questao.numero}, ${questao.origem}`
   const [reportando, setReportando] = useState(false)
   const fecharReporte = useCallback(() => setReportando(false), [])
   return (
@@ -51,7 +52,7 @@ export function QuestaoView({
       {textoBase && (
         <section aria-label="Texto de apoio" className="mb-6 border-l-4 border-linha pl-4">
           <p className="mb-2 text-sm text-tinta-suave">Texto compartilhado com outras questões</p>
-          <Blocos blocos={textoBase.conteudo} altFigura={`Figura do texto de apoio, FUVEST ${questao.ano}`} />
+          <Blocos blocos={textoBase.conteudo} altFigura={`Figura do texto de apoio, ${questao.origem}`} />
         </section>
       )}
 

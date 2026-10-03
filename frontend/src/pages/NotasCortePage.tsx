@@ -9,7 +9,7 @@ import { useSessao } from '../hooks/useSessao'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import type { ApiError } from '../services/api'
 import type { CarreiraAlvo, CarreiraCorte } from '../types'
-import { filtrarCarreiras, MODALIDADES } from '../utils/notasCorte'
+import { filtrarCarreiras, minimoFuvest, MODALIDADES } from '../utils/notasCorte'
 
 function anoDaUrl(valor: string | null): number | null {
   return valor && /^\d{4}$/.test(valor) ? Number(valor) : null
@@ -143,6 +143,9 @@ export function NotasCortePage() {
   }
 
   const ano = data.ano
+  // Escala do ano exibido: 90 até 2026, 80 desde a FUVEST 2027 (CR-011)
+  const pontosProva = data.pontos_prova ?? 90
+  const minimo = minimoFuvest(pontosProva)
   // Trocando de ano, a tabela anterior fica na tela até a nova chegar (keepPreviousData): o seletor
   // já mostra o ano escolhido e o aviso de "ano fora da base" espera a resposta
   const carregandoOutroAno = isPlaceholderData && consulta !== null
@@ -290,12 +293,12 @@ export function NotasCortePage() {
             </h2>
             <ul className="mt-2 list-disc space-y-1.5 pl-5">
               <li>
-                Corte é a menor nota (de 0 a 90) entre os candidatos chamados para a 2ª fase naquela carreira e
-                modalidade.
+                Corte é a menor nota (de 0 a {pontosProva}) entre os candidatos chamados para a 2ª fase naquela
+                carreira e modalidade.
               </li>
               <li>
-                Quem faz menos de 27 pontos (30% da prova) é eliminado; corte 27 quer dizer que todos os que atingiram o
-                mínimo foram chamados.
+                Quem faz menos de {minimo} pontos (30% da prova) é eliminado; corte {minimo} quer dizer que todos os
+                que atingiram o mínimo foram chamados.
               </li>
               <li>AC: ampla concorrência. EP: escola pública. PPI: escola pública, pretos, pardos e indígenas.</li>
               <li>

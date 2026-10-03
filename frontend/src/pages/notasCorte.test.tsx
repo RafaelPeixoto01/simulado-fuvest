@@ -19,8 +19,8 @@ const MEDICINA_2024: CarreiraCorte = { codigo: 460, nome: 'Medicina (São Paulo)
 
 const FONTE = (ano: number) => `https://www.fuvest.br/wp-content/uploads/fuvest_${ano}_notas_de_corte.pdf`
 const NOTAS: Record<number, NotasCorte> = {
-  2025: { anos: [2025, 2024], recente: 2025, ano: 2025, fonte: FONTE(2025), carreiras: [PSICOLOGIA, MEDICINA, MUSICA] },
-  2024: { anos: [2025, 2024], recente: 2025, ano: 2024, fonte: FONTE(2024), carreiras: [MEDICINA_2024] },
+  2025: { anos: [2025, 2024], recente: 2025, ano: 2025, pontos_prova: 90, fonte: FONTE(2025), carreiras: [PSICOLOGIA, MEDICINA, MUSICA] },
+  2024: { anos: [2025, 2024], recente: 2025, ano: 2024, pontos_prova: 90, fonte: FONTE(2024), carreiras: [MEDICINA_2024] },
 }
 
 function sessaoCom(carreira_alvo: CarreiraAlvo | null = null): Sessao {
@@ -45,7 +45,7 @@ function servidor(inicial: Sessao, extra: Parameters<typeof instalarApiFalsa>[0]
     },
     'PUT /api/conta/carreira-alvo': (corpo) => {
       const { ano, codigo } = corpo as { ano: number; codigo: number }
-      const alvo: CarreiraAlvo = { ano, codigo, carreira: NOTAS[2025].carreiras.find((c) => c.codigo === codigo)! }
+      const alvo: CarreiraAlvo = { ano, codigo, pontos_prova: 90, carreira: NOTAS[2025].carreiras.find((c) => c.codigo === codigo)! }
       sessao = { ...sessao, usuario: { ...sessao.usuario!, carreira_alvo: alvo } }
       return json(200, alvo)
     },
@@ -84,6 +84,17 @@ describe('Página de notas de corte (UT-057)', () => {
     const fonte = screen.getByRole('link', { name: /Notas de Corte 2025/ })
     expect(fonte).toHaveAttribute('href', FONTE(2025))
     expect(fonte).toHaveAttribute('target', '_blank')
+  })
+
+  it('lista de 80 pontos: a escala e o mínimo do ano (UT-068, CR-011)', async () => {
+    servidor(sessaoCom(), {
+      'GET /api/notas-corte': () =>
+        json(200, { ...NOTAS[2025], anos: [2027, 2025], recente: 2027, ano: 2027, pontos_prova: 80 }),
+    })
+    renderizar(<App />, { rota: '/notas-de-corte' })
+
+    expect(await screen.findByText(/Corte é a menor nota \(de 0 a 80\)/)).toBeInTheDocument()
+    expect(screen.getByText(/menos de 24 pontos \(30% da prova\) é eliminado; corte 24 quer dizer/)).toBeInTheDocument()
   })
 
   it('troca o ano pelo seletor; anos anteriores não têm o botão de carreira-alvo', async () => {
@@ -199,7 +210,7 @@ describe('Carreira-alvo na página (UT-058)', () => {
   })
 
   it('remove a carreira-alvo', async () => {
-    const { chamadas } = servidor(sessaoCom({ ano: 2025, codigo: 111, carreira: MEDICINA }))
+    const { chamadas } = servidor(sessaoCom({ ano: 2025, codigo: 111, pontos_prova: 90, carreira: MEDICINA }))
     renderizar(<App />, { rota: '/notas-de-corte' })
 
     await userEvent.click(await screen.findByRole('button', { name: 'Remover' }))
@@ -210,14 +221,14 @@ describe('Carreira-alvo na página (UT-058)', () => {
   })
 
   it('carreira-alvo de uma lista anterior pede para escolher de novo', async () => {
-    servidor(sessaoCom({ ano: 2024, codigo: 460, carreira: MEDICINA_2024 }))
+    servidor(sessaoCom({ ano: 2024, codigo: 460, pontos_prova: 90, carreira: MEDICINA_2024 }))
     renderizar(<App />, { rota: '/notas-de-corte' })
 
     expect(await screen.findByText(/Sua carreira-alvo é da lista de 2024\. Escolha de novo na lista de 2025/)).toBeInTheDocument()
   })
 
   it('carreira-alvo que saiu da lista', async () => {
-    servidor(sessaoCom({ ano: 2025, codigo: 999, carreira: null }))
+    servidor(sessaoCom({ ano: 2025, codigo: 999, pontos_prova: 90, carreira: null }))
     renderizar(<App />, { rota: '/notas-de-corte' })
 
     expect(await screen.findByText('Sua carreira-alvo não está mais na lista. Escolha outra.')).toBeInTheDocument()

@@ -47,7 +47,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
           {/* No celular, o cronômetro e a folha vão para as pontas da barra */}
           <span className="contents lg:flex lg:items-center lg:gap-2">
             <span className={`${CHIP} font-titulo font-[650] tabular-nums`}>04:52:10</span>
-            <span className={`${CHIP} font-semibold`}>Folha 12/90</span>
+            <span className={`${CHIP} font-semibold`}>Folha 12/80</span>
           </span>
         </div>
 
@@ -55,7 +55,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
           {/* Como a resolução (CR-008): o número numa bolinha */}
           <p className="flex items-center gap-2 font-titulo text-[0.9375rem] font-[650] lg:text-base">
             <BolinhaLetra letra="13" className="size-7 text-[0.8125rem] lg:size-8" />
-            <span className="font-medium text-tinta-suave">de 90</span>
+            <span className="font-medium text-tinta-suave">de 80</span>
           </p>
           <p className="mt-px mb-2 text-[0.71875rem] text-tinta-suave lg:mb-2.5 lg:text-xs">
             História · FUVEST 2025<span className="max-lg:hidden"> (questão 13)</span>
@@ -100,7 +100,7 @@ export function PreviaProduto({ className = '' }: { className?: string }) {
           className="w-62 rounded-[14px] border border-linha bg-papel p-4 shadow-[0_14px_32px_rgba(29,36,48,0.14)]"
         >
           <p className="text-xs text-tinta-suave">Resultado</p>
-          <p className="mt-0.5 mb-3 text-lg font-bold">58 de 90 acertos</p>
+          <p className="mt-0.5 mb-3 text-lg font-bold">52 de 80 acertos</p>
           <div className="flex flex-col gap-2 text-xs">
             {RESULTADO.map(([disciplina, percentual]) => (
               <div key={disciplina}>

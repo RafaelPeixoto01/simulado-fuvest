@@ -114,7 +114,7 @@ describe('Extras do início (UT-053, CR-009)', () => {
     // "8 disciplinas" vem da distribuição da prova completa
     const etiquetas = within(destaque).getByRole('list')
     expect(within(etiquetas).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
-      '90 questões',
+      '80 questões',
       '5 horas',
       '8 disciplinas',
     ])
@@ -131,7 +131,7 @@ describe('Extras do início (UT-053, CR-009)', () => {
     const { unmount } = renderizar(<App />)
     let destaque = await screen.findByRole('region', { name: 'Prova completa' })
     expect(within(within(destaque).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
-      '90 questões',
+      '80 questões',
       '5 horas',
       '1 disciplina',
     ])
@@ -141,7 +141,7 @@ describe('Extras do início (UT-053, CR-009)', () => {
     renderizar(<App />)
     destaque = await screen.findByRole('region', { name: 'Prova completa' })
     expect(within(within(destaque).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)).toEqual([
-      '90 questões',
+      '80 questões',
       '5 horas',
     ])
   })
