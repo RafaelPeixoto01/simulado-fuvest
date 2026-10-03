@@ -4,7 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
-| [CR-010](CR-010-notas-de-corte.md) | Notas de corte por carreira e carreira-alvo (Fase 4 do roadmap) | Em Implementação | 2026-10-02 |
+| [CR-010](CR-010-notas-de-corte.md) | Notas de corte por carreira e carreira-alvo (Fase 4 do roadmap) | Concluído | 2026-10-02 |
 | [CR-009](CR-009-rolagem-inicio-extras.md) | Rolagem ao trocar de página e extras do início | Concluído | 2026-10-02 |
 | [CR-008](CR-008-identidade-papel-caneta.md) | Identidade visual "Papel & Caneta" | Concluído | 2026-10-02 |
 | [CR-007](CR-007-apresentacao-menu-barra.md) | Apresentação, menu do celular e barra opaca | Concluído | 2026-10-01 |

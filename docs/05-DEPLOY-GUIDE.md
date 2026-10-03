@@ -185,7 +185,7 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 - [ ] Sem conta: nenhum cookie é criado ao navegar (DevTools → Application → Cookies)
 - [ ] Login obrigatório (CR-006): `GET /api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo` → 401; num navegador sem login, o início mostra a apresentação e `/historico` leva a ela
 - [ ] Vitrine (CR-007): sem cookie, `GET /api/vitrine` → 200 com `total_questoes` igual ao do catálogo e os `anos` publicados; a apresentação mostra esses números
-- [ ] Notas de corte (CR-010): sem cookie, `GET /api/notas-corte` → 401; logado, `/notas-de-corte` mostra os anos publicados (2025, 2024, 2023, 2022, 2020) e as carreiras do mais recente; definir a carreira-alvo, finalizar uma Prova de um ano e ver o bloco "Notas de corte" no resultado e a linha no início
+- [ ] Notas de corte (CR-010): sem cookie, `GET /api/notas-corte` → 401; logado, `/notas-de-corte` mostra os anos publicados (desde 02/10/2026: 2026, 2025, 2024, 2023, 2022 e 2020) e as carreiras do mais recente; definir a carreira-alvo, finalizar uma Prova de um ano e ver o bloco "Notas de corte" no resultado e a linha no início
 - [ ] Figuras carregam (`/figuras/AAAA/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 

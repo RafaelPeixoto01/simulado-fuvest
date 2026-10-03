@@ -28,7 +28,7 @@
 | CR-007 | Apresentação, menu do celular e barra opaca ([CR](changes/CR-007-apresentacao-menu-barra.md), [spec 07 §9](specs/07-contas-sincronizacao.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-009 | Rolagem ao trocar de página e extras do início ([CR](changes/CR-009-rolagem-inicio-extras.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
-| CR-010 | Notas de corte por carreira e carreira-alvo, Fase 4 do roadmap ([CR](changes/CR-010-notas-de-corte.md), [spec 08](specs/08-notas-de-corte.md)) | CR-T-01 a CR-T-09 | Em Implementação |
+| CR-010 | Notas de corte por carreira e carreira-alvo, Fase 4 do roadmap ([CR](changes/CR-010-notas-de-corte.md), [spec 08](specs/08-notas-de-corte.md)) | CR-T-01 a CR-T-09 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 
