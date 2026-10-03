@@ -301,6 +301,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - **CR-006** — Login obrigatório para usar o site (Concluído, 2026-10-01): sem login, só a apresentação (início) e a Privacidade (D1); API de conteúdo exige sessão — 401 `nao_autenticado` (D2); sem login configurado, o site fecha em produção (503 `site_indisponivel`) e abre em desenvolvimento (D3). `exigir_acesso` com modos `conta`/`livre`/`indisponivel` (ADR-012), `SessaoResponse.acesso`, `RequerConta` e `ApresentacaoPage`
 
 ### Última Tarefa Implementada
+- T-029 (2026-10-02): prova 2020 curada e publicada (`conteudo/prova-2020`); com 2020 e 2022–2025, são 5 provas e 449 questões no catálogo de produção, a meta do PRD §2. Os textos com linhas numeradas (Q03, Q43, texto das Q44–45) mantêm uma linha do PDF por linha, com o número a cada 5 na margem. Próximo: T-030 (revisão final)
 - CR-010 (2026-10-02): notas de corte por carreira (Fase 4) — página `/notas-de-corte`, carreira-alvo na conta e comparação no resultado e no início; notas de corte de 2020 e 2022–2025 publicadas, com os nomes revisados pelo usuário (Gate 1), e conferidas em produção com o login real. Depois, as notas de corte de 2026 (conteúdo, `conteudo/cortes-2026`), que viram a lista da carreira-alvo; o limite do nome da carreira subiu para 250 caracteres
 - CR-009 (2026-10-02): página nova sempre no topo (bug da rolagem herdada) e extras do início (cartão da Prova completa com miniatura da folha, lateral de 340 px, modos em linhas no celular), círculo de um algarismo e marcas do painel da folha
 - CR-008 (2026-10-02): identidade visual "Papel & Caneta" e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque
@@ -311,7 +312,7 @@ Versões definidas em `/docs/02-ARCHITECTURE.md` §1 (fonte da verdade) e fixada
 - CR-003 (2026-09-30): resultado, figura ampliada e banner do início
 - CR-002 (2026-09-30): contraste dos tokens e título por rota
 - CR-001 (2026-09-30): resolução em modo foco, barra inferior, folha e pausa
-- MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Provas 2025, 2024 e 2023 curadas e publicadas; pendentes do curador (T-011/T-029): 2022 e 2020, numa branch `conteudo/prova-AAAA`. Depois: T-030 (revisão final)
+- MVP em produção (2026-09-30), grupos 1 a 5 + T-028: rascunhos extraídos de 2020, 2022, 2023, 2024 e 2025 em `data/provas/` (a família 2025 cobre esses anos; 2021 exige OCR). Provas 2025, 2024 e 2023 curadas e publicadas; 2022 e 2020 publicadas depois, cada uma numa branch `conteudo/prova-AAAA` (T-029 concluída em 2026-10-02). Depois: T-030 (revisão final)
 
 ---
 
