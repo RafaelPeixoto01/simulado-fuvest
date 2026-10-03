@@ -14,11 +14,11 @@
 | Grupo | Descrição | Tarefas | Status |
 |-------|-----------|---------|--------|
 | 1 | Setup e Infraestrutura | T-001 a T-004 | Concluído |
-| 2 | Pacote e Ingestão | T-005 a T-011 | Concluído (exceto T-011, curador) |
+| 2 | Pacote e Ingestão | T-005 a T-011 | Concluído |
 | 3 | API | T-012 a T-017 | Concluído |
 | 4 | Frontend | T-018 a T-025 | Concluído |
 | 5 | Deploy | T-026 a T-027 | Concluído (pendente: toggle "Wait for CI", curador) |
-| 6 | Conteúdo e Lançamento | T-028 a T-030 | Em andamento (T-028 concluída) |
+| 6 | Conteúdo e Lançamento | T-028 a T-030 | Em andamento (T-028 e T-029 concluídas) |
 | CR-001 | Resolução: navegação, folha de respostas e pausa (pós-MVP, [CR](changes/CR-001-resolucao-navegacao.md)) | CR-T-01 a CR-T-10 | Concluído |
 | CR-002 | Contraste e tokens (pós-MVP, [CR](changes/CR-002-contraste-tokens.md)) | CR-T-01 a CR-T-05 | Concluído |
 | CR-003 | Resultado, figura e início (pós-MVP, [CR](changes/CR-003-resultado-figura-inicio.md)) | CR-T-01 a CR-T-09 | Concluído |
@@ -134,7 +134,7 @@
 | ID | Tarefa | Arquivos | Ref | Depende de | Done When |
 |----|--------|----------|-----|------------|-----------|
 | T-028 | Estender o registry da família 2025 aos anos vizinhos (2024, 2023, …) até onde ela extrair sem pendência estrutural; documentar onde uma família nova seria necessária | `ingestao/layouts/__init__.py`, `ingestao/gabarito/__init__.py`, fixtures | RF-003, ADR-003 | T-010 | Anos suportados listados no registry e na Arquitetura. **Resultado (2026-09-30):** a família cobre 2020, 2022, 2023, 2024 e 2025 (muda só a fonte do número da questão; gabarito com versões V/K/Q/X/Z). 2021 fica de fora: o PDF não tem texto extraível e exigiria OCR. Rascunhos extraídos: 2024 62/90, 2023 61/90, 2022 56/90, 2020 68/90 sem pendência estrutural (2025: 61/90). O gabarito retificado de 2024 aceita duas respostas na questão 48 (versão V): vira pendência para o curador |
-| T-029 | **(curador)** Curadoria e publicação até **≥ 5 provas** (meta do PRD §2). Desde o CR-004, cada questão também recebe um assunto da taxonomia (V11); revisar com `ingestao assuntos --ano AAAA` | `data/provas/**` | PRD §2 | T-011, T-028 | `validar --todas` verde; 5+ provas no catálogo de produção |
+| T-029 | **(curador)** Curadoria e publicação até **≥ 5 provas** (meta do PRD §2). Desde o CR-004, cada questão também recebe um assunto da taxonomia (V11); revisar com `ingestao assuntos --ano AAAA` | `data/provas/**` | PRD §2 | T-011, T-028 | `validar --todas` verde; 5+ provas no catálogo de produção. **Resultado (2026-10-02):** 2025, 2024 e 2023 publicadas em 2026-09-30, 2022 e 2020 em 2026-10-02, cada uma revisada pelo curador antes da publicação (branch `conteudo/prova-AAAA`). Produção: `/api/vitrine` com anos 2020, 2022–2025 e 449 questões não anuladas; `/api/health` com `provas: 5`. 2021 segue fora (exige OCR, T-028) |
 | T-030 | Revisão final: acessibilidade (teclado, contraste, alt), mobile 360 px, performance (geração p95 < 2 s), `/code-review` do diff, sincronização de todos os docs (PRD, Arquitetura, Specs, Plano, CLAUDE.md) | docs + ajustes | RNF-001–RNF-003 | T-027, T-029 | Checklist Done When Universal completo; findings corrigidos ou justificados |
 
 **Processo de conteúdo após o lançamento:** publicar uma prova nova (ou corrigir uma questão reportada) é mudança de **dados**, não de código. O fluxo é a branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`) + commit do pacote + merge com o CI verde (`validar --todas`), sem CR. Mudanças em parser, API ou UI seguem o Fluxo B.
