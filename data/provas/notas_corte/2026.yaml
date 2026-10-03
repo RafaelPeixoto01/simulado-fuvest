@@ -1,0 +1,378 @@
+# Notas de corte da 1ª fase — FUVEST 2026 (CR-010, specs/08).
+# Corte = menor nota entre os convocados para a 2ª fase, por carreira e modalidade.
+ano: 2026
+status: publicada
+fonte: https://www.fuvest.br/wp-content/uploads/fuvest2026_notas_de_corte.pdf
+pendencias: []
+carreiras:
+- codigo: 101
+  nome: Biotecnologia (São Paulo)
+  ac: {vagas: 26, convocados: 97, corte: 56, maximo: 84}
+  ep: {vagas: 11, convocados: 44, corte: 42, maximo: 73}
+  ppi: {vagas: 6, convocados: 20, corte: 29, maximo: 61}
+- codigo: 102
+  nome: Ciências Biológicas (São Paulo, Piracicaba, Ribeirão Preto)
+  ac: {vagas: 83, convocados: 268, corte: 57, maximo: 82}
+  ep: {vagas: 35, convocados: 189, corte: 49, maximo: 77}
+  ppi: {vagas: 21, convocados: 128, corte: 34, maximo: 65}
+- codigo: 103
+  nome: Ciências Biomédicas (São Paulo, Ribeirão Preto)
+  ac: {vagas: 29, convocados: 117, corte: 62, maximo: 86}
+  ep: {vagas: 12, convocados: 51, corte: 52, maximo: 71}
+  ppi: {vagas: 7, convocados: 41, corte: 45, maximo: 70}
+- codigo: 104
+  nome: Ciências dos Alimentos (Piracicaba)
+  ac: {vagas: 18, convocados: 76, corte: 51, maximo: 79}
+  ep: {vagas: 7, convocados: 19, corte: 27, maximo: 65}
+  ppi: {vagas: 4, convocados: 6, corte: 27, maximo: 44}
+- codigo: 105
+  nome: Educação Física (São Paulo, Ribeirão Preto)
+  ac: {vagas: 96, convocados: 268, corte: 43, maximo: 78}
+  ep: {vagas: 40, convocados: 201, corte: 29, maximo: 78}
+  ppi: {vagas: 23, convocados: 94, corte: 27, maximo: 54}
+- codigo: 106
+  nome: Enfermagem (São Paulo, Ribeirão Preto)
+  ac: {vagas: 92, convocados: 300, corte: 47, maximo: 77}
+  ep: {vagas: 39, convocados: 179, corte: 35, maximo: 66}
+  ppi: {vagas: 24, convocados: 87, corte: 27, maximo: 63}
+- codigo: 107
+  nome: Farmácia (São Paulo, Ribeirão Preto)
+  ac: {vagas: 101, convocados: 362, corte: 58, maximo: 83}
+  ep: {vagas: 40, convocados: 185, corte: 46, maximo: 76}
+  ppi: {vagas: 25, convocados: 147, corte: 27, maximo: 69}
+- codigo: 108
+  nome: Fisioterapia (São Paulo, Ribeirão Preto)
+  ac: {vagas: 29, convocados: 124, corte: 59, maximo: 80}
+  ep: {vagas: 12, convocados: 52, corte: 47, maximo: 79}
+  ppi: {vagas: 7, convocados: 38, corte: 40, maximo: 67}
+- codigo: 109
+  nome: Fonoaudiologia (São Paulo, Bauru, Ribeirão Preto)
+  ac: {vagas: 42, convocados: 138, corte: 50, maximo: 79}
+  ep: {vagas: 18, convocados: 104, corte: 39, maximo: 66}
+  ppi: {vagas: 10, convocados: 47, corte: 27, maximo: 58}
+- codigo: 110
+  nome: Gerontologia (São Paulo)
+  ac: {vagas: 26, convocados: 37, corte: 27, maximo: 68}
+  ep: {vagas: 11, convocados: 11, corte: 27, maximo: 57}
+  ppi: {vagas: 6, convocados: 4, corte: 27, maximo: 36}
+- codigo: 111
+  nome: Medicina (São Paulo, Bauru, Ribeirão Preto)
+  ac: {vagas: 147, convocados: 605, corte: 80, maximo: 88}
+  ep: {vagas: 61, convocados: 299, corte: 72, maximo: 85}
+  ppi: {vagas: 36, convocados: 184, corte: 60, maximo: 83}
+- codigo: 112
+  nome: Medicina Veterinária (São Paulo, Pirassununga)
+  ac: {vagas: 61, convocados: 248, corte: 59, maximo: 80}
+  ep: {vagas: 26, convocados: 122, corte: 50, maximo: 69}
+  ppi: {vagas: 15, convocados: 74, corte: 38, maximo: 58}
+- codigo: 113
+  nome: Nutrição (São Paulo, Ribeirão Preto)
+  ac: {vagas: 49, convocados: 169, corte: 55, maximo: 80}
+  ep: {vagas: 19, convocados: 94, corte: 46, maximo: 75}
+  ppi: {vagas: 11, convocados: 73, corte: 35, maximo: 64}
+- codigo: 114
+  nome: Obstetrícia (São Paulo)
+  ac: {vagas: 26, convocados: 68, corte: 38, maximo: 75}
+  ep: {vagas: 11, convocados: 41, corte: 27, maximo: 62}
+  ppi: {vagas: 6, convocados: 21, corte: 27, maximo: 50}
+- codigo: 115
+  nome: Odontologia (São Paulo, Bauru, Ribeirão Preto)
+  ac: {vagas: 115, convocados: 425, corte: 53, maximo: 82}
+  ep: {vagas: 48, convocados: 232, corte: 39, maximo: 71}
+  ppi: {vagas: 28, convocados: 78, corte: 27, maximo: 60}
+- codigo: 116
+  nome: Psicologia (Ribeirão Preto)
+  ac: {vagas: 18, convocados: 71, corte: 67, maximo: 81}
+  ep: {vagas: 8, convocados: 41, corte: 57, maximo: 72}
+  ppi: {vagas: 4, convocados: 21, corte: 48, maximo: 59}
+- codigo: 117
+  nome: Psicologia (São Paulo)
+  ac: {vagas: 31, convocados: 131, corte: 69, maximo: 85}
+  ep: {vagas: 13, convocados: 55, corte: 58, maximo: 75}
+  ppi: {vagas: 7, convocados: 45, corte: 49, maximo: 67}
+- codigo: 118
+  nome: Saúde Pública (São Paulo)
+  ac: {vagas: 18, convocados: 70, corte: 49, maximo: 72}
+  ep: {vagas: 7, convocados: 15, corte: 27, maximo: 77}
+  ppi: {vagas: 4, convocados: 4, corte: 27, maximo: 39}
+- codigo: 119
+  nome: Terapia Ocupacional (São Paulo, Ribeirão Preto)
+  ac: {vagas: 20, convocados: 58, corte: 53, maximo: 73}
+  ep: {vagas: 9, convocados: 54, corte: 46, maximo: 70}
+  ppi: {vagas: 5, convocados: 35, corte: 34, maximo: 62}
+- codigo: 120
+  nome: Zootecnia (Pirassununga)
+  ac: {vagas: 17, convocados: 54, corte: 43, maximo: 67}
+  ep: {vagas: 7, convocados: 33, corte: 27, maximo: 58}
+  ppi: {vagas: 4, convocados: 7, corte: 27, maximo: 52}
+- codigo: 201
+  nome: Engenharia Agronômica; Engenharia Bioquímica; Engenharia Florestal (Lorena, Piracicaba)
+  ac: {vagas: 123, convocados: 426, corte: 47, maximo: 83}
+  ep: {vagas: 51, convocados: 239, corte: 27, maximo: 70}
+  ppi: {vagas: 29, convocados: 43, corte: 27, maximo: 64}
+- codigo: 301
+  nome: Ciências da Natureza (São Paulo)
+  ac: {vagas: 26, convocados: 94, corte: 43, maximo: 68}
+  ep: {vagas: 11, convocados: 15, corte: 29, maximo: 58}
+  ppi: {vagas: 6, convocados: 7, corte: 27, maximo: 53}
+- codigo: 302
+  nome: Ciências Exatas (São Carlos)
+  ac: {vagas: 22, convocados: 71, corte: 27, maximo: 71}
+  ep: {vagas: 9, convocados: 11, corte: 27, maximo: 63}
+  ppi: {vagas: 5, convocados: 3, corte: 27, maximo: 47}
+- codigo: 303
+  nome: Computação (São Paulo, Ribeirão Preto, São Carlos)
+  ac: {vagas: 160, convocados: 550, corte: 64, maximo: 86}
+  ep: {vagas: 67, convocados: 344, corte: 55, maximo: 85}
+  ppi: {vagas: 39, convocados: 233, corte: 42, maximo: 82}
+- codigo: 304
+  nome: Engenharia Aeronáutica (São Carlos)
+  ac: {vagas: 18, convocados: 66, corte: 75, maximo: 87}
+  ep: {vagas: 7, convocados: 32, corte: 63, maximo: 78}
+  ppi: {vagas: 4, convocados: 18, corte: 39, maximo: 78}
+- codigo: 305
+  nome: Engenharia Ambiental (São Paulo, Lorena, São Carlos)
+  ac: {vagas: 61, convocados: 181, corte: 41, maximo: 83}
+  ep: {vagas: 25, convocados: 62, corte: 27, maximo: 73}
+  ppi: {vagas: 14, convocados: 27, corte: 27, maximo: 64}
+- codigo: 306
+  nome: Engenharia Civil (São Carlos)
+  ac: {vagas: 26, convocados: 101, corte: 58, maximo: 81}
+  ep: {vagas: 11, convocados: 43, corte: 43, maximo: 75}
+  ppi: {vagas: 6, convocados: 28, corte: 29, maximo: 59}
+- codigo: 307
+  nome: Engenharia de Materiais (São Paulo, Lorena, São Carlos)
+  ac: {vagas: 63, convocados: 235, corte: 54, maximo: 83}
+  ep: {vagas: 26, convocados: 57, corte: 29, maximo: 74}
+  ppi: {vagas: 16, convocados: 7, corte: 27, maximo: 61}
+- codigo: 308
+  nome: Engenharia Elétrica e de Computação (São Carlos)
+  ac: {vagas: 66, convocados: 252, corte: 66, maximo: 85}
+  ep: {vagas: 27, convocados: 121, corte: 50, maximo: 82}
+  ppi: {vagas: 18, convocados: 85, corte: 29, maximo: 76}
+- codigo: 309
+  nome: Engenharia Física; Engenharia de Produção; Engenharia Química (Lorena)
+  ac: {vagas: 104, convocados: 382, corte: 52, maximo: 82}
+  ep: {vagas: 44, convocados: 138, corte: 27, maximo: 76}
+  ppi: {vagas: 26, convocados: 33, corte: 27, maximo: 62}
+- codigo: 310
+  nome: Engenharia Mecânica; Engenharia Mecatrônica; Engenharia de Produção (São Carlos)
+  ac: {vagas: 66, convocados: 285, corte: 67, maximo: 84}
+  ep: {vagas: 27, convocados: 104, corte: 49, maximo: 75}
+  ppi: {vagas: 18, convocados: 89, corte: 27, maximo: 66}
+- codigo: 311
+  nome: Engenharias (São Paulo)
+  ac: {vagas: 328, convocados: 1230, corte: 69, maximo: 89}
+  ep: {vagas: 137, convocados: 524, corte: 47, maximo: 84}
+  ppi: {vagas: 82, convocados: 259, corte: 27, maximo: 77}
+- codigo: 312
+  nome: Engenharias FZEA (Pirassununga)
+  ac: {vagas: 70, convocados: 73, corte: 27, maximo: 78}
+  ep: {vagas: 29, convocados: 25, corte: 27, maximo: 70}
+  ppi: {vagas: 16, convocados: 5, corte: 27, maximo: 54}
+- codigo: 313
+  nome: Física / Física Computacional / Física Biomolecular / Meteorologia / Geofísica / Astronomia / Estatística / Matemática
+    / Matemática Aplicada / Matemática Aplicada a Negócios (São Paulo, Ribeirão Preto, São Carlos)
+  ac: {vagas: 269, convocados: 749, corte: 48, maximo: 86}
+  ep: {vagas: 109, convocados: 515, corte: 27, maximo: 79}
+  ppi: {vagas: 65, convocados: 133, corte: 27, maximo: 68}
+- codigo: 314
+  nome: Física Médica (São Paulo, Ribeirão Preto)
+  ac: {vagas: 29, convocados: 101, corte: 52, maximo: 76}
+  ep: {vagas: 13, convocados: 63, corte: 32, maximo: 73}
+  ppi: {vagas: 7, convocados: 16, corte: 29, maximo: 57}
+- codigo: 315
+  nome: Geociências e Educação Ambiental (São Paulo)
+  ac: {vagas: 18, convocados: 49, corte: 28, maximo: 67}
+  ep: {vagas: 7, convocados: 8, corte: 27, maximo: 69}
+  ppi: {vagas: 4, convocados: 3, corte: 27, maximo: 49}
+- codigo: 316
+  nome: Geologia (São Paulo)
+  ac: {vagas: 22, convocados: 60, corte: 43, maximo: 85}
+  ep: {vagas: 9, convocados: 42, corte: 27, maximo: 71}
+  ppi: {vagas: 6, convocados: 10, corte: 27, maximo: 62}
+- codigo: 317
+  nome: Informática Biomédica (Ribeirão Preto)
+  ac: {vagas: 9, convocados: 27, corte: 33, maximo: 65}
+  ep: {vagas: 4, convocados: 11, corte: 30, maximo: 55}
+  ppi: {vagas: 2, convocados: 1, corte: 27, maximo: 40}
+- codigo: 318
+  nome: Licenciatura em Matemática / Física (São Paulo)
+  ac: {vagas: 114, convocados: 323, corte: 27, maximo: 81}
+  ep: {vagas: 47, convocados: 94, corte: 27, maximo: 73}
+  ppi: {vagas: 28, convocados: 33, corte: 27, maximo: 68}
+- codigo: 319
+  nome: Oceanografia (São Paulo)
+  ac: {vagas: 18, convocados: 42, corte: 38, maximo: 69}
+  ep: {vagas: 7, convocados: 27, corte: 27, maximo: 67}
+  ppi: {vagas: 4, convocados: 11, corte: 27, maximo: 55}
+- codigo: 320
+  nome: Química (Ribeirão Preto)
+  ac: {vagas: 44, convocados: 126, corte: 39, maximo: 78}
+  ep: {vagas: 19, convocados: 46, corte: 28, maximo: 73}
+  ppi: {vagas: 10, convocados: 24, corte: 27, maximo: 71}
+- codigo: 321
+  nome: Química (São Paulo, São Carlos)
+  ac: {vagas: 78, convocados: 209, corte: 50, maximo: 84}
+  ep: {vagas: 33, convocados: 182, corte: 34, maximo: 74}
+  ppi: {vagas: 18, convocados: 65, corte: 27, maximo: 67}
+- codigo: 322
+  nome: Sistemas de Informação (São Carlos)
+  ac: {vagas: 22, convocados: 64, corte: 56, maximo: 77}
+  ep: {vagas: 9, convocados: 51, corte: 48, maximo: 73}
+  ppi: {vagas: 6, convocados: 39, corte: 34, maximo: 67}
+- codigo: 501
+  nome: Administração, Ciências Contábeis, Ciências Econômicas, Finanças e Negócios (Ribeirão Preto)
+  ac: {vagas: 116, convocados: 441, corte: 54, maximo: 81}
+  ep: {vagas: 48, convocados: 197, corte: 38, maximo: 75}
+  ppi: {vagas: 30, convocados: 93, corte: 27, maximo: 61}
+- codigo: 502
+  nome: Administração, Ciências Atuariais, Ciências Contábeis e Ciências Econômicas (São Paulo)
+  ac: {vagas: 259, convocados: 1018, corte: 61, maximo: 84}
+  ep: {vagas: 105, convocados: 428, corte: 49, maximo: 81}
+  ppi: {vagas: 65, convocados: 391, corte: 29, maximo: 73}
+- codigo: 503
+  nome: Ciências Econômicas e Administração (Piracicaba)
+  ac: {vagas: 36, convocados: 147, corte: 56, maximo: 80}
+  ep: {vagas: 14, convocados: 60, corte: 43, maximo: 64}
+  ppi: {vagas: 8, convocados: 15, corte: 27, maximo: 55}
+- codigo: 504
+  nome: Arquitetura (São Paulo)
+  ac: {vagas: 66, convocados: 246, corte: 63, maximo: 84}
+  ep: {vagas: 27, convocados: 131, corte: 51, maximo: 76}
+  ppi: {vagas: 16, convocados: 92, corte: 38, maximo: 69}
+- codigo: 505
+  nome: Arquitetura (São Carlos)
+  ac: {vagas: 20, convocados: 83, corte: 60, maximo: 78}
+  ep: {vagas: 8, convocados: 31, corte: 48, maximo: 69}
+  ppi: {vagas: 5, convocados: 26, corte: 30, maximo: 56}
+- codigo: 506
+  nome: Artes Cênicas (São Paulo)
+  ac: {vagas: 15, convocados: 52, corte: 55, maximo: 78}
+  ep: {vagas: 9, convocados: 44, corte: 46, maximo: 71}
+  ppi: {vagas: 6, convocados: 37, corte: 38, maximo: 53}
+- codigo: 507
+  nome: Artes Visuais (São Paulo)
+  ac: {vagas: 15, convocados: 51, corte: 61, maximo: 76}
+  ep: {vagas: 9, convocados: 43, corte: 54, maximo: 73}
+  ppi: {vagas: 6, convocados: 31, corte: 40, maximo: 61}
+- codigo: 508
+  nome: Audiovisual (São Paulo)
+  ac: {vagas: 15, convocados: 49, corte: 65, maximo: 81}
+  ep: {vagas: 6, convocados: 28, corte: 56, maximo: 77}
+  ppi: {vagas: 4, convocados: 25, corte: 49, maximo: 69}
+- codigo: 509
+  nome: Biblioteconomia e Ciência da Informação (São Paulo, Ribeirão Preto)
+  ac: {vagas: 36, convocados: 88, corte: 35, maximo: 79}
+  ep: {vagas: 16, convocados: 52, corte: 27, maximo: 72}
+  ppi: {vagas: 8, convocados: 14, corte: 27, maximo: 60}
+- codigo: 510
+  nome: Ciências Sociais (São Paulo)
+  ac: {vagas: 91, convocados: 272, corte: 48, maximo: 81}
+  ep: {vagas: 40, convocados: 181, corte: 30, maximo: 69}
+  ppi: {vagas: 23, convocados: 82, corte: 27, maximo: 66}
+- codigo: 511
+  nome: Design (São Paulo)
+  ac: {vagas: 17, convocados: 66, corte: 60, maximo: 80}
+  ep: {vagas: 7, convocados: 29, corte: 55, maximo: 67}
+  ppi: {vagas: 5, convocados: 27, corte: 44, maximo: 66}
+- codigo: 512
+  nome: Direito (São Paulo, Ribeirão Preto)
+  ac: {vagas: 246, convocados: 998, corte: 66, maximo: 87}
+  ep: {vagas: 102, convocados: 417, corte: 54, maximo: 79}
+  ppi: {vagas: 60, convocados: 361, corte: 43, maximo: 71}
+- codigo: 513
+  nome: Editoração (São Paulo)
+  ac: {vagas: 7, convocados: 20, corte: 53, maximo: 66}
+  ep: {vagas: 3, convocados: 13, corte: 42, maximo: 61}
+  ppi: {vagas: 2, convocados: 11, corte: 30, maximo: 61}
+- codigo: 514
+  nome: Educomunicação (São Paulo)
+  ac: {vagas: 13, convocados: 43, corte: 41, maximo: 71}
+  ep: {vagas: 5, convocados: 16, corte: 33, maximo: 62}
+  ppi: {vagas: 3, convocados: 6, corte: 27, maximo: 55}
+- codigo: 515
+  nome: Filosofia (São Paulo)
+  ac: {vagas: 74, convocados: 196, corte: 39, maximo: 83}
+  ep: {vagas: 33, convocados: 95, corte: 27, maximo: 73}
+  ppi: {vagas: 19, convocados: 33, corte: 27, maximo: 58}
+- codigo: 516
+  nome: Geografia (São Paulo)
+  ac: {vagas: 74, convocados: 211, corte: 40, maximo: 72}
+  ep: {vagas: 33, convocados: 87, corte: 28, maximo: 71}
+  ppi: {vagas: 19, convocados: 29, corte: 27, maximo: 64}
+- codigo: 517
+  nome: Gestão Ambiental (São Paulo, Piracicaba)
+  ac: {vagas: 70, convocados: 159, corte: 27, maximo: 71}
+  ep: {vagas: 29, convocados: 39, corte: 27, maximo: 61}
+  ppi: {vagas: 16, convocados: 14, corte: 27, maximo: 57}
+- codigo: 518
+  nome: Gestão de Políticas Públicas (São Paulo)
+  ac: {vagas: 52, convocados: 154, corte: 43, maximo: 70}
+  ep: {vagas: 22, convocados: 69, corte: 27, maximo: 61}
+  ppi: {vagas: 12, convocados: 40, corte: 27, maximo: 64}
+- codigo: 519
+  nome: História (São Paulo)
+  ac: {vagas: 117, convocados: 357, corte: 49, maximo: 76}
+  ep: {vagas: 52, convocados: 247, corte: 31, maximo: 75}
+  ppi: {vagas: 29, convocados: 110, corte: 27, maximo: 68}
+- codigo: 520
+  nome: Jornalismo (São Paulo)
+  ac: {vagas: 26, convocados: 91, corte: 62, maximo: 77}
+  ep: {vagas: 10, convocados: 47, corte: 56, maximo: 71}
+  ppi: {vagas: 6, convocados: 33, corte: 47, maximo: 67}
+- codigo: 521
+  nome: Letras (São Paulo)
+  ac: {vagas: 370, convocados: 946, corte: 37, maximo: 80}
+  ep: {vagas: 158, convocados: 528, corte: 27, maximo: 70}
+  ppi: {vagas: 91, convocados: 170, corte: 27, maximo: 66}
+- codigo: 522
+  nome: Marketing (São Paulo)
+  ac: {vagas: 52, convocados: 163, corte: 47, maximo: 71}
+  ep: {vagas: 22, convocados: 115, corte: 35, maximo: 67}
+  ppi: {vagas: 12, convocados: 51, corte: 27, maximo: 58}
+- codigo: 523
+  nome: Música (São Paulo)
+  ac: {vagas: 25, convocados: 68, corte: 47, maximo: 86}
+  ep: {vagas: 15, convocados: 67, corte: 32, maximo: 70}
+  ppi: {vagas: 10, convocados: 35, corte: 27, maximo: 65}
+- codigo: 524
+  nome: Música (Ribeirão Preto)
+  ac: {vagas: 15, convocados: 31, corte: 27, maximo: 64}
+  ep: {vagas: 9, convocados: 18, corte: 27, maximo: 53}
+  ppi: {vagas: 6, convocados: 6, corte: 27, maximo: 50}
+- codigo: 525
+  nome: Pedagogia (São Paulo)
+  ac: {vagas: 78, convocados: 198, corte: 41, maximo: 78}
+  ep: {vagas: 33, convocados: 167, corte: 27, maximo: 66}
+  ppi: {vagas: 21, convocados: 65, corte: 27, maximo: 63}
+- codigo: 526
+  nome: Pedagogia (Ribeirão Preto)
+  ac: {vagas: 22, convocados: 46, corte: 38, maximo: 78}
+  ep: {vagas: 10, convocados: 45, corte: 27, maximo: 62}
+  ppi: {vagas: 5, convocados: 18, corte: 27, maximo: 47}
+- codigo: 527
+  nome: Publicidade e Propaganda (São Paulo)
+  ac: {vagas: 22, convocados: 85, corte: 59, maximo: 74}
+  ep: {vagas: 9, convocados: 35, corte: 52, maximo: 67}
+  ppi: {vagas: 5, convocados: 38, corte: 47, maximo: 60}
+- codigo: 528
+  nome: Relações Internacionais (São Paulo)
+  ac: {vagas: 26, convocados: 102, corte: 67, maximo: 84}
+  ep: {vagas: 10, convocados: 42, corte: 58, maximo: 71}
+  ppi: {vagas: 6, convocados: 42, corte: 48, maximo: 65}
+- codigo: 529
+  nome: Relações Públicas (São Paulo)
+  ac: {vagas: 22, convocados: 77, corte: 55, maximo: 79}
+  ep: {vagas: 9, convocados: 51, corte: 47, maximo: 64}
+  ppi: {vagas: 5, convocados: 32, corte: 38, maximo: 61}
+- codigo: 530
+  nome: Têxtil e Moda (São Paulo)
+  ac: {vagas: 26, convocados: 74, corte: 52, maximo: 71}
+  ep: {vagas: 11, convocados: 63, corte: 44, maximo: 66}
+  ppi: {vagas: 6, convocados: 43, corte: 33, maximo: 58}
+- codigo: 531
+  nome: Turismo (São Paulo)
+  ac: {vagas: 65, convocados: 235, corte: 42, maximo: 79}
+  ep: {vagas: 27, convocados: 37, corte: 27, maximo: 62}
+  ppi: {vagas: 15, convocados: 16, corte: 27, maximo: 46}

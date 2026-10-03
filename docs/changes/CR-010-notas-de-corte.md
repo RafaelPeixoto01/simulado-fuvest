@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-02  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -176,7 +176,7 @@ Com `op.batch_alter_table` (SQLite). As duas colunas são gravadas e apagadas ju
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: três endpoints novos e uma coluna nova com dado de usuário — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v5.0, Arquitetura v1.10 (ADR-014), 03-SPEC v1.10, specs 01/03/04/07 e 08 nova, Plano, Deploy Guide v1.5, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; em produção, `/notas-de-corte` com os 5 anos e a carreira-alvo funcionando com o login real
+- [x] CI verde na branch e em `master`; em produção, `/notas-de-corte` com os 5 anos e a carreira-alvo funcionando com o login real — branch verde (run 37064793416), `master` verde no merge `eddcff8` (run 37065452570). Em produção (02/10): migration `003 -> 004` no log da Railway, `GET /api/notas-corte` e `PUT /api/conta/carreira-alvo` sem cookie → 401, `/notas-de-corte` → 200; o usuário conferiu com o login real a página, a carreira-alvo, o bloco do resultado e a linha do início ("CR-010 está tudo ok")
 
 **Validação runtime (02/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso, SQLite novo com as provas 2022–2025 e uma cópia de `data/provas` com os cortes marcados como publicados — o repositório continuou em rascunho):**
 - HTTP: sem sessão, `GET /api/notas-corte` e `PUT /api/conta/carreira-alvo` → 401. Logado: `GET /api/notas-corte` → anos `[2025, 2024, 2023, 2022, 2020]`, 75 carreiras, Medicina (código 111) com cortes 79/71/60 e 244 vagas; `?ano=2021` → 2025; `?ano=abc` → 422. `PUT {2025, 111}` → 200 com `Cache-Control: no-store`; `PUT {2024, 460}` → 422 `carreira_invalida`; `Origin` de outro site → 403; `GET /api/sessao` com a carreira-alvo resolvida; `DELETE` duas vezes → 204, 204, e `carreira_alvo: null`.
@@ -275,3 +275,5 @@ Sem o downgrade, o código anterior também funciona: ele ignora as colunas extr
 | 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR e spec 08 aprovados pelo usuário |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-08), primeira passada do conteúdo (CR-T-04, em rascunho), validação runtime, revisão de código (9 corrigidos, 1 justificado) e de segurança, documentos atualizados. Os PDFs reais mostraram modalidades sem vagas e sem convocados (spec 08 §2.4) e que de 2024 em diante o PDF não traz o campus de nenhuma carreira |
 | 2026-10-02 | Rafael Peixoto (com Claude) | CI da branch verde (run 37064793416). Gate 1: nomes aprovados pelo usuário sem ajustes; os cinco arquivos de cortes publicados; merge em `master` autorizado |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Pós-merge: limite do nome da carreira de 200 para 250 caracteres (schema e spec 08), porque o nome de 2026/313, com dez cursos e três campi, passa de 200 (teste novo). Encontrado ao preparar as notas de corte de 2026 (conteúdo, branch `conteudo/cortes-2026`) |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Conferência em produção pelo usuário com o login real — validação ✅, status Concluído. Na mesma entrega, as notas de corte de 2026 (74 carreiras, nomes aprovados pelo usuário) foram publicadas como conteúdo e passam a ser a lista da carreira-alvo |

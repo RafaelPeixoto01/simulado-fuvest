@@ -84,6 +84,17 @@ def test_fora_do_schema_e_recusado(tmp_path, alterar, trecho):
         carregar_ano(caminho)
 
 
+def test_nome_longo_ate_250_caracteres(tmp_path):
+    """2026/313: dez cursos no nome e três campi passam de 200 caracteres."""
+    dados = _dados()
+    dados["carreiras"][0]["nome"] = "x" * 250
+    assert carregar_ano(_gravar(tmp_path, dados)).carreiras[0].nome == "x" * 250
+
+    dados["carreiras"][0]["nome"] = "x" * 251
+    with pytest.raises(NotasCorteInvalidas, match="nome"):
+        carregar_ano(_gravar(tmp_path, dados))
+
+
 def test_salvar_e_carregar_preservam_o_conteudo(tmp_path):
     notas = notas_corte_sinteticas(2099)
     caminho = tmp_path / DIRETORIO_NOTAS_CORTE / "2099.yaml"
