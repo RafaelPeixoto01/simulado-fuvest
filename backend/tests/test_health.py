@@ -13,7 +13,9 @@ def test_health_responde_ok_com_zero_provas(client):
 def test_health_conta_provas_sincronizadas(client, sessao):
     sessao.add(
         Prova(
+            codigo="2098",
             ano=2098,
+            tipo="vestibular",
             versao="V1",
             url_prova="https://exemplo.test/p.pdf",
             url_gabarito="https://exemplo.test/g.pdf",

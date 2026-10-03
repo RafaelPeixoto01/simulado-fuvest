@@ -6,9 +6,12 @@ from pydantic import AfterValidator, BaseModel, ConfigDict, Field, model_validat
 from pydantic.alias_generators import to_camel
 
 from app.disciplinas import Disciplina
-from app.pacote.schema import Letra
+from app.pacote.schema import PADRAO_CODIGO_PROVA, Letra, TipoProva
 
-IdQuestao = Annotated[str, Field(pattern=r"^\d{4}-\d{3}$")]
+# "2025-037" ou "2027s1-037": codigo da prova + numero (ADR-006, ADR-015)
+PADRAO_ID_QUESTAO = r"^\d{4}(s[1-9])?-\d{3}$"
+IdQuestao = Annotated[str, Field(pattern=PADRAO_ID_QUESTAO)]
+CodigoProva = Annotated[str, Field(pattern=PADRAO_CODIGO_PROVA)]
 Ano = Annotated[int, Field(ge=1977, le=2100)]
 
 
@@ -45,8 +48,10 @@ class GerarPersonalizado(_Intervalo):
 
 
 class GerarAno(BaseModel):
+    """Prova de um ano ou simulado oficial, inteira (RF-011, CR-011)."""
+
     modo: Literal["ano"]
-    ano: Ano
+    prova: CodigoProva
 
 
 class GerarTreino(_Intervalo):
@@ -63,7 +68,7 @@ PedidoSimulado = Annotated[
 
 class BlocoPublico(BaseModel):
     texto: str | None = None
-    figura: str | None = None  # URL: /figuras/AAAA/arquivo.webp
+    figura: str | None = None  # URL: /figuras/CODIGO/arquivo.webp
 
 
 class AlternativaPublica(BaseModel):
@@ -73,7 +78,9 @@ class AlternativaPublica(BaseModel):
 
 class QuestaoPublica(BaseModel):
     id: str
-    ano: int
+    prova: str  # codigo: "2025", "2027s1"
+    origem: str  # "FUVEST 2025", "Simulado FUVEST 2027 · 1ª edição" (RN-013)
+    ano: int  # ano FUVEST de referencia
     numero: int
     disciplina: Disciplina
     disciplinas_secundarias: list[Disciplina]
@@ -88,7 +95,11 @@ class TextoBasePublico(BaseModel):
 
 
 class ProvaCatalogo(BaseModel):
+    codigo: str
     ano: int
+    tipo: TipoProva
+    edicao: int | None
+    rotulo: str
     versao: str
     total_questoes: int
     url_prova: str
@@ -119,8 +130,8 @@ class CatalogoResponse(BaseModel):
 class VitrineResponse(BaseModel):
     """Totais publicos para a apresentacao (CR-007, specs/07 §9.1): nada alem disto."""
 
-    total_questoes: int  # nao anuladas, como no catalogo
-    anos: list[int]  # provas sincronizadas, em ordem crescente
+    total_questoes: int  # nao anuladas, como no catalogo (inclui as dos simulados)
+    anos: list[int]  # anos com prova de vestibular sincronizada, crescente (sem simulados)
 
 
 class SimuladoResponse(BaseModel):
@@ -234,6 +245,7 @@ class NotasCorteResponse(BaseModel):
     anos: list[int]  # publicados, do mais recente para o mais antigo
     recente: int | None
     ano: int | None  # o devolvido: o pedido, se publicado; senao o mais recente
+    pontos_prova: int | None  # pontos da 1a fase daquele ano: 90 ate 2026, 80 em 2027 (CR-011)
     fonte: str | None
     carreiras: list[CarreiraCorteResposta]
 
@@ -248,6 +260,7 @@ class CarreiraAlvoRequest(BaseModel):
 class CarreiraAlvo(BaseModel):
     ano: int
     codigo: int
+    pontos_prova: int  # escala dos cortes daquele ano (CR-011): a comparacao converte a nota
     carreira: CarreiraCorteResposta | None  # None: o par nao esta mais nos cortes publicados
 
 

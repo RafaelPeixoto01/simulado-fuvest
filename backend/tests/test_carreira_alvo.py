@@ -31,6 +31,7 @@ def test_define_carreira_do_ano_mais_recente(client_logado, base_sintetica):
     esperado = {
         "ano": 2099,
         "codigo": 102,
+        "pontos_prova": 90,  # o arquivo sintetico de 2099 e de 90 pontos (CR-011)
         "carreira": {
             "codigo": 102,
             "nome": "Medicina (São Paulo, Ribeirão Preto)",
@@ -115,7 +116,8 @@ def test_carreira_que_saiu_da_base(client_logado, base_sintetica):
 
     (base_sintetica / "notas_corte" / "2099.yaml").unlink()
 
-    assert _carreira_alvo(client_logado) == {"ano": 2099, "codigo": 102, "carreira": None}
+    # Sem o arquivo, a escala vem da regra do ano (CR-011: 80 a partir de 2027)
+    assert _carreira_alvo(client_logado) == {"ano": 2099, "codigo": 102, "pontos_prova": 80, "carreira": None}
 
 
 def test_excluir_a_conta_apaga_a_carreira_alvo(client_logado, base_sintetica):

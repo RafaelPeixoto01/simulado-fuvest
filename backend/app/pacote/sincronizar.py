@@ -1,7 +1,8 @@
 """Sincroniza os pacotes do repositorio com o banco (ADR-002, specs/01 §2.4).
 
 O banco e um indice derivado de data/provas: depois de sincronizar, ele contem
-exatamente os pacotes publicados e validos. Idempotente e em uma transacao.
+exatamente os pacotes publicados e validos. Idempotente e em uma transacao. Cada prova
+e identificada pelo codigo, que e o nome do diretorio (ADR-015, CR-011).
 Taxonomia de assuntos invalida aborta antes de tocar o banco (ADR-009).
 
 Uso no start do container: `python -m app.pacote.sincronizar`
@@ -23,22 +24,22 @@ from app.models import Prova, Questao, TextoBase
 from app.pacote.assuntos import Taxonomia, TaxonomiaInvalida, carregar_taxonomia
 from app.pacote.leitura import DIR_FIGURAS, PacoteInvalido, carregar_pacote, listar_pacotes
 from app.pacote.schema import Alternativa, Bloco, PacoteProva
-from app.pacote.validacao import TOTAL_QUESTOES, validar_pacote
+from app.pacote.validacao import validar_pacote
 
 log = logging.getLogger("sincronizar")
 
 
 @dataclass
 class ResumoSincronizacao:
-    sincronizadas: list[int] = field(default_factory=list)
+    sincronizadas: list[str] = field(default_factory=list)  # codigos das provas
     ignoradas: dict[str, str] = field(default_factory=dict)  # diretorio -> motivo
-    removidas: list[int] = field(default_factory=list)
+    removidas: list[str] = field(default_factory=list)
 
 
 def _selecionar(
     data_dir: Path, taxonomia: Taxonomia, incluir_rascunhos: bool, resumo: ResumoSincronizacao
-) -> dict[int, PacoteProva]:
-    selecionados: dict[int, PacoteProva] = {}
+) -> dict[str, PacoteProva]:
+    selecionados: dict[str, PacoteProva] = {}
     for dir_prova in listar_pacotes(data_dir):
         nome = dir_prova.name
         try:
@@ -47,8 +48,8 @@ def _selecionar(
             resumo.ignoradas[nome] = f"YAML inválido: {erro.detalhe}"
             log.error("%s ignorado: YAML inválido", nome)
             continue
-        if nome != str(pacote.ano):
-            resumo.ignoradas[nome] = f"diretório {nome} não corresponde ao ano {pacote.ano}"
+        if nome != pacote.codigo:
+            resumo.ignoradas[nome] = f"diretório {nome} não corresponde ao código {pacote.codigo}"
             log.error("%s ignorado: %s", nome, resumo.ignoradas[nome])
             continue
         bloqueantes = [
@@ -64,7 +65,7 @@ def _selecionar(
         if not publicada and not incluir_rascunhos:
             resumo.ignoradas[nome] = "rascunho (não publicado)"
             continue
-        selecionados[pacote.ano] = pacote
+        selecionados[pacote.codigo] = pacote
     return selecionados
 
 
@@ -73,34 +74,37 @@ def _bloco(bloco: Bloco | Alternativa) -> dict:
 
 
 def _gravar(sessao: Session, pacote: PacoteProva, agora: datetime) -> None:
-    ano = pacote.ano
+    codigo = pacote.codigo
     # IDs naturais e estaveis (ADR-006): recriar o conteudo nao quebra referencias
-    sessao.execute(delete(Questao).where(Questao.prova_ano == ano))
-    sessao.execute(delete(TextoBase).where(TextoBase.prova_ano == ano))
+    sessao.execute(delete(Questao).where(Questao.prova_codigo == codigo))
+    sessao.execute(delete(TextoBase).where(TextoBase.prova_codigo == codigo))
 
-    prova = sessao.get(Prova, ano) or Prova(ano=ano)
+    prova = sessao.get(Prova, codigo) or Prova(codigo=codigo)
+    prova.ano = pacote.ano
+    prova.tipo = pacote.tipo
+    prova.edicao = pacote.edicao
     prova.versao = pacote.versao
     prova.url_prova = str(pacote.fonte.url_prova)
     prova.url_gabarito = str(pacote.fonte.url_gabarito)
-    prova.total_questoes = TOTAL_QUESTOES
+    prova.total_questoes = pacote.total_questoes
     prova.sincronizado_em = agora
     sessao.add(prova)
 
     for tb in pacote.textos_base:
         sessao.add(
             TextoBase(
-                id=f"{ano}-{tb.id}",
-                prova_ano=ano,
+                id=f"{codigo}-{tb.id}",
+                prova_codigo=codigo,
                 conteudo=[_bloco(b) for b in tb.conteudo],
             )
         )
     for q in pacote.questoes:
         sessao.add(
             Questao(
-                id=f"{ano}-{q.numero:03d}",
-                prova_ano=ano,
+                id=f"{codigo}-{q.numero:03d}",
+                prova_codigo=codigo,
                 numero=q.numero,
-                texto_base_id=f"{ano}-{q.texto_base}" if q.texto_base else None,
+                texto_base_id=f"{codigo}-{q.texto_base}" if q.texto_base else None,
                 enunciado=[_bloco(b) for b in q.enunciado],
                 alternativas={letra: _bloco(alt) for letra, alt in q.alternativas.items()},
                 resposta=q.resposta,
@@ -122,14 +126,14 @@ def sincronizar(
     selecionados = _selecionar(data_dir, taxonomia, incluir_rascunhos, resumo)
     agora = datetime.now(UTC)
     try:
-        existentes = set(sessao.scalars(select(Prova.ano)))
-        for ano in sorted(existentes - selecionados.keys()):
+        existentes = set(sessao.scalars(select(Prova.codigo)))
+        for codigo in sorted(existentes - selecionados.keys()):
             # ON DELETE CASCADE leva questoes e textos-base; reportes nao tem FK (ADR-006)
-            sessao.delete(sessao.get(Prova, ano))
-            resumo.removidas.append(ano)
-        for ano in sorted(selecionados):
-            _gravar(sessao, selecionados[ano], agora)
-            resumo.sincronizadas.append(ano)
+            sessao.delete(sessao.get(Prova, codigo))
+            resumo.removidas.append(codigo)
+        for codigo in sorted(selecionados):
+            _gravar(sessao, selecionados[codigo], agora)
+            resumo.sincronizadas.append(codigo)
         sessao.commit()
     except SQLAlchemyError:
         sessao.rollback()
@@ -139,8 +143,8 @@ def sincronizar(
 
 def formatar_resumo(resumo: ResumoSincronizacao) -> str:
     linhas = [
-        f"Sincronizadas: {resumo.sincronizadas or 'nenhuma'}",
-        f"Removidas: {resumo.removidas or 'nenhuma'}",
+        f"Sincronizadas: {', '.join(resumo.sincronizadas) or 'nenhuma'}",
+        f"Removidas: {', '.join(resumo.removidas) or 'nenhuma'}",
     ]
     linhas += [f"Ignorada {nome}: {motivo}" for nome, motivo in sorted(resumo.ignoradas.items())]
     return "\n".join(linhas)

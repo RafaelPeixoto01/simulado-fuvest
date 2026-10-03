@@ -43,7 +43,9 @@ def test_sem_notas_de_corte(client):
     resposta = client.get("/api/notas-corte")
 
     assert resposta.status_code == 200
-    assert resposta.json() == {"anos": [], "recente": None, "ano": None, "fonte": None, "carreiras": []}
+    assert resposta.json() == {
+        "anos": [], "recente": None, "ano": None, "pontos_prova": None, "fonte": None, "carreiras": [],
+    }
 
 
 @pytest.mark.parametrize("ano", ["abc", "1800", "2101"])

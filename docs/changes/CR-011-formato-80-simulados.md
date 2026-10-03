@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-02  
-**Status:** Rascunho  
+**Status:** Em Implementação  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -100,7 +100,7 @@ A curadoria das 160 questões dos dois simulados é conteúdo e fica fora deste 
   - Quando o total do simulado e os pontos da lista são iguais, compara direto. Quando são diferentes, converte e mostra os dois números, por exemplo: "Sua nota: 60 de 80 · equivale a 67,5 de 90 (estimativa)".
   - As notas de corte passam a saber os pontos da prova de cada ano (90 até 2026, 80 em 2027), e o mínimo da FUVEST passa a ser 30% desses pontos (27 ou 24).
 
-**Propostas técnicas e de produto para o Gate 0** (decorrem de D1–D3; o usuário confirma ou muda antes do código):
+**Propostas técnicas e de produto, aprovadas no Gate 0 (02/10/2026)** — decorrem de D1–D3; o usuário escolheu a opção recomendada em P2, P3 e P4 e aprovou P1 e P5:
 - **P1 · Identidade.**
   - O código de simulado é `AAAAsN`: o ano FUVEST de referência e a edição, com `s` minúsculo.
   - As colunas `questoes.id` e `reportes.questao_id` vão de 8 para 12 caracteres.
@@ -276,7 +276,7 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 - [ ] A Prova completa tem 80 questões, na distribuição proporcional das provas publicadas, com 5 h
 - [ ] A Prova de um ano lista as provas da FUVEST e, em seção própria, os simulados oficiais; cada uma é feita com o seu total (90 ou 80), anuladas incluídas, com 5 h
 - [ ] Questões dos simulados aparecem no Personalizado e no Treino (filtro de anos pelo ano de referência) e no Meu desempenho; cada questão mostra a origem
-- [ ] O Personalizado usa 225 s por questão (se P3 for confirmada)
+- [ ] O Personalizado usa 225 s por questão (P3)
 - [ ] O resultado e o início comparam com o corte proporcionalmente: mesma escala → direto; escalas diferentes → nota convertida com 1 casa e "(estimativa)"; a página de cortes mostra "de 0 a N" e o mínimo do ano
 - [ ] Um arquivo de cortes com `pontos_prova: 80` é aceito (mínimo 24, máximo ≤ 80) e os atuais continuam válidos
 - [ ] Migration `005` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI), sem perder contas, sessões, históricos e reportes
@@ -349,3 +349,4 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3, o resultado do teste dos dados e as propostas P1–P5 para o Gate 0 |
+| 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR aprovado pelo usuário; P2 (média das proporções de todas as provas), P3 (225 s) e P4 (simulados à parte nos números) confirmadas na opção recomendada |

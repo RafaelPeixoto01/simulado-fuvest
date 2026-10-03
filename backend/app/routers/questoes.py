@@ -7,19 +7,19 @@ from sqlalchemy.orm import Session
 
 from app.dependencias import exigir_acesso, obter_sessao
 from app.models import Questao
-from app.schemas import QuestoesResponse
+from app.schemas import PADRAO_ID_QUESTAO, QuestoesResponse
 from app.services.serializacao import questao_publica, textos_base_publicos
 
 # Login obrigatorio (CR-006, ADR-012)
 router = APIRouter(prefix="/api", tags=["questoes"], dependencies=[Depends(exigir_acesso)])
 
-ID_QUESTAO = re.compile(r"^\d{4}-\d{3}$")
+ID_QUESTAO = re.compile(PADRAO_ID_QUESTAO)
 MAX_IDS = 90
 
 
 @router.get("/questoes")
 def questoes_por_id(
-    ids: Annotated[str, Query(description="1 a 90 ids AAAA-NNN separados por vírgula")],
+    ids: Annotated[str, Query(description="1 a 90 ids CODIGO-NNN separados por vírgula")],
     sessao: Annotated[Session, Depends(obter_sessao)],
 ) -> QuestoesResponse:
     pedidos = list(dict.fromkeys(i.strip() for i in ids.split(",") if i.strip()))

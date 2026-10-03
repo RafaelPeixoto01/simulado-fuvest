@@ -90,3 +90,50 @@ def test_migration_003_cria_e_remove_as_tabelas_de_conta(tmp_path):
     restantes = set(inspect(engine).get_table_names())
     assert TABELAS_CONTA.isdisjoint(restantes)
     assert "questoes" in restantes
+
+
+def test_migration_005_troca_a_chave_da_prova_sem_perder_contas_e_reportes(tmp_path):
+    """BT-087 (CR-011): 004 -> 005 -> 004. As tabelas derivadas voltam vazias (a sincronizacao
+    repovoa); contas, historicos e reportes ficam."""
+    from sqlalchemy import text
+
+    engine = criar_engine(f"sqlite:///{tmp_path / 'm.db'}")
+    aplicar_migrations(engine, "004")
+    with engine.begin() as conn:
+        conn.execute(text(
+            "INSERT INTO provas (ano, versao, url_prova, url_gabarito, total_questoes, sincronizado_em) "
+            "VALUES (2025, 'V1', 'p', 'g', 90, CURRENT_TIMESTAMP)"
+        ))
+        conn.execute(text("INSERT INTO usuarios (google_sub, email) VALUES ('sub', 'a@b.c')"))
+        conn.execute(text(
+            "INSERT INTO simulados_concluidos (usuario_id, id, finalizado_em_ms, dados) "
+            "VALUES (1, 'sim-1', 1, '{}')"
+        ))
+        conn.execute(text("INSERT INTO reportes (questao_id, tipo) VALUES ('2025-001', 'outro')"))
+
+    aplicar_migrations(engine, "005")
+
+    inspetor = inspect(engine)
+    assert {c["name"] for c in inspetor.get_columns("provas")} >= {"codigo", "ano", "tipo", "edicao"}
+    assert inspetor.get_pk_constraint("provas")["constrained_columns"] == ["codigo"]
+    assert "prova_codigo" in {c["name"] for c in inspetor.get_columns("questoes")}
+    with engine.begin() as conn:
+        assert conn.execute(text("SELECT COUNT(*) FROM provas")).scalar() == 0
+        assert conn.execute(text("SELECT email FROM usuarios")).scalar() == "a@b.c"
+        assert conn.execute(text("SELECT id FROM simulados_concluidos")).scalar() == "sim-1"
+        assert conn.execute(text("SELECT questao_id FROM reportes")).scalar() == "2025-001"
+        conn.execute(text(
+            "INSERT INTO provas (codigo, ano, tipo, edicao, versao, url_prova, url_gabarito, "
+            "total_questoes, sincronizado_em) "
+            "VALUES ('2027s1', 2027, 'simulado', 1, 'S1', 'p', 'g', 80, CURRENT_TIMESTAMP)"
+        ))
+
+    aplicar_migrations(engine, "004", downgrade=True)
+
+    inspetor = inspect(engine)
+    assert inspetor.get_pk_constraint("provas")["constrained_columns"] == ["ano"]
+    assert "prova_ano" in {c["name"] for c in inspetor.get_columns("questoes")}
+    with engine.connect() as conn:
+        assert conn.execute(text("SELECT COUNT(*) FROM provas")).scalar() == 0
+        assert conn.execute(text("SELECT COUNT(*) FROM simulados_concluidos")).scalar() == 1
+        assert conn.execute(text("SELECT questao_id FROM reportes")).scalar() == "2025-001"

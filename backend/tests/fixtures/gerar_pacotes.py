@@ -1,9 +1,11 @@
 """Pacotes sinteticos validos (anos ficticios 2098/2099) para testes e dev local.
 
-Deterministicos por ano. Cobrem: as 8 disciplinas, anuladas, textos-base (um com
+Deterministicos por codigo. Cobrem: as 8 disciplinas, anuladas, textos-base (um com
 figura), disciplinas secundarias, figuras no enunciado e em alternativa, e um assunto
 por questao da taxonomia sintetica (3 temas por disciplina, gravada em assuntos.yaml).
 Gravam tambem as notas de corte sinteticas de cada ano (notas_corte/AAAA.yaml, CR-010).
+Os vestibulares tem 90 questoes; o simulado oficial sintetico `2099s1` (CR-011), 80. Os
+testes so recebem o simulado quando pedem (`simulados=`); o dev local o recebe sempre.
 
 Uso no dev local (site com dados antes de existir prova real curada):
     .venv/Scripts/python -m tests.fixtures.gerar_pacotes ../data/_cache/sinteticos
@@ -89,26 +91,32 @@ def escrever_notas_corte(destino: Path, anos: tuple[int, ...] = (2098, 2099)) ->
     return caminhos
 
 
-def _disciplinas_por_numero(rng: random.Random) -> list[Disciplina]:
+def _disciplinas_por_numero(rng: random.Random, total: int) -> list[Disciplina]:
     ordem = list(Disciplina)
-    # 90 = 2 disciplinas com 12 questoes + 6 com 11
-    distribuicao = [d for i, d in enumerate(ordem) for _ in range(12 if i < 2 else 11)]
+    # 90 = 2 disciplinas com 12 questoes + 6 com 11; 80 = 10 por disciplina
+    if total == 90:
+        distribuicao = [d for i, d in enumerate(ordem) for _ in range(12 if i < 2 else 11)]
+    else:
+        distribuicao = [d for d in ordem for _ in range(total // len(ordem))]
     rng.shuffle(distribuicao)
     return distribuicao
 
 
-def gerar_pacote(ano: int) -> PacoteProva:
-    rng = random.Random(ano)
-    disciplinas = _disciplinas_por_numero(rng)
-    anuladas = set(rng.sample(range(1, 91), 1 + ano % 2))
+def gerar_pacote(ano: int, edicao: int | None = None) -> PacoteProva:
+    """Vestibular de 90 questoes ou, com `edicao`, simulado oficial de 80 (CR-011)."""
+    total = 90 if edicao is None else 80
+    rng = random.Random(ano if edicao is None else ano * 10 + edicao)
+    disciplinas = _disciplinas_por_numero(rng, total)
+    anuladas = set(rng.sample(range(1, total + 1), 1 + ano % 2))
     texto_base_de = {n: tb for tb, numeros in TEXTOS_BASE.items() for n in numeros}
+    origem = f"FUVEST {ano}" if edicao is None else f"Simulado FUVEST {ano}, {edicao}ª edição"
 
     questoes = []
-    for numero in range(1, 91):
+    for numero in range(1, total + 1):
         disciplina = disciplinas[numero - 1]
         enunciado = [
             Bloco(texto=f"Questão sintética {numero} de {NOMES_DISCIPLINAS[disciplina]} "
-                        f"(FUVEST {ano}).\nSegunda linha do enunciado.")
+                        f"({origem}).\nSegunda linha do enunciado.")
         ]
         if numero % 15 == 0:
             enunciado += [Bloco(figura=f"q{numero:03d}-1.webp"), Bloco(texto="É correto afirmar:")]
@@ -145,13 +153,17 @@ def gerar_pacote(ano: int) -> PacoteProva:
         )
         for tb, numeros in TEXTOS_BASE.items()
     ]
+    codigo = f"{ano}" if edicao is None else f"{ano}s{edicao}"
     return PacoteProva(
         ano=ano,
-        versao="V1",
+        tipo="vestibular" if edicao is None else "simulado",
+        edicao=edicao,
+        versao="V1" if edicao is None else "S1",
+        total_questoes=total,
         status="publicada",
         fonte=Fonte(
-            url_prova=f"https://exemplo.test/{ano}/prova.pdf",
-            url_gabarito=f"https://exemplo.test/{ano}/gabarito.pdf",
+            url_prova=f"https://exemplo.test/{codigo}/prova.pdf",
+            url_gabarito=f"https://exemplo.test/{codigo}/gabarito.pdf",
             familia_layout="sintetica",
         ),
         textos_base=textos_base,
@@ -173,13 +185,18 @@ def _webp_placeholder(nome: str) -> bytes:
     return saida.getvalue()
 
 
-def escrever_pacotes(destino: Path, anos: tuple[int, ...] = (2098, 2099)) -> list[Path]:
+def escrever_pacotes(
+    destino: Path,
+    anos: tuple[int, ...] = (2098, 2099),
+    simulados: tuple[tuple[int, int], ...] = (),
+) -> list[Path]:
+    """Um diretorio por prova: os vestibulares de `anos` e os simulados (ano, edicao)."""
     escrever_taxonomia(destino)
     escrever_notas_corte(destino, anos)
     diretorios = []
-    for ano in anos:
-        pacote = gerar_pacote(ano)
-        dir_prova = destino / str(ano)
+    for ano, edicao in [(a, None) for a in anos] + list(simulados):
+        pacote = gerar_pacote(ano, edicao)
+        dir_prova = destino / pacote.codigo
         salvar_pacote(pacote, dir_prova)
         (dir_prova / DIR_FIGURAS).mkdir(exist_ok=True)
         for nome in figuras_referenciadas(pacote):
@@ -191,5 +208,5 @@ def escrever_pacotes(destino: Path, anos: tuple[int, ...] = (2098, 2099)) -> lis
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit("uso: python -m tests.fixtures.gerar_pacotes <diretorio-destino>")
-    for d in escrever_pacotes(Path(sys.argv[1])):
+    for d in escrever_pacotes(Path(sys.argv[1]), simulados=((2099, 1),)):
         print(f"gerado: {d}")

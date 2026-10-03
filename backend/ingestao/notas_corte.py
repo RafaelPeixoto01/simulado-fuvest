@@ -13,7 +13,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.pacote.notas_corte import PADRAO_FONTE, CarreiraCorte, NotasCorteAno
+from app.pacote.notas_corte import PADRAO_FONTE, CarreiraCorte, NotasCorteAno, pontos_do_ano
 from ingestao.baixar import ErroDownload, _obter_http, obter_pdf
 
 ARQUIVO_PDF = "notas_corte.pdf"
@@ -150,7 +150,14 @@ def montar_rascunho(carreiras: list[CarreiraExtraida], ano: int, fonte: str) -> 
             )
         if "..." in carreira.nome or "…" in carreira.nome:
             pendencias.append(f"Carreira {carreira.codigo}: nome cortado no PDF — completar pelo Guia de Carreiras")
-    return NotasCorteAno(ano=ano, status="rascunho", fonte=fonte, pendencias=pendencias, carreiras=validas)
+    try:
+        # A faixa do corte depende dos pontos da prova do ano (CR-011: 90 ate 2026, 80 em 2027)
+        return NotasCorteAno(
+            ano=ano, pontos_prova=pontos_do_ano(ano), status="rascunho", fonte=fonte,
+            pendencias=pendencias, carreiras=validas,
+        )
+    except ValidationError as erro:
+        raise ErroLayout(f"Valores fora do esperado para {ano}: {erro}") from erro
 
 
 def extrair_notas_corte(pdf: Path, ano: int, fonte: str) -> NotasCorteAno:

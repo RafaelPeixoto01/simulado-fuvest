@@ -3,7 +3,7 @@
 from sqlalchemy.orm import Session
 
 from app.models import Usuario
-from app.pacote.notas_corte import BaseNotasCorte, CarreiraCorte
+from app.pacote.notas_corte import BaseNotasCorte, CarreiraCorte, pontos_do_ano
 from app.schemas import CarreiraAlvo, CarreiraCorteResposta, CortesModalidades, NotasCorteResponse
 
 
@@ -28,6 +28,7 @@ def notas_corte_resposta(base: BaseNotasCorte, ano: int | None) -> NotasCorteRes
         anos=base.anos,
         recente=base.recente,
         ano=devolvido,
+        pontos_prova=notas.pontos_prova if notas else None,
         fonte=notas.fonte if notas else None,
         carreiras=[carreira_resposta(c) for c in notas.carreiras] if notas else [],
     )
@@ -39,7 +40,13 @@ def resolver_carreira_alvo(base: BaseNotasCorte, usuario: Usuario) -> CarreiraAl
     if ano is None or codigo is None:
         return None
     carreira = base.carreira(ano, codigo)
-    return CarreiraAlvo(ano=ano, codigo=codigo, carreira=carreira_resposta(carreira) if carreira else None)
+    notas = base.ano(ano)
+    # Escala dos cortes do ano (CR-011); ano fora dos publicados: a regra do ano
+    pontos = notas.pontos_prova if notas else pontos_do_ano(ano)
+    return CarreiraAlvo(
+        ano=ano, codigo=codigo, pontos_prova=pontos,
+        carreira=carreira_resposta(carreira) if carreira else None,
+    )
 
 
 def definir_carreira_alvo(

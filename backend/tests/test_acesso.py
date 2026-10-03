@@ -11,7 +11,7 @@ from tests.utils import aplicar_migrations
 # (metodo, caminho, corpo) de cada rota de conteudo, validas para a base sintetica
 CONTEUDO = [
     ("GET", "/api/catalogo", None),
-    ("POST", "/api/simulados", {"modo": "ano", "ano": 2099}),
+    ("POST", "/api/simulados", {"modo": "ano", "prova": "2099"}),
     ("GET", "/api/questoes?ids=2099-001", None),
     ("POST", "/api/correcoes", {"respostas": [{"questao_id": "2099-001", "resposta": "A"}]}),
     ("POST", "/api/reportes", {"questao_id": "2099-001", "tipo": "outro"}),

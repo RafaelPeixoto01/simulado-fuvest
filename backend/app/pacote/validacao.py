@@ -9,7 +9,9 @@ from app.disciplinas import NOMES_DISCIPLINAS
 from app.pacote.assuntos import Taxonomia
 from app.pacote.schema import LETRAS, Alternativa, Bloco, PacoteProva
 
-TOTAL_QUESTOES = 90
+# Prova completa no formato vigente da 1a fase (FUVEST 2027: 80 questoes, CR-011). O total
+# de cada prova vem do pacote (`total_questoes`: 90 ate 2026, 80 desde 2027)
+TOTAL_PROVA_COMPLETA = 80
 NOME_FIGURA = re.compile(r"^[a-z0-9-]+\.webp$")
 
 
@@ -36,17 +38,22 @@ def _figuras(blocos: list[Bloco | Alternativa]) -> list[str]:
 def _v01_numeracao(pacote: PacoteProva) -> list[Pendencia]:
     pendencias = []
     numeros = [q.numero for q in pacote.questoes]
-    if len(numeros) != TOTAL_QUESTOES:
+    total = pacote.total_questoes
+    if len(numeros) != total:
         pendencias.append(
-            Pendencia("V01", None, f"Esperadas {TOTAL_QUESTOES} questões, encontradas {len(numeros)}")
+            Pendencia("V01", None, f"Esperadas {total} questões, encontradas {len(numeros)}")
         )
     for numero, vezes in sorted(Counter(numeros).items()):
         if vezes > 1:
             pendencias.append(Pendencia("V01", numero, f"Número {numero} repetido {vezes} vezes"))
-    faltando = sorted(set(range(1, TOTAL_QUESTOES + 1)) - set(numeros))
+    faltando = sorted(set(range(1, total + 1)) - set(numeros))
     if faltando:
         lista = ", ".join(map(str, faltando))
         pendencias.append(Pendencia("V01", None, f"Faltam as questões: {lista}"))
+    fora = sorted(n for n in set(numeros) if n > total)
+    if fora:
+        lista = ", ".join(map(str, fora))
+        pendencias.append(Pendencia("V01", None, f"Questões além do total de {total}: {lista}"))
     return pendencias
 
 
@@ -170,7 +177,7 @@ def validar_pacote(
 
 def formatar_relatorio(pacote: PacoteProva, pendencias: list[Pendencia]) -> str:
     bloqueantes = [p for p in pendencias if p.bloqueante]
-    cabecalho = f"== {pacote.ano} ({pacote.status})"
+    cabecalho = f"== {pacote.codigo} ({pacote.status})"
     if not pendencias:
         return f"{cabecalho} — OK"
     linhas = [f"{cabecalho} — {len(bloqueantes)} pendência(s) bloqueante(s), "

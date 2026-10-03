@@ -44,6 +44,12 @@ def _sem_nulos(bloco: dict) -> dict:
 
 def _para_dict(pacote: PacoteProva) -> dict:
     dados = pacote.model_dump(mode="json")
+    # Campos do CR-011 so aparecem fora do padrao: os pacotes de vestibular de 90
+    # questoes continuam com as mesmas chaves de antes ao serem regravados
+    if dados["tipo"] == "vestibular":
+        del dados["tipo"], dados["edicao"]
+    if dados["total_questoes"] == 90:
+        del dados["total_questoes"]
     # Em blocos e alternativas so aparece a chave usada (texto ou figura);
     # nos demais campos o null fica explicito para o curador preencher
     for texto_base in dados["textos_base"]:

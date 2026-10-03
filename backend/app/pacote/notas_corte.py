@@ -15,12 +15,23 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 
 DIRETORIO_NOTAS_CORTE = "notas_corte"
-MINIMO_FUVEST = 27  # menos de 30% da 1a fase elimina (Resolucao FUVEST 2025, art. 11 par. 3)
-PONTOS_PROVA = 90
+# Pontos da 1a fase do ano: 90 ate 2026, 80 desde a FUVEST 2027 (Resolucao CoG 9008/2026, CR-011)
+PontosProva = Literal[80, 90]
 CHAVES_MODALIDADES = ("ac", "ep", "ppi")
 PADRAO_FONTE = r"^https://www\.fuvest\.br/\S+\.pdf$"  # PDF do acervo oficial
 
 log = logging.getLogger("notas_corte")
+
+
+def pontos_do_ano(ano: int) -> int:
+    """Pontos da 1a fase de um ano, para o rascunho do extrator: o arquivo grava o valor."""
+    return 80 if ano >= 2027 else 90
+
+
+def minimo_fuvest(pontos_prova: int) -> int:
+    """Menos de 30% da 1a fase elimina (art. 11, par. 3, das Resolucoes da FUVEST): 27 de 90,
+    24 de 80. Em inteiros: teto de 3 * pontos / 10."""
+    return (3 * pontos_prova + 9) // 10
 
 
 class Modalidade(BaseModel):
@@ -30,8 +41,9 @@ class Modalidade(BaseModel):
 
     vagas: int = Field(ge=0, le=2000)  # 0: carreira sem vagas nessa modalidade (2020/150, PPI)
     convocados: int = Field(ge=0, le=20000)
-    corte: int | None = Field(default=None, ge=MINIMO_FUVEST, le=PONTOS_PROVA)
-    maximo: int | None = Field(default=None, ge=MINIMO_FUVEST, le=PONTOS_PROVA)
+    # A faixa do ano (minimo da FUVEST ate os pontos da prova) e conferida em NotasCorteAno
+    corte: int | None = Field(default=None, ge=0, le=90)
+    maximo: int | None = Field(default=None, ge=0, le=90)
 
     @model_validator(mode="after")
     def _c04(self) -> "Modalidade":
@@ -72,10 +84,26 @@ class NotasCorteAno(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     ano: int = Field(ge=2000, le=2100)
+    pontos_prova: PontosProva = 90
     status: Literal["rascunho", "publicada"]
     fonte: str = Field(pattern=PADRAO_FONTE)
     pendencias: list[str] = Field(default_factory=list)
     carreiras: list[CarreiraCorte] = Field(min_length=1, max_length=300)
+
+    @model_validator(mode="after")
+    def _c04_faixa_do_ano(self) -> "NotasCorteAno":
+        """Corte e maximo entre o minimo da FUVEST e os pontos da prova daquele ano."""
+        minimo = minimo_fuvest(self.pontos_prova)
+        for carreira in self.carreiras:
+            for chave in CHAVES_MODALIDADES:
+                modalidade: Modalidade = getattr(carreira, chave)
+                for nome, valor in (("corte", modalidade.corte), ("máximo", modalidade.maximo)):
+                    if valor is not None and not minimo <= valor <= self.pontos_prova:
+                        raise ValueError(
+                            f"C04: carreira {carreira.codigo}, {chave}: {nome} {valor} fora de "
+                            f"{minimo}–{self.pontos_prova}"
+                        )
+        return self
 
 
 class NotasCorteInvalidas(Exception):
@@ -141,6 +169,9 @@ _Dumper.add_representer(
 def salvar_ano(notas: NotasCorteAno, caminho: Path) -> None:
     """Grava em UTF-8 com LF (no Windows o write_text traduziria para CRLF)."""
     dados = notas.model_dump(mode="json")
+    if dados["pontos_prova"] == 90:
+        # Os anos ate 2026 continuam com as chaves de antes do CR-011 ao serem regravados
+        del dados["pontos_prova"]
     for carreira in dados["carreiras"]:
         for chave in CHAVES_MODALIDADES:
             carreira[chave] = _Fluxo(carreira[chave])
