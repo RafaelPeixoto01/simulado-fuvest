@@ -1,6 +1,6 @@
 ano: 2020
 versao: V
-status: rascunho
+status: publicada
 fonte:
   url_prova: https://www.fuvest.br/wp-content/uploads/fuvest_2020_primeira_fase_prova_V.pdf
   url_gabarito: https://www.fuvest.br/wp-content/uploads/fuvest_2020_primeira_fase_gabaritos.pdf
@@ -15,23 +15,39 @@ textos_base:
   - texto: |-
       Assigning female genders to digital assistants such as Apple’s Siri and Amazon’s Alexa is helping entrench harmful gender biases, according to a UN agency.
       Research released by Unesco claims that the often submissive and flirty responses offered by the systems to many queries – including outright abusive ones – reinforce ideas of women as subservient.
-      “Because the speech of most voice assistants is female, it sends a signal that women are obliging, docile and eager ‐ to ‐ please helpers, available at the touch of a button or with a blunt voice command like ‘hey’ or ‘OK’”, the report said.
-      “The assistant holds no power of agency beyond what the commander asks of it. It honours commands and responds to queries regardless of their tone or hostility. In many communities, this reinforces commonly held gender biases that women are subservient and tolerant of poor treatment.” The Unesco publication was entitled “I’d Blush if I Could”; a reference to the response Apple’s Siri assistant offers to the phrase: “You’re a slut.” Amazon’s Alexa will respond: “Well, thanks for the feedback.”
-      The paper said such firms were “staffed by overwhelmingly male engineering teams” and have built AI (Artificial Intelligence) systems that “cause their feminised digital assistants to greet verbal abuse with catch ‐ me ‐ if ‐ you ‐ can flirtation”.
+      “Because the speech of most voice assistants is female, it sends a signal that women are obliging, docile and eager-to-please helpers, available at the touch of a button or with a blunt voice command like ‘hey’ or ‘OK’”, the report said.
+      “The assistant holds no power of agency beyond what the commander asks of it. It honours commands and responds to queries regardless of their tone or hostility. In many communities, this reinforces commonly held gender biases that women are subservient and tolerant of poor treatment.”
+      The Unesco publication was entitled “I’d Blush if I Could”; a reference to the response Apple’s Siri assistant offers to the phrase: “You’re a slut.” Amazon’s Alexa will respond: “Well, thanks for the feedback.”
+      The paper said such firms were “staffed by overwhelmingly male engineering teams” and have built AI (Artificial Intelligence) systems that “cause their feminised digital assistants to greet verbal abuse with catch-me-if-you-can flirtation”.
       Saniye Gülser Corat, Unesco’s director for gender equality, said: “The world needs to pay much closer attention to how, when and whether AI technologies are gendered and, crucially, who is gendering them.”
-      The Guardian , May, 2019. Adaptado.
+      The Guardian, May, 2019. Adaptado.
 - id: tb02
   questoes:
   - 29
   - 30
   conteudo:
   - texto: |-
-      Scientists have long touted DNA’s potential as an ideal storage medium; it’s dense, easy to replicate, and stable over millennia. But in order to replace existing silicon ‐ chip or magnetic ‐ tape storage technologies, DNA will have to get a lot cheaper to predictably read, write, and package.
-      That’s where scientists like Hyunjun Park come in. He and the other cofounders of Catalog, an MIT DNA ‐ storage spinoff emerging out of stealth on Tuesday, are building a machine that will write a terabyte of data a day, using 500 trillion molecules of DNA.
-      If successful, DNA storage could be the answer to a uniquely 21st ‐ century problem: information overload. Five years ago humans had produced 4.4 zettabytes of data; that's set to explode to 160 zettabytes (each year!) by 2025. Current infrastructure can handle only a fraction of the coming data deluge, which is expected to consume all the world's microchip ‐ grade silicon by 2040.
-      “Today’s technology is already close to the physical limits of scaling,” says Victor Zhirnov, chief scientist of the Semiconductor Research Corporation. “DNA has an information ‐ storage density several orders of magnitude higher than any other known storage technology.”
+      Scientists have long touted DNA’s potential as an ideal storage medium; it’s dense, easy to replicate, and stable over millennia. But in order to replace existing silicon-chip or magnetic-tape storage technologies, DNA will have to get a lot cheaper to predictably read, write, and package.
+      That’s where scientists like Hyunjun Park come in. He and the other cofounders of Catalog, an MIT DNA-storage spinoff emerging out of stealth on Tuesday, are building a machine that will write a terabyte of data a day, using 500 trillion molecules of DNA.
+      If successful, DNA storage could be the answer to a uniquely 21st-century problem: information overload. Five years ago humans had produced 4.4 zettabytes of data; that's set to explode to 160 zettabytes (each year!) by 2025. Current infrastructure can handle only a fraction of the coming data deluge, which is expected to consume all the world's microchip-grade silicon by 2040.
+      “Today’s technology is already close to the physical limits of scaling,” says Victor Zhirnov, chief scientist of the Semiconductor Research Corporation. “DNA has an information-storage density several orders of magnitude higher than any other known storage technology.”
       How dense exactly? Imagine formatting every movie ever made into DNA; it would be smaller than the size of a sugar cube. And it would last for 10,000 years.
-      Wired , June, 2018. Disponível em https://www.wired.com/. Adaptado.
+      Wired, June, 2018. Disponível em https://www.wired.com/. Adaptado.
+- id: tb07
+  questoes:
+  - 33
+  - 34
+  - 35
+  conteudo:
+  - texto: |-
+      Os textos literários são obras de discurso, a que falta a imediata referencialidade da linguagem corrente; poéticos, abolem, “destroem” o mundo circundante, cotidiano, graças à função irrealizante da imaginação que os constrói. E prendem-nos na teia de sua linguagem, a que devem o poder de apelo estético que nos enleia; seduz-nos o mundo outro, irreal, neles configurado (...). No entanto, da adesão a esse “mundo de papel”, quando retornamos ao real, nossa experiência, ampliada e renovada pela experiência da obra, à luz do que nos revelou, possibilita redescobri-lo, sentindo-o e pensando-o de maneira diferente e nova. A ilusão, a mentira, o fingimento da ficção, aclara o real ao desligar-se dele, transfigurando-o; e aclara-o já pelo insight que em nós provocou.
+      Benedito Nunes, “Ética e leitura”, de Crivo de Papel.
+  - texto: |-
+      O que eu precisava era ler um romance fantástico, um romance besta, em que os homens e as mulheres fossem criações absurdas, não andassem magoando-se, traindo-se. Histórias fáceis, sem almas complicadas. Infelizmente essas leituras já não me comovem.
+      Graciliano Ramos, Angústia.
+  - texto: |-
+      Romance desagradável, abafado, ambiente sujo, povoado de ratos, cheio de podridões, de lixo. Nenhuma concessão ao gosto do público. Solilóquio doido, enervante.
+      Graciliano Ramos, Memórias do Cárcere, em nota a respeito de seu livro Angústia.
 - id: tb03
   questoes:
   - 37
@@ -39,19 +55,21 @@ textos_base:
   conteudo:
   - texto: |-
       amora
+
       a palavra amora
       seria talvez menos doce
       e um pouco menos vermelha
       se não trouxesse em seu corpo
       (como um velado esplendor)
       a memória da palavra amor
+
       a palavra amargo
       seria talvez mais doce
       e um pouco menos acerba
       se não trouxesse em seu corpo
       (como uma sombra a espreitar)
       a memória da palavra amar
-      Marco Catalão, Sob a face neutra .
+      Marco Catalão, Sob a face neutra.
 - id: tb04
   questoes:
   - 39
@@ -59,84 +77,86 @@ textos_base:
   conteudo:
   - texto: |-
       Uma planta é perturbada na sua sesta* pelo exército que a pisa.
-      Mas mais frágil fica a bota .
-      Gonçalo M. Tavares, 1: poemas. *sesta: repouso após o almoço.
+
+      Mas mais frágil fica a bota.
+      Gonçalo M. Tavares, 1: poemas.
+      *sesta: repouso após o almoço.
 - id: tb05
   questoes:
   - 44
   - 45
   conteudo:
   - texto: |-
-      E Sofia? interroga impaciente a leitora, tal qual Orgon: Et
-      Tartufe? Ai, amiga minha, a resposta é naturalmente a
-      mesma, – também ela comia bem, dormia largo e fofo, –
-      coisas que, aliás, não impedem que uma pessoa ame, quando
-      quer amar. Se esta última reflexão é o motivo secreto da vossa 5 pergunta, deixai que vos diga que sois muito indiscreta, e que
-      eu não me quero senão com dissimulados.
-      Repito, comia bem, dormia largo e fofo. Chegara ao fim da
-      comissão das Alagoas, com elogios da imprensa; a Atalaia
-      chamou ‐ lhe “o anjo da consolação”. E não se pense que este 10 nome a alegrou, posto que a lisonjeasse; ao contrário,
-      resumindo em Sofia toda a ação da caridade, podia mortificar
-      as novas amigas, e fazer ‐ lhe perder em um dia o trabalho de
-      longos meses. Assim se explica o artigo que a mesma folha
-      trouxe no número seguinte, nomeando, particularizando e 15 glorificando as outras comissárias – “estrelas de primeira
-      grandeza”.
-      Machado de Assis, Quincas Borba .
+          E Sofia? interroga impaciente a leitora, tal qual Orgon: Et
+         Tartufe? Ai, amiga minha, a resposta é naturalmente a
+         mesma, – também ela comia bem, dormia largo e fofo, –
+         coisas que, aliás, não impedem que uma pessoa ame, quando
+       5 quer amar. Se esta última reflexão é o motivo secreto da vossa
+         pergunta, deixai que vos diga que sois muito indiscreta, e que
+         eu não me quero senão com dissimulados.
+          Repito, comia bem, dormia largo e fofo. Chegara ao fim da
+         comissão das Alagoas, com elogios da imprensa; a Atalaia
+      10 chamou-lhe “o anjo da consolação”. E não se pense que este
+         nome a alegrou, posto que a lisonjeasse; ao contrário,
+         resumindo em Sofia toda a ação da caridade, podia mortificar
+         as novas amigas, e fazer-lhe perder em um dia o trabalho de
+         longos meses. Assim se explica o artigo que a mesma folha
+      15 trouxe no número seguinte, nomeando, particularizando e
+         glorificando as outras comissárias – “estrelas de primeira
+         grandeza”.
+      Machado de Assis, Quincas Borba.
 - id: tb06
   questoes:
   - 48
   - 49
   conteudo:
   - texto: |-
-      Óbitos por cepas de bactérias resistentes a antibióticos vêm crescendo. Um estudo do governo britânico estima que, em escala global, os óbitos por cepas resistentes já cheguem a 700 mil por ano. E as coisas têm piorado. Além das bactérias, já estão surgindo fungos resistentes, como a Candida auris . Qualquer solução passa por um esforço multinacional de ações coordenadas. O crescente número de governos isolacionistas e até antidarwinistas não dá razões para otimismo. Há urgência. O estudo britânico calcula que, se nada for feito, em 2050, as mortes por infecções resistentes chegarão a 10 milhões ao ano.
-      Hélio Schwartsman, “Mortes anunciadas”. Folha de São Paulo , Abril/2019. Adaptado.
+      Óbitos por cepas de bactérias resistentes a antibióticos vêm crescendo. Um estudo do governo britânico estima que, em escala global, os óbitos por cepas resistentes já cheguem a 700 mil por ano. E as coisas têm piorado. Além das bactérias, já estão surgindo fungos resistentes, como a Candida auris.
+      Qualquer solução passa por um esforço multinacional de ações coordenadas. O crescente número de governos isolacionistas e até antidarwinistas não dá razões para otimismo. Há urgência. O estudo britânico calcula que, se nada for feito, em 2050, as mortes por infecções resistentes chegarão a 10 milhões ao ano.
+      Hélio Schwartsman, “Mortes anunciadas”. Folha de São Paulo, Abril/2019. Adaptado.
 questoes:
 - numero: 1
-  disciplina: null
+  disciplina: quimica
+  assunto: substancias-e-misturas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Em
-      Xangai,
-      uma
-      loja especializada em café oferece uma opção diferente para
+  - texto: Em Xangai, uma loja especializada em café oferece uma opção diferente para adoçar a bebida.
+      A chamada sweet little rain consiste em uma xícara de café sobre a qual é pendurado um algodão-doce,
+      material rico em sacarose, o que passa a impressão de existir uma nuvem pairando sobre o café, conforme
+      ilustrado na imagem.
   - figura: q001-1.webp
-  - texto: adoçar a bebida. A chamada sweet little rain consiste em uma xícara de café sobre a qual
-  - figura: q001-2.webp
-  - texto: é pendurado um algodão ‐ doce, material rico em sacarose, o que passa a impressão de existir
-      uma nuvem pairando
-  - figura: q001-3.webp
   - texto: |-
-      sobre o café, conforme ilustrado na imagem.
       Disponível em https://www.boredpanda.com/.
       O café quente é então adicionado na xícara e, passado um tempo, gotículas começam a pingar sobre a bebida, simulando uma chuva doce e reconfortante. A adição de café quente inicia o processo descrito, pois
+  - texto: |-
+      Note e adote:
+      Temperatura de fusão da sacarose à pressão ambiente = 186 °C;
+      Solubilidade da sacarose a 20 °C = 1,97 kg/L de água.
   alternativas:
     A:
-      texto: a temperatura do café é suficiente para liquefazer a sacarose do algodão ‐ doce, fazendo
-        com que este goteje na forma de sacarose líquida.
+      texto: a temperatura do café é suficiente para liquefazer a sacarose do algodão-doce, fazendo com
+        que este goteje na forma de sacarose líquida.
     B:
-      texto: o vapor de água que sai do café quente irá condensar na superfície do algodão ‐ doce, gotejando
+      texto: o vapor de água que sai do café quente irá condensar na superfície do algodão-doce, gotejando
         na forma de água pura.
     C:
-      texto: a sacarose que evapora do café quente condensa na superfície do algodão ‐ doce e goteja na
+      texto: a sacarose que evapora do café quente condensa na superfície do algodão-doce e goteja na
         forma de uma solução de sacarose em água.
     D:
-      texto: o vapor de água encontra o algodão ‐ doce e solubiliza a sacarose, que goteja na forma de
-        uma solução de sacarose em água.
+      texto: o vapor de água encontra o algodão-doce e solubiliza a sacarose, que goteja na forma de uma
+        solução de sacarose em água.
     E:
-      texto: |-
-        o vapor de água encontra o algodão ‐ doce e vaporiza a sacarose, que goteja na forma de uma solução de sacarose em água.
-        Note e adote:
-        Temperatura de fusão da sacarose à pressão ambiente = 186 °C;
-        Solubilidade da sacarose a 20 °C = 1,97 kg/L de água.
+      texto: o vapor de água encontra o algodão-doce e vaporiza a sacarose, que goteja na forma de uma
+        solução de sacarose em água.
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 2, y≈477–522
+  pendencias: []
 - numero: 2
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: termoquimica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: Equipamentos domésticos chamados de vaporizadores para roupa utilizam o vapor de água gerado
@@ -144,82 +164,70 @@ questoes:
       de 1.600 W foi utilizado para passar roupas por 20 minutos, consumindo 540 mL de água. Em relação
       ao gasto total de energia do equipamento, o gasto de energia utilizado apenas para vaporizar a água,
       após ela já ter atingido a temperatura de ebulição, equivale a, aproximadamente,
+  - texto: |-
+      Note e adote:
+      Entalpia de vaporização da água a 100 °C = 40 kJ/mol;
+      Massa molar da água = 18 g/mol;
+      Densidade da água = 1 g/mL.
   alternativas:
     A:
       texto: 0,04%.
     B:
-      texto: |-
-        0,062%.
-        Note e adote:
+      texto: 0,062%.
     C:
-      texto: |-
-        4,6%.
-        Entalpia de vaporização da água a 100 °C = 40 kJ/mol;
+      texto: 4,6%.
     D:
-      texto: |-
-        40%.
-        Massa molar da água = 18 g/mol;
+      texto: 40%.
     E:
-      texto: |-
-        62%.
-        Densidade da água = 1 g/mL.
+      texto: 62%.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 2, y≈676–730
+  pendencias: []
 - numero: 3
-  disciplina: null
+  disciplina: quimica
+  assunto: atomistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q003-1.webp
   - texto: |-
-      Pesquisadores (...) conseguiram controlar reações químicas de
-      um modo inovador. Usaram feixes de laser para promover um
-      esbarrão entre dois átomos e uni ‐ los, criando uma molécula.
-      Utilizando pinças ópticas (feixes de laser altamente focados
-      capazes de aprisionar objetos microscópicos), os 5 pesquisadores empurraram um átomo do elemento químico
-      césio (Cs) contra um átomo de sódio (Na) até que colidissem.
-      Um terceiro laser foi lançado sobre ambos, fornecendo
-      energia extra para criar a molécula NaCs. Na natureza, as
-      moléculas formam ‐ se a partir da interação de átomos por 10 acaso. Por suas características químicas, césio e sódio jamais
-      originariam uma molécula espontaneamente. (...)
-      Molécula criada em laboratório . Disponível em http://revistapesquisa.fapesp.br/.
-      Adaptado.
-      Com base nas informações do texto e em seus
-      conhecimentos, é correto afirmar que
+         Pesquisadores (...) conseguiram controlar reações químicas de
+         um modo inovador. Usaram feixes de laser para promover um
+         esbarrão entre dois átomos e uni-los, criando uma molécula.
+         Utilizando pinças ópticas (feixes de laser altamente focados
+       5 capazes de aprisionar objetos microscópicos), os
+         pesquisadores empurraram um átomo do elemento químico
+         césio (Cs) contra um átomo de sódio (Na) até que colidissem.
+         Um terceiro laser foi lançado sobre ambos, fornecendo
+         energia extra para criar a molécula NaCs. Na natureza, as
+      10 moléculas formam-se a partir da interação de átomos por
+         acaso. Por suas características químicas, césio e sódio jamais
+         originariam uma molécula espontaneamente. (...)
+  - texto: |-
+      Molécula criada em laboratório. Disponível em http://revistapesquisa.fapesp.br/. Adaptado.
+      Com base nas informações do texto e em seus conhecimentos, é correto afirmar que
   alternativas:
     A:
-      texto: |-
-        o Cs é um elemento químico radioativo e, devido a essa
-        característica química, a molécula de NaCs não se formaria
-        sem esse modo inovador (L.2), que estabiliza o
-        decaimento.
+      texto: o Cs é um elemento químico radioativo e, devido a essa característica química, a molécula
+        de NaCs não se formaria sem esse modo inovador (L.2), que estabiliza o decaimento.
     B:
-      texto: |-
-        o raio atômico do Na é maior que o do Cs, portanto, a sua
-        energia de ionização também é maior. O esbarrão (L.3) entre
-        os átomos retira um elétron do Na, permitindo a ligação.
+      texto: o raio atômico do Na é maior que o do Cs, portanto, a sua energia de ionização também é maior.
+        O esbarrão (L.3) entre os átomos retira um elétron do Na, permitindo a ligação.
     C:
-      texto: |-
-        o terceiro laser (L.8) usado no experimento serviu para
-        retirar um nêutron do Cs, tornando ‐ o um cátion e
-        possibilitando a reação com o Na.
+      texto: o terceiro laser (L.8) usado no experimento serviu para retirar um nêutron do Cs, tornando-o
+        um cátion e possibilitando a reação com o Na.
     D:
-      texto: |-
-        na natureza, com esses elementos se esbarrando por
-        acaso (L.10 ‐ 11), a tendência seria formar CsNa, e não
-        NaCs, justificando o caráter inovador do experimento.
+      texto: na natureza, com esses elementos se esbarrando por acaso (L.10-11), a tendência seria formar
+        CsNa, e não NaCs, justificando o caráter inovador do experimento.
     E:
-      texto: |-
-        o Cs e o Na não formariam uma molécula espontaneamente
-        (L.11 ‐ 12), uma vez que ambos têm grande tendência a
-        formarem cátions e ligações iônicas.
+      texto: o Cs e o Na não formariam uma molécula espontaneamente (L.11-12), uma vez que ambos têm grande
+        tendência a formarem cátions e ligações iônicas.
   resposta: E
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
+  disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -233,6 +241,10 @@ questoes:
   - figura: q004-1.webp
   - texto: Considerando as informações apresentadas no texto e no quadro, a principal razão para a diferença
       de coloração descrita é que a fração oleosa
+  - texto: |-
+      Note e adote:
+      Massas molares (g/mol):
+      Licopeno = 537; betanina = 551.
   alternativas:
     A:
       texto: fica mais quente do que a aquosa, degradando a betanina; o mesmo não é observado com o licopeno,
@@ -244,126 +256,118 @@ questoes:
       texto: é apolar e a betanina, polar, havendo pouca interação; o mesmo não é observado com o licopeno,
         que é apolar e irá interagir com o azeite.
     D:
-      texto: é apolar e a aquosa, polar, mantendo ‐ se separadas; o licopeno age como um surfactante misturando
+      texto: é apolar e a aquosa, polar, mantendo-se separadas; o licopeno age como um surfactante misturando
         as fases, colorindo a oleosa, enquanto a betanina não.
     E:
-      texto: |-
-        tem alta viscosidade, facilitando a difusão do licopeno, composto de menor massa molar; o mesmo não é observado para a betanina, com maior massa.
-        Note e adote:
-        Massas molares (g/mol):
-        Licopeno = 537; betanina = 551.
+      texto: tem alta viscosidade, facilitando a difusão do licopeno, composto de menor massa molar; o
+        mesmo não é observado para a betanina, com maior massa.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 3, y≈267, 298, 316, 346, 364: recortar como
-    figura'
-  - 'Índice/expoente em fonte pequena na página 3, y≈284, 293, 333, 341, 696: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 3, y≈667–712
+  pendencias: []
 - numero: 5
-  disciplina: null
+  disciplina: quimica
+  assunto: cinetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Numa determinada condição experimental e com o catalisador adequado, ocorre uma reação, conforme
       representada no gráfico, que relaciona porcentagem do composto pelo tempo de reação.
   - figura: q005-1.webp
-  - figura: q005-2.webp
   - texto: 'Uma representação adequada para esse processo é:'
   alternativas:
     A:
-      texto: limonen o ⇌ p ‐ cimeno → ‐ terpineno
+      figura: q005-a.webp
     B:
-      texto: limoneno ‐ terpineno
+      figura: q005-b.webp
     C:
-      texto: limoneno p ‐ cimeno ⇌ ‐ terpineno
+      figura: q005-c.webp
     D:
-      texto: limoneno p ‐ cimeno
+      figura: q005-d.webp
     E:
-      texto: limoneno → ‐ terpineno → p ‐ cimeno
+      figura: q005-e.webp
   resposta: E
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Os chamados “remédios homeopáticos” são produzidos seguindo a farmacotécnica homeopática, que se baseia em diluições sequenciais de determinados compostos naturais. A dosagem utilizada desses produtos é da ordem de poucos mL. Uma das técnicas de diluição homeopática é chamada de diluição centesimal (CH), ou seja, uma parte da solução é diluída em 99 partes de solvente e a
-      solução resultante é
-      homogeneizada (ver
-      esquema).
+      Os chamados “remédios homeopáticos” são produzidos seguindo a farmacotécnica homeopática, que se baseia em diluições sequenciais de determinados compostos naturais. A dosagem utilizada desses produtos é da ordem de poucos mL. Uma das técnicas de diluição homeopática é chamada de diluição centesimal (CH), ou seja, uma parte da solução é diluída em 99 partes de solvente e a solução resultante é homogeneizada (ver esquema).
+      Alguns desses produtos homeopáticos são produzidos com até 200 diluições centesimais sequenciais (200CH).
   - figura: q006-1.webp
+  - texto: Considerando uma solução de partida de 100 mL com concentração 1 mol/L de princípio ativo,
+      a partir de qual diluição centesimal a solução passa a não ter, em média, nem mesmo uma molécula
+      do princípio ativo?
   - texto: |-
-      Alguns desses produtos
-      homeopáticos são pro ‐
-      duzidos com até 200
-      diluições centesimais
-  - figura: q006-2.webp
-  - texto: |-
-      sequenciais (200CH).
-      Considerando uma solução de partida de 100 mL com concentração 1 mol/L de princípio ativo, a partir de qual diluição centesimal a solução passa a não ter, em média, nem mesmo uma molécula do princípio ativo?
+      Note e adote:
+      Número de Avogadro = 6×10²³.
   alternativas:
     A:
-      texto: 12ªdiluição (12CH).
+      texto: 12ª diluição (12CH).
     B:
-      texto: |-
-        24ª diluição (24CH).
-        Note e adote:
+      texto: 24ª diluição (24CH).
     C:
-      texto: |-
-        51ª diluição (51CH).
-        Número de Avogadro = 6×10 .
+      texto: 51ª diluição (51CH).
     D:
       texto: 99ª diluição (99CH).
     E:
       texto: 200ª diluição (200CH).
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 3, y≈676–707
+  pendencias: []
 - numero: 7
-  disciplina: null
+  disciplina: quimica
+  assunto: radioatividade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: O gás hélio disponível comercialmente pode ser gerado pelo decaimento radioativo, sobretudo
       do urânio, conforme esquematizado pela série de decaimento. Desde a formação da Terra, há 4,5 bilhões
-      de anos, apenas metade do U decaiu para a formação de He.
+      de anos, apenas metade do ²³⁸U decaiu para a formação de He.
   - figura: q007-1.webp
   - texto: 'Com base nessas informações e em seus conhecimentos, é correto afirmar:'
   alternativas:
     A:
-      texto: O decaimento de um átomo de U produz, ao final da série de decaimento, apenas um átomo de
-        He.
+      texto: O decaimento de um átomo de ²³⁸U produz, ao final da série de decaimento, apenas um átomo
+        de He.
     B:
-      texto: O decaimento do U para U gera a mesma quantidade de He que o decaimento do U para Th.
+      texto: O decaimento do ²³⁸U para ²³⁴U gera a mesma quantidade de He que o decaimento do ²³⁴U para
+        ²³⁰Th.
     C:
       texto: Daqui a 4,5 bilhões de anos, a quantidade de He no planeta Terra será o dobro da atual.
     D:
-      texto: O decaimento do U para U gera a mesma quantidade de He que o decaimento do Pb para Po.
+      texto: O decaimento do ²³⁸U para ²³⁴U gera a mesma quantidade de He que o decaimento do ²¹⁴Pb para
+        ²¹⁴Po.
     E:
-      texto: A produção de He ocorre pela sequência de decaimento a partir do Pb.
+      texto: A produção de He ocorre pela sequência de decaimento a partir do ²⁰⁶Pb.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈102, 118, 251, 277, 290, 330, 342, 369: conferir
-    o texto'
+  pendencias: []
 - numero: 8
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: cinetica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
+  - texto: Os movimentos das moléculas antes e depois de uma reação química obedecem aos princípios físicos
+      de colisões. Para tanto, cada átomo é representado como um corpo pontual com uma certa massa, ocupando
+      uma posição no espaço e com uma determinada velocidade (representada na forma vetorial). Costumeiramente,
+      os corpos pontuais são representados como esferas com diâmetros proporcionais à massa atômica. As
+      colisões ocorrem conservando a quantidade de movimento.
   - texto: |-
-      Os movimentos das moléculas antes e depois de uma reação química obedecem aos princípios físicos de colisões. Para tanto, cada átomo é representado como um corpo pontual com uma certa massa, ocupando uma posição no espaço e com uma determinada velocidade (representada na forma vetorial). Costumeiramente, os corpos pontuais são representados como esferas com diâmetros proporcionais à massa atômica. As colisões ocorrem conservando a quantidade de movimento.
-      Considerando um referencial no qual as moléculas neutras encontram ‐ se paradas antes e após a colisão, a alternativa que melhor representa o arranjo de íons e moléculas instantes antes e instantes depois de uma colisão que leva à reação F + H CC l → CH F + C l
+      Considerando um referencial no qual as moléculas neutras encontram-se paradas antes e após a colisão, a alternativa que melhor representa o arranjo de íons e moléculas instantes antes e instantes depois de uma colisão que leva à reação
+      F⁻ + H₃CCℓ → CH₃F + Cℓ⁻
       é
-      Antes da colisão
-      Após a colisão
-      Íon
-      Neutro
-      Neutro
-      Íon
+  - texto: '(Em cada alternativa, da esquerda para a direita: antes da colisão, o íon e a molécula neutra;
+      após a colisão, a molécula neutra e o íon.)'
+  - texto: |-
+      Note e adote:
+      Massas atômicas: H = 1 u.m.a., C = 12 u.m.a., F = 19 u.m.a. e Cℓ = 35 u.m.a.
+      Considere que apenas o isótopo de cloro Cℓ = 35 u.m.a. participa da reação.
   alternativas:
     A:
       figura: q008-a.webp
@@ -374,38 +378,30 @@ questoes:
     D:
       figura: q008-d.webp
     E:
-      texto: |-
-        Note e adote:
-        Massas atômicas: H = 1 u.m.a., C = 12 u.m.a., F = 19 u.m.a. e C l = 35 u.m.a. Considere que apenas o isótopo de cloro C l = 35 u.m.a. participa da reação.
       figura: q008-e.webp
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈578, 582, 683: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 4, y≈746–792
+  pendencias: []
 - numero: 9
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: organica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: 'Quando o nosso corpo é lesionado por uma pancada, logo se cria um hematoma que, ao longo do
-      tempo, muda de cor. Inicialmente, o hematoma torna ‐ se avermelhado pelo acúmulo de hemoglobina.
-      Em seguida, surge uma coloração azulada, decorrente da perda do O ligado ao Fe do grupo heme. Essa
-      coloração torna ‐ se, então, esverdeada (biliverdina) e, após isso, surge um tom amarelado na pele
+      tempo, muda de cor. Inicialmente, o hematoma torna-se avermelhado pelo acúmulo de hemoglobina. Em
+      seguida, surge uma coloração azulada, decorrente da perda do O₂ ligado ao Fe do grupo heme. Essa
+      coloração torna-se, então, esverdeada (biliverdina) e, após isso, surge um tom amarelado na pele
       (bilirrubina). Essa sequência de cores ocorre pela transformação do grupo heme da hemoglobina, como
       representado a seguir:'
   - figura: q009-1.webp
-  - figura: q009-2.webp
-  - figura: q009-3.webp
-  - figura: q009-4.webp
-  - figura: q009-5.webp
-  - figura: q009-6.webp
   - texto: 'Com base nas informações e nas representações, é correto afirmar:'
   alternativas:
     A:
       texto: A conversão da biliverdina em bilirrubina ocorre por meio de uma redução.
     B:
-      texto: A biliverdina, assim como a hemoglobina, é capaz de transportar O para as células do corpo,
+      texto: A biliverdina, assim como a hemoglobina, é capaz de transportar O₂ para as células do corpo,
         pois há oxigênio ligado na molécula.
     C:
       texto: As três estruturas apresentadas contêm o grupo funcional amida.
@@ -417,17 +413,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
+  disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A reação de cetonas com hidrazinas, representada pela equação química
   - figura: q010-1.webp
   - texto: pode ser explorada para a quantificação de compostos cetônicos gerados, por exemplo, pela respiração
-      humana. Para tanto, uma hidrazina específica, a 2,4 ‐ dinitrofenilhidrazina, é utilizada como reagente,
+      humana. Para tanto, uma hidrazina específica, a 2,4-dinitrofenilhidrazina, é utilizada como reagente,
       gerando um produto que possui cor intensa.
   - figura: q010-2.webp
-  - texto: 'Considere que a 2,4 ‐ dinitrofenilhidrazina seja utilizada para quantificar o seguinte composto:'
+  - texto: 'Considere que a 2,4-dinitrofenilhidrazina seja utilizada para quantificar o seguinte composto:'
   - figura: q010-3.webp
   - texto: 'Nesse caso, a estrutura do composto colorido formado será:'
   alternativas:
@@ -445,20 +442,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 11
-  disciplina: null
+  disciplina: quimica
+  assunto: substancias-e-misturas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Em supermercados, é comum encontrar alimentos chamados de liofilizados, como frutas, legumes
       e carnes. Alimentos liofilizados continuam próprios para consumo após muito tempo, mesmo sem refrigeração.
-      O termo “liofilizado”, nesses alimentos, refere ‐ se ao processo de congelamento e posterior desidratação
+      O termo “liofilizado”, nesses alimentos, refere-se ao processo de congelamento e posterior desidratação
       por sublimação da água. Para que a sublimação da água ocorra, é necessária uma combinação de condições,
       como mostra o gráfico de pressão por temperatura, em que as linhas representam transições de fases.
   - figura: q011-1.webp
-  - figura: q011-2.webp
   - texto: 'Apesar de ser um processo que requer, industrialmente, uso de certa tecnologia, existem evidências
-      de que os povos pré ‐ colombianos que viviam nas regiões mais altas dos Andes conseguiam liofilizar
-      alimentos, possibilitando estocá ‐ los por mais tempo. Assinale a alternativa que explica como ocorria
+      de que os povos pré-colombianos que viviam nas regiões mais altas dos Andes conseguiam liofilizar
+      alimentos, possibilitando estocá-los por mais tempo. Assinale a alternativa que explica como ocorria
       o processo de liofilização natural:'
   alternativas:
     A:
@@ -480,43 +477,33 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 12
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: equilibrio
+  disciplinas_secundarias:
+  - matematica
   texto_base: null
   enunciado:
+  - texto: Para exemplificar probabilidade, um grupo de estudantes fez uma atividade envolvendo química,
+      conforme o procedimento descrito.
+  - texto: Cada estudante recebeu um recipiente contendo 800 mL de água destilada com algumas gotas do
+      indicador de pH alaranjado de metila e soluções de HCℓ e NaOH em diversas concentrações.
+  - texto: "Cada estudante deveria jogar apenas uma vez dois dados, um amarelo e um vermelho, ambos contendo
+      os números de 1 a 6.\n• Ao jogar o dado vermelho, o estudante deveria adicionar ao recipiente 100
+      mL de solução do ácido clorídrico na concentração 10⁻ⁿ mol/L, sendo \U0001D45B o número marcado
+      no dado (por exemplo, se saísse o número 1 no dado, a solução seria de 10⁻¹ mol/L; se saísse 6,
+      a solução seria de 10⁻⁶ mol/L).\n• Ao jogar o dado amarelo, o estudante deveria executar o mesmo
+      procedimento, mas substituindo o ácido por NaOH, totalizando assim 1,0 L de solução.\n• O estudante
+      deveria observar a cor da solução ao final do experimento."
+  - texto: A professora mostrou a tabela com alguns valores de pH resultantes conforme os números tirados
+      nos dados. Ela pediu, então, aos estudantes que utilizassem seus conhecimentos e a tabela para prever
+      em quais combinações de dados a cor final do indicador seria vermelha.
+  - figura: q012-1.webp
+  - texto: 'A probabilidade de, após realizar o procedimento descrito, a solução final preparada por um
+      estudante ser vermelha é de:'
   - texto: |-
-      Para exemplificar probabilidade, um grupo de estudantes fez uma atividade envolvendo química, conforme o procedimento descrito.
-      Cada estudante recebeu um recipiente contendo 800 mL de água destilada com algumas gotas do indicador de pH alaranjado de metila e soluções de HC l e NaOH em diversas concentrações.
-      Cada estudante deveria jogar apenas uma vez dois dados, um amarelo e um vermelho, ambos contendo os números de 1 a 6. • Ao jogar o dado vermelho, o estudante deveria adicionar ao recipiente 100 mL de solução do ácido clorídrico na concentração 10 mol/L, sendo n o número marcado no dado (por exemplo, se saísse o número 1 no dado, a solução seria de 10 mol/L; se saísse 6, a solução seria de 10 mol/L).
-      • Ao jogar o dado amarelo, o estudante deveria executar o mesmo procedimento, mas substituindo o ácido por NaOH, totalizando assim 1,0 L de solução.
-      • O estudante deveria observar a cor da solução ao final do experimento.
-      A professora mostrou a tabela com alguns valores de pH resultantes conforme os números tirados nos dados. Ela pediu, então, aos estudantes que utilizassem seus conhecimentos e a tabela para prever em quais combinações de dados a cor final do indicador seria vermelha.
-      Dado amarelo (adição de base)
-      Número tirado
-      nos dados
-      1
-      2
-      3
-      4
-      5
-      6
-      1
-      7,0
-      2,1
-      2,0 2
-      3,1
-      m
-      3
-      7,0
-      4,1 4
-      7,0
-      5
-      11,9
-      8,9
-      6
-      7,9
-      7,0
-      A probabilidade de, após realizar o procedimento descrito, a solução final preparada por um estudante ser vermelha é de:
+      Note e adote:
+      Considere a seguinte relação entre pH do meio e coloração do indicador alaranjado de metila:
+  - figura: q012-2.webp
   alternativas:
     A:
       texto: 1/12
@@ -527,26 +514,13 @@ questoes:
     D:
       texto: 11/36
     E:
-      texto: |-
-        5/12
-        Note e adote:
-        Considere a seguinte relação entre pH do meio e coloração do indicador alaranjado de metila:
-        Menor que 3,3
-        3,3 a 4,4
-        Maior que 4,4
-        Vermelho
-        Laranja
-        Amarelo
-      figura: q012-e.webp
+      texto: 5/12
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈213, 237, 426, 429, 434, 439, 447, 455, 458, 463,
-    470, 475, 480, 485, 487, 492: conferir o texto'
-  - 'Texto sublinhado na página 6, y≈399, 400, 504: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈384–740
+  pendencias: []
 - numero: 13
-  disciplina: null
+  disciplina: matematica
+  assunto: combinatoria-e-probabilidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -555,7 +529,6 @@ questoes:
       a figura. Os números indicados nas setas são as probabilidades, dentre esses carros, de se ir de
       uma cidade a outra.
   - figura: q013-1.webp
-  - figura: q013-2.webp
   - texto: Nesse cenário, a probabilidade de um carro ir de A a F é
   alternativas:
     A:
@@ -572,7 +545,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 14
-  disciplina: null
+  disciplina: matematica
+  assunto: porcentagem
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -593,22 +567,21 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 15
-  disciplina: null
+  disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      O cilindro de papelão central de uma fita crepe tem raio externo de 3 cm. A fita tem espessura de 0,01 cm e dá 100 voltas completas. Considerando que, a cada volta, o raio externo do rolo é
-      aumentado no valor da
-      espessura da fita, o
+  - texto: O cilindro de papelão central de uma fita crepe tem raio externo de 3 cm. A fita tem espessura
+      de 0,01 cm e dá 100 voltas completas. Considerando que, a cada volta, o raio externo do rolo é aumentado
+      no valor da espessura da fita, o comprimento total da fita é de, aproximadamente,
   - figura: q015-1.webp
   - texto: |-
-      comprimento total da fita
-      é de, aproximadamente,
+      Note e adote:
+      π ≅ 3,14.
   alternativas:
     A:
       texto: 9,4 m.
-      figura: q015-a.webp
     B:
       texto: 11,0 m.
     C:
@@ -616,28 +589,24 @@ questoes:
     D:
       texto: 22,0 m.
     E:
-      texto: |-
-        25,1 m.
-        Note e adote:
-          3,14.
-      figura: q015-e.webp
+      texto: 25,1 m.
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈726–757
+  pendencias: []
 - numero: 16
-  disciplina: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um objeto é formado por 4 hastes rígidas conectadas em seus extremos por articulações, cujos
-      centros são os vértices de um paralelogramo. As hastes movimentam ‐ se de tal forma que o paralelogramo
-      permanece sempre no mesmo plano. A cada configuração desse objeto, associa ‐ se , a medida do menor
-      ângulo interno do paralelogramo. A área da região delimitada pelo paralelogramo quando = 90° é .
+  - texto: "Um objeto é formado por 4 hastes rígidas conectadas em seus extremos por articulações, cujos
+      centros são os vértices de um paralelogramo. As hastes movimentam-se de tal forma que o paralelogramo
+      permanece sempre no mesmo plano. A cada configuração desse objeto, associa-se \U0001D703, a medida
+      do menor ângulo interno do paralelogramo. A área da região delimitada pelo paralelogramo quando
+      \U0001D703 = 90° é \U0001D434."
   - figura: q016-1.webp
-  - texto: |-
-      Para que a área da região delimitada pelo paralelogramo seja , o valor de é, necessariamente, igual a
-      2
+  - texto: "Para que a área da região delimitada pelo paralelogramo seja \U0001D434/2, o valor de \U0001D703
+      é, necessariamente, igual a"
   alternativas:
     A:
       texto: 15°.
@@ -651,15 +620,14 @@ questoes:
       texto: 60°.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 7, y≈69: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 7, y≈69, 81, 118, 142, 237: recortar como figura'
+  pendencias: []
 - numero: 17
-  disciplina: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: A menor esfera na qual um paralelepípedo reto ‐ retângulo de medidas 7 cm × 4 cm × 4 cm está
+  - texto: A menor esfera na qual um paralelepípedo reto-retângulo de medidas 7 cm × 4 cm × 4 cm está
       inscrito tem diâmetro de
   alternativas:
     A:
@@ -674,17 +642,16 @@ questoes:
       texto: 15 cm.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 7, y≈400, 412, 424: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 7, y≈424: conferir o texto'
+  pendencias: []
 - numero: 18
-  disciplina: null
+  disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A dona de uma lanchonete observou que, vendendo um combo a R$ 10,00, 200 deles são vendidos
       por dia, e que, para cada redução de R$ 1,00 nesse preço, ela vende 100 combos a mais. Nessas condições,
-      qual é a máxima arrecadação diária que ela espera obter com a venda desse combo ?
+      qual é a máxima arrecadação diária que ela espera obter com a venda desse combo?
   alternativas:
     A:
       texto: R$ 2.000,00
@@ -700,13 +667,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
+  disciplina: matematica
+  assunto: aritmetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: A função de Euler determina, para cada número natural , a quantidade de números naturais menores
-      do que cujo máximo divisor comum com é igual a 1. Por exemplo, (6) = 2 pois os números menores do
-      que 6 com tal propriedade são 1 e 5. Qual o valor máximo de , para de 20 a 25?
+  - texto: "A função \U0001D438 de Euler determina, para cada número natural \U0001D45B, a quantidade
+      de números naturais menores do que \U0001D45B cujo máximo divisor comum com \U0001D45B é igual a
+      1. Por exemplo, \U0001D438(6) = 2 pois os números menores do que 6 com tal propriedade são 1 e 5.
+      Qual o valor máximo de \U0001D438(\U0001D45B), para \U0001D45B de 20 a 25?"
   alternativas:
     A:
       texto: '19'
@@ -720,15 +689,15 @@ questoes:
       texto: '25'
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 7, y≈646, 658, 670, 682, 696: recortar como
-    figura'
+  pendencias: []
 - numero: 20
-  disciplina: null
+  disciplina: matematica
+  assunto: algebra
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Se 3 97 , para todo número real , o valor de é
+  - texto: "Se 3\U0001D465² − 9\U0001D465 + 7 = (\U0001D465 − \U0001D44E)³ − (\U0001D465 − \U0001D44F)³,
+      para todo número real \U0001D465, o valor de \U0001D44E + \U0001D44F é"
   alternativas:
     A:
       texto: '3.'
@@ -744,15 +713,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
+  disciplina: matematica
+  assunto: algebra
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Uma agência de turismo vendeu um total de 78 passagens para os destinos: Lisboa, Paris e Roma.
-      Sabe ‐ se que o número de passagens vendidas para Paris foi o dobro do número de passagens vendidas
-      para os outros dois destinos conjuntamente. Sabe ‐ se também que, para Roma, foram vendidas duas
-      passagens a mais que a metade das vendidas para Lisboa. Qual foi o total de passagens vendidas,
-      conjuntamente, para Paris e Roma?'
+      Sabe-se que o número de passagens vendidas para Paris foi o dobro do número de passagens vendidas
+      para os outros dois destinos conjuntamente. Sabe-se também que, para Roma, foram vendidas duas passagens
+      a mais que a metade das vendidas para Lisboa. Qual foi o total de passagens vendidas, conjuntamente,
+      para Paris e Roma?'
   alternativas:
     A:
       texto: '26'
@@ -768,12 +738,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 22
-  disciplina: null
+  disciplina: matematica
+  assunto: geometria-analitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um ponto , do plano cartesiano pertence ao conjunto se é equidistante dos eixos e e pertence
-      ao círculo de equação 2620 . É correto afirmar que
+  - texto: "Um ponto (\U0001D465, \U0001D466) do plano cartesiano pertence ao conjunto \U0001D439 se é
+      equidistante dos eixos \U0001D442\U0001D44B e \U0001D442\U0001D44C e pertence ao círculo de equação
+      \U0001D465² + \U0001D466² − 2\U0001D465 − 6\U0001D466 + 2 = 0. É correto afirmar que \U0001D439"
   alternativas:
     A:
       texto: é um conjunto vazio.
@@ -789,22 +761,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
+  disciplina: matematica
+  assunto: estatistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Uma cidade é dividida em dois Setores: o Setor Sul, com área de 10 km , e o Setor Norte, com área de 30 km . Após um final de semana, foram divulgados os seguintes totais pluviométricos:
-      Dia
-      Sul
-      Norte
-      sábado
-      7 mm
-      11 mm
-      domingo
-      9 mm
-      17 mm
-      É correto afirmar que o total pluviométrico desse final de semana na cidade inteira foi de
+  - texto: 'Uma cidade é dividida em dois Setores: o Setor Sul, com área de 10 km², e o Setor Norte, com
+      área de 30 km². Após um final de semana, foram divulgados os seguintes totais pluviométricos:'
+  - figura: q023-1.webp
+  - texto: É correto afirmar que o total pluviométrico desse final de semana na cidade inteira foi de
   alternativas:
     A:
       texto: 15 mm.
@@ -818,40 +783,35 @@ questoes:
       texto: 28 mm.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 8, y≈81: conferir o texto'
-  - 'Texto sublinhado na página 8, y≈160: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 8, y≈122–160
+  pendencias: []
 - numero: 24
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: geometria-plana
+  disciplinas_secundarias:
+  - ingles
   texto_base: null
   enunciado:
   - figura: q024-1.webp
-  - texto: |-
-      Bill Waterson, Calvin and Hobbes . Disponível em https://www.gocomics.com/.
-      As possíveis soluções, em polegadas ( inches , em inglês), para o problema matemático proposto no quadrinho, no caso em que os pontos , e estão em uma mesma reta, são
+  - texto: "Bill Waterson, Calvin and Hobbes. Disponível em https://www.gocomics.com/.\nAs possíveis soluções,
+      em polegadas (inches, em inglês), para o problema matemático proposto no quadrinho, no caso em que
+      os pontos \U0001D434, \U0001D435 e \U0001D436 estão em uma mesma reta, são"
   alternativas:
     A:
-      texto: |-
-        e 10 .
-        , 5 e 10 .
+      texto: 10/3 e 10.
     B:
-      texto: ''
+      texto: 10/3, 5 e 10.
     C:
-      texto: ', e 10 .'
+      texto: 5/3, 10/3 e 10.
     D:
-      texto: e 10 .
+      texto: 5/3 e 10.
     E:
-      texto: e 5 .
+      texto: 10/3 e 5.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 8, y≈555, 571, 583, 598, 610, 625, 637, 652,
-    664, 678, 690: recortar como figura'
-  - 'Texto sublinhado na página 8, y≈580, 607, 634, 661, 687: formatação perdida no texto puro'
+  pendencias: []
 - numero: 25
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -872,11 +832,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
-  - texto: Segundo o texto, o título do relatório publicado pela Unesco ‐ “I´d Blush if I Could” ‐ , no
+  - texto: Segundo o texto, o título do relatório publicado pela Unesco – “I´d Blush if I Could” –, no
       que diz respeito aos assistentes digitais, indica
   alternativas:
     A:
@@ -893,7 +854,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 27
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -914,12 +876,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 28
-  disciplina: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q028-1.webp
-  - figura: q028-2.webp
   - texto: |-
       Disponível em https://www.facebook.com/groups/englishmemes/.
       O efeito de comicidade que se obtém do meme decorre, sobretudo, da
@@ -938,11 +900,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
-  - texto: Afirma ‐ se no texto que, no futuro, a tecnologia de gravação em moléculas de DNA
+  - texto: Afirma-se no texto que, no futuro, a tecnologia de gravação em moléculas de DNA
   alternativas:
     A:
       texto: será utilizada para sequenciar trilhões de moléculas destinadas à pesquisa médica.
@@ -958,7 +921,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -978,13 +942,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Harlem
+
       What happens to a dream deferred?
+
       Does it dry up
       like a raisin in the sun?
       Or fester like a sore—
@@ -992,11 +959,14 @@ questoes:
       Does it stink like rotten meat?
       Or crust and sugar over—
       like a syrupy sweet?
+
       Maybe it just sags
       like a heavy load.
+
       Or does it explode?
-      Langston Hughes , Selected Poems of Langston Hughes (1990). Disponível em http://www.poetryfoundation.org/.
-      As tentativas de resposta do poeta à pergunta “What happens to a dream deferred?” evocam imagens de
+      Langston Hughes, Selected Poems of Langston Hughes (1990). Disponível em http://www.poetryfoundation.org/.
+  - texto: As tentativas de resposta do poeta à pergunta “What happens to a dream deferred?” evocam imagens
+      de
   alternativas:
     A:
       texto: animosidade e revolta.
@@ -1012,39 +982,47 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 32
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Cantiga de enganar
+
       (...)
       O mundo não tem sentido.
-      Talvez nem seja talvez.
       O mundo e suas canções
-      O mundo não vale a pena,
       de timbre mais comovido
-      mas a pena não existe.
       estão calados, e a fala
-      Meu bem, façamos de conta. que de uma para outra sala
-      De sofrer e de olvidar,
+      que de uma para outra sala
       ouvimos em certo instante
-      de lembrar e de fruir,
       é silêncio que faz eco
-      de escolher nossas lembranças e que volta a ser silêncio
-      e revertê ‐ las, acaso
+      e que volta a ser silêncio
       no negrume circundante.
-      se lembrem demais em nós. Silêncio: que quer dizer?
-      Façamos, meu bem, de conta Que diz a boca do mundo?
-      – mas a conta não existe –
+      Silêncio: que quer dizer?
+      Que diz a boca do mundo?
       Meu bem, o mundo é fechado,
-      que é tudo como se fosse,
       se não for antes vazio.
-      ou que, se fora, não era.
       O mundo é talvez: e é só.
+      Talvez nem seja talvez.
+      O mundo não vale a pena,
+      mas a pena não existe.
+      Meu bem, façamos de conta.
+      De sofrer e de olvidar,
+      de lembrar e de fruir,
+      de escolher nossas lembranças
+      e revertê-las, acaso
+      se lembrem demais em nós.
+      Façamos, meu bem, de conta
+      – mas a conta não existe –
+      que é tudo como se fosse,
+      ou que, se fora, não era.
       (...)
       Carlos Drummond de Andrade, Claro Enigma.
-      Em Claro Enigma , a ideia de engano surge sob a perspectiva do sujeito maduro, já afastado das ilusões, como se lê no verso ‐ síntese “Tu não me enganas, mundo, e não te engano a ti.” (“Legado”). O excerto de “Cantiga de enganar” apresenta a relação do eu com o mundo mediada
+  - texto: Em Claro Enigma, a ideia de engano surge sob a perspectiva do sujeito maduro, já afastado das
+      ilusões, como se lê no verso-síntese “Tu não me enganas, mundo, e não te engano a ti.” (“Legado”).
+      O excerto de “Cantiga de enganar” apresenta a relação do eu com o mundo mediada
   alternativas:
     A:
       texto: pela música, que ressoa em canções líricas.
@@ -1055,22 +1033,15 @@ questoes:
     D:
       texto: pela memória, que corre fluida no tempo.
     E:
-      texto: |-
-        pelo despropósito de um faz ‐ de ‐ conta.
-        TEXTOS PARA AS QUESTÕES DE 33 A 35
-        Os textos literários são obras de discurso, a que falta a imediata referencialidade da linguagem corrente; poéticos, abolem, “destroem” o mundo circundante, cotidiano, graças à função irrealizante da imaginação que os constrói. E prendem ‐ nos na teia de sua linguagem, a que devem o poder de apelo estético que nos enleia; seduz ‐ nos o mundo outro, irreal, neles configurado (...). No entanto, da adesão a esse “mundo de papel”, quando retornamos ao real, nossa experiência, ampliada e renovada pela experiência da obra, à luz do que nos revelou, possibilita redescobri ‐ lo, sentindo ‐ o e pensando ‐ o de maneira diferente e nova. A ilusão, a mentira, o fingimento da ficção, aclara o real ao desligar ‐ se dele, transfigurando ‐ o; e aclara ‐ o já pelo insight que em nós provocou.
-        Benedito Nunes, “Ética e leitura”, de Crivo de Papel .
-        O que eu precisava era ler um romance fantástico, um romance besta, em que os homens e as mulheres fossem criações absurdas, não andassem magoando ‐ se, traindo ‐ se. Histórias fáceis, sem almas complicadas. Infelizmente essas leituras já não me comovem.
-        Graciliano Ramos, Angústia .
-        Romance desagradável, abafado, ambiente sujo, povoado de ratos, cheio de podridões, de lixo. Nenhuma concessão ao gosto do público. Solilóquio doido, enervante.
-        Graciliano Ramos, Memórias do Cárcere , em nota a respeito de seu livro Angústia.
+      texto: pelo despropósito de um faz-de-conta.
   resposta: E
   anulada: false
   pendencias: []
 - numero: 33
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: O argumento de Benedito Nunes, em torno da natureza artística da literatura, leva a considerar
       que a obra só assume função transformadora se
@@ -1089,18 +1060,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 34
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
-  - texto: Se o discurso literário “aclara o real ao desligar ‐ se dele, transfigurando ‐ o”, pode ‐ se
-      dizer que Luís da Silva, o narrador ‐ protagonista de Angústia , já não se comove com a leitura
-      de “histórias fáceis, sem almas complicadas” porque
+  - texto: Se o discurso literário “aclara o real ao desligar-se dele, transfigurando-o”, pode-se dizer
+      que Luís da Silva, o narrador-protagonista de Angústia, já não se comove com a leitura de “histórias
+      fáceis, sem almas complicadas” porque
   alternativas:
     A:
       texto: rejeita, como jornalista, a escrita de ficção.
     B:
-      texto: prefere alienar ‐ se com narrativas épicas.
+      texto: prefere alienar-se com narrativas épicas.
     C:
       texto: é indiferente às histórias de fundo sentimental.
     D:
@@ -1111,9 +1083,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: Para Graciliano Ramos, Angústia não faz concessão ao gosto do público na medida em que compõe
       uma atmosfera
@@ -1132,12 +1105,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Leia o trecho extraído de uma notícia veiculada na internet: “O carro furou o pneu e bateu no meio fio, então eles foram obrigados a parar. O refém conseguiu acionar a população, que depois pegou dois dos três indivíduos e tentaram linchar eles. O outro conseguiu fugir, mas foi preso momentos depois por uma viatura do 5º BPM”, afirmou o major.
+      Leia o trecho extraído de uma notícia veiculada na internet:
+      “O carro furou o pneu e bateu no meio fio, então eles foram obrigados a parar. O refém conseguiu acionar a população, que depois pegou dois dos três indivíduos e tentaram linchar eles. O outro conseguiu fugir, mas foi preso momentos depois por uma viatura do 5º BPM”, afirmou o major.
       Disponível em https://www.gp1.com.br/.
       No português do Brasil, a função sintática do sujeito não possui, necessariamente, uma natureza de agente, ainda que o verbo esteja na voz ativa, tal como encontrado em:
   alternativas:
@@ -1155,7 +1130,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 37
-  disciplina: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1179,7 +1155,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1199,7 +1176,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1220,7 +1198,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1240,14 +1219,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
+  disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O Twitter é uma das redes sociais mais importantes no Brasil e no mundo. (...) Um estudo identificou que as fake news são 70% mais propensas a serem retweetadas do que fatos verdadeiros. (...) Outra conclusão importante do trabalho diz respeito aos famosos bots : ao contrário do que muitos pensam, esses robôs não são os grandes responsáveis por disseminar notícias falsas. Nem mesmo comparando com outros robozinhos: tanto os que espalham informações mentirosas quanto aqueles que divulgam dados verdadeiros alcançaram o mesmo número de pessoas.
-      Super Interessante , “No Twitter, fake news se espalham 6 vezes mais rápido que notícias verdadeiras”. Maio/2019.
-      No período “Nem mesmo comparando com outros robozinhos: tanto os que espalham informações mentirosas quanto aqueles que divulgam dados verdadeiros alcançaram o mesmo número de pessoas.”, os dois ‐ pontos são utilizados para introduzir uma
+      O Twitter é uma das redes sociais mais importantes no Brasil e no mundo. (...) Um estudo identificou que as fake news são 70% mais propensas a serem retweetadas do que fatos verdadeiros. (...) Outra conclusão importante do trabalho diz respeito aos famosos bots: ao contrário do que muitos pensam, esses robôs não são os grandes responsáveis por disseminar notícias falsas. Nem mesmo comparando com outros robozinhos: tanto os que espalham informações mentirosas quanto aqueles que divulgam dados verdadeiros alcançaram o mesmo número de pessoas.
+      Super Interessante, “No Twitter, fake news se espalham 6 vezes mais rápido que notícias verdadeiras”. Maio/2019.
+      No período “Nem mesmo comparando com outros robozinhos: tanto os que espalham informações mentirosas quanto aqueles que divulgam dados verdadeiros alcançaram o mesmo número de pessoas.”, os dois-pontos são utilizados para introduzir uma
   alternativas:
     A:
       texto: conclusão.
@@ -1263,13 +1243,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Agora, o Manuel Fulô, este, sim! Um sujeito pingadinho, quase menino – “pepino que encorujou desde pequeno” – cara de bobo de fazenda, do segundo tipo –; porque toda fazenda tem o seu bobo, que é, ou um velhote baixote, de barba rara no queixo, ou um eterno rapazola, meio surdo, gago, glabro* e alvar**. Mas gostava de fechar a cara e roncar voz, todo enfarruscado, para mostrar brabeza, e só por descuido sorria, um sorriso manhoso de dono de hotel. E, em suas feições de caburé*** insalubre, amigavam ‐ se as marcas do sangue aimoré e do gálico herdado: cabelo preto, corrido, que boi lambeu; dentes de fio em meia ‐ lua; malares pontudos; lobo da orelha aderente; testa curta, fugidia; olhinhos de viés e nariz peba, mongol.
-      Guimarães Rosa, “Corpo fechado”, de Sagarana .
+      Agora, o Manuel Fulô, este, sim! Um sujeito pingadinho, quase menino – “pepino que encorujou desde pequeno” – cara de bobo de fazenda, do segundo tipo –; porque toda fazenda tem o seu bobo, que é, ou um velhote baixote, de barba rara no queixo, ou um eterno rapazola, meio surdo, gago, glabro* e alvar**. Mas gostava de fechar a cara e roncar voz, todo enfarruscado, para mostrar brabeza, e só por descuido sorria, um sorriso manhoso de dono de hotel. E, em suas feições de caburé*** insalubre, amigavam-se as marcas do sangue aimoré e do gálico herdado: cabelo preto, corrido, que boi lambeu; dentes de fio em meia-lua; malares pontudos; lobo da orelha aderente; testa curta, fugidia; olhinhos de viés e nariz peba, mongol.
+      Guimarães Rosa, “Corpo fechado”, de Sagarana.
       *sem pelos, sem barba **tolo ***mestiço
       O retrato de Manuel Fulô, tal como aparece no fragmento, permite afirmar que
   alternativas:
@@ -1290,100 +1271,104 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O feminismo negro não é uma luta meramente identitária, até porque branquitude e masculinidade também são identidades. Pensar feminismos negros é pensar projetos democráticos. Hoje afirmo isso com muita tranquilidade, mas 5
-      minha experiência de vida foi marcada pelo incômodo de uma incompreensão fundamental. Não que eu buscasse respostas para tudo. Na maior parte da minha infância e adolescência, não tinha consciência de mim. Não sabia por que sentia vergonha de levantar a mão quando a professora fazia uma 10 pergunta já supondo que eu não saberia a resposta. Por que eu ficava isolada na hora do recreio. Por que os meninos diziam na minha cara que não queriam formar par com a “neguinha” na festa junina. Eu me sentia estranha e inadequada, e, na maioria das vezes, fazia as coisas no 15 automático, me esforçando para não ser notada.
-      Djamila Ribeiro, Quem tem medo do feminismo negro? .
+         O feminismo negro não é uma luta meramente identitária, até
+         porque branquitude e masculinidade também são
+         identidades. Pensar feminismos negros é pensar projetos
+         democráticos. Hoje afirmo isso com muita tranquilidade, mas
+       5 minha experiência de vida foi marcada pelo incômodo de uma
+         incompreensão fundamental. Não que eu buscasse respostas
+         para tudo. Na maior parte da minha infância e adolescência,
+         não tinha consciência de mim. Não sabia por que sentia
+         vergonha de levantar a mão quando a professora fazia uma
+      10 pergunta já supondo que eu não saberia a resposta. Por que
+         eu ficava isolada na hora do recreio. Por que os meninos
+         diziam na minha cara que não queriam formar par com a
+         “neguinha” na festa junina. Eu me sentia estranha e
+         inadequada, e, na maioria das vezes, fazia as coisas no
+      15 automático, me esforçando para não ser notada.
+  - texto: |-
+      Djamila Ribeiro, Quem tem medo do feminismo negro?.
       O trecho que melhor define a “incompreensão fundamental” (L.6) referida pela autora é:
   alternativas:
     A:
-      texto: “não que eu buscasse respostas para tudo” (L.6 ‐ 7).
+      texto: “não que eu buscasse respostas para tudo” (L.6-7).
     B:
       texto: “não tinha consciência de mim” (L.8).
     C:
-      texto: “Por que eu ficava isolada na hora do recreio” (L.10 ‐ 11).
+      texto: “Por que eu ficava isolada na hora do recreio” (L.10-11).
     D:
       texto: “me esforçando para não ser notada” (L.15).
     E:
-      texto: “sentia vergonha de levantar a mão” (L.8 ‐ 9).
+      texto: “sentia vergonha de levantar a mão” (L.8-9).
   resposta: B
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
-  - texto: |-
-      No excerto, o autor recorre à intertextualidade, dialogando
-      com a comédia de Molière, Tartufo (1664), cuja personagem
-      central é um impostor da fé. Tal é a fama da peça que o nome
-      próprio se incorporou ao vocabulário, inclusive em português,
-      como substantivo comum, para designar o “indivíduo
-      hipócrita” ou o “falso devoto”. No contexto maior do
-      romance, sugere ‐ se que a tartufice
+  - texto: No excerto, o autor recorre à intertextualidade, dialogando com a comédia de Molière, Tartufo
+      (1664), cuja personagem central é um impostor da fé. Tal é a fama da peça que o nome próprio se
+      incorporou ao vocabulário, inclusive em português, como substantivo comum, para designar o “indivíduo
+      hipócrita” ou o “falso devoto”. No contexto maior do romance, sugere-se que a tartufice
   alternativas:
     A:
-      texto: |-
-        se cola à imagem da leitora, indiscreta quanto aos amores
-        alheios.
+      texto: se cola à imagem da leitora, indiscreta quanto aos amores alheios.
     B:
-      texto: |-
-        é ação isolada de Sofia, arrivista social e benemérita
-        fingida.
+      texto: é ação isolada de Sofia, arrivista social e benemérita fingida.
     C:
-      texto: |-
-        diz respeito ao filósofo Quincas Borba, o que explica o
-        título do livro.
+      texto: diz respeito ao filósofo Quincas Borba, o que explica o título do livro.
     D:
-      texto: |-
-        se produz na imprensa, apesar de esta se esquivar da
-        eloquência vazia.
+      texto: se produz na imprensa, apesar de esta se esquivar da eloquência vazia.
     E:
-      texto: |-
-        se estende à sociedade, na qual o cinismo é o trunfo dos
-        fortes.
+      texto: se estende à sociedade, na qual o cinismo é o trunfo dos fortes.
   resposta: E
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
+  disciplina: portugues
+  assunto: coesao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
-  - texto: |-
-      Considerando o contexto, o trecho “E não se pense que este
-      nome a alegrou, posto que a lisonjeasse” (L.10 ‐ 11) pode ser
-      reescrito, sem prejuízo de sentido, da seguinte maneira: E não
-      se pense que este nome a alegrou,
+  - texto: 'Considerando o contexto, o trecho “E não se pense que este nome a alegrou, posto que a lisonjeasse”
+      (L.10-11) pode ser reescrito, sem prejuízo de sentido, da seguinte maneira: E não se pense que este
+      nome a alegrou,'
   alternativas:
     A:
-      texto: apesar de lisonjeá ‐ la.
+      texto: apesar de lisonjeá-la.
     B:
       texto: antes a lisonjeou.
     C:
       texto: porque a lisonjeava.
     D:
-      texto: a fim de lisonjeá ‐ la.
+      texto: a fim de lisonjeá-la.
     E:
       texto: tanto quanto a lisonjeava.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 46
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Hoje fizeram o enterro de Bela. Todos na Chácara se convenceram de que ela estava morta, menos eu. Se eu pudesse não deixaria enterrá ‐ la ainda. Disse isso mesmo a vovó, mas ela disse que não se pode fazer assim. Bela estava igualzinha à que ela era no dia em que chegou da Formação, só um pouquinho mais magra.
+      Hoje fizeram o enterro de Bela. Todos na Chácara se convenceram de que ela estava morta, menos eu. Se eu pudesse não deixaria enterrá-la ainda. Disse isso mesmo a vovó, mas ela disse que não se pode fazer assim. Bela estava igualzinha à que ela era no dia em que chegou da Formação, só um pouquinho mais magra.
       Todos dizem que o sofrimento da morte é a luta da alma para se largar do corpo. Eu perguntei a vovó: “Como é que a alma dela saiu sem o menor sofrimento, sem ela fazer uma caretinha que fosse?”. Vovó disse que tudo isso é mistério, que nunca a gente pode saber essas coisas com certeza. Uns sofrem muito quando a alma se despega do corpo, outros morrem de repente sem sofrer.
-      Helena Morley, Minha Vida de Menina .
+      Helena Morley, Minha Vida de Menina.
+  - texto: |-
       Perguntas
+
       Numa incerta hora fria
       perguntei ao fantasma
       que força nos prendia,
@@ -1396,11 +1381,12 @@ questoes:
       rumo da eternidade,
       ele apenas responde
       (se acaso é responder
-      a mistérios, somar ‐ lhes
+      a mistérios, somar-lhes
       um mistério mais alto):
+
       Amar, depois de perder.
-      Carlos Drummond de Andrade, Claro Enigma .
-      As perguntas da menina e do poeta versam sobre a morte. É correto afirmar que
+      Carlos Drummond de Andrade, Claro Enigma.
+  - texto: As perguntas da menina e do poeta versam sobre a morte. É correto afirmar que
   alternativas:
     A:
       texto: ambos guardam uma dimensão transcendente e católica, de origem mineira.
@@ -1417,39 +1403,48 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A certa personagem desvanecida
+
       Um soneto começo em vosso gabo*:
       Contemos esta regra por primeira,
       Já lá vão duas, e esta é a terceira,
       Já este quartetinho está no cabo.
+
       Na quinta torce agora a porca o rabo;
       A sexta vá também desta maneira:
       Na sétima entro já com grã** canseira,
       E saio dos quartetos muito brabo.
+
       Agora nos tercetos que direi?
       Direi que vós, Senhor, a mim me honrais
-      Gabando ‐ vos a vós, e eu fico um rei.
+      Gabando-vos a vós, e eu fico um rei.
+
       Nesta vida um soneto já ditei;
       Se desta agora escapo, nunca mais:
       Louvado seja Deus, que o acabei.
       Gregório de Matos
       *louvor **grande
+  - texto: |-
       Tipo zero
+
       Você é um tipo que não tem tipo
       Com todo tipo você se parece
       E sendo um tipo que assimila tanto tipo
       Passou a ser um tipo que ninguém esquece
+
       Quando você penetra num salão
       E se mistura com a multidão
       Você se torna um tipo destacado
       Desconfiado todo mundo fica
       Que o seu tipo não se classifica
       Você passa a ser um tipo desclassificado
+
       Eu até hoje nunca vi nenhum
       Tipo vulgar tão fora do comum
       Que fosse um tipo tão observado
@@ -1457,7 +1452,8 @@ questoes:
       Que o seu tipo já está batido
       Mas o seu tipo é o tipo do tipo esgotado
       Noel Rosa
-      O soneto de Gregório de Matos e o samba de Noel Rosa, embora distantes na forma e no tempo, aproximam ‐ se por ironizarem
+  - texto: O soneto de Gregório de Matos e o samba de Noel Rosa, embora distantes na forma e no tempo,
+      aproximam-se por ironizarem
   alternativas:
     A:
       texto: o processo de composição do texto.
@@ -1473,8 +1469,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: saude
+  disciplinas_secundarias:
+  - geografia
   texto_base: tb06
   enunciado:
   - texto: O autor expressa preocupação com o fato de que as soluções para o problema apontado passam
@@ -1490,8 +1488,8 @@ questoes:
       texto: desafios atuais em meio ambiente e saúde são globais e soluções dependem da adesão de cada
         país aos protocolos internacionais.
     D:
-      texto: o comércio internacional é o principal responsável por espalhar doenças nesses países, tornando
-        ‐ os vulneráveis, apesar de os programas de vacinação terem alcance mundial.
+      texto: o comércio internacional é o principal responsável por espalhar doenças nesses países, tornando-os
+        vulneráveis, apesar de os programas de vacinação terem alcance mundial.
     E:
       texto: a pesquisa nesta área é de âmbito nacional e, portanto, novas drogas não terão alcance mundial,
         mas apenas regional.
@@ -1499,13 +1497,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
+  disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
-  - texto: Várias espécies do gênero Candida , que pertence ao grupo de fungos unicelulares, reproduzem
-      ‐ se por brotamento (gemulação), espalhando ‐ se rapidamente. No grupo dos fungos pluricelulares,
-      a rápida colonização de novos ambientes deve ‐ se, em grande parte, ao fato de que esse grupo possui
+  - texto: Várias espécies do gênero Candida, que pertence ao grupo de fungos unicelulares, reproduzem-se
+      por brotamento (gemulação), espalhando-se rapidamente. No grupo dos fungos pluricelulares, a rápida
+      colonização de novos ambientes deve-se, em grande parte, ao fato de que esse grupo possui
   alternativas:
     A:
       texto: esporos haploides que germinam e colonizam o ambiente.
@@ -1521,48 +1520,47 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 50
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ambiente
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
-      Boa parte da floresta amazônica brasileira cresce sobre solos pobres. Sua exuberância, portanto, deve ‐ se ao fato de que uma grande proporção dos nutrientes advindos da própria floresta retorna à vegetação. Quando se derruba a floresta de uma área de dezenas de quilômetros quadrados e, em seguida, ateia ‐ se fogo no local como preparo para o plantio, esse ciclo é interrompido, o que causa uma série de efeitos.
+      Boa parte da floresta amazônica brasileira cresce sobre solos pobres. Sua exuberância, portanto, deve-se ao fato de que uma grande proporção dos nutrientes advindos da própria floresta retorna à vegetação. Quando se derruba a floresta de uma área de dezenas de quilômetros quadrados e, em seguida, ateia-se fogo no local como preparo para o plantio, esse ciclo é interrompido, o que causa uma série de efeitos.
       Identifique corretamente a relação dos efeitos mencionados em I, II e III com a derrubada e a queima da floresta.
-      I ‐ Diminuição de curto prazo da fertilidade do solo pela queima da vegetação.
-      II ‐ Perda de biodiversidade pelo efeito direto do
   alternativas:
     A:
       texto: |-
-        fogo sobre os animais silvestres.
-        III ‐ Diminuição da evaporação da água da chuva que atinge o solo exposto.
-        I ‐ Aumento de curto prazo da fertilidade do solo pelo efeito direto do calor do fogo sobre o solo superficial.
+        I - Diminuição de curto prazo da fertilidade do solo pela queima da vegetação.
+        II - Perda de biodiversidade pelo efeito direto do fogo sobre os animais silvestres.
+        III - Diminuição da evaporação da água da chuva que atinge o solo exposto.
     B:
       texto: |-
-        II ‐ Diminuição da diversidade de animais silvestres devido à remoção da vegetação.
-        III ‐ Diminuição da temperatura do solo exposto como efeito direto da remoção da vegetação.
-        I ‐ Aumento de curto prazo da fertilidade do solo pela deposição de cinzas.
-        II ‐ Perda de biodiversidade devido à remoção da
+        I - Aumento de curto prazo da fertilidade do solo pelo efeito direto do calor do fogo sobre o solo superficial.
+        II - Diminuição da diversidade de animais silvestres devido à remoção da vegetação.
+        III - Diminuição da temperatura do solo exposto como efeito direto da remoção da vegetação.
     C:
       texto: |-
-        vegetação.
-        III ‐ Aumento temporário da evaporação da água da chuva que atinge o solo exposto.
-        I ‐ Aumento de curto prazo da fertilidade do solo pelo efeito direto do calor do fogo sobre o solo superficial.
+        I - Aumento de curto prazo da fertilidade do solo pela deposição de cinzas.
+        II - Perda de biodiversidade devido à remoção da vegetação.
+        III - Aumento temporário da evaporação da água da chuva que atinge o solo exposto.
     D:
       texto: |-
-        II ‐ Perda de biodiversidade pelo efeito direto do fogo sobre a vegetação.
-        III ‐ Diminuição temporária de absorção da água da chuva pelo solo exposto.
-        I ‐ Aumento de longo prazo da fertilidade do solo pela deposição de cinzas.
-        II ‐ Aumento da diversidade de animais silvestres
+        I - Aumento de curto prazo da fertilidade do solo pelo efeito direto do calor do fogo sobre o solo superficial.
+        II - Perda de biodiversidade pelo efeito direto do fogo sobre a vegetação.
+        III - Diminuição temporária de absorção da água da chuva pelo solo exposto.
     E:
       texto: |-
-        devido à remoção da vegetação.
-        III ‐ Aumento da erosão do solo exposto devido à remoção da vegetação.
+        I - Aumento de longo prazo da fertilidade do solo pela deposição de cinzas.
+        II - Aumento da diversidade de animais silvestres devido à remoção da vegetação.
+        III - Aumento da erosão do solo exposto devido à remoção da vegetação.
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 14, y≈195–679
+  pendencias: []
 - numero: 51
-  disciplina: null
+  disciplina: biologia
+  assunto: zoologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1570,27 +1568,27 @@ questoes:
       a fase adulta?
   alternativas:
     A:
-      texto: (D)
       figura: q051-a.webp
     B:
-      texto: (E)
       figura: q051-b.webp
     C:
       figura: q051-c.webp
+    D:
+      figura: q051-d.webp
+    E:
+      figura: q051-e.webp
   resposta: E
   anulada: false
-  pendencias:
-  - Só 3 alternativa(s) detectada(s)
+  pendencias: []
 - numero: 52
-  disciplina: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Analise o esquema de uma célula adulta.
   - figura: q052-1.webp
-  - figura: q052-2.webp
-  - figura: q052-3.webp
-  - texto: As estruturas I, II, III e IV caracterizam ‐ se pela presença, respectivamente, de
+  - texto: As estruturas I, II, III e IV caracterizam-se pela presença, respectivamente, de
   alternativas:
     A:
       texto: glicídeo, lipídeo, água e ácido nucleico.
@@ -1606,13 +1604,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 53
-  disciplina: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Analise a seguinte genealogia de uma doença:'
   - figura: q053-1.webp
-  - figura: q053-2.webp
   - texto: Foi levantada a hipótese de que a doença possui padrão de herança dominante ligada ao cromossomo
       X. O que levou a tal conclusão foi a
   alternativas:
@@ -1630,7 +1628,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1652,7 +1651,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
+  disciplina: biologia
+  assunto: biologia-molecular
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1674,13 +1674,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 56
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ambiente
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: A combinação entre baixa biodiversidade, altas concentrações de poluentes e baixas concentrações
       de oxigênio dissolvido, que é verificada nos rios que passam por grandes centros urbanos no Brasil,
-      deve ‐ se principalmente à(ao)
+      deve-se principalmente à(ao)
   alternativas:
     A:
       texto: descarte de garrafas PET e sacolas plásticas, aumentando a cadeia de produção de microplásticos.
@@ -1696,12 +1698,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 57
-  disciplina: null
+  disciplina: biologia
+  assunto: biologia-molecular
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Um paciente, com câncer sanguíneo (linfoma) e infectado por HIV, fez quimioterapia e recebeu um transplante de células ‐ tronco da medula óssea de um doador resistente ao HIV. Como resultado, tanto o câncer como o HIV retroagiram neste paciente. O receptor mais usado pelo HIV para entrar nas células do corpo é o CCR5. Um pequeno número de pessoas resistentes ao HIV tem duas cópias mutadas do gene do receptor CCR5. Isso significa que o vírus não pode penetrar nas células sanguíneas do corpo que costumam ser infectadas. O paciente recebeu células ‐ tronco da medula óssea de um doador que tem essa mutação genética específica, o que fez com que também ficasse resistente ao HIV.
+      Um paciente, com câncer sanguíneo (linfoma) e infectado por HIV, fez quimioterapia e recebeu um transplante de células-tronco da medula óssea de um doador resistente ao HIV. Como resultado, tanto o câncer como o HIV retroagiram neste paciente. O receptor mais usado pelo HIV para entrar nas células do corpo é o CCR5. Um pequeno número de pessoas resistentes ao HIV tem duas cópias mutadas do gene do receptor CCR5. Isso significa que o vírus não pode penetrar nas células sanguíneas do corpo que costumam ser infectadas. O paciente recebeu células-tronco da medula óssea de um doador que tem essa mutação genética específica, o que fez com que também ficasse resistente ao HIV.
       Disponível em https://www.bbc.com/. Março/2019. Adaptado.
       A terapia celular a que o texto se refere
   alternativas:
@@ -1724,13 +1727,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 58
-  disciplina: null
+  disciplina: historia
+  assunto: america-colonial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Pesquisadores do Museu Nacional, no Rio de Janeiro, encontraram o crânio e uma parte do fêmur de Luzia, o esqueleto humano mais antigo descoberto na América que revolucionou as teorias científicas sobre a ocupação do continente. Os fósseis foram achados há alguns dias (não foi divulgado quando) junto aos escombros do edifício, parcialmente destruído por um incêndio em 2 de setembro. O crânio está fragmentado, porque a cola que mantinha os seus pedaços juntos se foi com o calor, mas a equipe está bastante otimista com suas condições.
-      Júlia Barbon , Folha de São Paulo , Outubro/2018. Adaptado.
+      Júlia Barbon, Folha de São Paulo, Outubro/2018. Adaptado.
       O esqueleto de Luzia,
   alternativas:
     A:
@@ -1752,19 +1756,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 59
-  disciplina: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Afirmo, portanto, que tínhamos atingido já o ano bem farto da Encarnação do Filho de Deus, de 1348, quando, na mui excelsa cidade de Florença, (...) sobreveio a mortífera pestilência. (...) apareciam no começo, tanto em homens como nas mulheres, ou na virilha ou na axila, algumas inchações (...) chamava ‐ as o populacho de bubões (...).
-      Giovanni Boccaccio, Decamerão .
+      Afirmo, portanto, que tínhamos atingido já o ano bem farto da Encarnação do Filho de Deus, de 1348, quando, na mui excelsa cidade de Florença, (...) sobreveio a mortífera pestilência. (...) apareciam no começo, tanto em homens como nas mulheres, ou na virilha ou na axila, algumas inchações (...) chamava-as o populacho de bubões (...).
+      Giovanni Boccaccio, Decamerão.
       A respeito da Peste Negra do século XIV, é correto afirmar:
   alternativas:
     A:
       texto: Provocou gravíssima queda demográfica, que afetou grande parte da produção econômica europeia.
     B:
-      texto: Originou ‐ se no Oriente, penetrou no continente europeu pelos portos e manteve ‐ se restrita
+      texto: Originou-se no Oriente, penetrou no continente europeu pelos portos e manteve-se restrita
         à Península Itálica.
     C:
       texto: Foi provocada pela fome e pela desnutrição dos camponeses e favoreceu o processo de centralização
@@ -1779,14 +1784,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
+  disciplina: historia
+  assunto: africa
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: A imagem a seguir refere ‐ se às principais rotas de comércio da África do Norte e Ocidental,
+  - texto: A imagem a seguir refere-se às principais rotas de comércio da África do Norte e Ocidental,
       no século XV.
   - figura: q060-1.webp
-  - figura: q060-2.webp
   - texto: |-
       Eric Wolf, A Europa e os Povos sem História (trad.). São Paulo: Edusp, 2005.
       Em relação às rotas comerciais representadas no mapa, é correto afirmar que elas
@@ -1810,7 +1815,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 61
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1836,18 +1842,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 62
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: idade-moderna
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
-  - texto: A representação cartográfica a seguir refere ‐ se à viagem de circunavegação, iniciada em Sanlúcar
+  - texto: A representação cartográfica a seguir refere-se à viagem de circunavegação, iniciada em Sanlúcar
       de Barrameda, na Andaluzia, em 20 de setembro de 1519, e comandada pelo português Fernão de Magalhães,
       a serviço da monarquia da Espanha. A despeito da repercussão da viagem para o desenvolvimento dos
       conhecimentos náuticos e para a exploração do Oceano Pacífico, Battista Agnese foi um dos poucos
       cartógrafos a registrar a empreitada de Magalhães.
   - figura: q062-1.webp
   - texto: |-
-      Battista Agnese, Atlas Portulano , 1545. Biblioteca Digital Mundial. Disponível em https://www.wdl.org/pt/.
+      Battista Agnese, Atlas Portulano, 1545. Biblioteca Digital Mundial. Disponível em https://www.wdl.org/pt/.
       A representação cartográfica de Battista Agnese
   alternativas:
     A:
@@ -1870,7 +1878,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1884,7 +1893,7 @@ questoes:
       texto: a formação de núcleos de povoamento para absorverem a crescente população protestante dos
         Países Baixos.
     C:
-      texto: a exploração das minas de ouro recém ‐ descobertas no interior, somente acessíveis pelo controle
+      texto: a exploração das minas de ouro recém-descobertas no interior, somente acessíveis pelo controle
         de portos no Atlântico.
     D:
       texto: a ocupação de áreas até então pouco exploradas pelos portugueses, como o Maranhão e o Vale
@@ -1895,12 +1904,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
+  disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Ao primeiro brilho da alvorada chegou do horizonte uma nuvem negra, que era conduzida [pelo] senhor da tempestade (...). Surgiram então os deuses do abismo; Nergal destruiu as barragens que represavam as águas do inferno; Ninurta, o deus da guerra, pôs abaixo os diques (...). Por seis dias e seis noites os ventos sopraram; enxurradas, inundações e torrentes assolaram o mundo; a tempestade e o dilúvio explodiam em fúria como dois exércitos em guerra. Na alvorada do sétimo dia o temporal (...) amainou (...) o dilúvio serenou (...) toda a humanidade havia virado argila (...). Na montanha de Nisir o barco ficou preso (...). Na alvorada do sétimo dia eu soltei uma pomba e deixei que se fosse. Ela voou para longe, mas, não encontrando um lugar para pousar, retornou. Então soltei um corvo. A ave viu que as águas haviam abaixado; ela comeu, (...) grasnou e não mais voltou para o barco. Eu então abri todas as portas e janelas, expondo a nave aos quatro ventos. Preparei um sacrifício e derramei vinho sobre o topo da montanha em oferenda aos deuses (...) . A Epopeia de Gilgamesh , São Paulo: Martins Fontes, 2001.
+      Ao primeiro brilho da alvorada chegou do horizonte uma nuvem negra, que era conduzida [pelo] senhor da tempestade (...). Surgiram então os deuses do abismo; Nergal destruiu as barragens que represavam as águas do inferno; Ninurta, o deus da guerra, pôs abaixo os diques (...). Por seis dias e seis noites os ventos sopraram; enxurradas, inundações e torrentes assolaram o mundo; a tempestade e o dilúvio explodiam em fúria como dois exércitos em guerra. Na alvorada do sétimo dia o temporal (...) amainou (...) o dilúvio serenou (...) toda a humanidade havia virado argila (...). Na montanha de Nisir o barco ficou preso (...). Na alvorada do sétimo dia eu soltei uma pomba e deixei que se fosse. Ela voou para longe, mas, não encontrando um lugar para pousar, retornou. Então soltei um corvo. A ave viu que as águas haviam abaixado; ela comeu, (...) grasnou e não mais voltou para o barco. Eu então abri todas as portas e janelas, expondo a nave aos quatro ventos. Preparei um sacrifício e derramei vinho sobre o topo da montanha em oferenda aos deuses (...).
+      A Epopeia de Gilgamesh, São Paulo: Martins Fontes, 2001.
       Com base no texto, registrado aproximadamente no século VII a.C. e que se refere a um antigo mito da Mesopotâmia, bem como em seus conhecimentos, é possível dizer que a sociedade descrita era
   alternativas:
     A:
@@ -1917,7 +1928,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1926,15 +1938,17 @@ questoes:
       Não é difícil aprender
       Todas as manhas do seu jogo sujo
       Não é assim que tem que ser
+
       Vamos fazer nosso dever de casa
       E aí então vocês vão ver
       Suas crianças derrubando reis
       Fazer comédia no cinema com as suas leis
+
       Somos os filhos da revolução
       Somos burgueses sem religião
       Somos o futuro da nação
-      Geração Coca ‐ Cola.
-      Dado Villa ‐ Lobos e Renato Russo, Geração Coca ‐ Cola , 1984.
+      Geração Coca-Cola.
+      Dado Villa-Lobos e Renato Russo, Geração Coca-Cola, 1984.
       Esses versos
   alternativas:
     A:
@@ -1956,13 +1970,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
+  disciplina: historia
+  assunto: america-latina
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Documentos da Agência Central de Inteligência Americana (CIA) mostram que o Brasil quis liderar a Operação Condor e só não conseguiu porque enfrentou resistência dos outros países membros – Argentina, Chile, Uruguai, Paraguai e Bolívia. (...) Os documentos da CIA fazem parte do Projeto de Desclassificação Argentina ( The Dirty War , 1976 ‐ 1983), do governo americano, e incluem mais de 40 mil páginas. Duas dezenas delas fazem menções ao Brasil (...).
-      Marcelo Godoy, O Estado de São Paulo . Abril/2019.
+      Documentos da Agência Central de Inteligência Americana (CIA) mostram que o Brasil quis liderar a Operação Condor e só não conseguiu porque enfrentou resistência dos outros países membros – Argentina, Chile, Uruguai, Paraguai e Bolívia. (...) Os documentos da CIA fazem parte do Projeto de Desclassificação Argentina (The Dirty War, 1976-1983), do governo americano, e incluem mais de 40 mil páginas. Duas dezenas delas fazem menções ao Brasil (...).
+      Marcelo Godoy, O Estado de São Paulo. Abril/2019.
       A respeito da Operação Condor, é correto afirmar:
   alternativas:
     A:
@@ -1972,25 +1987,26 @@ questoes:
       texto: Ao encontrar resistência dos demais países que dela participavam, o Brasil passou a criticar
         publicamente suas ações.
     C:
-      texto: Em vista da oposição norte ‐ americana à iniciativa, a cooperação entre os países membros
-        não foi implantada.
+      texto: Em vista da oposição norte-americana à iniciativa, a cooperação entre os países membros não
+        foi implantada.
     D:
       texto: O governo ditatorial paraguaio assumiu a posição de liderança no acordo firmado entre seus
         países fundadores.
     E:
-      texto: Limitou ‐ se à troca de informações sobre os opositores políticos que buscaram exílio em
-        cada um desses países.
+      texto: Limitou-se à troca de informações sobre os opositores políticos que buscaram exílio em cada
+        um desses países.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
+  disciplina: historia
+  assunto: revolucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A entrega pacífica do governo a um adversário pressupunha um elevado nível de automoderação. O mesmo determinou a boa vontade de um governo em não usar os seus grandes recursos do poder na humilhação ou destruição de predecessores hostis ou opositores (...). As técnicas militares deram lugar às técnicas verbais do debate feitas de retórica e de persuasão, a maior parte das quais exigia mais contenção geral, identificando, de modo nítido, esta mudança com um avanço da civilização.
-      Norbert Elias, A busca da excitação . Lisboa: Difel, 1992.
+      Norbert Elias, A busca da excitação. Lisboa: Difel, 1992.
       O processo histórico britânico ofereceu, entre os séculos XVII e XIX, modelos institucionais e práticas políticas importantes. A respeito deles, é correto afirmar que
   alternativas:
     A:
@@ -2010,18 +2026,19 @@ questoes:
     E:
       texto: o estabelecimento do parlamento bicameral, com representação para os nobres e para a burguesia
         enriquecida, e do direito de voto universal, ambos no século XVIII, foram responsáveis pela contenção
-        das lutas sociais na Grã ‐ Bretanha.
+        das lutas sociais na Grã-Bretanha.
   resposta: B
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      De acordo com o historiador Martyn Lyons , “ nos temores contemporâneos em relação ao acesso ilimitado a sites perigosos da Internet, e às dificuldades enfrentadas por governos de diversos países no policiamento da distribuição da informação, ouve ‐ se o eco do pânico causado pela invenção da imprensa”.
-      Martyn Lyons, A história da leitura de Gutenberg a Bill Gates , RJ: Casa da Palavra, 1999.
+      De acordo com o historiador Martyn Lyons, “nos temores contemporâneos em relação ao acesso ilimitado a sites perigosos da Internet, e às dificuldades enfrentadas por governos de diversos países no policiamento da distribuição da informação, ouve-se o eco do pânico causado pela invenção da imprensa”.
+      Martyn Lyons, A história da leitura de Gutenberg a Bill Gates, RJ: Casa da Palavra, 1999.
       Escolha a alternativa que demonstre corretamente os elementos de continuidade e de descontinuidade entre a “revolução do impresso” e a “revolução eletrônica” apontados pelo autor.
   alternativas:
     A:
@@ -2037,125 +2054,118 @@ questoes:
     D:
       texto: Diferentemente do Index Librorum Prohibitorum promulgado para a atuação da Inquisição no
         controle da expansão do Protestantismo durante o século XVI, os atuais marcos regulatórios da
-        Internet limitam ‐ se ao controle da pornografia.
+        Internet limitam-se ao controle da pornografia.
     E:
       texto: O advento da tipografia não foi necessariamente revolucionário, pois não mudou a natureza
         nem o assunto dos livros; já a tecnologia digital suprimiu todas as formas anteriores de comunicação,
         da oral à impressa.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 19, y≈105, 118, 130, 298, 323, 335, 352, 359,
-    366, 395: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 19, y≈175, 188, 200, 224, 364: conferir o texto'
-  - 'Texto sublinhado na página 19, y≈364: formatação perdida no texto puro'
+  pendencias: []
 - numero: 69
-  disciplina: null
+  disciplina: fisica
+  assunto: gravitacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Em julho de 1969, os astronautas Neil Armstrong e Buzz Aldrin fizeram o primeiro pouso tripulado
       na superfície da Lua, enquanto seu colega Michael Collins permaneceu a bordo do módulo de comando
       Columbia em órbita lunar. Considerando que o Columbia estivesse em uma órbita perfeitamente circular
-      a uma altitude de 260 km acima da superfície da Lua, o tempo decorrido (em horas terrestres ‐ h)
+      a uma altitude de 260 km acima da superfície da Lua, o tempo decorrido (em horas terrestres - h)
       entre duas passagens do Columbia exatamente acima do mesmo ponto da superfície lunar seria de
+  - texto: |-
+      Note e adote:
+      Constante gravitacional: G ≅ 9 x 10⁻¹³ km³/(kg h²);
+      Raio da Lua = 1.740 km;
+      Massa da Lua ≅ 8 × 10²² kg;
+      π ≅ 3.
   alternativas:
     A:
-      texto: |-
-        0,5 h.
-        Note e adote:
+      texto: 0,5 h.
     B:
-      texto: |-
-        2 h.
-        Constante gravitacional: G  9 x 10 km /(kg h );
+      texto: 2 h.
     C:
-      texto: |-
-        4 h.
-        Raio da Lua = 1.740 km;
+      texto: 4 h.
     D:
-      texto: |-
-        8 h.
-        Massa da Lua  8 × 10 kg;
+      texto: 8 h.
     E:
-      texto: |-
-        72 h.
-          3.
+      texto: 72 h.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈623, 643, 658, 678: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈636–702
+  pendencias: []
 - numero: 70
-  disciplina: null
+  disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Em 20 de maio de 2019, as unidades de base do Sistema Internacional de Unidades (SI) passaram a ser definidas a partir de valores exatos de algumas constantes físicas. Entre elas, está a constante de Planck , que relaciona a energia de um fóton ( quantum de radiação eletromagnética) com a sua frequência na forma .
-      A unidade da constante de Planck em termos das unidades de base do SI (quilograma, metro e segundo) é:
+  - texto: "Em 20 de maio de 2019, as unidades de base do Sistema Internacional de Unidades (SI) passaram
+      a ser definidas a partir de valores exatos de algumas constantes físicas. Entre elas, está a constante
+      de Planck ℎ, que relaciona a energia \U0001D438 de um fóton (quantum de radiação eletromagnética)
+      com a sua frequência \U0001D453 na forma \U0001D438 = ℎ\U0001D453.\nA unidade da constante de Planck
+      em termos das unidades de base do SI (quilograma, metro e segundo) é:"
   alternativas:
     A:
-      texto: kg m /s
+      texto: kg m²/s
     B:
-      texto: kg s/m
+      texto: kg s/m²
     C:
-      texto: m s/kg
+      texto: m²s/kg
     D:
       texto: kg s/m
     E:
-      texto: kg m /s
+      texto: kg m²/s³
   resposta: A
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: ondulatoria
+  disciplinas_secundarias:
+  - matematica
   texto_base: null
   enunciado:
-  - texto: |-
-      A transmissão de dados de telefonia celular por meio de ondas eletromagnéticas está sujeita a perdas que aumentam com a distância entre a antena transmissora e a antena receptora. Uma aproximação frequentemente usada para expressar a perda , em decibéis (dB), do sinal em função de , no espaço livre de obstáculos, é dada pela expressão
-      4
-      20log
-      ,
-      em que  é o comprimento de onda do sinal. O gráfico a seguir mostra (em dB) versus (em metros) para um determinado comprimento de onda  .
+  - texto: "A transmissão de dados de telefonia celular por meio de ondas eletromagnéticas está sujeita
+      a perdas que aumentam com a distância \U0001D451 entre a antena transmissora e a antena receptora.
+      Uma aproximação frequentemente usada para expressar a perda \U0001D43F, em decibéis (dB), do sinal
+      em função de \U0001D451, no espaço livre de obstáculos, é dada pela expressão\n\U0001D43F = 20 log₁₀(4\U0001D70B\U0001D451/\U0001D706),\nem
+      que λ é o comprimento de onda do sinal. O gráfico a seguir mostra \U0001D43F (em dB) versus \U0001D451
+      (em metros) para um determinado comprimento de onda λ."
   - figura: q071-1.webp
-  - figura: q071-2.webp
   - texto: Com base no gráfico, a frequência do sinal é aproximadamente
+  - texto: |-
+      Note e adote:
+      Velocidade da luz no vácuo: c = 3×10⁸ m/s;
+      π ≅ 3;
+      1 GHz = 10⁹ Hz.
   alternativas:
     A:
-      texto: |-
-        2,5 GHz.
-        Note e adote:
+      texto: 2,5 GHz.
     B:
-      texto: |-
-        5 GHz.
-        Velocidade da luz no vácuo: c = 3×10 m/s;
+      texto: 5 GHz.
     C:
-      texto: |-
-        12 GHz.
-          3;
+      texto: 12 GHz.
     D:
-      texto: |-
-        40 GHz.
-        1 GHz = 10 Hz.
+      texto: 40 GHz.
     E:
       texto: 100 GHz.
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈601–663
+  pendencias: []
 - numero: 72
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: cinematica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: 'Um estímulo nervoso em um dos dedos do pé de um indivíduo demora cerca de 30 ms para chegar
       ao cérebro. Nos membros inferiores, o pulso elétrico, que conduz a informação do estímulo, é transmitido
       pelo nervo ciático, chegando à base do tronco em 20 ms. Da base do tronco ao cérebro, o pulso é
       conduzido na medula espinhal. Considerando que a altura média do brasileiro é de 1,70 m e supondo
-      uma razão média de 0,6 entre o comprimento dos membros inferiores e a altura de uma pessoa, pode
-      ‐ se concluir que as velocidades médias de propagação do pulso nervoso desde os dedos do pé até
-      o cérebro e da base do tronco até o cérebro são, respectivamente:'
+      uma razão média de 0,6 entre o comprimento dos membros inferiores e a altura de uma pessoa, pode-se
+      concluir que as velocidades médias de propagação do pulso nervoso desde os dedos do pé até o cérebro
+      e da base do tronco até o cérebro são, respectivamente:'
   alternativas:
     A:
       texto: 51 m/s e 51 m/s
@@ -2169,11 +2179,10 @@ questoes:
       texto: 68 m/s e 68 m/s
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 20, y≈81, 118, 142: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 20, y≈122: conferir o texto'
+  pendencias: []
 - numero: 73
-  disciplina: null
+  disciplina: fisica
+  assunto: termodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2198,7 +2207,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 74
-  disciplina: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2206,40 +2216,32 @@ questoes:
       m de altura. O elástico utilizado tem comprimento relaxado de 10 m. Qual deve ser o mínimo valor
       da constante elástica desse elástico para que ele possa ser utilizado com segurança no salto por
       uma pessoa cuja massa, somada à do equipamento de proteção a ela conectado, seja de 120 kg?
+  - texto: |-
+      Note e adote:
+      Despreze a massa do elástico, as forças dissipativas e as dimensões da pessoa;
+      Aceleração da gravidade = 10 m/s².
   alternativas:
     A:
-      texto: |-
-        30 N/m
-        Note e adote:
+      texto: 30 N/m
     B:
-      texto: |-
-        80 N/m
-        Despreze a massa do elástico, as forças
+      texto: 80 N/m
     C:
-      texto: |-
-        90 N/m
-        dissipativas e as dimensões da pessoa;
+      texto: 90 N/m
     D:
-      texto: |-
-        160 N/m
-        Aceleração da gravidade = 10 m/s .
+      texto: 160 N/m
     E:
       texto: 180 N/m
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈706, 735, 747, 759, 766, 771, 783: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 20, y≈724–786
+  pendencias: []
 - numero: 75
-  disciplina: null
+  disciplina: fisica
+  assunto: eletrodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um fabricante projetou resistores para utilizar em uma lâmpada de resistência . Cada um deles
-      deveria ter resistência . Após a fabricação, ele notou que alguns deles foram projetados erroneamente,
-      de forma que cada um deles possui uma resistência /2 . Tendo em vista que a lâmpada queimará se
-      for percorrida por uma corrente elétrica superior a / , em qual(is) dos circuitos a lâmpada queimará?
   - figura: q075-1.webp
+  - figura: q075-2.webp
   alternativas:
     A:
       texto: 1, apenas.
@@ -2255,7 +2257,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
+  disciplina: fisica
+  assunto: optica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2268,109 +2271,111 @@ questoes:
       radianos, como função do seu diâmetro, para ondas luminosas de comprimento de onda de 1,3 mm, igual
       ao daquelas captadas pelo EHT. Note a escala logarítmica dos eixos do gráfico.
   - figura: q076-1.webp
-  - figura: q076-2.webp
-  - texto: Sabe ‐ se que o tamanho equivalente a um pixel na foto do buraco negro corresponde ao valor
-      da menor distância entre dois objetos naquela galáxia para que eles possam ser identificados separadamente
+  - texto: Sabe-se que o tamanho equivalente a um pixel na foto do buraco negro corresponde ao valor da
+      menor distância entre dois objetos naquela galáxia para que eles possam ser identificados separadamente
       pelo EHT. Com base nas informações anteriores e na análise do gráfico, e sabendo que a distância
-      da Terra até a galáxia M87 é de 5 × 10 km, indique o valor mais próximo do tamanho do pixel .
+      da Terra até a galáxia M87 é de 5 × 10²⁰ km, indique o valor mais próximo do tamanho do pixel.
   alternativas:
     A:
-      texto: 5 × 10 km
+      texto: 5 × 10¹ km
     B:
-      texto: 5 × 10 km
+      texto: 5 × 10⁴ km
     C:
-      texto: 5 × 10 km
+      texto: 5 × 10⁷ km
     D:
-      texto: 5 × 10 km
+      texto: 5 × 10¹⁰ km
     E:
-      texto: 5 × 10 km
+      texto: 5 × 10¹³ km
   resposta: D
   anulada: false
   pendencias: []
 - numero: 77
-  disciplina: null
+  disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Um solenoide muito longo é percorrido por uma corrente elétrica , conforme mostra a figura
-      1.
+  - texto: "Um solenoide muito longo é percorrido por uma corrente elétrica \U0001D43C, conforme mostra
+      a figura 1."
   - figura: q077-1.webp
-  - texto: |-
-      Figura 1
-      Em um determinado instante, uma partícula de carga positiva desloca ‐ se com velocidade instantânea perpendicular ao eixo do solenoide, na presença de um campo elétrico na direção do eixo do solenoide. A figura 2 ilustra essa situação, em uma seção reta definida por um plano que contém o eixo do solenoide.
+  - texto: Figura 1
+  - texto: "Em um determinado instante, uma partícula de carga \U0001D45E positiva desloca-se com velocidade
+      instantânea \U0001D463⃗ perpendicular ao eixo do solenoide, na presença de um campo elétrico na
+      direção do eixo do solenoide. A figura 2 ilustra essa situação, em uma seção reta definida por um
+      plano que contém o eixo do solenoide."
   - figura: q077-2.webp
+  - texto: Figura 2
   - figura: q077-3.webp
-  - texto: |-
-      Figura 2
-      O diagrama que representa corretamente as forças elétrica e magnética atuando sobre a partícula é:
   alternativas:
     A:
-      texto: (D)
       figura: q077-a.webp
     B:
-      texto: (E)
       figura: q077-b.webp
     C:
       figura: q077-c.webp
+    D:
+      figura: q077-d.webp
+    E:
+      figura: q077-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 21, y≈81, 103, 188, 200, 264, 292, 304, 316,
-    328, 341, 404, 418: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 21, y≈268, 295, 308, 320, 332, 344, 408, 422: conferir
-    o texto'
-  - Só 3 alternativa(s) detectada(s)
+  pendencias: []
 - numero: 78
-  disciplina: null
+  disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Um drone voando na horizontal, em relação ao solo (como indicado pelo sentido da seta na figura),
       deixa cair um pacote de livros. A melhor descrição da trajetória realizada pelo pacote de livros,
       segundo um observador em repouso no solo, é dada pelo percurso descrito na
+  - figura: q078-1.webp
   alternativas:
     A:
       texto: trajetória 1.
     B:
       texto: trajetória 2.
-      figura: q078-b.webp
     C:
       texto: trajetória 3.
     D:
       texto: trajetória 4.
     E:
       texto: trajetória 5.
-      figura: q078-e.webp
   resposta: D
   anulada: false
   pendencias: []
 - numero: 79
-  disciplina: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Um pêndulo simples é composto por uma haste metálica leve, presa a um eixo bem lubrificado, e por uma esfera pequena de massa muito maior que a da haste, presa à sua extremidade oposta. O período para pequenas oscilações de um pêndulo é proporcional à raiz quadrada da razão entre o comprimento da haste metálica e a aceleração da gravidade local. Considere este pêndulo nas três situações:
-      1. Em um laboratório localizado ao nível do mar, na Antártida, a uma temperatura de 0 °C.
-      2. No mesmo laboratório, mas agora a uma temperatura de 250 K.
-      3. Em um laboratório no qual a temperatura é de 32 °F, em uma base lunar, cuja aceleração da gravidade é igual a um sexto daquela da Terra.
-      Indique a alternativa correta a respeito da comparação entre os períodos de oscilação , e do pêndulo nas situações 1, 2 e 3, respectivamente.
+  - texto: "Um pêndulo simples é composto por uma haste metálica leve, presa a um eixo bem lubrificado,
+      e por uma esfera pequena de massa muito maior que a da haste, presa à sua extremidade oposta. O
+      período \U0001D443 para pequenas oscilações de um pêndulo é proporcional à raiz quadrada da razão
+      entre o comprimento da haste metálica e a aceleração da gravidade local. Considere este pêndulo
+      nas três situações:\n1. Em um laboratório localizado ao nível do mar, na Antártida, a uma temperatura
+      de 0 °C.\n2. No mesmo laboratório, mas agora a uma temperatura de 250 K.\n3. Em um laboratório no
+      qual a temperatura é de 32 °F, em uma base lunar, cuja aceleração da gravidade é igual a um sexto
+      daquela da Terra.\nIndique a alternativa correta a respeito da comparação entre os períodos de oscilação
+      \U0001D443₁, \U0001D443₂ e \U0001D443₃ do pêndulo nas situações 1, 2 e 3, respectivamente."
   alternativas:
     A:
-      texto: < <
+      texto: "\U0001D443₁ < \U0001D443₂ < \U0001D443₃"
     B:
-      texto: = <
+      texto: "\U0001D443₁ = \U0001D443₃ < \U0001D443₂"
     C:
-      texto: < <
+      texto: "\U0001D443₂ < \U0001D443₁ < \U0001D443₃"
     D:
-      texto: < <
+      texto: "\U0001D443₃ < \U0001D443₂ < \U0001D443₁"
     E:
-      texto: < =
+      texto: "\U0001D443₁ < \U0001D443₂ = \U0001D443₃"
   resposta: C
   anulada: false
   pendencias: []
 - numero: 80
-  disciplina: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2402,7 +2407,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2410,7 +2416,6 @@ questoes:
       Um vídeo do astrônomo Carl Sagan em seu programa dos anos 1980, Cosmos, conta a história de Eratóstenes, demonstrando como os gregos antigos já haviam descoberto que a Terra é uma esfera (geoide). Para fazer isso, Eratóstenes observou a sombra de duas colunas no solstício de verão; uma coluna foi colocada em Alexandria e outra em Siena (atualmente Assuan), ambas no Egito. Ele notou que em Siena, ao meio dia, o Sol ficava em seu ponto mais alto e a coluna lá instalada projetava uma sombra com ângulo diferente daquela projetada em Alexandria. Sagan explica então que, se a Terra fosse plana, ambas as estruturas produziriam sombras iguais, mas como o planeta é esférico, o sombreamento varia.
       Disponível em https://revistagalileu.globo.com/. Adaptado. 2019.
   - figura: q081-1.webp
-  - figura: q081-2.webp
   - texto: |-
       Disponível em https://www.youtube.com/. Adaptado.
       A esfericidade do Planeta Terra demonstrada por Eratóstenes e relembrada por Carl Sagan explica, em conjunto com outros fatores,
@@ -2434,18 +2439,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: questoes-ambientais
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: Em reportagem publicada em 2018, a revista FAPESP apresenta uma pesquisa da Superintendência
       de Controle de Endemias (SUCEN) que usou informações de data e local de mortes de macacos por um
-      determinado vírus. A partir do estudo, construiu ‐ se um modelo epidemiológico que descreve o sentido
+      determinado vírus. A partir do estudo, construiu-se um modelo epidemiológico que descreve o sentido
       de deslocamento e os corredores ecológicos funcionais (corredores prováveis) do vírus.
   - figura: q082-1.webp
-  - texto: Disponível em http://revistapesquisa.fapesp.br/. Com base nas informações e no mapa, o corredor
-      ecológico funcional desse vírus, que atingiu a maior abrangência territorial no Estado de São Paulo
-      durante o ano de 2017, avançou principalmente por quais regiões e causou qual enfermidade?
+  - texto: |-
+      Disponível em http://revistapesquisa.fapesp.br/.
+      Com base nas informações e no mapa, o corredor ecológico funcional desse vírus, que atingiu a maior abrangência territorial no Estado de São Paulo durante o ano de 2017, avançou principalmente por quais regiões e causou qual enfermidade?
   alternativas:
     A:
       texto: Sul de Minas Gerais e Vale do rio Ribeira de Iguape; Chikungunya.
@@ -2461,14 +2468,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 83
-  disciplina: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O processo de desertificação é definido como a degradação ambiental e socioambiental, particularmente nas zonas áridas, semiáridas e subúmidas, resultantes de vários fatores e vetores, incluindo as variações e alterações climáticas e as atividades humanas.
       BRASIL, Ministério do Meio Ambiente. Disponível em http://www.mma.gov.br/.
-      Dentre as medidas mais adequadas para mitigação dos efeitos da desertificação encontra(m) ‐ se
+      Dentre as medidas mais adequadas para mitigação dos efeitos da desertificação encontra(m)-se
   alternativas:
     A:
       texto: a construção de rodovias que permitam às populações mais diretamente atingidas pela seca
@@ -2489,16 +2497,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 84
-  disciplina: null
+  disciplina: geografia
+  assunto: espaco-agrario
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Brasil: Estabelecimentos de agricultura familiar
-      e não familiar
+  - texto: 'Brasil: Estabelecimentos de agricultura familiar e não familiar'
   - figura: q084-1.webp
   - texto: |-
-      Hervé Théry e Neli Aparecida Mello ‐ Théry. Atlas do Brasil: disparidades e dinâmicas do território . 3ª edição, 2018. Adaptado.
+      Hervé Théry e Neli Aparecida Mello-Théry. Atlas do Brasil: disparidades e dinâmicas do território. 3ª edição, 2018. Adaptado.
       Sobre a produção agrícola brasileira e os dados apresentados nos cartogramas, é correto afirmar:
   alternativas:
     A:
@@ -2520,13 +2527,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 85
-  disciplina: null
+  disciplina: geografia
+  assunto: economia-mundial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
+  - texto: 'É de grande relevância aqui o fato de que uma grande proporção do trânsito de internet do
+      mundo passa pelos Estados Unidos (...). Isso significa que a NSA (a agência de segurança nacional
+      dos EUA) poderia acessar uma quantidade alarmante de ligações telefônicas simplesmente escolhendo
+      as instalações certas. O que é ainda mais inacreditável: essas instalações não passam de alguns
+      prédios, conhecidos como “hotéis de telecomunicação”, que hospedam os principais centros de conexão
+      de internet e telefonia do planeta todo.'
+  - figura: q085-1.webp
   - texto: |-
-      É de grande relevância aqui o fato de que uma grande proporção do trânsito de internet do mundo passa pelos Estados Unidos (...). Isso significa que a NSA (a agência de segurança nacional dos EUA) poderia acessar uma quantidade alarmante de ligações telefônicas simplesmente escolhendo as instalações certas. O que é ainda mais inacreditável: essas instalações não passam de alguns prédios, conhecidos como “hotéis de telecomunicação”, que hospedam os principais centros de conexão de internet e telefonia do planeta todo.
-      Stephen Graham, Cidades Sitiadas: o novo urbanismo militar , 2016. Adaptado.
+      Stephen Graham, Cidades Sitiadas: o novo urbanismo militar, 2016. Adaptado.
       A respeito da configuração espacial e geopolítica retratada no excerto e no mapa, é possível afirmar que
   alternativas:
     A:
@@ -2537,10 +2551,10 @@ questoes:
         pública do planeta, já que os custos com o tratamento de dados são muito altos.
     C:
       texto: em um mundo cada vez mais dependente dos fluxos imateriais de informação, a presença de objetos
-        técnicos fixos torna ‐ se irrelevante para a posição geopolítica dos Estados Unidos.
+        técnicos fixos torna-se irrelevante para a posição geopolítica dos Estados Unidos.
     D:
       texto: o mapa representa, por meio do “trânsito de internet” e do fluxo de “ligações telefônicas”,
-        uma globalização que integrou completamente tanto os norte ‐ americanos quanto as populações da
+        uma globalização que integrou completamente tanto os norte-americanos quanto as populações da
         África.
     E:
       texto: a presença de fixos, como algumas instalações de armazenagem e conexão, influencia a orientação
@@ -2549,14 +2563,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 86
-  disciplina: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O Ciclone Tropical Idai atingiu o litoral de Moçambique na noite de quinta ‐ feira (21/03/2019), provocando grandes danos na cidade de Beira. Cerca de 500 mil pessoas ficaram sem energia, afetando também o setor de comunicações.
+      O Ciclone Tropical Idai atingiu o litoral de Moçambique na noite de quinta-feira (21/03/2019), provocando grandes danos na cidade de Beira. Cerca de 500 mil pessoas ficaram sem energia, afetando também o setor de comunicações.
       Disponível em https://www.climatempo.com.br/. Adaptado.
-      Essa notícia refere ‐ se ao Ciclone Tropical que atingiu principalmente Moçambique, Zimbábue e Malaui. Eventos dessa magnitude e superiores – o Ciclone Idai atingiu apenas a categoria 2 em uma escala de 1 a 5 – ocorrem em outros locais do planeta e não repercutem da mesma forma, com a perda de centenas de vidas. Isso ocorre em função
+      Essa notícia refere-se ao Ciclone Tropical que atingiu principalmente Moçambique, Zimbábue e Malaui. Eventos dessa magnitude e superiores – o Ciclone Idai atingiu apenas a categoria 2 em uma escala de 1 a 5 – ocorrem em outros locais do planeta e não repercutem da mesma forma, com a perda de centenas de vidas. Isso ocorre em função
   alternativas:
     A:
       texto: da grande presença de populações não nativas, que não têm tradição em lidar com eventos dessa
@@ -2577,13 +2592,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 87
-  disciplina: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Em Barcelona, em 2012 e 2013, a cada 15 minutos uma família recebia ordem de despejo. Desde então, o panorama da habitação mudou totalmente. “(...) Estamos assistindo uma onda de especulação imobiliária (...) que agora se foca no aluguel”, explica Daniel Pardo da Associação de Moradores para um Turismo Sustentável. “Este fenômeno pôs em marcha um processo acelerado e violento de expulsão de inquilinos”, acrescenta. Onde a pressão da especulação imobiliária internacional e a indústria do turismo causaram um aumento substancial nos preços dos aluguéis, os catalães têm hoje de gastar mais de 46% dos seus salários com o aluguel. Para os jovens até os 35 anos, a taxa de esforço aumenta até os 65% (...). “Não queremos que os habitantes de Barcelona sejam substituídos por pessoas com maior poder de compra”, diz a porta ‐ voz do Sindicato dos Inquilinos. Só em Barcelona, 15 fundos de investimento imobiliário possuem 3.000 apartamentos.
-      “Os habitantes querem a sua cidade de volta”. Reportagem de Ulrike Prinz para o Goethe ‐ Institut Madrid. Maio/2018. Adaptado.
+      Em Barcelona, em 2012 e 2013, a cada 15 minutos uma família recebia ordem de despejo. Desde então, o panorama da habitação mudou totalmente. “(...) Estamos assistindo uma onda de especulação imobiliária (...) que agora se foca no aluguel”, explica Daniel Pardo da Associação de Moradores para um Turismo Sustentável. “Este fenômeno pôs em marcha um processo acelerado e violento de expulsão de inquilinos”, acrescenta. Onde a pressão da especulação imobiliária internacional e a indústria do turismo causaram um aumento substancial nos preços dos aluguéis, os catalães têm hoje de gastar mais de 46% dos seus salários com o aluguel. Para os jovens até os 35 anos, a taxa de esforço aumenta até os 65% (...). “Não queremos que os habitantes de Barcelona sejam substituídos por pessoas com maior poder de compra”, diz a porta-voz do Sindicato dos Inquilinos. Só em Barcelona, 15 fundos de investimento imobiliário possuem 3.000 apartamentos.
+      “Os habitantes querem a sua cidade de volta”. Reportagem de Ulrike Prinz para o Goethe-Institut Madrid. Maio/2018. Adaptado.
       Os conceitos que explicam as dinâmicas urbanas descritas no excerto são:
   alternativas:
     A:
@@ -2600,50 +2616,53 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
+  disciplina: geografia
+  assunto: geopolitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Dois eventos marcaram a diplomacia brasileira em relação ao Oriente Médio no início de 2019. Um deles foi o voto contra a resolução da ONU que pedia a desocupação militar das Colinas de Golã e sua devolução à Síria. Outro evento foi o anúncio de transferência da embaixada brasileira de Tel Aviv para Jerusalém, mesmo não tendo sido levada adiante até setembro de 2019. Em relação a esses eventos, é correto afirmar que eles representam
-      I ‐ umaaproximação do Brasil em relação à posição dos EUA.
+  - texto: Dois eventos marcaram a diplomacia brasileira em relação ao Oriente Médio no início de 2019.
+      Um deles foi o voto contra a resolução da ONU que pedia a desocupação militar das Colinas de Golã
+      e sua devolução à Síria. Outro evento foi o anúncio de transferência da embaixada brasileira de
+      Tel Aviv para Jerusalém, mesmo não tendo sido levada adiante até setembro de 2019. Em relação a
+      esses eventos, é correto afirmar que eles representam
   alternativas:
     A:
       texto: |-
-        II ‐ umpotencial distanciamento do Brasil emrelação à posição da maioria dos países do Conselho de Segurança da ONU.
-        I ‐ um distanciamento do Brasil em relação à posição da Palestina e uma aproximação em relação ao conjunto de países árabes.
+        I - uma aproximação do Brasil em relação à posição dos EUA.
+        II - um potencial distanciamento do Brasil em relação à posição da maioria dos países do Conselho de Segurança da ONU.
     B:
       texto: |-
-        II ‐ uma potencial aproximação do Brasil emrelação à posição da maioria dos países do Conselho de Segurança da ONU.
-        I ‐ um distanciamento do Brasil em relação à posição de Israel e uma aproximação em relação aos palestinos.
+        I - um distanciamento do Brasil em relação à posição da Palestina e uma aproximação em relação ao conjunto de países árabes.
+        II - uma potencial aproximação do Brasil em relação à posição da maioria dos países do Conselho de Segurança da ONU.
     C:
       texto: |-
-        II ‐ umpotencial distanciamento do Brasil emrelação à posição da maioria dos países do Conselho de Segurança da ONU.
-        I ‐ um distanciamento do Brasil em relação à posição dos EUA.
+        I - um distanciamento do Brasil em relação à posição de Israel e uma aproximação em relação aos palestinos.
+        II - um potencial distanciamento do Brasil em relação à posição da maioria dos países do Conselho de Segurança da ONU.
     D:
       texto: |-
-        II ‐ umapotencial aproximação do Brasil emrelação à posição da maioria dos países do Conselho de Segurança da ONU.
-        I ‐ umaaproximação do Brasil em relação àposição da Síria.
+        I - um distanciamento do Brasil em relação à posição dos EUA.
+        II - uma potencial aproximação do Brasil em relação à posição da maioria dos países do Conselho de Segurança da ONU.
     E:
-      texto: II ‐ um potencial distanciamento do Brasil emrelação à posição da maioria dos países do Conselho
-        de Segurança da ONU.
+      texto: |-
+        I - uma aproximação do Brasil em relação à posição da Síria.
+        II - um potencial distanciamento do Brasil em relação à posição da maioria dos países do Conselho de Segurança da ONU.
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈176–571
+  pendencias: []
 - numero: 89
-  disciplina: null
+  disciplina: geografia
+  assunto: relevo-e-solos
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      No Brasil, várias cidades registram ocupação irregular de encostas em áreas sujeitas a deslizamentos de terra (também chamados de escorregamentos). O Instituto de Pesquisas Tecnológicas (IPT) trabalha no levantamento, mapeamento, recuperação e estabilização dessas áreas de risco. Um exemplo deste trabalho foram aqueles executados desde a década de 1970 referentes aos deslizamentos dos morros de Santos e São Vicente ‐ SP, cuja região é acometida há tempos por esses problemas, inclusive com a ocorrência de vítimas fatais. Para investigar os deslizamentos de terra nas áreas serranas tropicais brasileiras, o Instituto realizou levantamentos topográficos, geológicos e geomorfológicos, estudando também a distribuição dos tipos de vegetação existentes e as categorias de ocupação urbana dos morros.
+      No Brasil, várias cidades registram ocupação irregular de encostas em áreas sujeitas a deslizamentos de terra (também chamados de escorregamentos). O Instituto de Pesquisas Tecnológicas (IPT) trabalha no levantamento, mapeamento, recuperação e estabilização dessas áreas de risco. Um exemplo deste trabalho foram aqueles executados desde a década de 1970 referentes aos deslizamentos dos morros de Santos e São Vicente-SP, cuja região é acometida há tempos por esses problemas, inclusive com a ocorrência de vítimas fatais. Para investigar os deslizamentos de terra nas áreas serranas tropicais brasileiras, o Instituto realizou levantamentos topográficos, geológicos e geomorfológicos, estudando também a distribuição dos tipos de vegetação existentes e as categorias de ocupação urbana dos morros.
       Representação de deslizamento de terra (escorregamento) na região de Santos e São Vicente
   - figura: q089-1.webp
-  - figura: q089-2.webp
-  - figura: q089-3.webp
-  - texto: Disponível em https://www.ipt.br/. Adaptado. 2019. Baseando ‐ se nas informações do texto e
-      na figura, é correto afirmar que
+  - texto: |-
+      Disponível em https://www.ipt.br/. Adaptado. 2019.
+      Baseando-se nas informações do texto e na figura, é correto afirmar que
   alternativas:
     A:
       texto: as características topográficas, geológicas e geomorfológicas de uma área de risco estão
@@ -2661,14 +2680,15 @@ questoes:
         na superfície da crosta terrestre e, portanto, não participam da escultura do relevo continental
         e do modelado.
     E:
-      texto: os escorregamentos são causados em especial pelo fato de o solo tornar ‐ se mais leve que
-        a rocha subjacente durante as chuvas prolongadas de verão, facilitando seu deslizamento ao longo
+      texto: os escorregamentos são causados em especial pelo fato de o solo tornar-se mais leve que a
+        rocha subjacente durante as chuvas prolongadas de verão, facilitando seu deslizamento ao longo
         das encostas pouco ou nada inclinadas.
   resposta: C
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
+  disciplina: geografia
+  assunto: biomas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
