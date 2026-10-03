@@ -22,7 +22,7 @@ from app.pacote.notas_corte import (
     problemas_de_publicacao,
     salvar_ano,
 )
-from app.pacote.schema import PacoteProva, Questao
+from app.pacote.schema import PADRAO_CODIGO_PROVA, PacoteProva, Questao, partes_do_codigo
 from app.pacote.sincronizar import formatar_resumo, sincronizar
 from app.pacote.validacao import formatar_relatorio, tem_bloqueante, validar_pacote
 
@@ -52,12 +52,12 @@ def _validar_um(dir_prova: Path, taxonomia: Taxonomia) -> bool:
 
 
 def _diretorios_alvo(args: argparse.Namespace) -> list[Path] | None:
-    """Sem --ano: todos os pacotes do diretorio. Com --ano: so ele (None, com erro, se faltar)."""
-    if args.ano is None:
+    """Sem --prova: todos os pacotes do diretorio. Com --prova: so ele (None, com erro, se faltar)."""
+    if args.prova is None:
         return listar_pacotes(args.data_dir)
-    dir_prova = args.data_dir / str(args.ano)
+    dir_prova = args.data_dir / args.prova
     if not dir_prova.is_dir():
-        _erro(f"Pacote do ano {args.ano} não encontrado em {args.data_dir}")
+        _erro(f"Pacote da prova {args.prova} não encontrado em {args.data_dir}")
         return None
     return [dir_prova]
 
@@ -79,17 +79,18 @@ def _validar_cortes(caminho: Path) -> bool:
 
 
 def _cortes_alvo(args: argparse.Namespace) -> list[Path]:
-    """Sem --ano: todos os arquivos de notas de corte. Com --ano: o do ano, se existir."""
-    if args.ano is None:
+    """Sem --prova: todos os arquivos de notas de corte. Com o codigo de um vestibular: o do
+    ano, se existir. Simulado oficial nao tem notas de corte."""
+    if args.prova is None:
         return arquivos_de_notas_corte(args.data_dir)
-    caminho = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.ano}.yaml"
+    caminho = args.data_dir / DIRETORIO_NOTAS_CORTE / f"{args.prova}.yaml"
     return [caminho] if caminho.is_file() else []
 
 
 def _cmd_validar(args: argparse.Namespace) -> int:
     cortes = _cortes_alvo(args)
     # Ano so com notas de corte (sem pacote de prova, ex.: 2021): valida so os cortes
-    so_cortes = args.ano is not None and cortes and not (args.data_dir / str(args.ano)).is_dir()
+    so_cortes = args.prova is not None and cortes and not (args.data_dir / args.prova).is_dir()
     diretorios = [] if so_cortes else _diretorios_alvo(args)
     if diretorios is None:
         return 1
@@ -140,7 +141,7 @@ def _linha_questao(questao: Questao) -> str:
 def formatar_assuntos(pacote: PacoteProva, taxonomia: Taxonomia) -> str:
     """Classificacao por disciplina e assunto, para o curador revisar (specs/06 §2.5)."""
     sem_assunto = [q for q in pacote.questoes if q.assunto is None]
-    linhas = [f"== {pacote.ano} ({pacote.status}) — {len(pacote.questoes)} questões, "
+    linhas = [f"== {pacote.codigo} ({pacote.status}) — {len(pacote.questoes)} questões, "
               f"{len(sem_assunto)} sem assunto"]
     for disciplina in sorted(Disciplina, key=lambda d: NOMES_DISCIPLINAS[d]):
         questoes = [q for q in pacote.questoes if q.disciplina == disciplina]
@@ -197,13 +198,13 @@ ESCALA_RENDER = 2.0  # 144 dpi (specs/01 §2.4, item 8)
 
 
 def _dir_cache(args: argparse.Namespace) -> Path:
-    return args.data_dir.parent / "_cache" / str(args.ano)
+    return args.data_dir.parent / "_cache" / args.prova
 
 
 def _pdf_em_cache(args: argparse.Namespace) -> Path | None:
     pdf = _dir_cache(args) / "prova.pdf"
     if not pdf.is_file():
-        _erro(f"PDF da prova {args.ano} não está em cache ({pdf}). Rode `baixar` antes.")
+        _erro(f"PDF da prova {args.prova} não está em cache ({pdf}). Rode `baixar` antes.")
         return None
     return pdf
 
@@ -249,7 +250,7 @@ def _cmd_baixar(args: argparse.Namespace) -> int:
 
     try:
         destino = baixar(
-            args.ano, args.prova_url, args.gabarito_url, args.versao,
+            args.prova, args.prova_url, args.gabarito_url, args.versao,
             args.data_dir.parent / "_cache",
         )
     except (ErroDownload, OSError) as erro:
@@ -315,7 +316,7 @@ def _cmd_recortar(args: argparse.Namespace) -> int:
         _erro(f"bbox inválida: use x0,y0,x1,y1 dentro de 0–{largura} × 0–{altura}")
         return 1
     imagem = renderizar_regiao(pdf, args.pagina, bbox, ESCALA_RENDER)
-    destino = args.data_dir / str(args.ano) / DIR_FIGURAS / f"{args.nome}.webp"
+    destino = args.data_dir / args.prova / DIR_FIGURAS / f"{args.nome}.webp"
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_bytes(para_webp(imagem))
     print(f"Figura gravada em {destino}\nCole no prova.yaml:\n- figura: {args.nome}.webp")
@@ -328,33 +329,34 @@ PENDENCIAS_ESTRUTURAIS = {"V02", "V03", "V06", "V08"}
 def _cmd_extrair(args: argparse.Namespace) -> int:
     from app.pacote.leitura import ARQUIVO_PACOTE, salvar_pacote
     from app.pacote.schema import Fonte, PacoteProva
-    from ingestao.familias import FamiliaNaoRegistrada, familia_do_ano
+    from ingestao.familias import FamiliaNaoRegistrada, familia_da_prova
     from ingestao.gabarito import obter_parser_gabarito
     from ingestao.gabarito.familia_2025 import ErroGabarito
     from ingestao.layouts import obter_parser_layout
 
     cache = _dir_cache(args)
     if not (cache / "fonte.json").is_file():
-        _erro(f"Sem PDFs em cache para {args.ano} ({cache}). Rode `baixar` antes.")
+        _erro(f"Sem PDFs em cache para {args.prova} ({cache}). Rode `baixar` antes.")
         return 1
     try:
-        familia = familia_do_ano(args.ano)
+        familia = familia_da_prova(args.prova)
     except FamiliaNaoRegistrada as erro:
         _erro(str(erro))
         return 1
-    dir_prova = args.data_dir / str(args.ano)
+    dir_prova = args.data_dir / args.prova
     if (dir_prova / ARQUIVO_PACOTE).exists() and not args.forcar:
         _erro(f"{dir_prova / ARQUIVO_PACOTE} já existe e pode ter revisão manual. "
               "Use --forcar para sobrescrever.")
         return 1
 
     fonte = json.loads((cache / "fonte.json").read_text(encoding="utf-8"))
+    parser_gabarito = obter_parser_gabarito(args.prova)
     try:
-        gabarito = obter_parser_gabarito(args.ano).extrair(cache / "gabarito.pdf", fonte["versao"])
+        gabarito = parser_gabarito.extrair(cache / "gabarito.pdf", fonte["versao"])
     except ErroGabarito as erro:
         _erro(f"Gabarito: {erro}")
         return 1
-    resultado = obter_parser_layout(args.ano).extrair(cache / "prova.pdf")
+    resultado = obter_parser_layout(args.prova).extrair(cache / "prova.pdf")
 
     for q in resultado.questoes:
         marcacao = gabarito.get(q.numero)
@@ -365,9 +367,13 @@ def _cmd_extrair(args: argparse.Namespace) -> int:
         else:
             q.resposta = marcacao
 
+    ano, edicao = partes_do_codigo(args.prova)
     pacote = PacoteProva(
-        ano=args.ano,
+        ano=ano,
+        tipo="vestibular" if edicao is None else "simulado",
+        edicao=edicao,
         versao=fonte["versao"],
+        total_questoes=parser_gabarito.total,
         status="rascunho",
         fonte=Fonte(url_prova=fonte["url_prova"], url_gabarito=fonte["url_gabarito"],
                     familia_layout=familia),
@@ -445,13 +451,27 @@ def _ano(valor: str) -> int:
     return ano
 
 
+def _codigo(valor: str) -> str:
+    """Codigo da prova (ADR-015): AAAA no vestibular, AAAAsN no simulado oficial (CR-011)."""
+    if not re.match(PADRAO_CODIGO_PROVA, valor) or not 1977 <= int(valor[:4]) <= 2100:
+        raise argparse.ArgumentTypeError(
+            "Código de prova inválido: use AAAA (vestibular) ou AAAAsN (simulado oficial, ex.: 2027s1)"
+        )
+    return valor
+
+
+def _alvo_prova(comando: argparse.ArgumentParser, **opcoes) -> None:
+    # --ano continua aceito: os comandos documentados ate o CR-010 usam `--ano AAAA`
+    comando.add_argument("--prova", "--ano", dest="prova", type=_codigo, metavar="CODIGO", **opcoes)
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m ingestao", description=__doc__)
     sub = parser.add_subparsers(dest="comando", required=True)
 
     validar = sub.add_parser("validar", help="Valida a taxonomia e os pacotes (regras V01-V11)")
     alvo = validar.add_mutually_exclusive_group(required=True)
-    alvo.add_argument("--ano", type=_ano)
+    _alvo_prova(alvo)
     alvo.add_argument("--todas", action="store_true")
     validar.set_defaults(func=_cmd_validar)
 
@@ -464,11 +484,11 @@ def _parser() -> argparse.ArgumentParser:
     importar.set_defaults(func=_cmd_importar)
 
     assuntos = sub.add_parser("assuntos", help="Relatório da classificação por assunto (revisão)")
-    assuntos.add_argument("--ano", type=_ano, help="Só este ano (padrão: todos os pacotes)")
+    _alvo_prova(assuntos, help="Só esta prova (padrão: todos os pacotes)")
     assuntos.set_defaults(func=_cmd_assuntos)
 
     baixar = sub.add_parser("baixar", help="Baixa os PDFs de prova e gabarito para data/_cache")
-    baixar.add_argument("--ano", type=_ano, required=True)
+    _alvo_prova(baixar, required=True)
     baixar.add_argument("--prova-url", required=True)
     baixar.add_argument("--gabarito-url", required=True)
     baixar.add_argument("--versao", default="V1")
@@ -482,20 +502,20 @@ def _parser() -> argparse.ArgumentParser:
     cortes.set_defaults(func=_cmd_cortes)
 
     preview = sub.add_parser("preview", help="Renderiza uma página com grade de coordenadas")
-    preview.add_argument("--ano", type=_ano, required=True)
+    _alvo_prova(preview, required=True)
     preview.add_argument("--pagina", type=int, required=True)
     preview.add_argument("--grade", type=int, default=50, help="Espaço da grade em pontos PDF")
     preview.set_defaults(func=_cmd_preview)
 
     recortar = sub.add_parser("recortar", help="Recorta uma região da página como figura WebP")
-    recortar.add_argument("--ano", type=_ano, required=True)
+    _alvo_prova(recortar, required=True)
     recortar.add_argument("--pagina", type=int, required=True)
     recortar.add_argument("--bbox", required=True, help="x0,y0,x1,y1 em pontos PDF")
     recortar.add_argument("--nome", required=True, help="qNNN-k ou tbNN-k (sem extensão)")
     recortar.set_defaults(func=_cmd_recortar)
 
     extrair = sub.add_parser("extrair", help="Extrai a prova em cache para um pacote rascunho")
-    extrair.add_argument("--ano", type=_ano, required=True)
+    _alvo_prova(extrair, required=True)
     extrair.add_argument("--forcar", action="store_true",
                          help="Sobrescreve prova.yaml existente (perde a revisão manual)")
     extrair.set_defaults(func=_cmd_extrair)

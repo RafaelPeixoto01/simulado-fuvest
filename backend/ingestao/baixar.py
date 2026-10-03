@@ -1,4 +1,4 @@
-"""Download dos PDFs oficiais para data/_cache/AAAA/ (RF-001)."""
+"""Download dos PDFs oficiais para data/_cache/CODIGO/ (RF-001; codigo da prova: ADR-015)."""
 
 import json
 import urllib.request
@@ -31,7 +31,7 @@ def obter_pdf(url: str, obter: Callable[[str], bytes] = _obter_http) -> bytes:
 
 
 def baixar(
-    ano: int,
+    codigo: str,
     url_prova: str,
     url_gabarito: str,
     versao: str,
@@ -46,10 +46,10 @@ def baixar(
         nome: obter_pdf(url, obter) for nome, url in (("prova.pdf", url_prova), ("gabarito.pdf", url_gabarito))
     }
 
-    destino = cache_dir / str(ano)
+    destino = cache_dir / codigo
     destino.mkdir(parents=True, exist_ok=True)
     for nome, dados in conteudos.items():
         (destino / nome).write_bytes(dados)
-    fonte = {"ano": ano, "versao": versao, "url_prova": url_prova, "url_gabarito": url_gabarito}
+    fonte = {"prova": codigo, "versao": versao, "url_prova": url_prova, "url_gabarito": url_gabarito}
     (destino / "fonte.json").write_text(json.dumps(fonte, indent=2), encoding="utf-8")
     return destino

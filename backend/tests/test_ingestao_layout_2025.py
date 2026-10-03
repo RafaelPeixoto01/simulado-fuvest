@@ -12,17 +12,17 @@ PDFS = Path(__file__).parent / "fixtures" / "pdfs"
 
 @pytest.fixture(scope="module")
 def p03():
-    return obter_parser_layout(2025).extrair(PDFS / "fuvest2025_v1_p03.pdf")
+    return obter_parser_layout("2025").extrair(PDFS / "fuvest2025_v1_p03.pdf")
 
 
 @pytest.fixture(scope="module")
 def p06():
-    return obter_parser_layout(2025).extrair(PDFS / "fuvest2025_v1_p06.pdf")
+    return obter_parser_layout("2025").extrair(PDFS / "fuvest2025_v1_p06.pdf")
 
 
 @pytest.fixture(scope="module")
 def p23():
-    return obter_parser_layout(2025).extrair(PDFS / "fuvest2025_v1_p23.pdf")
+    return obter_parser_layout("2025").extrair(PDFS / "fuvest2025_v1_p23.pdf")
 
 
 def _questao(resultado, numero):

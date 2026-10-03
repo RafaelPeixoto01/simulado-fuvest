@@ -79,6 +79,12 @@ def codigo_da_prova(ano: int, edicao: int | None) -> str:
     return f"{ano}" if edicao is None else f"{ano}s{edicao}"
 
 
+def partes_do_codigo(codigo: str) -> tuple[int, int | None]:
+    """Ex.: "2025" -> (2025, None); "2027s1" -> (2027, 1). Codigo ja validado (PADRAO_CODIGO_PROVA)."""
+    ano, _, edicao = codigo.partition("s")
+    return int(ano), int(edicao) if edicao else None
+
+
 def rotulo_da_prova(ano: int, edicao: int | None) -> str:
     """Origem exibida (RN-013): "FUVEST 2025" ou "Simulado FUVEST 2027 · 1ª edição"."""
     return f"FUVEST {ano}" if edicao is None else f"Simulado FUVEST {ano} · {edicao}ª edição"

@@ -49,6 +49,19 @@ ALTERNATIVA = re.compile(r"^\(([A-E])\)\s*")
 CID = re.compile(r"\(cid:(\d+)\)")
 
 
+@dataclass(frozen=True)
+class Variante:
+    """O que muda entre as familias derivadas deste layout (familia 2027, CR-011)."""
+
+    # Numero da questao: 2 digitos nesta faixa de tamanho (a fonte muda de ano para ano)
+    tamanho_marcador: tuple[float, float] = (12.0, 14.0)
+    # Glifos sem mapeamento que sao so espaco: nao viram pendencia de "simbolos"
+    cids_espaco: frozenset[int] = frozenset({3})
+
+
+VARIANTE_2025 = Variante()
+
+
 @dataclass
 class Elemento:
     pagina: int
@@ -115,7 +128,8 @@ def _alerta(pagina: int, top: float, rotulo: str) -> Elemento:
     return Elemento(pagina, "alerta", "esq", 0, top, 0, top, texto=rotulo)
 
 
-def _elementos_de_texto(pagina: int, palavras: list[dict], meio: float) -> list[Elemento]:
+def _elementos_de_texto(pagina: int, palavras: list[dict], meio: float,
+                        variante: Variante) -> list[Elemento]:
     elementos = []
     for linha in _agrupar_em_linhas(palavras):
         for segmento in _segmentos(linha, meio):
@@ -125,7 +139,7 @@ def _elementos_de_texto(pagina: int, palavras: list[dict], meio: float) -> list[
             if not normais:
                 continue
             bruto = " ".join(w["text"] for w in normais)
-            if any(int(c) != 3 for c in CID.findall(bruto)):
+            if any(int(c) not in variante.cids_espaco for c in CID.findall(bruto)):
                 elementos.append(_alerta(pagina, segmento[0]["top"], SIMBOLOS))
             texto = limpar_texto(bruto)
             if not texto:
@@ -194,7 +208,7 @@ def _ordem_de_leitura(elementos: list[Elemento]) -> list[Elemento]:
     return saida
 
 
-def _elementos_da_pagina(page, pagina: int) -> list[Elemento]:
+def _elementos_da_pagina(page, pagina: int, variante: Variante) -> list[Elemento]:
     meio = float(page.width) / 2
     imagens = [
         (i["x0"], i["top"], i["x1"], i["bottom"])
@@ -206,9 +220,10 @@ def _elementos_da_pagina(page, pagina: int) -> list[Elemento]:
         if TOPO <= w["top"] and w["bottom"] <= BASE
     ]
     # Numero da questao: 2 digitos em 12-14pt (a fonte muda de ano para ano)
+    menor, maior = variante.tamanho_marcador
     marcadores = [
         w for w in palavras
-        if w["text"].isdigit() and len(w["text"]) == 2 and 12 <= w["size"] <= 14
+        if w["text"].isdigit() and len(w["text"]) == 2 and menor <= w["size"] <= maior
     ]
     chaves = [w for w in palavras if w["text"] in "{}" and w["size"] < TAMANHO_MINIMO + 1]
     texto = [
@@ -224,7 +239,7 @@ def _elementos_da_pagina(page, pagina: int) -> list[Elemento]:
     elementos += [
         Elemento(pagina, "imagem", _lado(x0, x1, meio), x0, t, x1, b) for x0, t, x1, b in imagens
     ]
-    elementos += _elementos_de_texto(pagina, texto, meio)
+    elementos += _elementos_de_texto(pagina, texto, meio, variante)
     elementos += _elementos_vetoriais(page, pagina, texto, imagens, meio)
 
     # Borda direita de cada coluna (para distinguir linha cheia de linha curta)
@@ -358,11 +373,13 @@ class _Montador:
 
 class ParserLayout2025:
     nome = "familia_2025"
+    variante = VARIANTE_2025
 
     def extrair(self, pdf_path: Path) -> ResultadoExtracao:
         with pdfplumber.open(pdf_path) as pdf:
             elementos = [
-                e for n, page in enumerate(pdf.pages, start=1) for e in _elementos_da_pagina(page, n)
+                e for n, page in enumerate(pdf.pages, start=1)
+                for e in _elementos_da_pagina(page, n, self.variante)
             ]
         brutos_q, brutos_tb = _segmentar(elementos)
 
