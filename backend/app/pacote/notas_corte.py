@@ -23,9 +23,12 @@ PADRAO_FONTE = r"^https://www\.fuvest\.br/\S+\.pdf$"  # PDF do acervo oficial
 log = logging.getLogger("notas_corte")
 
 
+ANO_FORMATO_80 = 2027  # primeira 1a fase com 80 questoes (Resolucao CoG 9008/2026, art. 11)
+
+
 def pontos_do_ano(ano: int) -> int:
     """Pontos da 1a fase de um ano, para o rascunho do extrator: o arquivo grava o valor."""
-    return 80 if ano >= 2027 else 90
+    return 80 if ano >= ANO_FORMATO_80 else 90
 
 
 def minimo_fuvest(pontos_prova: int) -> int:
@@ -84,6 +87,8 @@ class NotasCorteAno(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     ano: int = Field(ge=2000, le=2100)
+    # Ate 2026 vale 90 e pode faltar (os arquivos anteriores ao CR-011); de 2027 em diante e
+    # obrigatorio no arquivo, para um ano de 80 pontos nunca ser lido como de 90
     pontos_prova: PontosProva = 90
     status: Literal["rascunho", "publicada"]
     fonte: str = Field(pattern=PADRAO_FONTE)
@@ -92,7 +97,11 @@ class NotasCorteAno(BaseModel):
 
     @model_validator(mode="after")
     def _c04_faixa_do_ano(self) -> "NotasCorteAno":
-        """Corte e maximo entre o minimo da FUVEST e os pontos da prova daquele ano."""
+        """Pontos da prova coerentes com o ano; corte e maximo entre o minimo da FUVEST e eles."""
+        if self.ano < ANO_FORMATO_80 and self.pontos_prova != 90:
+            raise ValueError(f"C04: até {ANO_FORMATO_80 - 1} a 1ª fase vale 90 pontos (pontos_prova)")
+        if self.ano >= ANO_FORMATO_80 and "pontos_prova" not in self.model_fields_set:
+            raise ValueError(f"C04: a partir de {ANO_FORMATO_80}, informe pontos_prova (80 ou 90)")
         minimo = minimo_fuvest(self.pontos_prova)
         for carreira in self.carreiras:
             for chave in CHAVES_MODALIDADES:
@@ -169,7 +178,7 @@ _Dumper.add_representer(
 def salvar_ano(notas: NotasCorteAno, caminho: Path) -> None:
     """Grava em UTF-8 com LF (no Windows o write_text traduziria para CRLF)."""
     dados = notas.model_dump(mode="json")
-    if dados["pontos_prova"] == 90:
+    if notas.ano < ANO_FORMATO_80:
         # Os anos ate 2026 continuam com as chaves de antes do CR-011 ao serem regravados
         del dados["pontos_prova"]
     for carreira in dados["carreiras"]:

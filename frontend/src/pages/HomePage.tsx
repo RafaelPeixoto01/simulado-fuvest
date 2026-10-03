@@ -18,7 +18,7 @@ import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Catalogo } from '../types'
 import { primeiroNomeOuNada } from '../utils/format'
-import { QUESTOES_PROVA_COMPLETA } from '../utils/formato'
+import { QUESTOES_PROVA_COMPLETA } from '../utils/formatoProva'
 import { formatarRestante, restanteMs } from '../utils/tempo'
 
 /** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). Desde o
@@ -212,6 +212,11 @@ export function HomePage() {
   const anos = provas.filter((p) => p.tipo === 'vestibular').map((p) => p.ano)
   const simulados = provas.filter((p) => p.tipo === 'simulado').length
   const periodo = anos.length > 1 ? ` (${Math.min(...anos)} a ${Math.max(...anos)})` : anos.length ? ` (${anos[0]})` : ''
+  // "N questões de 5 provas (2020 a 2025) e 2 simulados oficiais"; só com simulados, sem "0 provas"
+  const partes = [
+    anos.length > 0 && `${anos.length} ${anos.length === 1 ? 'prova' : 'provas'}${periodo}`,
+    simulados > 0 && `${simulados} ${simulados === 1 ? 'simulado oficial' : 'simulados oficiais'}`,
+  ].filter(Boolean)
 
   return (
     <div>
@@ -222,10 +227,8 @@ export function HomePage() {
       </h1>
       {catalogo.data && catalogo.data.provas.length > 0 && (
         <p className="mt-3 max-w-2xl text-lg text-tinta-suave">
-          {catalogo.data.total_questoes} questões de {anos.length} {anos.length === 1 ? 'prova' : 'provas'}
-          {periodo}
-          {simulados > 0 && ` e ${simulados} ${simulados === 1 ? 'simulado oficial' : 'simulados oficiais'}`}. O
-          simulado em andamento fica salvo neste navegador.
+          {catalogo.data.total_questoes} questões de {partes.join(' e ')}. O simulado em andamento fica salvo neste
+          navegador.
         </p>
       )}
 

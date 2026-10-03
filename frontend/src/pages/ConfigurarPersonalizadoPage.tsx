@@ -9,7 +9,7 @@ import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { descricaoPersonalizado } from '../simulado/novoSimulado'
 import type { Catalogo, Disciplina } from '../types'
-import { anosDasProvas, SEGUNDOS_POR_QUESTAO } from '../utils/formato'
+import { anosDasProvas, SEGUNDOS_POR_QUESTAO } from '../utils/formatoProva'
 import { formatarDuracao } from '../utils/tempo'
 
 function Formulario({ catalogo }: { catalogo: Catalogo }) {
@@ -116,7 +116,7 @@ function Formulario({ catalogo }: { catalogo: Catalogo }) {
         </label>
         <p className="mt-1 text-sm text-tinta-suave">
           {cronometro && Number.isInteger(quantidade) && quantidade > 0
-            ? `Tempo: ${formatarDuracao(quantidade * SEGUNDOS_POR_QUESTAO * 1000)}, o mesmo ritmo da prova (3 min 45 s por questão). Dá para pausar.`
+            ? `Tempo: ${formatarDuracao(quantidade * SEGUNDOS_POR_QUESTAO * 1000)}, o mesmo ritmo da prova (${formatarDuracao(SEGUNDOS_POR_QUESTAO * 1000)} por questão). Dá para pausar.`
             : 'Sem limite de tempo.'}
         </p>
       </div>

@@ -29,6 +29,14 @@ def test_limpar_texto_remove_artefatos_cid_e_espacos():
     assert limpar_texto(bruto) == "CONCURSO VESTIBULAR FUVEST 2015"
 
 
+def test_limpar_texto_com_glifos_de_espaco_da_variante():
+    """CR-011: na 1a edicao do simulado de 2027 o espaco e o glifo (cid:172), as vezes grudado."""
+    bruto = "Certas(cid:172)narrativas(cid:172) convidam(cid:12)"
+
+    assert limpar_texto(bruto, frozenset({3, 172})) == "Certas narrativas convidam"
+    assert limpar_texto(bruto) == "Certasnarrativas convidam"  # padrao: so o (cid:3) e espaco
+
+
 def test_linhas_cheias_viram_um_paragrafo():
     linhas = [_linha("Considerando a charge,", top=0), _linha("é correto afirmar:", x1=480, top=12)]
 

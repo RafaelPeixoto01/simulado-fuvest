@@ -72,6 +72,8 @@ def notas_corte_sinteticas(ano: int) -> NotasCorteAno:
 
     return NotasCorteAno(
         ano=ano,
+        # anos ficticios depois de 2027: o arquivo declara a escala (aqui, 90, como ate 2026)
+        pontos_prova=90,
         status="publicada",
         fonte=f"https://www.fuvest.br/wp-content/uploads/fuvest_{ano}_notas_de_corte.pdf",
         pendencias=[],

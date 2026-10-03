@@ -1,5 +1,7 @@
 """BT-092 a BT-096 (CR-011): ids e figuras pelo codigo da prova, vitrine e cortes de 80 pontos."""
 
+import re
+
 import pytest
 import yaml
 
@@ -137,3 +139,43 @@ def test_api_e_sessao_trazem_os_pontos_da_prova(client_logado, base_sintetica):
     )
     assert resposta.status_code == 200 and resposta.json()["pontos_prova"] == 80
     assert client_logado.get("/api/sessao").json()["usuario"]["carreira_alvo"]["pontos_prova"] == 80
+
+
+def test_pontos_da_prova_coerentes_com_o_ano(tmp_path):
+    """Revisao de codigo do CR-011: de 2027 em diante o arquivo declara a escala (um ano de 80
+    nunca e lido como de 90 por falta da chave); ate 2026 so vale 90."""
+    sem_chave = notas_corte_sinteticas(2027).model_dump(mode="json")
+    del sem_chave["pontos_prova"]
+    with pytest.raises(NotasCorteInvalidas, match="informe pontos_prova"):
+        carregar_ano(_gravar(tmp_path, sem_chave))
+
+    oitenta_em_2025 = _cortes_de_80(2025)
+    with pytest.raises(NotasCorteInvalidas, match="até 2026 a 1ª fase vale 90"):
+        carregar_ano(_gravar(tmp_path, oitenta_em_2025))
+
+    assert carregar_ano(_gravar(tmp_path, _cortes_de_80(2027))).pontos_prova == 80
+
+
+def test_questoes_de_varias_provas_sem_consulta_extra_da_prova(client, app, base_com_simulado):
+    """Revisao de codigo do CR-011: a origem vem da prova carregada junto (joinedload), sem uma
+    consulta a `provas` por prova."""
+    from sqlalchemy import event
+
+    comandos: list[str] = []
+
+    def registrar(_conn, _cursor, comando, *_args):
+        comandos.append(comando)
+
+    event.listen(app.state.engine, "before_cursor_execute", registrar)
+    try:
+        resposta = client.get("/api/questoes", params={"ids": "2098-001,2099-001,2099s1-001"})
+    finally:
+        event.remove(app.state.engine, "before_cursor_execute", registrar)
+
+    assert resposta.status_code == 200
+    assert {q["origem"] for q in resposta.json()["questoes"]} == {
+        "FUVEST 2098", "FUVEST 2099", "Simulado FUVEST 2099 · 1ª edição",
+    }
+    # A carga preguicosa seria um "SELECT ... FROM provas WHERE provas.codigo = ?" por prova
+    so_da_prova = [c for c in comandos if re.search(r"FROM provas\s+WHERE", c)]
+    assert so_da_prova == []

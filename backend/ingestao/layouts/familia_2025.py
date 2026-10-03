@@ -23,7 +23,7 @@ import pdfplumber
 from app.pacote.schema import LETRAS, Alternativa, Bloco, Questao, TextoBase
 from ingestao.figuras import para_webp
 from ingestao.layouts.base import ResultadoExtracao
-from ingestao.pdf_util import Linha, juntar_linhas, limpar_texto, renderizar_pagina
+from ingestao.pdf_util import CIDS_ESPACO, Linha, juntar_linhas, limpar_texto, renderizar_pagina
 
 TOPO = 35.0  # abaixo do cabecalho "Concurso Vestibular FUVEST 2025 – Prova V1"
 BASE = 805.0  # acima do fio do rodape
@@ -56,7 +56,7 @@ class Variante:
     # Numero da questao: 2 digitos nesta faixa de tamanho (a fonte muda de ano para ano)
     tamanho_marcador: tuple[float, float] = (12.0, 14.0)
     # Glifos sem mapeamento que sao so espaco: nao viram pendencia de "simbolos"
-    cids_espaco: frozenset[int] = frozenset({3})
+    cids_espaco: frozenset[int] = CIDS_ESPACO
 
 
 VARIANTE_2025 = Variante()
@@ -141,7 +141,7 @@ def _elementos_de_texto(pagina: int, palavras: list[dict], meio: float,
             bruto = " ".join(w["text"] for w in normais)
             if any(int(c) not in variante.cids_espaco for c in CID.findall(bruto)):
                 elementos.append(_alerta(pagina, segmento[0]["top"], SIMBOLOS))
-            texto = limpar_texto(bruto)
+            texto = limpar_texto(bruto, variante.cids_espaco)
             if not texto:
                 continue
             x0, x1 = normais[0]["x0"], normais[-1]["x1"]

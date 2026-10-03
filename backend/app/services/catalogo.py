@@ -29,13 +29,14 @@ def distribuicao_completa(
     Proporcao, e nao contagem: as provas tem 90 (ate 2026) ou 80 questoes (desde 2027).
     Empate de resto -> ordem alfabetica do slug (determinismo).
     """
-    contagens = [c for c in contagens_por_prova if sum(c.values()) > 0]
-    if not contagens:
+    # (contagem, total da prova); prova sem questoes nao tem proporcao (protege a divisao)
+    provas = [(c, sum(c.values())) for c in contagens_por_prova]
+    provas = [(c, n) for c, n in provas if n > 0]
+    if not provas:
         return {}
-    n = len(contagens)
-    disciplinas = sorted({d for contagem in contagens for d in contagem})
+    disciplinas = sorted({d for contagem, _ in provas for d in contagem})
     medias = {
-        d: sum((Fraction(c.get(d, 0), sum(c.values())) for c in contagens), Fraction(0)) * total / n
+        d: sum((Fraction(c.get(d, 0), n) for c, n in provas), Fraction(0)) * total / len(provas)
         for d in disciplinas
     }
     alvo = {d: int(m) for d, m in medias.items()}

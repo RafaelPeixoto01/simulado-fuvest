@@ -53,6 +53,16 @@ class GerarAno(BaseModel):
     modo: Literal["ano"]
     prova: CodigoProva
 
+    @model_validator(mode="before")
+    @classmethod
+    def _ano_antigo(cls, dados: Any) -> Any:
+        # Antes do CR-011 o SPA mandava {"modo": "ano", "ano": 2025}: uma aba aberta durante o
+        # deploy continua funcionando. O ano e o codigo do vestibular daquele ano
+        if isinstance(dados, dict) and "prova" not in dados and isinstance(dados.get("ano"), int):
+            sem_ano = {chave: valor for chave, valor in dados.items() if chave != "ano"}
+            return {**sem_ano, "prova": str(dados["ano"])}
+        return dados
+
 
 class GerarTreino(_Intervalo):
     modo: Literal["treino"]

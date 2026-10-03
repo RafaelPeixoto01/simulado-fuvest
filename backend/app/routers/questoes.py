@@ -3,7 +3,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.dependencias import exigir_acesso, obter_sessao
 from app.models import Questao
@@ -26,7 +26,8 @@ def questoes_por_id(
     if not 1 <= len(pedidos) <= MAX_IDS or not all(ID_QUESTAO.match(i) for i in pedidos):
         raise HTTPException(422, detail="Informe de 1 a 90 ids válidos")
 
-    encontradas = {q.id: q for q in sessao.scalars(select(Questao).where(Questao.id.in_(pedidos)))}
+    consulta = select(Questao).options(joinedload(Questao.prova)).where(Questao.id.in_(pedidos))
+    encontradas = {q.id: q for q in sessao.scalars(consulta)}
     na_ordem = [encontradas[i] for i in pedidos if i in encontradas]
     return QuestoesResponse(
         questoes=[questao_publica(q) for q in na_ordem],

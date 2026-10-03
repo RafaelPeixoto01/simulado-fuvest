@@ -79,9 +79,16 @@ def test_prova_de_ano_inexistente_404(client, base_sintetica):
 
 
 def test_prova_de_um_ano_com_codigo_invalido_422(client, base_sintetica):
-    """CR-011: so codigos AAAA ou AAAAsN; o campo antigo `ano` nao e mais aceito."""
-    for corpo in ({"prova": "2099S1"}, {"prova": "99"}, {"prova": "2099s0"}, {"ano": 2099}):
-        assert _gerar(client, modo="ano", **corpo).status_code == 422
+    """CR-011: so codigos AAAA ou AAAAsN."""
+    for corpo in ({"prova": "2099S1"}, {"prova": "99"}, {"prova": "2099s0"}, {"ano": "2099"}, {}):
+        assert _gerar(client, modo="ano", **corpo).status_code == 422, corpo
+
+
+def test_prova_de_um_ano_aceita_o_ano_do_pedido_antigo(client, base_sintetica):
+    """Revisao de codigo do CR-011: a aba aberta antes do deploy manda {"ano": 2099}."""
+    dados = _gerar(client, modo="ano", ano=2099).json()
+
+    assert len(dados["questoes"]) == 90 and dados["questoes"][0]["id"] == "2099-001"
 
 
 def test_treino_exclui_vistas(client, base_sintetica):

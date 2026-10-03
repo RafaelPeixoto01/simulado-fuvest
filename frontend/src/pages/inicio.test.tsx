@@ -62,6 +62,16 @@ describe('Início (RF-008)', () => {
     )
   })
 
+  it('só com simulados oficiais, não fala em "0 provas" (revisão de código do CR-011)', async () => {
+    instalarApiFalsa({
+      'GET /api/catalogo': () => json(200, { ...CATALOGO, provas: [provaFalsa('2027s1')], total_questoes: 79 }),
+    })
+
+    renderizar(<App />)
+
+    expect(await screen.findByText(/^79 questões de 1 simulado oficial\./)).toBeInTheDocument()
+  })
+
   it('prova completa fica indisponível com base pequena', async () => {
     instalarApiFalsa({
       'GET /api/catalogo': () => json(200, { ...CATALOGO, total_questoes: 88, completa_disponivel: false }),

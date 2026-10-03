@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from typing import TypeVar
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, contains_eager, joinedload
 
 from app.models import Prova, Questao
 from app.pacote.validacao import TOTAL_PROVA_COMPLETA
@@ -77,8 +77,10 @@ def _validas(sessao: Session, ano_inicio: int | None = None,
              ano_fim: int | None = None) -> list[Questao]:
     """Nao anuladas; o intervalo e pelo ano FUVEST de referencia da prova (simulados
     oficiais de 2027 entram em 2027 — CR-011, P4)."""
+    # contains_eager: a prova do join ja serve a serializacao (origem), sem consulta extra
     consulta = (
-        select(Questao).join(Questao.prova).where(Questao.anulada.is_(False)).order_by(Questao.id)
+        select(Questao).join(Questao.prova).options(contains_eager(Questao.prova))
+        .where(Questao.anulada.is_(False)).order_by(Questao.id)
     )
     if ano_inicio:
         consulta = consulta.where(Prova.ano >= ano_inicio)
@@ -127,7 +129,8 @@ def _ano(sessao: Session, pedido: GerarAno, semente: int) -> SimuladoGerado:
     # Todas as questoes da prova (90 ou 80), na ordem original e com as anuladas
     # (RN-002: contam como acerto)
     questoes = list(sessao.scalars(
-        select(Questao).where(Questao.prova_codigo == pedido.prova).order_by(Questao.numero)
+        select(Questao).options(joinedload(Questao.prova))
+        .where(Questao.prova_codigo == pedido.prova).order_by(Questao.numero)
     ))
     return SimuladoGerado("ano", questoes, TEMPO_PROVA_S, False, len(questoes), semente)
 

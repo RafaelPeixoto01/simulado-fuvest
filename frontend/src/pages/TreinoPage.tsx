@@ -10,7 +10,7 @@ import { useCatalogo } from '../hooks/useCatalogo'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { api, type ApiError } from '../services/api'
 import type { Catalogo, Disciplina, ItemCorrigido, Letra, TextoBase } from '../types'
-import { anosDasProvas } from '../utils/formato'
+import { anosDasProvas } from '../utils/formatoProva'
 
 const BUSCAR_QUANDO_FALTAM = 3
 

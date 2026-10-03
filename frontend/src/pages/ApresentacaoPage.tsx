@@ -9,7 +9,7 @@ import { CARTAO, LINK } from '../components/estilos'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { useVitrine } from '../hooks/useVitrine'
 import type { Vitrine } from '../types'
-import { QUESTOES_PROVA_COMPLETA } from '../utils/formato'
+import { QUESTOES_PROVA_COMPLETA } from '../utils/formatoProva'
 
 const MODOS = [
   ['Prova completa', `${QUESTOES_PROVA_COMPLETA} questões na distribuição da prova real, com 5 horas.`],
