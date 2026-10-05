@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-02  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -286,7 +286,7 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — 9 achados: 8 corrigidos, 1 justificado (abaixo)
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: contratos de endpoints alterados (formatos de id e de código, rota de figuras com caminho novo) — abaixo
 - [x] Documentos afetados foram atualizados — PRD v6.0, Arquitetura v1.11 (ADR-015, ADR-006 emendado), 03-SPEC v1.11, specs 01 (v1.3), 02 (v1.3), 03 (v1.11), 04 (v1.8), 07 (v1.6) e 08 (v1.1), Plano, Deploy Guide v1.6, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; em produção, a migration aplicada, as 5 provas sincronizadas e a Prova completa com 80 questões — **pendente do push**
+- [x] CI verde na branch e em `master`; em produção, a migration aplicada, as 5 provas sincronizadas e a Prova completa com 80 questões — branch verde (run 37357127787), `master` verde no merge `cc1f1c9` (run 37357559605). Em produção (05/10): log da Railway com `Running upgrade 004 -> 005` e `Sincronizadas: 2020, 2022, 2023, 2024, 2025`; `/api/health` com 5 provas; vitrine com 449 questões e os 5 anos; catálogo e geração sem cookie → 401; figura de 2025 → 200 e `/figuras/2025S1/...` → 404. No container (Deploy Guide §8.3, só leitura): distribuição somando 80, Prova completa com 80 questões e 18000 s, Prova de um ano de 2025 com 90, Personalizado de 4 com 900 s, notas de corte de 2020 e 2022–2026 em 90 pontos e as contas preservadas (só contagens)
 
 **Validação runtime (03/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso; SQLite novo com a base sintética — vestibulares 2098 e 2099 e o simulado `2099s1` de 80 questões — e as notas de corte sintéticas de 90 pontos):**
 - HTTP: sem sessão, `GET /api/catalogo` → 401. Logado: catálogo com `2099s1` (simulado, edição 1, "Simulado FUVEST 2099 · 1ª edição", 80), `2099` e `2098` (90), 255 questões, distribuição somando 80; vitrine `{"total_questoes": 255, "anos": [2098, 2099]}`; Prova completa com 80 questões (24 de 2099, 29 de 2098, 27 do simulado) e 18000 s; `{"modo": "ano", "prova": "2099s1"}` → 80 questões, `2099s1-001`, origem do simulado, figura `/figuras/2099s1/q015-1.webp`; `{"ano": 2099}` → 422 antes da revisão de código (depois dela, aceito como `prova: "2099"`, BT-091); `"2099S1"` → 422; `"2050s1"` → 404; Personalizado de 4 → 900 s; `/figuras/2099s1/...` → 200 e `/figuras/2099S1/...` → 404; `/api/questoes?ids=2099s1-001,2099-001,2099s2-001` → as duas primeiras e `nao_encontradas: ["2099s2-001"]`; `ids=2099S1-001` → 422; notas de corte `ano 2099, pontos_prova 90`.
@@ -378,3 +378,4 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3, o resultado do teste dos dados e as propostas P1–P5 para o Gate 0 |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR aprovado pelo usuário; P2 (média das proporções de todas as provas), P3 (225 s) e P4 (simulados à parte nos números) confirmadas na opção recomendada |
 | 2026-10-03 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-06), validação runtime (HTTP real e Playwright, FT-025), revisão de código (9 achados: 8 corrigidos, 1 justificado) e de segurança, documentos atualizados. Rascunhos reais de `2027s1` e `2027s2` extraídos fora do repositório (a curadoria é conteúdo). Pendente: CI na branch e em `master` e a conferência em produção |
+| 2026-10-05 | Rafael Peixoto (com Claude) | CI verde na branch e em `master` (merge `cc1f1c9`); migration 005 aplicada em produção e as 5 provas sincronizadas; conferência em produção — validação ✅, status Concluído. Próximo: curadoria dos simulados oficiais (`conteudo/simulados-2027`) |
