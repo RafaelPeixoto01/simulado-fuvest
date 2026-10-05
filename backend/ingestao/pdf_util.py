@@ -14,8 +14,8 @@ from PIL import Image
 
 BBox = tuple[float, float, float, float]
 
-_CID_ESPACO = re.compile(r"\(cid:3\)")
-_CID_OUTROS = re.compile(r"\(cid:\d+\)")
+_CID = re.compile(r"\(cid:(\d+)\)")
+CIDS_ESPACO = frozenset({3})  # glifo de espaco sem mapeamento (ex.: prova de 2015)
 _ESPACOS = re.compile(r"[ \t]+")
 
 
@@ -31,10 +31,10 @@ class Linha:
     x_direita: float | None = None
 
 
-def limpar_texto(texto: str) -> str:
-    """Remove artefatos de fonte (`(cid:N)`, ex.: prova de 2015) e normaliza espacos."""
-    texto = _CID_ESPACO.sub(" ", texto)
-    texto = _CID_OUTROS.sub("", texto)
+def limpar_texto(texto: str, cids_espaco: frozenset[int] = CIDS_ESPACO) -> str:
+    """Remove artefatos de fonte (`(cid:N)`, ex.: prova de 2015) e normaliza espacos. Os cids de
+    `cids_espaco` viram espaco (a familia 2027 acrescenta o 172 — CR-011); os demais somem."""
+    texto = _CID.sub(lambda m: " " if int(m.group(1)) in cids_espaco else "", texto)
     return _ESPACOS.sub(" ", texto).strip()
 
 

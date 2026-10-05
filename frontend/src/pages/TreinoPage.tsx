@@ -10,6 +10,7 @@ import { useCatalogo } from '../hooks/useCatalogo'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { api, type ApiError } from '../services/api'
 import type { Catalogo, Disciplina, ItemCorrigido, Letra, TextoBase } from '../types'
+import { anosDasProvas } from '../utils/formatoProva'
 
 const BUSCAR_QUANDO_FALTAM = 3
 
@@ -24,7 +25,7 @@ function plural(n: number, um: string, varios: string) {
 }
 
 function Configuracao({ catalogo, onComecar }: { catalogo: Catalogo; onComecar: (f: Filtros) => void }) {
-  const anos = catalogo.provas.map((p) => p.ano).sort((a, b) => a - b)
+  const anos = anosDasProvas(catalogo.provas)
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([])
   const [anoInicio, setAnoInicio] = useState(anos[0])
   const [anoFim, setAnoFim] = useState(anos[anos.length - 1])

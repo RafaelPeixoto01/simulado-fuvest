@@ -8,7 +8,7 @@ import pytest
 
 from ingestao.notas_corte import ErroLayout, extrair_de_palavras, montar_rascunho
 
-FONTE = "https://www.fuvest.br/wp-content/uploads/fuvest_2099_notas_de_corte.pdf"
+FONTE = "https://www.fuvest.br/wp-content/uploads/fuvest_2025_notas_de_corte.pdf"
 X_NUMEROS = (310, 348, 391, 434, 472)  # vagas, inscritos, ausentes, convocados, convocados por vaga
 X_MINIMO = 519
 X_MAXIMO = 567
@@ -147,9 +147,10 @@ def test_variante_2025_minimo_acima_da_linha_e_totais_na_carreira():
 
 
 def test_rascunho_sem_treineiros_e_com_pendencias_de_nome():
-    notas = montar_rascunho(extrair_de_palavras(_paginas_2025()), 2099, FONTE)
+    notas = montar_rascunho(extrair_de_palavras(_paginas_2025()), 2025, FONTE)
 
-    assert notas.status == "rascunho" and notas.ano == 2099 and notas.fonte == FONTE
+    assert notas.status == "rascunho" and notas.ano == 2025 and notas.fonte == FONTE
+    assert notas.pontos_prova == 90
     assert [c.codigo for c in notas.carreiras] == [101, 111, 112, 201]
     assert notas.carreiras[1].ac.corte == 79
     assert notas.pendencias == [
@@ -171,7 +172,7 @@ def test_sem_convocados_corte_e_maximo_ficam_vazios():
         }),
     ))
 
-    notas = montar_rascunho(extrair_de_palavras([pagina]), 2099, FONTE)
+    notas = montar_rascunho(extrair_de_palavras([pagina]), 2025, FONTE)
 
     exatas, audiovisual = notas.carreiras
     assert exatas.ppi.model_dump() == {"vagas": 5, "convocados": 0, "corte": None, "maximo": None}
@@ -200,4 +201,4 @@ def test_carreira_sem_as_tres_modalidades_e_recusada():
     pagina = _pagina(*_carreira_2020(82.7, "100−Administração", {"ac": (22, 88, 41, 68), "ep": (11, 44, 27, 59)}))
 
     with pytest.raises(ErroLayout, match="Carreira 100"):
-        montar_rascunho(extrair_de_palavras([pagina]), 2099, FONTE)
+        montar_rascunho(extrair_de_palavras([pagina]), 2025, FONTE)

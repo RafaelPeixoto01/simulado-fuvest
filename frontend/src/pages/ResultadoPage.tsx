@@ -16,7 +16,7 @@ import { useTituloPagina } from '../hooks/useTituloPagina'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { useSimulado } from '../simulado/useSimulado'
 import type { Disciplina } from '../types'
-import { anoDaProva, pontosComparaveis } from '../utils/notasCorte'
+import { anoDaProva, notaComparavel } from '../utils/notasCorte'
 
 function Aviso({ children }: { children: string }) {
   return <p className="rounded-md bg-alerta-claro px-3 py-2 text-alerta">{children}</p>
@@ -29,7 +29,7 @@ function Resultado({ entrada, estado }: { entrada: HistoricoEntry; estado: Estad
   const { questaoIds, resultado } = entrada
   const porId = useMemo(() => new Map(resultado.itens.map((i) => [i.questao_id, i])), [resultado.itens])
   const usuario = useSessao().data?.usuario ?? null
-  const pontos = pontosComparaveis(entrada)
+  const nota = notaComparavel(entrada)
 
   // Navegar (folha, Anterior/Próxima) rola até a revisão e foca o título; trocar de filtro não,
   // para o foco continuar no filtro e ele poder ser operado pelo teclado
@@ -72,11 +72,12 @@ function Resultado({ entrada, estado }: { entrada: HistoricoEntry; estado: Estad
           <Link to="/" className={BOTAO_PRIMARIO}>Novo simulado</Link>
           <Link to="/historico" className={BOTAO_SECUNDARIO}>Ver histórico</Link>
         </div>
-        {/* Notas de corte (CR-010, RN-018): só nos modos de 90 questões, com a carreira-alvo atual */}
-        {pontos !== null && (
+        {/* Notas de corte (CR-010, RN-018): Prova completa e Prova de um ano, com a carreira-alvo atual;
+            a nota vai para a escala da lista dela (CR-011) */}
+        {nota !== null && (
           <div className="mt-6 max-w-2xl">
             <ComparacaoCorte
-              pontos={pontos}
+              nota={nota}
               alvo={usuario?.carreira_alvo ?? null}
               anoDaProva={anoDaProva(entrada)}
               comUsuario={!!usuario}

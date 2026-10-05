@@ -24,11 +24,15 @@ from app.database import Base
 
 
 class Prova(Base):
-    """Derivada do repositorio (data/provas/AAAA/prova.yaml) pela sincronizacao."""
+    """Derivada do repositorio (data/provas/CODIGO/prova.yaml) pela sincronizacao."""
 
     __tablename__ = "provas"
 
-    ano: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
+    # "2025" (vestibular) ou "2027s1" (simulado oficial, 1a edicao) — ADR-015, CR-011
+    codigo: Mapped[str] = mapped_column(String(8), primary_key=True)
+    ano: Mapped[int] = mapped_column(Integer, index=True)  # ano FUVEST de referencia
+    tipo: Mapped[str] = mapped_column(String(10))  # "vestibular" | "simulado"
+    edicao: Mapped[int | None] = mapped_column(SmallInteger, nullable=True)
     versao: Mapped[str] = mapped_column(String(10))
     url_prova: Mapped[str] = mapped_column(Text)
     url_gabarito: Mapped[str] = mapped_column(Text)
@@ -46,9 +50,9 @@ class Prova(Base):
 class TextoBase(Base):
     __tablename__ = "textos_base"
 
-    id: Mapped[str] = mapped_column(String(12), primary_key=True)  # "AAAA-tbNN" (ADR-006)
-    prova_ano: Mapped[int] = mapped_column(
-        ForeignKey("provas.ano", ondelete="CASCADE"), index=True
+    id: Mapped[str] = mapped_column(String(12), primary_key=True)  # "CODIGO-tbNN" (ADR-006)
+    prova_codigo: Mapped[str] = mapped_column(
+        ForeignKey("provas.codigo", ondelete="CASCADE"), index=True
     )
     conteudo: Mapped[list] = mapped_column(JSON)
 
@@ -57,11 +61,13 @@ class TextoBase(Base):
 
 class Questao(Base):
     __tablename__ = "questoes"
-    __table_args__ = (UniqueConstraint("prova_ano", "numero", name="uq_questoes_prova_numero"),)
+    __table_args__ = (
+        UniqueConstraint("prova_codigo", "numero", name="uq_questoes_prova_numero"),
+    )
 
-    id: Mapped[str] = mapped_column(String(8), primary_key=True)  # "AAAA-NNN" (ADR-006)
-    prova_ano: Mapped[int] = mapped_column(
-        ForeignKey("provas.ano", ondelete="CASCADE"), index=True
+    id: Mapped[str] = mapped_column(String(12), primary_key=True)  # "CODIGO-NNN" (ADR-006)
+    prova_codigo: Mapped[str] = mapped_column(
+        ForeignKey("provas.codigo", ondelete="CASCADE"), index=True
     )
     numero: Mapped[int] = mapped_column(Integer)
     texto_base_id: Mapped[str | None] = mapped_column(
@@ -87,7 +93,7 @@ class Reporte(Base):
     __tablename__ = "reportes"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    questao_id: Mapped[str] = mapped_column(String(8), index=True)
+    questao_id: Mapped[str] = mapped_column(String(12), index=True)  # "CODIGO-NNN"
     tipo: Mapped[str] = mapped_column(String(20))
     descricao: Mapped[str | None] = mapped_column(String(500), nullable=True)
     status: Mapped[str] = mapped_column(String(10), default="pendente", server_default="pendente")

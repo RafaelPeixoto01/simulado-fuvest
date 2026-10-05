@@ -9,12 +9,11 @@ import { useIniciarSimulado } from '../hooks/useIniciarSimulado'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { descricaoPersonalizado } from '../simulado/novoSimulado'
 import type { Catalogo, Disciplina } from '../types'
+import { anosDasProvas, SEGUNDOS_POR_QUESTAO } from '../utils/formatoProva'
 import { formatarDuracao } from '../utils/tempo'
 
-const SEGUNDOS_POR_QUESTAO = 200 // 5 h / 90 questões (RN-009)
-
 function Formulario({ catalogo }: { catalogo: Catalogo }) {
-  const anos = catalogo.provas.map((p) => p.ano).sort((a, b) => a - b)
+  const anos = anosDasProvas(catalogo.provas)
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([])
   const [anoInicio, setAnoInicio] = useState(anos[0])
   const [anoFim, setAnoFim] = useState(anos[anos.length - 1])
@@ -117,7 +116,7 @@ function Formulario({ catalogo }: { catalogo: Catalogo }) {
         </label>
         <p className="mt-1 text-sm text-tinta-suave">
           {cronometro && Number.isInteger(quantidade) && quantidade > 0
-            ? `Tempo: ${formatarDuracao(quantidade * SEGUNDOS_POR_QUESTAO * 1000)}, o mesmo ritmo da prova (3 min 20 s por questão). Dá para pausar.`
+            ? `Tempo: ${formatarDuracao(quantidade * SEGUNDOS_POR_QUESTAO * 1000)}, o mesmo ritmo da prova (${formatarDuracao(SEGUNDOS_POR_QUESTAO * 1000)} por questão). Dá para pausar.`
             : 'Sem limite de tempo.'}
         </p>
       </div>

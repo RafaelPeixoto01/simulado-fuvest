@@ -22,14 +22,14 @@ def _linhas_sinteticas(marcas_v1: dict[int, str] | None = None) -> list[str]:
 
 
 def test_gabarito_oficial_2025_versao_v1():
-    respostas = obter_parser_gabarito(2025).extrair(GABARITO_2025, "V1")
+    respostas = obter_parser_gabarito("2025").extrair(GABARITO_2025, "V1")
 
     assert sorted(respostas) == list(range(1, 91))
     assert (respostas[1], respostas[46], respostas[90]) == ("E", "D", "B")
 
 
 def test_gabarito_oficial_2025_outra_versao():
-    respostas = obter_parser_gabarito(2025).extrair(GABARITO_2025, "V2")
+    respostas = obter_parser_gabarito("2025").extrair(GABARITO_2025, "V2")
 
     assert (respostas[1], respostas[46]) == ("A", "C")
     # Correspondencia oficial: a Q1 da V1 e a Q82 da V2 (mesma questao, resposta E)
@@ -57,4 +57,4 @@ def test_versao_inexistente_no_gabarito():
 
 def test_ano_sem_familia_registrada():
     with pytest.raises(FamiliaNaoRegistrada, match="2025"):
-        obter_parser_gabarito(1990)
+        obter_parser_gabarito("1990")

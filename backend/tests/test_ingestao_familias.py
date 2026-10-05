@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 from app.pacote.schema import PacoteProva
-from ingestao.familias import FAMILIAS, FamiliaNaoRegistrada, familia_do_ano
+from ingestao.familias import FAMILIAS, FamiliaNaoRegistrada, familia_da_prova
 from ingestao.gabarito.familia_2025 import interpretar_linhas
 from ingestao.layouts import obter_parser_layout
 
@@ -22,10 +22,11 @@ def _gabarito(ano: int) -> list[str]:
     return (FIXTURES / "gabaritos" / f"fuvest{ano}_gabarito.txt").read_text(encoding="utf-8").splitlines()
 
 
-def test_registry_cobre_2020_e_2022_a_2025():
-    assert sorted(FAMILIAS) == [2020, 2022, 2023, 2024, 2025]
+def test_registry_cobre_2020_e_2022_a_2025_e_os_simulados_de_2027():
+    assert sorted(FAMILIAS) == ["2020", "2022", "2023", "2024", "2025", "2027s1", "2027s2"]
+    assert familia_da_prova("2027s2") == "familia_2027"
     with pytest.raises(FamiliaNaoRegistrada):
-        familia_do_ano(2021)
+        familia_da_prova("2021")
 
 
 @pytest.mark.parametrize(
@@ -33,7 +34,7 @@ def test_registry_cobre_2020_e_2022_a_2025():
     [(2024, 5, [10, 11, 12]), (2022, 13, [43, 44, 45, 46, 47, 48]), (2020, 10, [31, 32, 33, 34, 35])],
 )
 def test_layout_de_anos_anteriores(ano, pagina, numeros):
-    resultado = obter_parser_layout(ano).extrair(FIXTURES / "pdfs" / f"fuvest{ano}_p{pagina:02d}.pdf")
+    resultado = obter_parser_layout(str(ano)).extrair(FIXTURES / "pdfs" / f"fuvest{ano}_p{pagina:02d}.pdf")
 
     assert [q.numero for q in resultado.questoes] == numeros
     for q in resultado.questoes:

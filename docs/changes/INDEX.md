@@ -4,6 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
+| [CR-011](CR-011-formato-80-simulados.md) | Formato de 80 questões (FUVEST 2027) e simulados oficiais da FUVEST | Em Implementação | 2026-10-03 |
 | [CR-010](CR-010-notas-de-corte.md) | Notas de corte por carreira e carreira-alvo (Fase 4 do roadmap) | Concluído | 2026-10-02 |
 | [CR-009](CR-009-rolagem-inicio-extras.md) | Rolagem ao trocar de página e extras do início | Concluído | 2026-10-02 |
 | [CR-008](CR-008-identidade-papel-caneta.md) | Identidade visual "Papel & Caneta" | Concluído | 2026-10-02 |

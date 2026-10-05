@@ -5,7 +5,7 @@ import { vi } from 'vitest'
 
 import App from '../App'
 import { CHAVE_SIMULADO } from '../storage/simuladoStorage'
-import { CATALOGO, instalarApiFalsa, json, simuladoFalso } from '../test/apiFalsa'
+import { CATALOGO, instalarApiFalsa, json, provaFalsa, simuladoFalso } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 
 const EM_ANDAMENTO = {
@@ -47,6 +47,31 @@ describe('Início (RF-008)', () => {
     expect(screen.queryByRole('region', { name: /FUVEST/ })).toBeNull()
   })
 
+  it('conta os vestibulares e, à parte, os simulados oficiais; lista o PDF de cada um (CR-011, P4)', async () => {
+    instalarApiFalsa({
+      'GET /api/catalogo': () =>
+        json(200, { ...CATALOGO, provas: [provaFalsa('2027s2'), provaFalsa('2027s1'), ...CATALOGO.provas] }),
+    })
+
+    renderizar(<App />)
+
+    expect(await screen.findByText(/^178 questões de 2 provas \(2024 a 2025\) e 2 simulados oficiais\./)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Simulado FUVEST 2027 · 1ª edição · PDF oficial (abre em nova aba)' })).toHaveAttribute(
+      'href',
+      'https://www.fuvest.br/p2027s1.pdf',
+    )
+  })
+
+  it('só com simulados oficiais, não fala em "0 provas" (revisão de código do CR-011)', async () => {
+    instalarApiFalsa({
+      'GET /api/catalogo': () => json(200, { ...CATALOGO, provas: [provaFalsa('2027s1')], total_questoes: 79 }),
+    })
+
+    renderizar(<App />)
+
+    expect(await screen.findByText(/^79 questões de 1 simulado oficial\./)).toBeInTheDocument()
+  })
+
   it('prova completa fica indisponível com base pequena', async () => {
     instalarApiFalsa({
       'GET /api/catalogo': () => json(200, { ...CATALOGO, total_questoes: 88, completa_disponivel: false }),
@@ -55,7 +80,7 @@ describe('Início (RF-008)', () => {
     renderizar(<App />)
 
     expect(await screen.findByRole('button', { name: 'Começar prova completa' })).toBeDisabled()
-    expect(screen.getByText(/Disponível quando a base tiver 90 questões válidas/)).toBeInTheDocument()
+    expect(screen.getByText(/Disponível quando a base tiver 80 questões válidas/)).toBeInTheDocument()
   })
 
   it('base vazia convida a voltar depois', async () => {
@@ -196,8 +221,41 @@ describe('Prova de um ano', () => {
 
     await waitFor(() => expect(localStorage.getItem(CHAVE_SIMULADO)).not.toBeNull())
     const pedido = api.mock.calls.find(([, init]) => init?.method === 'POST')!
-    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'ano', ano: 2024 })
+    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'ano', prova: '2024' })
     expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).descricao).toBe('FUVEST 2024')
+  })
+
+  it('os simulados oficiais ficam numa seção própria, cada um com o seu total (UT-065, CR-011)', async () => {
+    const api = instalarApiFalsa({
+      'GET /api/catalogo': () =>
+        json(200, { ...CATALOGO, provas: [provaFalsa('2027s2'), provaFalsa('2027s1'), ...CATALOGO.provas] }),
+      'POST /api/simulados': () => json(200, simuladoFalso(['2027s1-001'], { modo: 'ano' })),
+    })
+
+    renderizar(<App />, { rota: '/novo/ano' })
+
+    const vestibulares = await screen.findByRole('region', { name: 'Provas da FUVEST' })
+    expect(within(vestibulares).getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual([
+      'FUVEST 2025',
+      'FUVEST 2024',
+    ])
+    expect(within(vestibulares).getAllByText(/^90 questões/)).toHaveLength(2)
+    const simulados = screen.getByRole('region', { name: 'Simulados oficiais da FUVEST' })
+    expect(within(simulados).getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual([
+      'Simulado FUVEST 2027 · 2ª edição',
+      'Simulado FUVEST 2027 · 1ª edição',
+    ])
+    expect(within(simulados).getAllByText(/^80 questões/)).toHaveLength(2)
+    expect(
+      within(simulados).getByRole('link', { name: 'PDF oficial do Simulado FUVEST 2027 · 1ª edição' }),
+    ).toHaveAttribute('href', 'https://www.fuvest.br/p2027s1.pdf')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Fazer o Simulado FUVEST 2027 · 1ª edição' }))
+
+    await waitFor(() => expect(localStorage.getItem(CHAVE_SIMULADO)).not.toBeNull())
+    const pedido = api.mock.calls.find(([, init]) => init?.method === 'POST')!
+    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'ano', prova: '2027s1' })
+    expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).descricao).toBe('Simulado FUVEST 2027 · 1ª edição')
   })
 })
 
@@ -245,6 +303,7 @@ describe('Personalizado (FT-003)', () => {
 
     renderizar(<App />, { rota: '/novo/personalizado' })
 
-    expect(await screen.findByText(/1 h 6 min/)).toBeInTheDocument() // 20 × 3 min 20 s
+    // UT-067 (CR-011): 20 × 3 min 45 s, o ritmo da prova de 80 questões em 5 h
+    expect(await screen.findByText(/^Tempo: 1 h 15 min, o mesmo ritmo da prova \(3 min 45 s por questão\)/)).toBeInTheDocument()
   })
 })

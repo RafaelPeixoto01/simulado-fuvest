@@ -9,6 +9,8 @@ import { QuestaoView } from './QuestaoView'
 
 const QUESTAO: Questao = {
   id: '2099-020',
+  prova: '2099',
+  origem: 'FUVEST 2099',
   ano: 2099,
   numero: 20,
   disciplina: 'fisica',
@@ -130,5 +132,20 @@ describe('QuestaoView', () => {
     expect(screen.getByText('Texto compartilhado')).toBeInTheDocument()
     expect(screen.getByText(/Observe o gráfico/)).toBeInTheDocument()
     expect(screen.getAllByRole('radio')).toHaveLength(5)
+  })
+
+  it('mostra a origem da questão de um simulado oficial (UT-066, CR-011)', () => {
+    render(
+      <QuestaoView
+        questao={{ ...QUESTAO, id: '2027s1-020', prova: '2027s1', origem: 'Simulado FUVEST 2027 · 1ª edição', ano: 2027 }}
+        posicao={{ atual: 1, total: 80 }}
+        selecionada={null}
+        onSelecionar={() => {}}
+      />,
+    )
+
+    expect(screen.getByRole('heading', { name: 'Questão 1 de 80' })).toBeInTheDocument()
+    expect(screen.getByText('Física, Simulado FUVEST 2027 · 1ª edição (questão 20)')).toBeInTheDocument()
+    expect(screen.getByAltText('Figura da questão 20, Simulado FUVEST 2027 · 1ª edição')).toBeInTheDocument()
   })
 })

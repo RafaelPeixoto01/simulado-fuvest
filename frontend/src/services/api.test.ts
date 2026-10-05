@@ -18,13 +18,13 @@ describe('api', () => {
     const fetchFalso = vi.fn().mockResolvedValue(respostaJson(200, { modo: 'ano', questoes: [] }))
     vi.stubGlobal('fetch', fetchFalso)
 
-    const simulado = await api.gerarSimulado({ modo: 'ano', ano: 2025 })
+    const simulado = await api.gerarSimulado({ modo: 'ano', prova: '2025' })
 
     expect(simulado.modo).toBe('ano')
     const [url, init] = fetchFalso.mock.calls[0]
     expect(url).toBe('/api/simulados')
     expect(init.method).toBe('POST')
-    expect(JSON.parse(init.body)).toEqual({ modo: 'ano', ano: 2025 })
+    expect(JSON.parse(init.body)).toEqual({ modo: 'ano', prova: '2025' })
   })
 
   it('junta os ids na consulta de questões', async () => {

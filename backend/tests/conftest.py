@@ -81,3 +81,14 @@ def base_sintetica(sessao, settings, _pacotes_sinteticos):
     shutil.copytree(_pacotes_sinteticos, settings.data_dir)
     sincronizar(sessao, settings.data_dir)
     return settings.data_dir
+
+
+@pytest.fixture
+def base_com_simulado(sessao, settings):
+    """Vestibulares 2098 e 2099 e o simulado oficial 2099s1 (80 questoes) sincronizados (CR-011)."""
+    from app.pacote.sincronizar import sincronizar
+    from tests.fixtures.gerar_pacotes import escrever_pacotes
+
+    escrever_pacotes(settings.data_dir, simulados=((2099, 1),))
+    sincronizar(sessao, settings.data_dir)
+    return settings.data_dir

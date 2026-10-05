@@ -12,15 +12,16 @@ from dataclasses import dataclass
 from typing import TypeVar
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, contains_eager, joinedload
 
 from app.models import Prova, Questao
-from app.pacote.validacao import TOTAL_QUESTOES
+from app.pacote.validacao import TOTAL_PROVA_COMPLETA
 from app.schemas import GerarAno, GerarCompleta, GerarPersonalizado, GerarTreino
 from app.services.catalogo import contagens_por_prova, distribuicao_completa
 
-TEMPO_PROVA_S = 18000  # 5 h
-TEMPO_POR_QUESTAO_S = TEMPO_PROVA_S // TOTAL_QUESTOES  # 200 s = 3 min 20 s
+TEMPO_PROVA_S = 18000  # 5 h, em qualquer prova inteira (90 ate 2026, 80 desde 2027)
+# Ritmo do formato vigente (RN-009, CR-011): 5 h / 80 = 225 s = 3 min 45 s por questao
+TEMPO_POR_QUESTAO_S = TEMPO_PROVA_S // TOTAL_PROVA_COMPLETA
 LOTE_TREINO = 20
 
 T = TypeVar("T")
@@ -65,7 +66,7 @@ def sortear_completa(por_disciplina: dict[str, Sequence[T]], alvo: dict[str, int
 def _ordenar(questoes: list[Questao], rng: random.Random) -> list[Questao]:
     """RN-005: questoes do mesmo texto-base em sequencia (ordem original); grupos embaralhados."""
     grupos: dict[str, list[Questao]] = {}
-    for q in sorted(questoes, key=lambda q: (q.prova_ano, q.numero)):
+    for q in sorted(questoes, key=lambda q: (q.prova_codigo, q.numero)):
         grupos.setdefault(q.texto_base_id or q.id, []).append(q)
     ordem = list(grupos.values())
     rng.shuffle(ordem)
@@ -74,11 +75,17 @@ def _ordenar(questoes: list[Questao], rng: random.Random) -> list[Questao]:
 
 def _validas(sessao: Session, ano_inicio: int | None = None,
              ano_fim: int | None = None) -> list[Questao]:
-    consulta = select(Questao).where(Questao.anulada.is_(False)).order_by(Questao.id)
+    """Nao anuladas; o intervalo e pelo ano FUVEST de referencia da prova (simulados
+    oficiais de 2027 entram em 2027 — CR-011, P4)."""
+    # contains_eager: a prova do join ja serve a serializacao (origem), sem consulta extra
+    consulta = (
+        select(Questao).join(Questao.prova).options(contains_eager(Questao.prova))
+        .where(Questao.anulada.is_(False)).order_by(Questao.id)
+    )
     if ano_inicio:
-        consulta = consulta.where(Questao.prova_ano >= ano_inicio)
+        consulta = consulta.where(Prova.ano >= ano_inicio)
     if ano_fim:
-        consulta = consulta.where(Questao.prova_ano <= ano_fim)
+        consulta = consulta.where(Prova.ano <= ano_fim)
     return list(sessao.scalars(consulta))
 
 
@@ -92,7 +99,7 @@ def _da_disciplina(questoes: list[Questao], disciplinas: list[str]) -> list[Ques
 
 def _completa(sessao: Session, rng: random.Random, semente: int) -> SimuladoGerado:
     validas = _validas(sessao)
-    if len(validas) < TOTAL_QUESTOES:
+    if len(validas) < TOTAL_PROVA_COMPLETA:
         raise QuestoesInsuficientes(len(validas))
     por_disciplina: dict[str, list[Questao]] = {}
     for q in validas:
@@ -117,11 +124,13 @@ def _personalizado(sessao: Session, pedido: GerarPersonalizado, rng: random.Rand
 
 
 def _ano(sessao: Session, pedido: GerarAno, semente: int) -> SimuladoGerado:
-    if sessao.get(Prova, pedido.ano) is None:
-        raise ProvaNaoEncontrada(f"Prova de {pedido.ano} não está na base")
-    # Ordem original e anuladas incluidas (RN-002: contam como acerto)
+    if sessao.get(Prova, pedido.prova) is None:
+        raise ProvaNaoEncontrada(f"Prova {pedido.prova} não está na base")
+    # Todas as questoes da prova (90 ou 80), na ordem original e com as anuladas
+    # (RN-002: contam como acerto)
     questoes = list(sessao.scalars(
-        select(Questao).where(Questao.prova_ano == pedido.ano).order_by(Questao.numero)
+        select(Questao).options(joinedload(Questao.prova))
+        .where(Questao.prova_codigo == pedido.prova).order_by(Questao.numero)
     ))
     return SimuladoGerado("ano", questoes, TEMPO_PROVA_S, False, len(questoes), semente)
 

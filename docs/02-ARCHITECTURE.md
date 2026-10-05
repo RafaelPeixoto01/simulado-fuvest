@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.10
-**Data:** 2026-10-02
-**PRD Ref:** 01-PRD v5.0
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010
+**Versão:** 1.11
+**Data:** 2026-10-03
+**PRD Ref:** 01-PRD v6.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011
 
 ---
 
@@ -40,14 +40,14 @@
 
 Monorepo com dois subsistemas que compartilham o mesmo modelo de dados:
 
-1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/AAAA/prova.yaml` + figuras). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009). As notas de corte de cada ano seguem o mesmo caminho: extraídas do PDF oficial por um comando da CLI, revisadas e commitadas em `data/provas/notas_corte/` (ADR-014, CR-010).
+1. **Ingestão (offline, máquina do curador):** CLI em Python que baixa os PDFs do acervo, extrai gabarito e questões com parsers determinísticos por família de layout e grava um **pacote de revisão** (`data/provas/CODIGO/prova.yaml` + figuras; o código é o ano no vestibular e `AAAAsN` no simulado oficial da FUVEST — ADR-015). O curador revisa e classifica (disciplina e assunto da taxonomia `data/provas/assuntos.yaml`, CR-004), depois commita o pacote. O repositório é a fonte da verdade das questões e da taxonomia (ADR-002, ADR-009). As notas de corte de cada ano seguem o mesmo caminho: extraídas do PDF oficial por um comando da CLI, revisadas e commitadas em `data/provas/notas_corte/` (ADR-014, CR-010).
 2. **Aplicação web (Railway):** um container com FastAPI, que serve a API, as figuras e o build do SPA React. No start, o container aplica as migrations e **sincroniza** os pacotes publicados do repositório no Postgres, que funciona como índice de consulta. Gerar e corrigir são operações sem estado (ADR-004), e o simulado em andamento vive no `localStorage`. O histórico também vive no `localStorage`; para quem entra com a conta Google (ADR-010), obrigatória para usar o site desde o CR-006 (ADR-012), ele é guardado também no servidor, nas tabelas de conta, e o navegador vira um espelho dele (ADR-011, CR-005).
 
 ```mermaid
 graph TD
     subgraph Curador["Máquina do curador (offline)"]
         Acervo[fuvest.br acervo PDFs] -->|baixar| Cache[data/_cache PDFs - gitignored]
-        Cache -->|extrair: parser por família| Pacote[data/provas/AAAA/prova.yaml + figuras/]
+        Cache -->|extrair: parser por família| Pacote[data/provas/CODIGO/prova.yaml + figuras/]
         Pacote -->|revisar, classificar, validar| Pacote
         Pacote -->|git commit + push| Repo[(Repositório GitHub)]
     end
@@ -57,7 +57,7 @@ graph TD
         Build --> Start[alembic upgrade head -> sincronizar pacotes -> uvicorn]
         Start --> API[FastAPI :8000]
         API --> PG[(PostgreSQL)]
-        API --> Figs[/figuras/AAAA/arquivo.webp]
+        API --> Figs[/figuras/CODIGO/arquivo.webp]
         API --> SPA[SPA estático]
     end
 
@@ -104,9 +104,10 @@ Simulado Fuvest/
 │   ├── provas/                     # FONTE DA VERDADE das questões (versionado)
 │   │   ├── assuntos.yaml           # taxonomia de assuntos por disciplina (ADR-009, CR-004)
 │   │   ├── notas_corte/            # AAAA.yaml: notas de corte da 1ª fase por carreira (ADR-014, CR-010)
-│   │   └── 2025/
-│   │       ├── prova.yaml          # pacote de revisão (schema em app/pacote/schema.py)
-│   │       └── figuras/            # q037-1.webp, q052-b.webp, tb03-1.webp
+│   │   ├── 2025/                   # um diretório por prova, com o código dela (ADR-015)
+│   │   │   ├── prova.yaml          # pacote de revisão (schema em app/pacote/schema.py)
+│   │   │   └── figuras/            # q037-1.webp, q052-b.webp, tb03-1.webp
+│   │   └── 2027s1/                 # simulado oficial da FUVEST, 1ª edição (CR-011)
 │   └── _cache/                     # PDFs originais baixados (gitignored)
 ├── backend/
 │   ├── alembic.ini
@@ -129,7 +130,7 @@ Simulado Fuvest/
 │   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), notas_corte (CR-010), auth, conta (+ carreira-alvo), historico
 │   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas, google (OIDC), contas, historico, notas_corte (CR-010)
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
-│   │       ├── schema.py           # modelo Pydantic do prova.yaml
+│   │       ├── schema.py           # modelo Pydantic do prova.yaml; código e rótulo da prova (CR-011)
 │   │       ├── leitura.py          # carregar/salvar YAML
 │   │       ├── assuntos.py         # taxonomia: schema, carregar_taxonomia (estrito), taxonomia_em_uso (API)
 │   │       ├── notas_corte.py      # notas de corte: schema (C01–C05), carregar_ano (estrito), notas_corte_em_uso (API), salvar_ano
@@ -141,8 +142,9 @@ Simulado Fuvest/
 │   │   ├── notas_corte.py          # extrator do PDF "Notas de Corte" (família 2020–2025) e rascunho com pendências
 │   │   ├── pdf_util.py             # colunas, ordem de leitura, limpeza de texto, render de região
 │   │   ├── figuras.py              # imagens embutidas + recorte de região -> WebP
-│   │   ├── gabarito/               # parsers de gabarito por família (registry por ano)
-│   │   └── layouts/                # parsers de prova por família (registry por ano)
+│   │   ├── familias.py             # registry código da prova -> família (CR-011)
+│   │   ├── gabarito/               # parsers de gabarito por família (familia_2025, familia_2027)
+│   │   └── layouts/                # parsers de prova por família (familia_2025 e a variante familia_2027)
 │   └── tests/
 │       ├── conftest.py             # SQLite in-memory + pacote de fixture sincronizado
 │       ├── fixtures/pdfs/          # poucas páginas recortadas dos PDFs oficiais
@@ -170,7 +172,8 @@ Simulado Fuvest/
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
         │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NotasCorte (CR-010), NaoEncontrada
         ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015),
-        │                           #   notasCorte.ts (pontos comparáveis, situação, busca — CR-010)
+        │                           #   notasCorte.ts (nota comparável, escala do corte, situação, busca — CR-010, CR-011),
+        │                           #   formatoProva.ts (formato vigente: 80 questões, 225 s por questão; anos das provas — CR-011)
         └── test/                   # setup, renderizar (providers), apiFalsa (fetch simulado na fronteira)
 ```
 
@@ -183,7 +186,10 @@ O banco guarda o que é **derivado do repositório** (provas, textos-base, quest
 ```mermaid
 erDiagram
     PROVAS {
-        int ano PK
+        string codigo PK "2025 | 2027s1"
+        int ano
+        string tipo
+        int edicao
         string versao
         string url_prova
         string url_gabarito
@@ -191,13 +197,13 @@ erDiagram
         datetime sincronizado_em
     }
     TEXTOS_BASE {
-        string id PK "AAAA-tbNN"
-        int prova_ano FK
+        string id PK "CODIGO-tbNN"
+        string prova_codigo FK
         json conteudo
     }
     QUESTOES {
-        string id PK "AAAA-NNN"
-        int prova_ano FK
+        string id PK "CODIGO-NNN"
+        string prova_codigo FK
         int numero
         string texto_base_id FK
         json enunciado
@@ -257,26 +263,29 @@ erDiagram
 #### provas
 | Campo | Tipo | Restrições | Descrição |
 |-------|------|------------|-----------|
-| ano | int | PK | Ano do vestibular (ex.: 2025) |
-| versao | varchar(10) | NOT NULL | Versão ingerida: `V1`…`V4` ou `unica` (RN-001) |
+| codigo | varchar(8) | PK | Código da prova (ADR-015, CR-011): `2025` (vestibular) ou `2027s1` (simulado oficial, 1ª edição). É o diretório do pacote e o prefixo dos ids |
+| ano | int | NOT NULL, index | Ano FUVEST de referência (o do vestibular; no simulado, o do formato que ele treina) |
+| tipo | varchar(10) | NOT NULL | `vestibular` ou `simulado` |
+| edicao | smallint | NULL | Só no simulado oficial |
+| versao | varchar(10) | NOT NULL | Versão ingerida: `V1`…`V4`, letra, `S1`…`S4` (simulados) ou `unica` (RN-001) |
 | url_prova | text | NOT NULL | URL oficial do PDF da prova (RN-013) |
 | url_gabarito | text | NOT NULL | URL oficial do PDF do gabarito |
-| total_questoes | int | NOT NULL | Sempre 90 no MVP |
+| total_questoes | int | NOT NULL | Do pacote: 90 até 2026, 80 nos simulados e desde a FUVEST 2027 (CR-011) |
 | sincronizado_em | timestamptz | NOT NULL | Última sincronização a partir do repositório |
 
 #### textos_base
 | Campo | Tipo | Restrições | Descrição |
 |-------|------|------------|-----------|
-| id | varchar(12) | PK | `AAAA-tbNN` (ex.: `2025-tb03`) — estável entre sincronizações |
-| prova_ano | int | FK → provas.ano, ON DELETE CASCADE | |
+| id | varchar(12) | PK | `CODIGO-tbNN` (ex.: `2025-tb03`, `2027s1-tb01`) — estável entre sincronizações |
+| prova_codigo | varchar(8) | FK → provas.codigo, ON DELETE CASCADE | |
 | conteudo | JSON | NOT NULL | Lista de blocos (ver "Blocos de conteúdo") |
 
 #### questoes
 | Campo | Tipo | Restrições | Descrição |
 |-------|------|------------|-----------|
-| id | varchar(8) | PK | `AAAA-NNN` (ex.: `2025-037`) — ID natural e estável (ADR-006) |
-| prova_ano | int | FK → provas.ano, ON DELETE CASCADE, index | |
-| numero | int | NOT NULL, 1–90, UNIQUE(prova_ano, numero) | Número original na versão ingerida |
+| id | varchar(12) | PK | `CODIGO-NNN` (ex.: `2025-037`, `2027s1-037`) — ID natural e estável (ADR-006, ADR-015) |
+| prova_codigo | varchar(8) | FK → provas.codigo, ON DELETE CASCADE, index | |
+| numero | int | NOT NULL, 1 até o total da prova, UNIQUE(prova_codigo, numero) | Número original na versão ingerida |
 | texto_base_id | varchar(12) | FK → textos_base.id, NULL | Texto-base compartilhado (RN-005) |
 | enunciado | JSON | NOT NULL | Lista de blocos |
 | alternativas | JSON | NOT NULL | `{"A": {texto?, figura?}, …, "E": {…}}` |
@@ -290,7 +299,7 @@ erDiagram
 | Campo | Tipo | Restrições | Descrição |
 |-------|------|------------|-----------|
 | id | int | PK, autoincremento | |
-| questao_id | varchar(8) | NOT NULL, index — **sem FK** | Sobrevive à ressincronização/remoção da questão |
+| questao_id | varchar(12) | NOT NULL, index — **sem FK** | Sobrevive à ressincronização/remoção da questão (12 caracteres desde a migration 005 — CR-011) |
 | tipo | varchar(20) | NOT NULL | `enunciado`, `figura`, `gabarito`, `outro` |
 | descricao | varchar(500) | NULL | Texto livre |
 | status | varchar(10) | NOT NULL, default `pendente` | `pendente` / `resolvido` |
@@ -363,7 +372,7 @@ fisica:
 
 ### Notas de corte (conteúdo, CR-010)
 
-`data/provas/notas_corte/AAAA.yaml`, um por ano (2020 e 2022–2025): `ano`, `status` (`rascunho`/`publicada`), `fonte` (PDF oficial), `pendencias` e, por carreira, `codigo`, `nome` (com o campus) e `ac`/`ep`/`ppi` com `vagas`, `convocados`, `corte` e `maximo` (corte e máximo vazios sem convocados). Não há tabela (ADR-014): a API lê os arquivos publicados e sem problema com cache pelo mtime (`notas_corte_em_uso`), e a conta guarda só o par (ano, código) da carreira-alvo. Os códigos e nomes das carreiras mudam entre anos: não há equivalência entre eles (RN-019).
+`data/provas/notas_corte/AAAA.yaml`, um por ano (2020 e 2022–2026): `ano`, `pontos_prova` (90 até 2026; obrigatório e 80 a partir de 2027 — CR-011), `status` (`rascunho`/`publicada`), `fonte` (PDF oficial), `pendencias` e, por carreira, `codigo`, `nome` (com o campus) e `ac`/`ep`/`ppi` com `vagas`, `convocados`, `corte` e `maximo` (corte e máximo vazios sem convocados). Não há tabela (ADR-014): a API lê os arquivos publicados e sem problema com cache pelo mtime (`notas_corte_em_uso`), e a conta guarda só o par (ano, código) da carreira-alvo. Os códigos e nomes das carreiras mudam entre anos: não há equivalência entre eles (RN-019). A comparação converte a nota do simulado para a escala da lista (`pontos_prova`) quando os tamanhos diferem (D3 do CR-011).
 
 ---
 
@@ -469,7 +478,7 @@ fisica:
 - **Status:** Aceita
 - **Data:** 2026-09-29
 - **Contexto:** O PRD exclui IA na ingestão. Os PDFs variam por ano: 2025 tem duas colunas, figuras embutidas e 4 versões; 2015 traz artefatos de fonte (`(cid:3)`).
-- **Decisão:** Parsers de gabarito e de prova organizados em `ingestao/gabarito/` e `ingestao/layouts/`, com um registry que mapeia cada ano a uma família. Base comum em `pdf_util.py` (divisão em colunas, ordem de leitura, limpeza de artefatos, render de região via pypdfium2). O que o parser não extrai com segurança vira `pendencias` no YAML, e o curador completa com os comandos `preview` e `recortar`. A primeira família implementada é a do layout de 2025, que também cobre 2020 e 2022–2024 (T-028: muda só a fonte do número da questão e o gabarito usa versões por letra). 2021 não tem texto extraível (fontes sem mapeamento) e ficaria para uma futura extração com OCR.
+- **Decisão:** Parsers de gabarito e de prova organizados em `ingestao/gabarito/` e `ingestao/layouts/`, com um registry que mapeia cada ano a uma família. Base comum em `pdf_util.py` (divisão em colunas, ordem de leitura, limpeza de artefatos, render de região via pypdfium2). O que o parser não extrai com segurança vira `pendencias` no YAML, e o curador completa com os comandos `preview` e `recortar`. A primeira família implementada é a do layout de 2025, que também cobre 2020 e 2022–2024 (T-028: muda só a fonte do número da questão e o gabarito usa versões por letra). O CR-011 acrescenta a `familia_2027`, dos simulados oficiais da FUVEST 2027: uma variante da 2025 (marcador até 14,5 pt, o glifo `(cid:172)` como espaço, gabarito de 80 com versões `S1`–`S4`); o registry passou a ser por código da prova. 2021 não tem texto extraível (fontes sem mapeamento) e ficaria para uma futura extração com OCR.
 - **Alternativas Consideradas:**
   - PyMuPDF: descartada pela licença AGPL.
   - Um parser genérico para todos os anos: descartado, porque cada layout exige heurísticas próprias.
@@ -500,7 +509,7 @@ fisica:
   - Negativas: uma chamada por questão no Treino (latência baixa, aceitável).
 
 ### ADR-006: IDs naturais e estáveis para questões e textos-base
-- **Status:** Aceita
+- **Status:** Aceita; emendada pelo ADR-015 (CR-011): o prefixo dos ids é o **código da prova** (`AAAA` ou `AAAAsN`), e os ids anteriores continuam iguais
 - **Data:** 2026-09-29
 - **Contexto:** A sincronização recria o conteúdo a cada deploy; o `localStorage` (simulado em andamento, histórico) e os reportes referenciam questões.
 - **Decisão:** `questoes.id = "AAAA-NNN"` e `textos_base.id = "AAAA-tbNN"`, derivados de ano e número original. `reportes.questao_id` não tem FK.
@@ -600,6 +609,19 @@ fisica:
   - Positivas: um ano novo de cortes é uma mudança de conteúdo (branch `conteudo/cortes-AAAA`, CI e deploy), sem CR nem código novo; nenhuma tabela nova para os cortes.
   - Negativas: arquivo inválido some da API sem derrubar o deploy (o CI é o portão); a carreira-alvo de um ano antigo não acompanha a renumeração das carreiras e o estudante escolhe de novo (RN-019).
 
+### ADR-015: Código da prova e total de questões por prova
+- **Status:** Aceita
+- **Data:** 2026-10-03
+- **Contexto:** A FUVEST 2027 passa a ter 80 questões na 1ª fase (Resolução CoG nº 9008/2026, art. 11), e a FUVEST publicou dois simulados oficiais nesse formato, ambos "FUVEST 2027" (CR-011). Até então a prova era identificada pelo ano (`provas.ano` como chave, ids `AAAA-NNN`, `/figuras/AAAA/`) e toda prova tinha 90 questões (V01, gabarito). As duas edições colidiriam entre si e com a prova real de 2027.
+- **Decisão:** A prova passa a ser identificada por um **código**: `AAAA` no vestibular (o mesmo valor de antes) e `AAAAsN` no simulado oficial (edição N, `s` minúsculo). O código é o diretório do pacote, a chave de `provas` (`provas.codigo`, com `ano` de referência, `tipo` e `edicao` como colunas), o prefixo dos ids (`2027s1-001`, `2027s1-tb01`, regex `^\d{4}(s[1-9])?-\d{3}$`) e o caminho das figuras. O pacote declara `total_questoes` (80 ou 90; 90 quando ausente), que a V01 e o parser de gabarito conferem. A Prova completa usa o formato vigente (`TOTAL_PROVA_COMPLETA = 80`). A migration `005` **recria vazias** as três tabelas derivadas do repositório (ADR-002), que a sincronização do start repovoa, e só alarga `reportes.questao_id`. As notas de corte declaram `pontos_prova` (obrigatório a partir de 2027).
+- **Alternativas Consideradas:**
+  - Manter `ano` como chave e dar aos simulados um "ano" fictício: descartada, porque o ano aparece na interface, no filtro do Personalizado e nas notas de corte.
+  - Migrar as linhas de `provas`/`questoes` em vez de recriar: descartada, porque são dados derivados do repositório e a sincronização já os reconstrói a cada start.
+  - Derivar o total de questões do ano (90 até 2026, 80 depois): descartada para o pacote, porque os pacotes sintéticos de teste são de anos fictícios (2098, 2099) e o total explícito documenta o pacote; mantida só para o rascunho das notas de corte (`pontos_do_ano`), com a confirmação explícita no arquivo.
+- **Consequências:**
+  - Positivas: os ids existentes (históricos, simulados em andamento, reportes) não mudam; a prova real de 2027 entra como `2027` sem colidir com os simulados; um ano novo de 80 questões é só conteúdo.
+  - Negativas: no deploy, o container antigo ainda no ar consulta o schema anterior por alguns segundos (janela curta de erro no conteúdo); o rollback exige o `downgrade` antes do código anterior (Deploy Guide).
+
 ## 9. Deploy e Infraestrutura
 
 ### 9.1 Plataforma de Produção
@@ -691,4 +713,4 @@ cd frontend && npm audit && npm outdated
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`. v1.9 (2026-10-02, CR-009): `RolarAoTopo` (padrão de rolagem ao trocar de rota) e `inicio/MiniFolha`. v1.10 (2026-10-02, CR-010): notas de corte — ADR-014 (conteúdo versionado em `data/provas/notas_corte/`, sem tabela), `app/pacote/notas_corte.py`, `ingestao/notas_corte.py` e comando `cortes`, `usuarios.carreira_alvo_*` (migration 004), padrões da API (`/api/notas-corte`, `/api/conta/carreira-alvo`), `NotasCortePage`, `components/notasCorte/` e `utils/notasCorte.ts`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): estrutura de `components/resolucao/` e rota `/simulado` fora do `Layout`. v1.2 (2026-09-30, CR-002): `useTituloPagina` e teste de contraste dos tokens. v1.3 (2026-09-30, CR-003): `CabecalhoLetras`, `utils/folha.ts` e `resultado/revisao.ts`. v1.4 (2026-09-30, CR-004): taxonomia `data/provas/assuntos.yaml` e `app/pacote/assuntos.py` (ADR-009), `questoes.assunto`, comando `assuntos`, `DesempenhoPage` e `utils/desempenho.ts`. v1.5 (2026-10-01, CR-005): contas com Google — tabelas `usuarios`, `sessoes` e `simulados_concluidos`, ADR-010 (login por redirecionamento, sessão no banco), ADR-011 (espelho local do histórico), ADR-004 revisto, variáveis `GOOGLE_*` e `PUBLIC_URL`, integração com o Google, padrões de autenticação da API e `useHistorico`. v1.6 (2026-10-01, CR-006): login obrigatório — ADR-012 (`exigir_acesso`, modos `conta`/`livre`/`indisponivel`, `RequerConta`), ADR-004 revisto e padrões da API e do frontend. v1.7 (2026-10-01, CR-007): `GET /api/vitrine` pública (emenda ao ADR-012), `routers/vitrine.py`, `useVitrine`, `MenuCelular` e `components/apresentacao/`. v1.8 (2026-10-01, CR-008): identidade "Papel & Caneta" — fontes na stack, ADR-013 (tokens e Fraunces no próprio site), padrões do frontend, `CirculoCaneta`, `MarcasSincronismo` e `components/inicio/`. v1.9 (2026-10-02, CR-009): `RolarAoTopo` (padrão de rolagem ao trocar de rota) e `inicio/MiniFolha`. v1.10 (2026-10-02, CR-010): notas de corte — ADR-014 (conteúdo versionado em `data/provas/notas_corte/`, sem tabela), `app/pacote/notas_corte.py`, `ingestao/notas_corte.py` e comando `cortes`, `usuarios.carreira_alvo_*` (migration 004), padrões da API (`/api/notas-corte`, `/api/conta/carreira-alvo`), `NotasCortePage`, `components/notasCorte/` e `utils/notasCorte.ts`. v1.11 (2026-10-03, CR-011): ADR-015 (código da prova e total de questões por prova; migration 005 recria as tabelas derivadas), ADR-006 emendado, modelagem de `provas`/`textos_base`/`questoes`/`reportes`, `pontos_prova` nas notas de corte, `familia_2027` e registry por código, `utils/formatoProva.ts`.*

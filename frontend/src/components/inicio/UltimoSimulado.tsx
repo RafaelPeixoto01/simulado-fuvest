@@ -6,7 +6,7 @@ import { useSessao } from '../../hooks/useSessao'
 import { NOMES_DISCIPLINAS } from '../../types'
 import { disciplinasMaisFracas, ultimoSimulado } from '../../utils/desempenho'
 import { formatarDiaMes, formatarPercentual } from '../../utils/format'
-import { pontosComparaveis } from '../../utils/notasCorte'
+import { notaComparavel } from '../../utils/notasCorte'
 import { BarraPercentual } from '../BarraPercentual'
 import { CARTAO, LINK } from '../estilos'
 import { LinhaCortes } from '../notasCorte/ComparacaoCorte'
@@ -22,7 +22,7 @@ export function UltimoSimulado() {
 
   const { acertos, total, percentual } = entrada.resultado
   const fracas = disciplinasMaisFracas(entrada)
-  const pontos = pontosComparaveis(entrada)
+  const nota = notaComparavel(entrada)
 
   return (
     <section aria-labelledby={idTitulo} className={`${CARTAO} p-5`}>
@@ -36,8 +36,8 @@ export function UltimoSimulado() {
         {acertos} <span className="text-xl font-medium text-tinta-suave">de {total}</span>
       </p>
       <p className="text-sm text-tinta-suave">{formatarPercentual(percentual)} de aproveitamento</p>
-      {/* Notas de corte (CR-010): com carreira-alvo e um simulado de 90 questões */}
-      {alvo && pontos !== null && <LinhaCortes pontos={pontos} alvo={alvo} />}
+      {/* Notas de corte (CR-010): com carreira-alvo, na Prova completa e na Prova de um ano (CR-011) */}
+      {alvo && nota !== null && <LinhaCortes nota={nota} alvo={alvo} />}
 
       {fracas.length > 0 && (
         <>

@@ -1,4 +1,5 @@
-"""IT-004 a IT-007, IT-018, IT-019: sincronizacao repositorio -> banco (ADR-002, ADR-009)."""
+"""IT-004 a IT-007, IT-018, IT-019, IT-030: sincronizacao repositorio -> banco (ADR-002, ADR-009,
+ADR-015)."""
 
 import shutil
 
@@ -29,7 +30,7 @@ def test_sincronizar_duas_vezes_da_o_mesmo_estado(sessao, tmp_path):
     primeiro = sincronizar(sessao, tmp_path)
     segundo = sincronizar(sessao, tmp_path)
 
-    assert primeiro.sincronizadas == segundo.sincronizadas == [2098, 2099]
+    assert primeiro.sincronizadas == segundo.sincronizadas == ["2098", "2099"]
     assert _contar(sessao, Prova) == 2
     assert _contar(sessao, Questao) == 180
     assert _contar(sessao, TextoBase) == 4
@@ -46,7 +47,7 @@ def test_questao_persistida_com_ids_estaveis_e_blocos_limpos(sessao, tmp_path):
     assert q.alternativas["A"] == {"texto": "Alternativa A da questão 30"}
     assert isinstance(q.disciplina, str)
     assert sessao.get(TextoBase, "2099-tb02").conteudo[-1] == {"figura": "tb02-1.webp"}
-    assert sessao.get(Prova, 2099).url_prova == "https://exemplo.test/2099/prova.pdf"
+    assert sessao.get(Prova, "2099").url_prova == "https://exemplo.test/2099/prova.pdf"
 
 
 def test_rascunho_so_entra_com_incluir_rascunhos(sessao, tmp_path):
@@ -54,11 +55,11 @@ def test_rascunho_so_entra_com_incluir_rascunhos(sessao, tmp_path):
     _alterar(d2098, status="rascunho")
 
     sem = sincronizar(sessao, tmp_path)
-    assert sem.sincronizadas == [2099]
+    assert sem.sincronizadas == ["2099"]
     assert "2098" in sem.ignoradas
 
     com = sincronizar(sessao, tmp_path, incluir_rascunhos=True)
-    assert com.sincronizadas == [2098, 2099]
+    assert com.sincronizadas == ["2098", "2099"]
 
 
 def test_pacote_removido_sai_do_banco_e_reportes_ficam(sessao, tmp_path):
@@ -70,9 +71,9 @@ def test_pacote_removido_sai_do_banco_e_reportes_ficam(sessao, tmp_path):
     shutil.rmtree(d2098)
     resumo = sincronizar(sessao, tmp_path)
 
-    assert resumo.removidas == [2098]
-    assert sessao.get(Prova, 2098) is None
-    assert sessao.scalar(select(func.count()).where(Questao.prova_ano == 2098)) == 0
+    assert resumo.removidas == ["2098"]
+    assert sessao.get(Prova, "2098") is None
+    assert sessao.scalar(select(func.count()).where(Questao.prova_codigo == "2098")) == 0
     assert _contar(sessao, Reporte) == 1
 
 
@@ -84,7 +85,7 @@ def test_publicada_invalida_e_ignorada_e_as_demais_entram(sessao, tmp_path):
 
     resumo = sincronizar(sessao, tmp_path)
 
-    assert resumo.sincronizadas == [2099]
+    assert resumo.sincronizadas == ["2099"]
     assert "bloqueante" in resumo.ignoradas["2098"]
 
 
@@ -94,11 +95,11 @@ def test_yaml_quebrado_e_ignorado(sessao, tmp_path):
 
     resumo = sincronizar(sessao, tmp_path)
 
-    assert resumo.sincronizadas == [2099]
+    assert resumo.sincronizadas == ["2099"]
     assert "YAML" in resumo.ignoradas["2098"]
 
 
-def test_diretorio_com_nome_diferente_do_ano_e_ignorado(sessao, tmp_path):
+def test_diretorio_com_nome_diferente_do_codigo_e_ignorado(sessao, tmp_path):
     (d2098,) = escrever_pacotes(tmp_path, anos=(2098,))
     d2098.rename(tmp_path / "2097")
 
@@ -106,6 +107,33 @@ def test_diretorio_com_nome_diferente_do_ano_e_ignorado(sessao, tmp_path):
 
     assert resumo.sincronizadas == []
     assert "2097" in resumo.ignoradas
+
+
+def test_simulado_oficial_sincroniza_com_codigo_proprio(sessao, tmp_path):
+    """IT-030 (CR-011): o simulado convive com o vestibular do mesmo ano, com ids CODIGO-NNN."""
+    escrever_pacotes(tmp_path, anos=(2099,), simulados=((2099, 1),))
+
+    resumo = sincronizar(sessao, tmp_path)
+
+    assert resumo.sincronizadas == ["2099", "2099s1"]
+    simulado = sessao.get(Prova, "2099s1")
+    assert (simulado.ano, simulado.tipo, simulado.edicao) == (2099, "simulado", 1)
+    assert (simulado.versao, simulado.total_questoes) == ("S1", 80)
+    assert sessao.get(Prova, "2099").total_questoes == 90
+    assert sessao.scalar(select(func.count()).where(Questao.prova_codigo == "2099s1")) == 80
+    assert sessao.get(Questao, "2099s1-030").texto_base_id == "2099s1-tb02"
+    assert sessao.get(TextoBase, "2099s1-tb02").prova_codigo == "2099s1"
+
+
+def test_simulado_em_diretorio_com_o_ano_e_ignorado(sessao, tmp_path):
+    """O diretorio tem de ser o codigo: um simulado em data/provas/2099 nao entra."""
+    (d_simulado,) = escrever_pacotes(tmp_path, anos=(), simulados=((2099, 1),))
+    d_simulado.rename(tmp_path / "2099")
+
+    resumo = sincronizar(sessao, tmp_path)
+
+    assert resumo.sincronizadas == []
+    assert "código 2099s1" in resumo.ignoradas["2099"]
 
 
 def test_correcao_no_pacote_atualiza_a_questao(sessao, tmp_path):
