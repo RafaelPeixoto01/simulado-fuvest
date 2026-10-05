@@ -18,7 +18,7 @@ textos_base:
       Work has begun on a controversial project to create the building blocks of human life from scratch. The research has been taboo until now because of concerns it could lead to designer babies or unforeseen changes for future generations. But now the World's largest medical charity, the Wellcome Trust, has financed the project and says it has the potential to do more good than harm by accelerating treatments for many diseases.
       A doctor who is part of the project says the research was the next giant leap in biology. “We are looking at therapies that will improve people's lives as they age, that will lead to healthier aging with less disease. We are looking to use this approach to generate disease-resistant cells we can use to repopulate damaged organs, even the immune system”, he said.
       But critics fear the research opens the way for unscrupulous researchers seeking to create enhanced or modified humans. And although the project is hunting for medical benefits, there is nothing to stop scientists misusing the technology. They could create biological weapons, enhanced humans or even creatures that have human DNA. Given the potential misuse of the technology, the question for Wellcome is why they chose to fund it. The decision was not made lightly, says Dr Tom Collins. “This technology is going to be developed one day, so by doing it now, we are at least trying to do it in as responsible a way as possible and to confront the ethical and moral questions in as upfront way as possible”.
-      BBC News . June 2025. Adaptado.
+      BBC News. June 2025. Adaptado.
 - id: tb02
   questoes:
   - 33
@@ -30,28 +30,19 @@ textos_base:
       When a rule is worth following, it becomes “good”. This is why many agree “violence is bad” is a moral rule: it can be applied universally. Where rule-based morality runs into problems is when two moral rules conflict. In this case, a rule we support is: “stopping Nazism is good”. Another is: “violence is bad”. This returns us to a dilemma instead of solving it. Many might say this rule only requires amendments: “Violence is bad, except when it can stop Nazism.” If “stopping Nazism” meant extreme violence, then extreme violence is justified. We could keep making amendments but doing so could continue forever.
       Another way philosophers deliberate morality is through consequences. If an action brings more happiness into the world, then that action is good. If punching a Nazi means preventing Nazism, then punching Nazis is justified. The ends justify the means. Yet this gives a blank cheque to any action if we can justify more good.
       If killing one innocent means saving hundreds, then murder is justified. But if a moral system justifies awful acts consistently, it can’t be a basis for moral deliberation.
-      The Guardian . January 2017. Adaptado.
+      The Guardian. January 2017. Adaptado.
 - id: tb03
   questoes:
   - 48
   - 49
   conteudo:
-  - texto: |-
-      You may have never
-      heard of “The Comedian” or
-      Maurizio Cattelan, the artist
-      of the work. But unless you
-      avoid the Internet, you have
   - figura: tb03-1.webp
   - texto: |-
-      probably seen at least one
-      of its hundreds of parodies.
-      “The Comedian” is the
-      banana duct-taped to the
-      wall at Miami’s Art Basel that
-      was sold for $120,000 and caused a massive reaction amongst art lovers. It is one example in a line of Cattelan’s art pranks. His past “joke works” include statues of giant middle fingers and his most famous work is a golden toilet titled “America”. However offensive his previous works may be, none have rocked the mainstream more than “The Comedian”. Going off the implication that “The Comedian” is not simply the banana one sees but rather an abstract concept, what is the idea? I believe the more interesting explanation is the recognition of the interactive nature of the piece.
+      You may have never heard of “The Comedian” or Maurizio Cattelan, the artist of the work. But unless you avoid the Internet, you have probably seen at least one of its hundreds of parodies.
+      “The Comedian” is the banana duct-taped to the wall at Miami’s Art Basel that was sold for $120,000 and caused a massive reaction amongst art lovers. It is one example in a line of Cattelan’s art pranks.
+      His past “joke works” include statues of giant middle fingers and his most famous work is a golden toilet titled “America”. However offensive his previous works may be, none have rocked the mainstream more than “The Comedian”. Going off the implication that “The Comedian” is not simply the banana one sees but rather an abstract concept, what is the idea? I believe the more interesting explanation is the recognition of the interactive nature of the piece.
       As opposed to simply observing the art, Art Basel says on Instagram that the visitors that wait in line to take pictures with the work are “participating”. This leads me to conclude that the concept behind the piece has nothing to do with bananas and duct tape but instead the outrage. The reactions, both positive and negative, the parodies and memes referencing the work, and all serious discussions of the piece are the true spectacle of Cattelan’s work. All of us are the butt of the joke, for our swiftness to react has caused us all to waste time caring about a fruit signifying nothing.
-      The Spectator. February 2026 . Adaptado.
+      The Spectator. February 2026. Adaptado.
 - id: tb04
   questoes:
   - 53
@@ -75,12 +66,13 @@ textos_base:
   - figura: tb05-1.webp
   - texto: |-
       Contrary to our intuition, nostalgia came from medicine, not from poetry or politics. Among the first victims of the newly diagnosed disease were various displaced people of the seventeenth century, domestic help and servants working in France and Germany and Swiss soldiers fighting abroad. Nostalgia was said to produce “erroneous representations” that caused the afflicted to lose touch with the present. Longing for their native land became their single-minded obsession. The patients acquired “a haggard countenance,” and “indifference towards everything,” confusing real and imaginary events.
-      Nostalgia as a historical emotion came of age at the time of Romanticism and is coeval with the birth of mass culture. It began with the early-nineteenth-century memory boom that turned the salon culture of educated urban dwellers into a ritual commemoration of lost youth, lost springs, lost chances. With the perfection of album art, the practice of writing poems, drawing pictures and leaving dried flowers in a lady's album, every flirtation was on the verge of becoming a memento mori. Artificial nature begins to play an important part in the European imagination since the epoch of baroque - the word itself signifies a rare shell. In the middle of the nineteenth century a fondness for greenhouses and aquariums became a distinctive feature of the bourgeois home; it was a piece of nature transplanted into the urban home, framed and domesticated. What was cherished was the fossil, the ruin, the miniature, the souvenir. The melancholic sense of loss turned into a style, a late nineteenth-century fashion.
-      Svetlana Boym. The Future of nostalgia . 2001. Adaptado.
+      Nostalgia as a historical emotion came of age at the time of Romanticism and is coeval with the birth of mass culture. It began with the early-nineteenth-century memory boom that turned the salon culture of educated urban dwellers into a ritual commemoration of lost youth, lost springs, lost chances. With the perfection of album art, the practice of writing poems, drawing pictures and leaving dried flowers in a lady's album, every flirtation was on the verge of becoming a memento mori.
+      Artificial nature begins to play an important part in the European imagination since the epoch of baroque - the word itself signifies a rare shell. In the middle of the nineteenth century a fondness for greenhouses and aquariums became a distinctive feature of the bourgeois home; it was a piece of nature transplanted into the urban home, framed and domesticated. What was cherished was the fossil, the ruin, the miniature, the souvenir. The melancholic sense of loss turned into a style, a late nineteenth-century fashion.
+      Svetlana Boym. The Future of nostalgia. 2001. Adaptado.
 questoes:
 - numero: 1
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -108,15 +100,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “Comovia ‑ se ao observar o arranjo das pétalas picotadas — por um anjo? — dos cravos. Via olhos na corola dos malmequeres e carrancas sisudas ou brincalhonas nas nervuras da casca dos limões. Se Celestino tivesse tido tempo e paciência para um último desejo, teria tropeçado nos canteiros, caído sobre as flores e aí pereceria, engrinaldado. Vinda a chuva, a chuva o regaria. Chegado o vento, o vento sopraria sobre o seu cadáver. As mãos e as pernas ganhariam raiz até as suas plantas o cobrirem e dominarem o seu corpo, abraçando ‑ o como a um pai. Ter ‑ se ‑ ia tornado domínio delas, num caixão a céu aberto. Mas não foi assim que aconteceu.”
-      Djaimilia Pereira de Almeida. A visão das plantas .
-      Em A visão das plantas , a narrativa de Djaimilia Pereira de Almeida opera uma inversão de perspectiva ao situar Celestino, um antigo traficante de escravizados, em um jardim que “observa” a sua própria decadência física e mental. Considerando o excerto apresentado, depreende-se:
+      “Comovia-se ao observar o arranjo das pétalas picotadas — por um anjo? — dos cravos. Via olhos na corola dos malmequeres e carrancas sisudas ou brincalhonas nas nervuras da casca dos limões. Se Celestino tivesse tido tempo e paciência para um último desejo, teria tropeçado nos canteiros, caído sobre as flores e aí pereceria, engrinaldado. Vinda a chuva, a chuva o regaria. Chegado o vento, o vento sopraria sobre o seu cadáver. As mãos e as pernas ganhariam raiz até as suas plantas o cobrirem e dominarem o seu corpo, abraçando-o como a um pai. Ter-se-ia tornado domínio delas, num caixão a céu aberto. Mas não foi assim que aconteceu.”
+      Djaimilia Pereira de Almeida. A visão das plantas.
+      Em A visão das plantas, a narrativa de Djaimilia Pereira de Almeida opera uma inversão de perspectiva ao situar Celestino, um antigo traficante de escravizados, em um jardim que “observa” a sua própria decadência física e mental. Considerando o excerto apresentado, depreende-se:
   alternativas:
     A:
       texto: O jardim atuou como um agente de dissolução da subjetividade imperial, onde a vitalidade
@@ -138,8 +130,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 3
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-agrario
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -148,7 +140,7 @@ questoes:
       “Em termos de sazonalidade, na época das chuvas, as famílias concentram suas atividades nas terras baixas, onde se encontram as ‘roças’. Já na época da estiagem, concentram suas atividades nas terras altas, local em que coletam plantas ornamentais [as sempre-vivas] a serem comercializadas, assim como utilizam os campos nativos também para pastagem do gado.”
       Disponível em: http://dx.doi.org/10.5752/P.2595-7716.2022v4n1p58-80.
       “Panhava flor, pois é. Eu lembro desse dia assim, porque isso foi o nome que se deu para essa atividade. Então quando a gente estava lá reunido e a gente falando ‘o que é que cada uma faz?’, tinha uma coisa que era comum pra todos. Roça cada um faz de um jeito, gado uns têm outros não, mais todo mundo panhava flor. Então assim, eles tavam pensando o nome, então assim era coletor, era extrativista, até essas palavras saíram. Aí eu falei assim 'gente, eu nunca tinha ouvido falar em coleta, nunca tinha ouvido falar em extrativismo, o que a gente faz lá é panhar flor. Então a partir disso nós vamos formar um grupo de apanhador de flores, que aí entendendo que panhar flor é fazer esse modo de ser, de fazer, de viver. Assim, é muito mais amplo do que ir pra campo, até pra ir pra campo panhar tem toda uma história, um modo de ser.”
-      Maria de Fátima Alves, a Tatinha, apanhadora de flores . Disponível em: https://www.iepha.mg.gov.br/
+      Maria de Fátima Alves, a Tatinha, apanhadora de flores. Disponível em: https://www.iepha.mg.gov.br/
       Sobre a dinâmica de “panhar” flor, assinale a alternativa correta sobre o bioma, tipo de migração e o Sistema Agrícola Tradicional, respectivamente.
   alternativas:
     A:
@@ -158,12 +150,8 @@ questoes:
       texto: Caatinga; pendular; uso de técnicas rudimentares, com pouca ou nenhuma mecanização, predominante
         em pequenas propriedades, com produtividade reduzida.
     C:
-      texto: |-
-        Cerrado;
-        transumância;
-        envolvem
-        espaços
-        e agroecossistemas, transformação dos produtos agrícolas e cultura material e imaterial.
+      texto: Cerrado; transumância; envolvem espaços e agroecossistemas, transformação dos produtos agrícolas
+        e cultura material e imaterial.
     D:
       texto: Pradarias; temporária; envolve sistemas alimentares locais com base em agrossistemas manejados
         para produção sustentável e herança imaterial.
@@ -174,8 +162,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: biomas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -186,7 +174,7 @@ questoes:
       e biogeográficas formam um complexo relativamente homogêneo e extensivo. Observe o mapa a seguir:'
   - figura: q004-1.webp
   - texto: |-
-      AB'SABER, Aziz Nacib. Domínios morfoclimáticos e províncias fitogeográficas do Brasil . Orientação, São Paulo, 1967. Adaptado.
+      AB'SABER, Aziz Nacib. Domínios morfoclimáticos e províncias fitogeográficas do Brasil. Orientação, São Paulo, 1967. Adaptado.
       As modificações de uso e cobertura do solo associadas às atividades antrópicas têm impactado negativamente esses domínios. Assinale a alternativa que corresponde aos números 1, 2 e 3 e ao respectivo impacto ambiental observado nessas unidades de paisagem.
   alternativas:
     A:
@@ -201,22 +189,20 @@ questoes:
       texto: Amazônico (poluição), Cerrado (desertificação) e Caatinga (extinção de espécies).
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 3, y≈530: conferir o texto'
+  pendencias: []
 - numero: 5
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ambiente
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
       Nos últimos anos, a região de São Paulo tem registrado eventos climáticos extremos, caracterizados pela alternância entre curtos períodos de chuvas intensas e longos períodos de estiagem, conforme o gráfico a seguir:
-      Número de dias com precipitação acima de 80 mm e
-      100 mm no Instituto de Astronomia, Geofísica e Ciências
-      Atmosféricas da Universidade de São Paulo
+      Número de dias com precipitação acima de 80 mm e 100 mm no Instituto de Astronomia, Geofísica e Ciências Atmosféricas da Universidade de São Paulo
   - figura: q005-1.webp
   - texto: |-
-      Marengo e colaboradores (2020). Annals of the New York Academy of Sciences .
+      Marengo e colaboradores (2020). Annals of the New York Academy of Sciences.
       Essa variabilidade extrema favorece a erosão do solo, especialmente em áreas com desmatamento e solo exposto. O material erodido é transportado para rios e reservatórios junto com sedimentos e nutrientes, influenciando a atividade de microrganismos aquáticos, assim como a turbidez, temperatura e a disponibilidade de oxigênio dissolvido na água.
       A partir da leitura do texto e da análise do gráfico apresentado, é correto afirmar:
   alternativas:
@@ -226,7 +212,7 @@ questoes:
         funcional da comunidade.
     B:
       texto: O aumento da temperatura da água eleva sua capacidade de dissolver oxigênio, compensando
-        o consumo pela decomposição e favorecendo espécies sensíveis à disponibilidade de O .
+        o consumo pela decomposição e favorecendo espécies sensíveis à disponibilidade de O₂.
     C:
       texto: A alternância entre estiagens e chuvas intensas tende a manter a qualidade da água, pois
         eventos extremos de precipitação não alteram significativamente a dinâmica física e química dos
@@ -236,20 +222,19 @@ questoes:
         em suspensão impedem a atividade de organismos decompositores.
     E:
       texto: O aumento da temperatura da água e do aporte de matéria orgânica pode elevar a demanda bioquímica
-        de oxigênio e favorecer organismos tolerantes a baixas concentrações de O .
+        de oxigênio e favorecer organismos tolerantes a baixas concentrações de O₂.
   resposta: E
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Leia a chamada e observe o mapa a seguir:
-      Incêndios na Patagônia ameaçam árvores de
-      mais de 4000 anos
+      Incêndios na Patagônia ameaçam árvores de mais de 4000 anos
   - figura: q006-1.webp
   - texto: |-
       Folha de São Paulo, 05 de fevereiro de 2026. Adaptado.
@@ -267,18 +252,16 @@ questoes:
         como atuam no aquecimento da superfície, facilitando a rápida propagação das chamas.
     D:
       texto: A Patagônia enfrenta uma seca crônica, com registros de níveis de precipitação abaixo da
-        média nos últimos anos, o que reduz a umidade do solo e da vegetação, tornandoa altamente inflamável.
+        média nos últimos anos, o que reduz a umidade do solo e da vegetação, tornando-a altamente inflamável.
     E:
       texto: Incêndios são frequentes nas áreas de transição entre a floresta equatorial e a estepe patagônica,
         onde a vegetação é densa e mais seca devido ao gradiente de temperatura e precipitação.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈474: conferir o texto'
-  - 'Texto sublinhado na página 4, y≈503: formatação perdida no texto puro'
+  pendencias: []
 - numero: 7
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: termoquimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -290,6 +273,11 @@ questoes:
       está representada na figura a seguir:'
   - figura: q007-1.webp
   - texto: Sobre este processo, é correto afirmar que
+  - texto: |-
+      Note e adote:
+      Energias de ligação em kJ · mol⁻¹:
+      C−H = 415;
+      C−F = 500.
   alternativas:
     A:
       texto: a elevada quantidade de ligações C−F aumenta o calor liberado na combustão devido à alta
@@ -304,51 +292,44 @@ questoes:
       texto: a energia absorvida para a quebra da ligação C−F é maior do que para a quebra de ligações
         C−H, o que está associado a uma maior energia de ativação dessa combustão.
     E:
-      texto: |-
-        a presença de flúor diminui a polaridade da cadeia carbônica, tornando o polímero menos reativo ao oxigênio e, portanto, menos inflamável.
-        Note e adote:
-        Energias de ligação em kJ · mol :
-        C−H = 415;
-        C−F = 500.
+      texto: a presença de flúor diminui a polaridade da cadeia carbônica, tornando o polímero menos reativo
+        ao oxigênio e, portanto, menos inflamável.
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 4, y≈455–504
+  pendencias: []
 - numero: 8
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Alguns estudos indicam que as grandes obras de arquitetura e engenharia do Império Romano se devem às propriedades de autorreparação do concreto utilizado. A receita para esse concreto consistia, de forma simplificada, na adição de óxido de cálcio (CaO), silicatos e aluminatos vindos de cinzas vulcânicas, além de pedras e pequenas rochas que eram misturadas a seco para depois ocorrer a adição de água. Era encorajado que o óxido de cálcio não fosse totalmente incorporado à mistura seca, ficando como fragmentos sólidos chamados de clastos. Dessa forma, quando o concreto sofresse uma fissura, a rachadura iria expor parte desses clastos de óxido de cálcio que, em contato com a água do ambiente, geraria uma solução de íons Ca (reação I). Esses íons poderiam, então, reagir com o CO dissolvido na água, produzindo CaCO (reação II) como um sólido que preencheria as rachaduras por ter uma baixa solubilidade muito baixa.
-      I. CaO(s) + H O( ) ⇌ Ca (aq) + 2OH (aq)
-      II. Ca (aq) +2OH (aq) + CO (aq) ⇌ CaCO (s) + H O( )
-      O CaO é fundamental para esse processo e não poderia ser trocado por um sal de cálcio como o nitrato de cálcio (Ca(NO ) ), pois o CaO
+      Alguns estudos indicam que as grandes obras de arquitetura e engenharia do Império Romano se devem às propriedades de autorreparação do concreto utilizado. A receita para esse concreto consistia, de forma simplificada, na adição de óxido de cálcio (CaO), silicatos e aluminatos vindos de cinzas vulcânicas, além de pedras e pequenas rochas que eram misturadas a seco para depois ocorrer a adição de água. Era encorajado que o óxido de cálcio não fosse totalmente incorporado à mistura seca, ficando como fragmentos sólidos chamados de clastos. Dessa forma, quando o concreto sofresse uma fissura, a rachadura iria expor parte desses clastos de óxido de cálcio que, em contato com a água do ambiente, geraria uma solução de íons Ca²⁺ (reação I). Esses íons poderiam, então, reagir com o CO₂ dissolvido na água, produzindo CaCO₃ (reação II) como um sólido que preencheria as rachaduras por ter uma baixa solubilidade muito baixa.
+      I. CaO(s) + H₂O(ℓ) ⇌ Ca²⁺(aq) + 2OH⁻(aq)
+      II. Ca²⁺(aq) + 2OH⁻(aq) + CO₂(aq) ⇌ CaCO₃(s) + H₂O(ℓ)
+      O CaO é fundamental para esse processo e não poderia ser trocado por um sal de cálcio como o nitrato de cálcio (Ca(NO₃)₂), pois o CaO
   alternativas:
     A:
-      texto: deve estar presente para garantir o meio básico para a formação de CO a partir do CO , o
-        que não aconteceria com a solubilização de Ca(NO ) .
+      texto: deve estar presente para garantir o meio básico para a formação de CO₃²⁻ a partir do CO₂,
+        o que não aconteceria com a solubilização de Ca(NO₃)₂.
     B:
-      texto: é um sal com alta solubilidade, garantindo que exista a grande quantidade de Ca necessário
+      texto: é um sal com alta solubilidade, garantindo que exista a grande quantidade de Ca²⁺ necessário
         em solução para formação do precipitado.
     C:
       texto: tem capacidades refratárias que são responsáveis pela manutenção do calor necessário para
         a autorreparação das fissuras.
     D:
       texto: fornece salinidade adequada para que os outros sais de cálcio presentes no concreto possam
-        reagir com o CO do ar, gerando carbonato de cálcio.
+        reagir com o CO₂ do ar, gerando carbonato de cálcio.
     E:
       texto: possui um índice de dilatação térmica que é compatível com o restante do concreto, evitando
         a formação das fissuras.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈201, 212, 223, 266, 269, 288, 290, 331, 363, 366,
-    374, 396, 461: conferir o texto'
+  pendencias: []
 - numero: 9
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: termodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -370,9 +351,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: ligacoes
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: 'Logo após escovar os dentes, é comum ocorrer alteração na percepção do sabor de alimentos
@@ -402,8 +384,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 11
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: atomistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -413,9 +395,15 @@ questoes:
       livres de aditivos, indicado por uma representação de molécula orgânica composta por um átomo central
       e 4 átomos vizinhos. Ambos mostram as imagens cortadas por um risco diagonal.
   - figura: q011-1.webp
-  - figura: q011-2.webp
   - texto: O pictograma que representa alimentos livres de aditivos, se considerado do ponto de vista
       químico, pode ser interpretado como se o alimento fosse livre de
+  - texto: |-
+      Note e adote:
+      Configuração eletrônica:
+      H: 1s¹
+      C: 1s² 2s² 2p²
+      N: 1s² 2s² 2p³
+      P: 1s² 2s² 2p⁶ 3s² 3p³
   alternativas:
     A:
       texto: hidrocarbonetos leves.
@@ -426,23 +414,13 @@ questoes:
     D:
       texto: compostos fosforados.
     E:
-      texto: |-
-        carboidratos de baixa massa molecular.
-        Note e adote:
-        Configuração eletrônica:
-        H: 1s
-        C: 1s 2s 2p
-        N: 1s 2s 2p
-        P: 1s 2s 2p 3s 3p
+      texto: carboidratos de baixa massa molecular.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈392, 402, 412, 421: conferir o texto'
-  - 'Texto sublinhado na página 6, y≈431: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈365–431
+  pendencias: []
 - numero: 12
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -471,11 +449,10 @@ questoes:
         celulares à glicose, permitindo sua entrada nas células através de um processo de difusão facilitada.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈563: conferir o texto'
+  pendencias: []
 - numero: 13
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -486,41 +463,41 @@ questoes:
       mostra a figura a seguir:'
   - figura: q013-1.webp
   - texto: Sabendo que a embalagem do suco é um prisma de altura 10 cm e que a base é um triângulo equilátero
-      de lado 6 cm, qual é a quantidade de suco, em cm , derramado da embalagem?
+      de lado 6 cm, qual é a quantidade de suco, em cm³, derramado da embalagem?
   alternativas:
     A:
-      texto: 36 √5
+      texto: 36√5
     B:
-      texto: 180 √5
+      texto: 180√5
     C:
-      texto: 108 √3
+      texto: 108√3
     D:
-      texto: 36 √3
+      texto: 36√3
     E:
-      texto: 54 √3
+      texto: 54√3
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈600–676
+  pendencias: []
 - numero: 14
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Para mover uma caixa sobre o solo áspero a partir do repouso, é preciso puxar ou empurrar
       a caixa.\nNas alternativas a seguir, ilustram-se cinco situações que apresentam a superfície do
-      solo como o eixo \U0001D465 , o coeficiente de atrito entre a caixa e o solo (\U0001D707) , a massa
-      da caixa ( \U0001D45A ), o deslocamento da caixa (\U0001D6E5\U0001D465) e a direção e o sentido
-      da força externa (F ) que puxa ou empurra a caixa promovendo seu deslocamento sem retirá-la do solo.
-      Nas cinco situações ilustradas, F , \U0001D45A , \U0001D707 e \U0001D6E5\U0001D465 têm os mesmos
-      valores.\nNote e adote:\nA definição do trabalho de uma força ( \U0001D44A ) é igual ao produto
-      escalar da força ( \U0001D439 ) com o deslocamento em uma direção qualquer ( \U0001D6E5\U0001D460
-      ), ou seja, \U0001D44A = \U0001D439 ∙\U0001D6E5\U0001D460 .\nA definição do módulo da força de atrito
-      ( \U0001D453 ) é igual ao produto do coeficiente de atrito ( \U0001D707 ) com o módulo da força
-      normal ( \U0001D441 ), ou seja, \U0001D453 = \U0001D707\U0001D441 .\nDados: sen 30 = 0,50 ; cos
-      30 = 0,87\nConsiderando que \U0001D703 = 30 e \U0001D707 = 0,2, em qual das situações o trabalho
-      total sobre a caixa é menor?"
+      solo como o eixo \U0001D465, o coeficiente de atrito entre a caixa e o solo (\U0001D707), a massa
+      da caixa (\U0001D45A), o deslocamento da caixa (\U0001D6E5\U0001D465) e a direção e o sentido da
+      força externa (Fₑₓₜ) que puxa ou empurra a caixa promovendo seu deslocamento sem retirá-la do solo.
+      Nas cinco situações ilustradas, Fₑₓₜ, \U0001D45A, \U0001D707 e \U0001D6E5\U0001D465 têm os mesmos
+      valores."
+  - texto: "Note e adote:\nA definição do trabalho de uma força (\U0001D44A) é igual ao produto escalar
+      da força (\U0001D439⃗) com o deslocamento em uma direção qualquer (\U0001D6E5\U0001D460⃗), ou seja,
+      \U0001D44A = \U0001D439⃗ · \U0001D6E5\U0001D460⃗.\nA definição do módulo da força de atrito (\U0001D453ₐ)
+      é igual ao produto do coeficiente de atrito (\U0001D707) com o módulo da força normal (\U0001D441),
+      ou seja, \U0001D453ₐ = \U0001D707\U0001D441.\nDados: sen 30° = 0,50; cos 30° = 0,87"
+  - texto: "Considerando que \U0001D703 = 30° e \U0001D707 = 0,2, em qual das situações o trabalho total
+      sobre a caixa é menor?"
   alternativas:
     A:
       figura: q014-a.webp
@@ -534,13 +511,10 @@ questoes:
       figura: q014-e.webp
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 7, y≈140, 161, 201, 214, 233, 253, 262, 281: conferir
-    o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 7, y≈176–779
+  pendencias: []
 - numero: 15
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: quantidade-de-movimento
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -564,18 +538,17 @@ questoes:
       texto: Os centros das duas boias se deslocarão na mesma direção e em sentidos opostos, e não haverá
         rotação de nenhuma das boias.
     D:
-      texto: As duas boias sofrerão uma rotação no sentido antihorário, mas seus centros permanecerão
+      texto: As duas boias sofrerão uma rotação no sentido anti-horário, mas seus centros permanecerão
         em repouso.
     E:
       texto: Os centros das duas boias se deslocarão na mesma direção e em sentidos opostos, ao mesmo
-        tempo em que ambas as boias sofrerão uma rotação no sentido antihorário.
+        tempo em que ambas as boias sofrerão uma rotação no sentido anti-horário.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 7, y≈272–359
+  pendencias: []
 - numero: 16
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: aritmetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -603,8 +576,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -635,8 +608,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -666,16 +639,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Até hoje admitia-se que o nosso conhecimento se devia regular pelos objetos; porém, todas as tentativas para descobrir a priori , mediante conceitos, algo que ampliasse o nosso conhecimento, malogravam-se com este pressuposto. Tentemos, pois, uma vez, experimentar se não se resolverão melhor as tarefas da metafísica, admitindo que os objetos se deveriam regular pelo nosso conhecimento. Trata-se aqui de uma semelhança com a primeira ideia de Copérnico; não podendo prosseguir na explicação dos movimentos celestes enquanto admitia que toda a multidão de estrelas se movia em torno do espectador, tentou se não daria melhor resultado fazer antes girar o espectador e deixar os astros imóveis. Ora, na metafísica, pode-se tentar o mesmo, no que diz respeito à intuição dos objetos. Se a intuição tivesse de se guiar pela natureza dos objetos, não vejo como deles se poderia conhecer algo a priori ; se, pelo contrário, o objeto (enquanto objeto dos sentidos) se guiar pela natureza da nossa faculdade de intuição, posso perfeitamente representar essa possibilidade.
-      Immanuel Kant. Crítica da razão pura . Edição B, p. XVI-XVII. Adaptado.
+      Até hoje admitia-se que o nosso conhecimento se devia regular pelos objetos; porém, todas as tentativas para descobrir a priori, mediante conceitos, algo que ampliasse o nosso conhecimento, malogravam-se com este pressuposto. Tentemos, pois, uma vez, experimentar se não se resolverão melhor as tarefas da metafísica, admitindo que os objetos se deveriam regular pelo nosso conhecimento. Trata-se aqui de uma semelhança com a primeira ideia de Copérnico; não podendo prosseguir na explicação dos movimentos celestes enquanto admitia que toda a multidão de estrelas se movia em torno do espectador, tentou se não daria melhor resultado fazer antes girar o espectador e deixar os astros imóveis. Ora, na metafísica, pode-se tentar o mesmo, no que diz respeito à intuição dos objetos. Se a intuição tivesse de se guiar pela natureza dos objetos, não vejo como deles se poderia conhecer algo a priori; se, pelo contrário, o objeto (enquanto objeto dos sentidos) se guiar pela natureza da nossa faculdade de intuição, posso perfeitamente representar essa possibilidade.
+      Immanuel Kant. Crítica da razão pura. Edição B, p. XVI-XVII. Adaptado.
       A revolução copernicana de Kant oferece o modelo completo das explicações modernizadoras, ao fazer com que o objeto gire em torno de um novo foro. Mas nada nos obriga a tomar esta revolução como um acontecimento decisivo que nos teria colocado para sempre no caminho seguro da ciência, da moral e da teologia. Dou o nome de contrarrevolução copernicana a essa inversão da inversão. Não precisamos apoiar nossas explicações nestas duas formas puras, o objeto ou o sujeito-sociedade, já que elas são, ao contrário, resultados parciais e purificados da prática central, a única que nos interessa. A natureza gira, de fato, mas não ao redor do sujeito-sociedade. Ela gira em torno do coletivo produtor de coisas e de homens. O sujeito gira, de fato, mas não em torno da natureza. Ele é obtido a partir do coletivo produtor de homens e de coisas. O Império do Meio se encontra, enfim, representado. Natureza e sociedade são os seus satélites.
-      Bruno Latour. Jamais fomos modernos . São Paulo: Editora 34, 2019. Adaptado.
+      Bruno Latour. Jamais fomos modernos. São Paulo: Editora 34, 2019. Adaptado.
       Com base na leitura dos textos, a “contrarrevolução” proposta por Bruno Latour, em relação à “revolução” de Kant, consiste em
   alternativas:
     A:
@@ -690,14 +663,14 @@ questoes:
       texto: criticar a analogia de Kant com a astronomia de Copérnico, argumentando que a metafísica
         não pode ser comparada às ciências da natureza.
     E:
-      texto: defender que tanto a natureza quanto a sociedade são categorias a priori , independentes
-        da produção coletiva de coisas.
+      texto: defender que tanto a natureza quanto a sociedade são categorias a priori, independentes da
+        produção coletiva de coisas.
   resposta: C
   anulada: false
   pendencias: []
 - numero: 20
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -707,42 +680,40 @@ questoes:
       de 4 km para medir variações subatômicas na distância entre espelhos; quando uma onda atravessa
       o detector, ela altera essas distâncias, gerando sinais de luz que permitem aos cientistas mapear
       fenômenos invisíveis a bilhões de anos-luz. O LIGO é tão preciso que consegue medir variações equivalentes
-      a um milésimo do diâmetro de um próton, sendo o diâmetro do próton da ordem de 10 m.
+      a um milésimo do diâmetro de um próton, sendo o diâmetro do próton da ordem de 10⁻¹⁵ m.
   - figura: q020-1.webp
   - texto: |-
       LIGO Hanford. O Laboratório LIGO opera dois locais de detectores, um próximo a Hanford, no leste de Washington, e outro próximo a Livingston, na Louisiana. Esta foto mostra o local do detector de Hanford. Disponível em https://www.ligo.caltech.edu/image/.
-      Sabendo que o laser utilizado possui comprimento de onda da ordem de 10 m (infravermelho) e que a velocidade da luz no vácuo é 3×10 m/s, é correto afirmar:
+      Sabendo que o laser utilizado possui comprimento de onda da ordem de 10⁻⁶ m (infravermelho) e que a velocidade da luz no vácuo é 3×10⁸ m/s, é correto afirmar:
+  - texto: "Note e adote:\nO módulo da velocidade de uma onda (\U0001D463) é igual ao produto do comprimento
+      de onda (\U0001D706) com a frequência da onda (\U0001D453), ou seja, \U0001D463 = \U0001D706\U0001D453."
   alternativas:
     A:
-      texto: A variação de distância que o detector consegue medir é da ordem de grandeza de 10 m.
+      texto: A variação de distância que o detector consegue medir é da ordem de grandeza de 10⁻¹² m.
     B:
       texto: A razão entre o comprimento de um braço do detector e a variação mínima de distância que
-        ele mede é da ordem de grandeza de10 .
+        ele mede é da ordem de grandeza de 10⁻²¹.
     C:
       texto: O tempo necessário para que a luz do laser complete uma “ida e volta” em um dos braços do
-        interferômetro é da ordem de grandeza de10 s.
+        interferômetro é da ordem de grandeza de 10⁻³ s.
     D:
       texto: O diâmetro do próton é cerca de um milhão de vezes maior do que o comprimento de onda do
         laser utilizado no experimento.
     E:
-      texto: "A frequência do laser utilizado, calculada a partir de seu comprimento de onda, possui uma
-        ordem de grandeza de 10 Hz.\nNote e adote:\nO módulo da velocidade de uma onda ( \U0001D463 )
-        é igual ao produto do comprimento de onda ( \U0001D706 ) com a frequência da onda ( \U0001D453
-        ), ou seja, \U0001D463=\U0001D706\U0001D453 ."
+      texto: A frequência do laser utilizado, calculada a partir de seu comprimento de onda, possui uma
+        ordem de grandeza de 10¹¹ Hz.
   resposta: null
   anulada: true
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 10, y≈191, 431, 442, 475, 508, 541, 606: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈625–673
+  pendencias: []
 - numero: 21
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Atualmente, com o fácil acesso à internet e a grande quantidade de ferramentas que auxiliam a produção de vídeos, é fácil gerar vídeos com notícias falsas, as conhecidas fake news . Alguns desses vídeos apresentam geradores caseiros de energia infinita e incluem propagandas de venda de kits para construir esses geradores em casa. Qualquer vídeo que prometa geração infinita de energia está usando truques para enganar o espectador.
-      Dentre as alternativas a seguir, qual delas apresenta argumentos físicos corretos para rebater essas fake news ?
+      Atualmente, com o fácil acesso à internet e a grande quantidade de ferramentas que auxiliam a produção de vídeos, é fácil gerar vídeos com notícias falsas, as conhecidas fake news. Alguns desses vídeos apresentam geradores caseiros de energia infinita e incluem propagandas de venda de kits para construir esses geradores em casa. Qualquer vídeo que prometa geração infinita de energia está usando truques para enganar o espectador.
+      Dentre as alternativas a seguir, qual delas apresenta argumentos físicos corretos para rebater essas fake news?
   alternativas:
     A:
       texto: Um gerador transforma energia mecânica em energia elétrica. O motor transforma energia elétrica
@@ -751,7 +722,7 @@ questoes:
         é dissipada.
     B:
       texto: É possível colocar ímãs naturais em posições específicas para fazer um motor girar para sempre
-        sem precisar ligálo na tomada, considerando que os campos magnéticos dos ímãs naturais são perpétuos.
+        sem precisar ligá-lo na tomada, considerando que os campos magnéticos dos ímãs naturais são perpétuos.
     C:
       texto: A tensão típica gerada por eletricidade estática é extremamente alta. Por exemplo, o atrito
         do pente no cabelo seco pode gerar uma tensão de 1500 V a 5000 V, e essa eletricidade estática
@@ -768,8 +739,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 22
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: eletrodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -793,19 +764,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: radioatividade
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
-  - texto: "A geração de eletricidade a partir da fissão nuclear de urânio representa cerca de 10% da
-      produção elétrica mundial. Entretanto, o principal combustível nuclear, o isótopo U, corresponde
-      a apenas 0,7% de todo urânio natural, o que limita sua disponibilidade. Uma alternativa potencial
-      é o uso do isótopo U, que além de também ser físsil, gera menos resíduos nucleares de longa meia
-      vida. Esse isótopo não existe naturalmente, mas pode ser produzido a partir de um isótopo de tório,
-      Th, que é muito mais abundante que o U. O processo de obtenção de U ocorre conforme as reações\n\U0001D447ℎ+\U0001D465
-      → \U0001D447ℎ\n\U0001D447ℎ → \U0001D443\U0001D44E+\U0001D466\n\U0001D443\U0001D44E → \U0001D448+\U0001D467\nNessas
-      reações, x, y e z correspondem, respectivamente a"
+  - texto: |-
+      A geração de eletricidade a partir da fissão nuclear de urânio representa cerca de 10% da produção elétrica mundial. Entretanto, o principal combustível nuclear, o isótopo ²³⁵U, corresponde a apenas 0,7% de todo urânio natural, o que limita sua disponibilidade. Uma alternativa potencial é o uso do isótopo ²³³U, que além de também ser físsil, gera menos resíduos nucleares de longa meia vida. Esse isótopo não existe naturalmente, mas pode ser produzido a partir de um isótopo de tório, ²³²Th, que é muito mais abundante que o ²³⁵U. O processo de obtenção de ²³³U ocorre conforme as reações
+      ²³²₉₀Th + x → ²³³₉₀Th
+      ²³³₉₀Th → ²³³₉₁Pa + y
+      ²³³₉₁Pa → ²³³₉₂U + z
+      Nessas reações, x, y e z correspondem, respectivamente a
   alternativas:
     A:
       texto: nêutron, beta e beta.
@@ -819,24 +789,23 @@ questoes:
       texto: beta, próton e próton.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈93, 126, 158, 169, 189, 194, 206, 212, 224, 230:
-    conferir o texto'
+  pendencias: []
 - numero: 24
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: quantidade-de-movimento
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
-  - texto: O Bi é um núcleo radioativo frequentemente utilizado como radiofármaco terapêutico. Conforme
-      mostrado na figura, um possível esquema de decaimento do Bi ocorre por meio da emissão direta de
-      uma partícula alfa ( He), levando à formação do núcleo T . Nesse processo, é possível considerar
-      que o núcleo de Bi estava inicialmente em repouso.
+  - texto: O ²¹³Bi é um núcleo radioativo frequentemente utilizado como radiofármaco terapêutico. Conforme
+      mostrado na figura, um possível esquema de decaimento do ²¹³Bi ocorre por meio da emissão direta
+      de uma partícula alfa (⁴He), levando à formação do núcleo ²⁰⁹Tℓ. Nesse processo, é possível considerar
+      que o núcleo de ²¹³Bi estava inicialmente em repouso.
   - figura: q024-1.webp
-  - texto: Como a massa do He é muito menor que a massa do T , uma primeira aproximação do problema consiste
-      em desprezar o recuo do núcleo de T . Nesse caso, a velocidade de emissão da partícula alfa será
-      aproximadamente 1,7×10 m/s. Por outro lado, se o recuo do T for levado em consideração, é correto
-      afirmar que
+  - texto: Como a massa do ⁴He é muito menor que a massa do ²⁰⁹Tℓ, uma primeira aproximação do problema
+      consiste em desprezar o recuo do núcleo de ²⁰⁹Tℓ. Nesse caso, a velocidade de emissão da partícula
+      alfa será aproximadamente 1,7×10⁷ m/s. Por outro lado, se o recuo do ²⁰⁹Tℓ for levado em consideração,
+      é correto afirmar que
   alternativas:
     A:
       texto: a energia cinética da partícula alfa permanecerá a mesma.
@@ -850,12 +819,10 @@ questoes:
       texto: o momento linear do sistema não se conservará.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈374, 396, 407, 417, 428, 596, 617, 639, 648: conferir
-    o texto'
+  pendencias: []
 - numero: 25
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: eletrostatica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -880,8 +847,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: cinetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -890,51 +857,35 @@ questoes:
       diagramas simplificados de energia em função do progresso da reação para esses dois sistemas, sem
       identificação de qual curva corresponde a cada caso.
   - figura: q026-1.webp
-  - texto: |-
-      Sabendo que a reação do sódio com água ocorre mais rapidamente do que com etanol, assinale a alternativa que correlaciona corretamente as reações 1 e 2 com cada reagente e que classifica os processos quanto à troca de calor com o ambiente.
-      Processos de troca de
-      Reação 1
-      Reação 2
-      calor com o ambiente
+  - texto: Sabendo que a reação do sódio com água ocorre mais rapidamente do que com etanol, assinale
+      a alternativa que correlaciona corretamente as reações 1 e 2 com cada reagente e que classifica
+      os processos quanto à troca de calor com o ambiente.
   alternativas:
     A:
-      texto: |-
-        etanol
-        água
-        endotérmicos
+      texto: 'Reação 1: etanol; Reação 2: água; processos de troca de calor com o ambiente: endotérmicos.'
     B:
-      texto: |-
-        etanol
-        água
-        exotérmicos
+      texto: 'Reação 1: etanol; Reação 2: água; processos de troca de calor com o ambiente: exotérmicos.'
     C:
-      texto: |-
-        água
-        etanol
-        endotérmicos
+      texto: 'Reação 1: água; Reação 2: etanol; processos de troca de calor com o ambiente: endotérmicos.'
     D:
-      texto: |-
-        água
-        etanol
-        exotérmicos
+      texto: 'Reação 1: água; Reação 2: etanol; processos de troca de calor com o ambiente: exotérmicos.'
     E:
-      texto: |-
-        etanol
-        água
-        neutros
+      texto: 'Reação 1: etanol; Reação 2: água; processos de troca de calor com o ambiente: neutros.'
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 11, y≈654–785
+  pendencias: []
 - numero: 27
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Um estudante decidiu investigar de forma sistemática o efeito de diluições sucessivas nos valores de pH de uma solução. Como ponto de partida, optou por trabalhar com uma solução aquosa diluída de ácido clorídrico (HC ) com concentração de 0,01 mol·L , que apresentou um pH igual a 2,0. Em seguida, realizou uma diluição de 100 vezes dessa solução, obtendo um pH igual a 4,0. Repetindo o mesmo procedimento, isto é, realizando nova diluição de 100 vezes, o pH medido passa a ser 6,0.
+      Um estudante decidiu investigar de forma sistemática o efeito de diluições sucessivas nos valores de pH de uma solução. Como ponto de partida, optou por trabalhar com uma solução aquosa diluída de ácido clorídrico (HCℓ) com concentração de 0,01 mol·L⁻¹, que apresentou um pH igual a 2,0. Em seguida, realizou uma diluição de 100 vezes dessa solução, obtendo um pH igual a 4,0. Repetindo o mesmo procedimento, isto é, realizando nova diluição de 100 vezes, o pH medido passa a ser 6,0.
       Qual deverá ser o pH esperado da solução após mais uma diluição de 100 vezes?
+  - texto: |-
+      Note e adote:
+      O produto iônico da água (Kw) é 1x10⁻¹⁴
   alternativas:
     A:
       texto: 5,0
@@ -945,18 +896,13 @@ questoes:
     D:
       texto: 8,0
     E:
-      texto: |-
-        14,0
-        Note e adote:
-        O produto iônico da água (Kw) é 1x10
+      texto: 14,0
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈115, 293: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 12, y≈274–304
+  pendencias: []
 - numero: 28
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: biologia-molecular
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -983,8 +929,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -998,20 +944,15 @@ questoes:
     C:
       texto: pesquisa básica e interesses da indústria farmacêutica na exploração comercial de seus resultados.
     D:
-      texto: |-
-        envelhecimento
-        populacional
-        e
-        escassez
-        de financiamento público.
+      texto: envelhecimento populacional e escassez de financiamento público.
     E:
       texto: potencial terapêutico e possibilidade de aplicações eticamente questionáveis.
   resposta: E
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -1033,8 +974,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1045,39 +986,38 @@ questoes:
   - texto: 'Com base nos conhecimentos sobre herança mitocondrial, é correto afirmar:'
   alternativas:
     A:
-      texto: Todos os quatro indivíduos da geração F herdaram a mutação no mtDNA materno, porém apenas
-        a filha 1 e a filha 2 poderão transmiti-la à geração seguinte. O neto, pertencente à geração F
-        , não porta a mutação, pois recebeu seu mtDNA exclusivamente da mãe, cujo mtDNA é normal.
+      texto: Todos os quatro indivíduos da geração F₁ herdaram a mutação no mtDNA materno, porém apenas
+        a filha 1 e a filha 2 poderão transmiti-la à geração seguinte. O neto, pertencente à geração F₂,
+        não porta a mutação, pois recebeu seu mtDNA exclusivamente da mãe, cujo mtDNA é normal.
     B:
-      texto: Apenas a filha 1 e a filha 2, na geração F , herdaram a mutação no mtDNA, pois esse material
+      texto: Apenas a filha 1 e a filha 2, na geração F₁, herdaram a mutação no mtDNA, pois esse material
         genético é transmitido junto com o cromossomo X. Os indivíduos filho 1 e filho 2, por receberem
         o cromossomo Y do pai, não possuem mitocôndrias de origem materna e, portanto, não carregam a
         mutação.
     C:
-      texto: A neta, na geração F , não apresentará a mutação porque receberá o DNA mitocondrial de seu
+      texto: A neta, na geração F₂, não apresentará a mutação porque receberá o DNA mitocondrial de seu
         pai, de modo que a quantidade de mitocôndrias com a mutação se torna insuficiente para causar
         qualquer efeito.
     D:
-      texto: O neto, na geração F , poderá herdar a mutação mitocondrial de seu pai, filho 1, uma vez
+      texto: O neto, na geração F₂, poderá herdar a mutação mitocondrial de seu pai, filho 1, uma vez
         que o espermatozoide também contribui igualmente com mitocôndrias para o zigoto, as quais se incorporam
         ao embrião e participam normalmente do metabolismo celular do novo indivíduo.
     E:
-      texto: A mutação no mtDNA da mãe, na geração P, será transmitida apenas às filhas da geração F ,
+      texto: A mutação no mtDNA da mãe, na geração P, será transmitida apenas às filhas da geração F₁,
         em padrão semelhante ao da herança ligada ao cromossomo X dominante, já que tanto o mtDNA quanto
         o cromossomo X são de origem materna.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 13, y≈335, 368, 400, 465, 508, 584: conferir o texto'
+  pendencias: []
 - numero: 32
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Como era feita a ‘comprovação’ do arianismo dos cidadãos alemães? Como não havia qualquer possibilidade de comprovar geneticamente a linhagem dos pais e dos avós, como características fenotípicas (de aparência) também não aferiam com precisão o pertencimento a um ‘grupo racial’, e como os sobrenomes não eram considerados comprovantes de origem confiáveis, para obter a identidade ariana os indivíduos precisavam apresentar provas de vínculo religioso dos seus antepassados. Assim, certidões de batismo ou de comunhão nas Igrejas cristãs passaram a ser utilizadas para atestar o pertencimento a uma comunidade racial ‘desjudaizada’ – uma demonstração de insensatez que guiava toda a ideia nazista de Estado racial, mas também uma amostra de que, para fazer valer a autopropalada prerrogativa da raça, os nazistas iriam se basear nas informações disponíveis, fossem elas oficiais, fossem fabricadas no âmbito das igrejas.”
-      LIEBEL, Vinicius. O povo de Hitler : a nazificação da Alemanha. São Paulo: Contexto, 2025. Adaptado
+      LIEBEL, Vinicius. O povo de Hitler: a nazificação da Alemanha. São Paulo: Contexto, 2025. Adaptado
       Sobre a questão racial no nazismo, Vinicius Liebel diz que
   alternativas:
     A:
@@ -1098,8 +1038,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 33
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -1114,18 +1054,13 @@ questoes:
     D:
       texto: a moral fundada em regras pode exigir exceções que corroem sua pretensão universal.
     E:
-      texto: |-
-        sistemas
-        normativos
-        impedem
-        decisões
-        com consequências trágicas.
+      texto: sistemas normativos impedem decisões com consequências trágicas.
   resposta: D
   anulada: false
   pendencias: []
 - numero: 34
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -1148,8 +1083,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1176,15 +1111,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Examine a pintura.
   - figura: q036-1.webp
   - texto: |-
-      Jota. Conteúdo ilícito , 2021.
+      Jota. Conteúdo ilícito, 2021.
       Considerando a relação entre o título Conteúdo ilícito e a cena representada, é correto afirmar:
   alternativas:
     A:
@@ -1206,14 +1141,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 37
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Eu tenho um sonho de que um dia, lá na Geórgia, no Mississippi e no Alabama, os filhos dos antigos escravos e os filhos dos antigos senhores viverão como irmãos. Eu tenho um sonho esta tarde de que, um dia, crianças brancas e negras caminharão de mãos dadas como irmãos e irmãs. Eu tenho um sonho esta tarde de que, um dia, casas e igrejas não mais arderão em chamas simplesmente porque um povo quer se libertar. (...) Eu tenho um sonho esta tarde, que meus quatro filhos pequenos não terão a infância que eu tive, nem serão julgados pela cor da pele, mas pelo conteúdo de seu caráter.
-      Martin Luther King. “Discurso no comício pela liberdade no Cobo Hall (Detroit, 23/06/1963)”. In: Clayborne Carson e Kris Shepard. Um apelo à consciência. Os melhores discursos de Martin Luther King . Rio de Janeiro: Zahar, 2006. Adaptado.
+      Martin Luther King. “Discurso no comício pela liberdade no Cobo Hall (Detroit, 23/06/1963)”. In: Clayborne Carson e Kris Shepard. Um apelo à consciência. Os melhores discursos de Martin Luther King. Rio de Janeiro: Zahar, 2006. Adaptado.
       O excerto do pronunciamento de Martin Luther King destaca
   alternativas:
     A:
@@ -1230,14 +1165,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “O Partido Comunista, armado com o poder, já representa uma outra relação entre a vanguarda e a classe; nesta relação existe um elemento de coação. A luta de Lenin contra o burocratismo do partido e dos soviets significava, no fundo, uma luta não contra o mau funcionamento das secretarias, a inércia, a sujeira etc., mas contra a submissão da classe ao aparelho, contra a transformação da burocracia em uma nova camada dirigente. (...) A degeneração burocrática do partido atingiu o auge nestes últimos anos. O aparelho stalinista não sabe fazer outra coisa senão mandar. A linguagem do comando é a linguagem do ultimatismo. Todo operário tem de reconhecer antecipadamente que todas as decisões precedentes, atuais e futuras do Comitê Central, são infalíveis. As pretensões de infalibilidade aumentam à medida que a política se vai tornando cada vez mais errática.”
-      TROTSKY, Leon. Como esmagar o fascismo . São Paulo: Autonomia Literária, 2018.
+      TROTSKY, Leon. Como esmagar o fascismo. São Paulo: Autonomia Literária, 2018.
       No excerto, Trotsky argumenta que
   alternativas:
     A:
@@ -1255,17 +1190,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Grupos étnicos, focos de violência, fluxos e campos de refugiados, número de deslocados, exploração petrolífera e insegurança
-      alimentar entre o Sudão e o Sudão do Sul.
+  - texto: Grupos étnicos, focos de violência, fluxos e campos de refugiados, número de deslocados, exploração
+      petrolífera e insegurança alimentar entre o Sudão e o Sudão do Sul.
   - figura: q039-1.webp
   - texto: |-
-      Disponível em: https://diplomatique.org.br/o-sudao-epicentro-mundial-dosofrimento-humano/. Adaptado.
+      Disponível em: https://diplomatique.org.br/o-sudao-epicentro-mundial-do-sofrimento-humano/. Adaptado.
       Considerando os conceitos de cartografia temática, o mapa apresentado classifica-se como
   alternativas:
     A:
@@ -1292,8 +1226,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: geopolitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1303,17 +1237,17 @@ questoes:
   - figura: q040-1.webp
   - texto: |-
       Atlas Geopolitique. 2025. Adaptado.
-      Este tipo de influência recebe o nome de soft power em oposição ao hard power , estratégia de força militar ou econômica. Sobre a posição da Turquia na Geopolítica atual, é correto afirmar:
+      Este tipo de influência recebe o nome de soft power em oposição ao hard power, estratégia de força militar ou econômica. Sobre a posição da Turquia na Geopolítica atual, é correto afirmar:
   alternativas:
     A:
-      texto: A Turquia não utiliza estratégias hard power , tornando-se um dos três maiores produtores
+      texto: A Turquia não utiliza estratégias hard power, tornando-se um dos três maiores produtores
         de séries como difusão da cultura turca.
     B:
       texto: Além de ter uma posição estratégica entre Ocidente e Oriente e integrar a OTAN, a Turquia
         desempenha influência no mundo pela difusão cultural.
     C:
-      texto: A Turquia apresenta influência cultural ( soft power ) na América do Sul, onde há países
-        produtores e consumidores das séries turcas.
+      texto: A Turquia apresenta influência cultural (soft power) na América do Sul, onde há países produtores
+        e consumidores das séries turcas.
     D:
       texto: O investimento em estratégias de soft power resultou na presença turca em todos os continentes,
         principalmente nos países africanos.
@@ -1324,8 +1258,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1334,28 +1268,29 @@ questoes:
       A obra em questão é:
   alternativas:
     A:
-      texto: Caminho de pedras , de Rachel de Queiroz.
+      texto: Caminho de pedras, de Rachel de Queiroz.
     B:
-      texto: Memórias de Martha , de Júlia Lopes de Almeida.
+      texto: Memórias de Martha, de Júlia Lopes de Almeida.
     C:
-      texto: A paixão segundo G.H ., de Clarice Lispector.
+      texto: A paixão segundo G.H., de Clarice Lispector.
     D:
-      texto: Canção para ninar menino grande , de Conceição Evaristo.
+      texto: Canção para ninar menino grande, de Conceição Evaristo.
     E:
-      texto: Opúsculo Humanitário , de Nísia Floresta.
+      texto: Opúsculo Humanitário, de Nísia Floresta.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O Agente Secreto parece ter dificuldades em conter a força transbordante de uma pulsão criativa que se descobriu liberada. Camadas se multiplicam em citações fílmicas e ações cristalizadas se adensam para condensar, como num mergulho em espelhos enfileirados. A própria sala de cinema (já onipresente no longa anterior Retratos Fantasmas e que agora surge pela ficção no Cinema São Luiz) faz novos sedimentos de filme dentro do filme dentro do cinema, figurando, através das mãos do projecionista protagonista, a exibição e manipulação inclusive da matéria coisa-película. Algumas críticas se dedicaram a este horizonte que deglute sem dó, como um moedor de carne, tudo o que se cristaliza em gênero cinematográfico em torno de 1977, época em que a trama ficcional se passa. Podemos começar (e talvez findar) por Tubarão /1975 de Steven Spielberg, o grande filme de ação que afirma a nova geração da Hollywood nos anos 1970, ao qual Mendonça rende homenagem pelo fio que remete à sua Recife, assolada na realidade pela presença muito concreta do peixe em suas praias e os fantasmas imaginários que produz.
-      Fernão Pessoa Ramos. O Agente Secreto . Disponível em https://aterraeredonda.com.br/. Adaptado.
-      O excerto destaca que o filme O Agente Secreto , de Kleber Mendonça Filho, mobiliza “camadas”, “citações fílmicas” e incorpora gêneros cinematográficos dos anos 1970. Considerando o conceito de intertextualidade, esse procedimento
+      O Agente Secreto parece ter dificuldades em conter a força transbordante de uma pulsão criativa que se descobriu liberada. Camadas se multiplicam em citações fílmicas e ações cristalizadas se adensam para condensar, como num mergulho em espelhos enfileirados. A própria sala de cinema (já onipresente no longa anterior Retratos Fantasmas e que agora surge pela ficção no Cinema São Luiz) faz novos sedimentos de filme dentro do filme dentro do cinema, figurando, através das mãos do projecionista protagonista, a exibição e manipulação inclusive da matéria coisa-película.
+      Algumas críticas se dedicaram a este horizonte que deglute sem dó, como um moedor de carne, tudo o que se cristaliza em gênero cinematográfico em torno de 1977, época em que a trama ficcional se passa. Podemos começar (e talvez findar) por Tubarão /1975 de Steven Spielberg, o grande filme de ação que afirma a nova geração da Hollywood nos anos 1970, ao qual Mendonça rende homenagem pelo fio que remete à sua Recife, assolada na realidade pela presença muito concreta do peixe em suas praias e os fantasmas imaginários que produz.
+      Fernão Pessoa Ramos. O Agente Secreto. Disponível em https://aterraeredonda.com.br/. Adaptado.
+      O excerto destaca que o filme O Agente Secreto, de Kleber Mendonça Filho, mobiliza “camadas”, “citações fílmicas” e incorpora gêneros cinematográficos dos anos 1970. Considerando o conceito de intertextualidade, esse procedimento
   alternativas:
     A:
       texto: caracteriza-se pela retomada de obras anteriores como forma de estabilizar sentidos já consagrados,
@@ -1376,8 +1311,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1393,13 +1328,8 @@ questoes:
       texto: envolveu um contexto de expansão da política de massas, crítica à corrupção e forte personalização
         das candidaturas.
     C:
-      texto: |-
-        expressou
-        consenso
-        político
-        em
-        torno
-        do desenvolvimentismo e do fortalecimento técnicoadministrativo do Estado.
+      texto: expressou consenso político em torno do desenvolvimentismo e do fortalecimento técnico-administrativo
+        do Estado.
     D:
       texto: refletiu o declínio dos meios de comunicação de massa e o predomínio das estruturas políticas
         regionais tradicionais.
@@ -1410,14 +1340,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Pode-se afirmar a existência de uma divisão racial do espaço em nosso país, uma espécie de segregação, com acentuada polarização, extremamente desvantajosa para a população negra: quase dois terços da população branca (64%) se concentram na região mais desenvolvida do país, enquanto a população negra, quase na mesma proporção (69%), concentra-se no resto do país, sobretudo em regiões mais pobres como é o caso do Nordeste e Minas Gerais. (...) Acontece que o modelo de desenvolvimento econômico brasileiro marcou, nas duas últimas décadas, a consolidação da sociedade capitalista em nosso país. Altas taxas de crescimento da economia e acelerada urbanização, estimuladas pela intervenção direta do estado, resultaram num tipo de “integração” das regiões subdesenvolvidas às exigências da industrialização do Sudeste.
-      Lélia Gonzalez. Por um feminismo afro-latino-americano: ensaios, intervenções e diálogos . Rio de Janeiro: Zahar, 2020.
+      Pode-se afirmar a existência de uma divisão racial do espaço em nosso país, uma espécie de segregação, com acentuada polarização, extremamente desvantajosa para a população negra: quase dois terços da população branca (64%) se concentram na região mais desenvolvida do país, enquanto a população negra, quase na mesma proporção (69%), concentra-se no resto do país, sobretudo em regiões mais pobres como é o caso do Nordeste e Minas Gerais. (...)
+      Acontece que o modelo de desenvolvimento econômico brasileiro marcou, nas duas últimas décadas, a consolidação da sociedade capitalista em nosso país. Altas taxas de crescimento da economia e acelerada urbanização, estimuladas pela intervenção direta do estado, resultaram num tipo de “integração” das regiões subdesenvolvidas às exigências da industrialização do Sudeste.
+      Lélia Gonzalez. Por um feminismo afro-latino-americano: ensaios, intervenções e diálogos. Rio de Janeiro: Zahar, 2020.
       O excerto foi extraído do ensaio “Mulher negra”, publicado originalmente em 1985, e sustenta que
   alternativas:
     A:
@@ -1439,8 +1370,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1471,12 +1402,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 46
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Em Canção para ninar menino grande , de Conceição Evaristo, as diversas mulheres que atravessam
+  - texto: Em Canção para ninar menino grande, de Conceição Evaristo, as diversas mulheres que atravessam
       a vida de Fio Jasmim são marcadas pela pluralidade de experiências. Dadas as diferenças sociais
       e de classe entre personagens, como Juventina e Pérola Maria, assinale a alternativa que descreve
       a articulação dessas distinções na narrativa.
@@ -1505,18 +1436,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: textos-multimodais
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: 'Examine as duas imagens:'
   - figura: q047-1.webp
-  - texto: Assassinato na casa , Jakub Schikaneder, 1890, pintura a óleo sobre tela, Galeria Nacional
-      de Praga.
+  - texto: Assassinato na casa, Jakub Schikaneder, 1890, pintura a óleo sobre tela, Galeria Nacional de
+      Praga.
   - figura: q047-2.webp
   - texto: |-
-      El Tendedero , Mónica Mayer, instalação, 1978/2023, Fundação Ecarta.
+      El Tendedero, Mónica Mayer, instalação, 1978/2023, Fundação Ecarta.
       A pintura Assassinato na Casa (1890) de Jakub Schikaneder retrata de maneira realista o cadáver de uma mulher de bruços no chão de um pátio e a reação dos moradores à cena. A segunda imagem registra fotograficamente a instalação participativa de Mónica Mayer, que coleta depoimentos anônimos de mulheres sobre experiências de violência e assédio.
       Em relação à interpretação da permanência do fenômeno e da mudança de perspectiva histórica no enquadramento da violência contra a mulher, é correto afirmar:
   alternativas:
@@ -1539,8 +1471,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1561,8 +1493,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1584,15 +1516,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 50
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: cidadania
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A acessibilidade trata dos problemas e das soluções relacionados às diversas possíveis barreiras entre o público e a comunicação do museu, sejam elas físicas, sensoriais ou de atitude, a partir da compreensão de que a sociedade é composta de pessoas em diferentes condições e com diferentes necessidades. O tema ganha ainda mais relevância quando se tem em perspectiva as pessoas com deficiência, que possuem algum tipo de limitação em diferentes gradações, podendo variar de comprometimentos leves, médios e graves até a perda total da capacidade física, intelectual ou sensorial.
       Presentes em todas as esferas sociais, as pessoas com deficiência integram os diferentes públicos que frequentam museus e espaços culturais, tais como público familiar, público escolar, grupos de empresas ou de órgãos públicos, público regular e espontâneo e visitantes especializados. Assim, a adequação dessas instituições visando à acessibilidade universal é uma importante demanda para garantir o direito de todos ao acesso a ambientes mais acolhedores e inclusivos, livres de barreiras de acesso físico, comunicacional, intelectual e de atitudes.”
-      Instituto Brasileiro de Museus. Acessibilidade . Adaptado.
+      Instituto Brasileiro de Museus. Acessibilidade. Adaptado.
       Uma exposição idealmente acessível deve garantir:
   alternativas:
     A:
@@ -1605,7 +1537,7 @@ questoes:
         a leitura das obras.
     C:
       texto: Rampas e elevadores em todos os percursos, mapas táteis na entrada, visitas mediadas em horários
-        fixos para pessoas com deficiência e oferta de material explicativo digital por QR code , priorizando
+        fixos para pessoas com deficiência e oferta de material explicativo digital por QR code, priorizando
         a autonomia do visitante.
     D:
       texto: Recursos de inclusão comunicacional, textos em linguagem simples, maquetes táteis de obras
@@ -1617,13 +1549,10 @@ questoes:
         atendimento personalizado conforme a necessidade do público.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈164, 174, 192, 202, 220, 229, 248, 257, 276, 286:
-    conferir o texto'
-  - 'Texto sublinhado na página 20, y≈171, 199, 227, 255, 283: formatação perdida no texto puro'
+  pendencias: []
 - numero: 51
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1633,29 +1562,28 @@ questoes:
       qual é o cosseno do ângulo de inclinação dessa rampa?
   alternativas:
     A:
-      texto: ''
+      texto: (√3 − √2)/2
     B:
-      texto: ''
+      texto: (√6 + √3)/4
     C:
-      texto: ''
+      texto: (√6 + √2)/4
     D:
-      texto: ''
+      texto: (1 + √2)/3
     E:
-      texto: ''
+      texto: (2 + √6)/3
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 20, y≈163–276
+  pendencias: []
 - numero: 52
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Atualmente, criadores de conteúdo reúnem milhões de seguidores e utilizam as redes sociais como importantes espaços de ativismo, promovendo informação, visibilidade e inclusão de pessoas com deficiência, além de contribuir para o combate ao preconceito e para a ampliação da representatividade social.
-      Entre esses grupos, destacam-se pessoas com acondroplasia, uma forma de nanismo causada por mutação no gene FGFR3 . Trata-se de uma condição genética rara, de herança autossômica dominante, na qual a presença do alelo mutante em homozigose é letal, levando à morte ainda nas fases embrionária ou perinatal.
-      Considerando esse contexto, um casal com acondroplasia, ambos portadores da mesma mutação no gene FGFR3 , participou de sessões de aconselhamento genético para compreender os possíveis riscos de seus descendentes. Como resultado, tem-se que os genótipos, fenótipos e proporção dos descendentes que nascem vivos e se desenvolvem são, respectivamente,
+      Entre esses grupos, destacam-se pessoas com acondroplasia, uma forma de nanismo causada por mutação no gene FGFR3. Trata-se de uma condição genética rara, de herança autossômica dominante, na qual a presença do alelo mutante em homozigose é letal, levando à morte ainda nas fases embrionária ou perinatal.
+      Considerando esse contexto, um casal com acondroplasia, ambos portadores da mesma mutação no gene FGFR3, participou de sessões de aconselhamento genético para compreender os possíveis riscos de seus descendentes. Como resultado, tem-se que os genótipos, fenótipos e proporção dos descendentes que nascem vivos e se desenvolvem são, respectivamente,
   alternativas:
     A:
       texto: 'AA: acondroplasia 25%, Aa: acondroplasia 50% e aa: estatura média 25%.'
@@ -1671,8 +1599,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 53
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1681,28 +1609,28 @@ questoes:
   alternativas:
     A:
       texto: voz passiva – A estrutura da intervenção foi planejada com base em protocolos já descritos
-        na literatura e adaptada à rotina das crianças atendidas .
+        na literatura e adaptada à rotina das crianças atendidas.
     B:
       texto: primeira pessoa do singular – “achei que seria uma boa oportunidade unir atividade física
         e realidade virtual e avaliar se isso seria interessante para as pessoas com TEA, suas famílias
-        e a comunidade” .
+        e a comunidade”.
     C:
       texto: concessivas – Mesmo assim, afirma que crianças com maior nível de comprometimento também
-        participaram ativamente, reforçando o potencial inclusivo da proposta .
+        participaram ativamente, reforçando o potencial inclusivo da proposta.
     D:
-      texto: discurso direto – “ As crianças tinham limites diferentes quanto à execução e tempo de engajamento,
+      texto: discurso direto – “As crianças tinham limites diferentes quanto à execução e tempo de engajamento,
         mas em geral conseguiam se divertir e realizar o que era proposto durante o período que estavam
-        em sala jogando ”.
+        em sala jogando”.
     E:
       texto: estrangeirismos – Apesar das respostas positivas, Grola afirma que os exergames não substituem
         terapias convencionais, mas adicionam um recurso valioso ao repertório de profissionais que atendem
-        a crianças com TEA .
+        a crianças com TEA.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1729,8 +1657,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: variacao-linguistica
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1755,8 +1683,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 56
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1779,40 +1707,37 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 57
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: combinatoria-e-probabilidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Em cada partida de um determinado jogo, pode-se ganhar ou perder com igual probabilidade,
-      mas não empatar. Quando se ganha uma partida, ganha-se \U0001D45D=0,1, e quando se perde uma partida,
-      perde-se \U0001D45D=0,1 . Suponha que um jogador jogue exatamente 10 partidas desse jogo. Qual é
-      a probabilidade desse jogador obter lucro em um jogo com exatamente 10 partidas?"
+      mas não empatar. Quando se ganha uma partida, ganha-se \U0001D45D = 0,1, e quando se perde uma partida,
+      perde-se \U0001D45D = 0,1. Suponha que um jogador jogue exatamente 10 partidas desse jogo. Qual
+      é a probabilidade desse jogador obter lucro em um jogo com exatamente 10 partidas?"
   alternativas:
     A:
-      texto: ''
+      texto: 193/512
     B:
-      texto: ''
+      texto: 167/256
     C:
-      texto: ''
+      texto: 1/2
     D:
-      texto: ''
+      texto: 6/10
     E:
-      texto: ''
+      texto: 4/10
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈434, 444, 460, 470, 487, 496, 513, 522, 539, 542,
-    548, 552: conferir o texto'
-  - 'Texto sublinhado na página 22, y≈442, 468, 494, 520, 546, 550: formatação perdida no texto puro'
+  pendencias: []
 - numero: 58
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: optica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O LiDAR ( Light Detection and Ranging ) é uma tecnologia de sensoriamento remoto que utiliza pulsos de laser infravermelho para medir distâncias e movimentos em tempo real. O sistema calcula o “tempo de voo” do laser , que é o intervalo entre a emissão do pulso e o seu retorno ao sensor após atingir um objeto. Ao processar bilhões dessas medições, o LiDAR gera uma nuvem de pontos, permitindo a criação de mapas 3D dinâmicos essenciais para a navegação de veículos autônomos e o monitoramento de desastres naturais.
+      O LiDAR (Light Detection and Ranging) é uma tecnologia de sensoriamento remoto que utiliza pulsos de laser infravermelho para medir distâncias e movimentos em tempo real. O sistema calcula o “tempo de voo” do laser, que é o intervalo entre a emissão do pulso e o seu retorno ao sensor após atingir um objeto. Ao processar bilhões dessas medições, o LiDAR gera uma nuvem de pontos, permitindo a criação de mapas 3D dinâmicos essenciais para a navegação de veículos autônomos e o monitoramento de desastres naturais.
       Considere um sistema LiDAR de alta precisão operando em um veículo autônomo. Qual das seguintes afirmações descreve corretamente um aspecto físico ou uma limitação operacional dessa tecnologia?
   alternativas:
     A:
@@ -1838,17 +1763,17 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 59
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Um grave acidente de ônibus ocorreu próximo à cidade de Montes Claros, estado de Minas Gerais.
-      O instante do acidente na rodovia foi presenciado por da população dessa cidade. O número de pessoas
-      que soube do acontecimento \U0001D461 horas \U0001D434(\U0001D461)=\n, em que \U0001D435 é a após
-      o acidente é dado por:\npopulação da cidade de Montes Claros. Sabendo-se que da população soube
-      do acidente 3 horas após, então o tempo que passou até que da população soubesse da notícia foi
-      de"
+      O instante do acidente na rodovia foi presenciado por 1/65 da população dessa cidade. O número de
+      pessoas que soube do acontecimento \U0001D461 horas após o acidente é dado por: \U0001D434(\U0001D461)
+      = \U0001D435/(1 + \U0001D436\U0001D452⁻ᵏᵗ), em que \U0001D435 é a população da cidade de Montes
+      Claros. Sabendo-se que 1/9 da população soube do acidente 3 horas após, então o tempo que passou
+      até que 1/5 da população soubesse da notícia foi de"
   alternativas:
     A:
       texto: 4,5 horas.
@@ -1864,78 +1789,63 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: optica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Câmeras de smartphones
-      modernos têm utilizado
-      designs que permitem que a
-      luz percorra um caminho
   - figura: q060-1.webp
   - texto: |-
-      óptico maior dentro da
-      câmera sem aumentar seu
-      tamanho físico, possibilitando
-      zooms ópticos maiores. Um aspecto central desse design são as reflexões internas totais da luz no interior da câmera, que ocorrem quando o ângulo de refração na interface com o meio externo é maior que 90 .
+      Câmeras de smartphones modernos têm utilizado designs que permitem que a luz percorra um caminho óptico maior dentro da câmera sem aumentar seu tamanho físico, possibilitando zooms ópticos maiores. Um aspecto central desse design são as reflexões internas totais da luz no interior da câmera, que ocorrem quando o ângulo de refração na interface com o meio externo é maior que 90°.
       Considere um prisma feito de um material de índice de refração n cuja seção transversal tem o formato de um paralelogramo em que uma de suas faces, em contato com o ar, forma um ângulo de 45º com a horizontal (vide figura).
   - figura: q060-2.webp
-  - texto: "Note e adote:\n√2\n\U0001D460\U0001D452\U0001D45B45 =\U0001D450\U0001D45C\U0001D46045 =\n2\nConsidere
-      o índice de refração do ar (n ) igual a 1.\nLei de Snell: \U0001D45B \U0001D460\U0001D452\U0001D45B\U0001D703
-      =\U0001D45B \U0001D460\U0001D452\U0001D45B\U0001D703\nQual o valor mínimo de n para que um raio
-      de luz se propagando na horizontal dentro do prisma sofra reflexão total nesta face?\n√2"
+  - figura: q060-3.webp
+  - texto: Qual o valor mínimo de n para que um raio de luz se propagando na horizontal dentro do prisma
+      sofra reflexão total nesta face?
   alternativas:
     A:
-      texto: '2'
+      texto: √2/2
     B:
       texto: '1'
     C:
-      texto: |-
-        √2
-        3√2
+      texto: √2
     D:
-      texto: '2'
+      texto: 3√2/2
     E:
       texto: 2√2
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈93, 112, 131, 161, 180, 201, 219, 221, 229, 244,
-    253, 263, 268, 278, 388, 405, 421, 497, 562: conferir o texto'
-  - 'Texto sublinhado na página 23, y≈226, 261, 275, 392, 496, 562: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 23, y≈367–578
+  pendencias: []
 - numero: 61
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Considere a função \U0001D453:ℝ→ℝ , definida por \U0001D453(\U0001D465)=\U0001D44E\U0001D465+\U0001D44F
-      em que \U0001D44E e \U0001D44F são coeficientes reais diferentes de zero. Denote por \U0001D453
-      a função real inversa de \U0001D453 .\nSobre \U0001D453 e \U0001D453 , é correto afirmar:"
+  - texto: "Considere a função \U0001D453: ℝ → ℝ, definida por \U0001D453(\U0001D465) = \U0001D44E\U0001D465
+      + \U0001D44F em que \U0001D44E e \U0001D44F são coeficientes reais diferentes de zero. Denote por
+      \U0001D453⁻¹ a função real inversa de \U0001D453.\nSobre \U0001D453 e \U0001D453⁻¹, é correto afirmar:"
   alternativas:
     A:
-      texto: "A interseção entre os gráficos de \U0001D453 e \U0001D453 é uma reta."
+      texto: "A interseção entre os gráficos de \U0001D453 e \U0001D453⁻¹ é uma reta."
     B:
       texto: "Todo ponto (x, y) do gráfico de \U0001D453 possui um correspondente (y, x) no gráfico de
-        \U0001D453 ."
+        \U0001D453⁻¹."
     C:
       texto: "O ponto de interseção do gráfico de \U0001D453 com o eixo \U0001D442\U0001D465 tem abscissa
-        igual à abscissa do ponto de interseção do gráfico de \U0001D453 com o eixo \U0001D442\U0001D466
-        ."
+        igual à abscissa do ponto de interseção do gráfico de \U0001D453⁻¹ com o eixo \U0001D442\U0001D466."
     D:
-      texto: "O ponto de interseção entre \U0001D453 e \U0001D453 é ( , ) ."
+      texto: "O ponto de interseção entre \U0001D453 e \U0001D453⁻¹ é (\U0001D44F/(\U0001D44E − 1), −\U0001D44F/(\U0001D44E
+        − 1))."
     E:
-      texto: "A ordenada do ponto de interseção de \U0001D453 com o eixo \U0001D442\U0001D466 é , já a
-        abscissa do ponto de interseção de \U0001D453 com o eixo é \U0001D442\U0001D465 é ."
+      texto: "A ordenada do ponto de interseção de \U0001D453⁻¹ com o eixo \U0001D442\U0001D466 é −\U0001D44F/\U0001D44E,
+        já a abscissa do ponto de interseção de \U0001D453 com o eixo é \U0001D442\U0001D465 é −\U0001D44E/\U0001D44F."
   resposta: B
   anulada: false
   pendencias: []
 - numero: 62
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1945,14 +1855,14 @@ questoes:
   - texto: 'Em relação a esses números, é correto afirmar:'
   alternativas:
     A:
-      texto: Sabendo que T = 14851, tem-se que T = 15051.
+      texto: Sabendo que T₁₀₀ = 14851, tem-se que T₁₀₁ = 15051.
     B:
       texto: A diferença entre dois números triangulares centrados consecutivos são termos de uma PA de
         primeiro termo 1 e razão 3.
     C:
       texto: 62 é o 7º número triangular centrado e 83 é o 8º número triangular centrado.
     D:
-      texto: Todo número triangular centrado, T , n>1, quando dividido por 3, tem resto igual a 1.
+      texto: Todo número triangular centrado, Tₙ, n > 1, quando dividido por 3, tem resto igual a 1.
     E:
       texto: A diferença entre dois números triangulares centrados consecutivos são termos de uma PG de
         primeiro termo 1 e razão 3.
@@ -1960,21 +1870,22 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma bióloga estuda o crescimento de uma população de microrganismos em culturas diferentes.
       Ela observa que a quantidade de microrganismos em cada cultura pode ser descrita por uma função
-      injetora \U0001D453:ℝ →ℝ , que mede a taxa logarítmica de crescimento relativa de cada cultura,
-      e satisfaz as propriedades: \U0001D453(1)=0 e \U0001D453(\U0001D465∙\U0001D466)=\U0001D453(\U0001D465)+\U0001D453(\U0001D466)
-      para todo \U0001D465>0 e \U0001D466>0 .\nA bióloga analisa 5 culturas \U0001D44E ,\U0001D44E ,\U0001D44E
-      ,\U0001D44E e \U0001D44E , nessa ordem, que foram iniciadas de forma que o número inicial de microrganismos
-      forma uma progressão geométrica (PG) em que, \U0001D44E >0 para \U0001D456=1,2,3,4,5 e que \U0001D453(\U0001D44E
-      )=13\U0001D453(2) + 2\U0001D453(\U0001D44E ) e\n\U0001D453( )=−2\U0001D453(2\U0001D44E ) .\nPara
-      entender a distribuição inicial da população de microrganismos, com base nos dados observados, a
-      bióloga precisa determinar o valor inicial da primeira cultura \U0001D44E , que é"
+      injetora \U0001D453: ℝ₊* → ℝ, que mede a taxa logarítmica de crescimento relativa de cada cultura,
+      e satisfaz as propriedades: \U0001D453(1) = 0 e \U0001D453(\U0001D465 · \U0001D466) = \U0001D453(\U0001D465)
+      + \U0001D453(\U0001D466) para todo \U0001D465 > 0 e \U0001D466 > 0.\nA bióloga analisa 5 culturas
+      \U0001D44E₁, \U0001D44E₂, \U0001D44E₃, \U0001D44E₄ e \U0001D44E₅, nessa ordem, que foram iniciadas
+      de forma que o número inicial de microrganismos forma uma progressão geométrica (PG) em que, \U0001D44Eᵢ
+      > 0 para \U0001D456 = 1, 2, 3, 4, 5 e que ∑ᵢ₌₁⁵ \U0001D453(\U0001D44Eᵢ) = 13\U0001D453(2) + 2\U0001D453(\U0001D44E₁)
+      e ∑ᵢ₌₁⁴ \U0001D453(\U0001D44Eᵢ/\U0001D44Eᵢ₊₁) = −2\U0001D453(2\U0001D44E₁).\nPara entender a distribuição
+      inicial da população de microrganismos, com base nos dados observados, a bióloga precisa determinar
+      o valor inicial da primeira cultura \U0001D44E₁, que é"
   alternativas:
     A:
       texto: '1.'
@@ -1988,19 +1899,16 @@ questoes:
       texto: '5.'
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈104, 107, 147, 157, 186, 189, 190, 196, 198, 203,
-    208, 245: conferir o texto'
-  - 'Texto sublinhado na página 24, y≈203: formatação perdida no texto puro'
+  pendencias: []
 - numero: 64
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O experimento idealizado pelo cientista Richard Lenski, em 1988, monitora a evolução de 12 populações de bactérias por mais de 75 mil gerações. O estudo demonstra o surgimento contínuo e esporádico de mutações, as quais podem se fixar por garantirem vantagem à população, ou levarem à extinção de determinada população.
-      Em determinado momento, depois de muitas gerações, surgiu uma mutação que conferiu às bactérias, denominadas Cit , a capacidade de metabolizar um componente do meio de cultura (citrato), e isso proporcionou maior velocidade de crescimento.
+      Em determinado momento, depois de muitas gerações, surgiu uma mutação que conferiu às bactérias, denominadas Cit⁺, a capacidade de metabolizar um componente do meio de cultura (citrato), e isso proporcionou maior velocidade de crescimento.
       A seguir, são apresentados o experimento e o surgimento da nova linhagem bacteriana.
   - figura: q064-1.webp
   - texto: A análise do experimento permite concluir que a
@@ -2017,11 +1925,10 @@ questoes:
       texto: variação genética leva a diferentes repercussões, inclusive ocupação de novo nicho ecológico.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈91–218
+  pendencias: []
 - numero: 65
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2046,8 +1953,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2066,11 +1973,8 @@ questoes:
       texto: As asas dos pinguins e dos morcegos constituem órgãos análogos, pois derivam de folhetos
         embrionários distintos.
     D:
-      texto: |-
-        As asas dos morcegos e as nadadeiras das focas constituem
-        órgãos
-        homólogos,
-        pois evoluíram independentemente para diferentes formas de locomoção.
+      texto: As asas dos morcegos e as nadadeiras das focas constituem órgãos homólogos, pois evoluíram
+        independentemente para diferentes formas de locomoção.
     E:
       texto: As nadadeiras das baleias e as asas dos pinguins constituem órgãos homólogos, pois ambas
         derivam da mesma estrutura de um ancestral comum.
@@ -2078,14 +1982,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Também eu, que aos poucos estava me reduzindo ao que em mim era irredutível, também eu tinha milhares de cílios pestanejando, e com meus cílios eu avanço, eu protozoária, proteína pura. Segura minha mão, cheguei ao irredutível com a fatalidade de um dobre — sinto que tudo isso é antigo e amplo, sinto no hieróglifo da barata lenta a grafia do Extremo Oriente. E neste deserto de grandes seduções, as criaturas: eu e a barata viva. A vida, meu amor, é uma grande sedução onde tudo o que existe se seduz. Aquele quarto que estava deserto e por isso primariamente vivo. Eu chegara ao nada, e o nada era vivo e úmido.”
-      Clarice Lispector. A paixão segundo G.H .
+      Clarice Lispector. A paixão segundo G.H.
       Considerando a estética de Clarice Lispector e a trajetória da personagem G.H., o excerto
   alternativas:
     A:
@@ -2111,14 +2015,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O pensamento medieval estava na generalidade saturado das concepções de fé cristã. De igual modo, e numa esfera mais limitada, o pensamento de todos aqueles que viviam nos círculos da corte ou dos castelos estava impregnado do ideal da cavalaria.
-      Johan Huizinga. O declínio da Idade Média . São Paulo: Verbo/Edusp, 1978.
+      Johan Huizinga. O declínio da Idade Média. São Paulo: Verbo/Edusp, 1978.
       O texto, extraído de obra originalmente publicada em 1919,
   alternativas:
     A:
@@ -2135,14 +2039,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 69
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A balada é um gênero narrativo de origem medieval, tradicionalmente ligado à dança, à música e ao canto. Sua composição tem um ritmo mais lento, quer de índole romântica, quer como registro de um quotidiano alienador ou hostil. A oralidade tem grande importância na composição, execução e transmissão da balada, o que leva a repetições de fórmulas no interior de uma mesma estrofe ou entre estrofes. Esse gênero tem também a característica geral de não ter um autor identificável, mas coletivo e anônimo, o que o faz representativo de uma comunidade ou um povo.
-      Miguel Alarcão. E-Dicionário de Termos Literários , “Balada”. Disponível em https://edtl.fcsh.unl.pt/encyclopedia/balada. Adaptado.
+      Miguel Alarcão. E-Dicionário de Termos Literários, “Balada”. Disponível em https://edtl.fcsh.unl.pt/encyclopedia/balada. Adaptado.
       A partir do que se afirma no texto, a escolha do título Balada de amor ao vento se justifica porque o romance
   alternativas:
     A:
@@ -2169,14 +2073,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 70
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “A vida não me corre mal. Já lá vão os tempos em que vivi de miséria e morte, mas hoje existe em mim bem demarcada a realidade e o sonho. Mas para quê, recordar isso agora? Passaram já dezesseis anos que o Mwando me abandonou e talvez já tenha morrido. Tudo fiz para que ele regressasse. Os melhores curandeiros fizeram tudo ao seu alcance tentando produzir o milagre do regresso e nada. Acredito que foi tudo obra dos maus espíritos, que é o sangue da Phati que clamava por vingança. Todos os curandeiros foram unânimes em afirmar que os meus espíritos e os do Mwando estão em pé de guerra lá no fundo da terra e por essa razão recusaram sempre a nossa união. O Mwando era um homem majestoso, mas tinha aquela cortina de mistério que nunca consegui desvendar. Não quero mais saber dele, mas guardo doces recordações do tempo dos sonhos.”
-      Paulina Chiziane. Balada de amor ao vento .
+      Paulina Chiziane. Balada de amor ao vento.
       No excerto, a reflexão de Sarnau articula experiência e memória, contribuindo para o sentido do texto ao
   alternativas:
     A:
@@ -2198,8 +2102,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -2220,8 +2124,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 72
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -2242,8 +2146,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 73
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2252,6 +2156,7 @@ questoes:
       Do outro lado do mar
       Mas reconheço a sua voz há muitos anos
       E digo ao silêncio os seus versos devagar
+
       Relembrando
       O antigo jovem tempo tempo quando
       Pelos sombrios corredores da casa antiga
@@ -2259,6 +2164,7 @@ questoes:
       Eu recitava
       “As três mulheres do sabonete Araxá”
       E minha avó se espantava
+
       Manuel Bandeira era o maior espanto da minha avó
       Quando em manhãs intactas e perdidas
       No quarto já então pleno de futura
@@ -2266,18 +2172,22 @@ questoes:
       Eu lia
       A canção do “Trem de ferro”
       E o “Poema do beco”
+
       Tempo antigo lembrança demorada
-      Quando deixei uma tesoura esquecida nos ramos da cerejeira Quando
+      Quando deixei uma tesoura esquecida nos ramos da cerejeira
+      Quando
       Me sentava nos bancos pintados de fresco
       E no Junho inquieto e transparente
       As três mulheres do sabonete Araxá
       Me acompanhavam
       Tão visíveis
       (...)
+
       Estes poemas caminharam comigo e com a brisa
       (...)
       E foram parte do tempo respirado
-      Sophia de Mello Breyner Andresen. Geografia .
+
+      Sophia de Mello Breyner Andresen. Geografia.
       No poema “Manuel Bandeira”, de Sophia de Mello Breyner Andresen, a voz lírica revisita memórias da juventude associadas à leitura da obra do poeta modernista brasileiro. A partir da construção temporal, da dimensão metapoética e do diálogo intertextual presentes no poema, é correto afirmar:
   alternativas:
     A:
@@ -2302,9 +2212,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 74
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: poesia
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
@@ -2320,7 +2231,7 @@ questoes:
       (...)
       E esse Anjo disse a Tom que, se ele for bonzinho,
       Terá a Deus como pai, e todo o seu carinho.
-      William Blake. “O limpador de chaminés”. Canções da inocência (1789). In: Poesia e prosa selecionadas . São Paulo: J.C. Ismael Editor, 1984.Tradução: Paulo Vizioli.
+      William Blake. “O limpador de chaminés”. Canções da inocência (1789). In: Poesia e prosa selecionadas. São Paulo: J.C. Ismael Editor, 1984. Tradução: Paulo Vizioli.
       A partir da leitura do excerto e considerando o contexto da Revolução Industrial na Inglaterra do século XVIII, assinale a alternativa que interpreta corretamente a relação entre os aspectos poéticos e a trama histórica.
   alternativas:
     A:
@@ -2342,49 +2253,46 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 75
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma lapiseira usa uma mina de grafite perfeitamente cilíndrica de 2 mm de diâmetro e 60 mm
       de comprimento. Uma pessoa está escrevendo com essa lapiseira, mantendo a mina de grafite inclinada
       a 30 graus em relação à vertical e a 60 graus com relação ao plano do papel. Após algum tempo, em
-      um primeiro momento \U0001D440 , ela retira a mina de grafite da lapiseira e constata que o comprimento
-      da parte mais curta da mina de grafite mede 50 mm. Em um outro momento \U0001D440 , após mais algum
+      um primeiro momento \U0001D440₁, ela retira a mina de grafite da lapiseira e constata que o comprimento
+      da parte mais curta da mina de grafite mede 50 mm. Em um outro momento \U0001D440₂, após mais algum
       tempo de uso, ela verifica que a mina de grafite tem agora 40 mm na parte mais curta."
   - figura: q075-1.webp
-  - texto: "Conclui-se que o volume consumido entre os momentos \U0001D440 e \U0001D440 e a área da superfície
-      inclinada, que é uma elipse, valem, respectivamente,"
+  - texto: "Conclui-se que o volume consumido entre os momentos \U0001D440₁ e \U0001D440₂ e a área da
+      superfície inclinada, que é uma elipse, valem, respectivamente,"
   alternativas:
     A:
-      texto: |-
-        do volume da mina de grafite inicial e
-        .
+      texto: "1/6 do volume da mina de grafite inicial e 2\U0001D70B√3/3."
     B:
-      texto: "do volume da mina de grafite inicial e 2\U0001D70B ."
+      texto: "1/6 do volume da mina de grafite inicial e 2\U0001D70B."
     C:
-      texto: do volume da mina de grafite inicial e .
+      texto: "1/6 do volume da mina de grafite inicial e \U0001D70B/2."
     D:
-      texto: do volume da mina de grafite inicial e .
+      texto: "1/4 do volume da mina de grafite inicial e \U0001D70B√2/2."
     E:
-      texto: do volume da mina de grafite inicial e .
+      texto: "1/4 do volume da mina de grafite inicial e \U0001D70B√3/2."
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 29, y≈129, 150, 301, 311, 341, 350, 367, 376, 393, 403,
-    421, 431, 449, 458: conferir o texto'
-  - 'Texto sublinhado na página 29, y≈348, 374, 400, 428, 456: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 29, y≈340–448
+  pendencias: []
 - numero: 76
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      A retirada de metais pesados como Cd de efluentes industriais pode ser feita pela precipitação desses íons seguida da filtração. A precipitação do Cd pode ser feita por meio da adição de bases, já que seu hidróxido, Cd(OH) , nas condições de operação do reator, possui uma constante de solubilidade bastante baixa (K ~ 2×10 ).
-      Assumindo que a legislação brasileira estabelece como limite aceitável a concentração de aproximadamente 0,224 mg·L de Cd em efluentes, o pH mínimo para garantir a remoção adequada dos íons é
+      A retirada de metais pesados como Cd²⁺ de efluentes industriais pode ser feita pela precipitação desses íons seguida da filtração. A precipitação do Cd²⁺ pode ser feita por meio da adição de bases, já que seu hidróxido, Cd(OH)₂, nas condições de operação do reator, possui uma constante de solubilidade bastante baixa (Kₚₛ ~ 2×10⁻¹⁶).
+      Assumindo que a legislação brasileira estabelece como limite aceitável a concentração de aproximadamente 0,224 mg·L⁻¹ de Cd²⁺ em efluentes, o pH mínimo para garantir a remoção adequada dos íons é
+  - texto: |-
+      Note e adote:
+      Massa molar do Cd = 112 g·mol⁻¹.
   alternativas:
     A:
       texto: '4.'
@@ -2395,21 +2303,15 @@ questoes:
     D:
       texto: '9.'
     E:
-      texto: |-
-        10.
-        Note e adote:
-        Massa molar do Cd = 112 g · mol .
+      texto: '10.'
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 29, y≈514, 536, 550, 567, 568, 600, 612, 726: conferir
-    o texto'
-  - 'Texto sublinhado na página 29, y≈737: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 29, y≈708–737
+  pendencias: []
 - numero: 77
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: sociologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
@@ -2441,8 +2343,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 78
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: transportes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2471,37 +2373,17 @@ questoes:
         Itaqui e são distribuídos para o agronegócio no interior do país.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 30, y≈98, 110, 121, 132, 144: formatação perdida no texto puro'
+  pendencias: []
 - numero: 79
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
+  - texto: Exportações brasileiras no período 1821 – 1850
+  - figura: q079-1.webp
   - texto: |-
-      Exportações brasileiras no período 1821 – 1850
-      Produto
-      1821-30
-      1831-40
-      1841-50
-      Açúcar
-      27,8 %
-      24,4 %
-      26,3 %
-      Algodão
-      21 %
-      10,6 %
-      7,4 %
-      Café
-      19,2 %
-      43,8 %
-      42,6 %
-      Couros e peles
-      13,8 %
-      7,9 %
-      8,6 %
-      “ Anuário Estatístico IBGE, 1939-1940 ”. In: D. Nogueira. Raízes de uma Nação . Rio de Janeiro: Forense-Universitária, 1988. Adaptado.
+      “Anuário Estatístico IBGE, 1939-1940”. In: D. Nogueira. Raízes de uma Nação. Rio de Janeiro: Forense-Universitária, 1988. Adaptado.
       De acordo com os dados estatísticos exibidos na tabela, é correto afirmar:
   alternativas:
     A:
@@ -2521,17 +2403,16 @@ questoes:
         este produto como o principal responsável pela sustentação econômica do Segundo Reinado.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 30, y≈88–144
+  pendencias: []
 - numero: 80
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      “ A triste experiência do passado assaz nos mostra a necessidade de a valorizarmos (a História Natural), porque a substância da nação e sua riqueza vimos por largo tempo passar aos estranhos em troca de gêneros que já cresciam em nossas terras. ”
-      Memórias econômicas da Academia Real das Ciências de Lisboa para o adiantamento da Agricultura, das Artes e da Indústria em Portugal e suas Conquistas . Lisboa: Oficina da Academia Real das Ciências de Lisboa, 1789. Adaptado.
+      “A triste experiência do passado assaz nos mostra a necessidade de a valorizarmos (a História Natural), porque a substância da nação e sua riqueza vimos por largo tempo passar aos estranhos em troca de gêneros que já cresciam em nossas terras.”
+      Memórias econômicas da Academia Real das Ciências de Lisboa para o adiantamento da Agricultura, das Artes e da Indústria em Portugal e suas Conquistas. Lisboa: Oficina da Academia Real das Ciências de Lisboa, 1789. Adaptado.
       Conforme o excerto, qual das alternativas melhor representa o papel delegado ao conhecimento científico pela Coroa portuguesa no final do século XVIII?
   alternativas:
     A:
