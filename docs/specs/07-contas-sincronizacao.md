@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.5
-**Data:** 2026-10-02
+**Versão:** 1.6
+**Data:** 2026-10-03
 **PRD Ref:** 01-PRD v4.1 (RF-008, RF-020, RF-022, RF-024 a RF-026, US-013 a US-016, RN-012, RN-016, RN-017, RNF-004, RNF-005)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
-**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2), CR-010 (carreira-alvo na conta e nos textos de privacidade — `specs/08-notas-de-corte.md`)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2), CR-010 (carreira-alvo na conta e nos textos de privacidade — `specs/08-notas-de-corte.md`), CR-011 (ids `CODIGO-NNN` no histórico; vitrine com `anos` só dos vestibulares; textos de 80 questões na apresentação)
 
 ---
 
@@ -110,6 +110,7 @@ def caminho_seguro(voltar: str | None) -> str  # CAMINHO_VOLTAR ou "/"
 
 ```python
 # app/schemas.py — histórico (espelho de HistoricoEntry, specs/04 §2.2)
+# IdQuestao = ^\d{4}(s[1-9])?-\d{3}$: "2025-037" ou "2027s1-037" (CR-011)
 class ItemHistorico(BaseModel):              # extra="forbid"
     questao_id: IdQuestao
     resposta: Letra | None
@@ -518,7 +519,7 @@ Desde o CR-007 (D1, emenda à D2 do CR-006), a apresentação mostra os números
 - Router `app/routers/vitrine.py`, **sem** `exigir_acesso`: público em qualquer modo de acesso (`conta`, `livre`, `indisponivel`), como o `/api/health`. Sem rate limit (duas consultas agregadas leves, como o health). Não lê nem cria cookie.
 - Serviço `obter_vitrine(sessao)` em `services/catalogo.py`:
   - `total_questoes`: questões **não anuladas**, o mesmo `total_questoes` do catálogo (e do "270 questões de 3 provas" do início com login)
-  - `anos`: anos das provas sincronizadas, em ordem crescente. Cada prova é um ano, então o número de provas é `len(anos)`
+  - `anos`: anos das provas de **vestibular** sincronizadas, sem repetição, em ordem crescente. Cada uma é um ano, então o número de provas é `len(anos)`. Os simulados oficiais (CR-011) entram em `total_questoes`, mas não em `anos` (P4): a apresentação segue contando provas e período dos vestibulares, sem campo novo
 
 ```python
 class VitrineResponse(BaseModel):
@@ -557,9 +558,9 @@ Protótipo: telas "Apresentação · desktop" e "Apresentação · celular" do c
 
 **`PreviaProduto` (O1.2)** (`components/apresentacao/PreviaProduto.tsx`): HTML/CSS com os tokens do site, sem captura de tela nem chamada à API.
 - Texto para leitor de tela (`sr-only`): "Prévia da tela de resolução: uma questão de História da FUVEST 2025 com a alternativa B marcada, o cronômetro, a folha de respostas e os botões Anterior, Revisar e Próxima."
-- Miniatura (`aria-hidden`): barra do topo com "FUVEST 2025" (só a partir de 1024 px), o cronômetro "04:52:10" e "Folha 12/90"; "Questão 13 de 90" e "História · FUVEST 2025 (questão 13)"; o enunciado da questão 13 de 2025 na fonte de leitura; as alternativas A, B (marcada, como na resolução) e C, cortadas com reticências; e a barra inferior com "‹ Anterior", "Revisar" e "Próxima ›" (azul). O texto vem do pacote `data/provas/2025/prova.yaml`.
+- Miniatura (`aria-hidden`): barra do topo com "FUVEST 2025" (só a partir de 1024 px), o cronômetro "04:52:10" e "Folha 12/80"; "Questão 13 de 80" (o formato da Prova completa desde o CR-011) e "História · FUVEST 2025 (questão 13)"; o enunciado da questão 13 de 2025 na fonte de leitura; as alternativas A, B (marcada, como na resolução) e C, cortadas com reticências; e a barra inferior com "‹ Anterior", "Revisar" e "Próxima ›" (azul). O texto vem do pacote `data/provas/2025/prova.yaml`.
 - A coluna da prévia tem 616 px de altura entre 1024 e 1279 px e 584 px a partir daí, para o cartão de resultado ficar abaixo da alternativa marcada.
-- Cartão de resultado sobreposto (só a partir de 1024 px, embaixo e à esquerda da coluna): "Resultado", "58 de 90 acertos" e as barras de Inglês 40%, História 53%, Geografia 77% e Física 100% (números ilustrativos). Tem o próprio texto para leitor de tela: "Ao lado, o desempenho por disciplina de um resultado."
+- Cartão de resultado sobreposto (só a partir de 1024 px, embaixo e à esquerda da coluna): "Resultado", "52 de 80 acertos" (CR-011) e as barras de Inglês 40%, História 53%, Geografia 77% e Física 100% (números ilustrativos). Tem o próprio texto para leitor de tela: "Ao lado, o desempenho por disciplina de um resultado."
 
 **Identidade (CR-008):** o `h1` em Fraunces com o círculo de caneta em "reais" (`aria-hidden`; o nome do título não muda); os números da vitrine em `font-titulo`; os cartões dos modos com `CARTAO` (16 px, sem sombra) e os títulos em `font-titulo`; na prévia, o número da questão numa bolinha e o cronômetro em `font-titulo`, como na resolução nova.
 
