@@ -20,9 +20,11 @@ textos_base:
       João Carlos Corrêa
       Somente cerca de 4% dos brasileiros se reconhecem como “latino-americanos”. Este dado contrasta brutalmente com a média de 43% em países como Argentina ou México. E aqui reside nosso paradoxo histórico: enquanto rejeitamos o rótulo, 66% de nós acreditam que o Brasil deve representar a região no Conselho de Segurança da ONU. Desejamos liderar um clube ao qual relutamos em pertencer. Esta ambivalência não é acidental e, sim, a herança de uma ferida colonial que teima em não cicatrizar.
       Nossa desconexão com a latinidade tem raízes profundas e dolorosas. Enquanto a América hispânica forjou sua identidade no fogo das guerras de independência contra a coroa espanhola, o Brasil manteve laços umbilicalmente coloniais com Portugal, criando um isolamento que se transformou em mito fundador. A língua portuguesa, longe de ser apenas um idioma, ergueu uma muralha simbólica. Como bem aponta o pesquisador argentino Fernando Mourón (USP), o conceito de “América Latina sempre se associou à colonização espanhola”, excluindo o Brasil de um imaginário continental. Alimentamos a narrativa da excepcionalidade: somos um “país continente”, uma democracia racial”, como um biombo para ocultar nossa inegável pertença geográfica e cultural.
-      A decolonização exige que reconheçamos que nossa suposta singularidade é uma armadilha colonial. Como argumentam teóricos inspirados em Theodor Adorno, como Santiago Castro-Gómez, a verdadeira unidade latinoamericana reside na diversidade não homogeneizada, nas raízes indígenas sufocadas, nas culturas africanas resistentes e nos fluxos migratórios que nos moldaram, elementos que o Brasil compartilha intimamente com seus vizinhos.
+      A decolonização exige que reconheçamos que nossa suposta singularidade é uma armadilha colonial. Como argumentam teóricos inspirados em Theodor Adorno, como Santiago Castro-Gómez, a verdadeira unidade latino-americana reside na diversidade não homogeneizada, nas raízes indígenas sufocadas, nas culturas africanas resistentes e nos fluxos migratórios que nos moldaram, elementos que o Brasil compartilha intimamente com seus vizinhos.
       A América Latina existe como um campo simbólico onde Brasil e seus vizinhos disputam significados e poder. Para muitos, como aponta Mourón, a região segue sendo vista como “preocupação e problema”, não como lar coletivo. A verdadeira decolonização, no entanto, já emerge das bases. Movimentos indígenas e quilombolas no Brasil agem em redes transnacionais com parceiros andinos, de forma a nos dar o acalanto de perceber que a unicidade latino-americana se forja “de baixo para cima”, nas lutas comuns contra o extrativismo predatório, o racismo estrutural e a violência neocolonial.
       Disponível em https://memorial.org.br/. Adaptado.
+  - texto: '(No original, estão sublinhados: “laços”, “clube”, “muralha”, “biombo”, “armadilha”, “diversidade”,
+      “fluxos”, “campo”, “lar” e “bases”.)'
 - id: tb02
   questoes:
   - 12
@@ -30,11 +32,13 @@ textos_base:
   conteudo:
   - texto: |-
       Velha roupa colorida
+
       Você não sente nem vê
       Mas eu não posso deixar de dizer, meu amigo
       Que uma nova mudança em breve vai acontecer
       E o que há algum tempo era jovem novo
       Hoje é antigo, e precisamos todos rejuvenescer
+
       Nunca mais meu pai falou: "She's leaving home"
       E meteu o pé na estrada, "Like a Rolling Stone..."
       Nunca mais eu convidei minha menina
@@ -43,6 +47,7 @@ textos_base:
       O dedo em V, cabelo ao vento, amor e flor, quero cartaz
       No presente a mente, o corpo é diferente
       E o passado é uma roupa que não nos serve mais
+
       Como Poe, poeta louco americano, eu pergunto ao passarinho:
       Black bird, Assum Preto, o que se faz?"
       E raven never raven never raven
@@ -51,6 +56,7 @@ textos_base:
       E raven never raven never raven
       Black bird, Pássaro Preto, Pássaro Preto me responde:
       "O passado nunca mais"
+
       Belchior, 1976.
 - id: tb03
   questoes:
@@ -60,14 +66,14 @@ textos_base:
   conteudo:
   - figura: tb03-1.webp
   - texto: |-
-      A fish on a platter depicted in a Roman mosaic dating from the 2 century AD.
+      A fish on a platter depicted in a Roman mosaic dating from the 2nd century AD.
       Until relatively recently, our knowledge of the realities of daily life in the Roman empire relied heavily on literary sources. They inevitably focused on the imperial elites.
       The past 40 years, however, have seen an explosion in the discovery of new material and textual evidence.
       The meticulous triangulation of all this new evidence by scholars has birthed a new, data-driven school of ancient history that has yielded an extraordinarily detailed picture of the lives and livelihoods not just of the empire’s privileged upper classes but of everyone else as well.
       The result is thrilling, because it overturns so many earlier assumptions. It used to be thought that the harsh living conditions of most ancient Romans must have taken a terrible toll on their health. Yet new bio-archaeological techniques reveal that skeletal signatures of childhood disease were twice as high in Victorian London as in Roman British cities. Dental records do reveal an alarming deterioration in oral health coincident with Roman rule. The Romans’ relative good health probably had something to do with their diet.
       Here, it is the assumption that most scraped by on a subsistence level which new data consigns to history. In fact, even slaves enjoyed typical daily calorific intakes nearly twice the subsistence level. Urban and rural diets were surprisingly rich and varied — bone analysis reveals a healthy mix of seafood, meat, dairy and legumes — even in the farthest-flung corners of the empire.
       The economic irrelevance of women and girls is another misconception. Textiles were a vast industry, employing up to half of all the labour in the empire, and what women could earn from spinning rivalled some male monthly wages. Thus, for an enormous number of Roman households, the female members were economically just as important as the males.
-      Financial Times . 10 January 2026. Adaptado.
+      Financial Times. 10 January 2026. Adaptado.
 - id: tb04
   questoes:
   - 64
@@ -75,14 +81,14 @@ textos_base:
   conteudo:
   - figura: tb04-1.webp
   - texto: |-
-      Molecules in hot springs such as Yellowstone's Grand Prismatic Spring could have been a source of early life . (Frank Kovalchek).
+      Molecules in hot springs such as Yellowstone's Grand Prismatic Spring could have been a source of early life. (Frank Kovalchek).
       When a bone grows, our bodies’ proteins help provide the structure. When a muscle tears, proteins help rebuild it. When we fight an infection, transport oxygen in our blood or send messages to a cell, proteins often step up to the plate. But how did these skilled molecules first form on Earth and help give rise to life?
       The mystery, which has evaded scientists for more than five decades, can be explained with rather simple chemistry, according to a study published in Nature.
       In lab experiments, scientists have successfully shown how two basic ingredients of life — ribonucleic acid (RNA) and amino acids — can combine to start protein synthesis.
-      The basic ingredients and conditions — in water — are thought to have been around on Earth about 4 billion years ago, providing clues to how early life may have been kickstarted or could arise on other planets.
+      The basic ingredients and conditions — in water — are thought to have been around on Earth about 4 billion years ago, providing clues to how early life may have been kick-started or could arise on other planets.
       “It seems pretty probable” that this reaction would have been occurring on early Earth, said Matthew Powner, a chemist at University College London and an author of the new study. Powner’s lab investigates the chemical processes that lead to life, exploring key mechanisms seen in all living organisms. One of the most fundamental processes is how cells make proteins, the complex molecules responsible for our growth and survival from bone formation to immune support.
       Proteins are made of amino acids, which are thought to have been around long before life emerged. Proteins can’t replicate themselves and are built from blueprints, provided by nucleic acids like DNA and RNA, that instruct the amino acids to assemble.
-      The Washington Post . 27 August 2025. Adaptado.
+      The Washington Post. 27 August 2025. Adaptado.
 - id: tb05
   questoes:
   - 70
@@ -96,8 +102,8 @@ textos_base:
       Why fungi? These underground ecosystems play a crucial role in regulating the climate. Soils store about 75 percent of Earth’s terrestrial carbon and contain close to 60 percent of Earth’s biodiversity.
       Mycorrhizal fungi form the basis of food chains for those aboveground organisms, which together generate more soil and nutrients. They draw carbon from plants and get it to stick to minerals underground, where it’s hard to release back into the atmosphere. The vast majority of crops form partnerships with mycorrhizal fungi and rely on them for their nutrients.
       These fungi also hold soil together; their bodies are woven into the aggregate and produce sticky chemicals that are hard to break down. Take away that scaffolding and soils would erode and disappear.
-      People think they know what soil and dirt is. With highresolution imaging, we’re starting to make it visible and show that it’s alive. These are ecosystems with as much complexity as what’s happening aboveground.
-      The New York Times . 14 January 2026. Adaptado.
+      People think they know what soil and dirt is. With high-resolution imaging, we’re starting to make it visible and show that it’s alive. These are ecosystems with as much complexity as what’s happening aboveground.
+      The New York Times. 14 January 2026. Adaptado.
 - id: tb06
   questoes:
   - 79
@@ -105,7 +111,7 @@ textos_base:
   conteudo:
   - texto: 'No início do século XX, exploradores que atravessavam a Antártida observaram um fenômeno intrigante
       na geleira Taylor: água de cor avermelhada brotava do gelo, lembrando sangue. O fenômeno ficou conhecido
-      como “Cachoeiras de Sangue” ( Blood Falls ).'
+      como “Cachoeiras de Sangue” (Blood Falls).'
   - figura: tb06-1.webp
   - texto: Durante muito tempo, acreditou-se que a coloração fosse causada por algas ou microrganismos
       pigmentados que viviam em reservatórios de água presas abaixo do gelo. Na verdade, análises químicas
@@ -113,16 +119,27 @@ textos_base:
       o gelo, em um ambiente sem oxigênio, a água é incolor. No entanto, ao entrar em contato com o ar,
       ocorre uma reação química rápida, responsável pela coloração vermelha intensa, semelhante à observada
       na ferrugem e no tom avermelhado do sangue, associado à hemoglobina.
+- id: tb07
+  questoes:
+  - 58
+  - 59
+  conteudo:
+  - texto: 'Os fios de cabelo possuem uma camada externa composta por moléculas derivadas de ácidos graxos.
+      Essa camada tem a função de proteger o cabelo, sendo responsável pela sensação de brilho e aparência
+      de cabelos saudáveis. A ligação desses ácidos graxos ao cabelo ocorre por meio da função ácida do
+      ácido graxo e de grupos SH presentes no cabelo, similar à formação de ésteres, representada pelo
+      processo:'
+  - figura: tb07-1.webp
 questoes:
 - numero: 1
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Certas narrativas convidam o leitor a acompanhar a trama dos acontecimentos, buscando nela as relações de causa e efeito que acabam por produzir sentido ao desfecho proposto.
-      Em A paixão segundo G.H. , G.H. propõe outro jogo ao leitor: acompanhá-la no processo de busca de algum tipo possível de elaboração dos fragmentos de linguagem que se acumulam na experiência existencial do indivíduo singular. Nesse processo de organização, explicita-se um diálogo entre narradora e leitor, como se observa em:
+      Em A paixão segundo G.H., G.H. propõe outro jogo ao leitor: acompanhá-la no processo de busca de algum tipo possível de elaboração dos fragmentos de linguagem que se acumulam na experiência existencial do indivíduo singular. Nesse processo de organização, explicita-se um diálogo entre narradora e leitor, como se observa em:
   alternativas:
     A:
       texto: “A verdade não faz sentido, a grandeza do mundo me encolhe. Aquilo que provavelmente pedi
@@ -144,11 +161,10 @@ questoes:
         das coisas. Sei que, em relação ao humano, essa prece neutra seria uma monstruosidade.”
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 2, y≈179–427
+  pendencias: []
 - numero: 2
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -174,18 +190,17 @@ questoes:
         que vemos “se retira sempre” e nunca se deixa apreender de forma definitiva.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 2, y≈639, 697: conferir o texto'
+  pendencias: []
 - numero: 3
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Examine a pintura:'
   - figura: q003-1.webp
   - texto: |-
-      Arissana Pataxó. Indígenas em foco , 2016. MASP.
+      Arissana Pataxó. Indígenas em foco, 2016. MASP.
       Considerando a tensão entre a obra de Arissana Pataxó e a história das imagens de povos indígenas produzidas por olhares externos, assinale a alternativa que interpreta corretamente seu efeito crítico:
   alternativas:
     A:
@@ -207,15 +222,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Do pouco que havemos expendido relativamente às qualidades naturais da mulher indígena, queremos concluir que ela é digna de ocupar outra posição em nossa terra; e que o desprezo com que foi sempre e continua a ser olhada a sua raça pelas nossas outras populações é um abuso antinacional, anticristão, que os nossos governantes e o nosso clero devem fazer desaparecer, empregando, por bem da pátria e da igreja, meios mais próprios e seguros para consegui-lo. A humanidade e a civilização reclamam imperiosamente deles convenientes medidas para arrancar essa pura, digna porção do povo brasileiro à vida em que vegeta, e torná-la útil como incontestavelmente pode ser a uma e a outra. Oferecendo o nosso mesquinho óbolo¹ à nobre causa das nossas aborígenes, temos concluído os pontos principais que fazem o objeto deste opúsculo.
       ¹óbolo: pequeno donativo feito aos pobres; esmola.
-      Nísia Floresta. Opúsculo Humanitário .
+      Nísia Floresta. Opúsculo Humanitário.
       Considerando o excerto, a autora
   alternativas:
     A:
@@ -236,17 +251,16 @@ questoes:
         formas diversas de discriminação sofridas por outros grupos marginalizados no Brasil.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 3, y≈233: conferir o texto'
+  pendencias: []
 - numero: 5
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “O Colégio da Bahia seja de Vossa Alteza para o favorecer porque está já bem principiado e haverá nele vinte meninos, pouco mais ou menos, e mande ao governador que faça casas para os meninos, porque as que têm são feitas por nossas mãos e são de pouca duração e mande dar alguns escravos da Guiné à casa para fazerem mantimentos porque a terra é tão fértil que facilmente se manterão e vestirão muitos meninos, se tiverem alguns escravos que façam roças de mantimentos e algodoais, e para nós não é necessário nada, porque a terra é tal que um só morador é poderoso a manter a um de nós. Para as outras capitanias mande Vossa Alteza mulheres órfãs, porque todas casarão. Nesta não são necessárias por agora, por haver muitas filhas de homens brancos e de índias da terra, as quais todas agora casarão, com a ajuda do Senhor, e se não casavam antes, era porque consentiam viver os homens em seus pecados livremente.”
-      Manuel da Nóbrega. Cartas: a El-Rei D. João III – 1551 . In: Manuel da Nóbrega. Cartas jesuíticas : cartas do Brasil (1549-1560). 2015.
+      Manuel da Nóbrega. Cartas: a El-Rei D. João III – 1551. In: Manuel da Nóbrega. Cartas jesuíticas: cartas do Brasil (1549-1560). 2015.
       O relato de Manuel da Nóbrega sobre a ação religiosa no Brasil colonial indica o seguinte:
   alternativas:
     A:
@@ -265,15 +279,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: america-latina
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Além das dificuldades para o reconhecimento internacional, as novas repúblicas nascidas nas regiões outrora colonizadas pelos espanhóis tiveram suas economias profundamente afetadas pelos muitos anos de guerra. [...] Não bastassem as dificuldades com o erário, desde muito cedo, conflitos sociais e étnicos ganharam destaque.
-      Valdir dos Santos. Independências na América Latina . São Paulo: Contexto, 2025.
-      As dificuldades mencionadas no texto e enfrentadas pelas excolônias espanholas na América demonstram
+      Além das dificuldades para o reconhecimento internacional, as novas repúblicas nascidas nas regiões outrora colonizadas pelos espanhóis tiveram suas economias profundamente afetadas pelos muitos anos de guerra. [...]
+      Não bastassem as dificuldades com o erário, desde muito cedo, conflitos sociais e étnicos ganharam destaque.
+      Valdir dos Santos. Independências na América Latina. São Paulo: Contexto, 2025.
+      As dificuldades mencionadas no texto e enfrentadas pelas ex-colônias espanholas na América demonstram
   alternativas:
     A:
       texto: a dependência dos novos países em relação aos Estados Unidos, que controlavam os países da
@@ -284,8 +299,7 @@ questoes:
       texto: a impossibilidade de ampliar as relações comerciais com a Inglaterra, cujo interesse estava
         voltado para o Oriente.
     D:
-      texto: a complexa constituição dos novos Estados, que passaram a ser controlados pelas elites criollas
-        .
+      texto: a complexa constituição dos novos Estados, que passaram a ser controlados pelas elites criollas.
     E:
       texto: o impasse provocado pelo fim do pacto comercial, que ampliava o mercado para os produtos
         coloniais.
@@ -293,14 +307,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: america-latina
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - figura: q007-1.webp
   - texto: |-
-      “A disputa entre Venezuela e Guiana pelo território de Essequibo dura mais de 1 século. O local tem 160 mil km² e representa 74% do território da Guiana. É rica em petróleo, minerais e tem saída para o Oceano Atlântico. O presidente venezuelano, Nicolás Maduro, convocou um referendo sobre a anexação da área em 10 de novembro (2023) , afirmando que, na ocasião, os venezuelanos decidirão ‘democraticamente o seu futuro e o seu destino’. O governo da Guiana classificou a medida como provocativa, ilegal, nula e sem efeito jurídico internacional. Também acusou o líder venezuelano de crime internacional ao tentar enfraquecer a integridade territorial do Estado soberano da Guiana. O país defende o Tratado de Washington de 1897 e o Laudo de Paris de 1899, que determinaram a área como pertencente à Guiana, que era uma colônia britânica na época, e delimitaram a linha fronteiriça do território.”
+      “A disputa entre Venezuela e Guiana pelo território de Essequibo dura mais de 1 século. O local tem 160 mil km² e representa 74% do território da Guiana. É rica em petróleo, minerais e tem saída para o Oceano Atlântico. O presidente venezuelano, Nicolás Maduro, convocou um referendo sobre a anexação da área em 10 de novembro (2023), afirmando que, na ocasião, os venezuelanos decidirão ‘democraticamente o seu futuro e o seu destino’. O governo da Guiana classificou a medida como provocativa, ilegal, nula e sem efeito jurídico internacional. Também acusou o líder venezuelano de crime internacional ao tentar enfraquecer a integridade territorial do Estado soberano da Guiana. O país defende o Tratado de Washington de 1897 e o Laudo de Paris de 1899, que determinaram a área como pertencente à Guiana, que era uma colônia britânica na época, e delimitaram a linha fronteiriça do território.”
       Disponível em: https://www.poder360.com.br/. Adaptado.
       Sobre a formação histórica do conflito entre Venezuela e Guiana e seus desdobramentos geopolíticos, é correto afirmar:
   alternativas:
@@ -326,8 +341,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 8
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: economia-mundial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -363,8 +378,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: semantica
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -383,11 +398,10 @@ questoes:
       texto: A língua portuguesa, à medida que consiste em um mero idioma, ergueu uma muralha simbólica.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto-base tb01: Possível figura vetorial (tabela/gráfico) na página 5, y≈178–491'
+  pendencias: []
 - numero: 10
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: figuras-de-linguagem
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -408,8 +422,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 11
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -434,12 +448,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 12
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
-  - texto: Na canção Velha roupa colorida , ao propor uma reflexão sobre diferentes momentos, o título
+  - texto: Na canção Velha roupa colorida, ao propor uma reflexão sobre diferentes momentos, o título
       orienta o sentido geral do texto, levando à compreensão de que
   alternativas:
     A:
@@ -459,13 +473,10 @@ questoes:
         temática da canção.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈422: conferir o texto'
-  - 'Texto-base tb02: Índice/expoente em fonte pequena na página 6, y≈71, 74, 135, 163, 230, 336, 353:
-    conferir o texto'
+  pendencias: []
 - numero: 13
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: poesia
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -487,23 +498,23 @@ questoes:
         do enunciado.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈673: conferir o texto'
+  pendencias: []
 - numero: 14
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: leituras-obrigatorias
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - figura: q014-1.webp
   - texto: |-
-      La Bouche du Roi , obra mais famosa de Romuald Hazoumè, artista plástico da República do Benim (África Ocidental), local de onde escravos africanos eram transportados para as Américas.
-      Em La Bouche du Roi , vê-se uma instalação que recria o mapa do porão de um navio negreiro, utilizando centenas de máscaras, galões de petróleo vazios e outros materiais que representam a situação de pessoas escravizadas. A obra propõe uma revisão iconográfica da história do tráfico de escravos.
-      Na obra A visão das plantas , de Djaimilia Pereira da Silva, o personagem Celestino retorna de sua vida de corsário assombrado pelos crimes que praticara. O pirata foi se transformando em um jardineiro, de cujas mãos nascem a beleza e o viço das plantas. Sob a paz da natureza, entretanto, assomam-se constantes lembranças dos escravos mortos. Constata-se da leitura de A visão das plantas e da análise da imagem:
+      La Bouche du Roi, obra mais famosa de Romuald Hazoumè, artista plástico da República do Benim (África Ocidental), local de onde escravos africanos eram transportados para as Américas.
+      Em La Bouche du Roi, vê-se uma instalação que recria o mapa do porão de um navio negreiro, utilizando centenas de máscaras, galões de petróleo vazios e outros materiais que representam a situação de pessoas escravizadas. A obra propõe uma revisão iconográfica da história do tráfico de escravos.
+      Na obra A visão das plantas, de Djaimilia Pereira da Silva, o personagem Celestino retorna de sua vida de corsário assombrado pelos crimes que praticara. O pirata foi se transformando em um jardineiro, de cujas mãos nascem a beleza e o viço das plantas. Sob a paz da natureza, entretanto, assomam-se constantes lembranças dos escravos mortos. Constata-se da leitura de A visão das plantas e da análise da imagem:
   alternativas:
     A:
-      texto: Em A visão das plantas , a crítica social manifesta-se de forma sutil, ao enfatizar o caráter
-        idílico do jardim. Já em La Bouche du Roi , a crueza do material, proveniente do lixo, diminui
+      texto: Em A visão das plantas, a crítica social manifesta-se de forma sutil, ao enfatizar o caráter
+        idílico do jardim. Já em La Bouche du Roi, a crueza do material, proveniente do lixo, diminui
         a intensidade da crítica à violência e interfere negativamente na dimensão estética da obra.
     B:
       texto: Em ambas as expressões artísticas, na escritura poética de Djaimilia e na híbrida instalação
@@ -520,75 +531,71 @@ questoes:
         literária, seja na das artes plásticas, elas não trazem contribuição ao cânone da literatura pós-colonial,
         tampouco acenam para a importância de revisitar o passado para compreender os ecos do presente.
     E:
-      texto: Em A visão das plantas , a autora utiliza elementos de ficção científica para explorar a
-        desconexão emocional dos personagens em relação ao mundo natural. Em La Bouche du Roi , o escultor
-        critica a globalização, utilizando materiais que imitam o “outro” de uma maneira distorcida, ressaltando
+      texto: Em A visão das plantas, a autora utiliza elementos de ficção científica para explorar a desconexão
+        emocional dos personagens em relação ao mundo natural. Em La Bouche du Roi, o escultor critica
+        a globalização, utilizando materiais que imitam o “outro” de uma maneira distorcida, ressaltando
         a perda da identidade cultural africana diante de influências externas.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈176–363
+  pendencias: []
 - numero: 15
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: leituras-obrigatorias
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
+  - texto: Leia os excertos dos poemas O Navio Negreiro (1868), de Castro Alves, e O africano e o poeta,
+      extraído de Nebulosas (1872), de Narcisa Amália.
   - texto: |-
-      Leia os excertos dos poemas O Navio Negreiro (1868), de Castro Alves, e O africano e o poeta , extraído de Nebulosas (1872), de Narcisa Amália.
       'Stamos em pleno mar...;
       [...]
+      Albatroz! Albatroz! dá-me estas asas.
+      [...]
+      Mas que vejo eu aí... Que quadro d'amarguras!
+      É canto funeral! ... Que tétricas figuras! ...
+      Que cena infame e vil... Meu Deus! Meu Deus! Que horror!
+      E ri-se a orquestra irônica, estridente...
+      [...]
+      Qual um sonho dantesco as sombras voam!...
+      Gritos, ais, maldições, preces ressoam!
+      E ri-se Satanás
+      Senhor Deus dos desgraçados!
+      Dizei-me vós, Senhor Deus,
+      Se eu deliro... ou se é verdade
+      Tanto horror perante os céus?!...
+      Ó mar, por que não apagas
+      Co'a esponja de tuas vagas
+      Do teu manto este borrão?
+      Castro Alves. O Navio Negreiro.
+  - texto: |-
       [...]
       De imenso desgosto
-      Albatroz! Albatroz! dá-me
       Silente expressão;
-      estas asas.
       Quem pensa? — O poeta
       [...]
-      [...]
-      Mas que vejo eu aí... Que
       Lacera-me o seio
-      quadro d'amarguras!
-      É canto funeral! ... Que
       Sulcado de dor,
-      tétricas figuras! ...
-      Quem sente? — O poeta Que cena infame e vil... Meu
+      Quem sente? — O poeta
       [...]
-      Deus! Meu Deus! Que
       Sulquei vasto mar;
-      horror!
-      E ri-se a orquestra irônica, Mas este queixume
-      estridente...
-      [...]
+      Mas este queixume
       [...]
       Quem quer escutar?…
-      Qual um sonho dantesco as
-      — Quem quer? O poeta sombras voam!...
+      — Quem quer? O poeta
       [...]
-      Gritos, ais, maldições,
       Quem vê? — O poeta
-      preces ressoam!
       [...]
-      E ri-se Satanás
-      Senhor Deus dos
       Sem crenças na vida,
-      desgraçados!
       Sem pátria querida,
-      Dizei-me vós, Senhor Deus,
       Só resta tombar!
-      Se eu deliro... ou se é
       Mas… quem uma prece
-      verdade
       Na campa do escravo
-      Tanto horror perante os
-      céus?!...
       Que outrora foi bravo
-      Ó mar, por que não apagas Triste há de rezar?!…
-      Co'a esponja de tuas vagas
-      — Quem há de?… O poeta Do teu manto este borrão?
-      Narcisa Amália. O africano e o Castro Alves. O Navio Negreiro .
-      poeta .
-      Depreende-se dos poemas:
+      Triste há de rezar?!…
+      — Quem há de?… O poeta
+      Narcisa Amália. O africano e o poeta.
+  - texto: 'Depreende-se dos poemas:'
   alternativas:
     A:
       texto: Castro Alves e Narcisa Amália, apesar de distantes no tempo e pertencentes a movimentos literários
@@ -599,68 +606,36 @@ questoes:
         recorre à expressão "Quem há?" para enfatizar a solidão existencial do africano, sugerindo que
         o mundo deve se curvar à sua dor, mais profunda e sublime que a dos outros seres humanos.
     C:
-      texto: Ambos os poemas exaltam a liberdade, sendo o mar um símbolo positivo. Em O Navio Negreiro
-        , o mar é uma libertação do sofrimento, enquanto, em O africano e o poeta , o poeta alcança uma
-        transcendência que o liberta de sua dor através do contato com a natureza, principalmente com
-        o mar.
+      texto: Ambos os poemas exaltam a liberdade, sendo o mar um símbolo positivo. Em O Navio Negreiro,
+        o mar é uma libertação do sofrimento, enquanto, em O africano e o poeta, o poeta alcança uma transcendência
+        que o liberta de sua dor através do contato com a natureza, principalmente com o mar.
     D:
-      texto: Em O Navio Negreiro , o autor constrói imagens complexas para atestar a dimensão da crueldade
-        do momento histórico retratado. Em O africano e o poeta , a autora indicia a função crítica do
+      texto: Em O Navio Negreiro, o autor constrói imagens complexas para atestar a dimensão da crueldade
+        do momento histórico retratado. Em O africano e o poeta, a autora indicia a função crítica do
         poeta na sociedade, inscrevendo-a no próprio poetar. Desse modo, Narcisa Amália dialoga com Castro
         Alves, denunciando as injustiças da sociedade escravocrata.
     E:
       texto: Ambos os poemas apresentam a figura do poeta como um ser divinizado, cuja percepção de dor
-        transcende a realidade humana. Em O Navio Negreiro , o poeta é intermediário entre horrores do
-        mar e as figuras mitológicas; em O africano e o poeta , a dor do humano destaca-se como um sofrimento
+        transcende a realidade humana. Em O Navio Negreiro, o poeta é intermediário entre horrores do
+        mar e as figuras mitológicas; em O africano e o poeta, a dor do humano destaca-se como um sofrimento
         internalizado, mas igualmente elevado a uma missão quase divina.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 7, y≈112, 235, 250, 281, 296, 326, 342: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 7, y≈386, 404, 482, 500, 518: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 7, y≈112–481
+  pendencias: []
 - numero: 16
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
+  - texto: 'A tabela a seguir indica o número de inscritos no Exame Nacional do Ensino Médio (ENEM) entre
+      2010 e 2016 segundo a cor/raça, definidas por autodeclaração, bem como a sua variação:'
+  - figura: q016-1.webp
   - texto: |-
-      A tabela a seguir indica o número de inscritos no Exame Nacional do Ensino Médio (ENEM) entre 2010 e 2016 segundo a cor/raça, definidas por autodeclaração, bem como a sua variação:
-      Cor/raça Número de Variação em 2016 Variação em relação a
-      declarada inscritos em em relação aos
-      2010 (%)
-      inscritos em 2010
-      2010
-      Ganho 569.867
-      11,8
-      Branca
-      4.810.664
-      Perda -814.577
-      -16,9
-      Saldo -244.710
-      -5,1
-      Ganho 1.134.748
-      22,5
-      Parda
-      5.046.457
-      Perda -1.084.742
-      -21,5
-      Saldo
-      50.006
-      1,0
-      Ganho 568.701
-      40,0
-      Preta
-      1.421.157
-      Perda -373.997
-      -26,3
-      Saldo 194.704
-      13,7
-      A. Senkevics. De Brancos para Negros? Uma Análise Longitudinal da Reclassificação Racial no Enem 2010-2016 . Adaptado.
+      A. Senkevics. De Brancos para Negros? Uma Análise Longitudinal da Reclassificação Racial no Enem 2010-2016. Adaptado.
       Sobre a formação e reconfiguração racial, Winant sugere:
       “A teoria da formação racial sugere que o padrão de significados raciais e identidades raciais identificáveis, as dimensões raciais da desigualdade social, o grau de mobilização política baseada na raça, tudo isto manifesta instabilidade e flexibilidade. Portanto, num momento específico de uma certa sociedade, a raça pode parecer fenômeno quase ‘natural’, aproblemático e apolítico, apenas uma questão de ‘senso comum’, noutro momento ou contexto social, a raça pode ser altamente politizada, como lócus de mobilização social significativa.”
-      H. Winant. Repensar a Raça no Brasil . Sociedade e Estado, 1994. Adaptado.
+      H. Winant. Repensar a Raça no Brasil. Sociedade e Estado, 1994. Adaptado.
       Tendo em vista o argumento de Winant e os dados apresentados, é possível afirmar que o aumento de inscritos no ENEM que se autodeclaram como pretos deve-se, entre outros fatores,
   alternativas:
     A:
@@ -682,8 +657,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -693,7 +668,7 @@ questoes:
       O acesso à coleta e tratamento de esgotos; água potável; e a coleta e destinação adequada de resíduos sólidos não podem ser desvinculados dos direitos humanos fundamentais [...]. A prova disso é que os locais onde vivem as populações em processo de vulnerabilização social são os que mais carecem dos serviços de saneamento básico...
       Mas quando adicionamos à equação a dimensão racial, o cenário se agrava, pois, as populações negras, quilombolas, indígenas e ribeirinhas são desproporcionalmente mais afetadas pelas mazelas ambientais e urbanas — não somente por ações diretas, mas também por omissões sistemáticas do poder público.
       Como bem aponta Milton Santos, essa lógica é também espacial: o território é usado como marcador de exclusão. A periferia urbana e a zona rural se tornam territórios de sacrifício, nos quais o Estado age menos — ou age em favor do capital, promovendo deslocamentos forçados e negligência institucional.”
-      Saneamento: assim age o racismo ambiental na Amazônia . Disponível em: https://namidia.fapesp.br/. Adaptado.
+      Saneamento: assim age o racismo ambiental na Amazônia. Disponível em: https://namidia.fapesp.br/. Adaptado.
       O excerto analisa problemas socioambientais que caracterizam, respectivamente,
   alternativas:
     A:
@@ -710,8 +685,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -741,8 +716,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -750,7 +725,7 @@ questoes:
       Leia o excerto:
       “[...] Nesses movimentos, as transformações das cidades (de sua centralidade) e de seus centros (de seus bairros) tendem ao idêntico. Elas exibem, no processo, a necessidade de uma maior intervenção da gestão pública no espaço urbano [...].
       Do ponto de vista da centralidade, a produção do espaço da metrópole paulistana, ao longo de sua história, traz mudanças importantes. Em primeiro lugar a expansão do tecido urbano engloba subcentros (vários centros) que dividem com o centro histórico a capacidade da reunião das atividades constitutivas da vida urbana, em sociedade [...]. Mas enquanto o chamado centro histórico guarda um conteúdo que o diferencia dos outros (pela densidade e expressividade das atividades ali reunida), os centros vão compondo vários núcleos (bairros), que são lugares de funções únicas, com reunião de atividades comerciais e serviços descentralizados, destituídos de sentido como articulador da vida urbana [...]”.
-      Ana Fani A. Carlos. Metamorfose do centro da metrópole de São Paulo. In A nova vida do velho centro: nas cidades portuguesas e brasileiras . Centro de Estudos de Geografia e Ordenamento Territorial. CEGOT, 2016. Adaptado.
+      Ana Fani A. Carlos. Metamorfose do centro da metrópole de São Paulo. In A nova vida do velho centro: nas cidades portuguesas e brasileiras. Centro de Estudos de Geografia e Ordenamento Territorial. CEGOT, 2016. Adaptado.
       No texto, a autora analisa que a expansão urbana da metrópole paulistana descentraliza e organiza outros centros de serviços nos bairros. Assinale a alternativa que melhor explica como o processo de urbanização amplia a centralidade da cidade.
   alternativas:
     A:
@@ -777,9 +752,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 20
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: ambiente
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: A figura representa um deslizamento de encosta, decorrente dos fortes temporais que atingiram
@@ -801,52 +777,52 @@ questoes:
       texto: presença de solo rico em nutrientes e profundo, característica da mata atlântica.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈136, 265, 329, 360: conferir o texto'
+  pendencias: []
 - numero: 21
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Na 36ª Bienal de São Paulo, o grupo Forensic Architecture apresentou o The People’s Court I
-      (2025), que corresponde à primeira fase de Delta-Delta , uma investigação plurianual sobre o complexo
+      (2025), que corresponde à primeira fase de Delta-Delta, uma investigação plurianual sobre o complexo
       petroextrativista transatlântico que ocupa terras e comunidades no chamado Cinturão Verde Transatlântico,
       termo especulativo para uma floresta outrora contínua na Pangeia, há muito dividida pelas placas
       tectônicas em uma “diáspora ecológica”. Seus vestígios se estendem desde os bosques do delta do
       Níger até os cemitérios arborizados dos povos escravizados da Louisiana.
   - figura: q021-1.webp
-  - texto: 'Projeção de The People’s Court I . “ Uma nova forma de desapropriação surgiu por meio da infraestrutura
-      extrativa projetada para acelerar o colapso ecológico ”. Disponível em: https://36.bienal.org.br/artista/forensic-architecture/.
-      Adaptado. Sobre a cadeia produtiva do petróleo, assinale a alternativa correta que aponta um impacto
-      socioambiental presente na região do Delta do Níger.'
+  - texto: |-
+      Projeção de The People’s Court I. “Uma nova forma de desapropriação surgiu por meio da infraestrutura extrativa projetada para acelerar o colapso ecológico”. Disponível em: https://36.bienal.org.br/artista/forensic-architecture/. Adaptado.
+      Sobre a cadeia produtiva do petróleo, assinale a alternativa correta que aponta um impacto socioambiental presente na região do Delta do Níger.
   alternativas:
     A:
       texto: Substituição da pesca pelo turismo e artesanato sustentável com apoio das petrolíferas.
     B:
       texto: Destruição de áreas de pesca e fontes de água potável e deslocamento forçado da população.
     C:
-      texto: Emissão de gases de efeito estufa (CO , SO , N O) e intensificação da poluição sonora.
+      texto: Emissão de gases de efeito estufa (CO₂, SO₂, N₂O) e intensificação da poluição sonora.
     D:
       texto: Políticas redistributivas da renda gerada pelo petróleo com impacto nos indicadores sociais.
     E:
       texto: Reflorestamento e recuperação do solo para a agricultura tradicional.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈611, 701, 711: conferir o texto'
-  - 'Texto sublinhado na página 9, y≈652: formatação perdida no texto puro'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 9, y≈701, 711, 732: recortar como figura'
+  pendencias: []
 - numero: 22
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A produção de energia a partir de fontes renováveis continua a crescer no mundo todo. De acordo com estimativas da Agência Internacional de Energia, 450 GW de nova energia verde seriam instalados em todo o mundo até o final de 2023, dos quais dois terços seriam provenientes de sistemas fotovoltaicos. Esses sistemas funcionam com os módulos fotovoltaicos que convertem a energia recebida do sol em energia elétrica.
-      A radiação solar direta que atinge a superfície da Terra, em um dia claro ao meio-dia, contém um fluxo de aproximadamente 3,0×10 fótons por segundo por metro quadrado. O comprimento de onda dominante dessa radiação está em torno de 550 nanômetros (nm).
+      A radiação solar direta que atinge a superfície da Terra, em um dia claro ao meio-dia, contém um fluxo de aproximadamente 3,0×10²¹ fótons por segundo por metro quadrado. O comprimento de onda dominante dessa radiação está em torno de 550 nanômetros (nm).
       Considere um painel fotovoltaico com área de 2,0 m² sob incidência de radiação solar. A eficiência quântica do dispositivo, definida como a razão entre o número de elétrons coletados e o número de fótons incidentes, é de 20%. Qual é a potência elétrica aproximada gerada e como essa eficiência impacta o desempenho do sistema?
+  - texto: "Note e adote:\nCada fóton tem energia diretamente proporcional ao produto da constante de
+      Planck (ℎ) pela velocidade da luz (\U0001D450) e inversamente proporcional ao comprimento de onda
+      da luz (λ), ou seja, \U0001D438 = ℎ\U0001D450/λ.\nConstante de Planck: ℎ = 6,6 × 10⁻³⁴ J × s\nVelocidade
+      da luz: \U0001D450 = 3,0 × 10⁸ m/s\nPotência é definida como a quantidade de energia por intervalo
+      de tempo, isto é, \U0001D443 = \U0001D438/∆\U0001D461."
   alternativas:
     A:
       texto: Exatamente igual a 432 W. A eficiência de 20% significa que um quinto da energia luminosa
@@ -861,29 +837,23 @@ questoes:
       texto: Menor que 2160 W. A eficiência de 20% aplica-se apenas à metade do painel que está diretamente
         voltada para o sol ao meio-dia.
     E:
-      texto: "Exatamente igual a 0 W. O efeito fotovoltaico somente funciona em laboratórios com luzes
-        especiais ( lasers ) e não pode ser produzido pela luz do sol comum.\nNote e adote:\nCada fóton
-        tem energia diretamente proporcional ao produto da constante de Planck ( ℎ ) pela velocidade da
-        luz ( \U0001D450 ) e inversamente proporcional ao comprimento de onda da luz ( λ ), ou seja, E
-        = ℎ\U0001D450 / λ . Constante de Planck: ℎ = 6,6 10 \U0001D43D\U0001D460\nVelocidade da luz: \U0001D450
-        = 3,0 10 \U0001D45A ⁄ \U0001D460\nPotência é definida como a quantidade de energia por intervalo
-        de tempo, isto é, \U0001D443 \U0001D438 / ∆\U0001D461"
+      texto: Exatamente igual a 0 W. O efeito fotovoltaico somente funciona em laboratórios com luzes
+        especiais (lasers) e não pode ser produzido pela luz do sol comum.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 9, y≈652–743
+  pendencias: []
 - numero: 23
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: termologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Considere os textos a seguir que discorrem sobre copos térmicos:
-      “ O que realmente faz nossos produtos se destacarem é o isolamento térmico de ponta. Quase todos os itens da nossa seleção são feitos com dupla parede de aço inox 18/8 (...). E o grande segredo disso está na ciência. Sim, isso mesmo! Em outras palavras, nossos produtos possuem um espaço a vácuo entre as paredes que evita a troca de temperatura com o ambiente externo.
-      Esse é um método inventado pelo nosso fundador, o físico e inventor William Stanley Jr., lá em 1913, quando a marca Stanley foi criada. Na época, as partes internas das garrafas eram feitas de vidro. William descobriu, então, que um processo de soldagem entre duas paredes de aço inox, a vácuo, seria muito mais eficiente. ”
+      “O que realmente faz nossos produtos se destacarem é o isolamento térmico de ponta. Quase todos os itens da nossa seleção são feitos com dupla parede de aço inox 18/8 (...). E o grande segredo disso está na ciência. Sim, isso mesmo! Em outras palavras, nossos produtos possuem um espaço a vácuo entre as paredes que evita a troca de temperatura com o ambiente externo.
+      Esse é um método inventado pelo nosso fundador, o físico e inventor William Stanley Jr., lá em 1913, quando a marca Stanley foi criada. Na época, as partes internas das garrafas eram feitas de vidro. William descobriu, então, que um processo de soldagem entre duas paredes de aço inox, a vácuo, seria muito mais eficiente.”
       Disponível em https://www.stanley1913.com.br/blogs/news/tecnologia-stanley/.
-      “ Copos térmicos possuem uma barreira extra que impede que as trocas de calor com o ambiente externo aconteçam muito rapidamente. Para isso, dispõem de um truque: possuem paredes duplas, às vezes até mesmo triplas, entre o líquido a superfície externa. Isto é, a segunda parede do copo, que é a de contato direto com o líquido, não está diretamente em contato com o meio externo. Entre essas paredes, há ainda um pequeno espaço vazio – um vácuo. ”
+      “Copos térmicos possuem uma barreira extra que impede que as trocas de calor com o ambiente externo aconteçam muito rapidamente. Para isso, dispõem de um truque: possuem paredes duplas, às vezes até mesmo triplas, entre o líquido a superfície externa. Isto é, a segunda parede do copo, que é a de contato direto com o líquido, não está diretamente em contato com o meio externo. Entre essas paredes, há ainda um pequeno espaço vazio – um vácuo.”
       Disponível em: https://guiadoestudante.abril.com.br/.
       De acordo com os textos e com os seus conhecimentos, é correto afirmar:
   alternativas:
@@ -907,15 +877,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: fisica-moderna
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
   - texto: |-
       O espectro atômico funciona como uma impressão digital cósmica, pois cada elemento químico emite ou absorve luz em comprimentos de onda específicos e imutáveis. Ao decompor a luz de estrelas e galáxias, os cientistas conseguem identificar esses padrões fixos, que servem como uma régua de comparação absoluta entre o que é observado no laboratório e o que vem das profundezas do espaço.
-      A prova da expansão do universo surgiu quando Edwin Hubble percebeu que essas linhas espectrais em galáxias distantes estavam deslocadas para o vermelho ( redshift ). Esse fenômeno é análogo ao efeito Doppler sonoro. Como esse padrão se repete em
-      quase todas as direções, conclui-se que o próprio espaço entre as galáxias está em constante expansão.
+      A prova da expansão do universo surgiu quando Edwin Hubble percebeu que essas linhas espectrais em galáxias distantes estavam deslocadas para o vermelho (redshift). Esse fenômeno é análogo ao efeito Doppler sonoro. Como esse padrão se repete em quase todas as direções, conclui-se que o próprio espaço entre as galáxias está em constante expansão.
   - figura: q024-1.webp
   - texto: |-
       Disponível em https://www.jpl.nasa.gov/edu/resources/. Adaptado.
@@ -926,7 +896,7 @@ questoes:
         e possuem níveis de energia diferentes dos átomos encontrados atualmente na Via Láctea.
     B:
       texto: O modelo atômico de Bohr estabelece que os elétrons emitem fótons em frequências específicas;
-        o deslocamento dessas frequências conhecidas para o vermelho ( redshift ) comprova o afastamento
+        o deslocamento dessas frequências conhecidas para o vermelho (redshift) comprova o afastamento
         das galáxias.
     C:
       texto: O desvio para o vermelho ocorre porque os átomos das galáxias distantes estão se expandindo
@@ -942,15 +912,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 25
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Efeito Doppler refere-se à mudança na frequência de uma onda causada pelo movimento relativo
-      entre a fonte e o observador. Considere que uma fonte sonora emitindo um som com frequência \U0001D453
+      entre a fonte e o observador. Considere que uma fonte sonora emitindo um som com frequência \U0001D453₀
       aproxima-se de um observador em repouso ao longo de uma linha reta com velocidade constante. Após
-      atingir a posição do observador, no instante de tempo t , afasta-se dele pela mesma trajetória,
+      atingir a posição do observador, no instante de tempo t₀, afasta-se dele pela mesma trajetória,
       mantendo a mesma velocidade constante. Qual dos gráficos a seguir melhor representa como a frequência
       percebida pelo observador varia com o tempo?"
   alternativas:
@@ -966,21 +936,23 @@ questoes:
       figura: q025-e.webp
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈93, 104, 126, 278, 379: conferir o texto'
-  - 'Texto sublinhado na página 11, y≈364: formatação perdida no texto puro'
+  pendencias: []
 - numero: 26
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: "O gráfico a seguir é uma reta que relaciona a altura percebida \U0001D43F de um som, em decibéis
-      (dB), a \U0001D443 =log \U0001D43C , em que I é a intensidade do som em watts por metro quadrado
-      (W/m )."
+      (dB), a \U0001D443 = log \U0001D43C, em que I é a intensidade do som em watts por metro quadrado
+      (W/m²)."
   - figura: q026-1.webp
   - texto: Qual é, aproximadamente, a altura percebida L (em dB) de um som com intensidade igual a 3,2
-      x 10 W/m ?
+      x 10⁻⁵ W/m²?
+  - texto: |-
+      Note e adote:
+      log 32 ≅ 1,5
   alternativas:
     A:
       texto: '75'
@@ -991,82 +963,71 @@ questoes:
     D:
       texto: '84'
     E:
-      texto: |-
-        130
-        Note e adote:
-        log32 ≅ 1,5
+      texto: '130'
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 11, y≈364–398
+  pendencias: []
 - numero: 27
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "O papel di-log, também conhecido como papel log-log, é usado para se fazer gráficos com funções
-      do tipo \U0001D453\U0001D465 = \U0001D44E\U0001D465 , de forma que o gráfico de \U0001D453 aparece
+      do tipo \U0001D453(\U0001D465) = \U0001D44E\U0001D465ᵇ, de forma que o gráfico de \U0001D453 aparece
       como uma linha reta, exemplificado a seguir:"
   - figura: q027-1.webp
-  - texto: "Figura: Gráfico di-log, ou log-log\nSabe-se que há duas retas, \U0001D453\U0001D465 e \U0001D454\U0001D465
-      , que representam duas funções diferentes, passando respectivamente pelos pontos 2,2 , 10,10 e 2,4
-      , 12,12 , definidas no intervalo 0, ∞ . Determine o ponto \U0001D465 tal que \U0001D453\U0001D465
-      = \U0001D454\U0001D465 ."
+  - texto: "Figura: Gráfico di-log, ou log-log\nSabe-se que há duas retas, \U0001D453(\U0001D465) e \U0001D454(\U0001D465),
+      que representam duas funções diferentes, passando respectivamente pelos pontos (2,2), (10,10) e
+      (2,4), (12,12), definidas no intervalo ]0, +∞[. Determine o ponto \U0001D465₀ tal que \U0001D453(\U0001D465₀)
+      = \U0001D454(\U0001D465₀)."
   alternativas:
     A:
-      texto: "\U0001D465 =12"
+      texto: "\U0001D465₀ = 12"
     B:
-      texto: "\U0001D465 = \U0001D459\U0001D45C\U0001D454 12"
+      texto: "\U0001D465₀ = log₆ 12"
     C:
-      texto: "\U0001D465 =6"
+      texto: "\U0001D465₀ = 6"
     D:
-      texto: "\U0001D465 = \U0001D459\U0001D45C\U0001D454 6"
+      texto: "\U0001D465₀ = log₂ 6"
     E:
-      texto: "\U0001D465 = \U0001D459\U0001D45C\U0001D454 2"
+      texto: "\U0001D465₀ = log₆ 2"
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈82, 114, 289, 333, 352, 373, 395, 417, 438: conferir
-    o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 12, y≈82, 297, 318, 329: recortar como figura'
+  pendencias: []
 - numero: 28
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: combinatoria-e-probabilidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Todos gostam de dias extraordinários, ou seja, dias que fogem da rotina da pessoa. Em uma
       cidade, constatou-se que uma pessoa que sai de casa e retorna no mesmo dia tem a probabilidade de
-      \U0001D45D =10 de ter passado esse dia extraordinariamente. Essa pessoa sai de casa e retorna no
-      mesmo dia rotineiramente exatamente 28 dias por mês. Nessa situação, a probabilidade dessa pessoa
-      ter pelo menos dois dias extraordinários no mês é \U0001D443 . Suponha que o que acontece em um
+      \U0001D45D = 10⁻³ de ter passado esse dia extraordinariamente. Essa pessoa sai de casa e retorna
+      no mesmo dia rotineiramente exatamente 28 dias por mês. Nessa situação, a probabilidade dessa pessoa
+      ter pelo menos dois dias extraordinários no mês é \U0001D443₂. Suponha que o que acontece em um
       dia independe do que acontece em qualquer dia. Se essa pessoa reduzir suas saídas rotineiras para
       exatamente 14 dias por mês (metade dos 28 dias), a probabilidade de ter tido pelo menos um dia extraordinário
-      nesses 14 dias vale \U0001D443 . Use a aproximação 1 \U0001D6FC =1 \U0001D45B\U0001D6FC , válida
-      quando | \U0001D6FC | 1 e | \U0001D45B\U0001D6FC | é pequeno comparado a 1 . Então, a relação entre
-      \U0001D443 e \U0001D443 vale, aproximadamente,"
+      nesses 14 dias vale \U0001D443₁. Use a aproximação (1 + \U0001D6FC)ⁿ = 1 + \U0001D45B\U0001D6FC,
+      válida quando |\U0001D6FC| < 1 e |\U0001D45B\U0001D6FC| é pequeno comparado a 1. Então, a relação
+      entre \U0001D443₂ e \U0001D443₁ vale, aproximadamente,"
   alternativas:
     A:
-      texto: =5,2 10 .
+      texto: "\U0001D443₂/\U0001D443₁ = 5,2 × 10⁻²."
     B:
-      texto: =0,99 .
+      texto: "\U0001D443₂/\U0001D443₁ = 0,99."
     C:
-      texto: =1,01 .
+      texto: "\U0001D443₂/\U0001D443₁ = 1,01."
     D:
-      texto: =2,0 10 .
+      texto: "\U0001D443₂/\U0001D443₁ = 2,0 × 10⁰."
     E:
-      texto: =5,1 10 .
+      texto: "\U0001D443₂/\U0001D443₁ = 5,1 × 10⁻¹."
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈527, 573, 617, 624, 638, 649, 664, 668, 674, 676,
-    691, 701, 719, 723, 729, 746, 748, 756, 773, 775, 783: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 12, y≈624, 668, 750, 777: recortar como figura'
-  - 'Texto sublinhado na página 12, y≈671, 699, 726, 754, 781: formatação perdida no texto puro'
+  pendencias: []
 - numero: 29
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1095,15 +1056,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Mas nunca fui mestre de ninguém: se, pois, alguém se mostrou desejoso da minha presença quando eu falava, e acudiam à minha procura jovens e velhos, nunca me recusei a ninguém. Nunca, ao menos, falei de dinheiro; mas igualmente me presto a me interrogar os ricos e os pobres, quando alguém, respondendo, quer ouvir o que digo. E se algum deles se torna melhor, ou não se torna, não posso ser responsável, pois que não prometi, nem dei, nesse sentido, nenhum ensinamento. E, se alguém afirmar que aprendeu ou ouviu de mim, em particular, qualquer coisa de diverso do que disse a todos os outros, sabei bem que não diz a verdade.”
-      Platão. Apologia de Sócrates , Parágrafo XIX.
-      Nessa passagem, do texto Apologia de Sócrates , temos uma emblemática descrição do chamado método dialético socrático, um importante eixo de sua filosofia. Com base no trecho citado, qual das asserções a seguir melhor o sintetiza?
+      Platão. Apologia de Sócrates, Parágrafo XIX.
+      Nessa passagem, do texto Apologia de Sócrates, temos uma emblemática descrição do chamado método dialético socrático, um importante eixo de sua filosofia. Com base no trecho citado, qual das asserções a seguir melhor o sintetiza?
   alternativas:
     A:
       texto: Ensinar implica a afirmação de conhecimentos verdadeiros.
@@ -1119,14 +1080,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “Vê-se que o essencial gira em torno do ‘feudo’. A palavra aparece no oeste da Alemanha no início do século XI e se difunde sob sua aceitação técnica no final desse século, não sendo empregada por toda parte nem sempre nesse sentido exato. É mais um termo dos juristas e historiadores modernos do que um vocábulo da época. O mais importante é que o feudo é mais frequentemente uma terra. Isso assenta o feudalismo sobre sua base rural e manifesta que ele é antes de tudo um sistema de posse e de exploração da terra. A concessão do feudo pelo senhor ao vassalo faz-se no decorrer de uma cerimônia, a investidura, que consistia num ato simbólico, na entrega de um objeto (estandarte, cetro, bastão, anel, punhal, luva, pedaço de palha etc.). Em geral ela seguia o apalavramento e a homenagem. Só excepcionalmente foi consignada em ata escrita antes do século XIII. Feudalismo, mundo do gesto, não do escrito. O que garante a ascendência crescente do vassalo sobre seu feudo e, evidentemente, a hereditariedade do feudo, peça central do sistema feudal.”
-      Jacques Le Goff. A civilização do Ocidente medieval . Petrópolis: Vozes, 2016.
+      Jacques Le Goff. A civilização do Ocidente medieval. Petrópolis: Vozes, 2016.
       De acordo com o excerto, sobre a sociedade medieval, é correto dizer que
   alternativas:
     A:
@@ -1142,18 +1103,17 @@ questoes:
       texto: o termo “feudo” era usado na Europa medieval como sinônimo de propriedade privada.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 13, y≈265: conferir o texto'
+  pendencias: []
 - numero: 32
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Observe o cartum, feito por Simon James.
   - figura: q032-1.webp
   - texto: |-
-      Simon James. Apud: Mary Beard. SPQR: uma história da Roma antiga . São Paulo: Planeta, 2023.
+      Simon James. Apud: Mary Beard. SPQR: uma história da Roma antiga. São Paulo: Planeta, 2023.
       O cartum representa de forma paródica o cotidiano das províncias sob domínio do Império Romano, ao assinalar
   alternativas:
     A:
@@ -1175,8 +1135,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 33
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1197,11 +1157,10 @@ questoes:
       texto: afirmar que os escravizados recebiam alimentação idêntica à das elites senatoriais.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto-base tb03: Índice/expoente em fonte pequena na página 14, y≈186, 561, 576: conferir o texto'
+  pendencias: []
 - numero: 34
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1222,12 +1181,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 35
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: vocabulario
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
-  - texto: O emprego do adjetivo “thrilling” (4 º parágrafo) para caracterizar os resultados da pesquisa
+  - texto: O emprego do adjetivo “thrilling” (4º parágrafo) para caracterizar os resultados da pesquisa
   alternativas:
     A:
       texto: enfatiza repercussão emocional junto ao público leigo mais do que entre especialistas.
@@ -1244,8 +1203,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 36
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: revolucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1266,12 +1225,10 @@ questoes:
       texto: O elogio do urbanismo que propunha o adensamento e o crescimento vertical das cidades.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 15, y≈429, 440: conferir o texto'
-  - 'Texto sublinhado na página 15, y≈437: formatação perdida no texto puro'
+  pendencias: []
 - numero: 37
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1287,62 +1244,60 @@ questoes:
       para Montreal?
   alternativas:
     A:
-      texto: ''
+      texto: "\U0001D70B\U0001D445/2"
     B:
-      texto: "3 \U0001D70B \U0001D445"
+      texto: "3\U0001D70B\U0001D445"
     C:
-      texto: "2 \U0001D70B \U0001D445"
+      texto: "2\U0001D70B\U0001D445"
     D:
-      texto: ''
+      texto: "\U0001D70B\U0001D445/4"
     E:
-      texto: ''
+      texto: "\U0001D70B\U0001D445/3"
   resposta: E
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: fisica
+  assunto: magnetismo
+  disciplinas_secundarias:
+  - matematica
   texto_base: null
   enunciado:
   - texto: |-
-      Uma das hipóteses para explicar a orientação espacial de animais com percursos migratórios longos como tartarugas marinhas é a de que eles possuem cristais de magnetita (Fe O ) em seus tecidos, permitindo que esses animais detectem variações na direção do campo magnético da Terra próximo à superfície (vide figura). Em um experimento (Lohmann e Lohmann (1994)), filhotes de tartaruga-cabeçuda ( Caretta caretta ) foram expostos a um campo magnético de módulo 50 μ T e diferentes ângulos de inclinação vertical em relação à superfície. Quando a inclinação era de 60º, as tartarugas interpretavam estar muito ao norte e mudavam sua rota para o sul. Quando a inclinação era de 30º, sentiam estar muito ao sul e ajustavam sua rota ao norte.
-      Lohmann e Lohmann, Detection of magnetic inclination angle by sea turtles: a possible mechanism for determining by sea turtles. J. Exp. Biol. 194 , 23–32 (1994).
+      Uma das hipóteses para explicar a orientação espacial de animais com percursos migratórios longos como tartarugas marinhas é a de que eles possuem cristais de magnetita (Fe₃O₄) em seus tecidos, permitindo que esses animais detectem variações na direção do campo magnético da Terra próximo à superfície (vide figura). Em um experimento (Lohmann e Lohmann (1994)), filhotes de tartaruga-cabeçuda (Caretta caretta) foram expostos a um campo magnético de módulo 50 μT e diferentes ângulos de inclinação vertical em relação à superfície. Quando a inclinação era de 60º, as tartarugas interpretavam estar muito ao norte e mudavam sua rota para o sul. Quando a inclinação era de 30º, sentiam estar muito ao sul e ajustavam sua rota ao norte.
+      Lohmann e Lohmann, Detection of magnetic inclination angle by sea turtles: a possible mechanism for determining by sea turtles. J. Exp. Biol. 194, 23–32 (1994).
   - figura: q038-1.webp
   - texto: |-
       Disponível em https://www.pnas.org/doi/10.1073/pnas.0801859105.
       Qual a variação (em valor absoluto) na componente do campo magnético vertical à superfície da Terra entre os dois ângulos de inclinação utilizados no experimento?
+  - texto: |-
+      Note e adote:
+      sen 60º = cos 30° = √3/2 ≈ 0,866
+      sen 30º = cos 60º = 1/2
   alternativas:
     A:
-      texto: 18,3 μ T
+      texto: 18,3 μT
     B:
-      texto: 25 μ T
+      texto: 25 μT
     C:
-      texto: 43,3 μ T
+      texto: 43,3 μT
     D:
-      texto: 50 μ T
+      texto: 50 μT
     E:
-      texto: |-
-        100 μ T
-        Note e adote:
-        sen 60º = cos 30° = ≈ 0,866
-        sen 30º = cos 60º =
+      texto: 100 μT
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 16, y≈104, 211, 543, 552, 559, 569: conferir o texto'
-  - 'Texto sublinhado na página 16, y≈526, 550, 567: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 16, y≈526–576
+  pendencias: []
 - numero: 39
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Leia o excerto:
       “Os mapas serão considerados como parte integrante da família mais abrangente das imagens carregadas de um juízo de valor, deixando de ser percebidos essencialmente como levantamentos inertes de paisagens morfológicas ou como reflexos passivos do mundo dos objetos. Eles são considerados imagens que contribuem para o diálogo num mundo socialmente construído. Nós distinguimos assim a leitura dos mapas da crítica cartográfica tradicional e de oposições binárias entre mapas “verdadeiros e falsos”, “exatos e inexatos”, “objetivos e subjetivos”, “literais e simbólicos”, baseados na “integridade científica” ou marcados por uma “deformação ideológica”.
-      B. Harley. Mapas, saber e poder . Confins, 2009. Adaptado.
+      B. Harley. Mapas, saber e poder. Confins, 2009. Adaptado.
       A partir do excerto, pode-se afirmar que o autor entende o mapa como uma linguagem porque
   alternativas:
     A:
@@ -1364,8 +1319,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: cartografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1389,17 +1344,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: economia-mundial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Leia o excerto e observe o mapa:
       “A globalização é, de certa forma, o ápice do processo de internacionalização do mundo capitalista. A política agora é feita no mercado. Só que esse mercado global não existe como ator, mas como uma ideologia, um símbolo. Os atores são as empresas globais, que não têm preocupações éticas, nem finalísticas”.
-      Milton Santos. Por uma outra globalização . Adaptado.
+      Milton Santos. Por uma outra globalização. Adaptado.
   - figura: q041-1.webp
-  - figura: q041-2.webp
   - texto: |-
       Disponível em: https://www.submarinecablemap.com/. Adaptado.
       Considerando a configuração planetária da circulação de dados e informações, assinale a alternativa correta.
@@ -1423,15 +1377,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Em um artigo recém-publicado intitulado The Silicon Gaze , os autores descrevem como os sistemas algorítmicos, nos quais se baseiam os modelos de linguagem (LLMs) de inteligência artificial, passam a interpretar o mundo social por meio de dados. Pessoas são traduzidas em padrões de comportamento, perfis estatísticos e probabilidades de consumo, risco ou desempenho. Entre os muitos vieses que esse processo produz, os autores identificam o chamado “viés de proxy ”, que “surge quando o modelo confunde o que é mensurável com o que é valioso. Em vez de lidar com noções fugidias como ‘vibrância artística’, o sistema recorre a substitutos contáveis como locais listados como patrimônio cultural pela UNESCO ou avaliados com estrelas Michelin para avaliá-los.”
-      F. Kerche. et al . “The silicon gaze: A typology of biases and inequality in LLMs through the lens of place.” Platforms & Society , 2026. Adaptado.
-      Na modernidade, segundo Georg Simmel, a vida social é atravessada por processos de racionalização e objetivação. As formas abstratas de cálculo tornam-se mediadoras das relações sociais, substituindo qualidades singulares por equivalências quantitativas. O fenômeno descrito como “viés de proxy ” evidencia uma tensão típica da modernidade, pois demonstra que
+      Em um artigo recém-publicado intitulado The Silicon Gaze, os autores descrevem como os sistemas algorítmicos, nos quais se baseiam os modelos de linguagem (LLMs) de inteligência artificial, passam a interpretar o mundo social por meio de dados. Pessoas são traduzidas em padrões de comportamento, perfis estatísticos e probabilidades de consumo, risco ou desempenho. Entre os muitos vieses que esse processo produz, os autores identificam o chamado “viés de proxy”, que “surge quando o modelo confunde o que é mensurável com o que é valioso. Em vez de lidar com noções fugidias como ‘vibrância artística’, o sistema recorre a substitutos contáveis como locais listados como patrimônio cultural pela UNESCO ou avaliados com estrelas Michelin para avaliá-los.”
+      F. Kerche. et al. “The silicon gaze: A typology of biases and inequality in LLMs through the lens of place.” Platforms & Society, 2026. Adaptado.
+      Na modernidade, segundo Georg Simmel, a vida social é atravessada por processos de racionalização e objetivação. As formas abstratas de cálculo tornam-se mediadoras das relações sociais, substituindo qualidades singulares por equivalências quantitativas. O fenômeno descrito como “viés de proxy” evidencia uma tensão típica da modernidade, pois demonstra que
   alternativas:
     A:
       texto: a ampliação do uso de dados permite que decisões sociais se tornem completamente objetivas,
@@ -1456,8 +1410,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 43
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1488,14 +1442,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       “O Jornal das Trincheiras – a publicação que mais perto chegou de ser a porta-voz oficial da Revolução Constitucionalista – insistia, sete semanas após o início da fase armada do conflito, que a identidade paulista transcendia as fronteiras regionais; em virtude do conflito, o significado do termo paulista ‘ampliou-se, alargou-se, estendeu-se, para abranger no seu âmbito muito mais do que a simples designação de um acidente de nascimento’; tinha se tornado uma categoria que incluía todo aquele que ‘pensa com S. Paulo’. Em outras palavras, definia São Paulo como um estado de espírito.”
-      Barbara Weinstein. A cor da modernidade: a branquitude e a formação da identidade paulista . São Paulo: EDUSP, 2022.
+      Barbara Weinstein. A cor da modernidade: a branquitude e a formação da identidade paulista. São Paulo: EDUSP, 2022.
       Sobre a Revolução Constitucionalista, é correto afirmar que
   alternativas:
     A:
@@ -1515,26 +1469,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
-  texto_base: null
-  enunciado: []
-  alternativas: {}
-  resposta: D
-  anulada: false
-  pendencias:
-  - Só 0 alternativa(s) detectada(s)
-  - Enunciado vazio
-- numero: 46
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      A mobilização criada em torno da enfermagem durante a “Uma comissão especial da ONU enviada para estudar o II Guerra Mundial no Brasil fez com que muitas imagens diferentes fossem produzidas sobre a enfermagem e as enfermeiras. É evidente que esta escolha, como um dos emblemas em torno do qual o Estado Novo constituiu um ideal de mulher e de mobilização das mulheres, intensificada com a guerra, não foi casual.
-      Roney Cytrynowicz. Guerra sem guerra. A mobilização e o cotidiano em São Paulo durante a Segunda Guerra Mundial . São Paulo: Geração Editorial/EDUSP, 2000. Adaptado.
+      A mobilização criada em torno da enfermagem durante a II Guerra Mundial no Brasil fez com que muitas imagens diferentes fossem produzidas sobre a enfermagem e as enfermeiras. É evidente que esta escolha, como um dos emblemas em torno do qual o Estado Novo constituiu um ideal de mulher e de mobilização das mulheres, intensificada com a guerra, não foi casual.
+      Roney Cytrynowicz. Guerra sem guerra. A mobilização e o cotidiano em São Paulo durante a Segunda Guerra Mundial. São Paulo: Geração Editorial/EDUSP, 2000. Adaptado.
       O emprego da propaganda para moldar comportamentos e construir ideais de cidadania foi amplamente usado pelo Estado Novo. No contexto da Segunda Guerra Mundial, a construção da imagem da enfermeira foi mobilizada pelo regime para
   alternativas:
     A:
@@ -1552,20 +1494,50 @@ questoes:
     E:
       texto: converter o sacerdócio da caridade em uma profissão associada à defesa nacional, rompendo
         com práticas e hierarquias militares.
+  resposta: D
+  anulada: false
+  pendencias: []
+- numero: 46
+  disciplina: historia
+  assunto: seculo-xx
+  disciplinas_secundarias: []
+  texto_base: null
+  enunciado:
+  - texto: |-
+      “Uma comissão especial da ONU enviada para estudar o problema palestino apresentou um plano de partilha para a região. O plano foi aceito pela Assembleia Geral das Nações Unidas em novembro de 1947, com apoio dos Estados Unidos e da União Soviética. Os membros árabes das Nações Unidas e os árabes palestinos rejeitaram-no, e, mais uma vez diante da impossibilidade de encontrar uma política que árabes e judeus aceitassem, a Grã-Bretanha decidiu retirar-se da Palestina numa data fixada, 14 de maio de 1948. À medida que ela se aproximava, a autoridade britânica inevitavelmente diminuiu sua presença e, com isso, irrompeu a luta. Isso levou à decisão dos países árabes vizinhos de intervir, e assim uma série de conflitos locais transformou-se numa guerra. A 14 de maio, a comunidade judia declarou sua independência como Estado de Israel, o que foi imediatamente reconhecido pelos Estados Unidos e pela União Soviética; e forças egípcias, jordanianas, iraquianas, sírias e libanesas avançaram sobre as partes predominantemente árabes do país. Numa situação em que não havia fronteiras fixas nem nítidas divisões de população, a luta se deu entre o novo exército israelense e os dos estados árabes, tendo Israel conseguido ocupar a maior parte do país. Por prudência, inicialmente, e depois por pânico e por causa da política deliberada do exército israelense, quase dois terços da população árabe deixou suas casas e tornou-se refugiada.”
+      Albert Hourani. Uma história dos povos árabes. Tradução de Marcos Santarrita. São Paulo: Companhia das Letras (Companhia de Bolso), 2006. Adaptado.
+      Com base no trecho do livro de Albert Hourani, assinale a alternativa correta acerca da criação do Estado de Israel em 1948.
+  alternativas:
+    A:
+      texto: O plano de partilha da Palestina aprovado pela ONU em 1947 foi amplamente aceito tanto pelos
+        árabes palestinos, quanto pelos Estados árabes vizinhos.
+    B:
+      texto: A criação do Estado de Israel ocorreu após um acordo mediado pela Grã-Bretanha, que garantiu
+        fronteiras consensuais e evitou o conflito armado.
+    C:
+      texto: A declaração de independência de Israel ocorreu em um contexto de enfraquecimento da autoridade
+        britânica.
+    D:
+      texto: A intervenção militar dos países árabes ocorreu apenas após a definição clara de fronteiras
+        internacionais reconhecidas pela ONU.
+    E:
+      texto: O êxodo da população árabe palestina em 1948 deveu-se a uma decisão voluntária das lideranças
+        árabes.
   resposta: C
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: seculo-xx
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: 'Observe o gráfico a seguir:'
   - figura: q047-1.webp
   - texto: |-
       O Estado de São Paulo, fevereiro de 2026. Adaptado.
-      No dia 05 de fevereiro de 2026, o New Start , o mais recente tratado de não-proliferação de armas nucleares, assinado por EUA e Rússia, perdeu a validade, colocando o mundo em alerta sobre o risco eminente de uma nova escalada armamentista. Sobre o primeiro tratado de Não-Proliferação de Armas Nucleares, assinale a alternativa correta.
+      No dia 05 de fevereiro de 2026, o New Start, o mais recente tratado de não-proliferação de armas nucleares, assinado por EUA e Rússia, perdeu a validade, colocando o mundo em alerta sobre o risco eminente de uma nova escalada armamentista. Sobre o primeiro tratado de Não-Proliferação de Armas Nucleares, assinale a alternativa correta.
   alternativas:
     A:
       texto: Foi assinado no contexto do final da Segunda Guerra Mundial como resposta da ONU aos ataques
@@ -1584,27 +1556,25 @@ questoes:
         onde a Coreia do Norte e Irã nunca ratificaram.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 20, y≈200: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 20, y≈356: conferir o texto'
+  pendencias: []
 - numero: 48
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-analitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Deseja-se projetar uma rodovia retilínea \U0001D45F de maneira que passe pelos pontos \U0001D434
-      (2,3) e \U0001D435 (14,9) em um mapa (escala em km). Uma torre de transmissão está localizada no
-      ponto \U0001D437 (10,6) , que representa o centro da torre, e tem um raio de alcance de 5 km, definindo
-      uma área circular \U0001D436 . Para realizar a manutenção dessa torre, uma estrada de serviço \U0001D460
-      , também retilínea, deve ser construída de maneira que seja perpendicular à rodovia \U0001D45F ,
-      partindo do centro da torre \U0001D437 . Com base nessas informações, analise as seguintes afirmações:\nI.
-      A equação reduzida da reta \U0001D45F que representa a rodovia é: 1\n\U0001D466 = \U0001D465 +2\n2\nII.
-      A distância entre os pontos \U0001D434 e \U0001D435 é 6 √ 5 km.\nIII. A rodovia \U0001D45F intercepta
-      a área circular \U0001D436 em dois pontos\ndistintos.\nIV. A equação da reta que representa a estrada
-      de serviço \U0001D460 perpendicular à rodovia \U0001D45F que passa por \U0001D437 é:\n\U0001D466
-      = − 2 \U0001D465 +26\nV. A equação da circunferência que representa a área de\ncircular \U0001D436
-      é:\n( \U0001D465− 10) +( \U0001D466− 6) = 25\nAssinale a alternativa correta."
+  - texto: "Deseja-se projetar uma rodovia retilínea \U0001D45F de maneira que passe pelos pontos \U0001D434(2,3)
+      e \U0001D435(14,9) em um mapa (escala em km). Uma torre de transmissão está localizada no ponto
+      \U0001D437(10,6), que representa o centro da torre, e tem um raio de alcance de 5 km, definindo
+      uma área circular \U0001D436. Para realizar a manutenção dessa torre, uma estrada de serviço \U0001D460,
+      também retilínea, deve ser construída de maneira que seja perpendicular à rodovia \U0001D45F, partindo
+      do centro da torre \U0001D437. Com base nessas informações, analise as seguintes afirmações:\nI.
+      A equação reduzida da reta \U0001D45F que representa a rodovia é: \U0001D466 = (1/2)\U0001D465 +
+      2\nII. A distância entre os pontos \U0001D434 e \U0001D435 é 6√5 km.\nIII. A rodovia \U0001D45F
+      intercepta a área circular \U0001D436 em dois pontos distintos.\nIV. A equação da reta que representa
+      a estrada de serviço \U0001D460 perpendicular à rodovia \U0001D45F que passa por \U0001D437 é: \U0001D466
+      = −2\U0001D465 + 26\nV. A equação da circunferência que representa a área de circular \U0001D436
+      é: (\U0001D465 − 10)² + (\U0001D466 − 6)² = 25\nAssinale a alternativa correta."
   alternativas:
     A:
       texto: Apenas I, II e V são verdadeiras.
@@ -1620,15 +1590,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: transportes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: 'Observe o mapa que apresenta os rios navegáveis no território brasileiro e o volume total
       de cargas por hidrovia:'
   - figura: q049-1.webp
-  - figura: q049-2.webp
   - texto: 'Disponível em: http://www.transportes.gov.br. Adaptado.'
   - figura: q049-3.webp
   - texto: |-
@@ -1648,15 +1617,14 @@ questoes:
       texto: A região nordeste apresenta extensa rede de vias economicamente navegáveis, em especial no
         Rio São Francisco, com restrição hídrica no período de secas.
     E:
-      texto: 'A região centro-oeste, com destaque para os rios Paraguai, Araguaia, Paraná e Xingu, comporta
-        as maiores vias economicamente navegáveis do país. #####'
+      texto: A região centro-oeste, com destaque para os rios Paraguai, Araguaia, Paraná e Xingu, comporta
+        as maiores vias economicamente navegáveis do país.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈516, 658: conferir o texto'
+  pendencias: []
 - numero: 50
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1667,11 +1635,11 @@ questoes:
       indicou que mudanças nas regras de operação poderiam aumentar o volume mínimo de água armazenada.
       Uma das equações apresentadas pelos pesquisadores calcula a vazão de água de uma turbina em função
       de constantes e outras variáveis, como o nível de água do reservatório e a área de abertura da turbina.
-      A essa equação pode-se relacionar uma função real \U0001D453 definida por \U0001D453 ( \U0001D465
-      )= \U0001D44E ( \U0001D44F\U0001D465−\U0001D450 ) , em que \U0001D44E , \U0001D44F , \U0001D450
-      são coeficientes reais maiores do que 1 e \U0001D465≥ .\nConsiderando a função \U0001D454 : ℝ →ℝ
-      , definida por \U0001D454 ( \U0001D465 )= \U0001D465 , pode-se afirmar que, partindo de \U0001D454
-      para chegar em \U0001D453 , a função \U0001D454 sofreu transformações na seguinte ordem:"
+      A essa equação pode-se relacionar uma função real \U0001D453 definida por \U0001D453(\U0001D465)
+      = \U0001D44E(\U0001D44F\U0001D465 − \U0001D450)^0,5, em que \U0001D44E, \U0001D44F, \U0001D450 são
+      coeficientes reais maiores do que 1 e \U0001D465 ≥ \U0001D450/\U0001D44F.\nConsiderando a função
+      \U0001D454: ℝ⁺ → ℝ, definida por \U0001D454(\U0001D465) = \U0001D465^0,5, pode-se afirmar que, partindo
+      de \U0001D454 para chegar em \U0001D453, a função \U0001D454 sofreu transformações na seguinte ordem:"
   alternativas:
     A:
       texto: translação horizontal para a direita de b/c, alongamento vertical por fator a, compressão
@@ -1690,13 +1658,12 @@ questoes:
         horizontal por fator b.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈223, 232, 242, 258: conferir o texto'
-  - 'Texto sublinhado na página 22, y≈239: formatação perdida no texto puro'
+  pendencias: []
 - numero: 51
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: termoquimica
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: Os Jogos Olímpicos de Inverno também sofrem as consequências do aquecimento global. Para garantir
@@ -1707,29 +1674,28 @@ questoes:
       nas Olimpíadas de inverno de Milano-Cortina em 2026, foram utilizados em torno de 936 milhões de
       litros de água para produzir neve artificial, o que significa que o processo de solidificação da
       água levou a uma liberação de energia em kJ equivalente a
+  - texto: |-
+      Note e adote:
+      Entalpia de solidificação da água: -6 kJ/mol;
+      Massa molar da água: 18 g/mol;
+      Densidade da água: 1 kg/m³.
   alternativas:
     A:
-      texto: "3,12 \U0001D465 10 ."
+      texto: 3,12 x 10⁸.
     B:
-      texto: "1,01 \U0001D465 10 ."
+      texto: 1,01 x 10¹¹.
     C:
-      texto: "3,12 \U0001D465 10 ."
+      texto: 3,12 x 10¹¹.
     D:
-      texto: "5,62 \U0001D465 10 ."
+      texto: 5,62 x 10¹².
     E:
-      texto: "1,01 \U0001D465 10 .\nNote e adote:\nEntalpia de solidificação da água: -6 kJ/mol;\nMassa
-        molar da água: 18 g/mol;\nDensidade da água: 1 kg/m ."
+      texto: 1,01 x 10¹⁴.
   resposta: null
   anulada: true
-  pendencias:
-  - 'Texto sublinhado na página 22, y≈492, 537, 683: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 22, y≈511, 533, 537, 559, 620, 631, 642, 652, 663, 696,
-    721: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 22, y≈533: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈683–732
+  pendencias: []
 - numero: 52
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1744,6 +1710,7 @@ questoes:
   - texto: Usando o movimento de queda livre como referência, qual o porcentual estimado de perda de energia
       cinética provocado pelas forças não conservativas que atuam no conjunto atleta e trenó entre a linha
       de largada e a de chegada?
+  - figura: q052-2.webp
   alternativas:
     A:
       texto: Inferior a 5%.
@@ -1754,17 +1721,13 @@ questoes:
     D:
       texto: Igual ou superior a 15%, mas inferior a 20%.
     E:
-      texto: "Igual ou superior a 20%.\nNote e adote:\nAceleração da gravidade: \U0001D454 = 10 m/s .\nA
-        definição de energia cinética é a metade do produto da massa \U0001D438 = \U0001D45A\U0001D463\npela
-        velocidade ao quadrado,\n, e da energia potencial gravitacional é o produto da massa, aceleração
-        da gravidade e altura em relação ao nível de referência, \U0001D438 = \U0001D45A\U0001D454ℎ ."
+      texto: Igual ou superior a 20%.
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 22, y≈492–568
+  pendencias: []
 - numero: 53
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1789,14 +1752,10 @@ questoes:
       texto: Região (V).
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈66, 82, 85, 86, 97, 210, 220, 229, 243, 307, 317,
-    334, 344, 361, 371, 388, 398: conferir o texto'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 23, y≈213, 229: recortar como figura'
-  - 'Texto sublinhado na página 23, y≈217, 314, 342, 369, 396: formatação perdida no texto puro'
+  pendencias: []
 - numero: 54
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1819,60 +1778,59 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-plana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Duas circunferências são ditas ortogonais quando se interceptam em dois pontos distintos e nesses pontos suas retas tangentes são perpendiculares entre si. Sejam C e C duas circunferências quaisquer de centro O e O , respectivamente.
-      Se C e C são circunferências ortogonais que se interceptam nos pontos P e Q, é correto afirmar:
+      Duas circunferências são ditas ortogonais quando se interceptam em dois pontos distintos e nesses pontos suas retas tangentes são perpendiculares entre si. Sejam C₁ e C₂ duas circunferências quaisquer de centro O₁ e O₂, respectivamente.
+      Se C₁ e C₂ são circunferências ortogonais que se interceptam nos pontos P e Q, é correto afirmar:
   alternativas:
     A:
-      texto: O não pertence à reta tangente à C passando por P.
+      texto: O₂ não pertence à reta tangente à C₁ passando por P.
     B:
-      texto: O triângulo determinado pelos pontos O , O e P é obtuso.
+      texto: O triângulo determinado pelos pontos O₁, O₂ e P é obtuso.
     C:
-      texto: O quadrilátero de vértices O , O , P e Q é um quadrado.
+      texto: O quadrilátero de vértices O₁, O₂, P e Q é um quadrado.
     D:
-      texto: A reta PQ é mediatriz do segmento O O .
+      texto: A reta PQ é mediatriz do segmento O₁O₂.
     E:
-      texto: d( O , O ) = r + r , em que d( O , O ) é a distância entre os pontos O e O e r e r são os
-        raios de C e C , respectivamente.
+      texto: d(O₁, O₂)² = r₁² + r₂², em que d(O₁, O₂) é a distância entre os pontos O₁ e O₂ e r₁ e r₂
+        são os raios de C₁ e C₂, respectivamente.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈693, 707, 731, 759, 762, 782: conferir o texto'
+  pendencias: []
 - numero: 56
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Em uma determinada competição de jogo de cartas, a regra é que certas cartas possuam valores
       numéricos que sigam uma progressão aritmética (PA). Definindo que a carta \U0001D434 tem o valor
-      \U0001D460\U0001D452\U0001D45B , a carta \U0001D435 tem o valor \U0001D465 , a carta \U0001D436
-      tem o valor \U0001D466 , a carta \U0001D437 tem o valor \U0001D467 e a carta \U0001D438 tem o valor
-      de \U0001D460\U0001D452\U0001D45B 75 , qual deve ser o valor de \U0001D466 −\U0001D465\U0001D467
-      para qual os números das cartas \U0001D434 , \U0001D435 , \U0001D436 , \U0001D437 e \U0001D438 ,
-      nesta ordem, formem uma progressão aritmética (PA)?"
+      \U0001D460\U0001D452\U0001D45B(\U0001D70B/12), a carta \U0001D435 tem o valor \U0001D465, a carta
+      \U0001D436 tem o valor \U0001D466, a carta \U0001D437 tem o valor \U0001D467 e a carta \U0001D438
+      tem o valor de \U0001D460\U0001D452\U0001D45B(75°), qual deve ser o valor de \U0001D466² − \U0001D465\U0001D467
+      para qual os números das cartas \U0001D434, \U0001D435, \U0001D436, \U0001D437 e \U0001D438, nesta
+      ordem, formem uma progressão aritmética (PA)?"
   alternativas:
     A:
       texto: '1'
     B:
-      texto: ''
+      texto: 1/8
     C:
-      texto: ''
+      texto: 1/16
     D:
-      texto: ''
+      texto: 1/32
     E:
-      texto: ''
+      texto: 1/64
   resposta: D
   anulada: false
   pendencias: []
 - numero: 57
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: algebra
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1894,10 +1852,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 58
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: Qual das alternativas melhor representa a formação da ligação dos ácidos graxos com a superfície
       do cabelo?
@@ -1914,15 +1872,12 @@ questoes:
       figura: q058-e.webp
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 24, y≈296: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 24, y≈310: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈270–782
+  pendencias: []
 - numero: 59
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb07
   enunciado:
   - texto: Formulações para recuperar a função dessa camada exterior podem conter diversas espécies de
       cadeia longa que se depositam fisicamente sobre o cabelo, como o 1-hexadecanol, que costuma ser
@@ -1932,6 +1887,10 @@ questoes:
       em repouso. Após esse processo, a quantidade de 1-hexadecanol nesses 10 mL de hexano foi determinada
       por um método analítico específico como 62 mmol/L. A porcentagem em massa desse álcool nessa formulação
       será de
+  - texto: |-
+      Note e adote:
+      MM 1-hexadecanol = 242,5 g/mol.
+      Considere eficiência de separação de 100%.
   alternativas:
     A:
       texto: 0,25
@@ -1942,24 +1901,19 @@ questoes:
     D:
       texto: '15'
     E:
-      texto: |-
-        39
-        Note e adote:
-        MM 1-hexadecanol = 242,5 g/mol.
-        Considere eficiência de separação de 100%.
+      texto: '39'
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈296–337
+  pendencias: []
 - numero: 60
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: A figura a seguir representa esquematicamente os compostos orgânicos isômeros de posição orto-nitrofenol
       (2-nitrofenol) e para-nitrofenol (4-nitrofenol). No primeiro, a posição dos grupos funcionais hidroxila
-      (–OH) e nitro (–NO ) possibilita a formação de ligações de hidrogênio intramoleculares, ou seja,
+      (–OH) e nitro (–NO₂) possibilita a formação de ligações de hidrogênio intramoleculares, ou seja,
       dentro da própria molécula, o que reduz a disponibilidade do grupo hidroxila para a formação de
       ligações de hidrogênio intermoleculares, isto é, com outras moléculas. Já no segundo, os grupos
       funcionais estão mais distantes, e a geometria da molécula não possibilita a formação de ligação
@@ -1981,20 +1935,19 @@ questoes:
       texto: No orto-nitrofenol, a formação de ligação de hidrogênio intramolecular impede completamente
         a ocorrência de interações intermoleculares entre as moléculas.
     E:
-      texto: O orto-nitrofenol é mais solúvel em água que o paranitrofenol, pois a ligação de hidrogênio
+      texto: O orto-nitrofenol é mais solúvel em água que o para-nitrofenol, pois a ligação de hidrogênio
         intramolecular aumenta a polaridade da molécula.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 25, y≈104: conferir o texto'
+  pendencias: []
 - numero: 61
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      A capsaicina é um composto orgânico, responsável pela sensação de ardor produzida por algumas pimentas. Pesquisas sobre como o organismo detecta calor e substâncias irritantes levaram à identificação do canal iônico TRPV1. Em humanos, a capsaicina liga-se a esse canal, localizado em terminações nervosas livres associadas à detecção de estímulos potencialmente lesivos. Quando ativado, o TRPV1 aumenta a permeabilidade da membrana neuronal a cátions, especialmente Na ⁺ e Ca ² ⁺ , promovendo despolarização e geração de potenciais de ação. Esses impulsos são interpretados pelo sistema nervoso central como dor em queimação.
+      A capsaicina é um composto orgânico, responsável pela sensação de ardor produzida por algumas pimentas. Pesquisas sobre como o organismo detecta calor e substâncias irritantes levaram à identificação do canal iônico TRPV1. Em humanos, a capsaicina liga-se a esse canal, localizado em terminações nervosas livres associadas à detecção de estímulos potencialmente lesivos. Quando ativado, o TRPV1 aumenta a permeabilidade da membrana neuronal a cátions, especialmente Na⁺ e Ca²⁺, promovendo despolarização e geração de potenciais de ação. Esses impulsos são interpretados pelo sistema nervoso central como dor em queimação.
       Com base nessas informações e nos conhecimentos sobre receptores sensoriais, assinale a alternativa correta.
   alternativas:
     A:
@@ -2020,9 +1973,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 62
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: saude
+  disciplinas_secundarias:
+  - quimica
   texto_base: null
   enunciado:
   - texto: 'Casos de intoxicação humana por metanol estão geralmente associados ao consumo de bebidas
@@ -2036,54 +1990,30 @@ questoes:
       a mesma quantidade da mesma bebida adulterada, sendo um paciente sem tratamento, um tratado com
       etanol e um tratado com fomepizol.'
   - figura: q062-1.webp
-  - texto: |-
-      Assinale a alternativa que relaciona corretamente os pacientes 1, 2 e 3 aos tratamentos administrados e identifique a substância com maior afinidade pela ADH.
-      Maior
-      Paciente 1 Paciente 2 Paciente 3
-      afinidade
-      com a ADH sem
+  - texto: Assinale a alternativa que relaciona corretamente os pacientes 1, 2 e 3 aos tratamentos administrados
+      e identifique a substância com maior afinidade pela ADH.
   alternativas:
     A:
-      texto: |-
-        fomepizol
-        etanol
-        fomepizol tratamento
-        sem
+      texto: 'Paciente 1: fomepizol; Paciente 2: etanol; Paciente 3: sem tratamento; maior afinidade com
+        a ADH: fomepizol.'
     B:
-      texto: |-
-        etanol
-        fomepizol
-        etanol
-        tratamento
-        sem
+      texto: 'Paciente 1: etanol; Paciente 2: sem tratamento; Paciente 3: fomepizol; maior afinidade com
+        a ADH: etanol.'
     C:
-      texto: |-
-        fomepizol
-        etanol
-        metanol
-        tratamento
-        sem
+      texto: 'Paciente 1: sem tratamento; Paciente 2: fomepizol; Paciente 3: etanol; maior afinidade com
+        a ADH: metanol.'
     D:
-      texto: |-
-        fomepizol
-        etanol
-        metanol
-        tratamento
-        sem
+      texto: 'Paciente 1: fomepizol; Paciente 2: sem tratamento; Paciente 3: etanol; maior afinidade com
+        a ADH: metanol.'
     E:
-      texto: |-
-        etanol
-        fomepizol
-        fomepizol tratamento
+      texto: 'Paciente 1: sem tratamento; Paciente 2: etanol; Paciente 3: fomepizol; maior afinidade com
+        a ADH: fomepizol.'
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈200, 372: conferir o texto'
-  - 'Texto sublinhado na página 26, y≈666: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 26, y≈505–667
+  pendencias: []
 - numero: 63
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: saude
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2097,7 +2027,7 @@ questoes:
       sintomáticos.
   - figura: q063-1.webp
   - texto: |-
-      Disponível em: Figura 2 DOI: 10.1056/NEJMoa2301790.Adaptado.
+      Disponível em: Figura 2 DOI: 10.1056/NEJMoa2301790. Adaptado.
       Com base na interpretação do gráfico e nos conhecimentos sobre mecanismos de ação das vacinas, assinale a alternativa correta.
   alternativas:
     A:
@@ -2129,8 +2059,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -2153,13 +2083,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: expressoes
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
-  - texto: Considerado o contexto, a expressão idiomática “ step up to the plate” (1 º parágrafo) tem
-      como efeito
+  - texto: Considerado o contexto, a expressão idiomática “step up to the plate” (1º parágrafo) tem como
+      efeito
   alternativas:
     A:
       texto: indicar que as proteínas participam de vias metabólicas de menor relevância para a homeostase
@@ -2176,8 +2106,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2195,11 +2125,9 @@ questoes:
         pois a ausência de organelas próprias torna o organismo dependente da maquinaria metabólica do
         hospedeiro.
     C:
-      texto: |-
-        A compartimentalização por endomembranas nas células eucarióticas possibilita que reações metabólicas com exigências
-        físico-químicas
-        distintas
-        ocorram simultaneamente em compartimentos separados.
+      texto: A compartimentalização por endomembranas nas células eucarióticas possibilita que reações
+        metabólicas com exigências físico-químicas distintas ocorram simultaneamente em compartimentos
+        separados.
     D:
       texto: As células procarióticas compensam a ausência de núcleo delimitado por membrana por meio
         de um sistema endomembranoso rudimentar análogo ao retículo endoplasmático, no qual concentram
@@ -2212,8 +2140,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: genetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2239,8 +2167,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2268,8 +2196,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 69
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2293,11 +2221,10 @@ questoes:
       texto: Absorção do solo, parasitismo e competição.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 28, y≈132–262
+  pendencias: []
 - numero: 70
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -2319,8 +2246,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -2343,12 +2270,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 72
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
-  - texto: No texto, o emprego metafórico do termo “scaffolding” (7 º parágrafo)
+  - texto: No texto, o emprego metafórico do termo “scaffolding” (7º parágrafo)
   alternativas:
     A:
       texto: sugere que a manutenção do solo depende principalmente de intervenções técnicas realizadas
@@ -2369,8 +2296,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 73
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2382,7 +2309,7 @@ questoes:
         estimula o transporte ativo de minerais através do xilema.
     B:
       texto: compromete a fixação biológica de nitrogênio no solo, processo que depende exclusivamente
-        da interação simbionte entre o pólen carregado pelas abelhas e bactérias do gênero Rhizobium .
+        da interação simbionte entre o pólen carregado pelas abelhas e bactérias do gênero Rhizobium.
     C:
       texto: diminui a variabilidade genética das populações vegetais, visto que a polinização cruzada
         favorece a recombinação gênica e a formação de sementes e frutos mais vigorosos.
@@ -2396,8 +2323,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 74
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: zoologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2425,11 +2352,10 @@ questoes:
         de oxigênio e gás carbônico, além de hormônios e excretas.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 30, y≈222: conferir o texto'
+  pendencias: []
 - numero: 75
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2455,15 +2381,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: termoquimica
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: O custo energético para o funcionamento do coração pode ser estimado como sendo, em média,
       de 1 J por cada batida. Considerando que a energia para esse processo seja proveniente totalmente
-      da reação de combustão da glicose C H O + 6O → 6CO + 6H O, qual a quantidade de CO , em mol, expelida
-      em um dia por uma pessoa para manter seu coração funcionando?
+      da reação de combustão da glicose C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O, qual a quantidade de CO₂, em mol,
+      expelida em um dia por uma pessoa para manter seu coração funcionando?
+  - texto: |-
+      Note e adote:
+      Considere a taxa de batimento cardíaco médio da pessoa de 70 batimentos por minuto. ΔH da reação de combustão da glicose = -2.800 kJ/mol.
   alternativas:
     A:
       texto: 0,003.
@@ -2474,21 +2404,13 @@ questoes:
     D:
       texto: 0,036.
     E:
-      texto: |-
-        0,216.
-        Note e adote:
-        Considere a taxa de batimento cardíaco médio da pessoa de 9
-        70 batimentos por minuto. H da reação de combustão da
-        glicose = -2.800 kJ/mol.
+      texto: 0,216.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 31, y≈82, 117, 128, 234: conferir o texto'
-  - 'Texto sublinhado na página 31, y≈220: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 31, y≈220–270
+  pendencias: []
 - numero: 77
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2512,79 +2434,71 @@ questoes:
         regularidade.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 31, y≈452, 484, 530, 606: conferir o texto'
+  pendencias: []
 - numero: 78
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: equilibrio
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
-      No sangue, o oxigênio liga-se à hemoglobina não oxigenada (Hb), formando a hemoglobina oxigenada (HbO ). Esse processo de oxigenação pode ser representado pelo equilíbrio químico:
-      Hb + O ⇌ HbO
-      Para estimar a quantidade de oxigênio transportado pelo sangue, relógios digitais esportivos e monitores hospitalares utilizam um dispositivo chamado oxímetro de pulso. Esse equipamento emite luz em dois comprimentos de onda, 660 nm (vermelho) e 940 nm (infravermelho), e mede a quantidade de luz absorvida pelo sangue nos vasos sanguíneos superficiais, próximos à pele do usuário. A figura a seguir mostra, de forma simplificada, o espectro de absorção de luz pela Hb e pela HbO em função do comprimento de onda, com destaque para os comprimentos de onda utilizados pelos oxímetros.
+      No sangue, o oxigênio liga-se à hemoglobina não oxigenada (Hb), formando a hemoglobina oxigenada (HbO₂). Esse processo de oxigenação pode ser representado pelo equilíbrio químico:
+      Hb + O₂ ⇌ HbO₂
+      Para estimar a quantidade de oxigênio transportado pelo sangue, relógios digitais esportivos e monitores hospitalares utilizam um dispositivo chamado oxímetro de pulso. Esse equipamento emite luz em dois comprimentos de onda, 660 nm (vermelho) e 940 nm (infravermelho), e mede a quantidade de luz absorvida pelo sangue nos vasos sanguíneos superficiais, próximos à pele do usuário. A figura a seguir mostra, de forma simplificada, o espectro de absorção de luz pela Hb e pela HbO₂ em função do comprimento de onda, com destaque para os comprimentos de onda utilizados pelos oxímetros.
   - figura: q078-1.webp
   - texto: 'Considerando o equilíbrio químico e os dados espectrais apresentados, pode-se afirmar que,
-      em uma situação de baixa pressão parcial de O :'
+      em uma situação de baixa pressão parcial de O₂:'
   alternativas:
     A:
-      texto: O equilíbrio desloca-se para a direita, aumentando a fração de HbO e a absorção de luz em
+      texto: O equilíbrio desloca-se para a direita, aumentando a fração de HbO₂ e a absorção de luz em
         940 nm.
     B:
       texto: Não há alteração na posição do equilíbrio, apenas a intensidade da luz absorvida se altera
         em todos os comprimentos de onda.
     C:
-      texto: Ocorre aumento simultâneo das frações de Hb e HbO , elevando a absorção em 660 nm e 940 nm.
+      texto: Ocorre aumento simultâneo das frações de Hb e HbO₂, elevando a absorção em 660 nm e 940 nm.
     D:
       texto: O equilíbrio desloca-se para a esquerda, aumentando a fração de Hb, o que resulta em maior
         absorção de luz em 660 nm.
     E:
       texto: A absorção de luz em 660 nm induz o deslocamento do equilíbrio no sentido da formação de
-        Hb, reduzindo a fração de HbO .
+        Hb, reduzindo a fração de HbO₂.
   resposta: D
   anulada: false
   pendencias: []
 - numero: 79
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: eletroquimica
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
   - texto: Do ponto de vista químico, qual reação explica corretamente a origem da coloração vermelha
-      observada nas Blood Falls ?
+      observada nas Blood Falls?
   alternativas:
     A:
-      texto: Fe² ⁺ (aq) + 2e ⁻ → Fe(s)
+      texto: Fe²⁺(aq) + 2e⁻ → Fe(s)
     B:
-      texto: |-
-        Fe³ ⁺ (aq) + e ⁻ → Fe² ⁺ (aq)
-        ,
+      texto: Fe³⁺(aq) + e⁻ → Fe²⁺(aq)
     C:
-      texto: |-
-        4Fe² ⁺ (aq) + O (g) + 4H (aq) → 4Fe³ ⁺ (aq) + 2H O( )
-        ,
+      texto: 4Fe²⁺(aq) + O₂(g) + 4H⁺(aq) → 4Fe³⁺(aq) + 2H₂O(ℓ)
     D:
-      texto: 2Fe(s) + O (g) + 2H O( ) → 2Fe² ⁺ (aq) + 4OH ⁻ (aq)
+      texto: 2Fe(s) + O₂(g) + 2H₂O(ℓ) → 2Fe²⁺(aq) + 4OH⁻(aq)
     E:
-      texto: Fe³ ⁺ (aq) + 3OH ⁻ (aq) → Fe(OH) (s)
+      texto: Fe³⁺(aq) + 3OH⁻(aq) → Fe(OH)₃(s)
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 32, y≈451, 466, 471, 473, 480, 485, 495, 502: conferir
-    o texto'
-  - 'Texto-base tb06: Índice/expoente em fonte pequena na página 32, y≈118, 255: conferir o texto'
+  pendencias: []
 - numero: 80
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
-  - texto: |-
-      O fluxo de água que dá origem às Blood Falls é fornecido por um lago subglacial de água com cerca de 4 vezes mais sais que a água do mar. Em condições normais, a água pura c
-      congela a 0 C sob pressão atmosférica; no entanto, nesse lago, a água permanece líquida mesmo a temperaturas da c
-      ordem de − 7 C. Esse reservatório não congela mesmo em c
-      temperaturas abaixo de 0 C, pois
+  - texto: O fluxo de água que dá origem às Blood Falls é fornecido por um lago subglacial de água com
+      cerca de 4 vezes mais sais que a água do mar. Em condições normais, a água pura congela a 0 °C sob
+      pressão atmosférica; no entanto, nesse lago, a água permanece líquida mesmo a temperaturas da ordem
+      de −7 °C. Esse reservatório não congela mesmo em temperaturas abaixo de 0 °C, pois
   alternativas:
     A:
       texto: a elevada concentração de partículas dissolvidas reduz a temperatura de congelamento da água,
