@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.5
-**Data:** 2026-10-02
-**Arquitetura Ref:** 02-ARCHITECTURE v1.10 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, §9)
+**Versão:** 1.6
+**Data:** 2026-10-03
+**Arquitetura Ref:** 02-ARCHITECTURE v1.11 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, §9)
 
 ---
 
@@ -113,10 +113,11 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 - [ ] CI verde no push (`gh run watch`): jobs backend, frontend e docker
 - [ ] Nenhum `.env`, credencial ou `data/_cache/` no commit (o `GOOGLE_CLIENT_SECRET` só existe na Railway)
 
-### 4.2 Conteúdo (prova nova ou correção de questão)
-- [ ] Branch `conteudo/prova-AAAA` (ou `conteudo/correcao-AAAA-NNN`)
-- [ ] Toda questão com disciplina **e assunto** da taxonomia `data/provas/assuntos.yaml` (V11, CR-004); revisar com `python -m ingestao assuntos --ano AAAA`
-- [ ] `python -m ingestao validar --ano AAAA` sem pendência bloqueante
+### 4.2 Conteúdo (prova nova, simulado oficial ou correção de questão)
+- [ ] Branch `conteudo/prova-AAAA` (simulados oficiais: `conteudo/simulados-AAAA`; correção: `conteudo/correcao-CODIGO-NNN`)
+- [ ] Simulado oficial (CR-011): `python -m ingestao baixar --prova AAAAsN --prova-url <PDF da prova S1> --gabarito-url <PDF do gabarito> --versao S1` e `extrair --prova AAAAsN`. O pacote fica em `data/provas/AAAAsN/` com `tipo: simulado`, `edicao: N` e `total_questoes: 80`; a prova real de um ano novo usa `--prova AAAA` (`--ano` continua aceito)
+- [ ] Toda questão com disciplina **e assunto** da taxonomia `data/provas/assuntos.yaml` (V11, CR-004); revisar com `python -m ingestao assuntos --prova CODIGO`
+- [ ] `python -m ingestao validar --prova CODIGO` sem pendência bloqueante
 - [ ] `status: publicada` no `prova.yaml`
 - [ ] Conferido no site local: `python -m ingestao importar` + `npm run dev`
 - [ ] Merge em `master` + push → CI (`validar --todas`) → deploy → a sincronização publica a prova
@@ -124,6 +125,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 ### 4.3 Migration
 - [ ] `upgrade head` e `downgrade -1` testados no SQLite local **e** no Postgres do CI (passo "Migrations no Postgres")
 - [ ] `downgrade()` implementado; se destrutiva, backup antes (seção 6)
+- [ ] **Migration 005 (CR-011):** recria vazias `provas`, `textos_base` e `questoes` (a sincronização do start as repovoa) e alarga `reportes.questao_id`; contas e históricos não são tocados. Backup recomendado (seção 6), mas não obrigatório: ela só recria dados derivados do repositório e alarga uma coluna, sem perda, e não toca as tabelas de conta. Entre a migration e o código novo assumir, o container antigo ainda no ar consulta o schema anterior: o conteúdo pode dar erro por alguns segundos (contas e histórico continuam). Fazer o deploy em horário de pouco uso. Localmente, depois do `upgrade`, rodar `python -m ingestao importar` de novo
 
 ### 4.4 Taxonomia de assuntos (CR-004)
 - [ ] Mudou `data/provas/assuntos.yaml`? `python -m ingestao validar --todas` verde: renomear ou remover um slug em uso exige reclassificar as questões no mesmo commit (V11)
@@ -131,7 +133,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 
 ### 4.5 Notas de corte de um ano novo (CR-010)
 - [ ] Branch `conteudo/cortes-AAAA` (conteúdo, sem CR)
-- [ ] `python -m ingestao cortes --ano AAAA --url <PDF "Notas de Corte" do acervo>`: grava `data/provas/notas_corte/AAAA.yaml` em rascunho com as pendências de nome (não sobrescreve sem `--forcar`)
+- [ ] `python -m ingestao cortes --ano AAAA --url <PDF "Notas de Corte" do acervo>`: grava `data/provas/notas_corte/AAAA.yaml` em rascunho com as pendências de nome (não sobrescreve sem `--forcar`). A partir de 2027 o arquivo traz `pontos_prova: 80` (obrigatório; confira no PDF que os cortes vão até 80 e o mínimo é 24 — CR-011)
 - [ ] Completar os nomes: os cortados com "..." e, se o PDF não trouxer o campus, o campus de todas as carreiras, pelo Guia de Carreiras ou pelo Manual do Candidato do ano (a soma das vagas dos cursos tem que bater com a da carreira); conferir alguns cortes contra o PDF; zerar `pendencias` e `status: publicada`
 - [ ] `python -m ingestao validar --todas` verde (regras C01–C05); o usuário revisa os nomes antes do merge
 - [ ] Merge em `master` + push → CI → deploy. O ano novo vira a lista da carreira-alvo: as carreiras-alvo do ano anterior continuam comparando com o corte delas e a página sugere escolher de novo (RN-019)
@@ -152,6 +154,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 | Desligar o login (CR-005/CR-006) | Desde o CR-006, remover `GOOGLE_CLIENT_ID` **tira o site do ar** em produção ("temporariamente indisponível"); quem já entrou ainda pode sair e excluir a conta. Para voltar ao site público, reverter o CR-006. Trocar o segredo não desconecta ninguém |
 | Desconectar todo mundo (ex.: suspeita de vazamento de sessões) | Apagar as linhas de `sessoes` com um comando Python no container (seção 8.3): `with app.state.engine.begin() as c: c.execute(text("DELETE FROM sessoes"))`. Os históricos ficam; cada estudante entra de novo |
 | Reverter o CR-005 (contas) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. **Não** rodar `alembic downgrade` da `003` sem backup: ele apaga contas e históricos |
+| Reverter o CR-011 (código da prova, 80 questões) | O código anterior **não lê** o schema da `005`: backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade 004` (recria vazias as tabelas derivadas no formato anterior; falha se houver reporte de questão de simulado, `2027sN-NNN`: exportar e apagar esses reportes antes) → `git revert -m 1` do merge (e do conteúdo dos simulados, se publicado) + push; o start do código anterior repovoa as provas e ignora os diretórios `AAAAsN`. Históricos com ids de simulado ficam no servidor; o código anterior recusa novos envios com esses ids (ficam pendentes no navegador) |
 | Reverter o CR-010 (notas de corte) | `git revert -m 1` do merge: leva código e `data/provas/notas_corte/` juntos. A migration `004` pode ficar (o código antigo ignora as colunas); `alembic downgrade` da `004` apaga só as carreiras-alvo escolhidas, mas com backup antes (seção 6), como toda migration em banco com dados de usuário |
 | Notas de corte publicadas com erro | Corrigir ou `git revert` do arquivo `data/provas/notas_corte/AAAA.yaml` + push: a API lê o arquivo do deploy novo |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
@@ -186,7 +189,8 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 - [ ] Login obrigatório (CR-006): `GET /api/sessao` → `acesso: "conta"`; sem cookie, `GET /api/catalogo` → 401; num navegador sem login, o início mostra a apresentação e `/historico` leva a ela
 - [ ] Vitrine (CR-007): sem cookie, `GET /api/vitrine` → 200 com `total_questoes` igual ao do catálogo e os `anos` publicados; a apresentação mostra esses números
 - [ ] Notas de corte (CR-010): sem cookie, `GET /api/notas-corte` → 401; logado, `/notas-de-corte` mostra os anos publicados (desde 02/10/2026: 2026, 2025, 2024, 2023, 2022 e 2020) e as carreiras do mais recente; definir a carreira-alvo, finalizar uma Prova de um ano e ver o bloco "Notas de corte" no resultado e a linha no início
-- [ ] Figuras carregam (`/figuras/AAAA/...`)
+- [ ] Formato de 80 questões e simulados oficiais (CR-011): `railway logs` com `Running upgrade 004 -> 005` e a sincronização de todas as provas depois; a Prova completa começa com "Questão 1 de 80" e "Folha 0/80"; a Prova de um ano de 2025 continua com 90; a página da Prova de um ano lista os simulados oficiais à parte (quando publicados); o Personalizado mostra "3 min 45 s por questão"; o bloco de notas de corte mostra "equivale a … de 90 (estimativa)" na Prova completa
+- [ ] Figuras carregam (`/figuras/CODIGO/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 
 ---
@@ -253,3 +257,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.3 — CR-006: login obrigatório; sem as variáveis do Google, o site fica indisponível em produção; smoke test e verificação pós-deploy |
 | 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |
 | 2026-10-02 | Claude | v1.5 — CR-010: notas de corte de um ano novo (§4.5), migration 004 e rollback do CR-010, verificação das notas de corte |
+| 2026-10-03 | Claude | v1.6 — CR-011: migration 005 (recria as tabelas derivadas; janela curta no deploy, §4.3), simulados oficiais e `--prova` no conteúdo (§4.2), `pontos_prova` nas notas de corte de 2027 (§4.5), rollback e verificação do CR-011 |

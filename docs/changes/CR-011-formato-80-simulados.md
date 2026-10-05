@@ -270,23 +270,50 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 
 ## 8. Critérios de Aceite
 
-- [ ] Um pacote de simulado oficial (`tipo: simulado`, `edicao`, 80 questões, versão `S1`) é validado, sincronizado e servido com ids `2027sN-NNN`; os pacotes publicados de 2020 e 2022–2025 continuam válidos sem edição
-- [ ] Os ids existentes (`AAAA-NNN`) continuam valendo em questões, correção, reportes, treino e histórico; ids `AAAA` + `sN` também; outros formatos → 422
-- [ ] `python -m ingestao extrair --prova 2027s1` (e `2027s2`) gera o rascunho com 80 questões e o gabarito casado (anulada com `*`); `--ano` continua aceito
-- [ ] A Prova completa tem 80 questões, na distribuição proporcional das provas publicadas, com 5 h
-- [ ] A Prova de um ano lista as provas da FUVEST e, em seção própria, os simulados oficiais; cada uma é feita com o seu total (90 ou 80), anuladas incluídas, com 5 h
-- [ ] Questões dos simulados aparecem no Personalizado e no Treino (filtro de anos pelo ano de referência) e no Meu desempenho; cada questão mostra a origem
-- [ ] O Personalizado usa 225 s por questão (P3)
-- [ ] O resultado e o início comparam com o corte proporcionalmente: mesma escala → direto; escalas diferentes → nota convertida com 1 casa e "(estimativa)"; a página de cortes mostra "de 0 a N" e o mínimo do ano
-- [ ] Um arquivo de cortes com `pontos_prova: 80` é aceito (mínimo 24, máximo ≤ 80) e os atuais continuam válidos
-- [ ] Migration `005` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI), sem perder contas, sessões, históricos e reportes
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança (IT-028 a IT-034, BT-087 a BT-096, UT-062 a UT-068)
-- [ ] Fluxo afetado exercitado em runtime antes do merge — HTTP real e Playwright (FT-025), registrados abaixo
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: contratos de endpoints alterados (formatos de id e de código, rota de figuras com caminho novo)
-- [ ] Documentos afetados foram atualizados
-- [ ] CI verde na branch e em `master`; em produção, a migration aplicada, as 5 provas sincronizadas e a Prova completa com 80 questões
+- [x] Um pacote de simulado oficial (`tipo: simulado`, `edicao`, 80 questões, versão `S1`) é validado, sincronizado e servido com ids `2027sN-NNN`; os pacotes publicados de 2020 e 2022–2025 continuam válidos sem edição — IT-028, IT-030, IT-031; `validar --todas` verde com os pacotes reais sem nenhuma edição; `importar` sincronizou 2020 e 2022–2025 no `local.db` depois da `005`
+- [x] Os ids existentes (`AAAA-NNN`) continuam valendo em questões, correção, reportes, treino e histórico; ids `AAAA` + `sN` também; outros formatos → 422 — BT-092 e a regressão inteira (os testes antigos usam `2098-NNN`/`2099-NNN`); HTTP real abaixo
+- [x] `python -m ingestao extrair --prova 2027s1` (e `2027s2`) gera o rascunho com 80 questões e o gabarito casado (anulada com `*`); `--ano` continua aceito — rodado com os PDFs reais (`baixar` + `extrair` num diretório temporário): 80 questões nas duas edições, nenhuma sem resposta, anuladas 51 (1ª) e 20 (2ª), 42 e 41 figuras, sem pendência V01; IT-032 a IT-034
+- [x] A Prova completa tem 80 questões, na distribuição proporcional das provas publicadas, com 5 h — BT-089, BT-090; HTTP real e Playwright ("Questão 1 de 80", "Folha 0/80", 04:59:59)
+- [x] A Prova de um ano lista as provas da FUVEST e, em seção própria, os simulados oficiais; cada uma é feita com o seu total (90 ou 80), anuladas incluídas, com 5 h — BT-091, UT-065; Playwright (1280 e 360 px)
+- [x] Questões dos simulados aparecem no Personalizado e no Treino (filtro de anos pelo ano de referência) e no Meu desempenho; cada questão mostra a origem — teste do filtro de anos (`test_geracao`), BT-092 (treino), UT-066; a Prova completa de runtime sorteou 27 questões do `2099s1`. O Meu desempenho soma o histórico por disciplina e assunto, sem olhar a prova (não muda)
+- [x] O Personalizado usa 225 s por questão (P3) — BT-005, UT-067; HTTP real (4 questões → 900 s) e Playwright ("1 h 15 min … 3 min 45 s por questão")
+- [x] O resultado e o início comparam com o corte proporcionalmente: mesma escala → direto; escalas diferentes → nota convertida com 1 casa e "(estimativa)"; a página de cortes mostra "de 0 a N" e o mínimo do ano — UT-062 a UT-064, UT-068; Playwright ("Sua nota: 11 de 80 · equivale a 12,4 de 90 (estimativa)", "faltam 68,6")
+- [x] Um arquivo de cortes com `pontos_prova: 80` é aceito (mínimo 24, máximo ≤ 80) e os atuais continuam válidos — BT-095 e o teste de coerência com o ano (revisão de código, achado 1); `validar --todas` verde com os seis arquivos publicados
+- [ ] Migration `005` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI), sem perder contas, sessões, históricos e reportes — SQLite: `local.db` 004 → 005 → 004 → 005 (alembic) e BT-087 (004 → 005 → 004 com conta, histórico e reporte preservados). **Postgres no CI: pendente do push da branch**
+- [x] Testes existentes continuam passando (regressão) — backend 459 testes, frontend 297
+- [x] Novos testes cobrem a mudança (IT-028 a IT-034, BT-087 a BT-096, UT-062 a UT-068) — e os testes da revisão de código (consulta da prova, `pontos_prova` por ano, `ano` antigo, `(cid:172)` no texto, início só com simulados)
+- [x] Fluxo afetado exercitado em runtime antes do merge — HTTP real e Playwright (FT-025), registrados abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — 9 achados: 8 corrigidos, 1 justificado (abaixo)
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: contratos de endpoints alterados (formatos de id e de código, rota de figuras com caminho novo) — abaixo
+- [x] Documentos afetados foram atualizados — PRD v6.0, Arquitetura v1.11 (ADR-015, ADR-006 emendado), 03-SPEC v1.11, specs 01 (v1.3), 02 (v1.3), 03 (v1.11), 04 (v1.8), 07 (v1.6) e 08 (v1.1), Plano, Deploy Guide v1.6, CLAUDE.md, INDEX.md
+- [ ] CI verde na branch e em `master`; em produção, a migration aplicada, as 5 provas sincronizadas e a Prova completa com 80 questões — **pendente do push**
+
+**Validação runtime (03/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso; SQLite novo com a base sintética — vestibulares 2098 e 2099 e o simulado `2099s1` de 80 questões — e as notas de corte sintéticas de 90 pontos):**
+- HTTP: sem sessão, `GET /api/catalogo` → 401. Logado: catálogo com `2099s1` (simulado, edição 1, "Simulado FUVEST 2099 · 1ª edição", 80), `2099` e `2098` (90), 255 questões, distribuição somando 80; vitrine `{"total_questoes": 255, "anos": [2098, 2099]}`; Prova completa com 80 questões (24 de 2099, 29 de 2098, 27 do simulado) e 18000 s; `{"modo": "ano", "prova": "2099s1"}` → 80 questões, `2099s1-001`, origem do simulado, figura `/figuras/2099s1/q015-1.webp`; `{"ano": 2099}` → 422 antes da revisão de código (depois dela, aceito como `prova: "2099"`, BT-091); `"2099S1"` → 422; `"2050s1"` → 404; Personalizado de 4 → 900 s; `/figuras/2099s1/...` → 200 e `/figuras/2099S1/...` → 404; `/api/questoes?ids=2099s1-001,2099-001,2099s2-001` → as duas primeiras e `nao_encontradas: ["2099s2-001"]`; `ids=2099S1-001` → 422; notas de corte `ano 2099, pontos_prova 90`.
+- Playwright (FT-025), 1280 px: login falso → `/notas-de-corte` → "Definir como alvo" (Medicina) → início com "255 questões de 2 provas (2098 a 2099) e 1 simulado oficial.", Prova completa "80 questões" e o PDF do simulado em "Provas na base" → `/novo/ano` com "Provas da FUVEST" e "Simulados oficiais da FUVEST" → "Fazer o Simulado FUVEST 2099 · 1ª edição" (o diálogo de descarte apareceu por um simulado antigo de outra validação no `localStorage`) → "Questão 1 de 80", "Física, Simulado FUVEST 2099 · 1ª edição (questão 1)", "Folha 0/80" → 40 respostas → finalizar → "Você acertou 11 de 80 questões" e o bloco "Notas de corte" com "Sua nota: 11 de 80 · equivale a 12,4 de 90 (estimativa)", "faltam 68,6/60,6/49,6" e sem o link de lista do ano → início com "Corte 2099 · Medicina…: AC 81 (faltam 68,6) · EP 73 (faltam 60,6) · PPI 62 (faltam 49,6)" e a nota convertida → Personalizado com "Tempo: 1 h 15 min, o mesmo ritmo da prova (3 min 45 s por questão)" e anos 2098 e 2099 sem repetição → Prova completa com "Questão 1 de 80" e 04:59:59. A 360 px, `/novo/ano` com documento de 345 px (sem rolagem horizontal). Console sem erros nem avisos na sessão inteira.
+
+**Revisão de código (`/code-review high`, diff da branch) — 9 achados, 8 corrigidos e 1 justificado (`b68787b`):**
+1. Corrigido: `pontos_prova` com padrão 90 e sem conferência com o ano deixaria um `2027.yaml` escrito à mão sem a chave ser lido como de 90. Agora, de 2027 em diante o arquivo tem de declarar `pontos_prova`, e até 2026 só vale 90 (C04; teste novo).
+2. Corrigido: `GerarAno` sem o campo antigo derrubaria a Prova de um ano numa aba aberta durante o deploy. O pedido `{"ano": 2025}` vira `prova: "2025"` (teste novo).
+3. Corrigido: a origem lia a prova por carga preguiçosa (uma consulta por prova). `contains_eager` na geração e `joinedload` no modo ano e em `/api/questoes` (teste novo que falha sem a correção).
+4. Corrigido: só com simulados publicados, o início diria "0 provas"; agora "N questões de K simulados oficiais" (teste novo).
+5. Corrigido: o ritmo "3 min 45 s" estava escrito à mão; agora sai de `SEGUNDOS_POR_QUESTAO`.
+6. Corrigido: `utils/formato.ts` ao lado de `format.ts` confundia; renomeado para `utils/formatoProva.ts`.
+7. Justificado: o formato vigente (80 questões, 5 h, 225 s) fica como constante no backend e no frontend. Ele muda uma vez a cada muitos anos, por resolução da FUVEST; as duas pontas têm testes com o valor e citam a resolução, e levá-lo para a API (vitrine ou catálogo) seria campo novo na vitrine pública, decisão de produto (CLAUDE.md). O `?? 90` da página de cortes só vale sem nenhum ano publicado.
+8. Corrigido: o `(cid:172)` deixava de gerar alerta, mas o `limpar_texto` o apagava; palavras separadas só por ele sairiam grudadas. O `limpar_texto` recebe os glifos de espaço da variante (teste novo).
+9. Corrigido: a distribuição recalculava o total de cada prova por disciplina; agora calcula uma vez. A proteção contra prova sem questões fica, porque a função é pública e testada com contagens avulsas.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum segredo novo; nenhuma variável de ambiente nova |
+| Validação de entrada | Código da prova `^\d{4}(s[1-9])?$` (Pydantic em `GerarAno`, regex na rota de figuras e na CLI); ids `^\d{4}(s[1-9])?-\d{3}$` em questões, correção, reportes, treino e histórico; o `ano` do pedido antigo só é aceito como inteiro e passa pela mesma regex |
+| Caminho de arquivo | `/figuras/{prova}/{arquivo}`: código e nome do arquivo validados **antes** de tocar o disco, e só provas sincronizadas são servidas (path traversal testado — BT-042, BT-093); a CLI monta `data/provas/CODIGO` e `data/_cache/CODIGO` só com o código validado |
+| SQL | Só ORM; a migration usa operações do Alembic |
+| Tokens / ownership / CSRF | Nada muda: os endpoints alterados seguem com `exigir_acesso` e, nos POST, `verificar_origem`; o histórico continua filtrado pelo usuário da sessão |
+| Exposição de dados | Campos novos (`prova`, `origem`, `codigo`, `tipo`, `edicao`, `rotulo`, `pontos_prova`) são conteúdo público da FUVEST, atrás do login como o resto; a vitrine pública não ganha campo (P4) |
+| Dependências | Nenhuma nova: `pip audit` e `npm audit` não se aplicam |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -320,14 +347,14 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 
 - **Migration afetada:** `005_codigo_prova.py`
 - **Comando de downgrade:** `alembic downgrade 004`
-- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic 005 → 004 → 005) e BT-087; Postgres no CI depois do push
 - **Downgrade é destrutivo?** [ ] Sim / [x] Nao — recria vazias as tabelas derivadas (a sincronização do código anterior as repovoa) e volta `reportes.questao_id` para 8 caracteres (falha se houver reporte de questão de simulado; nesse caso, apagar esses reportes antes, depois de exportá-los)
 
 ### 10.3 Impacto em Dados
 
 - **Dados serão perdidos no rollback?** [ ] Sim / [x] Nao (exceto reportes de questões de simulado, se houver)
 - **Detalhamento:** provas, textos-base e questões são reconstruídos do repositório. Contas, sessões, históricos e carreiras-alvo não são tocados. Entradas de histórico com ids de simulado continuam guardadas no servidor; o código anterior as devolve mas recusa novas.
-- **Backup necessário antes do deploy?** [x] Sim / [ ] Nao — a migration não toca as tabelas de conta, mas recria tabelas e altera `reportes`: backup antes (Deploy Guide §6)
+- **Backup necessário antes do deploy?** [ ] Sim / [x] Nao (recomendado) — a migration só recria dados derivados do repositório e alarga `reportes.questao_id` (sem perda); as tabelas de conta não são tocadas. A §6 do Deploy Guide obriga backup em migration destrutiva de dados de usuário, o que não é o caso; backup é obrigatório antes de um `downgrade` em produção
 - **Procedimento de backup:** Deploy Guide §6
 
 ### 10.4 Rollback de Variaveis de Ambiente
@@ -350,3 +377,4 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 |------------|--------|-----------|
 | 2026-10-02 | Rafael Peixoto (com Claude) | CR criado com as decisões D1–D3, o resultado do teste dos dados e as propostas P1–P5 para o Gate 0 |
 | 2026-10-02 | Rafael Peixoto (com Claude) | Gate 0: CR aprovado pelo usuário; P2 (média das proporções de todas as provas), P3 (225 s) e P4 (simulados à parte nos números) confirmadas na opção recomendada |
+| 2026-10-03 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-06), validação runtime (HTTP real e Playwright, FT-025), revisão de código (9 achados: 8 corrigidos, 1 justificado) e de segurança, documentos atualizados. Rascunhos reais de `2027s1` e `2027s2` extraídos fora do repositório (a curadoria é conteúdo). Pendente: CI na branch e em `master` e a conferência em produção |

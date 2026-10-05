@@ -5,7 +5,7 @@
 **PRD Ref:** 01-PRD v5.0
 **Arquitetura Ref:** 02-ARCHITECTURE v1.10
 **Spec Ref:** 03-SPEC v1.10 (specs 01–08)
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011
 
 ---
 
@@ -29,6 +29,7 @@
 | CR-008 | Identidade visual "Papel & Caneta" ([CR](changes/CR-008-identidade-papel-caneta.md), [spec 03 §3](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-009 | Rolagem ao trocar de página e extras do início ([CR](changes/CR-009-rolagem-inicio-extras.md), [spec 03](specs/03-resolucao.md)) | CR-T-01 a CR-T-06 | Concluído |
 | CR-010 | Notas de corte por carreira e carreira-alvo, Fase 4 do roadmap ([CR](changes/CR-010-notas-de-corte.md), [spec 08](specs/08-notas-de-corte.md)) | CR-T-01 a CR-T-09 | Concluído |
+| CR-011 | Formato de 80 questões (FUVEST 2027) e simulados oficiais da FUVEST ([CR](changes/CR-011-formato-80-simulados.md); ADR-015; specs 01, 02, 03, 04, 07 e 08) | CR-T-01 a CR-T-07 | Em Implementação |
 
 > **Status:** Pendente / Em andamento / Concluído
 

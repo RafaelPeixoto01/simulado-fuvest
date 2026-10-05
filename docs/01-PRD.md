@@ -1,16 +1,16 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 5.0
-**Data:** 2026-10-02
+**Versão:** 6.0
+**Data:** 2026-10-03
 **Status:** Aprovado
-**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010
+**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010) + formato de 80 questões e simulados oficiais da FUVEST (CR-011)
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011
 
 ---
 
 ## 1. Visão Geral do Produto
 
-O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª fase da FUVEST** (Prova de Conhecimentos Gerais) usando questões reais de provas de anos anteriores, publicadas no acervo oficial em [fuvest.br](https://www.fuvest.br/acervo/).
+O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª fase da FUVEST** (Prova de Conhecimentos Gerais) usando questões reais de provas de anos anteriores, publicadas no acervo oficial em [fuvest.br](https://www.fuvest.br/acervo/), e dos simulados oficiais que a própria FUVEST aplica e publica (CR-011).
 
 **Problema:** as provas antigas existem só como PDFs soltos, um por ano. Para treinar, o estudante imprime ou lê o PDF, confere as respostas à mão no gabarito e não tem nenhuma visão do próprio desempenho por disciplina. Também não dá para montar uma prova misturando anos, nem treinar só uma matéria.
 
@@ -18,7 +18,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **Público-alvo:** estudantes que vão prestar a FUVEST (3º ano do ensino médio, cursinho, treineiros).
 
-**A 1ª fase da FUVEST** (Guia de Provas 2025): 90 questões de múltipla escolha com 5 alternativas (A–E) e uma correta, até 5 horas de prova, cada questão vale 1 ponto. Disciplinas: Biologia, Física, Geografia, História, Inglês, Matemática, Português e Química, com algumas questões interdisciplinares. Questão anulada tem o ponto atribuído a todos os candidatos.
+**A 1ª fase da FUVEST** (Guia de Provas 2025): 90 questões de múltipla escolha com 5 alternativas (A–E) e uma correta, até 5 horas de prova, cada questão vale 1 ponto. Disciplinas: Biologia, Física, Geografia, História, Inglês, Matemática, Português e Química, com algumas questões interdisciplinares. Questão anulada tem o ponto atribuído a todos os candidatos. **Desde a FUVEST 2027** (Resolução CoG nº 9008/2026, art. 11; 1ª fase em 01/11/2026), são **80 questões**, no mesmo tempo e com o mesmo formato; a eliminação passa a ser abaixo de 24 acertos (30%). A FUVEST aplicou dois simulados oficiais nesse formato em 2026 (1ª edição em 26/04 e 2ª em 26/07), com as provas e os gabaritos publicados (CR-011).
 
 ---
 
@@ -56,8 +56,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 | ID     | Requisito | Prioridade | Persona |
 |--------|-----------|------------|---------|
-| RF-001 | Registrar uma prova do acervo (ano + URLs oficiais do PDF da prova e do gabarito) e baixar os PDFs | Alta | Curador |
-| RF-002 | Extrair o gabarito oficial (90 respostas A–E ou "anulada") da versão escolhida | Alta | Curador |
+| RF-001 | Registrar uma prova do acervo ou um simulado oficial da FUVEST (código da prova + URLs oficiais do PDF da prova e do gabarito) e baixar os PDFs | Alta | Curador |
+| RF-002 | Extrair o gabarito oficial (90 ou 80 respostas A–E ou "anulada") da versão escolhida | Alta | Curador |
 | RF-003 | Extrair as questões do PDF da prova: número, enunciado, texto-base compartilhado, alternativas A–E e figuras | Alta | Curador |
 | RF-004 | Gerar um pacote de revisão editável por prova, com relatório de validação e pendências | Alta | Curador |
 | RF-005 | Classificar cada questão por disciplina e por assunto durante a revisão | Alta | Curador |
@@ -66,14 +66,14 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RF-023 | Manter a taxonomia de assuntos de cada disciplina, versionada junto com as provas (CR-004) | Alta | Curador |
 
 **RF-001 — Detalhamento:**
-- Campos obrigatórios: ano do vestibular, URL do PDF da prova, URL do PDF do gabarito
+- Campos obrigatórios: código da prova (o ano do vestibular, ex.: `2025`; ou `AAAAsN` no simulado oficial, ex.: `2027s1` — CR-011), URL do PDF da prova, URL do PDF do gabarito
 - Campos opcionais: versão da prova (V1 por padrão quando houver várias; "única" em anos com uma só versão)
 - Regras específicas: os PDFs baixados ficam guardados localmente como cópia de referência. O padrão das URLs muda por ano (ex.: `fuvest2025_primeira_fase_prova_V1.pdf` × `fuvest_2015_1fase_prova_V.pdf`), então elas são informadas, não deduzidas
 
 **RF-002 — Detalhamento:**
 - Lê a tabela do gabarito e extrai a coluna da versão registrada (RN-001)
 - Reconhece questões anuladas
-- Falha com mensagem clara se não encontrar exatamente 90 respostas
+- Falha com mensagem clara se não encontrar exatamente o total da prova (90 até 2026; 80 nos simulados oficiais e desde a FUVEST 2027 — CR-011)
 
 **RF-003 — Detalhamento:**
 - Parser determinístico (sem IA), organizado por **família de layout**: anos com a mesma diagramação compartilham a mesma lógica de extração
@@ -84,7 +84,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **RF-004 — Detalhamento:**
 - Saída por prova: arquivo estruturado legível e editável à mão + pasta com as figuras
-- Validações automáticas: 90 questões; 5 alternativas não vazias por questão; resposta do gabarito presente para cada questão; toda figura referenciada existe; toda questão tem disciplina principal e um assunto dessa disciplina (CR-004)
+- Validações automáticas: o total de questões da prova (90 ou 80); 5 alternativas não vazias por questão; resposta do gabarito presente para cada questão; toda figura referenciada existe; toda questão tem disciplina principal e um assunto dessa disciplina (CR-004)
 - Relatório lista as pendências por questão (ex.: "Q37: alternativa D vazia", "Q52: figura não localizada")
 
 **RF-005 — Detalhamento:**
@@ -126,9 +126,9 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 | ID     | Requisito | Prioridade | Persona |
 |--------|-----------|------------|---------|
-| RF-009 | Prova completa: 90 questões sorteadas de várias provas, na distribuição por disciplina da prova real, com 5 h | Alta | Estudante |
+| RF-009 | Prova completa: 80 questões (o formato da FUVEST 2027 — CR-011) sorteadas de várias provas, na distribuição por disciplina da prova real, com 5 h | Alta | Estudante |
 | RF-010 | Personalizado: o estudante escolhe disciplinas, intervalo de anos e quantidade de questões | Alta | Estudante |
-| RF-011 | Prova de um ano: a prova original de um ano, na ordem original, com 5 h | Alta | Estudante |
+| RF-011 | Prova de um ano: a prova original de um ano ou um simulado oficial da FUVEST, inteiro e na ordem original, com 5 h (CR-011) | Alta | Estudante |
 | RF-012 | Treino por questão: uma questão por vez com correção imediata, sem cronômetro | Alta | Estudante |
 
 **RF-009 — Detalhamento:**
@@ -141,7 +141,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Regras específicas: se não houver questões suficientes para os filtros, informa quantas existem e oferece gerar com esse total
 
 **RF-011 — Detalhamento:**
-- Lista os anos publicados; o estudante escolhe um
+- Lista os anos publicados e, à parte, os simulados oficiais da FUVEST (CR-011); o estudante escolhe um
+- A prova tem o total dela: 90 questões de 2020 a 2026, 80 nos simulados oficiais (e na FUVEST 2027, quando entrar)
 - Questões na ordem original da versão ingerida; anuladas aparecem e contam como acerto (RN-002)
 
 **RF-012 — Detalhamento:**
@@ -256,7 +257,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 |--------|-----------|------------|---------|
 | RF-027 | Extrair do PDF oficial as notas de corte da 1ª fase de um ano, revisar os nomes das carreiras e publicá-las | Alta | Curador |
 | RF-028 | Consultar as notas de corte por ano e carreira | Alta | Estudante |
-| RF-029 | Escolher uma carreira-alvo e comparar a nota dos simulados de 90 questões com o corte dela | Alta | Estudante |
+| RF-029 | Escolher uma carreira-alvo e comparar a nota da Prova completa e da Prova de um ano com o corte dela, na escala da lista de corte (CR-011) | Alta | Estudante |
 
 **RF-027 — Detalhamento:**
 - Um comando baixa o PDF "Notas de Corte" do acervo (URL informada, como as das provas) e gera um rascunho por ano, com as três modalidades de cada carreira (ampla concorrência, escola pública e escola pública PPI): vagas, convocados, corte (menor nota entre os convocados para a 2ª fase) e maior nota
@@ -266,12 +267,12 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **RF-028 — Detalhamento:**
 - Página "Notas de corte" (cabeçalho e menu do celular): escolha do ano (o mais recente por padrão), busca pelo nome ou código da carreira, tabela com vagas e o corte de cada modalidade
-- Explica o que é o corte, o mínimo de 27 pontos (menos de 30% elimina) e que é referência para a 1ª fase, não previsão de aprovação; link para o PDF oficial
+- Explica o que é o corte, o mínimo de 30% (27 pontos de 90; 24 de 80 a partir de 2027 — CR-011) e que é referência para a 1ª fase, não previsão de aprovação; link para o PDF oficial
 - Exige login, como o resto do conteúdo (RN-017)
 
 **RF-029 — Detalhamento:**
 - A carreira-alvo é escolhida na página, entre as carreiras do ano mais recente, e fica guardada na conta (RN-019)
-- O resultado da Prova completa e da Prova de um ano com 90 questões mostra os três cortes da carreira-alvo e quanto falta para cada um, ou se a nota atingiu o corte (RN-018); na Prova de um ano, um link leva aos cortes daquele ano
+- O resultado da Prova completa e da Prova de um ano mostra os três cortes da carreira-alvo e quanto falta para cada um, ou se a nota atingiu o corte (RN-018); quando o simulado e a lista de corte têm tamanhos diferentes, a nota é convertida para a escala da lista e mostrada como estimativa (CR-011); na Prova de um ano de vestibular, um link leva aos cortes daquele ano
 - O cartão "Seu último simulado" do início mostra a mesma comparação numa linha
 - Sem carreira-alvo, o resultado convida a escolher uma
 
@@ -294,7 +295,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 |---------|-----------|-----------|
 | RNF-001 | Geração de simulado em < 2 s (p95); figuras otimizadas para web e carregadas sob demanda | Performance |
 | RNF-002 | Layout responsivo, mobile-first, utilizável a partir de 360 px de largura | Usabilidade |
-| RNF-003 | Navegação completa por teclado, contraste WCAG AA (conferido a partir dos tokens; anel de foco próprio, visível sobre a ação azul-marinho — CR-008), texto alternativo nas figuras (padrão: "Figura da questão N — FUVEST ano") | Acessibilidade |
+| RNF-003 | Navegação completa por teclado, contraste WCAG AA (conferido a partir dos tokens; anel de foco próprio, visível sobre a ação azul-marinho — CR-008), texto alternativo nas figuras (padrão: "Figura da questão N, FUVEST ano"; nos simulados oficiais, "Simulado FUVEST ano · Nª edição" — CR-011) | Acessibilidade |
 | RNF-004 | Endpoints públicos com validação de entrada e limite de requisições por IP; sem área administrativa exposta na web (ingestão só por CLI). Com conta (CR-005): sessão em cookie `HttpOnly`, sem token acessível ao JavaScript; proteção contra CSRF; cada estudante só acessa o próprio histórico. Desde o CR-006, a API de conteúdo exige sessão (RN-017); só os totais da base ficam públicos, para a apresentação (CR-007) | Segurança |
 | RNF-005 | Usar o site exige entrar com a conta Google (CR-006). O servidor guarda só o mínimo (CR-005): identificador da conta Google, nome, e-mail, o histórico de simulados concluídos e a carreira-alvo (CR-010; nunca a modalidade de concorrência), apagáveis pelo próprio estudante. Quem não entra vê só a apresentação e a Privacidade, sem cookie. Sem cookies de rastreamento nem scripts de terceiros | Privacidade (LGPD) |
 | RNF-006 | Questão publicada = questão validada (RN-006/RN-007); nada chega ao site sem passar pelas validações | Confiabilidade dos dados |
@@ -306,9 +307,9 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ## 6. User Stories
 
-- **US-001:** Como estudante, quero fazer uma prova completa de 90 questões cronometrada, para treinar o ritmo real da 1ª fase
+- **US-001:** Como estudante, quero fazer uma prova completa cronometrada no formato atual da 1ª fase (80 questões desde a FUVEST 2027 — CR-011), para treinar o ritmo real da prova
   - Critérios de aceite:
-    - [ ] O simulado tem 90 questões sem repetição, de mais de um ano quando a base permitir
+    - [ ] O simulado tem 80 questões sem repetição, de mais de um ano quando a base permitir
     - [ ] A distribuição por disciplina segue a RN-003
     - [ ] O cronômetro começa em 5 h e finaliza o simulado ao zerar
 
@@ -320,8 +321,8 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 - **US-003:** Como estudante, quero refazer a prova original de um ano específico, para comparar com o que caiu de fato
   - Critérios de aceite:
-    - [ ] Vejo a lista de anos disponíveis
-    - [ ] As questões aparecem na ordem original, com as figuras e os textos-base
+    - [ ] Vejo a lista de anos disponíveis e, à parte, os simulados oficiais da FUVEST (CR-011)
+    - [ ] As questões aparecem na ordem original, com as figuras e os textos-base, e a prova tem o total dela (90 ou 80)
     - [ ] Questões anuladas contam como acerto e aparecem sinalizadas no resultado
 
 - **US-004:** Como estudante, quero treinar questão por questão vendo a resposta na hora, para estudar sem pressão de tempo
@@ -423,30 +424,36 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Um comando baixa o PDF e gera o rascunho com os nomes a revisar apontados
     - [ ] A publicação recusa arquivo com pendência, nome repetido ou corte fora da faixa
 
+- **US-021:** Como estudante, quero fazer os simulados oficiais da FUVEST no formato de 80 questões e encontrar as questões deles no meu treino, para me preparar para a prova de 2027 (CR-011)
+  - Critérios de aceite:
+    - [ ] Faço cada simulado oficial inteiro, com 80 questões e 5 horas, numa seção própria da Prova de um ano
+    - [ ] As questões dos simulados também aparecem na Prova completa, no Personalizado, no Treino e no "Meu desempenho", com a origem visível em cada questão
+    - [ ] A comparação com a nota de corte converte a minha nota para a escala da lista e avisa que é uma estimativa
+
 ---
 
 ## 7. Regras de Negócio
 
 | ID     | Regra | Módulo Relacionado |
 |--------|-------|--------------------|
-| RN-001 | Cada prova da base é a 1ª fase de um ano. Ingere-se **uma** versão por ano (V1 quando houver V1–V4; a única nos anos com uma versão) junto com a coluna correspondente do gabarito. As demais versões trazem as mesmas questões em outra ordem e não são ingeridas | Ingestão |
+| RN-001 | Cada prova da base é a 1ª fase de um ano ou um simulado oficial da FUVEST (CR-011), identificada por um código: o ano (`2025`) ou `AAAAsN` (`2027s1`). Ingere-se **uma** versão por prova (V1 quando houver V1–V4; S1 nos simulados; a única nos anos com uma versão) junto com a coluna correspondente do gabarito. As demais versões trazem as mesmas questões em outra ordem e não são ingeridas | Ingestão |
 | RN-002 | Questão anulada fica fora do sorteio (Prova completa, Personalizado, Treino). Na Prova de um ano ela aparece e conta como acerto para todos, como na regra oficial | Geração / Resultado |
-| RN-003 | Distribuição da Prova completa: número de questões por disciplina principal proporcional à média das provas publicadas, arredondado para somar 90 | Geração |
+| RN-003 | Distribuição da Prova completa: número de questões por disciplina principal pela média, entre as provas publicadas (vestibulares e simulados oficiais), da proporção de cada disciplina, arredondado para somar 80 (CR-011) | Geração |
 | RN-004 | Uma questão não se repete dentro do mesmo simulado | Geração |
 | RN-005 | Questões que compartilham texto-base e são sorteadas no mesmo simulado aparecem em sequência; o texto-base é exibido em cada uma delas | Geração / Resolução |
 | RN-006 | Uma prova só aparece no site depois de passar em todas as validações automáticas e ser marcada como publicada pelo curador | Ingestão |
-| RN-007 | Uma questão só entra na base com: enunciado, 5 alternativas A–E não vazias, resposta do gabarito (ou "anulada"), disciplina principal, assunto (RN-014) e fonte (ano, versão, número original) | Ingestão |
+| RN-007 | Uma questão só entra na base com: enunciado, 5 alternativas A–E não vazias, resposta do gabarito (ou "anulada"), disciplina principal, assunto (RN-014) e fonte (código da prova, versão, número original) | Ingestão |
 | RN-008 | Cada questão vale 1 ponto; em branco conta como erro; nota = acertos / total de questões do simulado | Resultado |
-| RN-009 | Tempo: Prova completa e Prova de um ano têm 5 h, sem pausa, contadas pelo relógio a partir do início (fechar a aba não pausa). Personalizado: tempo proporcional (300 min ÷ 90 = 3 min 20 s por questão), com pausa permitida, ou sem cronômetro. Treino não tem cronômetro | Resolução |
+| RN-009 | Tempo: Prova completa e Prova de um ano têm 5 h, sem pausa, contadas pelo relógio a partir do início (fechar a aba não pausa). Personalizado: tempo proporcional (300 min ÷ 80 = 3 min 45 s por questão, o ritmo da FUVEST 2027 — CR-011), com pausa permitida, ou sem cronômetro. Treino não tem cronômetro | Resolução |
 | RN-010 | Quando o tempo acaba, o simulado é finalizado automaticamente com as respostas marcadas até então | Resolução |
 | RN-011 | Só há um simulado em andamento por navegador; iniciar outro pede confirmação para descartar o atual | Resolução |
 | RN-012 | O simulado em andamento fica só no navegador. O histórico fica na conta e no navegador, como espelho dela (RN-016, CR-005) | Resolução / Histórico |
-| RN-013 | Toda questão exibida mostra a fonte (FUVEST ano, nº original) e o site oferece o link do PDF oficial daquele ano | Resolução / Catálogo |
+| RN-013 | Toda questão exibida mostra a fonte ("FUVEST ano" ou "Simulado FUVEST ano · Nª edição", nº original — CR-011) e o site oferece o link do PDF oficial daquela prova | Resolução / Catálogo |
 | RN-014 | Cada disciplina tem uma lista fixa de assuntos (taxonomia versionada). Cada questão tem **exatamente um** assunto, da lista da sua disciplina principal; disciplinas secundárias não têm assunto. O assunto não aparece durante a resolução nem filtra a geração (CR-004) | Ingestão / Resultado / Desempenho |
 | RN-015 | O painel "Meu desempenho" agrega as questões dos simulados concluídos no histórico: anuladas ficam fora (não medem conhecimento), em branco conta como erro (RN-008). Usa o assunto gravado no resultado de cada simulado. Assunto com menos de 5 questões aparece como "poucas questões" e vai para o fim da lista da disciplina; questão de resultado antigo, sem assunto, entra só na disciplina (CR-004) | Desempenho |
 | RN-016 | Conta (CR-005): login só com Google, obrigatório desde o CR-006 (RN-017). A conta guarda os 50 simulados concluídos mais recentes; o navegador com conta mostra o histórico da conta. Ao entrar, os simulados feitos sem conta neste navegador vão para a conta; ao sair, o histórico deixa o navegador e continua na conta; com conta, limpar o histórico limpa na conta. O resultado de um simulado não muda depois de enviado. A sessão dura 90 dias | Conta / Histórico |
 | RN-017 | Acesso (CR-006): usar o site exige sessão. Sem sessão, abrem só a apresentação (início) e a Privacidade; qualquer outra página leva à apresentação, e o login volta para ela. A API de conteúdo (catálogo, geração, questões, correção e reportes) recusa pedidos sem sessão; health, figuras e a vitrine (só os totais da base, CR-007) são públicos. Em produção sem login configurado, o site fica indisponível; fora de produção, aberto | Conta / Acesso |
-| RN-018 | Comparação com o corte (CR-010): só nos simulados de 90 questões da Prova completa e da Prova de um ano; a nota é o número de acertos (na Prova de um ano, a anulada conta como acerto, RN-002). Compara sempre com o corte do ano da carreira-alvo, nas três modalidades, e a nota atinge o corte quando é igual ou maior. A modalidade não é perguntada nem guardada. O texto fala em referência para ir à 2ª fase, nunca em aprovação | Notas de Corte |
+| RN-018 | Comparação com o corte (CR-010): só na Prova completa e na Prova de um ano, de qualquer tamanho (CR-011); a nota é o número de acertos (na Prova de um ano, a anulada conta como acerto, RN-002). Quando o simulado e a lista de corte têm tamanhos diferentes (80 × 90), a nota é convertida para a escala da lista (acertos ÷ total × pontos da prova da lista), com 1 casa decimal, e mostrada como estimativa (CR-011). Compara sempre com o corte do ano da carreira-alvo, nas três modalidades, e a nota atinge o corte quando é igual ou maior. A modalidade não é perguntada nem guardada. O texto fala em referência para ir à 2ª fase, nunca em aprovação | Notas de Corte |
 | RN-019 | Carreira-alvo (CR-010): uma por conta, escolhida entre as carreiras do ano mais recente. Quando sai a lista de um ano novo, os códigos e nomes das carreiras mudam e nada é migrado: a carreira-alvo continua comparando com o corte do ano dela até o estudante escolher de novo. Sai com a exclusão da conta | Notas de Corte |
 
 ---
@@ -474,6 +481,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 ## 9. Dependências e Premissas
 
 ### Dependências
+- **Simulados oficiais da FUVEST** (`fuvest.br/simulado-fuvest-2027-provas-gabarito`): PDFs da prova (versões S1–S4) e do gabarito de cada edição (CR-011)
 - **Acervo oficial da FUVEST** (`fuvest.br/acervo-vestibular-AAAA/`): PDFs da prova da 1ª fase e do gabarito, de 1977 a 2026; desde o CR-010, também o PDF "Notas de Corte" de cada ano e, para os nomes das carreiras, o Guia de Carreiras ou o Manual do Candidato
 - **Railway:** hospedagem da aplicação e do PostgreSQL
 - **Bibliotecas Python de leitura de PDF:** extração de texto, imagens e renderização de páginas (escolha na Arquitetura)
@@ -481,7 +489,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 ### Premissas
 - As provas e os gabaritos do acervo são públicos. O site é gratuito e educacional, cita a fonte em cada questão (RN-013), linka os PDFs oficiais e avisa que não é afiliado à FUVEST/USP
-- As versões V1–V4 de um mesmo ano têm as mesmas questões em ordem diferente (RN-001) — verificar no primeiro ano ingerido
+- As versões V1–V4 de um mesmo ano têm as mesmas questões em ordem diferente (RN-001) — verificar no primeiro ano ingerido. Nos simulados oficiais, as versões S1–S4 também: o gabarito traz a tabela de correspondência (conferido no CR-011)
 - O layout dos PDFs muda entre anos. O parser é construído por família de layout, começando pelos anos mais recentes, e a revisão manual faz parte do processo: nem toda questão sai do parser pronta
 - A classificação por disciplina é manual (o gabarito oficial não a informa)
 - Há um único curador, que é o dono do produto
@@ -499,9 +507,11 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 | Termo | Definição |
 |-------|-----------|
-| 1ª fase | Prova de Conhecimentos Gerais da FUVEST: 90 questões objetivas, até 5 h |
+| 1ª fase | Prova de Conhecimentos Gerais da FUVEST: 90 questões objetivas até 2026 e 80 desde a FUVEST 2027, até 5 h |
+| Simulado oficial | Prova aplicada pela própria FUVEST para treinar o formato da 1ª fase (em 2026, duas edições no formato de 80 questões), publicada com o gabarito. Entra na base como prova própria (CR-011) |
+| Código da prova | Identificador de uma prova na base: o ano no vestibular (`2025`) e `AAAAsN` no simulado oficial (`2027s1`, 1ª edição); prefixo dos ids das questões (CR-011) |
 | Acervo | Página oficial da FUVEST com provas e gabaritos de anos anteriores |
-| Versão da prova (V1–V4) | Variações da mesma prova com as questões em ordem diferente, cada uma com sua coluna no gabarito |
+| Versão da prova (V1–V4) | Variações da mesma prova com as questões em ordem diferente, cada uma com sua coluna no gabarito (S1–S4 nos simulados oficiais) |
 | Gabarito | Tabela oficial com a alternativa correta de cada questão, por versão |
 | Questão anulada | Questão cancelada pela FUVEST; o ponto é atribuído a todos |
 | Texto-base | Texto ou figura compartilhado por duas ou mais questões ("Texto para as questões 10 e 11") |
@@ -517,7 +527,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Sincronização | Envio dos simulados concluídos do navegador para a conta e cópia do histórico da conta para o navegador (RF-025) |
 | Página de apresentação | Início para quem não entrou: descreve o site e os modos, mostra os números da base e uma prévia do simulado, e leva ao login (RN-017, CR-007) |
 | Vitrine | Totais públicos da base (questões válidas e anos publicados) que a apresentação mostra sem login (CR-007) |
-| Nota de corte | Menor nota (de 0 a 90) entre os candidatos chamados para a 2ª fase, por carreira e modalidade, publicada pela FUVEST a cada ano (CR-010) |
+| Nota de corte | Menor nota (de 0 a 90 até 2026; de 0 a 80 desde 2027) entre os candidatos chamados para a 2ª fase, por carreira e modalidade, publicada pela FUVEST a cada ano (CR-010) |
 | Modalidade | Forma de concorrência na FUVEST: ampla concorrência (AC), escola pública (EP) ou escola pública PPI — pretos, pardos e indígenas |
 | Carreira | Agrupamento de cursos da USP com uma única nota de corte por modalidade; o código e o nome mudam entre anos (em 2025, Medicina juntou os três campi) |
 | Carreira-alvo | Carreira escolhida pelo estudante, entre as do ano mais recente, para comparar a nota dos simulados com o corte (RN-019) |
@@ -550,4 +560,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte).*

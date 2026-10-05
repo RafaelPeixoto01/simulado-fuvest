@@ -1,16 +1,16 @@
 # Especificação Técnica — Notas de Corte e Carreira-alvo
 
-**Versão:** 1.0
-**Data:** 2026-10-02
+**Versão:** 1.1
+**Data:** 2026-10-03
 **PRD Ref:** 01-PRD v5.0 (RF-027, RF-028, RF-029, US-018, US-019, US-020, RN-018, RN-019, RNF-005)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.10 (ADR-002, ADR-009, ADR-012, ADR-014)
-**CR Ref:** CR-010 (Fase 4 do roadmap: referência de notas de corte por carreira)
+**CR Ref:** CR-010 (Fase 4 do roadmap: referência de notas de corte por carreira), CR-011 (pontos da prova por ano — 80 desde 2027 — e comparação proporcional)
 
 ---
 
 ## 1. Resumo das Mudanças
 
-As notas de corte da 1ª fase publicadas pela FUVEST (a menor nota entre os convocados para a 2ª fase, por carreira e modalidade) entram no repositório como conteúdo versionado, um arquivo por ano, extraído do PDF oficial por um comando do curador e validado no CI. Uma página nova mostra os cortes de cada ano. O estudante escolhe uma carreira-alvo da lista mais recente, guardada na conta, e o resultado dos simulados de 90 questões e o início comparam a nota com os três cortes dessa carreira.
+As notas de corte da 1ª fase publicadas pela FUVEST (a menor nota entre os convocados para a 2ª fase, por carreira e modalidade) entram no repositório como conteúdo versionado, um arquivo por ano, extraído do PDF oficial por um comando do curador e validado no CI. Uma página nova mostra os cortes de cada ano. O estudante escolhe uma carreira-alvo da lista mais recente, guardada na conta, e o resultado da Prova completa e da Prova de um ano e o início comparam a nota com os três cortes dessa carreira. Desde o CR-011, cada lista declara os pontos da prova daquele ano (90 até 2026, 80 desde a FUVEST 2027), e a nota de um simulado de outro tamanho é convertida para essa escala (D3 do CR-011).
 
 ### Escopo desta Iteração
 - Conteúdo `data/provas/notas_corte/AAAA.yaml` (2020, 2022–2025), schema, carga e validação (C01–C05)
@@ -59,6 +59,7 @@ Fica dentro do `DATA_DIR` (`data/provas`) e entra na imagem com os pacotes, sem 
 # Notas de corte da 1ª fase — FUVEST 2025 (CR-010, specs/08).
 # Corte = menor nota entre os convocados para a 2ª fase. Nomes completados pelo Guia de Carreiras e Cursos.
 ano: 2025
+# pontos_prova: 80           # CR-011: obrigatório a partir de 2027 (80 ou 90); até 2026, ausente = 90
 status: publicada            # rascunho | publicada
 fonte: https://www.fuvest.br/wp-content/uploads/fuvest_2025_notas_de_corte.pdf
 pendencias: []               # textos; a publicação exige a lista vazia (C05)
@@ -79,14 +80,17 @@ Os quatro números de cada modalidade transcrevem a linha do PDF. A interface mo
 ```python
 DIRETORIO_NOTAS_CORTE = "notas_corte"
 PADRAO_FONTE = r"^https://www\.fuvest\.br/\S+\.pdf$"   # fonte do arquivo e URL aceita pelo comando `cortes`
-MINIMO_FUVEST = 27      # menos de 30% da 1a fase elimina (Resolucao FUVEST 2025, art. 11 par. 3)
-PONTOS_PROVA = 90
+ANO_FORMATO_80 = 2027   # primeira 1a fase com 80 questoes (Resolucao CoG 9008/2026, art. 11) — CR-011
+PontosProva = Literal[80, 90]
+
+def pontos_do_ano(ano: int) -> int: ...      # 80 a partir de 2027, senao 90 (rascunho do extrator)
+def minimo_fuvest(pontos_prova: int) -> int: ...   # 30%, arredondado para cima: 27 de 90, 24 de 80
 
 class Modalidade(BaseModel):              # extra="forbid"
     vagas: int                            # 0..2000 (0: sem vagas nessa modalidade, ex.: 2020/150 PPI)
     convocados: int                       # 0..20000
-    corte: int | None                     # MINIMO_FUVEST..90
-    maximo: int | None                    # MINIMO_FUVEST..90
+    corte: int | None                     # 0..90 no schema; a faixa do ano (minimo..pontos_prova) e conferida em NotasCorteAno
+    maximo: int | None                    # idem
     # C04: vagas == 0 -> convocados == 0; convocados > 0 -> corte e maximo presentes e corte <= maximo;
     #      convocados == 0 -> os dois None
 
@@ -102,10 +106,12 @@ class CarreiraCorte(BaseModel):           # extra="forbid"
 
 class NotasCorteAno(BaseModel):           # extra="forbid"
     ano: int                              # 2000..2100
+    pontos_prova: PontosProva = 90        # CR-011: obrigatório no arquivo a partir de 2027; até 2026, só 90
     status: Literal["rascunho", "publicada"]
     fonte: str                            # PADRAO_FONTE
     pendencias: list[str]
     carreiras: list[CarreiraCorte]        # 1..300
+    # C04 do ano: minimo_fuvest(pontos_prova) <= corte <= maximo <= pontos_prova
 
 class NotasCorteInvalidas(Exception):     # caminho + detalhe, como TaxonomiaInvalida
     ...
@@ -149,6 +155,7 @@ class NotasCorteResponse(BaseModel):
     anos: list[int]                       # publicados, do mais recente para o mais antigo
     recente: int | None
     ano: int | None                       # o ano devolvido: o pedido, se publicado; senão o recente
+    pontos_prova: int | None              # pontos da 1ª fase do ano devolvido: 90 ou 80 (CR-011)
     fonte: str | None                     # PDF oficial do ano devolvido
     carreiras: list[CarreiraCorteResposta]   # ordem do arquivo (por código)
 
@@ -159,6 +166,7 @@ class CarreiraAlvoRequest(BaseModel):     # extra="forbid"
 class CarreiraAlvo(BaseModel):
     ano: int
     codigo: int
+    pontos_prova: int                     # escala dos cortes desse ano (CR-011); ano fora da base: pontos_do_ano(ano)
     carreira: CarreiraCorteResposta | None   # None: o par (ano, código) não está mais nos cortes publicados
 
 class UsuarioPublico(BaseModel):
@@ -178,15 +186,23 @@ export const MODALIDADES: { chave: ChaveModalidade; nome: string; sigla: string 
   { chave: 'ppi', nome: 'Escola pública PPI', sigla: 'PPI' },
 ]
 
-/** Pontos comparáveis ao corte: os acertos da Prova completa e da Prova de um ano com 90 questões; null nos demais (RN-018). */
-export function pontosComparaveis(entrada: HistoricoEntry): number | null
+/** Menos de 30% elimina: 27 de 90, 24 de 80 (CR-011). */
+export function minimoFuvest(pontosProva: number): number
 
-/** Ano da Prova de um ano (do primeiro id, AAAA-NNN); null nos outros modos. */
+export interface NotaSimulado { acertos: number; total: number }
+
+/** Nota comparável (RN-018): Prova completa e Prova de um ano, de qualquer tamanho; null no Personalizado (CR-011). */
+export function notaComparavel(entrada: HistoricoEntry): NotaSimulado | null
+
+/** D3 do CR-011: direta quando total === pontosProva; senão acertos ÷ total × pontosProva, com 1 casa, como estimativa. */
+export function naEscalaDoCorte(nota: NotaSimulado, pontosProva: number): { pontos: number; estimativa: boolean }
+
+/** Ano da Prova de um ano de vestibular (do primeiro id, AAAA-NNN); null nos outros modos e nos simulados oficiais (AAAAsN-NNN). */
 export function anoDaProva(entrada: HistoricoEntry): number | null
 
 export type Situacao =
-  | { tipo: 'atingiu'; acima: number }    // pontos >= corte (acima = pontos - corte, pode ser 0)
-  | { tipo: 'falta'; faltam: number }     // pontos < corte
+  | { tipo: 'atingiu'; acima: number }    // pontos >= corte (acima = pontos - corte, pode ser 0; 1 casa)
+  | { tipo: 'falta'; faltam: number }     // pontos < corte (1 casa)
   | { tipo: 'sem-corte' }                 // corte null
 
 export function situacao(pontos: number, corte: number | null): Situacao
@@ -227,8 +243,9 @@ export function filtrarCarreiras(carreiras: CarreiraCorte[], busca: string): Car
 - Quando sai a lista de um ano novo, nada é migrado (os códigos mudam): a carreira-alvo continua com o ano dela até o estudante escolher de novo.
 - Excluir a conta apaga a linha de `usuarios` inteira, e com ela a carreira-alvo.
 
-**Comparação (RN-018):**
-- Só com `pontosComparaveis(entrada) !== null`: modo `completa` ou `ano` e `resultado.total === 90`. Os pontos são `resultado.acertos` (na Prova de um ano, a anulada já conta como acerto — RN-002).
+**Comparação (RN-018, CR-011):**
+- Só com `notaComparavel(entrada) !== null`: modo `completa` ou `ano`, de qualquer tamanho. A nota são os acertos sobre o total do simulado (na Prova de um ano, a anulada já conta como acerto — RN-002).
+- A nota vai para a escala da lista da carreira-alvo (`alvo.pontos_prova`, D3 do CR-011): com o mesmo total, direta; com outro (Prova completa de 80 contra a lista de 2026, de 90; Prova de um ano de 2025 contra a lista de 2027, de 80; ou uma prova com questão removida da base), `acertos ÷ total × pontos_prova` com 1 casa decimal, marcada como estimativa. "Faltam" e "atingiu" usam a nota convertida.
 - Sempre contra o corte do ano da carreira-alvo (D2), nas três modalidades (D4). `atingiu` quando pontos ≥ corte (o corte é a menor nota entre os convocados).
 - Calculada na hora de mostrar, com a carreira-alvo atual; nada é gravado no histórico.
 
@@ -240,7 +257,7 @@ Auth: Acesso (specs/07 §8: 401 nao_autenticado sem sessão no modo conta; 503 s
 Query: ano opcional, inteiro 1977..2100 (fora disso -> 422)
 200: NotasCorteResponse
      - sem `ano`, ou `ano` não publicado -> o ano mais recente (o cliente compara `ano` com o pedido)
-     - nenhum ano publicado -> {"anos": [], "recente": null, "ano": null, "fonte": null, "carreiras": []}
+     - nenhum ano publicado -> {"anos": [], "recente": null, "ano": null, "pontos_prova": null, "fonte": null, "carreiras": []}
 
 PUT /api/conta/carreira-alvo
 Auth: Acesso + sessão (401 nao_autenticado sem usuário, inclusive no modo livre) | Origin verificado | Rate limit: 30/min por IP | Cache-Control: no-store
@@ -271,7 +288,7 @@ Migration `004_carreira_alvo` (down_revision `003`), com `op.batch_alter_table` 
 | C01 | Arquivo `AAAA.yaml` legível, YAML válido, no schema (campos extras recusados) e `ano` igual ao nome do arquivo | Sempre (arquivo inválido) |
 | C02 | Códigos únicos; nomes únicos no ano (sem diferenciar maiúsculas); nenhuma carreira de treineiro | Publicado |
 | C03 | Nome sem "..." nem "…" (nome cortado) | Publicado |
-| C04 | Por modalidade: sem vagas, sem convocados; com convocados, `27 ≤ corte ≤ maximo ≤ 90`; sem convocados, corte e máximo vazios | Sempre (schema) |
+| C04 | Por modalidade: sem vagas, sem convocados; com convocados, `mínimo ≤ corte ≤ maximo ≤ pontos_prova` (27–90 ou 24–80, CR-011); sem convocados, corte e máximo vazios. Do ano: `pontos_prova` 90 até 2026 e obrigatório no arquivo a partir de 2027 | Sempre (schema) |
 | C05 | `pendencias` vazia | Publicado |
 
 | Campo (API) | Regra | Resultado |
@@ -295,7 +312,7 @@ Dentro do `RequerConta`. `useTituloPagina('Notas de corte')`. Lê e grava `?ano=
 | Carreira-alvo | Com alvo: "Sua carreira-alvo: **nome** · FUVEST {ano}", os três cortes com as siglas e o botão "Remover". Alvo de um ano anterior ao mais recente: "Sua carreira-alvo é da lista de {ano}. Escolha de novo na lista de {recente}: os códigos e os nomes das carreiras mudam de um ano para outro." Alvo fora da lista (`carreira: null`): "Sua carreira-alvo não está mais na lista. Escolha outra." Sem alvo: "Escolha uma carreira-alvo para comparar a nota dos seus simulados com o corte." |
 | Busca | Campo "Buscar carreira" (nome ou código, sem diferenciar acento nem maiúscula); "N carreiras" (`aria-live="polite"`); sem resultado: "Nenhuma carreira encontrada." |
 | Tabela | Colunas Carreira, Vagas, AC, EP, PPI e, só no ano mais recente e com usuário, a coluna de ação. Linhas ordenadas por nome. Corte `null` → "—" com `title` "sem convocados". A linha da carreira-alvo mostra "Sua carreira-alvo" (texto, não só cor); as outras, o botão "Definir como alvo" (`aria-label` "Definir {nome} como carreira-alvo") |
-| Como ler | "Corte é a menor nota (de 0 a 90) entre os candidatos chamados para a 2ª fase naquela carreira e modalidade." · "Quem faz menos de 27 pontos (30% da prova) é eliminado; corte 27 quer dizer que todos os que atingiram o mínimo foram chamados." · "AC: ampla concorrência. EP: escola pública. PPI: escola pública, pretos, pardos e indígenas." · "É uma referência para a 1ª fase, não uma previsão de aprovação: a aprovação depende da 2ª fase." · "Fonte: FUVEST, Notas de Corte {ano}" (link para `fonte`, avisando que abre em outra aba, como os PDFs do início) |
+| Como ler | "Corte é a menor nota (de 0 a {pontos_prova}) entre os candidatos chamados para a 2ª fase naquela carreira e modalidade." · "Quem faz menos de {mínimo} pontos (30% da prova) é eliminado; corte {mínimo} quer dizer que todos os que atingiram o mínimo foram chamados." (90 e 27 até 2026; 80 e 24 desde 2027 — CR-011) · "AC: ampla concorrência. EP: escola pública. PPI: escola pública, pretos, pardos e indígenas." · "É uma referência para a 1ª fase, não uma previsão de aprovação: a aprovação depende da 2ª fase." · "Fonte: FUVEST, Notas de Corte {ano}" (link para `fonte`, avisando que abre em outra aba, como os PDFs do início) |
 
 **Estados:** carregando (`Carregando`); erro da consulta (estado de erro com "Tentar de novo"); nenhum ano publicado ("As notas de corte ainda não estão disponíveis."); salvando (botões da linha desabilitados); salvo (`role="status"`: "{nome} agora é a sua carreira-alvo." / "Carreira-alvo removida."); erro ao salvar (`role="alert"`: "Não foi possível salvar a carreira-alvo. Tente novamente."); 422 `carreira_invalida` (saiu a lista de um ano novo depois que a página abriu): "A lista de notas de corte mudou. {mensagem do servidor}", e a lista é buscada de novo.
 
@@ -309,20 +326,20 @@ Dentro do `RequerConta`. `useTituloPagina('Notas de corte')`. Lê e grava `?ano=
 
 | Prop | Tipo | Obrigatório | Descrição |
 |------|------|-------------|-----------|
-| pontos | `number` | Sim | `pontosComparaveis(entrada)` |
+| nota | `NotaSimulado` | Sim | `notaComparavel(entrada)` (CR-011) |
 | alvo | `CarreiraAlvo \| null` | Sim | `sessao.usuario?.carreira_alvo ?? null` |
 | anoDaProva | `number \| null` | Sim | `anoDaProva(entrada)`: na Prova de um ano, para o link dos cortes daquele ano |
 | comUsuario | `boolean` | Sim | Sem usuário (modo livre), sem convite para escolher |
 
-No `ResultadoPage`, depois do resumo e dos botões "Novo simulado" e "Ver histórico", antes de "Por disciplina"; só com `pontos` não nulo. `section` com `h2` "Notas de corte":
-- Com `alvo.carreira`: "Sua carreira-alvo: **nome** · corte FUVEST {alvo.ano}" e a lista "Cortes da carreira-alvo", uma linha por modalidade: "{nome da modalidade}: corte {c} — atingiu (+{acima})" / "— faltam {faltam}", ou "{nome da modalidade}: sem convocados". A situação é escrita, não só indicada por cor (tokens `acerto` e `erro` como reforço). Depois, "Referência para ir à 2ª fase, não previsão de aprovação." e o link "Ver todas as notas de corte".
+No `ResultadoPage`, depois do resumo e dos botões "Novo simulado" e "Ver histórico", antes de "Por disciplina"; só com `nota` não nula. `section` com `h2` "Notas de corte":
+- Com `alvo.carreira`: "Sua carreira-alvo: **nome** · corte FUVEST {alvo.ano}"; com escalas diferentes, "Sua nota: 61 de 80 · equivale a 68,6 de 90 (estimativa)" (CR-011); e a lista "Cortes da carreira-alvo", uma linha por modalidade: "{nome da modalidade}: corte {c} — atingiu (+{acima})" / "— faltam {faltam}", ou "{nome da modalidade}: sem convocados". A situação é escrita, não só indicada por cor (tokens `acerto` e `erro` como reforço). Depois, "Referência para ir à 2ª fase, não previsão de aprovação." e o link "Ver todas as notas de corte".
 - Com alvo e `carreira: null`: "Sua carreira-alvo não está mais na lista." + link "Escolher de novo" (`/notas-de-corte`).
 - Sem alvo, com usuário: "Compare sua nota com o corte da carreira que você quer." + link "Escolher carreira-alvo" (`/notas-de-corte`). Sem usuário (modo livre): só o link "Ver as notas de corte".
-- Na Prova de um ano, em todos os casos, também "Ver as notas de corte de {anoDaProva}" (`/notas-de-corte?ano={anoDaProva}`).
+- Na Prova de um ano de vestibular, em todos os casos, também "Ver as notas de corte de {anoDaProva}" (`/notas-de-corte?ano={anoDaProva}`). Simulado oficial não tem lista própria: sem esse link (CR-011, P5).
 
 ### Componentes: LinhaCortes (início) e CortesEmLinha
 
-- **`LinhaCortes`** (`pontos`, `alvo`), no cartão `UltimoSimulado`, abaixo do aproveitamento: só com `alvo.carreira` e `pontos` não nulo. Uma linha: "Corte {alvo.ano} · {nome}: AC 79 (faltam 18) · EP 71 (faltam 10) · PPI 60 (atingiu)". Sem os dados da carreira, nada: o cartão é só um lembrete, e o aviso de escolher de novo fica no resultado e na página.
+- **`LinhaCortes`** (`nota`, `alvo`), no cartão `UltimoSimulado`, abaixo do aproveitamento: só com `alvo.carreira` e `nota` não nula. Uma linha: "Corte {alvo.ano} · {nome}: AC 79 (faltam 18) · EP 71 (faltam 10) · PPI 60 (atingiu)"; com escalas diferentes, a nota convertida ("faltam 10,4") e, abaixo, "Sua nota: 61 de 80 · equivale a 68,6 de 90 (estimativa)" (CR-011). Sem os dados da carreira, nada: o cartão é só um lembrete, e o aviso de escolher de novo fica no resultado e na página.
 - **`CortesEmLinha`** (`cortes`, `pontos?`): "AC 79 · EP 71 · PPI 60", com `<abbr>` nas siglas e "—" sem convocados; com `pontos`, a situação curta depois de cada corte. Usado no cartão da carreira-alvo da página e pela `LinhaCortes`.
 
 ### Cabeçalho e menu do celular (complementam `specs/03`)
@@ -377,7 +394,9 @@ sequenceDiagram
 
 | # | Cenário | Comportamento Esperado |
 |---|---------|------------------------|
-| 1 | Simulado Personalizado, ou Prova de um ano com questão removida da base (`total` ≠ 90) | Sem bloco no resultado e sem linha no início |
+| 1 | Simulado Personalizado | Sem bloco no resultado e sem linha no início |
+| 1a | Prova com questão removida da base, Prova completa de 80 com a lista de 90, ou Prova de um ano de 90 com a lista de 80 (CR-011) | Nota convertida para a escala da lista, com 1 casa, "(estimativa)" |
+| 1b | Lista de 2027 escrita à mão sem `pontos_prova` (CR-011) | Recusada (C04): um ano de 80 nunca é lido como de 90 |
 | 2 | Nota igual ao corte | "atingiu (+0)" |
 | 3 | Modalidade sem convocados (corte `null`) | "—" na tabela; "sem convocados" no resultado |
 | 4 | `?ano=2021` (não publicado) | Mostra o mais recente com o aviso |
@@ -404,6 +423,7 @@ sequenceDiagram
 |----|---------|-------------|----------|
 | IT-021 | Arquivo válido carrega; campo extra, YAML malformado e `ano` diferente do nome do arquivo são recusados (C01) | `carregar_ano` | `NotasCorteAno` / `NotasCorteInvalidas` |
 | IT-022 | Regras de publicação: código e nome repetidos, treineiro, nome cortado, pendência (C02, C03, C05) bloqueiam só o publicado; corte < 27, corte > máximo e corte sem convocados (C04) recusados em qualquer status | `problemas_de_publicacao`, `carregar_ano` | Problemas listados; rascunho aceito |
+| BT-095 | Cortes de 80 pontos (CR-011): mínimo 24, máximo ≤ 80; corte 25 válido em 80 e recusado em 90; 2027 sem `pontos_prova` e 2025 com 80 recusados | `carregar_ano` | Conforme C04 |
 | IT-023 | Carga tolerante: só publicados e válidos, inválido fica fora com log, `anos` do mais recente para o mais antigo, troca do arquivo reflete (mtime) | `notas_corte_em_uso` | `BaseNotasCorte` correta |
 | IT-024 | `validar --todas` e `--ano` com cortes válidos, inválidos e publicados com problema | CLI | Exit 0 / 1 e relatório `== cortes AAAA` |
 | IT-025 | Extrator, variante 2020 (mínimo e máximo na linha da modalidade), com palavras sintéticas | `ingestao/notas_corte.py` | Carreiras e modalidades corretas |
@@ -417,18 +437,23 @@ sequenceDiagram
 | BT-084 | Sem sessão (modos `conta` e `livre`), Origin diferente, modo `indisponivel` | PUT e DELETE | 401 / 403 / 503 |
 | BT-085 | Remover (duas vezes) | DELETE + GET /api/sessao | 204, 204; `carreira_alvo: null` |
 | BT-086 | Carreira-alvo de um ano que saiu da base → `carreira: null`; excluir a conta apaga a linha | GET /api/sessao, DELETE /api/conta | Conforme |
+| BT-096 | `pontos_prova` na consulta e na carreira-alvo da sessão (CR-011) | GET /api/notas-corte, PUT /api/conta/carreira-alvo, GET /api/sessao | 80 numa lista de 80, 90 numa de 90 |
 | BT-047 | Migration upgrade/downgrade (inclui 004) | alembic | Sem erro nos dois sentidos |
 
 ### Fluxo completo (backend + frontend)
 
 | ID | Cenário | Tipo | Esperado |
 |----|---------|------|----------|
-| UT-055 | `pontosComparaveis` (completa, ano, personalizado, total ≠ 90), `anoDaProva`, `situacao` (igual, acima, abaixo, sem corte) | Vitest | Conforme RN-018 |
+| UT-055 | `notaComparavel` (completa, ano, personalizado), `anoDaProva` (vestibular e simulado), `situacao` (igual, acima, abaixo, sem corte, com 1 casa) — desde o CR-011 | Vitest | Conforme RN-018 |
+| UT-062 | `naEscalaDoCorte` (mesma escala, 80→90, 90→80), `minimoFuvest` | Vitest | Conforme D3 do CR-011 |
+| UT-063 | Resultado com conversão: "Sua nota: 61 de 80 · equivale a 68,6 de 90 (estimativa)", faltam com 1 casa; mesma escala sem estimativa; simulado oficial sem o link do ano | Vitest + Testing Library | Conforme §3 (CR-011) |
+| UT-064 | Início: linha dos cortes com a nota convertida | Vitest + Testing Library | Conforme §3 (CR-011) |
+| UT-068 | Página com lista de 80 pontos: "de 0 a 80" e "menos de 24 pontos" | Vitest + Testing Library | Conforme §3 (CR-011) |
 | UT-056 | `normalizarBusca` e `filtrarCarreiras` (sem acento, por código, ordem por nome) | Vitest | Conforme |
 | UT-057 | Página: ano padrão, troca de ano (`?ano=`), ano não publicado ou fora da faixa com aviso, seletor durante a carga, busca e contagem, tabela, "—", "Como ler" e link da fonte | Vitest + Testing Library | Conforme §3 |
 | UT-058 | Página com carreira-alvo: definir (só no ano mais recente), remover, alvo de ano anterior, alvo fora da lista, erro ao salvar, lista que ficou velha (422); link "Notas de corte" no cabeçalho e no menu do celular | Vitest + Testing Library | Conforme §3 |
 | UT-059 | Resultado: bloco com alvo (três cortes, "faltam"/"atingiu"), sem alvo (convite), alvo fora da lista, link do ano na Prova de um ano, sem bloco no Personalizado | Vitest + Testing Library | Conforme §3 |
-| UT-060 | Início: linha dos cortes com 90 questões e alvo; sem linha no Personalizado ou sem alvo | Vitest + Testing Library | Conforme §3 |
+| UT-060 | Início: linha dos cortes com a Prova completa ou a Prova de um ano e alvo; sem linha no Personalizado ou sem alvo | Vitest + Testing Library | Conforme §3 |
 | UT-061 | Textos da apresentação, Conta e Privacidade com a carreira-alvo | Vitest + Testing Library | Conforme §3 |
 | FT-024 | Login com o provedor falso → `/notas-de-corte` → busca → "Definir como alvo" → Prova de um ano finalizada → bloco no resultado → linha no início; 360 px sem rolagem horizontal; console sem erros | E2E (Playwright MCP) | Conforme |
 
