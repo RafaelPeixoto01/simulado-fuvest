@@ -279,7 +279,7 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 - [x] O Personalizado usa 225 s por questão (P3) — BT-005, UT-067; HTTP real (4 questões → 900 s) e Playwright ("1 h 15 min … 3 min 45 s por questão")
 - [x] O resultado e o início comparam com o corte proporcionalmente: mesma escala → direto; escalas diferentes → nota convertida com 1 casa e "(estimativa)"; a página de cortes mostra "de 0 a N" e o mínimo do ano — UT-062 a UT-064, UT-068; Playwright ("Sua nota: 11 de 80 · equivale a 12,4 de 90 (estimativa)", "faltam 68,6")
 - [x] Um arquivo de cortes com `pontos_prova: 80` é aceito (mínimo 24, máximo ≤ 80) e os atuais continuam válidos — BT-095 e o teste de coerência com o ano (revisão de código, achado 1); `validar --todas` verde com os seis arquivos publicados
-- [ ] Migration `005` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI), sem perder contas, sessões, históricos e reportes — SQLite: `local.db` 004 → 005 → 004 → 005 (alembic) e BT-087 (004 → 005 → 004 com conta, histórico e reporte preservados). **Postgres no CI: pendente do push da branch**
+- [x] Migration `005` testada: `upgrade head` + `downgrade -1` (SQLite local e Postgres no CI), sem perder contas, sessões, históricos e reportes — SQLite: `local.db` 004 → 005 → 004 → 005 (alembic) e BT-087 (004 → 005 → 004 com conta, histórico e reporte preservados); Postgres no CI da branch (run 37357127787, job "Backend ... migrations no Postgres": upgrade, downgrade e upgrade)
 - [x] Testes existentes continuam passando (regressão) — backend 459 testes, frontend 297
 - [x] Novos testes cobrem a mudança (IT-028 a IT-034, BT-087 a BT-096, UT-062 a UT-068) — e os testes da revisão de código (consulta da prova, `pontos_prova` por ano, `ano` antigo, `(cid:172)` no texto, início só com simulados)
 - [x] Fluxo afetado exercitado em runtime antes do merge — HTTP real e Playwright (FT-025), registrados abaixo
@@ -347,7 +347,7 @@ ALTER TABLE reportes ALTER COLUMN questao_id TYPE VARCHAR(12);   -- batch_alter_
 
 - **Migration afetada:** `005_codigo_prova.py`
 - **Comando de downgrade:** `alembic downgrade 004`
-- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic 005 → 004 → 005) e BT-087; Postgres no CI depois do push
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (alembic 005 → 004 → 005), BT-087 e Postgres no CI (run 37357127787)
 - **Downgrade é destrutivo?** [ ] Sim / [x] Nao — recria vazias as tabelas derivadas (a sincronização do código anterior as repovoa) e volta `reportes.questao_id` para 8 caracteres (falha se houver reporte de questão de simulado; nesse caso, apagar esses reportes antes, depois de exportá-los)
 
 ### 10.3 Impacto em Dados
