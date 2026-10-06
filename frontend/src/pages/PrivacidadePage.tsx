@@ -13,7 +13,7 @@ function Secao({ titulo, children }: { titulo: string; children: ReactNode }) {
   )
 }
 
-/** O que o site guarda e como apagar (RF-026, RNF-005, CR-005). */
+/** O que o site guarda e como apagar (RF-026, RNF-005, CR-005); lista de contas e números do site (CR-013). */
 export function PrivacidadePage() {
   useTituloPagina('Privacidade')
 
@@ -29,22 +29,31 @@ export function PrivacidadePage() {
           Para usar o site, é preciso entrar com a conta Google. Antes disso, só a apresentação e esta página abrem:
           nenhum dado vai para o servidor e nenhum cookie é criado.
         </p>
-        <p>
-          Os reportes de erro em questões não guardam quem reportou, e contamos quantos simulados são gerados por dia,
-          sem saber quem os gerou.
-        </p>
+        <p>Os reportes de erro em questões não guardam quem reportou.</p>
       </Secao>
 
       <Secao titulo="Com a conta Google">
         <p>
-          Guardamos o identificador da sua conta Google, seu nome, seu e-mail, os 50 simulados concluídos mais
-          recentes (respostas, acertos e datas) e a carreira-alvo que você escolher nas notas de corte (não guardamos a
+          Guardamos o identificador da sua conta Google, seu nome, seu e-mail, as datas de cadastro e do último
+          acesso, os 50 simulados concluídos mais recentes (respostas, acertos e datas) e a carreira-alvo que você escolher nas notas de corte (não guardamos a
           sua modalidade de concorrência). Servem só para mostrar o seu histórico e o seu desempenho e comparar a nota
           dos simulados com o corte dessa carreira em qualquer dispositivo em que você entrar.
         </p>
         <p>
           Do Google recebemos só o nome e o e-mail. Não temos acesso à sua senha nem a nenhum outro dado da conta. Não
           compartilhamos nada com ninguém nem usamos os dados para publicidade.
+        </p>
+        <p>
+          O responsável pelo site vê a lista de contas (nome, e-mail, datas de cadastro e de último acesso, quantos
+          simulados estão no histórico e a carreira-alvo), só para dar suporte, por exemplo num pedido de exclusão.
+        </p>
+      </Secao>
+
+      <Secao titulo="Números do site">
+        <p>
+          Contamos por dia, sem guardar quem, quantos simulados são gerados e concluídos, quantos logins e acessos houve
+          e quantas vezes cada alternativa de cada questão foi marcada. Servem para acompanhar o uso do site e achar
+          questões com erro. Esses números não identificam ninguém e continuam depois que uma conta é excluída.
         </p>
       </Secao>
 

@@ -112,7 +112,8 @@ def test_callback_cria_usuario_e_sessao(client, provedor_falso, sessao):
     assert redirect_uri == "http://localhost:5173/api/auth/google/callback"
     assert client.get("/api/sessao").json() == {
         "login_disponivel": True,
-        "usuario": {"id": usuario.id, "email": "ana@exemplo.com", "nome": "Ana Souza", "carreira_alvo": None},
+        "usuario": {"id": usuario.id, "email": "ana@exemplo.com", "nome": "Ana Souza", "carreira_alvo": None,
+                    "admin": False},
         "acesso": "conta",
     }
 

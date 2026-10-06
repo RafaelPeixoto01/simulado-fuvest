@@ -444,6 +444,38 @@ def _cmd_reportes(args: argparse.Namespace) -> int:
         return 1
 
 
+def _executar_contas(args: argparse.Namespace) -> int:
+    from sqlalchemy import func, select
+
+    from app.models import Usuario
+
+    fabrica = criar_fabrica_sessao(criar_engine(args.database_url))
+    with fabrica() as sessao:
+        contas = sessao.scalars(
+            select(Usuario)
+            .where(func.lower(Usuario.email) == args.email.strip().lower())
+            .order_by(Usuario.criado_em)
+        ).all()
+        if not contas:
+            print(f"Nenhuma conta com o e-mail {args.email}.")
+            return 1
+        for u in contas:
+            data = u.criado_em.strftime("%Y-%m-%d %H:%M") if u.criado_em else "?"
+            print(f"sub: {u.google_sub} | {u.nome or 'sem nome'} | cadastro {data}")
+        print("Área de gestão: ADMIN_GOOGLE_SUBS=<sub> na Railway (CR-013).")
+        return 0
+
+
+def _cmd_contas(args: argparse.Namespace) -> int:
+    # Sempre mostra o banco alvo antes de agir (ADR-008); so leitura
+    print(f"Banco: {_descrever_banco(args.database_url)}")
+    try:
+        return _executar_contas(args)
+    except SQLAlchemyError as erro:
+        _erro(f"Falha no banco ({erro.__class__.__name__}).")
+        return 1
+
+
 def _ano(valor: str) -> int:
     ano = int(valor)
     if not 1977 <= ano <= 2100:
@@ -532,6 +564,14 @@ def _parser() -> argparse.ArgumentParser:
         "--status", choices=["pendente", "resolvido", "todos"], default="pendente"
     )
     acoes.choices["resolver"].add_argument("ids", type=int, nargs="+")
+
+    contas = sub.add_parser(
+        "contas", help="Contas com um e-mail: o sub do Google para ADMIN_GOOGLE_SUBS (CR-013)"
+    )
+    contas.add_argument("--email", required=True)
+    contas.add_argument("--database-url", required=True,
+                        help="URL do banco (produção: DATABASE_PUBLIC_URL da Railway)")
+    contas.set_defaults(func=_cmd_contas)
 
     for comando in sub.choices.values():
         comando.add_argument(

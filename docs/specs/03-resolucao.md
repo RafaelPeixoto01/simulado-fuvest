@@ -4,7 +4,7 @@
 **Data:** 2026-10-03
 **PRD Ref:** 01-PRD v4.0 (RF-008 a RF-016, US-001 a US-005, RN-009 a RN-012)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-004)
-**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta), CR-009 (rolagem ao trocar de página, extras do início, círculo de um algarismo, marcas do painel), CR-010 (rota `/notas-de-corte`, link "Notas de corte" no cabeçalho e no menu, linha dos cortes em "Seu último simulado" — detalhe em `specs/08-notas-de-corte.md`), CR-011 (Prova completa com 80, simulados oficiais na Prova de um ano, origem da questão, ritmo de 225 s, contagem de provas e simulados no início)
+**CR Ref:** CR-001 (resolução: navegação, folha de respostas e pausa), CR-002 (contraste e tokens), CR-003 (início, figura ampliada), CR-004 (rota `/desempenho` e link no cabeçalho), CR-005 (rotas `/conta` e `/privacidade`, link da conta no cabeçalho e "Privacidade" no rodapé), CR-006 (rotas atrás do login, apresentação no início), CR-007 (menu do cabeçalho no celular, barra do topo da resolução opaca), CR-008 (identidade "Papel & Caneta" e início com conta), CR-009 (rolagem ao trocar de página, extras do início, círculo de um algarismo, marcas do painel), CR-010 (rota `/notas-de-corte`, link "Notas de corte" no cabeçalho e no menu, linha dos cortes em "Seu último simulado" — detalhe em `specs/08-notas-de-corte.md`), CR-011 (Prova completa com 80, simulados oficiais na Prova de um ano, origem da questão, ritmo de 225 s, contagem de provas e simulados no início), CR-013 (rotas `/gestao/*` e link "Gestão" só para o administrador — detalhe em `specs/09-gestao.md`)
 
 ---
 
@@ -119,6 +119,7 @@ restanteMs   = max(0, tempoLimiteS*1000 - decorridoMs)     // null se sem cronô
 | `/resultado/:id`, `/historico` | ver `specs/04-correcao-resultado.md` | |
 | `/desempenho` | ver `specs/06-assuntos-desempenho.md` | Painel "Meu desempenho" (CR-004). O cabeçalho do `Layout` tem os links "Desempenho", "Histórico" e, desde o CR-010, "Notas de corte", nessa ordem; no celular, eles ficam no menu (CR-007, §3 "Cabeçalho do `Layout`") |
 | `/notas-de-corte` | ver `specs/08-notas-de-corte.md` | Notas de corte por ano e carreira e escolha da carreira-alvo (CR-010); `?ano=AAAA` escolhe o ano |
+| `/gestao`, `/gestao/aprendizado`, `/gestao/qualidade`, `/gestao/estudantes` | ver `specs/09-gestao.md` | Área de gestão (CR-013), dentro do `RequerConta` e do `RequerAdmin`: sem `usuario.admin`, "Página não encontrada"; `?periodo=` nas abas Uso e Aprendizado |
 | `/conta`, `/privacidade` | ver `specs/07-contas-sincronizacao.md` | Conta e privacidade (CR-005). Com login disponível, o cabeçalho ganha um terceiro link ("Entrar" ou o primeiro nome) para `/conta`; o rodapé ganha "Privacidade". Sem login, só estas duas e a apresentação abrem: as demais rotas, inclusive `/simulado`, passam por `RequerConta` (CR-006, `specs/07` §8) |
 | `*` | 404 simples | Link para `/` |
 
@@ -179,12 +180,12 @@ Protótipos "A · Início" e "A · Início · celular"; o que eles mostram além
 
 Protótipo: tela "Menu do cabeçalho · celular" do canvas "Protótipo Simulado Fuvest".
 
-- **A partir de 640 px:** como antes. Marca + "Simulado Fuvest" à esquerda; à direita, os links em linha: "Desempenho", "Histórico" e "Notas de corte" (com acesso ao conteúdo; o terceiro desde o CR-010) e a conta ("Entrar" ou o primeiro nome). Altura e estilo dos links (`itemNav`) inalterados.
+- **A partir de 640 px:** como antes. Marca + "Simulado Fuvest" à esquerda; à direita, os links em linha: "Desempenho", "Histórico" e "Notas de corte" (com acesso ao conteúdo; o terceiro desde o CR-010), "Gestão" (só com `usuario.admin`, CR-013) e a conta ("Entrar" ou o primeiro nome). Altura e estilo dos links (`itemNav`) inalterados.
 - **Abaixo de 640 px:** o cabeçalho tem **56 px fixos**. Os links empilhados (CR-004) saem:
   - **Sem conta** (`acesso: 'conta'` sem usuário): não há menu, só "Entrar", como hoje (O2.4).
   - **Com conta, ou com links de conteúdo** (`livre`, ou `indisponivel` com alguém conectado): botão **"Menu"** (`MenuCelular`) com ícone de três traços e o texto "Menu", 44 px de altura, `aria-expanded` e `aria-controls="menu-principal"`. Aberto, o ícone vira um X e o botão fica com borda azul e fundo `caneta-clara` (O2.1).
 - **Painel** (`<nav id="menu-principal" aria-label="Menu">`, logo abaixo do cabeçalho, largura toda, sombra), sobre o conteúdo escurecido (`tinta` a 35%, a partir do fim do cabeçalho). Itens em linhas de 52 px com ícone (O2.2):
-  - "Início" (casa), "Desempenho" (barras), "Histórico" (relógio) e "Notas de corte" (alvo, CR-010). Os três últimos só com acesso ao conteúdo, como os links do desktop.
+  - "Início" (casa), "Desempenho" (barras), "Histórico" (relógio) e "Notas de corte" (alvo, CR-010). Os três últimos só com acesso ao conteúdo, como os links do desktop. Depois deles, "Gestão" (colunas), só com `usuario.admin` (CR-013).
   - A página atual fica destacada (fundo `caneta-clara`, texto `caneta-escura`, negrito) e leva `aria-current="page"`.
   - Separada por uma linha, a conta (só com alguém conectado): a inicial do primeiro nome num círculo, o primeiro nome e "Conta e sair", levando a `/conta`.
 - **Fechar (O2.3):** Esc (o foco volta ao botão), toque ou clique fora do painel e do botão (o toque não chega ao que está por baixo), escolher um item (o foco volta ao botão), qualquer troca de rota ou o foco saindo do painel e do botão (Tab depois do último item). O botão também alterna. Tab segue do botão para os itens do painel.

@@ -113,6 +113,32 @@ class EstatisticaGeracao(Base):
     total: Mapped[int] = mapped_column(Integer, default=0)
 
 
+class EstatisticaDiaria(Base):
+    """Contagens anonimas por dia de Brasilia e metrica (CR-013, ADR-016, RN-021): `login`,
+    `ativo`, `conta_excluida`, `concluido.<modo>`, `prova_ano.<codigo>`... Sem nada de quem."""
+
+    __tablename__ = "estatisticas_diarias"
+
+    dia: Mapped[date] = mapped_column(Date, primary_key=True)
+    metrica: Mapped[str] = mapped_column(String(40), primary_key=True)
+    total: Mapped[int] = mapped_column(BigInteger, default=0)  # o tempo em ms passa de 32 bits
+
+
+class EstatisticaQuestao(Base):
+    """Marcacoes de cada questao nos simulados concluidos, sem saber de quem (CR-013).
+    Sem FK, como `reportes`: sobrevive a ressincronizacao (ADR-006)."""
+
+    __tablename__ = "estatisticas_questoes"
+
+    questao_id: Mapped[str] = mapped_column(String(12), primary_key=True)  # "CODIGO-NNN"
+    marcadas_a: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    marcadas_b: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    marcadas_c: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    marcadas_d: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    marcadas_e: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    em_branco: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+
+
 class Usuario(Base):
     """Conta opcional, criada ao entrar com o Google (CR-005, ADR-010)."""
 
@@ -126,6 +152,7 @@ class Usuario(Base):
     criado_em: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    # No login e no primeiro pedido de cada dia de Brasilia (CR-013, RN-021)
     ultimo_acesso_em: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

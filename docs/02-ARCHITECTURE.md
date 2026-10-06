@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.12
-**Data:** 2026-10-05
-**PRD Ref:** 01-PRD v6.1
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012
+**Versão:** 1.13
+**Data:** 2026-10-06
+**PRD Ref:** 01-PRD v7.0
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013
 
 ---
 
@@ -118,7 +118,7 @@ Simulado Fuvest/
 │   ├── requirements-dev.txt        # -r dos dois + pytest, httpx, ruff, pip-audit
 │   ├── app/
 │   │   ├── main.py                 # app, middlewares, rota de figuras, fallback do SPA
-│   │   ├── config.py               # env vars (DATABASE_URL, DATA_DIR, ENVIRONMENT, ALLOWED_ORIGINS, GOOGLE_*, PUBLIC_URL)
+│   │   ├── config.py               # env vars (DATABASE_URL, DATA_DIR, ENVIRONMENT, ALLOWED_ORIGINS, GOOGLE_*, PUBLIC_URL, ADMIN_GOOGLE_SUBS — CR-013)
 │   │   ├── database.py             # engine/sessão; postgres:// -> postgresql+psycopg://
 │   │   ├── models.py               # SQLAlchemy
 │   │   ├── schemas.py              # Pydantic da API
@@ -126,9 +126,9 @@ Simulado Fuvest/
 │   │   ├── rate_limit.py           # slowapi
 │   │   ├── security_headers.py     # middleware de headers HTTP
 │   │   ├── autenticacao.py         # cookies de sessão e de login, PKCE, caminho de volta (CR-005)
-│   │   ├── dependencias.py         # sessão do banco, taxonomia, notas de corte, usuário da sessão, verificação de Origin
-│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), notas_corte (CR-010), auth, conta (+ carreira-alvo), historico
-│   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas, google (OIDC), contas, historico, notas_corte (CR-010)
+│   │   ├── dependencias.py         # sessão do banco, taxonomia, notas de corte, usuário da sessão (+ último acesso do dia), administrador (CR-013), verificação de Origin
+│   │   ├── routers/                # catalogo, simulados, questoes, correcoes, reportes, health, vitrine (CR-007), notas_corte (CR-010), auth, conta (+ carreira-alvo), historico, gestao (CR-013)
+│   │   ├── services/               # catalogo (+ vitrine), geracao, correcao, estatisticas (contadores anônimos — CR-013), google (OIDC), contas, historico, notas_corte (CR-010), gestao (CR-013)
 │   │   └── pacote/                 # compartilhado entre produção e ingestão (sem libs de PDF)
 │   │       ├── schema.py           # modelo Pydantic do prova.yaml; código e rótulo da prova (CR-011)
 │   │       ├── leitura.py          # carregar/salvar YAML
@@ -137,7 +137,7 @@ Simulado Fuvest/
 │   │       ├── validacao.py        # regras RN-007 (V01–V11) + relatório de pendências
 │   │       └── sincronizar.py      # repo -> banco (idempotente); `python -m app.pacote.sincronizar`
 │   ├── ingestao/                   # CLI do curador: `python -m ingestao <comando>`
-│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, assuntos, cortes (CR-010), reportes
+│   │   ├── __main__.py / cli.py    # baixar, extrair, preview, recortar, validar, importar, assuntos, cortes (CR-010), reportes, contas (CR-013)
 │   │   ├── baixar.py
 │   │   ├── notas_corte.py          # extrator do PDF "Notas de Corte" (família 2020–2025) e rascunho com pendências
 │   │   ├── pdf_util.py             # colunas, ordem de leitura, limpeza de texto, render de região
@@ -160,9 +160,10 @@ Simulado Fuvest/
         ├── simulado/               # tipos, reducer puro, contexto + SimuladoProvider, useSimulado, novoSimulado
         ├── hooks/                  # useCatalogo, useQuestoes, useIniciarSimulado, useFinalizarSimulado,
         │                           #   useConfirmarDescarte, useAtalhos, useAgora, useTituloPagina,
-        │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007), useNotasCorte (+ useCarreiraAlvo, CR-010)
+        │                           #   useSessao, useHistorico, useConta (CR-005), useVitrine (CR-007), useNotasCorte (+ useCarreiraAlvo, CR-010), useGestao (CR-013)
         ├── components/             # Layout, MenuCelular (CR-007), Marca, Estados, ConfirmDialog, AvisoStorage, Icone, CabecalhoLetras, BotaoGoogle,
-        │                           #   RequerConta (CR-006), CirculoCaneta e MarcasSincronismo (motivos — CR-008), RolarAoTopo (CR-009), estilos.ts
+        │                           #   RequerConta (CR-006), CirculoCaneta e MarcasSincronismo (motivos — CR-008), RolarAoTopo (CR-009), estilos.ts,
+        │                           #   RequerAdmin e GraficoColunas (CR-013)
         │   ├── inicio/             #   UltimoSimulado ("Seu último simulado" — CR-008), MiniFolha (miniatura da folha na Prova completa — CR-009)
         │   ├── notasCorte/         #   ComparacaoCorte (resultado), LinhaCortes (início), CortesEmLinha (CR-010)
         │   ├── apresentacao/       #   PreviaProduto (miniatura da resolução e do resultado na apresentação — CR-007)
@@ -171,6 +172,7 @@ Simulado Fuvest/
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
         │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NotasCorte (CR-010), NaoEncontrada
+        │   └── gestao/             #   GestaoLayout, Uso, Aprendizado, Qualidade, Estudantes, periodo.ts, componentes.tsx (CR-013)
         ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015),
         │                           #   notasCorte.ts (nota comparável, escala do corte, situação, busca — CR-010, CR-011),
         │                           #   formatoProva.ts (formato vigente: 80 questões, 225 s por questão; anos das provas — CR-011)
@@ -181,7 +183,7 @@ Simulado Fuvest/
 
 ## 4. Modelagem de Dados
 
-O banco guarda o que é **derivado do repositório** (provas, textos-base, questões), duas tabelas anônimas escritas em runtime (reportes e estatística) e, desde o CR-005, as **tabelas de conta** (usuários, sessões e simulados concluídos), que só têm linhas para quem entra com o Google (RN-012, RN-016). A taxonomia de assuntos não tem tabela: é lida do arquivo (ADR-009). As tabelas de conta são os únicos dados do banco que não podem ser reconstruídos do git: elas entram no backup (Deploy Guide §6).
+O banco guarda o que é **derivado do repositório** (provas, textos-base, questões), tabelas anônimas escritas em runtime (reportes e as estatísticas: a de geração e, desde o CR-013, as contagens diárias e as marcações por questão, ADR-016) e, desde o CR-005, as **tabelas de conta** (usuários, sessões e simulados concluídos), que só têm linhas para quem entra com o Google (RN-012, RN-016). A taxonomia de assuntos não tem tabela: é lida do arquivo (ADR-009). As tabelas de conta são os únicos dados do banco que não podem ser reconstruídos do git: elas entram no backup (Deploy Guide §6).
 
 ```mermaid
 erDiagram
@@ -227,6 +229,20 @@ erDiagram
         date dia PK
         string modo PK
         int total
+    }
+    ESTATISTICAS_DIARIAS {
+        date dia PK
+        string metrica PK
+        bigint total
+    }
+    ESTATISTICAS_QUESTOES {
+        string questao_id PK
+        int marcadas_a
+        int marcadas_b
+        int marcadas_c
+        int marcadas_d
+        int marcadas_e
+        int em_branco
     }
     USUARIOS {
         int id PK
@@ -309,9 +325,23 @@ erDiagram
 #### estatisticas_geracao
 | Campo | Tipo | Restrições | Descrição |
 |-------|------|------------|-----------|
-| dia | date | PK (composta) | Dia da geração (UTC) |
+| dia | date | PK (composta) | Dia da geração: UTC até o CR-013; de Brasília desde ele (RN-021) |
 | modo | varchar(12) | PK (composta) | `completa`, `personalizado`, `ano`, `treino` |
 | total | int | NOT NULL | Contador (métrica anônima do PRD §2) |
+
+#### estatisticas_diarias (CR-013)
+| Campo | Tipo | Restrições | Descrição |
+|-------|------|------------|-----------|
+| dia | date | PK (composta) | Dia de Brasília (UTC−3 fixo) |
+| metrica | varchar(40) | PK (composta) | `login`, `ativo`, `conta_excluida`, `concluido.<modo>`, `por_tempo.<modo>`, `tempo_ms.<modo>`, `questoes.<modo>`, `acertos.<modo>`, `prova_ano.<codigo>` (RN-021) |
+| total | bigint | NOT NULL | Soma do dia, sem identificar ninguém; gravada por upsert (`ON CONFLICT DO UPDATE`) |
+
+#### estatisticas_questoes (CR-013)
+| Campo | Tipo | Restrições | Descrição |
+|-------|------|------------|-----------|
+| questao_id | varchar(12) | PK — **sem FK** | Sobrevive à ressincronização, como `reportes` (ADR-006) |
+| marcadas_a … marcadas_e | int | NOT NULL, default 0 | Vezes que cada letra foi marcada nos simulados concluídos |
+| em_branco | int | NOT NULL, default 0 | Vezes que a questão ficou em branco |
 
 #### usuarios (CR-005)
 | Campo | Tipo | Restrições | Descrição |
@@ -321,7 +351,7 @@ erDiagram
 | email | varchar(320) | NOT NULL | Atualizado a cada login |
 | nome | varchar(200) | NULL | Claim `name`; atualizado a cada login |
 | criado_em | timestamptz | NOT NULL, default now | |
-| ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login |
+| ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login e, desde o CR-013, no primeiro pedido de cada dia de Brasília (no máximo uma escrita por dia) |
 | carreira_alvo_ano | smallint | NULL | Carreira-alvo (CR-010, migration 004): ano da lista de onde foi escolhida |
 | carreira_alvo_codigo | smallint | NULL | Código da carreira naquele ano; gravado e apagado junto com o ano. Nunca a modalidade (RN-018) |
 
@@ -400,7 +430,8 @@ fisica:
 - Todas as rotas sob `/api/` (exceto `/figuras/...` e o SPA)
 - Catálogo, geração, questões, correção e reportes **exigem sessão** desde o CR-006 (`exigir_acesso`, ADR-012): 401 `nao_autenticado` sem sessão; 503 `site_indisponivel` em produção sem login configurado; abertos fora de produção sem login configurado. `/api/health`, `/figuras`, o login e `/api/sessao` continuam públicos; desde o CR-007, também `GET /api/vitrine`, só com os totais da base para a apresentação. Rota pública nova não leva `exigir_acesso` e devolve só agregados, nunca conteúdo
 - Rotas de conta (CR-005, ADR-010): cookie de sessão `HttpOnly`; `/api/historico` e `/api/conta` exigem sessão (401 `nao_autenticado`); `POST`/`DELETE` com cookie conferem o `Origin` contra `PUBLIC_URL` (403 `origem_invalida`); respostas com dado pessoal levam `Cache-Control: no-store`. Cada consulta filtra pelo `usuario_id` da sessão (ownership)
-- Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta e a carreira-alvo (CR-010)
+- Geração e correção **sem estado** no servidor (ADR-004); as escritas públicas são `POST /api/reportes` (anônimo) e, com sessão, o histórico da conta e a carreira-alvo (CR-010). As contagens do CR-013 são efeito colateral (login, primeiro pedido do dia, histórico, exclusão), em savepoint: falha vira log e nunca derruba a operação
+- Rotas de gestão (CR-013, ADR-016): `/api/gestao/*` com `exigir_admin` no router — o `sub` da conta em `ADMIN_GOOGLE_SUBS`; para qualquer outro, inclusive sem sessão, 404 `nao_encontrado` antes de qualquer validação. Sempre `Cache-Control: no-store`; o `POST` confere o `Origin`. Só leem agregados e a lista de contas, e resolvem reportes; não editam conteúdo
 - `GET /api/notas-corte` é conteúdo (`exigir_acesso`); `PUT`/`DELETE /api/conta/carreira-alvo` exigem, além disso, um usuário (401 também no modo `livre`), conferem o `Origin` e respondem com `no-store`. `GET /api/sessao` traz a carreira-alvo resolvida com os cortes (CR-010)
 - Erros de validação → 422 (padrão FastAPI); recurso inexistente → 404; limite excedido → 429
 - O gabarito **nunca** vai na resposta de geração/consulta de questões; só em `POST /api/correcoes`
@@ -416,6 +447,7 @@ fisica:
 - Login por navegação de página inteira (`<a href="/api/auth/google?voltar=...">`), nunca por `fetch`; o token da sessão nunca é visível ao JavaScript
 - Aparência só por tokens (`index.css`, nomes estáveis desde o CR-002; valores "Papel & Caneta" desde o CR-008, ADR-013). `optico` só em anéis e na marca; texto rosa usa `optico-texto`. Fraunces só em títulos e números de destaque (`h1`/`h2` pela base, `font-titulo` no resto). Estilos repetidos de botão e cartão ficam em `components/estilos.ts`
 - Toda mudança de caminho começa no topo da página (`RolarAoTopo` no `App`, CR-009): o `BrowserRouter` não restaura nem zera a rolagem sozinho, e a restauração do navegador fica desligada (`history.scrollRestoration = 'manual'`), porque no voltar ela devolvia a posição antiga por cima do topo. Rolagens dentro de uma página (trocar de questão na resolução) ficam com a página
+- A área de gestão fica dentro do `RequerConta` e do `RequerAdmin` (CR-013): sem `usuario.admin`, "Página não encontrada". O frontend só esconde; quem protege é o servidor
 - Rotas protegidas por `RequerConta` (CR-006, ADR-012): sem sessão, vão para a apresentação com `?voltar=<rota>`; erro de rede ao verificar a sessão não bloqueia a página (a API protege). Qualquer 401 `nao_autenticado` ou 503 `site_indisponivel`, em qualquer chamada, recarrega a sessão (`definirAoErroDeAcesso` em `services/api.ts`, registrado pelo `criarQueryClient`)
 
 ### Estilo de Código
@@ -622,6 +654,22 @@ fisica:
   - Positivas: os ids existentes (históricos, simulados em andamento, reportes) não mudam; a prova real de 2027 entra como `2027` sem colidir com os simulados; um ano novo de 80 questões é só conteúdo.
   - Negativas: no deploy, o container antigo ainda no ar consulta o schema anterior por alguns segundos (janela curta de erro no conteúdo); o rollback exige o `downgrade` antes do código anterior (Deploy Guide).
 
+### ADR-016: Área de gestão com administrador por `sub` e contagens anônimas
+- **Status:** Aceita
+- **Data:** 2026-10-06
+- **Contexto:** O CR-013 traz uma área de gestão com os números do site. Logins, usuários ativos e respostas por questão não eram registrados (a sessão dura 90 dias; o histórico guarda 50 por conta e some com "Limpar histórico"). O site promete guardar só nome, e-mail, histórico e carreira-alvo (RNF-005), e os estudantes são em geral menores. O login não exige `email_verified` (revisão de código do CR-005).
+- **Decisão:** (1) **Administrador** = `usuarios.google_sub` em `ADMIN_GOOGLE_SUBS` (`Settings.eh_admin`); `exigir_admin` no router `/api/gestao/*` responde 404 `nao_encontrado` a qualquer outro, antes da validação (o corpo do `POST` é lido numa dependência depois dela); `UsuarioPublico.admin` só mostra o link. (2) **Contagens anônimas por dia de Brasília** (UTC−3 fixo, sem `tzdata`): `estatisticas_diarias (dia, metrica, total)` com chaves de métrica em texto, gravada por upsert dentro de savepoint, e `estatisticas_questoes` com as marcações por letra, sem FK. Contadas no login, no primeiro pedido do dia (`obter_usuario`, com `UPDATE` condicional de `ultimo_acesso_em`, atômico), na exclusão da conta e na chegada do histórico (só as entradas inseridas, via `RETURNING`). O contador de geração passa ao dia de Brasília. (3) **Acerto por questão na leitura**, com o gabarito atual. (4) A migration 006 faz o backfill a partir de `simulados_concluidos`, sem importar o app.
+- **Alternativas Consideradas:**
+  - Identificar o administrador pelo e-mail: descartada, porque o e-mail sem verificação não prova a identidade.
+  - Coluna `papel` em `usuarios`, concedida pela CLI: descartada por exigir migration e comando de escrita em produção para um único administrador; a variável se troca na Railway sem código.
+  - Registrar os dias ativos de cada conta (tabela `usuario_id × dia`): daria retenção por coorte, mas é dado pessoal novo e quebra a promessa da RNF-005 (D2 do CR-013).
+  - Calcular tudo do histórico guardado: descartada, porque ele encolhe (50 por conta, limpar, excluir) e não tem logins nem acessos; e ler o JSON de todos os históricos a cada consulta não escala.
+  - Uma tabela por métrica: descartada; a tabela única com chave de métrica aceita métricas novas sem migration.
+  - Biblioteca de gráficos: descartada; colunas em HTML/CSS próprio bastam e evitam dependência e ajuste de CSP.
+- **Consequências:**
+  - Positivas: números que sobrevivem à limpeza de históricos e à exclusão de contas, sem identificar ninguém; acerto que se corrige com o gabarito; a área se liga e desliga pela variável.
+  - Negativas: logins e ativos só existem a partir do deploy; sem retenção por coorte; uma escrita por usuário por dia nos pedidos com sessão; a lista de contas é dado pessoal exposto na web, mitigado pelo 404, pelo `no-store` e pelo teste de acesso em todas as rotas.
+
 ## 9. Deploy e Infraestrutura
 
 ### 9.1 Plataforma de Produção
@@ -663,6 +711,7 @@ graph LR
 | `GOOGLE_CLIENT_ID` | Para o login | — | Cliente OAuth do Google (CR-005). Sem ele, o login fica desligado |
 | `GOOGLE_CLIENT_SECRET` | Para o login | — | **Segredo.** Só na Railway; nunca no repositório, em log ou no chat |
 | `PUBLIC_URL` | Para o login | `http://localhost:5173` | Origem pública do site, sem barra final: monta o `redirect_uri` do Google e é o único `Origin` aceito em `POST`/`DELETE` com cookie |
+| `ADMIN_GOOGLE_SUBS` | Para a gestão | — | `sub` das contas Google de administrador, separados por vírgula (CR-013, ADR-016). Sem ela, a área de gestão não existe. Não é segredo, mas fica só na Railway |
 
 O único segredo é o `GOOGLE_CLIENT_SECRET` (CR-005). **Não existe arquivo `.env`:** todas as variáveis têm default local seguro (SQLite, login desligado) e produção as define na Railway, de modo que nenhum comando local atinge produção por acidente (ADR-008).
 

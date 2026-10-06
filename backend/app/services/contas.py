@@ -1,4 +1,4 @@
-"""Contas, sessoes e exclusao (CR-005, ADR-010, RN-016)."""
+"""Contas, sessoes e exclusao (CR-005, ADR-010, RN-016); login e exclusao contados (CR-013)."""
 
 from datetime import UTC, datetime
 
@@ -8,19 +8,18 @@ from sqlalchemy.orm import Session
 
 from app.autenticacao import DURACAO_SESSAO, hash_token, novo_token
 from app.models import SessaoUsuario, Usuario
+from app.services.estatisticas import como_utc, dia_local, incrementar, inicio_do_dia
 from app.services.google import IdentidadeGoogle
 
 
-def _utc(momento: datetime) -> datetime:
-    # O SQLite devolve datetime sem fuso; o Postgres, com
-    return momento if momento.tzinfo else momento.replace(tzinfo=UTC)
-
-
-def _usuario_do_google(sessao: Session, identidade: IdentidadeGoogle, agora: datetime) -> Usuario:
+def _usuario_do_google(
+    sessao: Session, identidade: IdentidadeGoogle, agora: datetime
+) -> tuple[Usuario, bool]:
+    """(usuario, criado agora)."""
     consulta = select(Usuario).where(Usuario.google_sub == identidade.sub)
     usuario = sessao.scalar(consulta)
     if usuario is not None:
-        return usuario
+        return usuario, False
     try:
         # Savepoint: dois primeiros logins simultaneos da mesma conta disputam o google_sub
         with sessao.begin_nested():
@@ -33,8 +32,8 @@ def _usuario_do_google(sessao: Session, identidade: IdentidadeGoogle, agora: dat
             )
             sessao.add(usuario)
     except IntegrityError:
-        usuario = sessao.scalar(consulta)  # o outro login criou primeiro
-    return usuario
+        return sessao.scalar(consulta), False  # o outro login criou primeiro
+    return usuario, True
 
 
 def entrar(
@@ -43,7 +42,10 @@ def entrar(
     """Registra o login e abre uma sessao nova; devolve o token do cookie (nao vai ao banco)."""
     if token_anterior:  # troca de conta no mesmo navegador: a sessao anterior acaba
         _apagar_sessao(sessao, token_anterior)
-    usuario = _usuario_do_google(sessao, identidade, agora)
+    usuario, criado = _usuario_do_google(sessao, identidade, agora)
+    hoje = dia_local(agora)
+    # Conta nova ou primeiro acesso do dia: usuario ativo hoje (RN-021)
+    ativo_novo = criado or como_utc(usuario.ultimo_acesso_em) < inicio_do_dia(hoje)
     usuario.email = identidade.email
     usuario.nome = identidade.nome
     usuario.ultimo_acesso_em = agora
@@ -51,7 +53,7 @@ def entrar(
     for vencida in sessao.scalars(
         select(SessaoUsuario).where(SessaoUsuario.usuario_id == usuario.id)
     ):
-        if _utc(vencida.expira_em) <= agora:
+        if como_utc(vencida.expira_em) <= agora:
             sessao.delete(vencida)
     token = novo_token()
     sessao.add(SessaoUsuario(
@@ -60,6 +62,7 @@ def entrar(
         criado_em=agora,
         expira_em=agora + DURACAO_SESSAO,
     ))
+    incrementar(sessao, hoje, {"login": 1, "ativo": int(ativo_novo)})
     sessao.commit()
     return token
 
@@ -68,7 +71,7 @@ def usuario_da_sessao(sessao: Session, token: str, agora: datetime) -> Usuario |
     registro = sessao.get(SessaoUsuario, hash_token(token))
     if registro is None:
         return None
-    if _utc(registro.expira_em) <= agora:
+    if como_utc(registro.expira_em) <= agora:
         sessao.delete(registro)
         sessao.commit()
         return None
@@ -86,5 +89,7 @@ def sair(sessao: Session, token: str) -> None:
 
 def excluir_conta(sessao: Session, usuario_id: int) -> None:
     """Apaga o usuario; sessoes e historico saem por ON DELETE CASCADE (RF-026)."""
-    sessao.execute(delete(Usuario).where(Usuario.id == usuario_id))
+    apagadas = sessao.execute(delete(Usuario).where(Usuario.id == usuario_id)).rowcount
+    # Anonimo (RN-021); a segunda de duas exclusoes simultaneas nao apaga nada e nao conta
+    incrementar(sessao, dia_local(datetime.now(UTC)), {"conta_excluida": apagadas})
     sessao.commit()

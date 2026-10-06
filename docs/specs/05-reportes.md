@@ -4,13 +4,13 @@
 **Data:** 2026-10-01
 **PRD Ref:** 01-PRD v4.0 (RF-007, RF-021, US-008, US-010, RN-017)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.0 (ADR-006, ADR-008)
-**CR Ref:** CR-006 (o reporte exige sessão, mas continua sem gravar quem reportou)
+**CR Ref:** CR-006 (o reporte exige sessão, mas continua sem gravar quem reportou), CR-013 (lista e resolução também na área de gestão — `specs/09-gestao.md`)
 
 ---
 
 ## 1. Resumo das Mudanças
 
-O estudante reporta de forma anônima um problema em uma questão. O curador lista e resolve os reportes pela CLI, contra o banco de produção, informando a URL explicitamente.
+O estudante reporta de forma anônima um problema em uma questão. O curador lista e resolve os reportes pela CLI, contra o banco de produção, informando a URL explicitamente. Desde o CR-013, também pela aba Qualidade da área de gestão (`GET /api/gestao/reportes`, `POST /api/gestao/reportes/resolver`), com o mesmo serviço (`resolver_reportes`).
 
 ### Escopo desta Iteração
 - `POST /api/reportes` (rate limit)

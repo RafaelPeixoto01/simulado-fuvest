@@ -51,6 +51,12 @@ export function Layout() {
                 <NavLink to="/notas-de-corte" className={itemNav}>
                   Notas de corte
                 </NavLink>
+                {/* Só o administrador (CR-013); o servidor protege a área de qualquer jeito */}
+                {usuario?.admin && (
+                  <NavLink to="/gestao" className={itemNav}>
+                    Gestão
+                  </NavLink>
+                )}
               </>
             )}
             {(sessao?.usuario || sessao?.login_disponivel) && (

@@ -1,5 +1,6 @@
 """Schemas da API (specs/02, 04 e 05). O gabarito nunca aparece em schema de questao."""
 
+from datetime import date, datetime
 from typing import Annotated, Any, Literal
 
 from pydantic import AfterValidator, BaseModel, ConfigDict, Field, model_validator
@@ -279,6 +280,7 @@ class UsuarioPublico(BaseModel):
     email: str
     nome: str | None
     carreira_alvo: CarreiraAlvo | None = None
+    admin: bool = False  # CR-013: so o servidor decide (RN-020); o frontend so mostra o link
 
 
 # Login obrigatorio (CR-006, ADR-012): `conta` exige sessao; `livre` e o desenvolvimento sem
@@ -366,3 +368,227 @@ class HistoricoRequest(BaseModel):
 class HistoricoResponse(BaseModel):
     entradas: list[dict[str, Any]]  # HistoricoEntry, do mais recente para o mais antigo
     rejeitadas: list[str] = []
+
+
+# --- Area de gestao (CR-013, specs/09). So para o administrador (RN-020) ---
+
+PeriodoGestao = Literal["7", "30", "90", "tudo"]
+ModoConcluido = Literal["completa", "personalizado", "ano"]
+
+
+class PontoSerie(BaseModel):
+    inicio: date  # primeiro dia do intervalo (o dia, ou a semana comecando na segunda)
+    total: int
+
+
+class SeriesUso(BaseModel):
+    cadastros: list[PontoSerie]
+    logins: list[PontoSerie]
+    ativos: list[PontoSerie]  # por semana: a media por dia, arredondada
+    gerados: list[PontoSerie]
+    concluidos: list[PontoSerie]
+
+
+class CartoesUso(BaseModel):
+    estudantes: int
+    novos: int
+    ativos_hoje: int
+    ativos_media_dia: float  # media por dia no periodo, 1 casa
+    ativos_7_dias: int
+    ativos_30_dias: int
+    logins: int
+    gerados: int
+    concluidos: int
+    contas_excluidas: int
+
+
+class ModoUso(BaseModel):
+    modo: Literal["completa", "personalizado", "ano", "treino"]
+    gerados: int
+    concluidos: int | None  # None no Treino (nao entra no historico)
+    taxa_conclusao: float | None
+
+
+class FaixaUso(BaseModel):
+    faixa: Literal["0", "1", "2–5", "6–20", "21–50"]
+    estudantes: int
+
+
+class ProvaFeita(BaseModel):
+    codigo: str
+    rotulo: str
+    concluidos: int
+
+
+class UsoResponse(BaseModel):
+    periodo: PeriodoGestao
+    inicio: date
+    fim: date
+    granularidade: Literal["dia", "semana"]
+    cartoes: CartoesUso
+    series: SeriesUso
+    modos: list[ModoUso]
+    distribuicao: list[FaixaUso]
+    provas_ano: list[ProvaFeita]
+
+
+class ModoAprendizado(BaseModel):
+    modo: ModoConcluido
+    concluidos: int
+    acerto_medio: float | None
+    por_tempo: float | None
+    tempo_medio_questao_s: int | None
+
+
+class AssuntoAprendizado(BaseModel):
+    assunto: str
+    nome: str
+    respostas: int
+    acertos: int
+    percentual: float
+
+
+class DisciplinaAprendizado(BaseModel):
+    disciplina: Disciplina
+    respostas: int
+    acertos: int
+    percentual: float
+    assuntos: list[AssuntoAprendizado]
+
+
+class CarreiraEscolhida(BaseModel):
+    ano: int
+    codigo: int
+    nome: str | None  # None: a carreira saiu dos cortes publicados
+    pontos_prova: int
+    cortes: CortesModalidades | None
+    estudantes: int
+    com_prova_completa: int
+    atingiriam: CortesModalidades | None  # contagem por modalidade; None na modalidade sem corte
+
+
+class AprendizadoResponse(BaseModel):
+    periodo: PeriodoGestao
+    inicio: date
+    fim: date
+    modos: list[ModoAprendizado]
+    disciplinas: list[DisciplinaAprendizado]
+    carreiras: list[CarreiraEscolhida]
+
+
+class ProvaBase(BaseModel):
+    codigo: str
+    rotulo: str
+    tipo: str
+    total_questoes: int
+    questoes: int
+    anuladas: int
+    sincronizado_em: datetime
+
+
+class ResumoBase(BaseModel):
+    provas: int
+    questoes: int  # validas (nao anuladas)
+    anuladas: int
+    sem_assunto: int
+    sincronizado_em: datetime | None
+
+
+class DisciplinaBase(BaseModel):
+    disciplina: Disciplina
+    questoes: int
+
+
+class ResumoReportes(BaseModel):
+    pendentes: int
+    resolvidos: int
+    questoes_com_reporte_resolvido: int
+    indice_resolvidos: float | None  # % das questoes validas (meta < 2%, PRD §2)
+
+
+class Marcacoes(BaseModel):
+    a: int
+    b: int
+    c: int
+    d: int
+    e: int
+    em_branco: int
+
+
+class QuestaoSuspeita(BaseModel):
+    questao_id: str
+    prova: str
+    numero: int
+    disciplina: Disciplina
+    assunto: str | None
+    gabarito: Letra
+    respostas: int
+    acertos: int
+    percentual: float
+    marcacoes: Marcacoes
+    motivos: list[Literal["acerto_baixo", "alternativa_atrai"]]
+
+
+class QualidadeResponse(BaseModel):
+    base: ResumoBase
+    provas: list[ProvaBase]
+    disciplinas: list[DisciplinaBase]
+    reportes: ResumoReportes
+    suspeitas: list[QuestaoSuspeita]
+
+
+class QuestaoReportada(BaseModel):
+    prova: str
+    numero: int
+    disciplina: Disciplina
+    gabarito: Letra | None
+    anulada: bool
+
+
+class ReporteGestao(BaseModel):
+    id: int
+    questao_id: str
+    tipo: TipoReporte
+    descricao: str | None
+    status: Literal["pendente", "resolvido"]
+    criado_em: datetime
+    resolvido_em: datetime | None
+    questao: QuestaoReportada | None  # None: a questao saiu da base
+
+
+class ReportesGestaoResponse(BaseModel):
+    reportes: list[ReporteGestao]
+
+
+class ResolverReportesRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ids: Annotated[
+        list[Annotated[int, Field(ge=1)]],
+        Field(min_length=1, max_length=100),
+        AfterValidator(_sem_duplicatas),
+    ]
+
+
+class ResolverReportesResponse(BaseModel):
+    resolvidos: list[int]
+    ja_resolvidos: list[int]
+    inexistentes: list[int]
+
+
+class EstudanteGestao(BaseModel):
+    id: int
+    nome: str | None
+    email: str
+    criado_em: datetime
+    ultimo_acesso_em: datetime
+    simulados: int
+    carreira_alvo: str | None
+    admin: bool
+
+
+class EstudantesResponse(BaseModel):
+    total: int
+    pagina: int
+    por_pagina: int
+    estudantes: list[EstudanteGestao]

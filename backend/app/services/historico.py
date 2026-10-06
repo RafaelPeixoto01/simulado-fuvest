@@ -1,5 +1,6 @@
 """Historico de simulados concluidos da conta (CR-005, ADR-011, RN-016)."""
 
+from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import ValidationError
@@ -9,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from app.models import SimuladoConcluido
 from app.schemas import EntradaHistorico
+from app.services.estatisticas import registrar_conclusoes
 
 LIMITE_HISTORICO = 50  # D4: o mesmo limite do navegador
 
@@ -52,7 +54,7 @@ def gravar(sessao: Session, usuario_id: int, entradas: list[dict[str, Any]]) -> 
         validas.setdefault(entrada.id, entrada)
 
     if validas:
-        sessao.execute(inserir_sem_conflito(sessao.get_bind().dialect.name, [
+        linhas = [
             {
                 "usuario_id": usuario_id,
                 "id": e.id,
@@ -61,7 +63,13 @@ def gravar(sessao: Session, usuario_id: int, entradas: list[dict[str, Any]]) -> 
                 "dados": e.model_dump(mode="json", by_alias=True, exclude_unset=True),
             }
             for e in validas.values()
-        ]))
+        ]
+        insercao = inserir_sem_conflito(sessao.get_bind().dialect.name, linhas)
+        inseridas = set(sessao.scalars(insercao.returning(SimuladoConcluido.id)))
+        # Contagem anonima so do que acabou de chegar: reenviar nao conta de novo (CR-013)
+        registrar_conclusoes(
+            sessao, [linha["dados"] for linha in linhas if linha["id"] in inseridas], datetime.now(UTC)
+        )
         excedentes = list(sessao.scalars(
             select(SimuladoConcluido.id)
             .where(SimuladoConcluido.usuario_id == usuario_id)

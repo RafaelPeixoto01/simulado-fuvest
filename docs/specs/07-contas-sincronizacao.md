@@ -1,10 +1,10 @@
 # Especificação Técnica — Contas e Histórico Sincronizado
 
-**Versão:** 1.6
-**Data:** 2026-10-03
+**Versão:** 1.7
+**Data:** 2026-10-06
 **PRD Ref:** 01-PRD v4.1 (RF-008, RF-020, RF-022, RF-024 a RF-026, US-013 a US-016, RN-012, RN-016, RN-017, RNF-004, RNF-005)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.7 (ADR-004 revisto, ADR-010, ADR-011, ADR-012)
-**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2), CR-010 (carreira-alvo na conta e nos textos de privacidade — `specs/08-notas-de-corte.md`), CR-011 (ids `CODIGO-NNN` no histórico; vitrine com `anos` só dos vestibulares; textos de 80 questões na apresentação)
+**CR Ref:** CR-005 (Fase 3B do roadmap), CR-006 (login obrigatório — §8), CR-007 (vitrine e apresentação — §9), CR-008 (identidade na apresentação — §9.2), CR-010 (carreira-alvo na conta e nos textos de privacidade — `specs/08-notas-de-corte.md`), CR-011 (ids `CODIGO-NNN` no histórico; vitrine com `anos` só dos vestibulares; textos de 80 questões na apresentação), CR-013 (último acesso diário, contagens anônimas no login, no histórico e na exclusão, `UsuarioPublico.admin`, Privacidade — `specs/09-gestao.md`)
 
 ---
 
@@ -52,7 +52,7 @@ Fora desta iteração: outros provedores de login, e-mail/senha, sincronizar o s
 | | email | varchar(320) | NOT NULL | Atualizado a cada login (D3) |
 | | nome | varchar(200) | NULL | Claim `name`; atualizado a cada login (D3) |
 | | criado_em | timestamptz | NOT NULL, default now | |
-| | ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login |
+| | ultimo_acesso_em | timestamptz | NOT NULL, default now | Atualizado a cada login e, desde o CR-013, no primeiro pedido de cada dia de Brasília |
 | `sessoes` | token_hash | varchar(64) | PK | SHA-256 (hex) do token do cookie; o token em si não é guardado |
 | | usuario_id | int | FK → usuarios.id ON DELETE CASCADE, index | |
 | | criado_em | timestamptz | NOT NULL, default now | |
@@ -205,12 +205,12 @@ export function useLimparHistorico(), useSair(), useExcluirConta()  // mutations
 **Callback (`GET /api/auth/google/callback?code&state` ou `?error`):**
 1. Falha em qualquer passo → 302 para `/conta?erro=login`, apagando o cookie de login e sem sessão. Falhas: `error` presente, `code`/`state` ausentes, cookie ausente ou malformado, `state` diferente (comparação em tempo constante), `ErroLoginGoogle` na troca.
 2. `trocar_codigo` → `IdentidadeGoogle`.
-3. `entrar`: usuário por `google_sub`; cria se não existir (num savepoint: dois primeiros logins simultâneos da mesma conta não dão erro, o segundo relê o usuário); atualiza `email`, `nome` e `ultimo_acesso_em`. Remove as sessões expiradas desse usuário.
+3. `entrar`: usuário por `google_sub`; cria se não existir (num savepoint: dois primeiros logins simultâneos da mesma conta não dão erro, o segundo relê o usuário); atualiza `email`, `nome` e `ultimo_acesso_em`. Remove as sessões expiradas desse usuário. Desde o CR-013, conta `login` e, se a conta é nova ou o último acesso não era de hoje, `ativo` (`specs/09` §2.4).
 4. Se a requisição trouxer um cookie de sessão válido, essa sessão é encerrada (troca de conta no mesmo navegador).
 5. `criar_sessao`: token = `token_urlsafe(32)`; grava o SHA-256 e `expira_em` = agora + 90 dias.
 6. 302 para `voltar` (caminho relativo), com o cookie de sessão (`HttpOnly`, `SameSite=Lax`, `Path=/`, `Max-Age` de 90 dias; `Secure` e `__Host-` em produção) e o cookie de login apagado.
 
-**Sessão atual (`obter_usuario`):** cookie ausente, maior que 128 caracteres, hash desconhecido ou `expira_em` vencido → sem usuário (a sessão vencida é apagada). As datas do banco são normalizadas para UTC antes de comparar (o SQLite devolve sem fuso). Com o login desligado, a sessão continua valendo: desligar só impede logins novos, e quem já entrou ainda sincroniza, sai e exclui a conta (RF-026; revisão de código).
+**Sessão atual (`obter_usuario`):** cookie ausente, maior que 128 caracteres, hash desconhecido ou `expira_em` vencido → sem usuário (a sessão vencida é apagada). As datas do banco são normalizadas para UTC antes de comparar (o SQLite devolve sem fuso). Com o login desligado, a sessão continua valendo: desligar só impede logins novos, e quem já entrou ainda sincroniza, sai e exclui a conta (RF-026; revisão de código). Desde o CR-013, com usuário, `registrar_atividade` atualiza o último acesso no primeiro pedido do dia e conta `ativo` (no máximo uma escrita por usuário por dia; falha vira log).
 
 **Provedor (`criar_app`):** `ProvedorGoogle` só com `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`; em produção, também exige `PUBLIC_URL` com `https` — senão o login fica desligado e o motivo vai para o log (uma variável esquecida não derruba o site). Falhas de rede na troca do código (`OSError`, `http.client.HTTPException`) e JSON inválido viram `ErroLoginGoogle`. Com várias audiências no `id_token`, o `azp` precisa ser este cliente. `email_verified` não é exigido: a identidade é o `sub`, e o e-mail só aparece para o próprio dono.
 
@@ -219,11 +219,12 @@ export function useLimparHistorico(), useSair(), useExcluirConta()  // mutations
 2. Insere as entradas cujo `id` ainda não existe para o usuário (`INSERT ... ON CONFLICT DO NOTHING`, no dialeto do banco). Entrada já existente **não é alterada** (o resultado de um simulado é imutável).
 3. `dados` = `model_dump(mode="json", by_alias=True, exclude_unset=True)`: a entrada é devolvida como chegou.
 4. Limite (D4): mantém as 50 de maior `finalizado_em_ms` (empate pelo `id`, decrescente) e apaga as demais do usuário.
+5. Desde o CR-013, as entradas realmente inseridas (`RETURNING id`) vão, antes do corte e no mesmo commit, para as contagens anônimas (`registrar_conclusoes`, `specs/09` §2.4). A resposta não muda.
 5. Responde com a lista completa (como o `GET`) + `rejeitadas`.
 
 **Histórico — `GET`:** `dados` das entradas do usuário, por `finalizado_em_ms` decrescente (empate pelo `id`). **`DELETE`:** apaga todas as do usuário.
 
-**Excluir conta:** apaga o usuário; sessões e histórico saem por cascata (`ON DELETE CASCADE`, ativo também no SQLite); apaga o cookie de sessão.
+**Excluir conta:** apaga o usuário; sessões e histórico saem por cascata (`ON DELETE CASCADE`, ativo também no SQLite); apaga o cookie de sessão. Desde o CR-013, conta `conta_excluida` (anônimo; as contagens anteriores ficam).
 
 **Verificação de origem (`verificar_origem`, nos `POST`/`DELETE` com cookie):** se o header `Origin` existir e for diferente da origem de `PUBLIC_URL` → 403 `origem_invalida`. Sem `Origin` (cliente que não é navegador) → segue; o navegador sempre manda `Origin` em `POST`/`DELETE`.
 
@@ -332,7 +333,7 @@ Link (`<a href="/api/auth/google?voltar=...">`, navegação de página inteira, 
 `useTituloPagina('Conta')`.
 
 ### Página: PrivacidadePage (`/privacidade`)
-`h1` "Privacidade" e seções curtas: **Sem conta** (nada pessoal no servidor; simulado e histórico só no navegador; reportes anônimos; contagem anônima de simulados gerados); **Com conta Google** (o que guardamos: identificador da conta Google, nome, e-mail, os 50 simulados concluídos mais recentes e, desde o CR-010, a carreira-alvo das notas de corte, sem a modalidade de concorrência; para quê: mostrar o histórico e o desempenho e comparar a nota com o corte da carreira-alvo em qualquer dispositivo; do Google recebemos só nome e e-mail, sem acesso à senha nem a outros dados; não compartilhamos nem usamos para publicidade); **Cookies** (só para quem entra: um de sessão por 90 dias e um temporário durante o login; nenhum cookie de rastreamento); **Excluir seus dados** (Conta → "Excluir conta" apaga tudo na hora; "Sair" tira o histórico deste navegador); **Contato** (issues do repositório público no GitHub). `useTituloPagina('Privacidade')`.
+`h1` "Privacidade" e seções curtas: **Sem conta** (nada pessoal no servidor; simulado e histórico só no navegador; reportes anônimos; contagem anônima de simulados gerados); **Com conta Google** (o que guardamos: identificador da conta Google, nome, e-mail, os 50 simulados concluídos mais recentes e, desde o CR-010, a carreira-alvo das notas de corte, sem a modalidade de concorrência; para quê: mostrar o histórico e o desempenho e comparar a nota com o corte da carreira-alvo em qualquer dispositivo; do Google recebemos só nome e e-mail, sem acesso à senha nem a outros dados; não compartilhamos nem usamos para publicidade); **Cookies** (só para quem entra: um de sessão por 90 dias e um temporário durante o login; nenhum cookie de rastreamento); **Excluir seus dados** (Conta → "Excluir conta" apaga tudo na hora; "Sair" tira o histórico deste navegador); **Contato** (issues do repositório público no GitHub). `useTituloPagina('Privacidade')`. Desde o CR-013 (`specs/09` §3): "Com a conta Google" acrescenta as datas de cadastro e do último acesso e que o responsável pelo site vê a lista de contas, só para suporte; a contagem anônima sai de "Antes de entrar" e vira a seção **Números do site** (gerados e concluídos, logins e acessos, marcações por alternativa, sem identificar ninguém, ficam depois da exclusão de uma conta).
 
 ### HistoricoPage e DesempenhoPage (complementam `specs/04` e `specs/06`)
 - Fonte: `useHistorico().entradas` (no lugar de `listarHistorico`).

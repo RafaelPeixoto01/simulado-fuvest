@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.autenticacao import apagar_cookie_sessao, nome_cookie_sessao
 from app.dependencias import (
+    eh_admin,
     exigir_acesso,
     exigir_usuario,
     modo_de_acesso,
@@ -46,6 +47,7 @@ def ler_sessao(
                 nome=usuario.nome,
                 # So com usuario: quem nao entrou (apresentacao) nao le os arquivos de cortes
                 carreira_alvo=resolver_carreira_alvo(obter_notas_corte(request), usuario),
+                admin=eh_admin(request.app.state.settings, usuario),  # so o link (CR-013)
             )
             if usuario
             else None

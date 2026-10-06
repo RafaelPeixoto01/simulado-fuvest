@@ -92,3 +92,15 @@ def base_com_simulado(sessao, settings):
     escrever_pacotes(settings.data_dir, simulados=((2099, 1),))
     sincronizar(sessao, settings.data_dir)
     return settings.data_dir
+
+
+@pytest.fixture
+def client_admin(client, provedor_falso, app):
+    """Client com a sessao da Ana, administradora pela ADMIN_GOOGLE_SUBS (CR-013)."""
+    from dataclasses import replace
+
+    from tests.contas import ANA, entrar
+
+    app.state.settings = replace(app.state.settings, admin_google_subs=frozenset({ANA.sub}))
+    assert entrar(client).status_code == 302
+    return client

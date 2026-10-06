@@ -2,10 +2,10 @@
 
 **Versão:** 1.0
 **Data:** 2026-09-29
-**PRD Ref:** 01-PRD v5.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.10
-**Spec Ref:** 03-SPEC v1.10 (specs 01–08)
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012
+**PRD Ref:** 01-PRD v7.0
+**Arquitetura Ref:** 02-ARCHITECTURE v1.13
+**Spec Ref:** 03-SPEC v1.13 (specs 01–09)
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013
 
 ---
 
@@ -31,6 +31,7 @@
 | CR-010 | Notas de corte por carreira e carreira-alvo, Fase 4 do roadmap ([CR](changes/CR-010-notas-de-corte.md), [spec 08](specs/08-notas-de-corte.md)) | CR-T-01 a CR-T-09 | Concluído |
 | CR-011 | Formato de 80 questões (FUVEST 2027) e simulados oficiais da FUVEST ([CR](changes/CR-011-formato-80-simulados.md); ADR-015; specs 01, 02, 03, 04, 07 e 08) | CR-T-01 a CR-T-07 | Concluído |
 | CR-012 | Família 2026 no extrator: prova da FUVEST 2026 e simulado oficial de 2025 ([CR](changes/CR-012-provas-2026.md); spec 01) | CR-T-01 a CR-T-03 | Concluído |
+| CR-013 | Área de gestão: indicadores do site para o administrador ([CR](changes/CR-013-area-gestao.md); ADR-016; spec 09 e notas nas specs 03, 05 e 07) | CR-T-01 a CR-T-06 | Em Implementação |
 
 > **Status:** Pendente / Em andamento / Concluído
 

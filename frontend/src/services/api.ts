@@ -1,9 +1,18 @@
 import type { HistoricoEntry } from '../simulado/tipos'
 import type {
+  AprendizadoGestao,
   CarreiraAlvo,
   Catalogo,
   Correcao,
+  EstudantesGestao,
   NotasCorte,
+  OrdemEstudantes,
+  PeriodoGestao,
+  QualidadeGestao,
+  ReporteGestao,
+  ResolucaoReportes,
+  StatusReporte,
+  UsoGestao,
   PedidoSimulado,
   QuestoesPorId,
   RespostaItem,
@@ -121,4 +130,17 @@ export const api = {
   definirCarreiraAlvo: (pedido: { ano: number; codigo: number }) =>
     put<CarreiraAlvo>('/api/conta/carreira-alvo', pedido),
   removerCarreiraAlvo: () => apagar('/api/conta/carreira-alvo'),
+  // Área de gestão (CR-013): só o administrador; para os demais, 404
+  gestaoUso: (periodo: PeriodoGestao) => requisitar<UsoGestao>(`/api/gestao/uso?${new URLSearchParams({ periodo })}`),
+  gestaoAprendizado: (periodo: PeriodoGestao) =>
+    requisitar<AprendizadoGestao>(`/api/gestao/aprendizado?${new URLSearchParams({ periodo })}`),
+  gestaoQualidade: () => requisitar<QualidadeGestao>('/api/gestao/qualidade'),
+  gestaoReportes: (status: StatusReporte) =>
+    requisitar<{ reportes: ReporteGestao[] }>(`/api/gestao/reportes?${new URLSearchParams({ status })}`),
+  resolverReportes: (ids: number[]) => post<ResolucaoReportes>('/api/gestao/reportes/resolver', { ids }),
+  gestaoEstudantes: ({ busca, ordem, pagina }: { busca: string; ordem: OrdemEstudantes; pagina: number }) => {
+    const params = new URLSearchParams({ ordem, pagina: String(pagina) })
+    if (busca) params.set('busca', busca)
+    return requisitar<EstudantesGestao>(`/api/gestao/estudantes?${params}`)
+  },
 }

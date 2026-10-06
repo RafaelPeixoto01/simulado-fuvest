@@ -198,6 +198,7 @@ export interface Usuario {
   email: string
   nome: string | null
   carreira_alvo?: CarreiraAlvo | null // CR-010; o servidor sempre manda
+  admin?: boolean // CR-013: só mostra o link da gestão; quem protege é o servidor
 }
 
 /** Modo de acesso (CR-006, ADR-012): `conta` exige login; `livre` é o desenvolvimento sem login
@@ -219,4 +220,157 @@ export const NOMES_DISCIPLINAS: Record<Disciplina, string> = {
   matematica: 'Matemática',
   portugues: 'Português',
   quimica: 'Química',
+}
+
+/** Área de gestão (CR-013, specs/09). Só para o administrador; datas em ISO. */
+export type PeriodoGestao = '7' | '30' | '90' | 'tudo'
+export type ModoConcluido = 'completa' | 'personalizado' | 'ano'
+
+export interface PontoSerie {
+  inicio: string // primeiro dia do intervalo (AAAA-MM-DD)
+  total: number
+}
+
+export interface UsoGestao {
+  periodo: PeriodoGestao
+  inicio: string
+  fim: string
+  granularidade: 'dia' | 'semana'
+  cartoes: {
+    estudantes: number
+    novos: number
+    ativos_hoje: number
+    ativos_media_dia: number
+    ativos_7_dias: number
+    ativos_30_dias: number
+    logins: number
+    gerados: number
+    concluidos: number
+    contas_excluidas: number
+  }
+  series: Record<'cadastros' | 'logins' | 'ativos' | 'gerados' | 'concluidos', PontoSerie[]>
+  modos: { modo: ModoConcluido | 'treino'; gerados: number; concluidos: number | null; taxa_conclusao: number | null }[]
+  distribuicao: { faixa: string; estudantes: number }[]
+  provas_ano: { codigo: string; rotulo: string; concluidos: number }[]
+}
+
+export interface AssuntoAprendizado {
+  assunto: string
+  nome: string
+  respostas: number
+  acertos: number
+  percentual: number
+}
+
+export interface AprendizadoGestao {
+  periodo: PeriodoGestao
+  inicio: string
+  fim: string
+  modos: {
+    modo: ModoConcluido
+    concluidos: number
+    acerto_medio: number | null
+    por_tempo: number | null
+    tempo_medio_questao_s: number | null
+  }[]
+  disciplinas: {
+    disciplina: Disciplina
+    respostas: number
+    acertos: number
+    percentual: number
+    assuntos: AssuntoAprendizado[]
+  }[]
+  carreiras: {
+    ano: number
+    codigo: number
+    nome: string | null
+    pontos_prova: number
+    cortes: CortesModalidades | null
+    estudantes: number
+    com_prova_completa: number
+    atingiriam: CortesModalidades | null
+  }[]
+}
+
+export interface Marcacoes {
+  a: number
+  b: number
+  c: number
+  d: number
+  e: number
+  em_branco: number
+}
+
+export interface QuestaoSuspeita {
+  questao_id: string
+  prova: string
+  numero: number
+  disciplina: Disciplina
+  assunto: string | null
+  gabarito: Letra
+  respostas: number
+  acertos: number
+  percentual: number
+  marcacoes: Marcacoes
+  motivos: ('acerto_baixo' | 'alternativa_atrai')[]
+}
+
+export interface QualidadeGestao {
+  base: { provas: number; questoes: number; anuladas: number; sem_assunto: number; sincronizado_em: string | null }
+  provas: {
+    codigo: string
+    rotulo: string
+    tipo: string
+    total_questoes: number
+    questoes: number
+    anuladas: number
+    sincronizado_em: string
+  }[]
+  disciplinas: { disciplina: Disciplina; questoes: number }[]
+  reportes: {
+    pendentes: number
+    resolvidos: number
+    questoes_com_reporte_resolvido: number
+    indice_resolvidos: number | null
+  }
+  suspeitas: QuestaoSuspeita[]
+}
+
+export type StatusReporte = 'pendente' | 'resolvido'
+
+export interface ReporteGestao {
+  id: number
+  questao_id: string
+  tipo: TipoReporte
+  descricao: string | null
+  status: StatusReporte
+  criado_em: string
+  resolvido_em: string | null
+  questao: { prova: string; numero: number; disciplina: Disciplina; gabarito: Letra | null; anulada: boolean } | null
+}
+
+export interface ResolucaoReportes {
+  resolvidos: number[]
+  ja_resolvidos: number[]
+  inexistentes: number[]
+}
+
+export type OrdemEstudantes = 'cadastro' | 'acesso'
+
+export interface EstudanteGestao {
+  id: number
+  nome: string | null
+  email: string
+  criado_em: string
+  ultimo_acesso_em: string
+  simulados: number
+  carreira_alvo: string | null
+  admin: boolean
+}
+
+export interface EstudantesGestao {
+  total: number
+  pagina: number
+  por_pagina: number
+  estudantes: EstudanteGestao[]
 }

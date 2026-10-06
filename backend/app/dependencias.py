@@ -6,11 +6,13 @@ from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from app.autenticacao import TAMANHO_MAXIMO_TOKEN, nome_cookie_sessao, origem_publica
+from app.config import Settings
 from app.models import Usuario
 from app.pacote.assuntos import Taxonomia, taxonomia_em_uso
 from app.pacote.notas_corte import BaseNotasCorte, notas_corte_em_uso
 from app.schemas import ModoAcesso
 from app.services.contas import usuario_da_sessao
+from app.services.estatisticas import registrar_atividade
 
 
 def obter_sessao(request: Request) -> Iterator[Session]:
@@ -36,7 +38,11 @@ def obter_usuario(
     token = request.cookies.get(nome_cookie_sessao(request.app.state.settings))
     if not token or len(token) > TAMANHO_MAXIMO_TOKEN:
         return None
-    return usuario_da_sessao(sessao, token, datetime.now(UTC))
+    agora = datetime.now(UTC)
+    usuario = usuario_da_sessao(sessao, token, agora)
+    if usuario is not None:
+        registrar_atividade(sessao, usuario, agora)  # ultimo acesso e `ativo` do dia (CR-013)
+    return usuario
 
 
 def exigir_usuario(usuario: Annotated[Usuario | None, Depends(obter_usuario)]) -> Usuario:
@@ -45,6 +51,23 @@ def exigir_usuario(usuario: Annotated[Usuario | None, Depends(obter_usuario)]) -
             "codigo": "nao_autenticado",
             "mensagem": "Entre com sua conta Google para continuar.",
         })
+    return usuario
+
+
+NAO_ENCONTRADO = {"codigo": "nao_encontrado", "mensagem": "Página não encontrada."}
+
+
+def eh_admin(settings: Settings, usuario: Usuario) -> bool:
+    return settings.eh_admin(usuario.google_sub)  # RN-020
+
+
+def exigir_admin(
+    request: Request, usuario: Annotated[Usuario | None, Depends(obter_usuario)]
+) -> Usuario:
+    """Router da gestao (CR-013): para quem nao e admin, inclusive sem sessao, a area nao
+    existe (404), e o erro vem antes da validacao de query e corpo."""
+    if usuario is None or not eh_admin(request.app.state.settings, usuario):
+        raise HTTPException(404, detail=NAO_ENCONTRADO)
     return usuario
 
 

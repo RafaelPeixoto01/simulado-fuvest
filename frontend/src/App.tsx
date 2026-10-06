@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { Layout } from './components/Layout'
+import { RequerAdmin } from './components/RequerAdmin'
 import { RequerConta } from './components/RequerConta'
 import { RolarAoTopo } from './components/RolarAoTopo'
 import { ApresentacaoPage } from './pages/ApresentacaoPage'
@@ -8,6 +9,11 @@ import { ConfigurarPersonalizadoPage } from './pages/ConfigurarPersonalizadoPage
 import { ContaPage } from './pages/ContaPage'
 import { DesempenhoPage } from './pages/DesempenhoPage'
 import { EscolherAnoPage } from './pages/EscolherAnoPage'
+import { AprendizadoPage } from './pages/gestao/AprendizadoPage'
+import { EstudantesPage } from './pages/gestao/EstudantesPage'
+import { GestaoLayout } from './pages/gestao/GestaoLayout'
+import { QualidadePage } from './pages/gestao/QualidadePage'
+import { UsoPage } from './pages/gestao/UsoPage'
 import { HistoricoPage } from './pages/HistoricoPage'
 import { HomePage } from './pages/HomePage'
 import { NaoEncontradaPage } from './pages/NaoEncontradaPage'
@@ -52,6 +58,20 @@ export default function App() {
             <Route path="historico" element={<HistoricoPage />} />
             <Route path="desempenho" element={<DesempenhoPage />} />
             <Route path="notas-de-corte" element={<NotasCortePage />} />
+            {/* Área de gestão (CR-013): só o administrador; para os demais, "Página não encontrada" */}
+            <Route
+              path="gestao"
+              element={
+                <RequerAdmin>
+                  <GestaoLayout />
+                </RequerAdmin>
+              }
+            >
+              <Route index element={<UsoPage />} />
+              <Route path="aprendizado" element={<AprendizadoPage />} />
+              <Route path="qualidade" element={<QualidadePage />} />
+              <Route path="estudantes" element={<EstudantesPage />} />
+            </Route>
           </Route>
           <Route path="*" element={<NaoEncontradaPage />} />
         </Route>

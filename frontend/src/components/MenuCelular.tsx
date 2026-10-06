@@ -139,6 +139,15 @@ export function MenuCelular({
                   >
                     Notas de corte
                   </Item>
+                  {usuario?.admin && (
+                    <Item
+                      para="/gestao"
+                      aoEscolher={fecharDevolvendoFoco}
+                      icone={<path d="M4 20h16M7 16v-5M12 16V6M17 16v-8" />}
+                    >
+                      Gestão
+                    </Item>
+                  )}
                 </>
               )}
               {nome && (
