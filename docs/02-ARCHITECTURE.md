@@ -1,9 +1,9 @@
 # Arquitetura — Simulado Fuvest
 
-**Versão:** 1.13
+**Versão:** 1.14
 **Data:** 2026-10-06
 **PRD Ref:** 01-PRD v7.0
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013, CR-014
 
 ---
 
@@ -31,7 +31,7 @@
 | Driver Postgres | psycopg | 3.3 | Driver moderno do SQLAlchemy 2 |
 | Testes | pytest + httpx2 (BE), Vitest + jsdom (FE) | 9.1 / 5.0 | Mesma stack; `httpx2` é o cliente que o `starlette.testclient` 1.7 exige (com `httpx` emite deprecação) |
 | Lint | ruff (BE), ESLint + typescript-eslint (FE) | 0.16 / 10.11 + 8.71 | Erros de lint bloqueiam commit e CI |
-| CI/CD | GitHub Actions | — | Em push de qualquer branch: pytest + ruff + migrations num Postgres 17 (service container) + validação dos pacotes + tsc + eslint + vitest |
+| CI/CD | GitHub Actions | — | Em push de qualquer branch: pytest + ruff + migrations num Postgres 18, a versão da produção (CR-014; service container) + validação dos pacotes + tsc + eslint + vitest |
 | Deploy | Railway (container Docker) | Node 24 / Python 3.12 | Serviço único + Postgres add-on (ADR-001) |
 
 ---
@@ -100,6 +100,7 @@ Simulado Fuvest/
 ├── .github/workflows/ci.yml
 ├── .claude/                        # hooks de qualidade + settings (versionado)
 ├── Dockerfile                      # multi-stage: build do SPA (Node 24) + backend (Python 3.12)
+├── scripts/backup-producao.sh      # backup do Postgres de produção pelo railway ssh, com checksum e --ensaio (CR-014)
 ├── data/
 │   ├── provas/                     # FONTE DA VERDADE das questões (versionado)
 │   │   ├── assuntos.yaml           # taxonomia de assuntos por disciplina (ADR-009, CR-004)
@@ -721,7 +722,7 @@ O único segredo é o `GOOGLE_CLIENT_SECRET` (CR-005). **Não existe arquivo `.e
 
 > Procedimentos detalhados em `/docs/05-DEPLOY-GUIDE.md` (criado na tarefa de deploy).
 
-Rollback de código ou de dados é o mesmo procedimento: `git revert` do commit (inclusive de um pacote) + push, e a sincronização do próximo start deixa o banco igual ao repositório.
+Rollback de código ou de dados é o mesmo procedimento: `git revert` do commit (inclusive de um pacote) + push, e a sincronização do próximo start deixa o banco igual ao repositório. As tabelas que não vêm do repositório (contas, históricos, reportes e contagens) só voltam de um backup: `scripts/backup-producao.sh` (dentro do container do Postgres, sem URL pública) e restauração com o proxy TCP ligado só durante ela (Deploy Guide §6, CR-014).
 
 ### 9.5 Health Check
 

@@ -1,6 +1,6 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.8
+**Versão:** 1.9
 **Data:** 2026-10-06
 **Arquitetura Ref:** 02-ARCHITECTURE v1.13 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, ADR-016, §9)
 
@@ -125,7 +125,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 
 ### 4.3 Migration
 - [ ] `upgrade head` e `downgrade -1` testados no SQLite local **e** no Postgres do CI (passo "Migrations no Postgres")
-- [ ] `downgrade()` implementado; se destrutiva, backup antes (seção 6)
+- [ ] `downgrade()` implementado; se destrutiva, backup antes com `scripts/backup-producao.sh --ensaio` (seção 6)
 - [ ] **Migration 005 (CR-011):** recria vazias `provas`, `textos_base` e `questoes` (a sincronização do start as repovoa) e alarga `reportes.questao_id`; contas e históricos não são tocados. Backup recomendado (seção 6), mas não obrigatório: ela só recria dados derivados do repositório e alarga uma coluna, sem perda, e não toca as tabelas de conta. Entre a migration e o código novo assumir, o container antigo ainda no ar consulta o schema anterior: o conteúdo pode dar erro por alguns segundos (contas e histórico continuam). Fazer o deploy em horário de pouco uso. Localmente, depois do `upgrade`, rodar `python -m ingestao importar` de novo
 - [ ] **Migration 006 (CR-013):** só cria `estatisticas_diarias` e `estatisticas_questoes` e as preenche a partir de `simulados_concluidos` (lê, não altera). Não destrutiva: backup não obrigatório. O código anterior ignora as tabelas novas, então não há janela de erro no deploy
 
@@ -168,15 +168,35 @@ O banco de questões é descartável: ele é reconstruído a cada start a partir
 
 ## 6. Backup
 
-Pela URL pública do Postgres (a interna, `*.railway.internal`, só é alcançável de dentro da Railway):
+O Postgres da Railway não tem URL pública (sem proxy TCP) e esta máquina não tem o cliente do PostgreSQL: o backup roda **dentro do container do serviço Postgres** (`pg_dump` 18.6), pelo `railway ssh`, com o script do repositório (CR-014). No Git Bash, na raiz do repositório:
 
 ```bash
-railway variables -s Postgres --kv | grep DATABASE_PUBLIC_URL   # tem a senha: não colar em lugar nenhum
-pg_dump -Fc "<DATABASE_PUBLIC_URL>" > backup_$(date +%Y%m%d_%H%M%S).dump
-pg_restore --clean --if-exists -d "<DATABASE_PUBLIC_URL>" backup_AAAAMMDD_HHMMSS.dump
+scripts/backup-producao.sh --ensaio                 # antes de migration destrutiva: sempre com --ensaio
+scripts/backup-producao.sh --destino /outra/pasta   # padrão: ~/backups-simulado-fuvest
 ```
 
-Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instalado nesta máquina hoje**. Obrigatório antes de migration destrutiva. Desde o CR-005, o banco guarda contas e históricos de estudantes, e perdê-los é perder dados de usuários: além do backup manual antes de migrations, ligar os backups do volume do Postgres na Railway (Postgres → Backups, conforme o plano). O arquivo de backup tem dado pessoal: guardar fora do repositório e apagar quando não for mais necessário.
+- Gera `simulado-fuvest_AAAAMMDD_HHMMSS.dump` (formato custom do `pg_dump`) com um único dump num arquivo temporário do container, confere o SHA-256 nos dois lados e o cabeçalho `PGDMP`, e apaga o temporário (com ou sem erro).
+- `--ensaio` restaura **o mesmo arquivo** num banco temporário do servidor (`ensaio_restauracao`, apagado no fim) e compara as contagens de cada tabela com o banco real; falha se alguma diferir (uma tabela que mudou durante o backup aparece como tal). Em 06/10/2026: 11 tabelas iguais, 404 KB, cerca de 5 s.
+- O terminal só mostra nomes de tabela e contagens: nenhuma URL, senha ou dado de estudante. O arquivo tem dado pessoal: fica fora do repositório (`*.dump` no `.gitignore`), não é compartilhado e é apagado quando não servir mais.
+
+### 6.1 Restauração
+
+O `railway ssh` não repassa a entrada padrão, então não dá para devolver o arquivo ao servidor por ele. A restauração liga o proxy TCP do Postgres **só enquanto dura** (D1 do CR-014):
+
+1. Instalar o cliente do PostgreSQL **18** (só as ferramentas de linha de comando) e conferir `pg_restore --version`.
+2. Painel da Railway → serviço Postgres → Settings → Networking → ligar o TCP Proxy. A variável `DATABASE_PUBLIC_URL` passa a existir.
+3. Restaurar, com a URL numa variável do shell (nunca impressa):
+   ```bash
+   URL=$(railway variables -s Postgres --kv | grep '^DATABASE_PUBLIC_URL=' | cut -d= -f2-)
+   pg_restore --clean --if-exists --no-owner -d "$URL" ~/backups-simulado-fuvest/<arquivo>.dump
+   unset URL
+   ```
+4. **Desligar o TCP Proxy** no painel e conferir que a URL pública sumiu: `railway variables -s Postgres --kv | cut -d= -f1 | grep -c PUBLIC` → `0`.
+5. `railway redeploy -s simulado-fuvest` (o start roda as migrations e a sincronização) e a verificação pós-deploy (§7).
+
+Durante a restauração o site pode dar erro: fazer em horário de pouco uso. Este caminho ainda não foi exercitado (exige ligar o proxy e instalar o cliente); o `--ensaio` prova que o arquivo restaura com o `pg_restore` da mesma versão do servidor.
+
+Desde o CR-005, o banco guarda contas e históricos de estudantes, e perdê-los é perder dados de usuários. Além do backup antes de migrations, ligar os backups do volume do Postgres na Railway (Postgres → Backups, conforme o plano) continua recomendado como segunda camada.
 
 ---
 
@@ -278,6 +298,7 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |
 | 2026-10-02 | Claude | v1.5 — CR-010: notas de corte de um ano novo (§4.5), migration 004 e rollback do CR-010, verificação das notas de corte |
 | 2026-10-03 | Claude | v1.6 — CR-011: migration 005 (recria as tabelas derivadas; janela curta no deploy, §4.3), simulados oficiais e `--prova` no conteúdo (§4.2), `pontos_prova` nas notas de corte de 2027 (§4.5), rollback e verificação do CR-011 |
+| 2026-10-06 | Claude | v1.9 — CR-014: backup pelo `railway ssh` com o script `scripts/backup-producao.sh` (checksum e `--ensaio`) e restauração com o proxy TCP ligado só durante ela (§6, §4.3) |
 | 2026-10-06 | Claude | v1.8 — CR-013 concluído: o Postgres não tem URL pública, então `reportes` (§8.1) e `contas` (§8.4) rodam dentro do container com `railway ssh` |
 | 2026-10-06 | Claude | v1.8 — CR-013: variável `ADMIN_GOOGLE_SUBS` (§2) e como ligar a área de gestão (§8.4, comando `contas`), migration 006 (§4.3), rollback, verificação pós-deploy e reportes também pela web (§8.1) |
 | 2026-10-05 | Claude | v1.7 — CR-012: `familia_2026` (prova da FUVEST 2026 e simulado oficial de 2025, `2026s1` com 90 questões) e o registro de código novo como mudança de parser (§4.2) |
