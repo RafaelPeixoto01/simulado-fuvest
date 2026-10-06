@@ -49,3 +49,6 @@ data/_cache/
 
 # Build do SPA copiado para o backend (Docker / teste local de produção)
 backend/static/
+
+# Backups do banco de producao: dado pessoal, nunca no repositorio (CR-014)
+*.dump
