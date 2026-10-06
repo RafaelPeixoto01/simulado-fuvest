@@ -8,7 +8,7 @@ const ABAS = [
 ]
 
 const aba = ({ isActive }: { isActive: boolean }) =>
-  `-mb-px shrink-0 border-b-2 px-3 py-2 text-sm font-semibold ${
+  `-mb-px shrink-0 border-b-2 px-1.5 py-2 text-[0.8125rem] font-semibold sm:px-3 sm:text-sm ${
     isActive ? 'border-caneta text-caneta' : 'border-transparent text-tinta-suave hover:text-tinta'
   }`
 
@@ -25,7 +25,8 @@ export function GestaoLayout() {
       <p className="mt-2 text-tinta-suave">
         Números do site, contados por dia sem identificar ninguém. Só o administrador vê esta área.
       </p>
-      <nav aria-label="Seções da gestão" className="mt-6 flex gap-1 overflow-x-auto border-b border-linha">
+      {/* As quatro abas cabem em 360 px sem rolagem lateral */}
+      <nav aria-label="Seções da gestão" className="mt-6 flex gap-0.5 border-b border-linha sm:gap-1">
         {ABAS.map((a) => (
           <NavLink key={a.para} to={{ pathname: a.para, search: busca }} end={a.fim} className={aba}>
             {a.nome}
