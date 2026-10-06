@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.6
-**Data:** 2026-10-03
-**Arquitetura Ref:** 02-ARCHITECTURE v1.11 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, §9)
+**Versão:** 1.7
+**Data:** 2026-10-05
+**Arquitetura Ref:** 02-ARCHITECTURE v1.12 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, §9)
 
 ---
 
@@ -115,7 +115,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 
 ### 4.2 Conteúdo (prova nova, simulado oficial ou correção de questão)
 - [ ] Branch `conteudo/prova-AAAA` (simulados oficiais: `conteudo/simulados-AAAA`; correção: `conteudo/correcao-CODIGO-NNN`)
-- [ ] Simulado oficial (CR-011): `python -m ingestao baixar --prova AAAAsN --prova-url <PDF da prova S1> --gabarito-url <PDF do gabarito> --versao S1` e `extrair --prova AAAAsN`. O pacote fica em `data/provas/AAAAsN/` com `tipo: simulado`, `edicao: N` e `total_questoes: 80`; a prova real de um ano novo usa `--prova AAAA` (`--ano` continua aceito)
+- [ ] Simulado oficial (CR-011): `python -m ingestao baixar --prova AAAAsN --prova-url <PDF da prova S1> --gabarito-url <PDF do gabarito> --versao S1` e `extrair --prova AAAAsN`. O pacote fica em `data/provas/AAAAsN/` com `tipo: simulado`, `edicao: N` e `total_questoes: 80` (90 no simulado de 2025, `2026s1`); a prova real de um ano novo usa `--prova AAAA` (`--ano` continua aceito). O `extrair` só aceita códigos registrados em `ingestao/familias.py` (hoje 2020, 2022–2026, 2026s1, 2027s1 e 2027s2); registrar um código novo é mudança de parser e passa por CR (CR-012)
 - [ ] Toda questão com disciplina **e assunto** da taxonomia `data/provas/assuntos.yaml` (V11, CR-004); revisar com `python -m ingestao assuntos --prova CODIGO`
 - [ ] `python -m ingestao validar --prova CODIGO` sem pendência bloqueante
 - [ ] `status: publicada` no `prova.yaml`
@@ -258,3 +258,4 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |
 | 2026-10-02 | Claude | v1.5 — CR-010: notas de corte de um ano novo (§4.5), migration 004 e rollback do CR-010, verificação das notas de corte |
 | 2026-10-03 | Claude | v1.6 — CR-011: migration 005 (recria as tabelas derivadas; janela curta no deploy, §4.3), simulados oficiais e `--prova` no conteúdo (§4.2), `pontos_prova` nas notas de corte de 2027 (§4.5), rollback e verificação do CR-011 |
+| 2026-10-05 | Claude | v1.7 — CR-012: `familia_2026` (prova da FUVEST 2026 e simulado oficial de 2025, `2026s1` com 90 questões) e o registro de código novo como mudança de parser (§4.2) |

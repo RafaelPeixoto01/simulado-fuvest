@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 6.0
-**Data:** 2026-10-03
+**Versão:** 6.1
+**Data:** 2026-10-05
 **Status:** Aprovado
 **Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010) + formato de 80 questões e simulados oficiais da FUVEST (CR-011)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011, CR-012
 
 ---
 
@@ -481,7 +481,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 ## 9. Dependências e Premissas
 
 ### Dependências
-- **Simulados oficiais da FUVEST** (`fuvest.br/simulado-fuvest-2027-provas-gabarito`): PDFs da prova (versões S1–S4) e do gabarito de cada edição (CR-011)
+- **Simulados oficiais da FUVEST** (`fuvest.br/simulado-fuvest-2027-provas-gabarito`): PDFs da prova (versões S1–S4) e do gabarito de cada edição (CR-011). O simulado oficial do ciclo anterior (FUVEST 2026, aplicado em 19/10/2025, 90 questões) está no acervo de 2026 (CR-012)
 - **Acervo oficial da FUVEST** (`fuvest.br/acervo-vestibular-AAAA/`): PDFs da prova da 1ª fase e do gabarito, de 1977 a 2026; desde o CR-010, também o PDF "Notas de Corte" de cada ano e, para os nomes das carreiras, o Guia de Carreiras ou o Manual do Candidato
 - **Railway:** hospedagem da aplicação e do PostgreSQL
 - **Bibliotecas Python de leitura de PDF:** extração de texto, imagens e renderização de páginas (escolha na Arquitetura)
@@ -560,4 +560,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte).*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte). v6.1 (2026-10-05, CR-012): dependências — o simulado oficial da FUVEST 2026 no acervo de 2026.*

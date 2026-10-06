@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.11
-**Data:** 2026-10-03
-**PRD Ref:** 01-PRD v6.0
-**Arquitetura Ref:** 02-ARCHITECTURE v1.11
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011
+**Versão:** 1.12
+**Data:** 2026-10-05
+**PRD Ref:** 01-PRD v6.1
+**Arquitetura Ref:** 02-ARCHITECTURE v1.12
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -18,7 +18,7 @@ MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficia
 
 | # | Spec | RFs | Resumo |
 |---|------|-----|--------|
-| 01 | [Ingestão de Provas](specs/01-ingestao.md) | RF-001–RF-006 | CLI do curador, pacote `prova.yaml` (código da prova, tipo, edição e total — CR-011), validação V01–V10, sincronização repo → banco, famílias de layout 2025 e 2027 |
+| 01 | [Ingestão de Provas](specs/01-ingestao.md) | RF-001–RF-006 | CLI do curador, pacote `prova.yaml` (código da prova, tipo, edição e total — CR-011), validação V01–V10, sincronização repo → banco, famílias de layout 2025, 2026 (CR-012) e 2027 |
 | 02 | [Catálogo e Geração](specs/02-catalogo-e-geracao.md) | RF-008–RF-012 | `GET /api/catalogo`, `POST /api/simulados` (4 modos; Prova completa com 80 e Prova de um ano pelo código — CR-011), `GET /api/questoes` |
 | 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: identidade visual e tokens (CR-002, CR-008), rotas, cabeçalho (menu do celular — CR-007), início com conta (CR-008, CR-009), rolagem ao trocar de página (CR-009), Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
 | 04 | [Correção, Resultado e Histórico](specs/04-correcao-resultado.md) | RF-017–RF-020 | `POST /api/correcoes`, resultado por disciplina, folha corrigida clicável e revisão uma questão por vez (CR-003), histórico local |
@@ -115,6 +115,7 @@ Desde o CR-006 (ADR-012, `specs/07` §8), catálogo, simulados, questões, corre
 | Versão | Data | Alteração |
 |--------|------|-----------|
 | 1.0 | 2026-09-29 | Criação: specs 01–05 do MVP |
+| 1.12 | 2026-10-05 | CR-012: spec 01 v1.4 — `familia_2026` (layout da 2027 + gabarito de 90) para a prova da FUVEST 2026 e o simulado oficial de 2025, IT-035 a IT-037. Nenhum contrato da API muda |
 | 1.11 | 2026-10-03 | CR-011: formato de 80 questões e simulados oficiais — código da prova nos ids e nas figuras, `GerarAno.prova`, `QuestaoPublica.prova/origem`, `ProvaCatalogo` com código, tipo, edição e rótulo, `pontos_prova` nas notas de corte, migration 005; specs 01, 02, 03, 04, 07 e 08 |
 | 1.10 | 2026-10-02 | CR-010: spec 08 nova (notas de corte e carreira-alvo); contratos `GET /api/notas-corte`, `PUT`/`DELETE /api/conta/carreira-alvo` e `carreira_alvo` na sessão, erro `carreira_invalida`, migration 004; notas nas specs 01, 03, 04 e 07 |
 | 1.9 | 2026-10-02 | CR-009: spec 03 v1.9 (rolagem ao topo a cada mudança de caminho, extras E4/E6/E7 do início, círculo de um algarismo, marcas do painel abaixo da legenda) e spec 04 v1.6 (círculo de um algarismo no resultado). Nenhum contrato da API muda |

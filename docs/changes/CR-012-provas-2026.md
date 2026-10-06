@@ -127,16 +127,16 @@ Teste com os PDFs reais, fora do repositório (05/10/2026):
 
 ## 8. Critérios de Aceite
 
-- [ ] `extrair --prova 2026` com os PDFs oficiais (V1) gera 90 questões, `total_questoes: 90`, `familia_layout: familia_2026`, o gabarito casado e a questão 3 anulada
-- [ ] `extrair --prova 2026s1` com os PDFs oficiais (S1) gera 90 questões, `tipo: simulado`, `edicao: 1`, `versao: S1`, `total_questoes: 90` e o gabarito casado
-- [ ] Os textos dos rascunhos saem sem `(cid:` e sem a pendência de "símbolos não extraídos" causada pelo espaço
-- [ ] As famílias 2025 e 2027 continuam extraindo como antes (IT-008, IT-009, IT-032 a IT-034) e `validar --todas` segue verde sem editar nenhum pacote
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança (IT-035 a IT-037 e o registry)
-- [ ] Fluxo afetado exercitado em runtime antes do merge: CLI `baixar` + `extrair` com os PDFs reais num diretório temporário. O site não muda (sem endpoint, tela nem pacote novo), então o Playwright e o HTTP ficam N/A
-- [ ] Revisão de código pré-merge: N/A — complexidade Baixa (CR-040)
-- [ ] Revisão de segurança: N/A — sem endpoint, autenticação, dados de usuário nem dependência nova; o parser só lê PDFs baixados pelo curador
-- [ ] Documentos afetados foram atualizados
+- [x] `extrair --prova 2026` com os PDFs oficiais (V1) gera 90 questões, `total_questoes: 90`, `familia_layout: familia_2026`, o gabarito casado e a questão 3 anulada — 90 questões, 9 textos-base, 47 figuras, 55/90 sem pendência estrutural, nenhuma questão sem resposta, anulada `[3]`
+- [x] `extrair --prova 2026s1` com os PDFs oficiais (S1) gera 90 questões, `tipo: simulado`, `edicao: 1`, `versao: S1`, `total_questoes: 90` e o gabarito casado — 90 questões, 7 textos-base, 52 figuras, 41/90 sem pendência estrutural, nenhuma questão sem resposta nem anulada
+- [x] Os textos dos rascunhos saem sem `(cid:` e sem a pendência de "símbolos não extraídos" causada pelo espaço — nenhum `(cid:` nos dois `prova.yaml`; sobram 3 pendências de símbolos (Q04 e Q76 da prova, Q87 do simulado), todas de fórmulas de verdade (glifos 2870, 3036, 4666…), enquanto o `(cid:172)` aparece 21.462 e 16.235 vezes nos PDFs
+- [x] As famílias 2025 e 2027 continuam extraindo como antes (IT-008, IT-009, IT-032 a IT-034) e `validar --todas` segue verde sem editar nenhum pacote — suíte inteira verde; `validar --todas`: as 7 provas e os 6 anos de notas de corte OK
+- [x] Testes existentes continuam passando (regressão) — `pytest` e `ruff` verdes; o hook do commit `2bf36ba` rodou pytest, ruff, tsc, eslint e vitest (o vitest falhou na 1ª tentativa no teste intermitente conhecido de `inicio.test.tsx`, "pausado…", e passou na 2ª)
+- [x] Novos testes cobrem a mudança (IT-035 a IT-037 e o registry) — `tests/test_ingestao_familia_2026.py` (7 testes) e `test_ingestao_familias.py`
+- [x] Fluxo afetado exercitado em runtime antes do merge: CLI `baixar` + `extrair` com os PDFs reais num diretório temporário. O site não muda (sem endpoint, tela nem pacote novo), então o Playwright e o HTTP ficam N/A — `baixar --prova 2026 --versao V1` e `--prova 2026s1 --versao S1` com as URLs oficiais e `extrair` com `--data-dir` no scratchpad: resultados nos dois primeiros critérios; antes do CR, o mesmo `extrair` terminava com "Prova 2026 sem família de layout registrada"
+- [x] Revisão de código pré-merge: N/A — complexidade Baixa (CR-040)
+- [x] Revisão de segurança: N/A — sem endpoint, autenticação, dados de usuário nem dependência nova; o parser só lê PDFs baixados pelo curador
+- [x] Documentos afetados foram atualizados — PRD v6.1, Arquitetura v1.12, índice da Spec v1.12, spec 01 v1.4, Plano, Deploy Guide v1.7, CLAUDE.md e INDEX
 - [ ] CI verde na branch e em `master`
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
@@ -196,3 +196,4 @@ Teste com os PDFs reais, fora do repositório (05/10/2026):
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
 | 2026-10-05 | Rafael Peixoto (com Claude) | CR criado a partir da pesquisa de novas provas (relatório do Gemini conferido nas fontes): a prova da FUVEST 2026 e o simulado oficial de 19/10/2025 estão no acervo e não estão na base. Teste das famílias com os PDFs reais; D1 (rótulo "1ª edição") decidido pelo usuário |
+| 2026-10-05 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-03): `familia_2026`, registry, fixtures e IT-035 a IT-037; extração real das duas provas fora do repositório; documentos atualizados. Pendente: CI na branch e em `master` |
