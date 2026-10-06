@@ -1,10 +1,10 @@
 # Especificação Técnica — Ingestão de Provas
 
-**Versão:** 1.3
-**Data:** 2026-10-03
+**Versão:** 1.4
+**Data:** 2026-10-05
 **PRD Ref:** 01-PRD v2.0 (RF-001 a RF-006, RF-023, US-009, US-012, RN-001, RN-006, RN-007, RN-014)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-002, ADR-003, ADR-006, ADR-008, ADR-009)
-**CR Ref:** CR-004 (assunto por questão, V11, taxonomia e comando `assuntos` — detalhe em `specs/06-assuntos-desempenho.md`), CR-010 (notas de corte: comando `cortes` e `validar` com os cortes — detalhe em `specs/08-notas-de-corte.md`), CR-011 (código da prova, simulados oficiais, total de questões por pacote e família 2027)
+**CR Ref:** CR-004 (assunto por questão, V11, taxonomia e comando `assuntos` — detalhe em `specs/06-assuntos-desempenho.md`), CR-010 (notas de corte: comando `cortes` e `validar` com os cortes — detalhe em `specs/08-notas-de-corte.md`), CR-011 (código da prova, simulados oficiais, total de questões por pacote e família 2027), CR-012 (família 2026: prova da FUVEST 2026 e simulado oficial de 2025)
 
 ---
 
@@ -40,6 +40,7 @@ CLI do curador (`python -m ingestao <comando>`, executada a partir de `backend/`
 | Criar | `backend/ingestao/gabarito/__init__.py`, `familia_2025.py` | Registry + parser do gabarito |
 | Criar | `backend/ingestao/layouts/__init__.py`, `base.py`, `familia_2025.py` | Registry + protocolo + parser da prova |
 | Criar (CR-011) | `backend/ingestao/layouts/familia_2027.py`, `backend/ingestao/gabarito/familia_2027.py` | Família dos simulados oficiais de 2027: variante da 2025 (§2.4) |
+| Criar (CR-012) | `backend/ingestao/layouts/familia_2026.py`, `backend/ingestao/gabarito/familia_2026.py` | Família da prova da FUVEST 2026 e do simulado oficial de 2025: layout da 2027 + gabarito de 90 (§2.4) |
 | Criar | `backend/tests/fixtures/pdfs/*.pdf` | Páginas recortadas dos PDFs oficiais (≤ 1 MB no total) |
 | Criar | `backend/tests/test_pacote_*.py`, `test_ingestao_*.py` | Testes |
 | Modificar | `.gitignore` | Adicionar `data/_cache/` |
@@ -159,12 +160,12 @@ class ParserLayout(Protocol):
 
 class ParserGabarito(Protocol):
     nome: str
-    total: int                                       # questões da prova: 90 (família 2025) ou 80 (família 2027)
+    total: int                                       # questões da prova: 90 (famílias 2025 e 2026) ou 80 (família 2027)
     def extrair(self, pdf_path: Path, versao: str) -> dict[int, Letra | None | Literal["anulada"]]: ...
     # None = marcação não reconhecida (vira pendência)
 ```
 
-Registries (`layouts/__init__.py`, `gabarito/__init__.py`): `FAMILIAS: dict[str, str]` (código da prova → nome da família, em `ingestao/familias.py`) e `obter_parser_layout(codigo)` / `obter_parser_gabarito(codigo)`, que levantam `FamiliaNaoRegistrada` se a prova não tiver família. Hoje: `2020`, `2022`–`2025` → `familia_2025`; `2027s1`, `2027s2` → `familia_2027` (CR-011).
+Registries (`layouts/__init__.py`, `gabarito/__init__.py`): `FAMILIAS: dict[str, str]` (código da prova → nome da família, em `ingestao/familias.py`) e `obter_parser_layout(codigo)` / `obter_parser_gabarito(codigo)`, que levantam `FamiliaNaoRegistrada` se a prova não tiver família. Hoje: `2020`, `2022`–`2025` → `familia_2025`; `2026`, `2026s1` → `familia_2026` (CR-012); `2027s1`, `2027s2` → `familia_2027` (CR-011).
 
 ### 2.3 Comandos da CLI
 
@@ -222,6 +223,10 @@ Todos os comandos aceitam `--data-dir` (default: `DATA_DIR` da config) para os t
 - gabarito com cabeçalho `PROVA S1 PROVA S2 PROVA S3 PROVA S4`, linhas `n L n+40 L` por versão, `*` = anulada e 80 respostas.
 
 Com os PDFs reais (S1 das duas edições), a extração sai com 80 questões, 6 e 5 textos-base, 42 e 41 figuras e o gabarito casado (anuladas: a 51 da 1ª edição e a 20 da 2ª). As versões S1–S4 têm as mesmas questões (gabarito de correspondência), e ingere-se a S1 (RN-001).
+
+**Família `familia_2026` — prova da FUVEST 2026 e simulado oficial de 19/10/2025 (CR-012):** esses PDFs estrearam o layout da família 2027 (número em Baloo 2 ExtraBold de 13,98 pt, espaço como `(cid:172)`), mas têm 90 questões. A família é o par **parser de prova da 2027** (`VARIANTE_2027`) + **gabarito da 2025** (`n L n+45 L`, `*` = anulada; `PROVA V1 …` na prova e `PROVA S1 …` no simulado), com o nome `familia_2026`; o total do pacote vem do gabarito (90). A família 2025 também acha as questões, mas toma o `(cid:172)` por símbolo não extraído, e o gabarito da 2027 recusa 90 respostas.
+
+Com os PDFs reais (V1 da prova, S1 do simulado), a extração sai com 90 questões, 9 e 7 textos-base, 47 e 52 figuras, 55 e 41 questões sem pendência estrutural e o gabarito casado (anulada: a 3 da V1 da prova; nenhuma no simulado). O simulado entra como `2026s1` (`edicao: 1`, D1 do CR-012).
 
 **Parser `familia_2025` — gabarito:** cabeçalho `PROVA V1 ...` (2025) ou `PROVA V PROVA K ...` (2020, 2022–2024, às vezes em minúsculas); as linhas têm o formato `n L n+45 L` repetido por versão (ex.: `1 E 46 D 1 A 46 C ...`). Extrair a coluna da versão pedida. Letras `A`–`E` → letra; o marcador de anulada documentado no próprio PDF → `"anulada"`; qualquer outro token, ou **duas respostas aceitas** num gabarito retificado (`48 D E`), → `None` (pendência para o curador).
 
@@ -348,6 +353,9 @@ sequenceDiagram
 | IT-032 | Gabarito da família 2027 (fixture: S1 da 1ª edição) | `gabarito/familia_2027` | 80 respostas, a 51 anulada; a família 2025 recusa (CR-011) |
 | IT-033 | Layout da família 2027 (fixtures: página 2 da 1ª edição e página 3 da 2ª) | `layouts/familia_2027` | Questões 1–3 e 4–5 com 5 alternativas e figuras; sem pendência pelo `(cid:172)` (CR-011) |
 | IT-034 | `extrair --prova 2027s1`, `--ano` como sinônimo, código inválido | CLI | Pacote de simulado / mesmo efeito / erro (CR-011) |
+| IT-035 | Gabarito da família 2026 (fixtures: página "Gabarito" da prova e do simulado) | `gabarito/familia_2026` | 90 respostas; a 3 anulada na V1 e a 48 na V3; simulado sem anulada, Q1 da S1 = Q71 da S2; a família 2027 recusa (CR-012) |
+| IT-036 | Layout da família 2026 (fixtures: página 22 da prova V1 e página 28 do simulado S1) | `layouts/familia_2026` | Questões 48–49 sem pendência pelo `(cid:172)` (a família 2025 acusa símbolos) e 89–90 com figuras (CR-012) |
+| IT-037 | `extrair --prova 2026s1` | CLI | Simulado de 90, `familia_2026`, gabarito S1 (CR-012) |
 
 ---
 

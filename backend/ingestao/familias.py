@@ -15,6 +15,10 @@ FAMILIAS: dict[str, str] = {
     "2023": "familia_2025",
     "2024": "familia_2025",
     "2025": "familia_2025",
+    # prova da FUVEST 2026 e simulado oficial de 19/10/2025 (CR-012): o layout da 2027
+    # (numero em 13,98 pt, espaco como (cid:172)) com o gabarito de 90 da 2025
+    "2026": "familia_2026",
+    "2026s1": "familia_2026",
     # simulados oficiais da FUVEST 2027 (CR-011): o layout de 2025 com o numero em 14pt,
     # 80 questoes e, na 1a edicao, o espaco como o glifo (cid:172)
     "2027s1": "familia_2027",

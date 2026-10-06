@@ -3,7 +3,7 @@ from typing import Literal, Protocol
 
 from app.pacote.schema import Letra
 from ingestao.familias import familia_da_prova
-from ingestao.gabarito import familia_2025, familia_2027
+from ingestao.gabarito import familia_2025, familia_2026, familia_2027
 
 Marcacao = Letra | Literal["anulada"] | None  # None = marcacao nao reconhecida
 
@@ -17,6 +17,7 @@ class ParserGabarito(Protocol):
 
 PARSERS: dict[str, ParserGabarito] = {
     "familia_2025": familia_2025.ParserGabarito2025(),
+    "familia_2026": familia_2026.ParserGabarito2026(),
     "familia_2027": familia_2027.ParserGabarito2027(),
 }
 
