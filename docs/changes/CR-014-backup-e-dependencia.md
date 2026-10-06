@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-06  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -152,7 +152,7 @@ Duas pendências achadas no fechamento do CR-013, num CR só, a pedido do usuár
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md): dependência atualizada (`npm audit`) e manuseio de dado pessoal no backup — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — Deploy Guide v1.9, Arquitetura v1.14, Plano, INDEX, CLAUDE.md; PRD e Spec sem mudança (nenhuma funcionalidade nem contrato novo)
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` — branch verde (runs 37545145021 e 37546332377, com a imagem `postgres:18`), `master` verde no merge `35a4860` (run 37546525358); deploy da Railway `SUCCESS` e `GET /api/health` com as 9 provas
 
 **Revisão de código (`/code-review high`, diff da branch) — 10 achados, 9 corrigidos e 1 justificado:**
 1. Corrigido: os marcadores `INICIO`/`FIM` casavam por prefixo, e uma linha de base64 que começa com "FIM" (chance de 1 em 64³ por linha) cortaria o arquivo; agora valem só como linha inteira, depois de tirar os CR da saída.
@@ -235,3 +235,4 @@ Duas pendências achadas no fechamento do CR-013, num CR só, a pedido do usuár
 | 2026-10-06 | Rafael Peixoto (com Claude) | CR criado com o diagnóstico (só leitura): sem URL pública nem cliente local, `pg_dump` 18.6 no container, dump íntegro pelo `railway ssh` (checksum), stdin não repassado, CI no Postgres 17 × produção 18.6, `source-map-js` 1.2.2 corrige o GHSA-68fv-2mgg-jv7q |
 | 2026-10-06 | Rafael Peixoto (com Claude) | Decisões D1a, D2a e D3a do usuário; status Em Implementação |
 | 2026-10-06 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-05): `source-map-js` 1.2.2, `scripts/backup-producao.sh` com dois backups reais com `--ensaio`, CI no Postgres 18 (run 37545145021 verde, imagem `postgres:18`); revisão de código (9 corrigidos, 1 justificado), script testado com um `railway` falso (9 casos) e de segurança; documentos atualizados |
+| 2026-10-06 | Rafael Peixoto (com Claude) | Merge `35a4860` em `master`, CI verde (run 37546525358) e deploy sem mudança na aplicação — validação ✅, status Concluído |
