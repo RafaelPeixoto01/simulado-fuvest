@@ -141,18 +141,40 @@ Duas pendências achadas no fechamento do CR-013, num CR só, a pedido do usuár
 
 ## 8. Critérios de Aceite
 
-- [ ] `npm audit` (frontend) sem alertas; só o `package-lock.json` muda; build, tsc, eslint e vitest verdes
-- [ ] O script de backup gera um `.dump` de produção com o SHA-256 conferido nos dois lados, apaga o arquivo temporário do container e não imprime URL nem senha
-- [ ] O dump é restaurável (ensaio conforme a D2), com as contagens de `usuarios`, `sessoes`, `simulados_concluidos`, `reportes` e `estatisticas_*` iguais às do banco real
-- [ ] O Deploy Guide §6 descreve o backup e a restauração que funcionam hoje (D1), e o §4.3 e o CLAUDE.md apontam para eles
-- [ ] Nenhum arquivo `.dump` no repositório (`.gitignore`)
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança — N/A: script operacional e lockfile; o ensaio de restauração é o teste do backup
-- [ ] Fluxo afetado exercitado em runtime antes do merge — o backup real e o ensaio de restauração (CR-T-03 e CR-T-04)
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada — complexidade Média
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md): dependência atualizada (`npm audit`) e manuseio de dado pessoal no backup
-- [ ] Documentos afetados foram atualizados
+- [x] `npm audit` (frontend) sem alertas; só o `package-lock.json` muda; build, tsc, eslint e vitest verdes — `source-map-js` 1.2.1 → 1.2.2 (3 linhas do lockfile); local: `found 0 vulnerabilities`, 317 testes; CI da branch: `found 0 vulnerabilities` no passo informativo
+- [x] O script de backup gera um `.dump` de produção com o SHA-256 conferido nos dois lados, apaga o arquivo temporário do container e não imprime URL nem senha — dois backups reais em 06/10 (404.623 bytes; o segundo com o script revisado); depois de cada um, nenhum arquivo em `/tmp` nem banco `ensaio*` no container; o terminal só mostrou nomes de tabela e contagens
+- [x] O dump é restaurável (ensaio conforme a D2), com as contagens de `usuarios`, `sessoes`, `simulados_concluidos`, `reportes` e `estatisticas_*` iguais às do banco real — `--ensaio`: as 11 tabelas do banco (inclusive `alembic_version`, `provas`, `questoes` e `textos_base`) com a mesma contagem no banco real e no restaurado
+- [x] O Deploy Guide §6 descreve o backup e a restauração que funcionam hoje (D1), e o §4.3 e o CLAUDE.md apontam para eles — §6 reescrito (backup pelo script; §6.1 restauração com o proxy TCP ligado só durante ela, marcada como ainda não exercitada); §4.3, Arquitetura §9.4 e CLAUDE.md (comando, lembrete e troubleshooting do stdin no `railway ssh`)
+- [x] Nenhum arquivo `.dump` no repositório (`.gitignore`) — `*.dump` ignorado; o backup fica em `~/backups-simulado-fuvest`
+- [x] Testes existentes continuam passando (regressão) — backend 519 (CI), frontend 317
+- [x] ~~Novos testes cobrem a mudança~~ — N/A no repositório: script operacional e lockfile. O script foi testado com um `railway` falso (roteiro fora do repositório, 9 casos: arquivo válido com uma linha de base64 começando por "FIM", saída com CRLF, transferência truncada, checksum errado, base64 inválido, ensaio incompleto, ensaio sem contagens, diferença no ensaio, tabela que mudou durante o backup e `railway ssh` com erro), e o ensaio de restauração é o teste do backup real
+- [x] Fluxo afetado exercitado em runtime antes do merge — os dois backups reais com `--ensaio` acima e a conferência do container limpo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md): dependência atualizada (`npm audit`) e manuseio de dado pessoal no backup — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — Deploy Guide v1.9, Arquitetura v1.14, Plano, INDEX, CLAUDE.md; PRD e Spec sem mudança (nenhuma funcionalidade nem contrato novo)
 - [ ] CI verde na branch e em `master`
+
+**Revisão de código (`/code-review high`, diff da branch) — 10 achados, 9 corrigidos e 1 justificado:**
+1. Corrigido: os marcadores `INICIO`/`FIM` casavam por prefixo, e uma linha de base64 que começa com "FIM" (chance de 1 em 64³ por linha) cortaria o arquivo; agora valem só como linha inteira, depois de tirar os CR da saída.
+2. Corrigido: com `set -e`, uma falha do `railway ssh` encerrava o script sem a mensagem nem a saída do container; agora o código de saída é tratado e a saída (sem o dump) aparece.
+3. Corrigido: uma falha do `base64 -d` deixava um `.dump` parcial com cara de válido; agora o arquivo nasce como `.parcial` e só vira `.dump` depois do checksum, do cabeçalho e do ensaio.
+4. Corrigido: o ensaio "passava" sem comparar nada se as contagens faltassem (o `join` descarta tabela sem par); agora o container informa quantas tabelas há em cada lista, e o script recusa lista vazia, incompleta ou diferente.
+5. Corrigido: com Ctrl-C ou a conexão caída, o `sh` remoto morria sem apagar o dump do `/tmp`; agora HUP, INT e TERM saem pelo mesmo caminho de limpeza.
+6. Corrigido: os arquivos de contagem ficavam no `/tmp` do container quando o ensaio falhava; agora a limpeza também os apaga.
+7. Corrigido: o banco do ensaio tinha nome fixo, e dois ensaios ao mesmo tempo se atropelariam; agora leva o PID (`ensaio_restauracao_<pid>`).
+8. Corrigido: `umask 077` no início do script. No Windows o NTFS ignora o umask (o arquivo aparece como `-rw-r--r--` no Git Bash); a proteção ali é a pasta pessoal do usuário, que só ele lê.
+9. Justificado: o dump passa por cópias temporárias (no container, em base64 e decodificado) e o ensaio duplica o banco no servidor. Com 404 KB de dump e 4,5 GB livres no volume, é desprezível, e fazer streaming perderia a garantia de que o arquivo restaurado no ensaio é o mesmo que foi baixado. Se o banco crescer, comprimir com `-Z` é a saída.
+10. Corrigido: o cabeçalho do Deploy Guide apontava a Arquitetura v1.13, e as linhas novas do changelog estavam fora da ordem (já desde o CR-013); agora v1.14 e a ordem cronológica.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum. O script não lê nem imprime URL ou senha: as variáveis `PG*` são expandidas dentro do container; a restauração (§6.1) guarda a URL numa variável do shell e a apaga (`unset`) |
+| Dado pessoal | O `.dump` e a saída em base64 têm dados de estudantes: `umask 077`, saída temporária apagada no fim, `.dump` fora do repositório (`*.dump` no `.gitignore`) e o aviso de não compartilhar e apagar; os temporários do container são apagados mesmo com erro ou interrupção |
+| Exposição do banco | Nenhuma no backup (só `railway ssh` autenticado); na restauração, o proxy TCP fica ligado só durante ela, com o passo explícito de desligar e conferir |
+| Validação de entrada / SQL / ownership / CORS / headers | N/A: nenhum endpoint nem consulta da aplicação muda |
+| Dependências | `source-map-js` 1.2.2 corrige o GHSA-68fv-2mgg-jv7q; `npm audit` sem alertas; nenhuma dependência nova |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -212,3 +234,4 @@ Duas pendências achadas no fechamento do CR-013, num CR só, a pedido do usuár
 |------------|--------|-----------|
 | 2026-10-06 | Rafael Peixoto (com Claude) | CR criado com o diagnóstico (só leitura): sem URL pública nem cliente local, `pg_dump` 18.6 no container, dump íntegro pelo `railway ssh` (checksum), stdin não repassado, CI no Postgres 17 × produção 18.6, `source-map-js` 1.2.2 corrige o GHSA-68fv-2mgg-jv7q |
 | 2026-10-06 | Rafael Peixoto (com Claude) | Decisões D1a, D2a e D3a do usuário; status Em Implementação |
+| 2026-10-06 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-05): `source-map-js` 1.2.2, `scripts/backup-producao.sh` com dois backups reais com `--ensaio`, CI no Postgres 18 (run 37545145021 verde, imagem `postgres:18`); revisão de código (9 corrigidos, 1 justificado), script testado com um `railway` falso (9 casos) e de segurança; documentos atualizados |
