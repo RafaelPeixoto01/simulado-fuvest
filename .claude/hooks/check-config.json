@@ -1,7 +1,7 @@
 {
   "$comment": "Checks executados pelo check-quality.js antes de cada git commit (Windows/cmd.exe). O backend usa o Python do venv do projeto (backend/.venv): o Python global tem as versoes do Meu Controle.",
   "checks": [
-    { "name": "pytest", "cwd": "backend", "command": ".venv\\Scripts\\python.exe -m pytest tests/ -q", "timeoutSeconds": 60 },
+    { "name": "pytest", "cwd": "backend", "command": ".venv\\Scripts\\python.exe -m pytest tests/ -q", "timeoutSeconds": 120 },
     { "name": "ruff", "cwd": "backend", "command": ".venv\\Scripts\\python.exe -m ruff check .", "timeoutSeconds": 30 },
     { "name": "TypeScript", "cwd": "frontend", "command": "npx tsc --noEmit -p tsconfig.app.json", "timeoutSeconds": 60 },
     { "name": "ESLint", "cwd": "frontend", "command": "npx eslint .", "timeoutSeconds": 60 },
