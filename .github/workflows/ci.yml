@@ -15,7 +15,7 @@ jobs:
         working-directory: backend
     services:
       postgres:
-        image: postgres:17
+        image: postgres:18  # a versao da producao na Railway (18.6, conferida no CR-014)
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
