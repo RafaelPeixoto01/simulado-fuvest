@@ -203,12 +203,12 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 
 ### 8.1 Reportes de erro dos estudantes
 
+O Postgres não expõe URL pública (sem proxy TCP; conferido em 06/10/2026, não há `DATABASE_PUBLIC_URL`): os comandos rodam dentro do container, com a URL interna. As aspas simples fazem o `$DATABASE_URL` ser expandido pelo `sh` remoto, e a URL (com a senha) não passa pelo terminal local:
+
 ```bash
-railway variables -s Postgres --kv | grep DATABASE_PUBLIC_URL     # URL pública (tem a senha: não colar em lugar nenhum)
-cd backend
-.venv/Scripts/python -m ingestao reportes listar --database-url "<DATABASE_PUBLIC_URL>"
+railway ssh -s simulado-fuvest 'python -m ingestao reportes listar --database-url $DATABASE_URL'
 # corrigir o prova.yaml numa branch conteudo/..., merge, deploy; depois:
-.venv/Scripts/python -m ingestao reportes resolver --database-url "<DATABASE_PUBLIC_URL>" 12 15
+railway ssh -s simulado-fuvest 'python -m ingestao reportes resolver --database-url $DATABASE_URL 12 15'
 ```
 
 Desde o CR-013 a lista e a resolução também estão na aba Qualidade da área de gestão (`/gestao/qualidade`), sem precisar da URL do banco.
@@ -243,13 +243,12 @@ Consultas sobre as contas devem mostrar só contagens: e-mails, nomes e históri
 O administrador é reconhecido pelo `sub` da conta Google, nunca pelo e-mail (ADR-016). Uma vez, depois de entrar no site com a conta:
 
 ```bash
-railway variables -s Postgres --kv | grep DATABASE_PUBLIC_URL     # tem a senha: não colar em lugar nenhum
-cd backend
-.venv/Scripts/python -m ingestao contas --email <seu e-mail> --database-url "<DATABASE_PUBLIC_URL>"   # só leitura: mostra o sub
-railway variables -s simulado-fuvest --set ADMIN_GOOGLE_SUBS=<sub>     # redeploy automático
+railway ssh -s simulado-fuvest 'python -m ingestao contas --email <seu e-mail> --database-url $DATABASE_URL'   # só leitura: mostra o sub
+railway variables -s simulado-fuvest --set ADMIN_GOOGLE_SUBS=<sub>     # redeploy automático (passa pelo "Wait for CI")
+railway deployment list -s simulado-fuvest                             # espere o novo deploy ficar SUCCESS
 ```
 
-Recarregue o site: o link "Gestão" aparece no cabeçalho. Para tirar o acesso, remova a variável (ou o `sub` dela).
+Recarregue o site: o link "Gestão" aparece no cabeçalho. Para tirar o acesso, remova a variável (ou o `sub` dela). Feito em 06/10/2026 com a conta do dono do produto.
 
 ---
 
@@ -279,5 +278,6 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |
 | 2026-10-02 | Claude | v1.5 — CR-010: notas de corte de um ano novo (§4.5), migration 004 e rollback do CR-010, verificação das notas de corte |
 | 2026-10-03 | Claude | v1.6 — CR-011: migration 005 (recria as tabelas derivadas; janela curta no deploy, §4.3), simulados oficiais e `--prova` no conteúdo (§4.2), `pontos_prova` nas notas de corte de 2027 (§4.5), rollback e verificação do CR-011 |
+| 2026-10-06 | Claude | v1.8 — CR-013 concluído: o Postgres não tem URL pública, então `reportes` (§8.1) e `contas` (§8.4) rodam dentro do container com `railway ssh` |
 | 2026-10-06 | Claude | v1.8 — CR-013: variável `ADMIN_GOOGLE_SUBS` (§2) e como ligar a área de gestão (§8.4, comando `contas`), migration 006 (§4.3), rollback, verificação pós-deploy e reportes também pela web (§8.1) |
 | 2026-10-05 | Claude | v1.7 — CR-012: `familia_2026` (prova da FUVEST 2026 e simulado oficial de 2025, `2026s1` com 90 questões) e o registro de código novo como mudança de parser (§4.2) |
