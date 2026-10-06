@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-05  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -137,7 +137,7 @@ Teste com os PDFs reais, fora do repositório (05/10/2026):
 - [x] Revisão de código pré-merge: N/A — complexidade Baixa (CR-040)
 - [x] Revisão de segurança: N/A — sem endpoint, autenticação, dados de usuário nem dependência nova; o parser só lê PDFs baixados pelo curador
 - [x] Documentos afetados foram atualizados — PRD v6.1, Arquitetura v1.12, índice da Spec v1.12, spec 01 v1.4, Plano, Deploy Guide v1.7, CLAUDE.md e INDEX
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` — branch verde (run 37401061817) e `master` verde no merge `8522376` (run 37401224254), nos três jobs; deploy da Railway `SUCCESS` no `8522376`, com `/api/health` `{"status":"ok","provas":7}` e a vitrine com 607 questões (sem mudança no site, como esperado)
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -197,3 +197,5 @@ Teste com os PDFs reais, fora do repositório (05/10/2026):
 |------------|--------|-----------|
 | 2026-10-05 | Rafael Peixoto (com Claude) | CR criado a partir da pesquisa de novas provas (relatório do Gemini conferido nas fontes): a prova da FUVEST 2026 e o simulado oficial de 19/10/2025 estão no acervo e não estão na base. Teste das famílias com os PDFs reais; D1 (rótulo "1ª edição") decidido pelo usuário |
 | 2026-10-05 | Rafael Peixoto (com Claude) | Implementação (CR-T-01 a CR-T-03): `familia_2026`, registry, fixtures e IT-035 a IT-037; extração real das duas provas fora do repositório; documentos atualizados. Pendente: CI na branch e em `master` |
+| 2026-10-05 | Rafael Peixoto (com Claude) | CI verde na branch e em `master` (merge `8522376`); deploy conferido em produção — validação ✅, status Concluído. Próximo: curadoria da prova 2026 e do simulado 2026s1 (conteúdo) |
+| 2026-10-05 | Rafael Peixoto (com Claude) | O hook de commit passa a dar 120 s ao pytest (`.claude/hooks/check-config.json`, eram 60 s): com os testes novos, a suíte do backend leva 71 s nesta máquina e o commit de conclusão foi bloqueado por tempo, sem teste falhando |
