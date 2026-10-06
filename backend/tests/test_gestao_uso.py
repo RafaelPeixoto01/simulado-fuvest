@@ -4,7 +4,7 @@ from datetime import UTC, date, datetime, timedelta
 
 import pytest
 
-from app.models import EstatisticaDiaria, EstatisticaGeracao, SimuladoConcluido, Usuario
+from app.models import EstatisticaDiaria, EstatisticaGeracao, Prova, SimuladoConcluido, Usuario
 from app.services import gestao
 
 AGORA = datetime(2026, 10, 6, 15, 0, tzinfo=UTC)  # terca-feira, 6/10 em Brasilia
@@ -45,6 +45,9 @@ def dados(sessao):
         (HOJE, "personalizado"): 2,
     }
     sessao.add_all(EstatisticaGeracao(dia=d, modo=m, total=n) for (d, m), n in geracao.items())
+    # So a 2025 esta na base: a 2027s1 (saiu, ou codigo forjado) aparece pelo codigo
+    sessao.add(Prova(codigo="2025", ano=2025, tipo="vestibular", versao="V1", url_prova="p", url_gabarito="g",
+                     total_questoes=90, sincronizado_em=AGORA))
     for i in range(3):
         sessao.add(SimuladoConcluido(usuario_id=ana.id, id=f"a{i}", finalizado_em_ms=i, dados={}))
     sessao.add(SimuladoConcluido(usuario_id=beto.id, id="b0", finalizado_em_ms=1, dados={}))
@@ -59,6 +62,7 @@ def test_ultimos_7_dias(sessao, dados):
         "estudantes": 3,
         "novos": 1,  # Ana, em 1/10
         "ativos_hoje": 2,
+        "ativos_media_dia": 0.7,  # 5 em 7 dias
         "ativos_7_dias": 1,  # Ana
         "ativos_30_dias": 2,  # Ana e Beto
         "logins": 3,
@@ -81,7 +85,7 @@ def test_ultimos_7_dias(sessao, dados):
         ("0", 1), ("1", 1), ("2–5", 1), ("6–20", 0), ("21–50", 0),
     ]
     assert [(p.codigo, p.rotulo, p.concluidos) for p in uso.provas_ano] == [
-        ("2027s1", "Simulado FUVEST 2027 · 1ª edição", 2),
+        ("2027s1", "2027s1", 2),
         ("2025", "FUVEST 2025", 1),
     ]
 

@@ -35,6 +35,7 @@ function Graficos({ uso }: { uso: UsoGestao }) {
         granularidade={granularidade}
         unidade="usuários ativos"
         media
+        mediaDoPeriodo={uso.cartoes.ativos_media_dia}
       />
       <GraficoColunas titulo="Logins" pontos={series.logins} granularidade={granularidade} unidade="logins" />
       <GraficoColunas titulo="Simulados gerados" pontos={series.gerados} granularidade={granularidade} unidade="simulados" />

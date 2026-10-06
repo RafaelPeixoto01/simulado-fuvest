@@ -393,6 +393,7 @@ class CartoesUso(BaseModel):
     estudantes: int
     novos: int
     ativos_hoje: int
+    ativos_media_dia: float  # media por dia no periodo, 1 casa
     ativos_7_dias: int
     ativos_30_dias: int
     logins: int

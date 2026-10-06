@@ -5,6 +5,8 @@ from datetime import UTC, datetime
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, Query, Request, Response
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from app.dependencias import (
@@ -86,10 +88,22 @@ def ler_reportes(
     return ReportesGestaoResponse(reportes=gestao.reportes(sessao, status))
 
 
+async def _pedido_resolver(request: Request) -> ResolverReportesRequest:
+    """Corpo lido numa dependencia, depois do exigir_admin do router: um parametro de corpo seria
+    decodificado antes das dependencias, e JSON malformado daria 422 a quem nao e admin (RN-020)."""
+    try:
+        return ResolverReportesRequest.model_validate_json(await request.body())
+    except ValidationError as erro:
+        raise RequestValidationError(erro.errors(include_url=False)) from None
+
+
 @router.post("/reportes/resolver", dependencies=[Depends(verificar_origem)])
 @limiter.limit("30/minute")
 def resolver(
-    request: Request, response: Response, pedido: ResolverReportesRequest, sessao: Sessao
+    request: Request,
+    response: Response,
+    pedido: Annotated[ResolverReportesRequest, Depends(_pedido_resolver)],
+    sessao: Sessao,
 ) -> ResolverReportesResponse:
     _sem_cache(response)
     resultado = resolver_reportes(sessao, pedido.ids)  # o mesmo servico da CLI

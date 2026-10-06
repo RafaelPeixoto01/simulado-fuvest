@@ -34,6 +34,10 @@ class Settings:
     def producao(self) -> bool:
         return self.environment == "production"
 
+    def eh_admin(self, google_sub: str) -> bool:
+        """Administrador pelo `sub` da conta Google, nunca pelo e-mail (RN-020, ADR-016)."""
+        return google_sub in self.admin_google_subs
+
     @property
     def login_disponivel(self) -> bool:
         return bool(self.google_client_id and self.google_client_secret)

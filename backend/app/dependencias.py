@@ -58,8 +58,7 @@ NAO_ENCONTRADO = {"codigo": "nao_encontrado", "mensagem": "Página não encontra
 
 
 def eh_admin(settings: Settings, usuario: Usuario) -> bool:
-    """Administrador pelo `sub` da conta Google, nunca pelo e-mail (RN-020, ADR-016)."""
-    return usuario.google_sub in settings.admin_google_subs
+    return settings.eh_admin(usuario.google_sub)  # RN-020
 
 
 def exigir_admin(

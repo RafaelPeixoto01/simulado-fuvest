@@ -202,6 +202,7 @@ def uso(sessao: Session, nome_periodo: str, agora: datetime) -> UsoResponse:
         for metrica, por_dia in diarias.items()
         if metrica.startswith("prova_ano.")
     })
+    rotulos = {p.codigo: rotulo_da_prova(p.ano, p.edicao) for p in sessao.scalars(select(Prova))}
 
     return UsoResponse(
         periodo=p.nome,
@@ -212,6 +213,7 @@ def uso(sessao: Session, nome_periodo: str, agora: datetime) -> UsoResponse:
             estudantes=estudantes,
             novos=_soma(cadastros),
             ativos_hoje=diarias["ativo"][p.fim],
+            ativos_media_dia=round(_soma(diarias["ativo"]) / p.dias, 1),
             ativos_7_dias=_ativos_desde(sessao, p.fim - timedelta(days=6)),
             ativos_30_dias=_ativos_desde(sessao, p.fim - timedelta(days=29)),
             logins=_soma(diarias["login"]),
@@ -230,7 +232,7 @@ def uso(sessao: Session, nome_periodo: str, agora: datetime) -> UsoResponse:
         modos=modos,
         distribuicao=_distribuicao(sessao, estudantes),
         provas_ano=[
-            ProvaFeita(codigo=codigo, rotulo=_rotulo(codigo), concluidos=total)
+            ProvaFeita(codigo=codigo, rotulo=rotulos.get(codigo, codigo), concluidos=total)
             for codigo, total in sorted(provas.items(), key=lambda par: (-par[1], par[0]))
             if total
         ],
@@ -246,13 +248,17 @@ def _marcacoes(estatistica: EstatisticaQuestao) -> dict[str | None, int]:
 
 
 def _respostas_das_questoes(sessao: Session):
-    """(questao, marcacoes) das questoes validas com marcacao; o gabarito e o atual (T5)."""
-    for questao, estatistica in sessao.execute(
-        select(Questao, EstatisticaQuestao)
+    """(questao, marcacoes) das questoes validas com marcacao; o gabarito e o atual (T5).
+    So as colunas usadas: o enunciado e as alternativas nao saem do banco."""
+    for linha in sessao.execute(
+        select(
+            Questao.id, Questao.numero, Questao.prova_codigo, Questao.disciplina, Questao.assunto,
+            Questao.resposta, EstatisticaQuestao,
+        )
         .join(EstatisticaQuestao, EstatisticaQuestao.questao_id == Questao.id)
         .where(Questao.anulada.is_(False), Questao.resposta.is_not(None))
     ):
-        yield questao, _marcacoes(estatistica)
+        yield linha, _marcacoes(linha.EstatisticaQuestao)
 
 
 def _acerto_por_disciplina(sessao: Session, taxonomia: Taxonomia | None) -> list[DisciplinaAprendizado]:
@@ -569,7 +575,7 @@ def estudantes(
                 ultimo_acesso_em=como_utc(u.ultimo_acesso_em),
                 simulados=n,
                 carreira_alvo=_nome_carreira(notas_corte, u),
-                admin=u.google_sub in settings.admin_google_subs,
+                admin=settings.eh_admin(u.google_sub),
             )
             for u, n in linhas
         ],

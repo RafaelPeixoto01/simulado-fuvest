@@ -79,3 +79,18 @@ def test_outra_conta_nao_herda_o_acesso(client_admin, app):
         assert entrar(outro, "codigo-beto").status_code == 302
         assert _todas(outro) == [404] * 6
         assert outro.get("/api/sessao").json()["usuario"]["admin"] is False
+
+
+def test_json_malformado_de_quem_nao_e_admin_404(client_logado, app):
+    """Revisao de codigo: o corpo so e lido depois do exigir_admin (conta comum e sem sessao)."""
+    cabecalhos = {**ORIGEM, "Content-Type": "application/json"}
+
+    assert _nao_encontrado(client_logado.post(RESOLVER, content=b"{nao json", headers=cabecalhos))
+    with TestClient(app) as anonimo:
+        assert _nao_encontrado(anonimo.post(RESOLVER, content=b"{nao json", headers=cabecalhos))
+
+
+def test_json_malformado_do_admin_422(client_admin):
+    cabecalhos = {**ORIGEM, "Content-Type": "application/json"}
+
+    assert client_admin.post(RESOLVER, content=b"{nao json", headers=cabecalhos).status_code == 422

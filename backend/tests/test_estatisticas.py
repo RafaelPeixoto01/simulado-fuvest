@@ -209,3 +209,14 @@ def test_geracao_usa_o_dia_de_brasilia(sessao, monkeypatch):
     estatisticas.registrar_geracao(sessao, "completa")
 
     assert [(e.dia, e.total) for e in sessao.scalars(select(EstatisticaGeracao))] == [(date(2026, 10, 5), 1)]
+
+
+def test_exclusao_repetida_conta_uma_vez(sessao):
+    """Revisao de codigo: a segunda de duas exclusoes simultaneas nao apaga nada e nao conta."""
+    contas.entrar(sessao, ANA, datetime.now(UTC), None)
+    usuario_id = _ana(sessao).id
+
+    contas.excluir_conta(sessao, usuario_id)
+    contas.excluir_conta(sessao, usuario_id)
+
+    assert _contagens(sessao)["conta_excluida"] == 1

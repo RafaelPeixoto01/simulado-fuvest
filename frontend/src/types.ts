@@ -240,6 +240,7 @@ export interface UsoGestao {
     estudantes: number
     novos: number
     ativos_hoje: number
+    ativos_media_dia: number
     ativos_7_dias: number
     ativos_30_dias: number
     logins: number

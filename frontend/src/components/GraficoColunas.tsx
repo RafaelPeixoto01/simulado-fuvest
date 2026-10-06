@@ -17,21 +17,23 @@ interface Props {
   granularidade: 'dia' | 'semana'
   /** Plural do que é contado: "cadastros", "logins" */
   unidade: string
-  /** Usuários ativos: o cabeçalho traz a média por dia, e cada semana já é uma média (specs/09 §2.4) */
+  /** Usuários ativos: cada semana já é uma média por dia (specs/09 §2.4) */
   media?: boolean
+  /** Média por dia do período inteiro, calculada no servidor (as semanas parciais pesam pelos dias) */
+  mediaDoPeriodo?: number
 }
 
 /** Colunas de uma série só (CR-013, specs/09 §3; regras da skill de dataviz): colunas de até
  *  24 px com 4 px arredondados no topo e 2 px de papel entre elas, na cor de ação; a leitura do
  *  valor aparece ao passar o ponteiro, e os números ficam numa tabela que abre ("Ver os números").
  *  As colunas são decorativas para leitores de tela: a tabela é a fonte. */
-export function GraficoColunas({ titulo, pontos, granularidade, unidade, media = false }: Props) {
+export function GraficoColunas({ titulo, pontos, granularidade, unidade, media = false, mediaDoPeriodo }: Props) {
   const [destaque, setDestaque] = useState<number | null>(null)
   const idTitulo = useId()
   const maximo = Math.max(0, ...pontos.map((p) => p.total))
   const soma = pontos.reduce((total, p) => total + p.total, 0)
   const resumo = media
-    ? `média de ${numero.format(pontos.length ? soma / pontos.length : 0)} por dia`
+    ? `média de ${numero.format(mediaDoPeriodo ?? (pontos.length ? soma / pontos.length : 0))} por dia`
     : `${numero.format(soma)} no período`
   const rotulo = (p: PontoSerie) => (granularidade === 'dia' ? diaMesIso(p.inicio) : `semana de ${diaMesIso(p.inicio)}`)
   const ponto = destaque !== null ? pontos[destaque] : null

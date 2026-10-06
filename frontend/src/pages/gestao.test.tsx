@@ -35,6 +35,7 @@ const USO: UsoGestao = {
     estudantes: 1234,
     novos: 56,
     ativos_hoje: 12,
+    ativos_media_dia: 9.4,
     ativos_7_dias: 80,
     ativos_30_dias: 300,
     logins: 410,
@@ -205,6 +206,8 @@ describe('Aba Uso (UT-071)', () => {
     expect(screen.getByText('Ativos em 7 dias', { selector: 'dt' }).parentElement).toHaveTextContent('80')
     expect(screen.getByText('De 07/09/2026 a 06/10/2026, por dia')).toBeInTheDocument()
     expect(screen.getAllByRole('figure')).toHaveLength(5)
+    // Média do período inteiro, calculada no servidor
+    expect(screen.getByRole('figure', { name: 'Usuários ativos' })).toHaveTextContent('média de 9,4 por dia')
 
     const modos = screen.getByRole('region', { name: 'Simulados por modo' })
     const linhas = within(modos).getAllByRole('row').map((r) => r.textContent)
