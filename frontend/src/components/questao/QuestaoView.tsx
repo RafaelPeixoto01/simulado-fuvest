@@ -20,6 +20,8 @@ interface Props {
   nivelTitulo?: 2 | 3
   /** Linha extra no cabeçalho, abaixo da fonte (ex.: selo do resultado e posição na revisão) */
   complemento?: ReactNode
+  /** Sem o "Reportar problema": a área de gestão abre a questão para conferir (CR-013) */
+  reportavel?: boolean
 }
 
 export function QuestaoView({
@@ -33,6 +35,7 @@ export function QuestaoView({
   refTitulo,
   nivelTitulo = 2,
   complemento,
+  reportavel = true,
 }: Props) {
   // Origem (RN-013): "FUVEST 2025" ou "Simulado FUVEST 2027 · 1ª edição" (CR-011)
   const fonte = `${NOMES_DISCIPLINAS[questao.disciplina]}, ${questao.origem} (questão ${questao.numero})`
@@ -68,13 +71,15 @@ export function QuestaoView({
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         {acoes}
-        <button
-          type="button"
-          onClick={() => setReportando(true)}
-          className="text-sm text-tinta-suave underline underline-offset-2 hover:text-tinta"
-        >
-          Reportar problema
-        </button>
+        {reportavel && (
+          <button
+            type="button"
+            onClick={() => setReportando(true)}
+            className="text-sm text-tinta-suave underline underline-offset-2 hover:text-tinta"
+          >
+            Reportar problema
+          </button>
+        )}
       </div>
       {reportando && <ReportarModal questaoId={questao.id} descricao={fonte} onFechar={fecharReporte} />}
     </article>
