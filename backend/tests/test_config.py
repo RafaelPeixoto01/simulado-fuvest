@@ -44,3 +44,12 @@ def test_login_exige_id_e_segredo_do_google():
     assert s.login_disponivel is True
     assert s.public_url == "https://site.exemplo"
     assert so_id.login_disponivel is False
+
+
+def test_admin_google_subs_separados_por_virgula():
+    """BT-111 (CR-013): espacos e virgulas sobrando ignorados; ausente = ninguem e admin."""
+    s = Settings.from_env({"ADMIN_GOOGLE_SUBS": " 123 , ,456,"})
+
+    assert s.admin_google_subs == frozenset({"123", "456"})
+    assert Settings.from_env({}).admin_google_subs == frozenset()
+    assert Settings.from_env({"ADMIN_GOOGLE_SUBS": ""}).admin_google_subs == frozenset()

@@ -26,6 +26,9 @@ class Settings:
     google_client_secret: str | None = None  # segredo: so em variavel da Railway
     # Origem publica do site: monta o redirect_uri e e o unico Origin aceito com cookie
     public_url: str = "http://localhost:5173"
+    # Area de gestao (CR-013, ADR-016): `sub` das contas Google de administrador. Vazio: a
+    # area nao existe. Pelo sub, nunca pelo e-mail (o login nao exige email_verified)
+    admin_google_subs: frozenset[str] = frozenset()
 
     @property
     def producao(self) -> bool:
@@ -53,4 +56,7 @@ class Settings:
             google_client_id=env.get("GOOGLE_CLIENT_ID") or None,
             google_client_secret=env.get("GOOGLE_CLIENT_SECRET") or None,
             public_url=(env.get("PUBLIC_URL") or padrao.public_url).rstrip("/"),
+            admin_google_subs=frozenset(
+                sub.strip() for sub in env.get("ADMIN_GOOGLE_SUBS", "").split(",") if sub.strip()
+            ),
         )
