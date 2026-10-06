@@ -13,33 +13,39 @@ textos_base:
   conteudo:
   - texto: |-
       Pouco antes de eu completar quatro anos de idade, nasceu nossa irmã mais nova, para quem eu escolhera o nome de Maria Bethânia, por causa de uma bela valsa do compositor pernambucano Capiba. Naturalmente todos achavam graça no fato de eu saber cantar canções de gente grande, e mais ainda na minha determinação de nomear minha irmãzinha segundo uma dessas canções. Mas ninguém se sentia com coragem de realmente pôr esse nome “tão pesado” num bebê. Como havia várias outras sugestões (iam de Cristina a Gislaine), meu pai resolveu escrever todos os nomes em pedacinhos de papel que, depois de dobrados, ele jogou na copa de meu pequeno chapéu de explorador e me deu para tirar na sorte. Saiu o da minha escolha. Meu pai então pôs um ar resignado (que era uma ordem para que todos também se resignassem) e disse: “Pronto. Agora tem que ser Maria Bethânia”. E saiu para registrar a recém-nascida com esse nome. Recentemente, ouvi de minhas irmãs mais velhas uma versão que diz que meu pai escrevera Maria Bethânia em todos os papéis. Não é de todo improvável. E, de fato, na expressão resignada de meu pai era visível – ainda hoje o é, na lembrança – um intrigante toque de humor. Mas, embora me encha de orgulho o pensamento de que meu pai possa ter trapaceado para me agradar, eu sempre preferi crer na autenticidade do sorteio: essa intervenção do acaso parece conferir mais realidade a tudo o que veio a se passar desde então, pois ela faz crescerem ao mesmo tempo as magias (que nos dão a impressão de se excluírem mutuamente) do presságio e da unicidade absolutamente gratuita de cada acontecimento.
-      Caetano Veloso. Verdade tropical . São Paulo: Companhia das Letras, 1997. Adaptado.
+      Caetano Veloso. Verdade tropical. São Paulo: Companhia das Letras, 1997. Adaptado.
 - id: tb02
   questoes:
   - 15
   - 16
   conteudo:
   - texto: |-
-      A uberização nomeia um novo tipo de gestão e controle da força de trabalho. Resultando das formas contemporâneas de eliminação de direitos, transferência de riscos e custos para os trabalhadores e novos arranjos produtivos, ela em alguma medida sintetiza processos em curso há décadas, ao mesmo tempo em que se apresenta como tendência para o futuro do trabalho. O tema ganha visibilidade com a formação de enormes contingentes de trabalhadores controlados por empresas que operam por meio de plataformas digitais. O desafio contemporâneo frente a esse novo tipo de organização envolve elementos complexos e armadilhas teórico-políticas. Reside em compreender as plataformas digitais como um novo meio poderoso pelo qual as relações de trabalho vêm se reestruturando, sem, entretanto, incorrer em um determinismo tecnológico que mistifique os processos sociais que envolvem décadas de flexibilização e transformação no trabalho, e que se materializam nas plataformas digitais, embora de forma obscura. Com base nessa perspectiva, o desafio também reside na compreensão de uma tendência que precede e ultrapassa as plataformas digitais, relacionada ao elemento central da uberização, qual seja, a consolidação e gerenciamento de multidões de trabalhadores como trabalhadores just-in-time . Essa condição do trabalho envolve um novo tipo generalizável de remuneração por peça que conserva sua centralidade nas formas de exploração capitalistas, mas atualiza seus elementos, demandando a compreensão das permanências, transformações e tendências que se desenham no presente ou como futuro possível e provável do trabalho.
-      ABÍLIO, L. C. et al . “Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas”. Sociologias , v. 23, n. 57, 2021.
+      A uberização nomeia um novo tipo de gestão e controle da força de trabalho. Resultando das formas contemporâneas de eliminação de direitos, transferência de riscos e custos para os trabalhadores e novos arranjos produtivos, ela em alguma medida sintetiza processos em curso há décadas, ao mesmo tempo em que se apresenta como tendência para o futuro do trabalho. O tema ganha visibilidade com a formação de enormes contingentes de trabalhadores controlados por empresas que operam por meio de plataformas digitais. O desafio contemporâneo frente a esse novo tipo de organização envolve elementos complexos e armadilhas teórico-políticas. Reside em compreender as plataformas digitais como um novo meio poderoso pelo qual as relações de trabalho vêm se reestruturando, sem, entretanto, incorrer em um determinismo tecnológico que mistifique os processos sociais que envolvem décadas de flexibilização e transformação no trabalho, e que se materializam nas plataformas digitais, embora de forma obscura. Com base nessa perspectiva, o desafio também reside na compreensão de uma tendência que precede e ultrapassa as plataformas digitais, relacionada ao elemento central da uberização, qual seja, a consolidação e gerenciamento de multidões de trabalhadores como trabalhadores “just-in-time”. Essa condição do trabalho envolve um novo tipo generalizável de remuneração por peça que conserva sua centralidade nas formas de exploração capitalistas, mas atualiza seus elementos, demandando a compreensão das permanências, transformações e tendências que se desenham no presente ou como futuro possível e provável do trabalho.
+      ABÍLIO, L. C. et al. “Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas”. Sociologias, v. 23, n. 57, 2021.
 - id: tb03
   questoes:
   - 58
   - 59
   conteudo:
   - texto: |-
-      Nearly a century ago, Edwin Hubble discovered that the universe is getting larger. Modern measurements of how fast it is expanding disagree, however, suggesting that our understanding of the laws of physics might be off. Everyone expected the sharp vision of the James Webb Space Telescope to bring the answer into focus. But a long-awaited analysis of the telescope’s observations released late Monday evening once again gleans conflicting expansion rates from different types of data, while homing in on possible sources of error at the heart of the conflict. Two rival teams have led the effort to measure the cosmic expansion rate, which is known as the Hubble constant, or H . One of these teams, led by Adam Riess of Johns Hopkins University, has consistently measured H to be about 8 percent higher than the theoretical prediction for how fast space should be expanding, based on the cosmos’s known ingredients and governing equations. This discrepancy, known as the Hubble tension, suggests that the theoretical model of the cosmos might be missing something—some extra ingredient or effect that speeds up cosmic expansion.
-      Riess and his team released their latest measurement of H based on Webb data this spring, getting a value that agrees with their earlier estimates.
-      But for years a rival team led by Wendy Freedman of the University of Chicago has urged caution, arguing that cleaner measurements were needed. Her team’s own measurements of H have invariably landed closer than Riess’ to the theoretical prediction, implying that the Hubble tension may not be real. Since the Webb telescope started taking data in 2022, the astrophysics community has awaited Freedman’s multipronged analysis using the telescope’s observations of three types of stars. Now, the results are in: Two types of stars yield H estimates that align with the theoretical prediction, while the third—the same type of star Riess uses—matches his team’s higher H value.
+      Nearly a century ago, Edwin Hubble discovered that the universe is getting larger. Modern measurements of how fast it is expanding disagree, however, suggesting that our understanding of the laws of physics might be off. Everyone expected the sharp vision of the James Webb Space Telescope to bring the answer into focus. But a long-awaited analysis of the telescope’s observations released late Monday evening once again gleans conflicting expansion rates from different types of data, while homing in on possible sources of error at the heart of the conflict. Two rival teams have led the effort to measure the cosmic expansion rate, which is known as the Hubble constant, or H₀. One of these teams, led by Adam Riess of Johns Hopkins University, has consistently measured H₀ to be about 8 percent higher than the theoretical prediction for how fast space should be expanding, based on the cosmos’s known ingredients and governing equations. This discrepancy, known as the Hubble tension, suggests that the theoretical model of the cosmos might be missing something—some extra ingredient or effect that speeds up cosmic expansion.
+      Riess and his team released their latest measurement of H₀ based on Webb data this spring, getting a value that agrees with their earlier estimates.
+      But for years a rival team led by Wendy Freedman of the University of Chicago has urged caution, arguing that cleaner measurements were needed. Her team’s own measurements of H₀ have invariably landed closer than Riess’ to the theoretical prediction, implying that the Hubble tension may not be real. Since the Webb telescope started taking data in 2022, the astrophysics community has awaited Freedman’s multipronged analysis using the telescope’s observations of three types of stars. Now, the results are in: Two types of stars yield H₀ estimates that align with the theoretical prediction, while the third—the same type of star Riess uses—matches his team’s higher H₀ value.
       Disponível em https://wired.com/. 08 Sep 2024. Adaptado.
 - id: tb04
   questoes:
   - 62
   - 63
   conteudo:
-  - texto: |-
-      Quem viajou de avião já ouviu o famoso aviso: “Em caso de despressurização da cabine, máscaras de oxigênio cairão automaticamente acima do seu assento. Puxe uma das máscaras, coloque-a sobre o nariz e a boca e respire normalmente (...)”. Porém, ao invés de aviões conterem cilindros de oxigênio que alimentam as máscaras, esse gás é gerado por meio de uma reação química. No compartimento sobre cada passageiro encontra-se um reservatório contendo ,
-      um sal como o clorato de sódio (NaC O ) que, ao se decompor, produz oxigênio (O ), cloreto de sódio (NaC , ) e calor. O clorato de sódio é estável em temperatura ambiente, e sua decomposição só se inicia quando o passageiro puxa a máscara, o que dispara um gatilho que gera calor suficiente para iniciar a reação que, então, se mantém autossuficiente até consumo total do reagente.
+  - texto: 'Quem viajou de avião já ouviu o famoso aviso: “Em caso de despressurização da cabine, máscaras
+      de oxigênio cairão automaticamente acima do seu assento. Puxe uma das máscaras, coloque-a sobre
+      o nariz e a boca e respire normalmente (...)”. Porém, ao invés de aviões conterem cilindros de oxigênio
+      que alimentam as máscaras, esse gás é gerado por meio de uma reação química. No compartimento sobre
+      cada passageiro encontra-se um reservatório contendo um sal como o clorato de sódio (NaCℓO₃) que,
+      ao se decompor, produz oxigênio (O₂), cloreto de sódio (NaCℓ) e calor. O clorato de sódio é estável
+      em temperatura ambiente, e sua decomposição só se inicia quando o passageiro puxa a máscara, o que
+      dispara um gatilho que gera calor suficiente para iniciar a reação que, então, se mantém autossuficiente
+      até consumo total do reagente.'
 - id: tb05
   questoes:
   - 66
@@ -55,29 +61,17 @@ textos_base:
   - 69
   - 70
   conteudo:
-  - texto: |-
-      Think for a minute about the
-      little bumps on your tongue. You
-      probably saw a diagram of those
-      taste bud arrangements once in
-      a biology textbook — sweet
-      sensors at the tip, salty on either
-      side, sour behind them, bitter in
-      the back.
+  - texto: Think for a minute about the little bumps on your tongue. You probably saw a diagram of those
+      taste bud arrangements once in a biology textbook — sweet sensors at the tip, salty on either side,
+      sour behind them, bitter in the back.
   - figura: tb06-1.webp
   - texto: |-
-      But the idea that specific
-      tastes are confined to certain
-      areas of the tongue is a myth that
-      “persists in the collective
-      consciousness, despite decades
-      of research debunking it”,
-      according to a review published this month in The New England Journal of Medicine . Also wrong: the notion that taste is limited to the mouth.
+      But the idea that specific tastes are confined to certain areas of the tongue is a myth that “persists in the collective consciousness, despite decades of research debunking it”, according to a review published this month in The New England Journal of Medicine. Also wrong: the notion that taste is limited to the mouth.
       The old diagram, which has been used in many textbooks over the years, originated in a study published by David Hanig, a German scientist, in 1901. But the scientist was not suggesting that various tastes are segregated on the tongue. He was actually measuring the sensitivity of different areas, said Paul Breslin, a researcher at Monell Chemical Senses Center in Philadelphia. “What he found was that you could detect things at a lower concentration in one part relative to another,” Dr. Breslin said. The tip of the tongue, for example, is dense with sweet sensors but contains the others as well.
       The map’s mistakes are easy to confirm. If you place a lemon wedge at the tip of your tongue, it will taste sour, and if you put a bit of honey toward the side, it will be sweet.
       The perception of taste is a remarkably complex process, starting from that first encounter with the tongue. Taste cells have a variety of sensors that signal the brain when they encounter nutrients or toxins. For some tastes, tiny pores in cell membranes let taste chemicals in.
       Such taste receptors aren’t limited to the tongue; they are also found in the gastrointestinal tract, liver, pancreas, fat cells, brain, muscle cells, thyroid and lungs. We don’t generally think of these organs as tasting anything, but they use the receptors to pick up the presence of various molecules and metabolize them, said Diego Bohórquez, a self-described gut-brain neuroscientist at Duke University. For example, when the gut notices sugar in food, it tells the brain to alert other organs to get ready for digestion.
-      New York Times . May 29, 2024. Adaptado.
+      New York Times. May 29, 2024. Adaptado.
 - id: tb07
   questoes:
   - 76
@@ -88,9 +82,9 @@ textos_base:
       necessário para que a pessoa possa ouvir o som emitido pelo audiômetro a uma dada frequência \U0001D453
       (medida em Hz), representada no eixo horizontal."
   - figura: tb07-1.webp
-  - texto: "Quanto menor o valor de a ( \U0001D453 ), melhor é a resposta auditiva do paciente naquela
-      frequência \U0001D453 . O uso de aparelhos auditivos pode ser uma forma de melhorar a resposta auditiva
-      em determinadas frequências."
+  - texto: "Quanto menor o valor de α(\U0001D453), melhor é a resposta auditiva do paciente naquela frequência
+      \U0001D453. O uso de aparelhos auditivos pode ser uma forma de melhorar a resposta auditiva em determinadas
+      frequências."
 - id: tb08
   questoes:
   - 79
@@ -102,7 +96,7 @@ textos_base:
       Zoë Schlanger recounts Rhoades’s story in her new book, “The Light Eaters: How the Unseen World of Plant Intelligence Offers a New Understanding of Life on Earth.”
       The contemporary world of botany that Schlanger explores in “The Light Eaters” is still divided over the matter of how plants sense the world and whether they can be said to communicate. But, in the past twenty years, the idea that plants communicate has gained broader acceptance. Research in recent decades has shown garden-variety lima beans protecting themselves by synthesizing and releasing chemicals to summon the predators of the insects that eat them; lab-grown pea shoots navigating mazes and responding to the sound of running water; and a chameleonic vine in the jungles of Chile mimicking the shape and color of nearby plants by a mechanism that’s not yet understood.
       Schlanger acknowledges that some of the research yields as many questions as answers. It’s not clear how the vine gathers information about surrounding plants to perform its mimicry.
-      New Yorker . 12 June 2024. Adaptado.
+      New Yorker. 12 June 2024. Adaptado.
 - id: tb09
   questoes:
   - 82
@@ -114,14 +108,14 @@ textos_base:
       Disponível em https://www5.iqsc.usp.br/2025/. Adaptado.
 questoes:
 - numero: 1
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: semantica
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
-  - texto: Caetano Veloso revela sua posição a respeito do fato narrado no fragmento Mas, embora me encha
+  - texto: Caetano Veloso revela sua posição a respeito do fato narrado no fragmento “Mas, embora me encha
       de orgulho o pensamento de que meu pai possa ter trapaceado para me agradar, eu sempre preferi crer
-      na autenticidade do sorteio . Assinale a alternativa em que a paráfrase do excerto mantém o mesmo
+      na autenticidade do sorteio”. Assinale a alternativa em que a paráfrase do excerto mantém o mesmo
       sentido do texto original.
   alternativas:
     A:
@@ -143,13 +137,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
-  - texto: No fragmento Mas ninguém se sentia com coragem de realmente pôr esse nome “tão pesado” num
-      bebê , a expressão “tão pesado” aparece entre aspas porque o enunciador
+  - texto: No fragmento “Mas ninguém se sentia com coragem de realmente pôr esse nome ‘tão pesado’ num
+      bebê”, a expressão “tão pesado” aparece entre aspas porque o enunciador
   alternativas:
     A:
       texto: busca realçar o caráter denotativo da expressão, indicando sua concordância com ela.
@@ -167,8 +161,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 3
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: aritmetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -193,53 +187,45 @@ questoes:
   anulada: true
   pendencias: []
 - numero: 4
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "O conceito de entropia permeia diversas áreas do conhecimento e foi introduzido na Teoria
       da Informação por Claude Shannon, que desenvolveu uma forma de calcular a entropia \U0001D438 de
-      um sistema, a saber\n\U0001D465\n\U0001D438 = −\U0001D443\nlog \U0001D443 ( \U0001D465 )\nem que
-      \U0001D443 ( \U0001D465 ) é a probabilidade do i-ésimo resultado para a variável \U0001D465 .\nPor
+      um sistema, a saber"
+  - figura: q004-1.webp
+  - texto: "em que \U0001D443ᵢ(\U0001D465) é a probabilidade do i-ésimo resultado para a variável \U0001D465.\nPor
       exemplo, considere uma sequência com duas letras A coloridas, a primeira azul e a segunda vermelha
       (AA). Se essas duas letras fossem colocadas numa urna, a probabilidade de se retirar, sem observar,
-      a letra azul, como na sequência original, é . Devolve-se a letra à urna e sorteiase novamente. A
-      probabilidade de sair vermelha é novamente , e nesse caso tem-se:\n1\n1 \U0001D7CF\n\U0001D7CF\n\U0001D438
-      = −\U0001D443 ( \U0001D465 )log \U0001D443 ( \U0001D465 ) = − log + \U0001D425\U0001D428\U0001D420\n=1
-      2 2 \U0001D7D0 \U0001D7D0\nPara uma sequência com 4 letras A, as duas primeiras azuis e as duas
-      últimas vermelhas (AAAA), colocando-as numa urna e sorteando uma, a probabilidade de sair azul é
-      . Devolve-se a letra e sorteia-se novamente. A probabilidade da segunda letra sorteada ser azul,
-      como na sequência original, é novamente . Procedendo dessa forma para as duas letras vermelhas,
-      tem-se:\n\U0001D438 = −\U0001D443 ( \U0001D465 )log \U0001D443 ( \U0001D465 )\n1\n1 1\n1 \U0001D7CF\n\U0001D7CF
-      \U0001D7CF\n\U0001D7CF\n= − log + log + \U0001D425\U0001D428\U0001D420\n+ \U0001D425\U0001D428\U0001D420\n=2\n2
-      2 2 2 \U0001D7D0 \U0001D7D0 \U0001D7D0 \U0001D7D0\nCom base nessas informações, qual o valor da
-      entropia \U0001D438 , no caso de uma sequência com 4 letras A, sendo as 3 primeiras azuis e a última
-      vermelha (AAAA)?"
+      a letra azul, como na sequência original, é 1/2. Devolve-se a letra à urna e sorteia-se novamente.
+      A probabilidade de sair vermelha é novamente 1/2, e nesse caso tem-se:"
+  - figura: q004-2.webp
+  - texto: 'Para uma sequência com 4 letras A, as duas primeiras azuis e as duas últimas vermelhas (AAAA),
+      colocando-as numa urna e sorteando uma, a probabilidade de sair azul é 1/2. Devolve-se a letra e
+      sorteia-se novamente. A probabilidade da segunda letra sorteada ser azul, como na sequência original,
+      é novamente 1/2. Procedendo dessa forma para as duas letras vermelhas, tem-se:'
+  - figura: q004-3.webp
+  - texto: "Com base nessas informações, qual o valor da entropia \U0001D438, no caso de uma sequência
+      com 4 letras A, sendo as 3 primeiras azuis e a última vermelha (AAAA)?"
   alternativas:
     A:
-      texto: 5 − log 3
+      texto: 5 − (9/4) log₂ 3
     B:
-      texto: − log 3
+      texto: 1/2 − (5/2) log₂ 3
     C:
-      texto: ''
+      texto: 3/2
     D:
-      texto: log 3
+      texto: (9/4) log₂ 3
     E:
       texto: '3'
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 3, y≈128, 129, 285, 407, 433: recortar como
-    figura'
-  - 'Índice/expoente em fonte pequena na página 3, y≈133, 142, 146, 164, 226, 236, 244, 252, 262, 273,
-    289, 291, 299, 337, 343, 346, 373, 383, 393, 400, 411, 420, 439, 500, 510, 528, 538, 553, 564, 580,
-    589: conferir o texto'
-  - 'Texto sublinhado na página 3, y≈234, 260, 289, 344, 381, 437, 508, 535, 561, 587: formatação perdida
-    no texto puro'
+  pendencias: []
 - numero: 5
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -252,40 +238,33 @@ questoes:
   - texto: |-
       “No bingo das ligações químicas, os pesquisadores conseguiram completar a lacuna entre o Boro e o Carbono.”
       Disponível em https://www.tecmundo.com.br/ciencia/. Adaptado.
-      Adaptando essa ideia, foi feito um jogo para identificar os tipos ,
-      de ligações entre os elementos Na, K, Ca, C , Br e I. Assinale a alternativa que representa a melhor marcação do tipo de ligação formada por esses átomos, seguindo a legenda:
-       – ligação iônica;
-       – ligação covalente;
+      Adaptando essa ideia, foi feito um jogo para identificar os tipos de ligações entre os elementos Na, K, Ca, Cℓ, Br e I. Assinale a alternativa que representa a melhor marcação do tipo de ligação formada por esses átomos, seguindo a legenda:
+      ■ – ligação iônica;
+      ○ – ligação covalente;
       Δ – ligação metálica.
   alternativas:
     A:
-      texto: |-
-        (D)
-        Figura A
-        Figura D
       figura: q005-a.webp
     B:
-      texto: |-
-        (E)
-        Figura B
-        Figura E
       figura: q005-b.webp
     C:
-      texto: Figura C
       figura: q005-c.webp
+    D:
+      figura: q005-d.webp
+    E:
+      figura: q005-e.webp
   resposta: E
   anulada: false
-  pendencias:
-  - Só 3 alternativa(s) detectada(s)
+  pendencias: []
 - numero: 6
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Para uma atividade de campo voltada à valorização do patrimônio histórico e cultural, professores de geografia levaram seus estudantes a um parque temático de monumentos geográficos. Eles visitaram a réplica de uma pirâmide regular de base quadrada com vértice a 18 metros de altura em relação ao centro da base. As faces da pirâmide estão voltadas para as direções norte, sul, leste e oeste. Para acessar o vértice da pirâmide, os estudantes precisaram percorrer uma trilha de pedestre e subir a rampa localizada na face norte. A trilha compreende os lados oeste, sul, leste e metade do lado norte do quadrado. Essa rampa está localizada exatamente no meio da face, ou seja, é o apótema da pirâmide.
-      Sabendo-se que o volume da pirâmide é de 864 m , quantos metros, aproximadamente, os estudantes tiveram que percorrer para chegar até o topo da pirâmide?
+      Sabendo-se que o volume da pirâmide é de 864 m³, quantos metros, aproximadamente, os estudantes tiveram que percorrer para chegar até o topo da pirâmide?
   alternativas:
     A:
       texto: '36'
@@ -299,49 +278,42 @@ questoes:
       texto: '61'
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈215: conferir o texto'
+  pendencias: []
 - numero: 7
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Considere a equação trigonométrica\n\U0001D70B\n\U0001D460\U0001D452\U0001D45B + \U0001D460\U0001D452\U0001D45B
-      \U0001D465 = \U0001D460\U0001D452\U0001D45B (2 \U0001D465 ) − cos \U0001D70B\n2\npara \U0001D465∈ℝ
-      ,0 ≤\U0001D465 <2 \U0001D70B .\nUm estudante resolveu essa equação da seguinte maneira:\n\U0001D70B\n\U0001D460\U0001D452\U0001D45B
-      + \U0001D460\U0001D452\U0001D45B \U0001D465 = \U0001D460\U0001D452\U0001D45B (2 \U0001D465 ) − cos
-      \U0001D70B\n2\n1+ \U0001D460\U0001D452\U0001D45B \U0001D465 = \U0001D460\U0001D452\U0001D45B (2
-      \U0001D465 )+1\n\U0001D460\U0001D452\U0001D45B \U0001D465 = \U0001D460\U0001D452\U0001D45B (2 \U0001D465
-      )\n\U0001D460\U0001D452\U0001D45B \U0001D465 =2 \U0001D460\U0001D452\U0001D45B \U0001D465\n2 \U0001D460\U0001D452\U0001D45B
-      \U0001D465−\U0001D460\U0001D452\U0001D45B \U0001D465 =0\n\U0001D460\U0001D452\U0001D45B \U0001D465
-      =0\n\U0001D465 =0 \U0001D45C\U0001D462 \U0001D465 = \U0001D70B\nA resolução apresentada pelo estudante
-      está errada, pois ele"
+  - texto: Considere a equação trigonométrica
+  - figura: q007-1.webp
+  - texto: "para \U0001D465 ∈ ℝ, 0 ≤ \U0001D465 < 2\U0001D70B.\nUm estudante resolveu essa equação da
+      seguinte maneira:"
+  - figura: q007-2.webp
+  - texto: A resolução apresentada pelo estudante está errada, pois ele
   alternativas:
     A:
       texto: "considerou que cos \U0001D70B vale 1."
     B:
       texto: não considerou as infinitas voltas no ciclo trigonométrico para a resposta.
     C:
-      texto: considerou que sen vale 1.
+      texto: "considerou que sen(\U0001D70B/2) vale 1."
     D:
       texto: não utilizou corretamente o seno da soma de dois arcos.
     E:
       texto: apresentou duas respostas e não apenas uma.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 4, y≈389, 462, 632: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 4, y≈624, 634: conferir o texto'
+  pendencias: []
 - numero: 8
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: variacao-linguistica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A escola não pode ignorar as diferenças sociolinguísticas. Os professores e, por meio deles, os alunos têm que estar bem conscientes de que existem duas ou mais maneiras de dizer a mesma coisa. E mais, que essas formas alternativas servem a propósitos comunicativos distintos e são recebidas de maneira diferenciada pela sociedade. Os alunos que chegam à escola falando “nós cheguemu”, “abrido” e “ele drome”, por exemplo, têm que ser respeitados e ver valorizadas as suas peculiaridades linguístico-culturais, mas têm o direito inalienável de aprender as variantes de prestígio dessas expressões. Não se lhes pode negar esse conhecimento, sob pena de se fecharem para eles as portas, já estreitas, da ascensão social.
-      BORTONI-RICARDO, S. M. Nós cheguemos na escola, e agora? Sociolinguística & Educação . São Paulo: Parábola, 2005. Adaptado.
+      BORTONI-RICARDO, S. M. Nós cheguemos na escola, e agora? Sociolinguística & Educação. São Paulo: Parábola, 2005. Adaptado.
       De acordo com o texto, cabe aos professores
   alternativas:
     A:
@@ -363,18 +335,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 9
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: sociologia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
-  - texto: 'Em meados do século XIX, Nísia Floresta publicou no Brasil seu Opúsculo Humanitário , uma
-      ardente defesa da educação como meio para eliminar os obstáculos que impediam as mulheres de contribuir,
+  - texto: 'Em meados do século XIX, Nísia Floresta publicou no Brasil seu Opúsculo Humanitário, uma ardente
+      defesa da educação como meio para eliminar os obstáculos que impediam as mulheres de contribuir,
       em condições de igualdade com os homens, com a sociedade brasileira. Para tanto, contrapõe o estado
       da educação das mulheres nas nações ditas civilizadas e cultas ao péssimo estado da educação, pública
       e privada, religiosa e laica no Brasil, assumindo que a educação é uma expressão do grau de civilização
       das nações e muito influente sobre sua moralidade. Meio século mais tarde, Émile Durkheim dedicou
-      duas obras à educação escolar: Educação e Sociologia e A Educação Moral . Nelas, o sociólogo francês
+      duas obras à educação escolar: Educação e Sociologia e A Educação Moral. Nelas, o sociólogo francês
       concebe a escola como um espaço de transmissão da civilização às novas gerações por meio da sua
       socialização nos sentimentos, ideias e valores da sociedade, além da promoção da solidariedade com
       as múltiplas sociedades das quais participamos e com a humanidade como um todo. Ao funcionar como
@@ -403,16 +376,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q010-1.webp
   - texto: |-
-      Capoeira , Maria Auxiliadora da Silva, técnica mista sobre tela, 69,5 x 75 x 1,5 cm, 1970. Acervo MASP.
-      “Maria Auxiliadora nasceu em 24 de maio de 1935, em Campo Belo, MG, numa família de 18 irmãos, gerados por Dona Maria, uma humilde bordadora, que acumulava ainda as funções de dona-de-casa, escultora e pintora. (...) Auxiliadora, ainda criança, mostra uma inclinação natural para tingir os fios que a mãe borda para fora e, com 11 anos, já desenhava, com carvão, figuras nos muros. Absorta nessa atividade, esquecia muitas vezes de olhar as panelas no fogo, e a comida da família queimava. (...) Sem conhecer perspectiva ou claroescuro, bem dentro dos princípios dos artistas autodidatas, Auxiliadora foi aprimorando sua arte. No fim dos anos 1960, juntou-se, com outros integrantes da família, como o escultor Vicente de Paula e o pintor João Cândido, ao grupo que girava em torno do músico, teatrólogo e poeta negro Solano Trindade, no Embu das Artes, SP, onde se formara um centro de artesanato, principalmente de cultura e arte de origem africana.”
-      D'AMBROZIO, Oscar. Maria Auxiliadora. Um cometa das artes . Adaptado.
+      Capoeira, Maria Auxiliadora da Silva, técnica mista sobre tela, 69,5 x 75 x 1,5 cm, 1970. Acervo MASP.
+      “Maria Auxiliadora nasceu em 24 de maio de 1935, em Campo Belo, MG, numa família de 18 irmãos, gerados por Dona Maria, uma humilde bordadora, que acumulava ainda as funções de dona-de-casa, escultora e pintora. (...) Auxiliadora, ainda criança, mostra uma inclinação natural para tingir os fios que a mãe borda para fora e, com 11 anos, já desenhava, com carvão, figuras nos muros. Absorta nessa atividade, esquecia muitas vezes de olhar as panelas no fogo, e a comida da família queimava. (...) Sem conhecer perspectiva ou claro-escuro, bem dentro dos princípios dos artistas autodidatas, Auxiliadora foi aprimorando sua arte. No fim dos anos 1960, juntou-se, com outros integrantes da família, como o escultor Vicente de Paula e o pintor João Cândido, ao grupo que girava em torno do músico, teatrólogo e poeta negro Solano Trindade, no Embu das Artes, SP, onde se formara um centro de artesanato, principalmente de cultura e arte de origem africana.”
+      D'AMBROZIO, Oscar. Maria Auxiliadora. Um cometa das artes. Adaptado.
       A trajetória da artista autodidata Maria Auxiliadora da Silva desafia as estruturas convencionais do sistema de artes visuais no Brasil ao articular, em sua obra e atuação, experiências de pertencimento, identidade e resistência. Em crítica publicada no livro “Pensando a Arte”, Mário Schenberg descreve sua produção como marcada pela "vivência autêntica da vida popular", "senso mágico afro-brasileiro" e uma "imaginação construtora de arquiteturas cromáticas e lineares". Considerando a obra “Capoeira”, os comentários de Schenberg, o texto de Oscar D’Ambrozio e os debates contemporâneos sobre arte e decolonialidade, é correto afirmar:
   alternativas:
     A:
@@ -438,11 +411,10 @@ questoes:
         foram suficientes para reconhecer artistas não brancos e mulheres no campo artístico.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈727, 778, 786: conferir o texto'
+  pendencias: []
 - numero: 11
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -450,19 +422,19 @@ questoes:
       Sempre que brilha um novo dia, e que nos bate à porta o jornal, apoderamo-nos com solicitude dessa folha e avidamente percorremos a sessão das Câmaras do dia antecedente em procura do assunto que temos escrito no coração e no espírito - a educação da mulher brasileira -, e dobramos a folha desconsolados e aguardamos o dia seguinte, que se escoa na mesma expectativa, no mesmo desengano!
       (...)
       Um dia raiará mais propício para nós, em que os escolhidos da nação brasileira se dignem de achar a educação da mulher um objeto importante para dele ocuparem-se, com a circunspecção que merece.
-      Nísia Floresta. Opúsculo Humanitário .
-      Sonhando ser mestra, eu não imaginava o descanso, o repouso ameno que daria à minha mãe como recompensa dos grandes sacrifícios feitos por ela para meu bem-estar, eu não pensava em ser útil, em tornar-me necessária, imprescindível. Eu queria ser mestra para não morar em um cortiço malalumiado, infecto, úmido, nesta terra onde há tantas flores, tanta luz e tantas alegrias. O caso é que fosse qual fosse a mão que me escreveu no pensamento a resolução de vir a ser professora – pertencesse ela à tentação diabólica do luxo ou à compreensão de um dever –, fosse qual fosse, eu a abençoo.
-      Julia Lopes de Almeida. Memórias de Martha .
+      Nísia Floresta. Opúsculo Humanitário.
+      Sonhando ser mestra, eu não imaginava o descanso, o repouso ameno que daria à minha mãe como recompensa dos grandes sacrifícios feitos por ela para meu bem-estar, eu não pensava em ser útil, em tornar-me necessária, imprescindível. Eu queria ser mestra para não morar em um cortiço mal-alumiado, infecto, úmido, nesta terra onde há tantas flores, tanta luz e tantas alegrias. O caso é que fosse qual fosse a mão que me escreveu no pensamento a resolução de vir a ser professora – pertencesse ela à tentação diabólica do luxo ou à compreensão de um dever –, fosse qual fosse, eu a abençoo.
+      Julia Lopes de Almeida. Memórias de Martha.
       A partir da leitura dos excertos e das obras citadas, é correto afirmar:
   alternativas:
     A:
       texto: Opúsculo Humanitário e Memórias de Martha são obras que defendem fortemente o abolicionismo
         e o acesso à educação pela população afrodescendente brasileira.
     B:
-      texto: Opúsculo Humanitári o defende a modernização da política brasileira, e Memórias de Martha
+      texto: Opúsculo Humanitário defende a modernização da política brasileira, e Memórias de Martha
         narra a ascensão social da protagonista por meio da sua profissionalização.
     C:
-      texto: Opúsculo Humanitário e Memórias de Martha , obras seminais do feminismo no Brasil, defendem
+      texto: Opúsculo Humanitário e Memórias de Martha, obras seminais do feminismo no Brasil, defendem
         a educação profissional feminina a fim de prepará-las para a sua emancipação econômica.
     D:
       texto: Opúsculo Humanitário e Memórias de Martha destacam o espaço rural brasileiro como o lugar
@@ -474,8 +446,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 12
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -485,20 +457,20 @@ questoes:
       ao voto feminino. A partir da década de 1960, houve avanços significativos, como o Estatuto da Mulher
       Casada (1962), que eliminou a necessidade de receber autorização do marido para diversas atividades,
       e, na década de 1970, a Lei do Divórcio (1977) e o fortalecimento dos movimentos feministas. As
-      obras Caminho de pedras , de Rachel de Queiroz, e As meninas , de Lygia Fagundes Telles, discutem
+      obras Caminho de pedras, de Rachel de Queiroz, e As meninas, de Lygia Fagundes Telles, discutem
       questões relativas aos direitos das mulheres e sua relação com a política ao longo do século XX
       no Brasil. Sobre esses romances, é correto afirmar:'
   alternativas:
     A:
-      texto: Em Caminho de pedras , Rachel de Queiroz relaciona a luta pelos direitos da mulher à legalização
+      texto: Em Caminho de pedras, Rachel de Queiroz relaciona a luta pelos direitos da mulher à legalização
         do divórcio no Brasil, enquanto As meninas constitui um libelo pela educação feminina no período
         final da Era Vargas.
     B:
-      texto: As personagens Angelita, de Caminho de pedras , e Ana Clara, de As meninas , impactam a vida
+      texto: As personagens Angelita, de Caminho de pedras, e Ana Clara, de As meninas, impactam a vida
         dos protagonistas de seus romances e representam a transformação da condição social das mulheres
         ao romperem com a configuração familiar tradicional.
     C:
-      texto: Em Caminho de pedras e em As meninas , a política (militância de esquerda) e a religião (internato
+      texto: Em Caminho de pedras e em As meninas, a política (militância de esquerda) e a religião (internato
         de freiras) são instituições que, em vez de contribuírem para a revisão de valores morais e para
         a emancipação feminina, aprofundam os mecanismos de controle social sobre as mulheres.
     D:
@@ -513,12 +485,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 13
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: matematica
+  assunto: estatistica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
-  - texto: Na obra Caminho de pedras , de 1937, a autora Rachel de Queiroz aborda os desafios da personagem
+  - texto: Na obra Caminho de pedras, de 1937, a autora Rachel de Queiroz aborda os desafios da personagem
       Noemi em busca de sua liberdade política, social e sexual, em uma sociedade conservadora. O papel
       da mulher na sociedade e sua inserção no mercado de trabalho são temas atuais. Em março de 2025,
       o governo federal lançou um boletim que tem como objetivo analisar a inserção das mulheres no mercado
@@ -526,7 +499,7 @@ questoes:
       na força de trabalho no Brasil, no 3º trimestre de cada ano, no período de 2012 a 2024.
   - figura: q013-1.webp
   - texto: |-
-      Pesquisa Nacional por Amostra de Domicílio (PNAD) Contínua. Instituto de Brasileiro de Geografia e Estatística (IBGE) .
+      Pesquisa Nacional por Amostra de Domicílio (PNAD) Contínua. Instituto de Brasileiro de Geografia e Estatística (IBGE).
       Em relação ao gráfico apresentado, é correto afirmar:
   alternativas:
     A:
@@ -548,8 +521,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 14
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: populacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -562,7 +535,7 @@ questoes:
       Distribuição relativa dos vínculos ativos de emprego formal de imigrantes estrangeiros na região Sul (2023)
   - figura: q014-2.webp
   - texto: |-
-      Atlas Temático do Observatório das Migrações em São Paulo . Adaptado.
+      Atlas Temático do Observatório das Migrações em São Paulo. Adaptado.
       A partir do mapa e do gráfico, assinale a alternativa correta sobre o contexto apresentado na região Sul.
   alternativas:
     A:
@@ -583,8 +556,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 15
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -609,12 +582,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
-  - texto: A expressão just-in-time , destacada no texto, refere-se, no contexto da discussão, a uma modalidade
+  - texto: A expressão just-in-time, destacada no texto, refere-se, no contexto da discussão, a uma modalidade
       de trabalho
   alternativas:
     A:
@@ -631,9 +604,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: sociologia
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: 'Em março de 2025, postagens em redes sociais digitais discutiram uma tendência verificada
@@ -647,7 +621,7 @@ questoes:
   - figura: q017-1.webp
   - figura: q017-2.webp
   - texto: |-
-      Pesquisa Nacional por Amostra de Domicílio Contínua (PNAD-C) . Instituto de Brasileiro de Geografia e Estatística (IBGE), maio de 2025. Adaptado.
+      Pesquisa Nacional por Amostra de Domicílio Contínua (PNAD-C). Instituto de Brasileiro de Geografia e Estatística (IBGE), maio de 2025. Adaptado.
       A partir dos dados apresentados no gráfico, é correto afirmar que as associações realizadas por crianças e adolescentes com diferentes formas ocupacionais são fundadas em uma visão de que
   alternativas:
     A:
@@ -670,15 +644,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: exponencial-e-logaritmo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma startup de tecnologia está desenvolvendo um novo aplicativo e observa que o número de
-      usuários está crescendo, em milhares, após t semanas do lançamento, de acordo com a função:\n\U0001D440
-      ( \U0001D461 )=200×(1,1)\nCom isso, a equipe da startup quer saber: qual é o período, em semanas,
-      em que o número de usuários ultrapassa 300 mil?"
+      usuários está crescendo, em milhares, após t semanas do lançamento, de acordo com a função:\n\U0001D440(\U0001D461)
+      = 200 × (1,1)ᵗ\nCom isso, a equipe da startup quer saber: qual é o período, em semanas, em que o
+      número de usuários ultrapassa 300 mil?"
+  - texto: |-
+      Note e adote:
+      log 3 ≅ 0,4771; log 5 ≅ 0,6990 e log 11 ≅ 1,0414
   alternativas:
     A:
       texto: Entre 0 e 1 semana.
@@ -689,25 +666,22 @@ questoes:
     D:
       texto: Entre 3 e 4 semanas.
     E:
-      texto: "Entre 4 e 6 semanas.\nNote e adote:\n\U0001D459\U0001D45C\U0001D454 3 ≅ 0,4771; \U0001D459\U0001D45C\U0001D454
-        5 ≅ 0,6990 e \U0001D459\U0001D45C\U0001D454 11 ≅ 1,0414"
+      texto: Entre 4 e 6 semanas.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 9, y≈125, 271: conferir o texto'
-  - 'Texto sublinhado na página 9, y≈253: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 9, y≈253–282
+  pendencias: []
 - numero: 19
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: textos-multimodais
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: 'Observe e analise a obra artística de Cildo Meireles:'
   - figura: q019-1.webp
   - texto: |-
-      Anverso e reverso de Zero Cruzeiro , de Cildo Meireles. Acervo Fundação Cultural Banco Itaú.
-      Em Zero Cruzeiro , obra criada em 1978,
+      Anverso e reverso de Zero Cruzeiro, de Cildo Meireles. Acervo Fundação Cultural Banco Itaú.
+      Em Zero Cruzeiro, obra criada em 1978,
   alternativas:
     A:
       texto: a assinatura reproduzida na nota é a do presidente do Banco Central e confere um efeito oficial
@@ -728,14 +702,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 20
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: america-latina
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O indígena sofre menos sob a República do que sob a dominação espanhola? Não existem mais corregimientos nem encomiendas , mas persistem os trabalhos forçados e os recrutamentos. O sofrimento que lhe provocamos basta para descarregar sobre nós a execração dos seres humanos. Nós o conservamos na ignorância e na servidão, o envilecemos no quartel, o embrutecemos com o álcool, o lançamos a destroçar-se nas guerras civis e, de tempos em tempos, organizamos caçadas e matanças.
-      Manuel González Prada. “Nuestros índios”. In: Ideas en torno de Latinoamérica . México: UNAM, 1986. Adaptado.
+      O indígena sofre menos sob a República do que sob a dominação espanhola? Não existem mais corregimientos nem encomiendas, mas persistem os trabalhos forçados e os recrutamentos. O sofrimento que lhe provocamos basta para descarregar sobre nós a execração dos seres humanos. Nós o conservamos na ignorância e na servidão, o envilecemos no quartel, o embrutecemos com o álcool, o lançamos a destroçar-se nas guerras civis e, de tempos em tempos, organizamos caçadas e matanças.
+      Manuel González Prada. “Nuestros índios”. In: Ideas en torno de Latinoamérica. México: UNAM, 1986. Adaptado.
       O excerto, extraído de um texto publicado no início do século XX pelo peruano Manuel González Prada,
   alternativas:
     A:
@@ -757,14 +731,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-colonia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Na documentação jesuítica quinhentista, há constantes referências ao desejo dos índios de entregarem seus filhos para que fossem ensinados pelos padres. Talvez o ensino das crianças indígenas pudesse representar, também, uma possibilidade de estabelecer alianças entre grupos indígenas e padres, revelando outra dimensão da evangelização das crianças como ‘grande meio’ para se converter o gentio. É difícil determinar ao certo qual foi a imagem a respeito dos portugueses construída pelas várias tribos indígenas e, principalmente, dos religiosos da Companhia de Jesus, mas a construção de alianças, a partir das crianças (os índios dando seus filhos), pode ter constituído uma possibilidade frutífera de relacionamento para alguns grupos.
-      Rafael Chambouleyron. “Jesuítas e as crianças no Brasil quinhentista”. In: Mary del Priore. História das crianças no Brasil . São Paulo: Contexto, 1999.
+      Rafael Chambouleyron. “Jesuítas e as crianças no Brasil quinhentista”. In: Mary del Priore. História das crianças no Brasil. São Paulo: Contexto, 1999.
       Com base no excerto, é correto afirmar:
   alternativas:
     A:
@@ -782,8 +756,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 22
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -810,19 +784,18 @@ questoes:
         derrubada do marco temporal, que tem levado indígenas à pobreza nas metrópoles brasileiras.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 10, y≈82, 158, 461: conferir o texto'
+  pendencias: []
 - numero: 23
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: 'No ano de 2024, o Atlas da Mata Atlântica identificou uma perda de 143,66 km de florestas
+  - texto: 'No ano de 2024, o Atlas da Mata Atlântica identificou uma perda de 143,66 km² de florestas
       maduras dentro do limite de aplicação da Lei da Mata Atlântica. A área foi muito semelhante à do
       ano anterior, com uma queda de apenas 2% na taxa de desmatamento de um ano para o outro, o que denuncia
       a situação de vulnerabilidade do Bioma. Além da redução tímida, a taxa ainda está longe do menor
-      desmatamento já registrado desde a primeira edição do Atlas, em 1985: os 113,99 km observados no
+      desmatamento já registrado desde a primeira edição do Atlas, em 1985: os 113,99 km² observados no
       período de 2017 a 2018. O gráfico apresenta a área de desmatamento e a tendência para a série histórica.'
   - figura: q023-1.webp
   - texto: |-
@@ -839,8 +812,8 @@ questoes:
       texto: os primeiros 15 anos de monitoramento (1985 a 1999) são marcados por três períodos de elevação
         da área de desmatamento.
     D:
-      texto: é possível observar uma redução consistente na área de desmatamento da Mata Atlântica (km
-        /ano) ao longo de toda a série histórica.
+      texto: é possível observar uma redução consistente na área de desmatamento da Mata Atlântica (km²/ano)
+        ao longo de toda a série histórica.
     E:
       texto: há uma evolução crescente da área de desmatamento nos limites da Mata Atlântica, em especial
         nos últimos 10 anos de monitoramento.
@@ -848,9 +821,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: questoes-ambientais
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: A área de cobertura vegetal observada no arquipélago das Ilhas Shetlands do Sul, na Antártida,
@@ -862,11 +836,9 @@ questoes:
   - texto: Imagem ilustrativa da presença de musgos na Ilha Ardley.
   - figura: q024-2.webp
   - texto: |-
-      Ilha Ardley (62° S) e evolução temporal do Índice de Vegetação
-      Normalizado (NDVI) e do Índice de Vegetação Verde (TCG,
-      sigla em inglês para Tasseled Cap Greenness ).
+      Ilha Ardley (62° S) e evolução temporal do Índice de Vegetação Normalizado (NDVI) e do Índice de Vegetação Verde (TCG, sigla em inglês para Tasseled Cap Greenness).
       Disponível em doi.org/10.1038/s41561-024-01564-5. Adaptado.
-      O processo de esverdeamento ( greening ) da área apresentada na imagem, sua evolução temporal desde 1986 e os elementos do texto permitem concluir que
+      O processo de esverdeamento (greening) da área apresentada na imagem, sua evolução temporal desde 1986 e os elementos do texto permitem concluir que
   alternativas:
     A:
       texto: a construção de bases de pesquisa científica em diferentes pontos da área favorece a presença
@@ -882,14 +854,13 @@ questoes:
         representada para a região.
     E:
       texto: a elevação do nível do mar na região com cada vez menos umidade do ar tem como consequência
-        o processo de greening .
+        o processo de greening.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈328: conferir o texto'
+  pendencias: []
 - numero: 25
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -919,17 +890,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Our planet is home to subterranean lava deposits and smatterings of obsidian—black volcanic
-      glass. Scalding
   - figura: q026-1.webp
   - texto: |-
-      groundwater bubbles to the surface in places. In such a landscape, you remember that the planet’s hard exterior is so thin that we call it a crust. Its superheated interior burns with an estimated forty-four trillion watts of power. Heat mined from underground is called geothermal and can be used to produce steam, spin a turbine, and generate electricity. Until recently, humans have tended to harvest small quantities in the rare places where it surfaces, such as hot springs. The biggest drawback is drilling miles through hot rock, safely. If scientists can do that, next-generation geothermal power could supply clean energy for eons. Right now, geothermal energy meets a puny portion of humanity’s electricity and heating needs. Fossil fuels power about eighty per cent of human activity, pumping out carbon dioxide and short-circuiting our climate to catastrophic effect. Converts argue that geothermal checks three key boxes: it is carbon-free, available everywhere, and effectively unlimited. It is also baseload, which means that, unlike solar panels or wind, it provides a steady flow of energy. “Over the last two years, I have watched this exponential spinup of activity in geothermal,” a drilling expert said. But there is a risk of moon shots: often, they miss. “There’s basically zero chance that you’re going to develop a moon-shot technology and have it be commercial in five years, on a large-scale”, said Mark Jacobson, an engineering professor. That’s how long humanity has to lower emissions before climatic devastation. “There’s a very decent chance you can do that with wind and solar,” he said. Perhaps, when resources and time are finite, trying and failing could be worse than not trying at all.
-      New Yorker . March 2025. Adaptado.
+      Our planet is home to subterranean lava deposits and smatterings of obsidian—black volcanic glass. Scalding groundwater bubbles to the surface in places. In such a landscape, you remember that the planet’s hard exterior is so thin that we call it a crust. Its superheated interior burns with an estimated forty-four trillion watts of power. Heat mined from underground is called geothermal and can be used to produce steam, spin a turbine, and generate electricity. Until recently, humans have tended to harvest small quantities in the rare places where it surfaces, such as hot springs. The biggest drawback is drilling miles through hot rock, safely. If scientists can do that, next-generation geothermal power could supply clean energy for eons. Right now, geothermal energy meets a puny portion of humanity’s electricity and heating needs. Fossil fuels power about eighty per cent of human activity, pumping out carbon dioxide and short-circuiting our climate to catastrophic effect. Converts argue that geothermal checks three key boxes: it is carbon-free, available everywhere, and effectively unlimited. It is also baseload, which means that, unlike solar panels or wind, it provides a steady flow of energy. “Over the last two years, I have watched this exponential spin-up of activity in geothermal,” a drilling expert said. But there is a risk of moon shots: often, they miss. “There’s basically zero chance that you’re going to develop a moon-shot technology and have it be commercial in five years, on a large-scale”, said Mark Jacobson, an engineering professor. That’s how long humanity has to lower emissions before climatic devastation. “There’s a very decent chance you can do that with wind and solar,” he said. Perhaps, when resources and time are finite, trying and failing could be worse than not trying at all.
+      New Yorker. March 2025. Adaptado.
       De acordo com o texto, atualmente a exploração do calor gerado nas regiões subterrâneas do planeta
   alternativas:
     A:
@@ -944,11 +913,10 @@ questoes:
       texto: proporciona utilidade prática restrita do ponto de vista da produção industrial.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈133: conferir o texto'
+  pendencias: []
 - numero: 27
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: relevo-e-solos
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -965,7 +933,7 @@ questoes:
     B:
       texto: Intemperismo químico; formação de relevos de cuesta.
     C:
-      texto: Movimento divergente de placas; rift valley .
+      texto: Movimento divergente de placas; rift valley.
     D:
       texto: Processos erosivos contínuos; formação de cânions.
     E:
@@ -974,21 +942,23 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 28
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: termoquimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: |-
-      Essa imagem, chamada de “A formatura da capivara”, foi gerada
-      por
-      Inteligência Artificial (IA). Em 2024 estimouse que 30 milhões de imagens foram geradas diariamente no
   - figura: q028-1.webp
-  - texto: mundo utilizando modelos de IA a um gasto energético médio de 131 kJ por imagem. O uso intenso
-      dessa tecnologia tem levado à reativação de usinas termoelétricas e à construção de novas usinas
-      nucleares para suportar os servidores que realizam o processamento de IA. Considerando que toda
-      a energia para gerar essas imagens fosse proveniente da combustão completa de carvão, a pegada de
-      carbono diária medida em toneladas de CO formado, resultante da produção dessas imagens, seria de
+  - texto: Essa imagem, chamada de “A formatura da capivara”, foi gerada por Inteligência Artificial (IA).
+      Em 2024 estimou-se que 30 milhões de imagens foram geradas diariamente no mundo utilizando modelos
+      de IA a um gasto energético médio de 131 kJ por imagem. O uso intenso dessa tecnologia tem levado
+      à reativação de usinas termoelétricas e à construção de novas usinas nucleares para suportar os
+      servidores que realizam o processamento de IA. Considerando que toda a energia para gerar essas
+      imagens fosse proveniente da combustão completa de carvão, a pegada de carbono diária medida em
+      toneladas de CO₂ formado, resultante da produção dessas imagens, seria de
+  - texto: |-
+      Note e adote:
+      Massa molar (g/mol): C = 12; O = 16
+      Entalpia de combustão completa do carvão: ΔH = −393 kJ/mol
   alternativas:
     A:
       texto: 0,2.
@@ -999,20 +969,13 @@ questoes:
     D:
       texto: '280.'
     E:
-      texto: |-
-        440.
-        Note e adote:
-        Massa molar (g/mol) : C = 12; O = 16
-        Entalpia de combustão completa do carvão: Δ H = - 393 kJ/mol
+      texto: '440.'
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 13, y≈244: conferir o texto'
-  - 'Texto sublinhado na página 13, y≈339: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈339–380
+  pendencias: []
 - numero: 29
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1026,10 +989,10 @@ questoes:
         para manter a floresta em pé.
     B:
       texto: Créditos de carbono correspondem a um aumento da taxa fotossintética e uma maior conversão
-        de CO em matéria orgânica pelas florestas tropicais.
+        de CO₂ em matéria orgânica pelas florestas tropicais.
     C:
       texto: Créditos de carbono são obtidos por qualquer país, mesmo os mais industrializados, pela redução
-        da emissão de CO e seus equivalentes na atmosfera.
+        da emissão de CO₂ e seus equivalentes na atmosfera.
     D:
       texto: Países industrializados geram muitos créditos de carbono, que podem ser repassados aos países
         menos poluidores, via mercado de carbono.
@@ -1038,18 +1001,16 @@ questoes:
         ultrapassado tal limite, o país sofre sanções econômicas.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 13, y≈549, 593: conferir o texto'
+  pendencias: []
 - numero: 30
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O Brasil é o líder mundial em reciclagem de alumínio, atingindo números próximos a 99% de latas recicladas no ano de 2021. Essas latas, já utilizadas para refrigerantes, cervejas, energéticos, agora começam a trazer também água mineral em seu interior.
-      Considere que uma empresa deseja envasar 350 mL de água em
-      uma lata de alumínio de formato cilíndrico e que, por razões práticas como manuseio e custo do material, o diâmetro da base dessa lata deve ter entre 5 cm e 8 cm.
+      Considere que uma empresa deseja envasar 350 mL de água em uma lata de alumínio de formato cilíndrico e que, por razões práticas como manuseio e custo do material, o diâmetro da base dessa lata deve ter entre 5 cm e 8 cm.
       Qual será, aproximadamente, em centímetros, a menor altura possível da lata?
   alternativas:
     A:
@@ -1066,8 +1027,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 31
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: funcoes-inorganicas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1097,33 +1058,32 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 32
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      O produto conhecido como descalcificante, comumente composto por ácido cítrico, é usado para desentupir os dutos internos de eletrodomésticos como cafeteiras e ferros de passar roupa a vapor. O entupimento frequentemente é causado pelo depósito de calcário (CaCO ), produto da reação entre CO e íons cálcio presentes na água. O equilíbrio de formação do carbonato de cálcio está representado a seguir:
-      Ca (aq) + CO (g) + H O(l) ⇌ CaCO (s) + 2H (aq).
+      O produto conhecido como descalcificante, comumente composto por ácido cítrico, é usado para desentupir os dutos internos de eletrodomésticos como cafeteiras e ferros de passar roupa a vapor. O entupimento frequentemente é causado pelo depósito de calcário (CaCO₃), produto da reação entre CO₂ e íons cálcio presentes na água. O equilíbrio de formação do carbonato de cálcio está representado a seguir:
+      Ca²⁺(aq) + CO₂(g) + H₂O(l) ⇌ CaCO₃(s) + 2H⁺(aq).
       Sobre os processos de entupimento por carbonato de cálcio e a descalcificação desses eletrodomésticos, é correto afirmar que
   alternativas:
     A:
       texto: a diminuição do pH pela presença do ácido cítrico leva à reação de descalcificação.
     B:
-      texto: a reação de descalcificação com ácido cítrico desloca o equilíbrio porque consome CO .
+      texto: a reação de descalcificação com ácido cítrico desloca o equilíbrio porque consome CO₂.
     C:
-      texto: ambientes ricos em CO causam menos entupimento dos eletrodomésticos.
+      texto: ambientes ricos em CO₂ causam menos entupimento dos eletrodomésticos.
     D:
       texto: a utilização de água com maior pH nos eletrodomésticos causa menos entupimento.
     E:
       texto: o ácido cítrico age como um catalisador, pois não participa do equilíbrio de descalcificação.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈457, 468, 509, 511, 609, 620: conferir o texto'
+  pendencias: []
 - numero: 33
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: questoes-ambientais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1131,7 +1091,7 @@ questoes:
       Uma pesquisa realizada na Universidade de São Paulo sobre a sustentabilidade do setor têxtil destaca que “cerca de 4 milhões de resíduos têxteis são descartados todos os anos nos domicílios brasileiros, e o Brasil não tem gestão de resíduos. No ano passado, cada domicílio do País descartou cerca de 44 quilos de roupas e calçados. A estimativa é que o setor têxtil seja responsável por 2% a 8% das emissões de gases de efeito estufa em todo o mundo.”
       Disponível em https://jornal.usp.br/. Adaptado.
       Outro dado que corrobora com a pesquisa é o crescimento em 60% da produção de roupas nos últimos 15 anos, com custo barateado em 36%, significando um aumento considerável do consumo deste setor, no mundo. Além disso, a produção de algodão, apesar de ocupar 2,5% das áreas cultivadas no mundo, utiliza 25% dos inseticidas e 10% dos herbicidas. E, também, utiliza aproximadamente 11 bilhões de litros de água, para a lavagem e tingimento dos tecidos. Assim, segundo a Organização Mundial de Saúde, a cadeia produtiva da indústria têxtil é um setor econômico dos mais poluentes.
-      Géopolitique: enjeux internationaux , 2022. Adaptado.
+      Géopolitique: enjeux internationaux, 2022. Adaptado.
       Com base nos textos, qual alternativa explica o impacto ambiental do consumismo no setor da indústria têxtil?
   alternativas:
     A:
@@ -1160,8 +1120,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 34
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: hidrografia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1170,7 +1130,7 @@ questoes:
       Principais rios da Região Hidrográfica Amazônica
   - figura: q034-1.webp
   - texto: |-
-      Atlas da Amazônia Brasileira , 2025. Adaptado.
+      Atlas da Amazônia Brasileira, 2025. Adaptado.
       A partir das informações do mapa e do texto, assinale a alternativa correta.
   alternativas:
     A:
@@ -1195,34 +1155,25 @@ questoes:
         do rio Amazonas na Cordilheira dos Andes.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 15, y≈504: formatação perdida no texto puro'
+  pendencias: []
 - numero: 35
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: relevo-e-solos
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Em regiões montanhosas e com clima tropical, é comum a ocorrência de movimentações de massa associados a volumes elevados de chuva. Pelos seus efeitos destrutivos, principalmente em áreas ocupadas de forma irregular, tornamse foco de estudos de identificação, caracterização, monitoramento e prevenção. Observe a seguir um exemplo de sistema de monitoramento:
+      Em regiões montanhosas e com clima tropical, é comum a ocorrência de movimentações de massa associados a volumes elevados de chuva. Pelos seus efeitos destrutivos, principalmente em áreas ocupadas de forma irregular, tornam-se foco de estudos de identificação, caracterização, monitoramento e prevenção. Observe a seguir um exemplo de sistema de monitoramento:
       Sistema de monitoramento de corrida de detritos
   - figura: q035-1.webp
   - texto: |-
-      Sensores
-      Função
-      Pluviômetro
-      Medir as precipitações
-      Geofones
-      Medir as vibrações no solo
-      Sonar de
-      Medir o nível dos rios
-      volume
-      Cabo sensor
-      Registrar a passagem de detritos
-      Sensor de
-      Registrar a força da corrida de detritos
-      impacto
-      Corridas de Detritos no Brasil , FEBRAGEO. 2022. Adaptado.
+      Sensores – Função
+      Pluviômetro – Medir as precipitações
+      Geofones – Medir as vibrações no solo
+      Sonar de volume – Medir o nível dos rios
+      Cabo sensor – Registrar a passagem de detritos
+      Sensor de impacto – Registrar a força da corrida de detritos
+      Corridas de Detritos no Brasil, FEBRAGEO. 2022. Adaptado.
       Sobre o motivo da localização dos sensores, assinale a alternativa correta:
   alternativas:
     A:
@@ -1242,11 +1193,10 @@ questoes:
         permite detectar a composição da corrida de detritos.
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 15, y≈390–504
+  pendencias: []
 - numero: 36
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1256,9 +1206,11 @@ questoes:
       M, equidistante na horizontal dos pontos A e B, a 40 m de cada um, nos quais estão os prismas de
       leitura (miras), conforme a figura a seguir:'
   - figura: q036-1.webp
-  - texto: "Imagem sem escala\nAdmitindo-se que o ângulo de inclinação descendente, \U0001D6FC , é 7°
-      e o ângulo de inclinação ascendente, \U0001D6FC , é 5° e que a leitura no prisma, ℎ no ponto B foi
-      de 3,60 m, determine a diferença de altitude (altura), em metros, entre os pontos A e B."
+  - texto: Imagem sem escala
+  - figura: q036-2.webp
+  - texto: |-
+      Note e adote:
+      tan(5°) ≅ 0.087 e tan(7°) ≅ 0.122
   alternativas:
     A:
       texto: 1,60
@@ -1269,47 +1221,42 @@ questoes:
     D:
       texto: 3,96
     E:
-      texto: "4,80\nNote e adote:\n\U0001D461\U0001D44E\U0001D45B (5°) ≅ 0.087 e \U0001D461\U0001D44E\U0001D45B
-        (7°) ≅ 0.122"
+      texto: 4,80
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 16, y≈322, 333, 340, 344, 364, 384, 402, 418, 437: conferir
-    o texto'
-  - 'Texto sublinhado na página 16, y≈435: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 16, y≈435–465
+  pendencias: []
 - numero: 37
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-analitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Engenheiros estavam mapeando um terreno para construção de um empreendimento com quatro prédios
       em formato cilíndrico distribuídos em torno de uma praça com o formato quadrado. Para a construção
-      dos prédios, os engenheiros demarcaram os vértices da praça nos pontos \U0001D434 =(0,0) , \U0001D435
-      =(8,0) , C e D, em sistema de coordenadas cartesianas onde cada unidade corresponde a um metro.\nSabendo-se
+      dos prédios, os engenheiros demarcaram os vértices da praça nos pontos \U0001D434 = (0,0), \U0001D435
+      = (8,0), C e D, em sistema de coordenadas cartesianas onde cada unidade corresponde a um metro.\nSabendo-se
       que a borda da seção circular de cada prédio tangencia cada lado do quadrado no seu ponto médio,
       qual deve ser a equação da circunferência do prédio que tem uma distância de 10 m do seu centro
-      até o centro do quadrado e que passa pelo ponto de tangência \U0001D443 , conforme a figura?"
+      até o centro do quadrado e que passa pelo ponto de tangência \U0001D443, conforme a figura?"
   - figura: q037-1.webp
   - texto: Imagem sem escala
   alternativas:
     A:
-      texto: "( \U0001D465− 14) +( \U0001D466− 4) =36"
+      texto: "(\U0001D465 − 14)² + (\U0001D466 − 4)² = 36"
     B:
-      texto: "( \U0001D465− 18) +( \U0001D466− 4) =100"
+      texto: "(\U0001D465 − 18)² + (\U0001D466 − 4)² = 100"
     C:
-      texto: "( \U0001D465− 8) +( \U0001D466− 24) =36"
+      texto: "(\U0001D465 − 8)² + (\U0001D466 − 24)² = 36"
     D:
-      texto: "\U0001D465 + \U0001D466 =36"
+      texto: "\U0001D465² + \U0001D466² = 36"
     E:
-      texto: "( \U0001D465− 4) +( \U0001D466− 24) =100"
+      texto: "(\U0001D465 − 4)² + (\U0001D466 − 24)² = 100"
   resposta: A
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1343,14 +1290,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 39
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-republica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Os grotões transformaram-se em jardins cortados a meio pelas avenidas e pela sombra dos viadutos não há mais sapo. Nos jardins encontrareis recintos fechados com instrutoras, dentistas, educadoras sanitárias dentro. São os parques infantis, onde as crianças proletárias se socializam aprendendo nos brinquedos o cooperativismo e a consciência do homem social.
-      Mário de Andrade. “Dia de São Paulo”. Revista do Arquivo Municipal . São Paulo: Departamento de Cultura, 1936, nº 19.
+      Mário de Andrade. “Dia de São Paulo”. Revista do Arquivo Municipal. São Paulo: Departamento de Cultura, 1936, nº 19.
       O excerto relata alterações na paisagem urbana paulistana com a implantação de novos equipamentos que visavam
   alternativas:
     A:
@@ -1372,19 +1319,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 40
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: leituras-obrigatorias
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       Considere os dois fragmentos a seguir:
-      O fundamento psicológico sobre o qual se eleva o tipo das individualidades da cidade grande é a intensificação da vida nervosa , que resulta da mudança rápida e ininterrupta de impressões [...]. Talvez não haja nenhum fenômeno tão característico da cidade grande como o caráter blasé . [...] A essência do caráter blasé é o embotamento frente à distinção das coisas [...]. Em parte por conta dessa situação psicológica, em parte em virtude do direito à desconfiança que temos perante os elementos da vida na cidade grande, que passam por nós em um contato fugaz, somos coagidos a uma reserva, em virtude da qual mal conhecemos os vizinhos que temos por muitos anos [...]. Ao mesmo tempo, essa reserva garante ao indivíduo uma espécie [...] de liberdade pessoal.
-      Simmel, Georg. (2005). As grandes cidades e a vida do espírito . Mana, Trad. Leopoldo Waizbort. Adaptado.
+      O fundamento psicológico sobre o qual se eleva o tipo das individualidades da cidade grande é a intensificação da vida nervosa, que resulta da mudança rápida e ininterrupta de impressões [...]. Talvez não haja nenhum fenômeno tão característico da cidade grande como o caráter blasé. [...] A essência do caráter blasé é o embotamento frente à distinção das coisas [...]. Em parte por conta dessa situação psicológica, em parte em virtude do direito à desconfiança que temos perante os elementos da vida na cidade grande, que passam por nós em um contato fugaz, somos coagidos a uma reserva, em virtude da qual mal conhecemos os vizinhos que temos por muitos anos [...]. Ao mesmo tempo, essa reserva garante ao indivíduo uma espécie [...] de liberdade pessoal.
+      Simmel, Georg. (2005). As grandes cidades e a vida do espírito. Mana, Trad. Leopoldo Waizbort. Adaptado.
       As luzes da cidade se acendiam, as cortinas de aço das portas desciam com barulho e os caixeiros, os empregados que passavam o dia sorridentes ou abstratos, por trás dos balcões [...], se transformavam em homens misteriosos, individuais, que metiam um paletó, tinham uma casa, uma rua e iam comer o seu jantar, dormir o seu sono, trancar a sua porta. [...] Todos ali tinham a sua vida isolada, sua vida particular.
       E, naquela hora, cortavam as amarras, cada um procurando o seu mundo pessoal, a sua pequenina ilha.
-      Rachel de Queiroz. Caminho de Pedras . Adaptado.
-      No primeiro trecho, publicado originalmente em 1903, o sociólogo Georg Simmel procurou condensar as características fundamentais da vida psíquica nas grandes cidades. Já no segundo, com que Rachel de Queiroz inicia o capítulo 7 de Caminho de Pedras , vemos como o protagonista Roberto percebe sua cidade a bordo de um bonde. Lendo-os em conjunto, é possível afirmar:
+      Rachel de Queiroz. Caminho de Pedras. Adaptado.
+      No primeiro trecho, publicado originalmente em 1903, o sociólogo Georg Simmel procurou condensar as características fundamentais da vida psíquica nas grandes cidades. Já no segundo, com que Rachel de Queiroz inicia o capítulo 7 de Caminho de Pedras, vemos como o protagonista Roberto percebe sua cidade a bordo de um bonde. Lendo-os em conjunto, é possível afirmar:
   alternativas:
     A:
       texto: As observações de Roberto contrariam a análise de Simmel. O “sorriso” dos empregados contradiz
@@ -1405,18 +1353,17 @@ questoes:
         empregados.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 18, y≈365: conferir o texto'
+  pendencias: []
 - numero: 41
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O carnaval, para além de ser a mais importante manifestação cultural brasileira, é o exercício concreto e sensível de vários direitos conquistados e consagrados. Ele celebra o direito à cidade, à manifestação, à associação e o direito à liberdade de expressão. Como festa pagã e sincrética, afirma o direito à liberdade religiosa sem ser proselitista e, como representação cultural, amplia o espaço cívico para combiná-lo com festividade, criatividade e liberdade artística e cultural.
       O carnaval, nas suas diversas facetas, é político. E essa característica não aparece somente nos debates promovidos através da festa, mas também pela possibilidade de desfrutar uma vida livre de censura de qualquer tipo por parte de pessoas de todas as regiões do país, em suas mais distintas realidades. Ocupar as ruas é um ato político. O lazer e a folia em espaço público, o exercício do direito à fruição e de produzir e consumir conteúdos culturais diversos também são. É ainda mais relevante o ato de externalizar e amplificar histórias, memórias e narrativas sobre grupos historicamente silenciados no país, como as populações negra, indígena e de tantas outras comunidades tradicionais. A manifestação política através de brincadeiras, danças, marchinhas, cantos e fantasias é das formas mais sublimes de expressão da aliança entre luta social, cultura e expressão estética. É a possibilidade que brasileiras e brasileiros encontram de, lutando por meio da arte, fazer ecoar uma voz esquecida no cotidiano.
-      Artigo 19 . 16/02/2024. Adaptado.
+      Artigo 19. 16/02/2024. Adaptado.
       Ao afirmar que o carnaval é político, o texto objetiva
   alternativas:
     A:
@@ -1437,14 +1384,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 42
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Os espetáculos circenses organizados ao final do século XVIII uniam o cômico e o dramático, como historicamente já faziam outras formas de espetáculo, por meio da combinação da atuação das famílias de saltimbancos, ciganos, atores da Commedia dell’Arte , e mesclavam a pantomima e o palhaço com a acrobacia, os equilíbrios, as exibições equestres e a doma de animais em um mesmo espaço. Desde aquele momento, fica visível a emergência não somente de novos modelos de espetáculos, mas também novas estruturas de organização e produção desses espetáculos, caracterizadas pela delimitação do espaço físico das apresentações, cobrança compulsória de entradas e alternância entre exibições de equilibristas, acrobatas, artistas equestres, comediantes, pantomimas e representações diversas, ou seja, um espetáculo pautado na íntima mistura de expressões e artistas originários de diferentes espaços e formações.
-      LOPES, Daniel de Carvalho; SILVA, Ermínia. Circo: percursos de uma arte em transformação contínua . Cadernos do GIPE-CIT, v. 1, 2020. Adaptado.
+      Os espetáculos circenses organizados ao final do século XVIII uniam o cômico e o dramático, como historicamente já faziam outras formas de espetáculo, por meio da combinação da atuação das famílias de saltimbancos, ciganos, atores da Commedia dell’Arte, e mesclavam a pantomima e o palhaço com a acrobacia, os equilíbrios, as exibições equestres e a doma de animais em um mesmo espaço. Desde aquele momento, fica visível a emergência não somente de novos modelos de espetáculos, mas também novas estruturas de organização e produção desses espetáculos, caracterizadas pela delimitação do espaço físico das apresentações, cobrança compulsória de entradas e alternância entre exibições de equilibristas, acrobatas, artistas equestres, comediantes, pantomimas e representações diversas, ou seja, um espetáculo pautado na íntima mistura de expressões e artistas originários de diferentes espaços e formações.
+      LOPES, Daniel de Carvalho; SILVA, Ermínia. Circo: percursos de uma arte em transformação contínua. Cadernos do GIPE-CIT, v. 1, 2020. Adaptado.
       No contexto histórico, o circo
   alternativas:
     A:
@@ -1467,12 +1414,10 @@ questoes:
         de corpos virtuosos.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈195, 462, 502: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈69–437
+  pendencias: []
 - numero: 43
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1480,7 +1425,7 @@ questoes:
   - texto: |-
       Imagem ilustrativa da exposição imersiva de Van Gogh.
       Nos últimos anos, exposições imersivas têm atraído um público amplo ao proporcionar experiências sensoriais e visuais baseadas em obras de artistas consagrados, muitas delas com trilha sonora, narração de cartas e projeções em altíssima definição. Contudo, parte da crítica especializada tem problematizado essa tendência de oferecer vivências multissensoriais que buscam envolver o visitante por completo. As críticas apontam implicações relacionadas à natureza da experiência estética, à espetacularização da arte, ao patrocínio corporativo e ao sucesso de público mediado pelas redes sociais. A crítica de arte Sheila Leirner, por exemplo, comenta:
-      Fica como se O Jardim das Delícias , A Tentação de Santo Antônio (telas de Hieronymus Bosch) e outras preciosidades como as frutas de Giuseppe Arcimboldo ou as festas campestres de Brueghel fossem ilustrações ou decorações para a grandiloquência artificial e sensacionalista de um show de cabaré. Certo, pode ser muito bonito, mas será que estas maravilhas pictóricas (em si) precisam de “efeitos especiais” para que cheguemos a elas? Até mesmo uma pequena reprodução em cartão postal pode ser mais fiel à nossa percepção...
+      Fica como se O Jardim das Delícias, A Tentação de Santo Antônio (telas de Hieronymus Bosch) e outras preciosidades como as frutas de Giuseppe Arcimboldo ou as festas campestres de Brueghel fossem ilustrações ou decorações para a grandiloquência artificial e sensacionalista de um show de cabaré. Certo, pode ser muito bonito, mas será que estas maravilhas pictóricas (em si) precisam de “efeitos especiais” para que cheguemos a elas? Até mesmo uma pequena reprodução em cartão postal pode ser mais fiel à nossa percepção...
       Disponível em https://sheilaleirnerblog.wordpress.com/.
       Com base nas informações e discussões apresentadas, assinale a alternativa que expressa a análise crítica mais fundamentada sobre o fenômeno das exposições imersivas:
   alternativas:
@@ -1508,16 +1453,16 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q044-1.webp
   - texto: |-
-      Paul Cézanne. A montanha de Sainte-Victoire , 1904.
+      Paul Cézanne. A montanha de Sainte-Victoire, 1904.
       Assim também o gênio de Cézanne consiste em fazer com que as deformações de perspectiva, pela disposição de conjunto do quadro, deixem de ser visíveis por si mesmas na visão global e contribuam apenas, como ocorre na visão natural, para dar impressão de uma ordem nascente, de um objeto que surge a se aglomerar sob o olhar. (...) O desenho deve então resultar da cor, se se quer que o mundo seja restituído em sua espessura, pois é uma massa sem lacunas, um organismo de cores, através das quais a fuga da perspectiva, os contornos, as retas, as curvas instalam-se como linhas de força, pois é vibrando que a órbita do espaço se constitui.
-      Merleau-Ponty. A dúvida de Cézanne .
+      Merleau-Ponty. A dúvida de Cézanne.
       Merleau-Ponty, filósofo francês do século XX, dedicou um espaço importante em sua filosofia à reflexão sobre a pintura e, em particular, à obra de Paul Cézanne.
       Com base na proposição do filósofo e na observação da tela do artista, é correto afirmar que cabe à expressão por meio da pintura
   alternativas:
@@ -1533,17 +1478,16 @@ questoes:
       texto: destacar a cor sobre o desenho, para fazer aparecer as perspectivas.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈277, 318: conferir o texto'
+  pendencias: []
 - numero: 45
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Decretou então o ótimo Artífice que àquele ao qual nada de próprio pudera dar tivesse como privativo tudo quanto fora partilhado por cada um dos demais. Assim, pois, tomou o homem, essa obra de tipo indefinido, e, tendo-o colocado no centro do universo, falou-lhe nestes termos: ‘A ti, ó Adão, não temos dado nem uma sede determinada, nem um aspecto peculiar, nem uma função singular precisamente para que o lugar, a imagem e as tarefas que reclamas para ti, tudo isso tenhas e realizes, mas pelo mérito de tua vontade e livre consentimento. As outras criaturas já foram prefixadas em sua constituição pelas leis por nós estatuídas. Tu, porém, não estás contido por amarra nenhuma. Antes, pela decisão do arbítrio, em cujas mãos te depositei, hás de predeterminar a tua compleição pessoal. Eu te coloquei no centro do mundo, a fim de poderes inspecionar, daí, de todos os lados, da maneira mais cômoda, tudo que existe.
-      Pico della Mirandola. Discurso sobre a dignidade do homem. In: PICO, Giovanni, Conde de Mirândola e de Concórdia. A dignidade do homem . 2ª. ed. Campo Grande: Solivros/Uniderp, 1999. Adaptado.
+      Pico della Mirandola. Discurso sobre a dignidade do homem. In: PICO, Giovanni, Conde de Mirândola e de Concórdia. A dignidade do homem. 2ª. ed. Campo Grande: Solivros/Uniderp, 1999. Adaptado.
       Elaborado em 1486, na região da atual Itália, o texto do humanista Pico della Mirandola apresenta algumas características do movimento renascentista, dentre as quais
   alternativas:
     A:
@@ -1560,15 +1504,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 46
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q046-1.webp
   - texto: |-
-      Francisco Ruiz Gijón (1683-1720), Santíssimo Cristo da Expiação , popularmente conhecido como Cristo Cachorro . Escultura em madeira, 1682 (detalhe).
-      A partir da comparação entre a escultura Cristo Cachorro , de Francisco Ruiz Gijón, e o livro O Cristo cigano , de Sophia de Mello Breyner Andresen, inspirado por ela, depreende-se:
+      Francisco Ruiz Gijón (1683-1720), Santíssimo Cristo da Expiação, popularmente conhecido como Cristo Cachorro. Escultura em madeira, 1682 (detalhe).
+      A partir da comparação entre a escultura Cristo Cachorro, de Francisco Ruiz Gijón, e o livro O Cristo cigano, de Sophia de Mello Breyner Andresen, inspirado por ela, depreende-se:
   alternativas:
     A:
       texto: A escultura barroca Cristo Cachorro prenuncia os traços modernistas do livro de Sophia de
@@ -1576,7 +1520,7 @@ questoes:
         objeto do cotidiano, está indiretamente presente na escultura como o instrumento cortante utilizado
         para sua criação.
     B:
-      texto: Tanto a escultura Cristo Cachorro , enquanto obra barroca, quanto o livro de Sophia de Mello
+      texto: Tanto a escultura Cristo Cachorro, enquanto obra barroca, quanto o livro de Sophia de Mello
         Breyner Andresen, obra modernista, revelam, na precisão dos detalhes anatômicos e na personalização
         do objeto faca, respectivamente, o desaparecimento da visão da arte enquanto ligação com o divino
         e a concepção da morte como fim absoluto.
@@ -1586,7 +1530,7 @@ questoes:
         o livro de Sophia de Mello Breyner Andresen revela seu traço moderno na despersonalização do humano,
         ao propor a faca e o amor como condutores da ação.
     D:
-      texto: A elaboração metonímica do corpo do Cristo no Cristo Cachorro , atenta aos detalhes, revela
+      texto: A elaboração metonímica do corpo do Cristo no Cristo Cachorro, atenta aos detalhes, revela
         uma antecipação de traços modernistas nessa escultura barroca, enquanto a comparação entre amor
         e morte no livro de Sophia de Mello Breyner Andresen revela os traços tardiamente românticos de
         seu estilo poético.
@@ -1599,17 +1543,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 47
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: leituras-obrigatorias
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       iii. Busca
+
       Pelos campos fora
       Caminhava sempre
       Como se buscasse
       Uma presença ausente
+
       “Onde estás tu, morte?
       Não posso te ver:
       Neste dia de Maio
@@ -1620,6 +1567,7 @@ questoes:
       É verdade que passas
       Pela cidade às vezes
       Nos caixões de chumbo:
+
       Mas viro o meu rosto
       Pois não te compreendo
       És um pesadelo
@@ -1628,9 +1576,9 @@ questoes:
       Com suas mãos frescas
       E a luz logo apaga”
       [...]
-      Sophia de Mello Breyner Andresen. O Cristo cigano .
-      É tão tenaz o desvio que a esquivança encobridora ante a morte exerce sobre a cotidianidade que, no ser-um-com-ooutro, seus ‘próximos’ ainda se empenham com frequência precisamente junto ao ‘moribundo’ para o persuadir de que escapa da morte e retorna em seguida à tranquila cotidianidade do mundo de suas ocupações. Tal ‘preocupação-com-o-outro’ pensa ‘consolar’ dessa maneira o ‘moribundo’. Ela quer devolvê-lo à existência, ajudando-o a encobrir ainda mais completamente sua possibilidade de ser mais própria e irremetente. A gente se ocupa dessa maneira de uma constante tranquilização sobre a morte. Mas, no fundo, ela vale tanto para o ‘moribundo’ quanto para ‘os que consolam’. E mesmo no caso do deixar de viver, a publicidade ainda não deve ser perturbada, nem inquietada pelo acontecimento na sua ocupada despreocupação. Pois não raro se vê na morte dos outros uma inconveniência social, quando não mesmo uma falta de tato, cuja publicidade deve ser poupada.
-      Martin Heidegger. Ser e Tempo , §51.
+      Sophia de Mello Breyner Andresen. O Cristo cigano.
+      É tão tenaz o desvio que a esquivança encobridora ante a morte exerce sobre a cotidianidade que, no ser-um-com-o-outro, seus ‘próximos’ ainda se empenham com frequência precisamente junto ao ‘moribundo’ para o persuadir de que escapa da morte e retorna em seguida à tranquila cotidianidade do mundo de suas ocupações. Tal ‘preocupação-com-o-outro’ pensa ‘consolar’ dessa maneira o ‘moribundo’. Ela quer devolvê-lo à existência, ajudando-o a encobrir ainda mais completamente sua possibilidade de ser mais própria e irremetente. A gente se ocupa dessa maneira de uma constante tranquilização sobre a morte. Mas, no fundo, ela vale tanto para o ‘moribundo’ quanto para ‘os que consolam’. E mesmo no caso do deixar de viver, a publicidade ainda não deve ser perturbada, nem inquietada pelo acontecimento na sua ocupada despreocupação. Pois não raro se vê na morte dos outros uma inconveniência social, quando não mesmo uma falta de tato, cuja publicidade deve ser poupada.
+      Martin Heidegger. Ser e Tempo, §51.
       A escritora Sophia de Mello Breyner Andresen e o filósofo Martin Heidegger descrevem, por meio de recursos expositivos bem diferentes, uma mesma atitude geral comumente assumida por uma pessoa ante o desvelamento de sua própria mortalidade a partir da constatação da morte ou do adoecimento mortal de uma outra pessoa. Qual alternativa melhor descreve essa atitude?
   alternativas:
     A:
@@ -1647,8 +1595,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 48
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1656,8 +1604,8 @@ questoes:
       Mwando está embasbacado com a descoberta do insólito do mundo. Como o Adão no Paraíso, a voz da serpente sugeriu-lhe a maçã, que lhe arrancou brutalmente a venda de todos os mistérios. Sim, escutou os lábios de uma mulher pronunciando em sussurros o seu nome, despertando-o do ventre fecundo da inocência. Mwando nasceu. Sente o coração a bater com força, mesmo à maneira do primeiro amor.
       (…)
       Procurou o refúgio do quarto e fechou-se. Estava transtornado. Sentia a sua devoção abalada pela paixão. Não conseguia fugir às tramas da serpente, a Sarnau arrastava-o cada vez mais para o abismo.
-      Paulina Chiziane. Balada de amor ao vento .
-      Considerando a intertextualidade bíblica presente no excerto de Balada de amor ao vento , a experiência de Mwando é caracterizada
+      Paulina Chiziane. Balada de amor ao vento.
+      Considerando a intertextualidade bíblica presente no excerto de Balada de amor ao vento, a experiência de Mwando é caracterizada
   alternativas:
     A:
       texto: por uma decepção com o mundo, causada pela perda da fé e pela compreensão da fragilidade
@@ -1678,14 +1626,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 49
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      [...] as lendárias Rotas da Seda, longe de serem meras rotas comerciais, eram rodovias culturais que desempenhavam um papel fundamental na ligação entre o leste e o oeste, reunindo intermitentemente nômades e moradores da cidade, povos pastoris e agricultores, mercadores e monges, soldados e peregrinos. A noção de movimento é, portanto, central para a compreensão das relações entre os povos [...]. Um diálogo entre culturas signi fi ca trocas não apenas de bens, mas também de ideias.
-      Vadime Elisséeff. “Introduction. Approaches Old and New to Silk Roads”. The Silk roads: highways of culture and commerce . New York: Berghahn Books, 2000. Traduzido e adaptado.
+      [...] as lendárias Rotas da Seda, longe de serem meras rotas comerciais, eram rodovias culturais que desempenhavam um papel fundamental na ligação entre o leste e o oeste, reunindo intermitentemente nômades e moradores da cidade, povos pastoris e agricultores, mercadores e monges, soldados e peregrinos. A noção de movimento é, portanto, central para a compreensão das relações entre os povos [...]. Um diálogo entre culturas significa trocas não apenas de bens, mas também de ideias.
+      Vadime Elisséeff. “Introduction. Approaches Old and New to Silk Roads”. The Silk roads: highways of culture and commerce. New York: Berghahn Books, 2000. Traduzido e adaptado.
       Com base no excerto, que aborda o complexo de rotas terrestres que se estenderam, durante a Idade Média, por boa parte da Ásia, Leste da África e Sul da Europa, as trocas culturais e os deslocamentos tiveram impacto na
   alternativas:
     A:
@@ -1707,14 +1655,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 50
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Entre os deveres de todo devoto do Islã está a obrigatoriedade de pelo menos uma vez na vida fazer uma peregrinação a Meca, cidade sagrada na qual Maomé primeiro pregou a religião. Nem todos podiam fazer a peregrinação, mas muitos faziam, geralmente juntando-se às caravanas que percorriam o Saara, chegando a Meca a partir do Cairo. Essa circulação de pessoas, que entravam em contato com os lugares nos quais era intenso o ensino do Islã, criava vínculos entre todo o mundo muçulmano do Sael, norte da África e península Arábica. Os ensinamentos islâmicos eram ainda reforçados pela ação dos ulemás, estudiosos do Alcorão que se assentavam em algumas cidades ou passavam períodos em diferentes lugares. As escolas corânicas, nas quais os meninos liam e decoravam o Alcorão, também eram lugares de atuação dos ulemás, que mantinham vivo o ensino do islã.
-      Marina de Mello e Souza. África e Brasil africano . São Paulo: Ática, 2007.
+      Marina de Mello e Souza. África e Brasil africano. São Paulo: Ática, 2007.
       Ao tratar do islamismo na Idade Média, o texto caracteriza
   alternativas:
     A:
@@ -1736,17 +1684,18 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 51
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: seculo-xx
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
       No Afeganistão, em vinte anos de guerra, morreram mais de 157 mil pessoas; no Iraque, de 2003 até hoje, dez anos depois de as tropas americanas se retirarem do país, foram mortas entre 308 e 600 mil; e no Paquistão, o aliado dos Estados Unidos na Guerra ao Terror, 70 mil.
       As violações de direitos humanos por militares americanos, como os abusos e a tortura de prisioneiros, muitas vezes inocentes, na prisão de Abu Ghraib, no Iraque, e na base de Guantánamo, em Cuba, geraram ainda mais ressentimento nas populações desses países.
       A Guerra ao Terror provocou mais radicalização religiosa, conflitos internos, forçou milhões de pessoas a abandonar suas casas e a fugir para outros países, aumentando ainda mais o preconceito em relação a muçulmanos e árabes. Dizem que o mundo nunca mais foi o mesmo depois do Onze de Setembro.
-      Simone Duarte. O vento mudou de direção: o Onze de Setembro que o mundo não viu . São Paulo: Fósforo, 2021.
-      O excerto traz informações sobre a atuação militar norteamericana na Ásia após os atentados terroristas de 11 de setembro de 2001 e afirma que essas investidas militares
+      Simone Duarte. O vento mudou de direção: o Onze de Setembro que o mundo não viu. São Paulo: Fósforo, 2021.
+      O excerto traz informações sobre a atuação militar norte-americana na Ásia após os atentados terroristas de 11 de setembro de 2001 e afirma que essas investidas militares
   alternativas:
     A:
       texto: provocaram novos confrontos locais e mundiais e acirraram perseguições de caráter étnico
@@ -1767,8 +1716,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 52
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: geopolitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1779,10 +1728,8 @@ questoes:
       2025, o governo norte americano propôs que a rota de transporte estratégica turco-azerbaijana seja
       controlada pelos EUA, por 99 anos. Essa proposta ainda está em curso, devido à oposição do Irã.
   - figura: q052-1.webp
-  - figura: q052-2.webp
-  - figura: q052-3.webp
   - texto: |-
-      Reconfiguração geopolítica do Cáucaso (2023). Atlas Géopolitique Mondial , 2025. Adaptado.
+      Reconfiguração geopolítica do Cáucaso (2023). Atlas Géopolitique Mondial, 2025. Adaptado.
       Com base no texto, na legenda do mapa e em seus conhecimentos, assinale a alternativa que explica os motivos da ofensiva do Azerbaijão contra os armênios.
   alternativas:
     A:
@@ -1809,8 +1756,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 53
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: geopolitica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1841,14 +1788,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 54
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: antiguidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Nossa forma de governo não entra em rivalidade com as instituições dos outros. Nosso governo não copia o de nossos vizinhos, mas é um exemplo para eles. É verdade que somos chamados de democracia, pois a administração está nas mãos de muitos e não de poucos. Mas, enquanto existe justiça igual para todos e igualmente em suas disputas privadas, a reivindicação de excelência também é reconhecida; e quando um cidadão é de alguma forma distinto, ele é preferido para o serviço público, não como uma questão de privilégio, mas como recompensa do mérito. Nem a pobreza é um obstáculo, pois um homem pode beneficiar seu país, seja qual for a obscuridade de sua condição. Não há exclusividade em nossa vida pública, e em nossos negócios privados não suspeitamos uns dos outros [...]. Enquanto estamos assim sem restrições em nossos negócios privados, um espírito de reverência permeia nossos atos públicos; somos impedidos de fazer o mal pelo respeito às autoridades e às leis, tendo uma consideração especial por aquelas que são ordenadas para a proteção dos prejudicados, bem como por aquelas leis não escritas.
-      Tucídides. Oração Fúnebre de Péricles . University of Minnesota. Human Rights Library. Richard Hoocker, 1996. Adaptado.
+      Tucídides. Oração Fúnebre de Péricles. University of Minnesota. Human Rights Library. Richard Hoocker, 1996. Adaptado.
       O excerto, que pretende reproduzir o discurso fúnebre de Péricles (século V a.C.) na Guerra do Peloponeso,
   alternativas:
     A:
@@ -1865,37 +1812,37 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 55
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: aritmetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Existem números curiosos na matemática. Os números perfeitos são alguns deles. Um número \U0001D45B
-      (para \U0001D45B∈ℕ ) é perfeito se, e somente se, for igual à soma de seus divisores positivos (excluindo
-      o próprio). Relacionando números perfeitos e números primos, Euclides escreveu uma proposição em
-      seu famoso livro “Elementos”: se 2 − 1 é um número primo, então 2 (2 − 1) é um número perfeito.\nConsiderando
+      (para \U0001D45B ∈ ℕ*) é perfeito se, e somente se, for igual à soma de seus divisores positivos
+      (excluindo o próprio). Relacionando números perfeitos e números primos, Euclides escreveu uma proposição
+      em seu famoso livro “Elementos”: se 2ⁿ − 1 é um número primo, então 2ⁿ⁻¹(2ⁿ − 1) é um número perfeito.\nConsiderando
       o que foi exposto, é correto afirmar:"
   alternativas:
     A:
-      texto: "Com exceção de \U0001D45B =1 , os 5 primeiros termos da sequência ( \U0001D44E )=(2 − 1)
-        são números primos."
+      texto: "Com exceção de \U0001D45B = 1, os 5 primeiros termos da sequência (\U0001D44Eₙ) = (2ⁿ −
+        1) são números primos."
     B:
       texto: Os termos da progressão geométrica, cujo primeiro termo é o primeiro número perfeito e cuja
         razão é 3, são pares.
     C:
       texto: Os números 28 e 31 são números perfeitos.
     D:
-      texto: "Na proposição de Euclides, para \U0001D45B =4 , obtemos que 2 − 1 não é primo, mas que 2
-        (2 − 1) é perfeito."
+      texto: "Na proposição de Euclides, para \U0001D45B = 4, obtemos que 2ⁿ − 1 não é primo, mas que
+        2ⁿ⁻¹(2ⁿ − 1) é perfeito."
     E:
-      texto: "A sequência formada pela diferença dos termos consecutivos de ( \U0001D44E )=(2 − 1) é uma
-        progressão aritmética de razão 2."
+      texto: "A sequência formada pela diferença dos termos consecutivos de (\U0001D44Eₙ) = (2ⁿ − 1) é
+        uma progressão aritmética de razão 2."
   resposta: B
   anulada: false
   pendencias: []
 - numero: 56
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1922,16 +1869,15 @@ questoes:
         comuns.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈136, 171, 193, 268: conferir o texto'
+  pendencias: []
 - numero: 57
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: biologia-molecular
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Em abril de 2025, uma empresa de biotecnologia anunciou que havia criado lobos com características
-      de lobos-gigantes, ou dire-wolves , uma espécie extinta há milhares de anos. Para isso, a empresa
+      de lobos-gigantes, ou dire-wolves, uma espécie extinta há milhares de anos. Para isso, a empresa
       obteve o genoma de lobos-gigantes e o comparou com o genoma de lobos modernos. Com base nesta comparação,
       foram feitas 20 modificações em 14 genes do genoma do lobo moderno, utilizando tecnologias de edição
       gênica. Em seguida, o núcleo de uma célula de lobo moderno contendo o DNA editado foi inserido em
@@ -1956,11 +1902,10 @@ questoes:
       texto: nenhuma espécie conhecida, pois os efeitos da edição genética são imprevisíveis.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 26, y≈390, 422, 445, 503, 649, 677, 688: conferir o texto'
+  pendencias: []
 - numero: 58
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1982,8 +1927,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 59
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -2003,56 +1948,43 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: gravitacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Desde as primeiras descobertas, os buracos negros despertam enorme interesse da humanidade.
-      Eles são caracterizados por regiões suficientemente densas e massivas em que o campo gravitacional
-      é tão intenso que nada que esteja a distâncias inferiores a \U0001D445 do buraco negro consegue
-      escapar de sua atração, nem a luz ou outras formas de radiação. Esse raio, também conhecido como
-      raio de Schwarzschild , é expresso por \U0001D445 =2 \U0001D43A\U0001D440 / \U0001D450 , sendo \U0001D43A
-      a constante de gravitação universal, \U0001D440 a massa do buraco negro e \U0001D450 a velocidade
-      da luz.\nConsidere, por simplicidade, um buraco negro de massa igual à massa solar \U0001D440 =
-      2×10 kg e de raio igual a \U0001D445 . Nesse caso, a razão entre a densidade volumétrica de um buraco
-      negro e a densidade volumétrica do Sol apresenta uma ordem de grandeza mais próxima de:"
+  - figura: q060-1.webp
+  - figura: q060-2.webp
   alternativas:
     A:
-      texto: '10'
+      texto: 10⁻²
     B:
-      texto: '10'
+      texto: 10⁴
     C:
-      texto: '10'
+      texto: 10¹⁰
     D:
-      texto: '10'
+      texto: 10¹⁶
     E:
-      texto: "10\nNote e adote:\nSuponha uniformes as densidades volumétricas do Sol e do buraco negro.\nConsidere
-        que o buraco negro e o Sol sejam esféricos e tenham distribuição de massa uniforme.\n\U0001D43A
-        = 10 Nm /kg ; \U0001D445 = 10 m ; \U0001D450 = 3×10 m/s."
+      texto: 10²²
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 27, y≈118, 147, 150, 151, 164, 194, 197, 248, 259, 270,
-    281, 291, 367, 370: conferir o texto'
-  - 'Texto sublinhado na página 27, y≈311: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 27, y≈311–379
+  pendencias: []
 - numero: 61
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Em 1905, Albert Einstein propôs que a luz, um tipo de radiação eletromagnética, é composta
-      por fótons, sendo que cada fóton tem energia proporcional à frequência da luz ( \U0001D453 ) e à
-      constante de Planck ( ℎ ). Nesses termos, \U0001D438 = ℎ \U0001D453 , e a intensidade da luz é a
-      medida da quantidade de fótons. Essa interpretação foi fundamental para o desenvolvimento da teoria
-      quântica da luz e para explicar o efeito fotoelétrico. Esse efeito consiste em um fenômeno físico
-      no qual elétrons são ejetados de um material, geralmente um metal, quando este é irradiado com luz
-      cujos fótons têm energia maior que a energia de ligação do elétron ao material, também conhecida
-      como função trabalho. Assim, quando o fóton incide sobre a superfície do material, a energia excedente
-      transforma-se na energia cinética do elétron que escapa da superfície.\nEm qual das situações a
-      seguir a energia cinética do elétron ejetado no efeito fotoelétrico aumenta?"
+      por fótons, sendo que cada fóton tem energia proporcional à frequência da luz (\U0001D453) e à constante
+      de Planck (ℎ). Nesses termos, \U0001D438 = ℎ\U0001D453, e a intensidade da luz é a medida da quantidade
+      de fótons. Essa interpretação foi fundamental para o desenvolvimento da teoria quântica da luz e
+      para explicar o efeito fotoelétrico. Esse efeito consiste em um fenômeno físico no qual elétrons
+      são ejetados de um material, geralmente um metal, quando este é irradiado com luz cujos fótons têm
+      energia maior que a energia de ligação do elétron ao material, também conhecida como função trabalho.
+      Assim, quando o fóton incide sobre a superfície do material, a energia excedente transforma-se na
+      energia cinética do elétron que escapa da superfície.\nEm qual das situações a seguir a energia
+      cinética do elétron ejetado no efeito fotoelétrico aumenta?"
   alternativas:
     A:
       texto: Aumentando a intensidade da luz incidente.
@@ -2066,12 +1998,10 @@ questoes:
       texto: Diminuindo a energia do fóton incidente.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 27, y≈603: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 27, y≈662: conferir o texto'
+  pendencias: []
 - numero: 62
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: termoquimica
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -2092,8 +2022,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 63
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: estequiometria
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -2102,6 +2032,11 @@ questoes:
       cabine. Calcule a massa de clorato de sódio mínima, em gramas, que deve ser utilizada por reservatório,
       para gerar oxigênio suficiente por 15 minutos, considerando que a taxa de respiração média de oxigênio
       de um adulto é de 1,2 L/min ao nível do mar a 20 °C.
+  - texto: |-
+      Note e adote:
+      Considere que quantidade de matéria de oxigênio consumida é independente da altitude e que os passageiros continuam respirando normalmente.
+      Volume molar no nível do mar a 20 °C = 24 L/mol
+      MM NaCℓO₃ = 106 g/mol
   alternativas:
     A:
       texto: '27'
@@ -2112,19 +2047,13 @@ questoes:
     D:
       texto: '94'
     E:
-      texto: |-
-        119
-        Note e adote:
-        Considere que quantidade de matéria de oxigênio consumida é independente da altitude e que os passageiros continuam respirando normalmente.
-        Volume molar no nível do mar a 20 c C = 24 L/mol
-        MM NaC , O = 106 g/mol
+      texto: '119'
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 27, y≈603–670
+  pendencias: []
 - numero: 64
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: biologia-molecular
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2148,8 +2077,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 65
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: saude
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2173,9 +2102,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 66
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: ingles
+  assunto: compreensao
+  disciplinas_secundarias:
+  - biologia
   texto_base: tb05
   enunciado:
   - texto: Segundo o texto, os experimentos demonstram que
@@ -2194,17 +2124,17 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: atomistica
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
   - texto: |-
-      A espectrometria de massas, utilizada para a identificação das proteínas no estudo apresentado no texto, é uma técnica que permite determinar com precisão a massa molecular de moléculas carregadas. A determinação da massa exata da molécula é feita a partir do conhecimento da sua carga e da razão massa/carga ( m/z ), parâmetro que influencia no movimento das espécies, permitindo sua determinação. Caso a carga das moléculas seja unitária, a razão m/z é numericamente igual à massa da espécie a ser identificada. Caso a carga seja 2, a razão m/z detectada é metade da massa da molécula.
-      A imagem a seguir representa, na forma de um gráfico, o resultado de uma análise por espectrometria de massas de uma amostra pura contendo apenas uma espécie intacta com fórmula molecular [C H NO Ca] e massa exata, considerando os isótopos mais abundantes, de 843,444 g/mol, detectada como m/z 421,722.
+      A espectrometria de massas, utilizada para a identificação das proteínas no estudo apresentado no texto, é uma técnica que permite determinar com precisão a massa molecular de moléculas carregadas. A determinação da massa exata da molécula é feita a partir do conhecimento da sua carga e da razão massa/carga (m/z), parâmetro que influencia no movimento das espécies, permitindo sua determinação. Caso a carga das moléculas seja unitária, a razão m/z é numericamente igual à massa da espécie a ser identificada. Caso a carga seja 2, a razão m/z detectada é metade da massa da molécula.
+      A imagem a seguir representa, na forma de um gráfico, o resultado de uma análise por espectrometria de massas de uma amostra pura contendo apenas uma espécie intacta com fórmula molecular [C₄₄H₆₉NO₁₂Ca]²⁺ e massa exata, considerando os isótopos mais abundantes, de 843,444 g/mol, detectada como m/z 421,722.
   - figura: q067-1.webp
   - texto: A presença de outros sinais além do sinal de m/z 421,722, mesmo em uma amostra pura não contendo
-      nenhuma outra espécie além do [C H NO Ca] , deve-se
+      nenhuma outra espécie além do [C₄₄H₆₉NO₁₂Ca]²⁺, deve-se
   alternativas:
     A:
       texto: à presença de outros isótopos menos abundantes e mais pesados de átomos presentes na molécula.
@@ -2218,11 +2148,10 @@ questoes:
       texto: à presença de outros isótopos menos abundantes e mais leves de átomos presentes na molécula.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 29, y≈226, 228, 471, 474: conferir o texto'
+  pendencias: []
 - numero: 68
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -2242,8 +2171,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 69
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -2265,8 +2194,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 70
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -2293,43 +2222,43 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 71
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: termologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Para muitas pessoas, um ovo perfeitamente cozido tem uma gema cremosa e uma clara firme. A gema atinge uma textura cremosa a 65 °C, mas a clara fica totalmente firme a 85 °C. Métodos comuns de cozimento frequentemente resultam em um ovo com clara e gema duras (1), um ovo com
-      clara dura e gema cremosa (2) ou um ovo com clara e gema cremosas (3). Pesquisadores da Universidade de Nápoles, entretanto, perceberam que alternar o cozimento dos ovos em água a 100 °C e 30 °C a cada dois minutos, totalizando 32 minutos (4), faz com que as duas regiões do ovo (clara e gema) respondam de formas diferentes às temperaturas alternadas. Aplicando o método estudado (4), a temperatura da clara oscila antes de finalmente se estabilizar em torno de 85 °C, enquanto a temperatura da gema sobe lentamente até atingir 67 °C, quando chega à consistência desejada.
+      Para muitas pessoas, um ovo perfeitamente cozido tem uma gema cremosa e uma clara firme. A gema atinge uma textura cremosa a 65 °C, mas a clara fica totalmente firme a 85 °C.
+      Métodos comuns de cozimento frequentemente resultam em um ovo com clara e gema duras (1), um ovo com clara dura e gema cremosa (2) ou um ovo com clara e gema cremosas (3).
+      Pesquisadores da Universidade de Nápoles, entretanto, perceberam que alternar o cozimento dos ovos em água a 100 °C e 30 °C a cada dois minutos, totalizando 32 minutos (4), faz com que as duas regiões do ovo (clara e gema) respondam de formas diferentes às temperaturas alternadas. Aplicando o método estudado (4), a temperatura da clara oscila antes de finalmente se estabilizar em torno de 85 °C, enquanto a temperatura da gema sobe lentamente até atingir 67 °C, quando chega à consistência desejada.
       A figura a seguir compara o ovo cozido para cada um dos métodos descritos.
   - figura: q071-1.webp
   - texto: |-
       Di Lorenzo, E., Romano, F., Ciriaco, L. et al. “Periodic cooking of eggs”. Commun Eng 4, 5 (2025). Adaptado.
-      Suponha que, em cada método de cozimento, cada parte do ovo (clara e gema) seja aquecida de uma temperatura inicial de 20 ºC até as respectivas temperaturas finais apresentadas na figura. A quantidade de calor total recebida Qn pelo conjunto gema + clara para o método de cozimento (n = 1, 2, 3, 4), em ordem crescente, é:
+      Suponha que, em cada método de cozimento, cada parte do ovo (clara e gema) seja aquecida de uma temperatura inicial de 20 ºC até as respectivas temperaturas finais apresentadas na figura. A quantidade de calor total recebida Qₙ pelo conjunto gema + clara para o método de cozimento (n = 1, 2, 3, 4), em ordem crescente, é:
+  - texto: |-
+      Note e adote:
+      Calor específico a pressão constante:
+      Clara: 3,8 J/g.K; Gema: 3,1 J/g.K.
+      Massa do ovo = 50 g.
+      Assuma que a massa da clara seja igual à da gema.
   alternativas:
     A:
-      texto: Q4<Q1<Q3<Q2
+      texto: Q₄ < Q₁ < Q₃ < Q₂
     B:
-      texto: Q3<Q4<Q2<Q1
+      texto: Q₃ < Q₄ < Q₂ < Q₁
     C:
-      texto: Q1<Q3<Q2<Q4
+      texto: Q₁ < Q₃ < Q₂ < Q₄
     D:
-      texto: Q3<Q2<Q4<Q1
+      texto: Q₃ < Q₂ < Q₄ < Q₁
     E:
-      texto: |-
-        Q4<Q3<Q1<Q2
-        Note e adote:
-        Calor específico a pressão constante:
-        Clara: 3,8 J/g.K; Gema: 3,1 J/g.K.
-        Massa do ovo = 50 g.
-        Assuma que a massa da clara seja igual à da gema.
+      texto: Q₄ < Q₃ < Q₁ < Q₂
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 30, y≈532–590
+  pendencias: []
 - numero: 72
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2340,6 +2269,10 @@ questoes:
       Um dos parâmetros importantes é a velocidade do jato de água ao atingir a lâmina de água que já está no filtro. Uma das conclusões do estudo é que velocidades acima de 2 m/s levam a uma melhor mistura do pó de café com a água.
       A parte (b) da figura esquematiza a situação descrita, em que H é a altura da lâmina de água e D a altura de despejo da água do bule, medidas que têm a base do filtro como referência.
       Assumindo que seja desprezível a velocidade do jato quando a água começa a ser despejada no bico do bule, para uma altura H = 8 cm, qual a altura mínima D de despejo para que a velocidade do jato, ao atingir a água, seja de, pelo menos, 2 m/s?
+  - texto: |-
+      Note e adote:
+      Densidade (massa específica) da água: d = 1000 kg/m³
+      Aceleração da gravidade: g = 10 m/s²
   alternativas:
     A:
       texto: 4 cm
@@ -2350,26 +2283,19 @@ questoes:
     D:
       texto: 18 cm
     E:
-      texto: |-
-        28 cm
-        Note e adote:
-        Densidade (massa específica) da água: d = 1000 kg/m
-        Aceleração da gravidade: g = 10 m/s
+      texto: 28 cm
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 31, y≈475: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 31, y≈492, 502: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 31, y≈475–513
+  pendencias: []
 - numero: 73
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: dinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Uma definição possível de equilíbrio mecânico estável é a seguinte:
-      “ Se um corpo está em uma posição de equilíbrio mecânico e, ao sofrer pequenos deslocamentos em torno dessa posição, sua tendência for retornar à posição original de equilíbrio, dizemos que o equilíbrio é estável . ”
+      “Se um corpo está em uma posição de equilíbrio mecânico e, ao sofrer pequenos deslocamentos em torno dessa posição, sua tendência for retornar à posição original de equilíbrio, dizemos que o equilíbrio é estável. ”
       As imagens a seguir mostram uma colher em diferentes situações de equilíbrio mecânico em cima de uma xícara.
   - figura: q073-1.webp
   - texto: Com base na definição apresentada e nos seus conhecimentos, quais imagens ilustram situações
@@ -2390,8 +2316,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 74
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2400,27 +2326,24 @@ questoes:
   - texto: 'Com base nos gráficos das funções apresentados na imagem, é correto afirmar que:'
   alternativas:
     A:
-      texto: "\U0001D464 ( \U0001D465 ) = 2 ℎ ( \U0001D465 )\ne \U0001D45B ( \U0001D465 ) = −\U0001D453
-        ( \U0001D465− 4)"
+      texto: "\U0001D464(\U0001D465) = 2ℎ(\U0001D465) e \U0001D45B(\U0001D465) = −\U0001D453(\U0001D465
+        − 4)"
     B:
-      texto: "ℎ ( \U0001D465 ) = \U0001D453 ( \U0001D465 ) − 2\ne \U0001D45A ( \U0001D465 ) = \U0001D453
-        ( \U0001D465− 3)"
+      texto: "ℎ(\U0001D465) = \U0001D453(\U0001D465) − 2 e \U0001D45A(\U0001D465) = \U0001D453(\U0001D465
+        − 3)"
     C:
-      texto: "\U0001D464 ( \U0001D465 ) = 2 \U0001D453 ( \U0001D465 )\ne \U0001D454 ( \U0001D465 ) = \U0001D453
-        ( \U0001D465 /2)"
+      texto: "\U0001D464(\U0001D465) = 2\U0001D453(\U0001D465) e \U0001D454(\U0001D465) = \U0001D453(\U0001D465/2)"
     D:
-      texto: "\U0001D45B ( \U0001D465 ) = −\U0001D45A ( \U0001D465 +1) e \U0001D454 ( \U0001D465 ) = \U0001D453
-        (2 \U0001D465 )"
+      texto: "\U0001D45B(\U0001D465) = −\U0001D45A(\U0001D465 + 1) e \U0001D454(\U0001D465) = \U0001D453(2\U0001D465)"
     E:
-      texto: "\U0001D45A ( \U0001D465 ) = \U0001D453 ( \U0001D465 +3)\ne ℎ ( \U0001D465 ) = \U0001D453
-        ( \U0001D465 )+2"
+      texto: "\U0001D45A(\U0001D465) = \U0001D453(\U0001D465 + 3) e ℎ(\U0001D465) = \U0001D453(\U0001D465)
+        + 2"
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 32, y≈331: conferir o texto'
+  pendencias: []
 - numero: 75
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: cinematica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2429,62 +2352,51 @@ questoes:
       varia com o tempo?
   alternativas:
     A:
-      texto: Figura A
       figura: q075-a.webp
     B:
-      texto: Figura B
       figura: q075-b.webp
     C:
-      texto: Figura C
       figura: q075-c.webp
     D:
-      texto: Figura D
       figura: q075-d.webp
     E:
-      texto: Figura E
       figura: q075-e.webp
   resposta: C
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: tb07
   enunciado:
   - texto: Considerando os valores de α registrados em 8000 Hz e 500 Hz para esse paciente, qual a razão
       entre as intensidades das ondas sonoras emitidas pelo audiômetro nessas duas frequências?
+  - figura: q076-1.webp
   alternativas:
     A:
-      texto: '10'
+      texto: 10²
     B:
-      texto: '10'
+      texto: 10³
     C:
-      texto: '10'
+      texto: 10⁴
     D:
-      texto: '10'
+      texto: 10⁵
     E:
-      texto: "10\nNote e adote:\nA relação entre o nível de intensidade sonora a ( \U0001D453 ), em dB,
-        e a intensidade \U0001D43C ( \U0001D453 ) da onda sonora a uma frequência \U0001D453 é dada por
-        a ( \U0001D453 )=10\nlog\nonde \U0001D43C é a intensidade do limiar da audição.\nObserve que,
-        para \U0001D43C ( \U0001D453 )= \U0001D43C , tem-se a = 10 log (1) = 0 dB"
+      texto: 10⁶
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 33, y≈423, 434, 444, 455, 466, 524, 532, 535, 546, 557:
-    conferir o texto'
-  - 'Texto sublinhado na página 33, y≈485, 531: formatação perdida no texto puro'
-  - 'Texto com símbolos não extraídos (fórmula?) na página 33, y≈527: recortar como figura'
-  - Possível figura vetorial (tabela/gráfico) na página 33, y≈485–565
-  - 'Texto-base tb07: Texto sublinhado na página 33, y≈166: formatação perdida no texto puro'
-  - 'Texto-base tb07: Índice/expoente em fonte pequena na página 33, y≈184: conferir o texto'
+  pendencias: []
 - numero: 77
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: tb07
   enunciado:
   - texto: Em qual comprimento de onda sonora ocorre a melhor resposta auditiva do paciente nesse exame?
+  - texto: |-
+      Note e adote:
+      Considere a velocidade do som no ar como vₛ = 340 m/s.
   alternativas:
     A:
       texto: 1,36 cm
@@ -2495,17 +2407,13 @@ questoes:
     D:
       texto: 34 cm
     E:
-      texto: |-
-        80 cm
-        Note e adote:
-        Considere a velocidade do som no ar como v = 340 m/s.
+      texto: 80 cm
   resposta: D
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 33, y≈166–195
+  pendencias: []
 - numero: 78
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2530,8 +2438,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 79
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb08
   enunciado:
@@ -2550,12 +2458,10 @@ questoes:
       texto: oscilação natural das populações de pragas como causa da regeneração florestal.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 34, y≈491: conferir o texto'
-  - 'Texto-base tb08: Índice/expoente em fonte pequena na página 34, y≈424: conferir o texto'
+  pendencias: []
 - numero: 80
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb08
   enunciado:
@@ -2573,11 +2479,10 @@ questoes:
       texto: ao modo como o vegetal reproduz características visuais de espécies vizinhas.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 34, y≈676: conferir o texto'
+  pendencias: []
 - numero: 81
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: tb08
   enunciado:
@@ -2608,8 +2513,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: ambiental
   disciplinas_secundarias: []
   texto_base: tb09
   enunciado:
@@ -2632,43 +2537,38 @@ questoes:
         que ocorra a lixiviação.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 35, y≈256: formatação perdida no texto puro'
-  - 'Texto-base tb09: Índice/expoente em fonte pequena na página 35, y≈72, 74, 169, 180, 190, 201, 212,
-    222: conferir o texto'
-  - 'Texto-base tb09: Texto sublinhado na página 35, y≈228: formatação perdida no texto puro'
+  pendencias: []
 - numero: 83
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: tb09
   enunciado:
-  - texto: A porcentagem em massa de fosfato (PO ) numa amostra do vidro fertilizante é de 19%. A velocidade
+  - texto: A porcentagem em massa de fosfato (PO₄³⁻) numa amostra do vidro fertilizante é de 19%. A velocidade
       de dissolução desse vidro em água é constante e independente da massa inicial, sendo igual a 7,3
-      mg/h. Em um teste de dissolução, adicionouse excesso dessa amostra de vidro fertilizante a 1 L de
-      água e mediu-se a concentração de íons fosfato ao longo do tempo. A concentração de fosfato em mol/L
-      obtida após 100 h de experimento foi
+      mg/h. Em um teste de dissolução, adicionou-se excesso dessa amostra de vidro fertilizante a 1 L
+      de água e mediu-se a concentração de íons fosfato ao longo do tempo. A concentração de fosfato em
+      mol/L obtida após 100 h de experimento foi
+  - texto: |-
+      Note e adote:
+      Massa molar do fosfato = 95 g/mol
   alternativas:
     A:
-      texto: 1,46 × 10
+      texto: 1,46 × 10⁻³
     B:
-      texto: 7,68 × 10
+      texto: 7,68 × 10⁻³
     C:
-      texto: 139 × 10
+      texto: 139 × 10⁻³
     D:
-      texto: 365 × 10
+      texto: 365 × 10⁻³
     E:
-      texto: |-
-        730 × 10
-        Note e adote:
-        Massa molar do fosfato = 95 g/mol
+      texto: 730 × 10⁻³
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 35, y≈228–257
+  pendencias: []
 - numero: 84
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2691,8 +2591,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 85
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2715,17 +2615,16 @@ questoes:
         uma nova espécie.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 36, y≈248, 255, 278: conferir o texto'
+  pendencias: []
 - numero: 86
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: zoologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A rega e o zelo geraram uma infinidade de seres que descobria nos dedos ao mexer na terra: minhocas, besouros verdes, bichos-de-conta.
-      Djaimilia Pereira de Almeida. A visão das plantas .
+      Djaimilia Pereira de Almeida. A visão das plantas.
       Na obra A visão das plantas (2021) são descritas características dos animais e das plantas no jardim cuidado por Celestino. Nesta frase, são citados animais que pertencem a diferentes grupos de invertebrados, como as minhocas (anelídeos), os besouros (insetos) e os bichos-de-conta (crustáceos), também conhecidos como tatuzinhos de jardim. Assinale a alternativa que apresenta corretamente a informação sobre o sistema respiratório destes grupos.
   alternativas:
     A:
@@ -2735,7 +2634,7 @@ questoes:
       texto: As minhocas apresentam respiração cutânea e os besouros apresentam respiração traqueal, sendo
         a umidade do solo importante em ambos os casos.
     C:
-      texto: Os besouros apresentam respiração traqueal e os bichosde-conta apresentam respiração pulmonar,
+      texto: Os besouros apresentam respiração traqueal e os bichos-de-conta apresentam respiração pulmonar,
         e a umidade do solo não é importante na respiração destes animais.
     D:
       texto: As minhocas, os besouros e os bichos-de-conta apresentam respiração branquial, sendo a umidade
@@ -2745,19 +2644,18 @@ questoes:
         do solo não é importante na respiração dos três animais.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 36, y≈476: conferir o texto'
+  pendencias: []
 - numero: 87
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       As plantas viam o jardineiro como as plantas vêem. Não se sentiam agradecidas. Tratavam o seu regador à semelhança da chuva que caía sobre elas nas noites de Outono. Florescerem não era o seu meio de meterem conversa com o jardineiro, mas uma forma de acentuarem a sua indiferença à declaração de amor que ele cultivava a cada hora.
       Tanto lhes fazia serem cuidadas por um assassino, se eram sujas as mãos que as amparavam ou o que viera antes do amor que ele lhes dedicava.
-      Seguiam ‑ no com o seu olhar sem julgamento, alheias a que, todas as manhãs, Celestino acordava por elas. Vigiavam os seus passos, pressentiam a sua presença, alegravam ‑ se de o ver, conheciam as suas rotinas. Sem que por um instante lhe sentissem a falta, ou se afligissem com as suas ausências ocasionais.
-      Djaimilia Pereira de Almeida. A visão das plantas .
+      Seguiam-no com o seu olhar sem julgamento, alheias a que, todas as manhãs, Celestino acordava por elas. Vigiavam os seus passos, pressentiam a sua presença, alegravam-se de o ver, conheciam as suas rotinas. Sem que por um instante lhe sentissem a falta, ou se afligissem com as suas ausências ocasionais.
+      Djaimilia Pereira de Almeida. A visão das plantas.
       Considerando o trecho citado, depreende-se que o “olhar sem julgamento”
   alternativas:
     A:
@@ -2779,14 +2677,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 88
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Entre 1810 e 1850 os debates acalorados giraram em torno do fim do tráfico internacional, da sua legislação, da sua repressão, num impressionante vaivém, ou na famosa expressão: “Para inglês ver”. Até que o comércio internacional de almas fosse extinto em 1850, e na verdade alguns anos depois, muita pressão externa foi necessária. O fim do tráfico não significou a abolição da escravidão, que ainda permaneceria forte por quase quarenta anos.
-      Lilia M. Schwarcz e Flávio Gomes. “Apresentação”. In: Dicionário da escravidão e liberdade . São Paulo: Companhia das Letras, 2018. Adaptado.
+      Lilia M. Schwarcz e Flávio Gomes. “Apresentação”. In: Dicionário da escravidão e liberdade. São Paulo: Companhia das Letras, 2018. Adaptado.
       De acordo com o excerto, é correto afirmar:
   alternativas:
     A:
@@ -2805,14 +2703,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 89
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: portugues
+  assunto: leituras-obrigatorias
+  disciplinas_secundarias:
+  - historia
   texto_base: null
   enunciado:
   - texto: |-
       A família de Neide fazia questão de conservar o pomposo sobrenome, “Paranhos”, herdado dos tempos da escravatura. A manutenção do nome dos descendentes dos antigos colonizadores, cuja família era tradicional na cidade, para o clã descendente de africanos escravizados, ganhara um sentido de enfrentamento aos brancos “Paranhos”. Para além de ser um destino histórico, era uma velada reivindicação de uma fortuna familiar dos brancos, que em grande parte era de pertença dos negros “Paranhos”.
-      Conceição Evaristo. Canção para ninar menino grande .
+      Conceição Evaristo. Canção para ninar menino grande.
       No excerto, o uso do mesmo nome por uma família branca e uma família negra indica
   alternativas:
     A:
@@ -2839,8 +2738,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
