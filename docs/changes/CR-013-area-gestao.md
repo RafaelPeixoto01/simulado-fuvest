@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-06  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -174,7 +174,7 @@ O downgrade apaga as duas tabelas: são só agregados, nada de usuário se perde
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: rotas novas com dado pessoal, só para o administrador — ver "Revisão de segurança" abaixo
 - [x] Documentos afetados foram atualizados — PRD v7.0, Arquitetura v1.13 (ADR-016), 03-SPEC v1.13, spec 09 nova, specs 03, 05 e 07, Plano, Deploy Guide v1.8, CLAUDE.md, INDEX.md
-- [ ] CI verde na branch e em `master`; em produção, `ADMIN_GOOGLE_SUBS` configurada e a área conferida pelo usuário com o login real
+- [x] CI verde na branch e em `master`; em produção, `ADMIN_GOOGLE_SUBS` configurada e a área conferida pelo usuário com o login real — branch verde (run 37520656472), `master` verde no merge `f867359` (run 37520985605). Em produção (06/10): `Running upgrade 005 -> 006` no log da Railway e as 9 provas sincronizadas; sem cookie, as 6 rotas `/api/gestao/*` → 404 (inclusive o `POST` com JSON malformado); o `sub` da conta do dono do produto saiu do `ingestao contas` rodado dentro do container (o Postgres não tem URL pública) e foi para `ADMIN_GOOGLE_SUBS`; redeploy `SUCCESS`; o usuário conferiu a área com o login real ("A área ficou correta")
 
 **Validação runtime (06/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso, `ADMIN_GOOGLE_SUBS` com o `sub` falso do administrador e um SQLite novo com as 9 provas publicadas; 30 estudantes, históricos e reportes semeados pelos próprios serviços, o que exercitou os contadores do login e da chegada do histórico):**
 - HTTP: sem sessão e com a conta comum (Beto), as 6 rotas → 404 `nao_encontrado`, inclusive `?periodo=x`; a sessão do Beto traz `admin: false` e a do administrador, `true`. Administrador: `GET /api/gestao/uso` → 200 com `Cache-Control: no-store`, 30 pontos por dia em 30 dias e 14 semanas em 90, `periodo=15` → 422; `/aprendizado` com os modos, 3 disciplinas e a carreira-alvo semeada (10 estudantes, 5 com Prova completa, "atingiriam" AC 1 · EP 4 · PPI 5); `/qualidade` com 9 provas e 786 questões válidas, e a questão 2025-005 suspeita (11,1% em 45 respostas, os dois motivos); reportes pendentes com a questão (e `null` para `2019-001`); resolver com `Origin` de outro site → 403, `ids: []` → 422, `[1, 999]` → resolvidos `[1]`, inexistentes `[999]`; estudantes com a busca "aluno1" (11) e a etiqueta de admin.
@@ -241,7 +241,7 @@ O downgrade apaga as duas tabelas: são só agregados, nada de usuário se perde
 
 - **Migration afetada:** `006_estatisticas_gestao.py`
 - **Comando de downgrade:** `alembic downgrade 005`
-- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (Alembic `006 → 005 → 006` e BT-047) e Postgres no CI
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (Alembic `006 → 005 → 006` e BT-047) e Postgres no CI (runs 37520656472 e 37520985605)
 - **Downgrade é destrutivo?** [x] Sim / [ ] Nao — apaga só os contadores novos e as marcações por questão; contas, sessões, históricos e reportes ficam
 
 Sem o downgrade, o código anterior também funciona: ele não lê as tabelas novas.
@@ -273,3 +273,5 @@ Sem o downgrade, o código anterior também funciona: ele não lê as tabelas no
 |------------|--------|-----------|
 | 2026-10-06 | Rafael Peixoto (com Claude) | CR criado a partir do plano de 06/10 (feito no Claude Code, antes do CR), com as decisões D1–D3 do usuário e as decisões técnicas T1–T6 confirmadas por ele |
 | 2026-10-06 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-04), validação runtime (HTTP real e Playwright; ajuste das abas a 360 px), revisão de código (7 corrigidos, 3 justificados) e de segurança, documentos atualizados. Na implementação, `contas` passou a exigir `--database-url` (ADR-008), as colunas do gráfico ficaram em HTML/CSS e o cartão ganhou `ativos_media_dia` |
+| 2026-10-06 | Rafael Peixoto (com Claude) | CI da branch verde (run 37520656472); merge `f867359` em `master`, CI verde (run 37520985605) e deploy com a migration `006`. `ADMIN_GOOGLE_SUBS` definida com o `sub` da conta do dono do produto (descoberto com o `ingestao contas` via `railway ssh`: o Postgres não tem URL pública, e o Deploy Guide passou a usar o container) |
+| 2026-10-06 | Rafael Peixoto (com Claude) | Conferência em produção pelo usuário com o login real — validação ✅, status Concluído |

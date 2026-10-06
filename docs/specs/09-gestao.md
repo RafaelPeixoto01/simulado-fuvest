@@ -49,7 +49,7 @@ O administrador do site (o dono do produto) ganha a página `/gestao`, com quatr
 
 ### 2.2 Variável `ADMIN_GOOGLE_SUBS`
 
-Lista de `sub` (claim do Google, `usuarios.google_sub`) separados por vírgula. Ausente ou vazia: ninguém é administrador e todas as rotas de gestão respondem 404. O `sub` não é segredo, mas fica só na Railway, com as outras variáveis. Para descobrir o próprio: entrar no site uma vez com a conta e rodar `python -m ingestao contas --email <e-mail> --database-url "<DATABASE_PUBLIC_URL>"` (Deploy Guide).
+Lista de `sub` (claim do Google, `usuarios.google_sub`) separados por vírgula. Ausente ou vazia: ninguém é administrador e todas as rotas de gestão respondem 404. O `sub` não é segredo, mas fica só na Railway, com as outras variáveis. Para descobrir o próprio: entrar no site uma vez com a conta e rodar `railway ssh -s simulado-fuvest 'python -m ingestao contas --email <e-mail> --database-url $DATABASE_URL'` (dentro do container, com a URL interna do banco — Deploy Guide §8.4).
 
 ### 2.3 Interfaces / Types
 
