@@ -33,7 +33,7 @@ O administrador do site (o dono do produto) ganha a página `/gestao`, com quatr
 
 | Ação | Caminho | Conteúdo |
 |------|---------|----------|
-| Modificar | `backend/app/config.py` | `admin_google_subs: frozenset[str]` (`ADMIN_GOOGLE_SUBS`, separada por vírgula, espaços ignorados) |
+| Modificar | `backend/app/config.py` | `admin_google_subs: frozenset[str]` (`ADMIN_GOOGLE_SUBS`, separada por vírgula, espaços ignorados) e `eh_admin(sub)`, a única regra do administrador |
 | Criar | `backend/alembic/versions/006_estatisticas_gestao.py` | Tabelas + backfill (§2.6) |
 | Modificar | `backend/app/models.py` | `EstatisticaDiaria`, `EstatisticaQuestao` |
 | Modificar | `backend/app/services/estatisticas.py` | `FUSO_BRASILIA`, `dia_local`, `inicio_do_dia`, `incrementar`, `registrar_atividade`, `registrar_conclusoes`; `registrar_geracao` com `dia_local` |
@@ -44,12 +44,12 @@ O administrador do site (o dono do produto) ganha a página `/gestao`, com quatr
 | Modificar | `frontend/src/types.ts`, `services/api.ts` | Tipos e chamadas |
 | Criar | `frontend/src/hooks/useGestao.ts` | `useGestaoUso`, `useGestaoAprendizado`, `useGestaoQualidade`, `useGestaoReportes`, `useResolverReportes`, `useGestaoEstudantes` |
 | Criar | `frontend/src/components/RequerAdmin.tsx`, `components/GraficoColunas.tsx` | Porteiro e gráfico |
-| Criar | `frontend/src/pages/gestao/GestaoLayout.tsx`, `UsoPage.tsx`, `AprendizadoPage.tsx`, `QualidadePage.tsx`, `EstudantesPage.tsx`, `periodo.ts` | Telas (§3) |
+| Criar | `frontend/src/pages/gestao/GestaoLayout.tsx`, `UsoPage.tsx`, `AprendizadoPage.tsx`, `QualidadePage.tsx`, `EstudantesPage.tsx`, `periodo.ts` (período na URL, rótulos), `componentes.tsx` (seletor, cartão, seção, tabela) | Telas (§3) |
 | Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx`, `components/questao/QuestaoView.tsx`, `pages/PrivacidadePage.tsx` | Rotas, links, questão sem "Reportar problema" na gestão, texto |
 
 ### 2.2 Variável `ADMIN_GOOGLE_SUBS`
 
-Lista de `sub` (claim do Google, `usuarios.google_sub`) separados por vírgula. Ausente ou vazia: ninguém é administrador e todas as rotas de gestão respondem 404. O `sub` não é segredo, mas fica só na Railway, com as outras variáveis. Para descobrir o próprio: entrar no site uma vez com a conta e rodar `python -m ingestao contas --email <e-mail>` contra o banco de produção (Deploy Guide).
+Lista de `sub` (claim do Google, `usuarios.google_sub`) separados por vírgula. Ausente ou vazia: ninguém é administrador e todas as rotas de gestão respondem 404. O `sub` não é segredo, mas fica só na Railway, com as outras variáveis. Para descobrir o próprio: entrar no site uma vez com a conta e rodar `python -m ingestao contas --email <e-mail> --database-url "<DATABASE_PUBLIC_URL>"` (Deploy Guide).
 
 ### 2.3 Interfaces / Types
 
@@ -84,6 +84,7 @@ class CartoesUso(BaseModel):
     estudantes: int  # contas hoje
     novos: int  # contas criadas no período
     ativos_hoje: int
+    ativos_media_dia: float  # soma de `ativo` no período ÷ dias, 1 casa
     ativos_7_dias: int
     ativos_30_dias: int
     logins: int
@@ -284,34 +285,34 @@ class EstudantesResponse(BaseModel):
 ### 2.4 Lógica de Negócio
 
 **Dia e período (RN-021):**
-- `FUSO_BRASILIA = timezone(timedelta(hours=-3))` (o Brasil não tem horário de verão desde 2019; sem `tzdata`). `dia_local(agora)` = data de `agora` em Brasília; `inicio_do_dia(agora)` = 00:00 de Brasília daquele dia, em UTC.
+- `FUSO_BRASILIA = timezone(timedelta(hours=-3))` (o Brasil não tem horário de verão desde 2019; sem `tzdata`). `dia_local(agora)` = data de `agora` em Brasília; `inicio_do_dia(dia)` = 00:00 de Brasília do dia, em UTC; `como_utc` normaliza o datetime sem fuso do SQLite.
 - Período `7`, `30` ou `90`: de `hoje − (N − 1)` até hoje (dias de Brasília). `tudo`: do primeiro dia com dado (o menor entre `estatisticas_geracao.dia`, `estatisticas_diarias.dia` e o dia de cadastro da conta mais antiga) até hoje; sem dado, só hoje.
 - Granularidade: `dia` quando o período tem até 31 dias; senão `semana`, com intervalos começando na segunda-feira (o primeiro pode começar no meio da semana, no `inicio`). As séries trazem todos os intervalos, com zero onde não houve nada.
 
 **Contadores (`services/estatisticas.py`, RN-021):**
 - `incrementar(sessao, dia, contagens: dict[str, int])`: `INSERT … ON CONFLICT (dia, metrica) DO UPDATE SET total = total + excluded.total`, por dialeto (como `historico.inserir_sem_conflito`), dentro de `sessao.begin_nested()`. Erro do banco → `log.exception` e a operação principal segue. Quem chama faz o commit.
-- `registrar_atividade(sessao, usuario, agora)`: se `ultimo_acesso_em` já é de hoje, não faz nada (sem escrita). Senão, `UPDATE usuarios SET ultimo_acesso_em = agora WHERE id = :id AND ultimo_acesso_em < inicio_do_dia(agora)`; se mudou uma linha, `ativo += 1`; commit. Duas abas no mesmo instante contam uma vez. Erro → rollback, log e o pedido segue.
+- `registrar_atividade(sessao, usuario, agora)`: se `ultimo_acesso_em` já é de hoje, não faz nada (sem escrita). Senão, `UPDATE usuarios SET ultimo_acesso_em = agora WHERE id = :id AND ultimo_acesso_em < inicio_do_dia(hoje)`; se mudou uma linha, `ativo += 1`; commit. Duas abas no mesmo instante contam uma vez. Erro → rollback, log e o pedido segue.
 - `registrar_conclusoes(sessao, entradas, agora)`: para cada entrada inserida, no dia da chegada: `concluido.<modo>` +1; `por_tempo.<modo>` +1 se `finalizado_por_tempo`; `tempo_ms.<modo>` + `tempo_gasto_ms` limitado a 0…24 h; `questoes.<modo>` + `resultado.total`; `acertos.<modo>` + `resultado.acertos`; no modo `ano`, `prova_ano.<codigo>` +1, com o código do prefixo de `questao_ids[0]`. Marcações: para cada item do resultado, a letra marcada (`marcadas_a` … `marcadas_e`) ou `em_branco`, somadas por questão e gravadas num upsert só (`estatisticas_questoes`). Anuladas também são contadas (a leitura as deixa de fora).
 - `registrar_geracao` passa a usar `dia_local` (antes, o dia UTC). Os dias anteriores ficam como estão.
 
 **Pontos de coleta:**
 - `contas.entrar`: `login` +1; `ativo` +1 se a conta é nova ou o último acesso não era de hoje; `ultimo_acesso_em = agora` (como antes). `_usuario_do_google` passa a dizer se criou a conta.
 - `dependencias.obter_usuario`: depois de resolver o usuário da sessão, `registrar_atividade` (vale para qualquer pedido com sessão, inclusive `GET /api/sessao`).
-- `contas.excluir_conta`: `conta_excluida` +1 no mesmo commit.
+- `contas.excluir_conta`: `conta_excluida` + as linhas que o `DELETE` apagou, no mesmo commit (a segunda de duas exclusões simultâneas não conta).
 - `historico.gravar`: o `INSERT … ON CONFLICT DO NOTHING` ganha `RETURNING id`; só as entradas devolvidas vão para `registrar_conclusoes`, antes do corte em 50 e no mesmo commit.
 
-**Administrador (RN-020):** `eh_admin(settings, usuario)` = `usuario.google_sub in settings.admin_google_subs`. `exigir_admin` (dependência do router de gestão) usa `obter_usuario`; sem usuário ou não admin → 404 `nao_encontrado`. Roda antes da validação de query e corpo, então quem não é admin nunca vê 422. Não depende do modo de acesso: sem login configurado não há usuário, e a área responde 404.
+**Administrador (RN-020):** `Settings.eh_admin(sub)` = `sub in admin_google_subs` (a dependência e a lista de estudantes usam a mesma regra). `exigir_admin` (dependência do router de gestão) usa `obter_usuario`; sem usuário ou não admin → 404 `nao_encontrado`. Roda antes da validação de query e corpo, então quem não é admin nunca vê 422: o corpo do `POST` é lido numa dependência depois dela (um parâmetro de corpo seria decodificado antes das dependências, e JSON malformado daria 422). Não depende do modo de acesso: sem login configurado não há usuário, e a área responde 404.
 
 **Uso (`GET /api/gestao/uso`):**
-- Cartões: `estudantes` = contas hoje; `novos` = contas com cadastro no período; `ativos_hoje` = `ativo` de hoje; `ativos_7_dias`/`ativos_30_dias` = contas com `ultimo_acesso_em ≥ inicio_do_dia(hoje − 6)` / `(hoje − 29)`; `logins`, `concluidos` (soma de `concluido.*`) e `contas_excluidas` no período; `gerados` = soma de `estatisticas_geracao` no período (todos os modos, inclusive Treino).
+- Cartões: `estudantes` = contas hoje; `novos` = contas com cadastro no período; `ativos_hoje` = `ativo` de hoje; `ativos_media_dia` = soma de `ativo` no período ÷ dias do período (o cabeçalho do gráfico de ativos); `ativos_7_dias`/`ativos_30_dias` = contas com `ultimo_acesso_em ≥ inicio_do_dia(hoje − 6)` / `(hoje − 29)`; `logins`, `concluidos` (soma de `concluido.*`) e `contas_excluidas` no período; `gerados` = soma de `estatisticas_geracao` no período (todos os modos, inclusive Treino).
 - Séries: `cadastros` pelo dia de Brasília de `usuarios.criado_em`; `logins`, `ativos` e `concluidos` de `estatisticas_diarias`; `gerados` de `estatisticas_geracao`. Por semana, `ativos` é a média por dia dos dias do intervalo, arredondada (somar ativos de dias diferentes contaria a mesma pessoa várias vezes).
 - `modos`: Prova completa, Personalizado, Prova de um ano e Treino com os gerados no período; os três primeiros com os concluídos e a taxa (pode passar de 100%, porque o concluído é contado na chegada e o histórico de um navegador novo chega de uma vez).
 - `distribuicao`: quantas contas têm 0, 1, 2–5, 6–20 e 21–50 simulados no histórico hoje (não depende do período).
-- `provas_ano`: soma de `prova_ano.<codigo>` no período, com o rótulo da prova (`rotulo_da_prova`); prova que saiu da base mostra o código.
+- `provas_ano`: soma de `prova_ano.<codigo>` no período, com o rótulo da prova que está na base (`rotulo_da_prova`); prova que saiu da base, ou código desconhecido, mostra o código.
 
 **Aprendizado (`GET /api/gestao/aprendizado`):**
 - `modos` (no período): `acerto_medio` = Σ acertos ÷ Σ questões × 100; `por_tempo` = Σ por tempo ÷ Σ concluídos × 100; `tempo_medio_questao_s` = Σ tempo ÷ Σ questões, em segundos inteiros. Sem concluídos (ou sem questões), `None`.
-- `disciplinas` (desde o início, RN-022 nota): `estatisticas_questoes` junto com `questoes`, sem anuladas e sem resposta nula. Por questão, `respostas` = soma das marcações e em branco; `acertos` = marcações da letra do gabarito **atual**. Agrupado pela disciplina principal e pelo assunto (nome da taxonomia; sem taxonomia, o slug); questão sem assunto entra só na disciplina. Ordem: pior percentual primeiro (empate pelo nome). Marcações de questões que saíram da base ficam de fora.
+- `disciplinas` (desde o início): `estatisticas_questoes` junto com `questoes` (só as colunas usadas, sem o conteúdo), sem anuladas e sem resposta nula. Por questão, `respostas` = soma das marcações e em branco; `acertos` = marcações da letra do gabarito **atual**. Agrupado pela disciplina principal e pelo assunto (nome da taxonomia; sem taxonomia, o slug); questão sem assunto entra só na disciplina. Ordem: pior percentual primeiro (empate pelo nome). Marcações de questões que saíram da base ficam de fora.
 - `carreiras`: as 10 carreiras-alvo com mais contas (empate: ano mais recente, depois código). Para cada uma, os cortes do ano dela (como a sessão resolve — `resolver_carreira_alvo`); `com_prova_completa` = contas do grupo com alguma Prova completa no histórico; `atingiriam` = dessas, quantas têm, no simulado de Prova completa mais recente, a nota na escala da lista (direta se o total é igual aos pontos da lista; senão acertos ÷ total × pontos, 1 casa — RN-018) maior ou igual ao corte de cada modalidade.
 
 **Qualidade (`GET /api/gestao/qualidade`):**
@@ -323,7 +324,7 @@ class EstudantesResponse(BaseModel):
 
 **Estudantes:** `busca` (até 100 caracteres, sem espaços nas pontas) filtra nome ou e-mail por "contém", sem diferenciar maiúsculas (`ilike`, com `%`, `_` e `\` escapados). `ordem=cadastro` (padrão) ordena pelo cadastro mais recente; `acesso`, pelo último acesso mais recente (empate: id decrescente). 50 por página; página além da última → lista vazia com o `total`.
 
-**Comando `contas`:** `python -m ingestao contas --email X` lista, no banco de `DATABASE_URL`, as contas com aquele e-mail (sem diferenciar maiúsculas): `sub`, nome, cadastro. Nenhuma conta → mensagem e exit 1.
+**Comando `contas`:** `python -m ingestao contas --email X --database-url URL` (a URL é obrigatória e nunca lida do ambiente — ADR-008; imprime o banco alvo sem a senha) lista as contas com aquele e-mail (sem diferenciar maiúsculas): `sub`, nome, cadastro. Só leitura. Nenhuma conta → mensagem e exit 1.
 
 ### 2.5 API Endpoints
 
@@ -336,7 +337,7 @@ GET  /api/gestao/aprendizado?periodo=7|30|90|tudo  (padrão 30)   60/min por IP 
 GET  /api/gestao/qualidade                                       60/min por IP   200 QualidadeResponse
 GET  /api/gestao/reportes?status=pendente|resolvido (padrão pendente)  60/min    200 ReportesGestaoResponse
 POST /api/gestao/reportes/resolver   Origin verificado (403)     30/min por IP   200 ResolverReportesResponse
-     Body: ResolverReportesRequest
+     Body: ResolverReportesRequest (lido depois do exigir_admin: JSON malformado de quem não é admin -> 404)
 GET  /api/gestao/estudantes?busca=&ordem=cadastro|acesso&pagina=1..10000   60/min   200 EstudantesResponse
 
 422: periodo, status, ordem ou pagina inválidos; corpo inválido (sem ids, mais de 100, repetidos, campo extra)
@@ -378,7 +379,7 @@ Dentro do `RequerConta` (sem login → apresentação). Com a sessão carregada 
 
 ### `GestaoLayout` (`/gestao/*`)
 - `h1` "Gestão" e o texto "Números do site, contados por dia sem identificar ninguém. Só o administrador vê esta área."
-- Abas (`nav aria-label="Seções da gestão"`, `NavLink`): Uso (`/gestao`, `end`), Aprendizado, Qualidade, Estudantes. Título da aba do navegador: "Gestão · Uso" etc.
+- Abas (`nav aria-label="Seções da gestão"`, `NavLink`): Uso (`/gestao`, `end`), Aprendizado, Qualidade, Estudantes; as quatro cabem em 360 px (fonte e espaçamento menores no celular), e o `?periodo=` segue ao trocar de aba. Título da aba do navegador: "Gestão · Uso" etc.
 - Período (Uso e Aprendizado): `select` "Período" com "Últimos 7 dias", "Últimos 30 dias" (padrão), "Últimos 90 dias" e "Desde o início", guardado na URL (`?periodo=`); valor inválido vale 30. A troca mantém os dados anteriores esmaecidos (`aria-busy`) até chegar a resposta.
 
 ### `UsoPage` (`/gestao`)
@@ -405,8 +406,8 @@ Dentro do `RequerConta` (sem login → apresentação). Com a sessão carregada 
 - "Página X de Y · N estudantes", "Anterior" e "Próxima". Nenhum resultado: "Nenhum estudante encontrado."
 
 ### `GraficoColunas`
-- Props: `titulo`, `pontos: {inicio, total}[]`, `granularidade`, `rotuloValor` (ex.: "cadastros"), opcional `media` (texto do cabeçalho: "média por dia" em vez de "no período").
-- `figure` com `figcaption` (título e o total do período, ou a média); SVG com colunas em `caneta` sobre a linha de base, o maior valor no eixo e as datas do primeiro e do último intervalo; o SVG é `aria-hidden`, e os valores ficam numa tabela visualmente oculta ("Data", "Valor"). Coluna zero mostra só a linha de base. Sem pontos: "Sem dados no período."
+- Props: `titulo`, `pontos: {inicio, total}[]`, `granularidade`, `unidade` (ex.: "cadastros"), opcionais `media` (a série é de médias por dia) e `mediaDoPeriodo`.
+- `figure` nomeada pelo título (`aria-labelledby`), com o total do período ou a média por dia (nos ativos, `ativos_media_dia`, para as semanas parciais pesarem pelos dias). Colunas em HTML/CSS (sem biblioteca, regras da skill de dataviz): até 24 px de largura, 4 px arredondados no topo, 2 px de papel entre elas, cor `caneta`, mínimo de 2 px para valor maior que zero; coluna zero mostra só a linha de base. Acima, "máximo N" ou, sob o ponteiro, "06/10: 12 cadastros" (a coluna inteira é a área do ponteiro e muda de tom); abaixo, as datas do primeiro e do último intervalo. As colunas são `aria-hidden`: os números ficam na tabela de "Ver os números" (`details`), para todos. Sem pontos: "Sem dados no período."
 
 ### Cabeçalho, menu do celular e Privacidade
 - Link "Gestão" no cabeçalho (depois de "Notas de corte") e no menu do celular, só com `usuario.admin`.
@@ -480,10 +481,10 @@ sequenceDiagram
 | BT-098 | `incrementar` soma em linhas existentes e novas; erro do banco não propaga | `estatisticas` | Totais somados; log, sem exceção |
 | BT-099 | Login conta `login`; conta nova e primeiro login do dia contam `ativo`; segundo login no mesmo dia não | `/api/auth/google/callback` | `login` 2, `ativo` 1 |
 | BT-100 | Atividade: dois pedidos no mesmo dia → `ativo` 1; no dia seguinte → +1; `ultimo_acesso_em` atualizado | `obter_usuario` (`GET /api/sessao`) | Conforme RN-021 |
-| BT-101 | Excluir a conta conta `conta_excluida` | `DELETE /api/conta` | +1 |
+| BT-101 | Excluir a conta conta `conta_excluida`; duas exclusões da mesma conta contam uma | `DELETE /api/conta`, `excluir_conta` | +1 |
 | BT-102 | Histórico: métricas por modo, `prova_ano`, marcações (letra e em branco); reenvio e entrada recusada não contam; tempo limitado | `POST /api/historico` | Conforme RN-021 |
 | BT-103 | Geração no dia de Brasília | `registrar_geracao` | `dia_local` |
-| BT-104 | Acesso: sem sessão, conta comum, sem a variável, query inválida de não admin → 404 em todas as rotas; admin → 200 com `no-store`; `admin` na sessão; `POST` com Origin de fora → 403 | `/api/gestao/*`, `/api/sessao` | Conforme RN-020 |
+| BT-104 | Acesso: sem sessão, conta comum, sem a variável, query inválida e JSON malformado de não admin → 404 em todas as rotas; admin → 200 com `no-store` (JSON malformado → 422); `admin` na sessão; `POST` com Origin de fora → 403 | `/api/gestao/*`, `/api/sessao` | Conforme RN-020 |
 | BT-105 | Uso: cartões, séries por dia (7, 30) e por semana (90, tudo), média semanal dos ativos, modos e taxa, distribuição, provas da Prova de um ano; `periodo` inválido → 422 | `GET /api/gestao/uso` | Conforme §2.4 |
 | BT-106 | Aprendizado: modos no período; acerto por disciplina e assunto com o gabarito atual (trocar o gabarito muda), sem anuladas; carreiras com cortes e "atingiriam" (escala direta e convertida), carreira fora da lista | `GET /api/gestao/aprendizado` | Conforme §2.4 |
 | BT-107 | Qualidade: base, provas, disciplinas, reportes e suspeitas pelos limiares (19 respostas fica de fora; acerto 14%; alternativa que atrai) | `GET /api/gestao/qualidade` | Conforme RN-022 |
@@ -511,7 +512,7 @@ sequenceDiagram
 
 ## 7. Checklist de Implementação
 
-- [ ] Variável, migration 006 + backfill, contadores e pontos de coleta (BT-047, BT-097 a BT-103, BT-111)
-- [ ] Acesso de admin, API `/api/gestao/*`, comando `contas` (BT-104 a BT-110)
-- [ ] Frontend: porteiro, rotas, links, gráfico, quatro abas, Privacidade (UT-069 a UT-076)
-- [ ] FT-026 exercitado
+- [x] Variável, migration 006 + backfill, contadores e pontos de coleta (BT-047, BT-097 a BT-103, BT-111)
+- [x] Acesso de admin, API `/api/gestao/*`, comando `contas` (BT-104 a BT-110)
+- [x] Frontend: porteiro, rotas, links, gráfico, quatro abas, Privacidade (UT-069 a UT-076)
+- [x] FT-026 exercitado

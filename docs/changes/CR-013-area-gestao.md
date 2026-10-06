@@ -71,7 +71,7 @@ O dono do produto não tem como acompanhar se o site está sendo usado (quantos 
 | 5 | API nova | — | `GET /api/gestao/uso`, `/aprendizado`, `/qualidade`, `/reportes`, `/estudantes`; `POST /api/gestao/reportes/resolver` (só admin, `no-store`) |
 | 6 | CLI | `reportes listar/resolver` | + `contas --email X` (lista `sub`, e-mail e cadastro das contas com aquele e-mail) |
 | 7 | Página nova | — | `/gestao` (Uso), `/gestao/aprendizado`, `/gestao/qualidade`, `/gestao/estudantes`, dentro do `RequerConta` e do `RequerAdmin`; link "Gestão" no cabeçalho e no menu do celular só para o admin |
-| 8 | Gráficos | — | `GraficoColunas` (SVG próprio, tokens, tabela acessível) |
+| 8 | Gráficos | — | `GraficoColunas` (colunas em HTML/CSS próprio, tokens, tabela com os números) |
 | 9 | Privacidade | Lista o que é guardado | + data de cadastro e último acesso; o responsável pelo site vê a lista de contas para suporte; os números de uso (logins, acessos, respostas) são contados por dia sem identificar ninguém |
 
 ### 4.2 O que NÃO muda
@@ -118,13 +118,13 @@ O dono do produto não tem como acompanhar se o site está sendo usado (quantos 
 | Criar | `backend/app/services/gestao.py`, `backend/app/routers/gestao.py` | Consultas agregadas e rotas `/api/gestao/*` |
 | Modificar | `backend/app/schemas.py`, `backend/app/routers/conta.py`, `backend/app/main.py` | Schemas da gestão; `UsuarioPublico.admin`; registro do router |
 | Modificar | `backend/ingestao/cli.py` | Comando `contas --email` |
-| Criar | `backend/tests/test_estatisticas.py`, `test_gestao_acesso.py`, `test_gestao_uso.py`, `test_gestao_aprendizado.py`, `test_gestao_qualidade.py`, `test_gestao_estudantes.py`, `test_cli_contas.py` | Testes |
-| Modificar | `backend/tests/test_migrations.py`, `test_config.py`, `test_historico.py`, `test_auth.py` | Migration 006, variável nova, contagens |
+| Criar | `backend/tests/test_estatisticas.py`, `test_gestao_acesso.py`, `test_gestao_uso.py`, `test_gestao_aprendizado.py`, `test_gestao_qualidade.py`, `test_gestao_estudantes.py` (inclui o comando `contas`) | Testes |
+| Modificar | `backend/tests/test_migrations.py`, `test_config.py`, `test_auth.py`, `conftest.py` (`client_admin`) | Migration 006, variável nova, `admin` na sessão |
 | Modificar | `frontend/src/types.ts`, `services/api.ts` | Tipos e chamadas da gestão; `Usuario.admin` |
 | Criar | `frontend/src/hooks/useGestao.ts` | Consultas e a mutação de resolver reportes |
 | Criar | `frontend/src/components/RequerAdmin.tsx`, `components/GraficoColunas.tsx` | Porteiro do admin e gráfico de colunas |
-| Criar | `frontend/src/pages/gestao/*.tsx` (+ testes) | `GestaoLayout`, `UsoPage`, `AprendizadoPage`, `QualidadePage`, `EstudantesPage` |
-| Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx`, `pages/PrivacidadePage.tsx` (+ testes) | Rotas, links e texto da Privacidade |
+| Criar | `frontend/src/pages/gestao/*` (+ `pages/gestao.test.tsx`, `components/GraficoColunas.test.tsx`) | `GestaoLayout`, `UsoPage`, `AprendizadoPage`, `QualidadePage`, `EstudantesPage`, `periodo.ts`, `componentes.tsx` |
+| Modificar | `frontend/src/App.tsx`, `components/Layout.tsx`, `components/MenuCelular.tsx`, `components/questao/QuestaoView.tsx` (`reportavel`), `pages/PrivacidadePage.tsx` | Rotas, links, questão sem "Reportar problema" na gestão e texto da Privacidade |
 
 ### 6.2 Banco de Dados
 
@@ -160,21 +160,53 @@ O downgrade apaga as duas tabelas: são só agregados, nada de usuário se perde
 
 ## 8. Critérios de Aceite
 
-- [ ] Com `ADMIN_GOOGLE_SUBS` contendo o `sub` da conta, o administrador vê o link "Gestão" e as quatro abas; qualquer outra conta, quem não entrou e qualquer conta sem a variável recebem 404 `nao_encontrado` em todas as rotas `/api/gestao/*`, e a página `/gestao` mostra "Página não encontrada"
-- [ ] Logins, usuários ativos (uma vez por usuário por dia de Brasília), contas excluídas e simulados concluídos são contados por dia sem `usuario_id`; reenviar o mesmo simulado não conta duas vezes; o contador de gerados passa a usar o dia de Brasília
-- [ ] A migration `006` cria as tabelas e importa o histórico já guardado (concluídos por modo e marcações das questões); `upgrade head` + `downgrade -1` testados (SQLite local e Postgres no CI)
-- [ ] Aba Uso: cartões (estudantes, novos, ativos hoje, em 7 e em 30 dias, logins, gerados, concluídos, contas excluídas), séries por dia até 30 dias e por semana acima, taxa de conclusão por modo, distribuição de simulados por estudante e provas mais feitas na Prova de um ano, conforme o período
-- [ ] Aba Aprendizado: acerto médio, % finalizados por tempo e tempo médio por questão por modo no período; acerto por disciplina e assunto calculado com o gabarito atual, sem anuladas; carreiras-alvo mais escolhidas com os cortes e quantos estudantes atingiriam cada um no último simulado de Prova completa
-- [ ] Aba Qualidade: saúde da base, reportes pendentes com a questão e "marcar como resolvidos" (com `Origin`), e questões suspeitas pelos limiares da RN-022 com a distribuição A–E e o gabarito
-- [ ] Aba Estudantes: lista paginada (50 por página) com busca por nome ou e-mail e ordem por cadastro ou último acesso; nenhuma ação sobre as contas
-- [ ] A Privacidade diz que o responsável pelo site vê a lista de contas e que os números de uso são contados sem identificar ninguém
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança
-- [ ] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
-- [ ] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: rotas novas com dado pessoal, só para o administrador — ver "Revisão de segurança" abaixo
-- [ ] Documentos afetados foram atualizados
+- [x] Com `ADMIN_GOOGLE_SUBS` contendo o `sub` da conta, o administrador vê o link "Gestão" e as quatro abas; qualquer outra conta, quem não entrou e qualquer conta sem a variável recebem 404 `nao_encontrado` em todas as rotas `/api/gestao/*`, e a página `/gestao` mostra "Página não encontrada" — BT-104 (inclusive query inválida e JSON malformado de não admin), UT-069, UT-070; HTTP real e Playwright abaixo
+- [x] Logins, usuários ativos (uma vez por usuário por dia de Brasília), contas excluídas e simulados concluídos são contados por dia sem `usuario_id`; reenviar o mesmo simulado não conta duas vezes; o contador de gerados passa a usar o dia de Brasília — BT-097 a BT-103 (duas abas no mesmo instante contam um ativo; exclusão repetida conta uma)
+- [x] A migration `006` cria as tabelas e importa o histórico já guardado (concluídos por modo e marcações das questões); `upgrade head` + `downgrade -1` testados (SQLite local e Postgres no CI) — BT-047 (006: o backfill dá o mesmo que o serviço, no dia de Brasília de `recebido_em`) e, pelo Alembic, `005 → 006 → 005 → 006` num SQLite novo em 06/10; Postgres no CI da branch (ver abaixo)
+- [x] Aba Uso: cartões (estudantes, novos, ativos hoje, em 7 e em 30 dias, logins, gerados, concluídos, contas excluídas), séries por dia até 31 dias e por semana acima, taxa de conclusão por modo, distribuição de simulados por estudante e provas mais feitas na Prova de um ano, conforme o período — BT-105, UT-071, UT-075; Playwright abaixo
+- [x] Aba Aprendizado: acerto médio, % finalizados por tempo e tempo médio por questão por modo no período; acerto por disciplina e assunto calculado com o gabarito atual, sem anuladas; carreiras-alvo mais escolhidas com os cortes e quantos estudantes atingiriam cada um no último simulado de Prova completa — BT-106 (trocar o gabarito muda o acerto; escala direta e convertida), UT-072
+- [x] Aba Qualidade: saúde da base, reportes pendentes com a questão e "marcar como resolvidos" (com `Origin`), e questões suspeitas pelos limiares da RN-022 com a distribuição A–E e o gabarito — BT-107, BT-108, UT-073; Playwright abaixo
+- [x] Aba Estudantes: lista paginada (50 por página) com busca por nome ou e-mail e ordem por cadastro ou último acesso; nenhuma ação sobre as contas — BT-109 (`%` e `_` literais), UT-074
+- [x] A Privacidade diz que o responsável pelo site vê a lista de contas e que os números de uso são contados sem identificar ninguém — UT-076
+- [x] Testes existentes continuam passando (regressão) — backend 519 testes (eram 466), frontend 317 (eram 297)
+- [x] Novos testes cobrem a mudança — BT-097 a BT-111, BT-047 (006), UT-069 a UT-076 e os da revisão de código
+- [x] Fluxo afetado exercitado em runtime antes do merge — ver "Validação runtime" abaixo
+- [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada, com findings corrigidos ou justificados — ver "Revisão de código" abaixo
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada: rotas novas com dado pessoal, só para o administrador — ver "Revisão de segurança" abaixo
+- [x] Documentos afetados foram atualizados — PRD v7.0, Arquitetura v1.13 (ADR-016), 03-SPEC v1.13, spec 09 nova, specs 03, 05 e 07, Plano, Deploy Guide v1.8, CLAUDE.md, INDEX.md
 - [ ] CI verde na branch e em `master`; em produção, `ADMIN_GOOGLE_SUBS` configurada e a área conferida pelo usuário com o login real
+
+**Validação runtime (06/10/2026, build servido pelo FastAPI na porta 8001 com o provedor Google falso, `ADMIN_GOOGLE_SUBS` com o `sub` falso do administrador e um SQLite novo com as 9 provas publicadas; 30 estudantes, históricos e reportes semeados pelos próprios serviços, o que exercitou os contadores do login e da chegada do histórico):**
+- HTTP: sem sessão e com a conta comum (Beto), as 6 rotas → 404 `nao_encontrado`, inclusive `?periodo=x`; a sessão do Beto traz `admin: false` e a do administrador, `true`. Administrador: `GET /api/gestao/uso` → 200 com `Cache-Control: no-store`, 30 pontos por dia em 30 dias e 14 semanas em 90, `periodo=15` → 422; `/aprendizado` com os modos, 3 disciplinas e a carreira-alvo semeada (10 estudantes, 5 com Prova completa, "atingiriam" AC 1 · EP 4 · PPI 5); `/qualidade` com 9 provas e 786 questões válidas, e a questão 2025-005 suspeita (11,1% em 45 respostas, os dois motivos); reportes pendentes com a questão (e `null` para `2019-001`); resolver com `Origin` de outro site → 403, `ids: []` → 422, `[1, 999]` → resolvidos `[1]`, inexistentes `[999]`; estudantes com a busca "aluno1" (11) e a etiqueta de admin.
+- Playwright (FT-026), 1280 px: login falso → `/gestao` com os oito cartões, os cinco gráficos, a tabela por modo, a distribuição e a prova mais feita; período de 90 dias → "por semana", 14 colunas, e o período segue na aba Aprendizado; Aprendizado com os assuntos do pior para o melhor ("Obras de leitura obrigatória" com 11,1%) e a carreira-alvo; Qualidade → "Ver questão" abre a questão com o texto-base e a alternativa correta marcada, sem "Reportar problema"; marcar o reporte #2 → "1 reporte marcado como resolvido.", resumo "1 pendente · 3 resolvidos" e a lista recarregada; Estudantes com busca e ordem pela URL. A 360 px, documento com 345 px nas quatro abas (a primeira passada achou a última aba cortada, com barra de rolagem: corrigido em `5573d28`); menu do celular com "Gestão". Conta comum (Beto) em `/gestao` → "Página não encontrada", sem o link e sem pedir a API. Console sem erros nem avisos (o único erro registrado foi o 404 do `fetch` de conferência feito à mão).
+
+**Revisão de código (`/code-review high`, diff da branch) — 10 achados, 7 corrigidos e 3 justificados (`f9f834b`):**
+1. Corrigido: JSON malformado no `POST /reportes/resolver` dava 422 a quem não é admin (o FastAPI decodifica o corpo antes das dependências) e revelava a rota. O corpo passou a ser lido numa dependência depois do `exigir_admin` (dois testes novos).
+2. Justificado: uma conta pode inflar os agregados com históricos forjados de ids novos. É o risco 4 da §9: exige conta Google e rate limit, não toca os dados de ninguém, o acerto por questão usa o gabarito do servidor e a questão suspeita é só um sinal para o curador conferir (RN-022). Limitar por conta exigiria registrar quem concluiu, o que a D2 descarta.
+3. Corrigido: a prova da Prova de um ano ganhava rótulo a partir do código mesmo fora da base (ou com código forjado); agora só a que está na base tem rótulo, e as demais mostram o código (teste ajustado).
+4. Corrigido: duas exclusões simultâneas da mesma conta contavam duas; agora conta as linhas que o `DELETE` apagou (teste novo).
+5. Corrigido: a "média por dia" dos ativos por semana fazia a média das semanas sem pesar as parciais; agora vem do servidor (`ativos_media_dia`, soma ÷ dias do período).
+6. Corrigido: a consulta das marcações carregava a questão inteira (enunciado, alternativas); agora só as colunas usadas.
+7. Justificado: as carreiras-alvo leem o histórico de quem as escolheu, 10 consultas por pedido. É o risco 5 da §9, aceitável até alguns milhares de contas; se crescer, guardar a última nota é outro CR.
+8. Corrigido: `como_utc` duplicava `contas._utc`; agora há um só.
+9. Corrigido: a regra do administrador estava repetida na lista de estudantes; agora as duas usam `Settings.eh_admin`.
+10. Justificado (falso positivo): a questão aberta na Qualidade não quebra a ordem dos títulos, porque sem `posicao` o `QuestaoView` não renderiza título nenhum.
+
+**Revisão de segurança (checklist OWASP do CLAUDE.md):**
+
+| Item | Resultado |
+|------|-----------|
+| Segredos hardcoded | Nenhum. `ADMIN_GOOGLE_SUBS` não é segredo e fica só na Railway |
+| Validação de entrada | Pydantic e FastAPI: `periodo`, `status` e `ordem` por `Literal`; `pagina` 1–10000; `busca` até 100 caracteres; `ids` 1–100 inteiros ≥ 1, sem repetição, `extra="forbid"` |
+| Autorização (ownership) | Todas as rotas `/api/gestao/*` passam pelo `exigir_admin` no router: 404 para quem não é admin, sem sessão ou sem a variável, antes de validar query e corpo (inclusive JSON malformado). Identidade pelo `sub`, nunca pelo e-mail (sem `email_verified`). O frontend só esconde o link; o teste de acesso cobre as 6 rotas |
+| Tokens / cookies | Nenhuma mudança na sessão; o administrador usa o mesmo cookie `HttpOnly` |
+| SQL | Só ORM e Core parametrizados; a busca usa `ilike` com `%`, `_` e `\` escapados; a migration usa `sa.select`/`bulk_insert` |
+| CSRF / CORS | `verificar_origem` no `POST` (403 com Origin de fora); CORS inalterado (só em desenvolvimento) |
+| Cabeçalhos | `Cache-Control: no-store` em todas as rotas de gestão (lista de contas é dado pessoal); demais cabeçalhos do middleware inalterados |
+| XSS | Nomes, e-mails e descrições de reporte renderizados como texto pelo React |
+| Rate limit | 60/min por IP nas leituras, 30/min no `POST` |
+| Dado pessoal (LGPD) | Contadores sem `usuario_id`; a lista de contas é só para o administrador; a Privacidade descreve os dois. Nenhum dado novo sobre o estudante é guardado (o último acesso já existia) |
+| Dependências | Nenhuma nova: `pip audit` e `npm audit` não se aplicam |
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -209,7 +241,7 @@ O downgrade apaga as duas tabelas: são só agregados, nada de usuário se perde
 
 - **Migration afetada:** `006_estatisticas_gestao.py`
 - **Comando de downgrade:** `alembic downgrade 005`
-- **Downgrade testado?** [ ] Sim / [ ] Nao
+- **Downgrade testado?** [x] Sim / [ ] Nao — SQLite local (Alembic `006 → 005 → 006` e BT-047) e Postgres no CI
 - **Downgrade é destrutivo?** [x] Sim / [ ] Nao — apaga só os contadores novos e as marcações por questão; contas, sessões, históricos e reportes ficam
 
 Sem o downgrade, o código anterior também funciona: ele não lê as tabelas novas.
@@ -239,4 +271,5 @@ Sem o downgrade, o código anterior também funciona: ele não lê as tabelas no
 
 | Data       | Autor  | Descrição |
 |------------|--------|-----------|
-| 2026-10-06 | Rafael Peixoto (com Claude) | CR criado a partir do plano de 06/10 (`docs/planejamento/area-gestao.md`), com as decisões D1–D3 do usuário e as decisões técnicas T1–T6 confirmadas por ele |
+| 2026-10-06 | Rafael Peixoto (com Claude) | CR criado a partir do plano de 06/10 (feito no Claude Code, antes do CR), com as decisões D1–D3 do usuário e as decisões técnicas T1–T6 confirmadas por ele |
+| 2026-10-06 | Rafael Peixoto (com Claude) | Implementação (CR-T-02 a CR-T-04), validação runtime (HTTP real e Playwright; ajuste das abas a 360 px), revisão de código (7 corrigidos, 3 justificados) e de segurança, documentos atualizados. Na implementação, `contas` passou a exigir `--database-url` (ADR-008), as colunas do gráfico ficaram em HTML/CSS e o cartão ganhou `ativos_media_dia` |

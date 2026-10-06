@@ -172,7 +172,7 @@ Simulado Fuvest/
         │   └── resultado/          #   ResumoResultado, DesempenhoDisciplinas (+ "Ver por assunto"), FolhaCorrigida (grade/bolhas), RevisaoQuestoes, revisao.ts (filtros)
         ├── pages/                  # Home, ConfigurarPersonalizado, EscolherAno, Resolucao, Resultado, Treino, Historico, Desempenho (CR-004),
         │                           #   Conta, Privacidade (CR-005), Apresentacao (CR-006), NotasCorte (CR-010), NaoEncontrada
-        │   └── gestao/             #   GestaoLayout, Uso, Aprendizado, Qualidade, Estudantes, periodo.ts (CR-013)
+        │   └── gestao/             #   GestaoLayout, Uso, Aprendizado, Qualidade, Estudantes, periodo.ts, componentes.tsx (CR-013)
         ├── utils/                  # tempo.ts, format.ts, folha.ts (colunas e número das folhas ópticas), desempenho.ts (agregação do painel, RN-015),
         │                           #   notasCorte.ts (nota comparável, escala do corte, situação, busca — CR-010, CR-011),
         │                           #   formatoProva.ts (formato vigente: 80 questões, 225 s por questão; anos das provas — CR-011)
@@ -658,14 +658,14 @@ fisica:
 - **Status:** Aceita
 - **Data:** 2026-10-06
 - **Contexto:** O CR-013 traz uma área de gestão com os números do site. Logins, usuários ativos e respostas por questão não eram registrados (a sessão dura 90 dias; o histórico guarda 50 por conta e some com "Limpar histórico"). O site promete guardar só nome, e-mail, histórico e carreira-alvo (RNF-005), e os estudantes são em geral menores. O login não exige `email_verified` (revisão de código do CR-005).
-- **Decisão:** (1) **Administrador** = `usuarios.google_sub` em `ADMIN_GOOGLE_SUBS`; `exigir_admin` no router `/api/gestao/*` responde 404 `nao_encontrado` a qualquer outro, antes da validação; `UsuarioPublico.admin` só mostra o link. (2) **Contagens anônimas por dia de Brasília** (UTC−3 fixo, sem `tzdata`): `estatisticas_diarias (dia, metrica, total)` com chaves de métrica em texto, gravada por upsert dentro de savepoint, e `estatisticas_questoes` com as marcações por letra, sem FK. Contadas no login, no primeiro pedido do dia (`obter_usuario`, com `UPDATE` condicional de `ultimo_acesso_em`, atômico), na exclusão da conta e na chegada do histórico (só as entradas inseridas, via `RETURNING`). O contador de geração passa ao dia de Brasília. (3) **Acerto por questão na leitura**, com o gabarito atual. (4) A migration 006 faz o backfill a partir de `simulados_concluidos`, sem importar o app.
+- **Decisão:** (1) **Administrador** = `usuarios.google_sub` em `ADMIN_GOOGLE_SUBS` (`Settings.eh_admin`); `exigir_admin` no router `/api/gestao/*` responde 404 `nao_encontrado` a qualquer outro, antes da validação (o corpo do `POST` é lido numa dependência depois dela); `UsuarioPublico.admin` só mostra o link. (2) **Contagens anônimas por dia de Brasília** (UTC−3 fixo, sem `tzdata`): `estatisticas_diarias (dia, metrica, total)` com chaves de métrica em texto, gravada por upsert dentro de savepoint, e `estatisticas_questoes` com as marcações por letra, sem FK. Contadas no login, no primeiro pedido do dia (`obter_usuario`, com `UPDATE` condicional de `ultimo_acesso_em`, atômico), na exclusão da conta e na chegada do histórico (só as entradas inseridas, via `RETURNING`). O contador de geração passa ao dia de Brasília. (3) **Acerto por questão na leitura**, com o gabarito atual. (4) A migration 006 faz o backfill a partir de `simulados_concluidos`, sem importar o app.
 - **Alternativas Consideradas:**
   - Identificar o administrador pelo e-mail: descartada, porque o e-mail sem verificação não prova a identidade.
   - Coluna `papel` em `usuarios`, concedida pela CLI: descartada por exigir migration e comando de escrita em produção para um único administrador; a variável se troca na Railway sem código.
   - Registrar os dias ativos de cada conta (tabela `usuario_id × dia`): daria retenção por coorte, mas é dado pessoal novo e quebra a promessa da RNF-005 (D2 do CR-013).
   - Calcular tudo do histórico guardado: descartada, porque ele encolhe (50 por conta, limpar, excluir) e não tem logins nem acessos; e ler o JSON de todos os históricos a cada consulta não escala.
   - Uma tabela por métrica: descartada; a tabela única com chave de métrica aceita métricas novas sem migration.
-  - Biblioteca de gráficos: descartada; colunas em SVG próprio bastam e evitam dependência e ajuste de CSP.
+  - Biblioteca de gráficos: descartada; colunas em HTML/CSS próprio bastam e evitam dependência e ajuste de CSP.
 - **Consequências:**
   - Positivas: números que sobrevivem à limpeza de históricos e à exclusão de contas, sem identificar ninguém; acerto que se corrige com o gabarito; a área se liga e desliga pela variável.
   - Negativas: logins e ativos só existem a partir do deploy; sem retenção por coorte; uma escrita por usuário por dia nos pedidos com sessão; a lista de contas é dado pessoal exposto na web, mitigado pelo 404, pelo `no-store` e pelo teste de acesso em todas as rotas.

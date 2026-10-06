@@ -4,6 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
+| [CR-013](CR-013-area-gestao.md) | Área de gestão (indicadores do site para o administrador) | Em Implementação | 2026-10-06 |
 | [CR-012](CR-012-provas-2026.md) | Família 2026 no extrator (prova da FUVEST 2026 e simulado oficial de 2025) | Concluído | 2026-10-05 |
 | [CR-011](CR-011-formato-80-simulados.md) | Formato de 80 questões (FUVEST 2027) e simulados oficiais da FUVEST | Concluído | 2026-10-05 |
 | [CR-010](CR-010-notas-de-corte.md) | Notas de corte por carreira e carreira-alvo (Fase 4 do roadmap) | Concluído | 2026-10-02 |

@@ -1,8 +1,8 @@
 # Guia de Deploy e Release — Simulado Fuvest
 
-**Versão:** 1.7
-**Data:** 2026-10-05
-**Arquitetura Ref:** 02-ARCHITECTURE v1.12 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, §9)
+**Versão:** 1.8
+**Data:** 2026-10-06
+**Arquitetura Ref:** 02-ARCHITECTURE v1.13 (ADR-001, ADR-002, ADR-008, ADR-009, ADR-010, ADR-012, ADR-014, ADR-015, ADR-016, §9)
 
 ---
 
@@ -56,6 +56,7 @@ Não existe arquivo `.env`: todo default é local e seguro (SQLite). Produção 
 | `GOOGLE_CLIENT_ID` | Sim (CR-006) | ID do cliente OAuth (seção 3.1) | Sem ele (ou sem o segredo, ou com `PUBLIC_URL` sem https), o site fica **indisponível** em produção: 503 `site_indisponivel` na API de conteúdo (CR-006). Fora de produção, abre sem login |
 | `GOOGLE_CLIENT_SECRET` | Para o login | Segredo do cliente OAuth | **Único segredo do projeto.** Definir só na Railway; nunca no repositório, em log ou no chat |
 | `PUBLIC_URL` | Para o login | `https://simulado-fuvest-production.up.railway.app` | Sem barra final. Monta o `redirect_uri` e é o único `Origin` aceito nos `POST`/`DELETE` com cookie. Em produção, sem `https` o login fica desligado e o log mostra `PUBLIC_URL precisa ser https` |
+| `ADMIN_GOOGLE_SUBS` | Para a gestão | O `sub` da conta Google do administrador (seção 8.4) | CR-013: lista separada por vírgula. Sem ela, a área de gestão não existe (404 para todos). Não é segredo, mas fica só na Railway |
 
 Trocar o domínio exige atualizar `PUBLIC_URL` **e** o URI de redirecionamento do cliente OAuth (seção 3.1).
 
@@ -126,6 +127,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 - [ ] `upgrade head` e `downgrade -1` testados no SQLite local **e** no Postgres do CI (passo "Migrations no Postgres")
 - [ ] `downgrade()` implementado; se destrutiva, backup antes (seção 6)
 - [ ] **Migration 005 (CR-011):** recria vazias `provas`, `textos_base` e `questoes` (a sincronização do start as repovoa) e alarga `reportes.questao_id`; contas e históricos não são tocados. Backup recomendado (seção 6), mas não obrigatório: ela só recria dados derivados do repositório e alarga uma coluna, sem perda, e não toca as tabelas de conta. Entre a migration e o código novo assumir, o container antigo ainda no ar consulta o schema anterior: o conteúdo pode dar erro por alguns segundos (contas e histórico continuam). Fazer o deploy em horário de pouco uso. Localmente, depois do `upgrade`, rodar `python -m ingestao importar` de novo
+- [ ] **Migration 006 (CR-013):** só cria `estatisticas_diarias` e `estatisticas_questoes` e as preenche a partir de `simulados_concluidos` (lê, não altera). Não destrutiva: backup não obrigatório. O código anterior ignora as tabelas novas, então não há janela de erro no deploy
 
 ### 4.4 Taxonomia de assuntos (CR-004)
 - [ ] Mudou `data/provas/assuntos.yaml`? `python -m ingestao validar --todas` verde: renomear ou remover um slug em uso exige reclassificar as questões no mesmo commit (V11)
@@ -139,7 +141,7 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 - [ ] Merge em `master` + push → CI → deploy. O ano novo vira a lista da carreira-alvo: as carreiras-alvo do ano anterior continuam comparando com o corte delas e a página sugere escolher de novo (RN-019)
 - [ ] Arquivo de cortes inválido **não derruba o site**: a API ignora o ano (log `Notas de corte ignoradas`), por isso o portão é o CI
 
-> **Nunca aponte o banco local para produção.** Todos os comandos locais usam SQLite por padrão. O único comando que toca produção é `reportes`, e ele exige `--database-url` explícito (ADR-008).
+> **Nunca aponte o banco local para produção.** Todos os comandos locais usam SQLite por padrão. Os únicos comandos que tocam produção são `reportes` e, desde o CR-013, `contas` (só leitura), e os dois exigem `--database-url` explícito (ADR-008).
 
 ---
 
@@ -157,9 +159,10 @@ O Google Cloud não tem CLI para criar cliente OAuth do tipo "Aplicativo da Web"
 | Reverter o CR-011 (código da prova, 80 questões) | O código anterior **não lê** o schema da `005`: backup (seção 6) → `railway ssh -s simulado-fuvest python -m alembic downgrade 004` (recria vazias as tabelas derivadas no formato anterior; falha se houver reporte de questão de simulado, `2027sN-NNN`: exportar e apagar esses reportes antes) → `git revert -m 1` do merge (e do conteúdo dos simulados, se publicado) + push; o start do código anterior repovoa as provas e ignora os diretórios `AAAAsN`. Históricos com ids de simulado ficam no servidor; o código anterior recusa novos envios com esses ids (ficam pendentes no navegador) |
 | Reverter o CR-010 (notas de corte) | `git revert -m 1` do merge: leva código e `data/provas/notas_corte/` juntos. A migration `004` pode ficar (o código antigo ignora as colunas); `alembic downgrade` da `004` apaga só as carreiras-alvo escolhidas, mas com backup antes (seção 6), como toda migration em banco com dados de usuário |
 | Notas de corte publicadas com erro | Corrigir ou `git revert` do arquivo `data/provas/notas_corte/AAAA.yaml` + push: a API lê o arquivo do deploy novo |
+| Reverter o CR-013 (área de gestão) | `git revert -m 1` do merge: o código anterior ignora as tabelas novas. A migration `006` pode ficar; `alembic downgrade` da `006` apaga só os contadores e as marcações (contas e históricos ficam), mas com backup antes (seção 6). Para só esconder a área, basta remover `ADMIN_GOOGLE_SUBS` |
 | Reverter o CR-004 (assuntos) | `git revert -m 1` do merge **inteiro**, que leva código e conteúdo juntos. Reverter só o código deixaria os pacotes com `assunto`, que o schema antigo (`extra="forbid"`) rejeita, e as provas sairiam do ar. A migration `002` pode ficar: o código antigo ignora a coluna |
 
-O banco de questões é descartável: ele é reconstruído a cada start a partir de `data/provas`. Os dados próprios do banco são `reportes`, `estatisticas_geracao` e, desde o CR-005, **as contas**: `usuarios`, `sessoes` e `simulados_concluidos`, que não podem ser reconstruídas.
+O banco de questões é descartável: ele é reconstruído a cada start a partir de `data/provas`. Os dados próprios do banco são `reportes`, `estatisticas_geracao`, desde o CR-013 `estatisticas_diarias` e `estatisticas_questoes` (anônimos) e, desde o CR-005, **as contas**: `usuarios`, `sessoes` e `simulados_concluidos`, que não podem ser reconstruídas.
 
 ---
 
@@ -190,6 +193,7 @@ Requer o cliente do PostgreSQL (`pg_dump`/`pg_restore`), **que não está instal
 - [ ] Vitrine (CR-007): sem cookie, `GET /api/vitrine` → 200 com `total_questoes` igual ao do catálogo e os `anos` publicados; a apresentação mostra esses números
 - [ ] Notas de corte (CR-010): sem cookie, `GET /api/notas-corte` → 401; logado, `/notas-de-corte` mostra os anos publicados (desde 02/10/2026: 2026, 2025, 2024, 2023, 2022 e 2020) e as carreiras do mais recente; definir a carreira-alvo, finalizar uma Prova de um ano e ver o bloco "Notas de corte" no resultado e a linha no início
 - [ ] Formato de 80 questões e simulados oficiais (CR-011): `railway logs` com `Running upgrade 004 -> 005` e a sincronização de todas as provas depois; a Prova completa começa com "Questão 1 de 80" e "Folha 0/80"; a Prova de um ano de 2025 continua com 90; a página da Prova de um ano lista os simulados oficiais à parte (quando publicados); o Personalizado mostra "3 min 45 s por questão"; o bloco de notas de corte mostra "equivale a … de 90 (estimativa)" na Prova completa
+- [ ] Área de gestão (CR-013): `railway logs` com `Running upgrade 005 -> 006`; sem cookie, `GET /api/gestao/uso` → 404 `nao_encontrado`; com `ADMIN_GOOGLE_SUBS` definida, o administrador vê o link "Gestão" e as quatro abas (Uso com os simulados concluídos importados do histórico; logins e ativos a partir do deploy), e uma conta comum vê "Página não encontrada" em `/gestao`
 - [ ] Figuras carregam (`/figuras/CODIGO/...`)
 - [ ] `railway logs`: sem erros; a linha `Sincronizadas: [...]` lista as provas esperadas e nenhuma `Ignorada` publicada
 
@@ -206,6 +210,8 @@ cd backend
 # corrigir o prova.yaml numa branch conteudo/..., merge, deploy; depois:
 .venv/Scripts/python -m ingestao reportes resolver --database-url "<DATABASE_PUBLIC_URL>" 12 15
 ```
+
+Desde o CR-013 a lista e a resolução também estão na aba Qualidade da área de gestão (`/gestao/qualidade`), sem precisar da URL do banco.
 
 ### 8.2 Diagnóstico
 
@@ -231,6 +237,21 @@ railway ssh -s simulado-fuvest "python -c 'exec(__import__(\"base64\").b64decode
 ```
 
 Consultas sobre as contas devem mostrar só contagens: e-mails, nomes e históricos são dados pessoais e não vão para o terminal nem para o chat.
+
+### 8.4 Ligar a área de gestão (CR-013)
+
+O administrador é reconhecido pelo `sub` da conta Google, nunca pelo e-mail (ADR-016). Uma vez, depois de entrar no site com a conta:
+
+```bash
+railway variables -s Postgres --kv | grep DATABASE_PUBLIC_URL     # tem a senha: não colar em lugar nenhum
+cd backend
+.venv/Scripts/python -m ingestao contas --email <seu e-mail> --database-url "<DATABASE_PUBLIC_URL>"   # só leitura: mostra o sub
+railway variables -s simulado-fuvest --set ADMIN_GOOGLE_SUBS=<sub>     # redeploy automático
+```
+
+Recarregue o site: o link "Gestão" aparece no cabeçalho. Para tirar o acesso, remova a variável (ou o `sub` dela).
+
+---
 
 ## 9. Integração Contínua
 
@@ -258,4 +279,5 @@ Acompanhar: `gh run watch`; falhas: `gh run view --log-failed`.
 | 2026-10-01 | Claude | v1.4 — CR-007: `GET /api/vitrine` pública na verificação pós-deploy e no smoke test |
 | 2026-10-02 | Claude | v1.5 — CR-010: notas de corte de um ano novo (§4.5), migration 004 e rollback do CR-010, verificação das notas de corte |
 | 2026-10-03 | Claude | v1.6 — CR-011: migration 005 (recria as tabelas derivadas; janela curta no deploy, §4.3), simulados oficiais e `--prova` no conteúdo (§4.2), `pontos_prova` nas notas de corte de 2027 (§4.5), rollback e verificação do CR-011 |
+| 2026-10-06 | Claude | v1.8 — CR-013: variável `ADMIN_GOOGLE_SUBS` (§2) e como ligar a área de gestão (§8.4, comando `contas`), migration 006 (§4.3), rollback, verificação pós-deploy e reportes também pela web (§8.1) |
 | 2026-10-05 | Claude | v1.7 — CR-012: `familia_2026` (prova da FUVEST 2026 e simulado oficial de 2025, `2026s1` com 90 questões) e o registro de código novo como mudança de parser (§4.2) |
