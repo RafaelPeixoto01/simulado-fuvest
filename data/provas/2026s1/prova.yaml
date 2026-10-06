@@ -17,16 +17,16 @@ textos_base:
       Intelectuais e farsantes amiúde se confundem. Sinal dos tempos, gritos se tornam equivalentes a ênfases, ataques passam a valer como expressão de individualidade e a retórica mais rude toma ares de argumentação. A confusão não é nova, é quase natural. Afinal, a inteligência parece poder alimentar tanto a reflexão quanto o canalha; contra toda aparência, inteligências há de diversa natureza. Pior ainda. A quase todos a inteligência parece ser da ordem das coisas cítricas e não naturalmente doce; seria em geral áspera e raramente acolhedora. E o lugar-comum da tradição nos faz mesmo julgar tolo o otimista e profundo o pessimista; a vocação natural da razão parece ser o negativo, a destruição e, portanto, o esclarecimento condenado a ser talhado em penumbra.
       Ao contrário, por tolice convicta ou por experiência bem assentada, penso que a inteligência pode ser acolhedora, expansiva. O indivíduo arguto não precisa ser quem prefere sempre a ironia à crítica, se verdadeiramente arguto, não precisa preferir a cizânia à concórdia, a vitória ao consenso, a persuasão ao convencimento.
       Chego a guardar a lembrança viva de amigos assim, muitíssimo inteligentes. Minha tristeza mais íntima é quase todos eles terem morrido. Porém, ao encontrá-los outrora, eles pareciam mesmo felizes em me ver, como se, ao me olharem fixamente, escolhessem de mim o que poderia haver de melhor. Amigos que, em vez de lamentar o peso da existência, como o fazem alguns cínicos, saudavam, com alma lírica, sua força instigante, seu permanente desafio.
-      João Carlos Salles. Eu sei lá: nota sobre as forças selvagens da inteligência. Revista Cult . 29 de março de 2018. Adaptado.
+      João Carlos Salles. Eu sei lá: nota sobre as forças selvagens da inteligência. Revista Cult. 29 de março de 2018. Adaptado.
 - id: tb02
   questoes:
   - 26
   - 27
   conteudo:
   - texto: O cubo truncado é o sólido arquimediano resultante da remoção de uma pirâmide de base triangular
-      em torno de cada vértice de um cubo, que será chamado de cubo de partida , conforme mostra a figura.
+      em torno de cada vértice de um cubo, que será chamado de cubo de partida, conforme mostra a figura.
   - figura: tb02-1.webp
-  - texto: As faces do sólido resultante são octógonos regulares e triângulos equiláteros . Suponha que
+  - texto: As faces do sólido resultante são octógonos regulares e triângulos equiláteros. Suponha que
       as arestas do cubo de partida tenham comprimento de 1 unidade de medida.
 - id: tb03
   questoes:
@@ -36,9 +36,9 @@ textos_base:
   conteudo:
   - figura: tb03-1.webp
   - texto: |-
-      Gossip may not be good for you, per se , but it’s deeply connected to human nature.
+      Gossip may not be good for you, per se, but it’s deeply connected to human nature.
       The historian Yuval Noah Harari wrote that gossip helped early Homo sapiens form larger and more stable bands. He borrowed the idea from the anthropologist Robin Dunbar, who theorized that language — and by extension, gossip — replaced grooming, a social bonding practice still seen among our primate cousins.
-      Humans needed something that would help them keep upto-date with friends and family as they spread out across distances, and networks of Homo sapiens were becoming too large for everyone to effectively groom everyone else.
+      Humans needed something that would help them keep up-to-date with friends and family as they spread out across distances, and networks of Homo sapiens were becoming too large for everyone to effectively groom everyone else.
       Or, to put it another way, humans evolved to gossip. The language of social bonding is thought to play a pivotal part in ensuring our survival and later flourishing.
       Gossip’s ability to drive “vicarious learning” and facilitate “social connection” was the subject of a recent study by scientists at Dartmouth’s Computational Social Affective Neuroscience Laboratory.
       Luke Chang, a professor of psychological and brain sciences, explained that he and his co-researcher, Eshin Jolly, dug into the topic because gossip is ubiquitous but not well-studied.
@@ -53,14 +53,23 @@ textos_base:
   - texto: |-
       O Retorno do Rei: Queda e Ascensão de Elvis Presley é uma jornada fascinante por trás do icônico especial de retorno de Elvis Presley, que marcou um dos momentos mais decisivos da carreira do lendário cantor. No verão de 1968, Elvis estava em uma encruzilhada. Após uma meteórica ascensão ao estrelato nos anos 1950, dois anos no exército e uma carreira em declínio com filmes de Hollywood sem sucesso, ele estava longe do auge de sua fama.
       Disponível em https://www.adorocinema.com/filmes/. Adaptado.
+- id: tb08
+  questoes:
+  - 36
+  - 37
+  conteudo:
+  - texto: |-
+      A seguir, são apresentados dois trechos de Balada de amor ao vento, de Paulina Chiziane.
+      “Foi nessa manhã que se realizou o último conselho da Corte do Rei Zucula. Ditadas as últimas vontades, o rei foi acocorar-se na raiz da figueira secular falando com os antepassados remotos e recentes. Diz-se que nesse momento apareceu uma cobra enorme que se enrolou no tronco da figueira, lançando línguas de fogo. Foi nesse momento que a sua vida se esfumou. O rei morreu de cócoras, e de cócoras foi enterrado, com a lança do guerreiro à direita, e o escudo à esquerda, pois se outra coisa fizessem não choveria.”
+      “Ela teve uma morte repentina, quase igual à do seu defunto rei. Foi no oitavo dia da morte do marido que ela se aproximou da figueira para fazer as oferendas. Apareceu a mesma cobra que lançou línguas de fogo, levando consigo a vida da rainha. Ela morreu de joelhos, e de joelhos foi enterrada, com uma faca encravada na palma da mão direita, uma moeda de ouro e grãos de mapira [sorgo; milho-zaburro] na outra, pois se outra coisa se fizesse, não haveria paz para todos os seus descendentes.”
 - id: tb05
   questoes:
   - 38
   - 39
   conteudo:
   - texto: |-
-      Há um fenômeno interessante nas redes sociais, os influenciadores isentões. Talvez não seja novidade para ninguém e eu seja só a tia atrasada do rolê. Talvez todo mundo ache que a vida é assim, mas quando percebi a mutreta, achei muito esperto e, também, bastante desonesto. São celebridades e perfis que ganharam projeção com fofocas do meio artístico, cobertura sobre a programação de TV, que hoje abrange o streaming , alguns com comentários bemhumorados e, muitas vezes, críticas bastante ácidas. Eu passei a seguir algumas dessas páginas, que muitas vezes nem rosto têm, por causa do humor e das sacadas geniais para zombar da vida e de gente famosa. Não foi de cara que percebi a repetição do mesmo padrão, foto ou vídeo postados não vêm mais com uma legenda opinativa, mas com a descrição do episódio — às vezes, nem isso, e uma pergunta: "o que vocês acharam disso?", "qual dos dois está certo?", "fulano tem razão?" Quem está distraído pode até pensar que a boa alma, que quase sempre tem milhões de seguidores, quer dar voz ao seguidor, abrir espaço para que todos deem sua opinião, democratizar o debate. Na prática, é só um jeito de conseguir muito engajamento sem expor a própria opinião, sem fazer nenhum esforço de reflexão, sem correr o risco de ser cancelado por desagradar A ou B. Muitos desses perfis romperam a barreira do assunto entretenimento e possuem também conteúdo político. Quem resiste, não é mesmo? Parece que se você não falar de política nos dias de hoje, você nem existe. Mas como falar do assunto para quem só está ali porque quer ver as tretas sobre o BBB? Posando de isentão.
-      Mariliz Pereira Jorge. Os influenciadores isentões . Folha de S. Paulo. 31.05.2022. Adaptado.
+      Há um fenômeno interessante nas redes sociais, os influenciadores isentões. Talvez não seja novidade para ninguém e eu seja só a tia atrasada do rolê. Talvez todo mundo ache que a vida é assim, mas quando percebi a mutreta, achei muito esperto e, também, bastante desonesto. São celebridades e perfis que ganharam projeção com fofocas do meio artístico, cobertura sobre a programação de TV, que hoje abrange o streaming, alguns com comentários bem-humorados e, muitas vezes, críticas bastante ácidas. Eu passei a seguir algumas dessas páginas, que muitas vezes nem rosto têm, por causa do humor e das sacadas geniais para zombar da vida e de gente famosa. Não foi de cara que percebi a repetição do mesmo padrão, foto ou vídeo postados não vêm mais com uma legenda opinativa, mas com a descrição do episódio — às vezes, nem isso, e uma pergunta: "o que vocês acharam disso?", "qual dos dois está certo?", "fulano tem razão?" Quem está distraído pode até pensar que a boa alma, que quase sempre tem milhões de seguidores, quer dar voz ao seguidor, abrir espaço para que todos deem sua opinião, democratizar o debate. Na prática, é só um jeito de conseguir muito engajamento sem expor a própria opinião, sem fazer nenhum esforço de reflexão, sem correr o risco de ser cancelado por desagradar A ou B. Muitos desses perfis romperam a barreira do assunto entretenimento e possuem também conteúdo político. Quem resiste, não é mesmo? Parece que se você não falar de política nos dias de hoje, você nem existe. Mas como falar do assunto para quem só está ali porque quer ver as tretas sobre o BBB? Posando de isentão.
+      Mariliz Pereira Jorge. Os influenciadores isentões. Folha de S. Paulo. 31.05.2022. Adaptado.
 - id: tb06
   questoes:
   - 45
@@ -84,45 +93,24 @@ textos_base:
       - Grupo 2: recebeu alimentação suplementada com óleo de soja;
       - Grupo 3: recebeu alimentação suplementada com óleo de linhaça.
       A análise do teor de gordura e de ácidos graxos no leite de cada grupo de vacas é apresentada a seguir.
-      % ácidos
-      % de ácidos
-      % de
-      Suplementação
-      graxos
-      graxos
-      da alimentação gordura
-      insaturados saturados
-      no leite
-      das vacas
-      na gordura na gordura
-      Grupo 1: Sem
-      3,4
-      66,9
-      33,1
-      suplementação
-      Grupo 2: Óleo
-      2,8
-      56,5
-      43,5
-      de Soja
-      Grupo 3: Óleo
-      2,9
-      56,6
-      43,4
-      de Linhaça
-      Em particular, a alteração na dieta dos animais melhorou a proporção de Ômega-6 ( Ω -6) e Ômega-3 ( Ω -3) que, em quantidades adequadas, têm um importante papel na prevenção, por exemplo, de doenças cardiovasculares e inflamatórias crônicas, além de alguns tipos de câncer.
-      O estudo mostrou que a suplementação de óleo de linhaça na dieta das vacas diminuiu no leite a proporção Ω -6 / Ω -3 de 7,92 para 2,72. Essa proporção mais baixa no leite pode contribuir para que a proporção desses ácidos graxos na alimentação diária total dos seres humanos esteja dentro da faixa indicada pela OMS, que é de 5 a 10.
+      Suplementação da alimentação das vacas – % de gordura no leite – % de ácidos graxos saturados na gordura – % ácidos graxos insaturados na gordura
+      Grupo 1: Sem suplementação – 3,4 – 66,9 – 33,1
+      Grupo 2: Óleo de Soja – 2,8 – 56,5 – 43,5
+      Grupo 3: Óleo de Linhaça – 2,9 – 56,6 – 43,4
+      Em particular, a alteração na dieta dos animais melhorou a proporção de Ômega-6 (Ω-6) e Ômega-3 (Ω-3) que, em quantidades adequadas, têm um importante papel na prevenção, por exemplo, de doenças cardiovasculares e inflamatórias crônicas, além de alguns tipos de câncer.
+      O estudo mostrou que a suplementação de óleo de linhaça na dieta das vacas diminuiu no leite a proporção Ω-6/Ω-3 de 7,92 para 2,72. Essa proporção mais baixa no leite pode contribuir para que a proporção desses ácidos graxos na alimentação diária total dos seres humanos esteja dentro da faixa indicada pela OMS, que é de 5 a 10.
       Mauricio X. S. Oliveira et al. (2021). PLoS ONE 16(2): e0246357. Disponível em https://doi.org/10.1371/journal.pone.0246357/.
 questoes:
 - numero: 1
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: brasil-republica
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - figura: q001-1.webp
   - texto: |-
-      Henfil. O Pasquim , edição 716 (17 a 23/03/1983), Rio de Janeiro.
+      Henfil. O Pasquim, edição 716 (17 a 23/03/1983), Rio de Janeiro.
       A charge publicada em 1983
   alternativas:
     A:
@@ -141,14 +129,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 2
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A principal característica política da independência brasileira foi a negociação entre a elite nacional, a coroa portuguesa e a Inglaterra, tendo como figura mediadora o príncipe D. Pedro.
-      José Murilo de Carvalho. Cidadania no Brasil. O longo caminho . Rio de Janeiro: Civilização Brasileira, 2008.
+      José Murilo de Carvalho. Cidadania no Brasil. O longo caminho. Rio de Janeiro: Civilização Brasileira, 2008.
       Segundo o texto, a emancipação política brasileira
   alternativas:
     A:
@@ -165,21 +153,16 @@ questoes:
         da colônia.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 2, y≈782, 791: conferir o texto'
+  pendencias: []
 - numero: 3
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       No pós-Segunda Guerra, sociólogos e cientistas políticos elaboraram diferentes teorias sobre a convergência entre países desenvolvidos e em desenvolvimento. Uma delas, a teoria da modernização, pressupunha que os países em desenvolvimento que modernizassem suas economias por meio da industrialização e da urbanização tenderiam a ampliar a participação política dos cidadãos, reforçar o controle democrático sobre os governos e consolidar direitos trabalhistas e sociais.
-      Em suma, projetando nos países em desenvolvimento uma trajetória típica trilhada por alguns pioneiros da industrialização,
-      essas
-      teorias
-      consideravam
-      o desenvolvimento econômico um caminho seguro para a disseminação de democracias liberais no mundo.
+      Em suma, projetando nos países em desenvolvimento uma trajetória típica trilhada por alguns pioneiros da industrialização, essas teorias consideravam o desenvolvimento econômico um caminho seguro para a disseminação de democracias liberais no mundo.
       Todavia, a análise dos contextos de países em desenvolvimento, entre os anos 1960 e 1980, levou à contestação da teoria da modernização, que se mostrou frágil por desconsiderar que
   alternativas:
     A:
@@ -205,14 +188,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 4
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Creio que a melhor maneira de deduzir as ideias subjacentes às ações fascistas é a partir dessas próprias ações, uma vez que algumas delas permanecem imanifestas e implícitas na linguagem pública deles (dos fascistas). Muitas delas permanecem mais no domínio dos sentimentos viscerais que ao das proposições racionais. Chamei-as de “paixões mobilizadoras”: 1) um senso de crise catastrófica, além do alcance das soluções tradicionais; 2) a primazia do grupo, perante o qual todos têm deveres superiores a qualquer direito, sejam eles individuais ou universais, e a subordinação do indivíduo a esses deveres; 3) a crença de que o próprio grupo é vítima, sentimento esse que justifica qualquer ação, sem limites jurídicos ou morais, contra seus inimigos, tanto internos quanto externos; 4) o pavor à decadência do grupo sob a influência corrosiva do liberalismo individualista, dos conflitos de classe e das influências estrangeiras; 5) a necessidade de uma integração mais estreita no interior de uma comunidade mais pura, por consentimento, se possível, pela violência excludente, se necessário; 6) a necessidade da autoridade de chefes naturais (sempre do sexo masculino), culminando num comandante nacional, o único capaz de encarnar o destino histórico do grupo; 7) a superioridade dos instintos do líder sobre a razão abstrata e universal; 8) a beleza da violência e a eficácia da vontade, sempre que voltadas para o êxito do grupo; 9) o direito do povo eleito de dominar os demais, sem restrições provenientes de qualquer tipo de lei humana ou divina, o direito sendo decidido por meio do critério único das proezas do grupo no interior de uma luta darwiniana. O fascismo, segundo essa definição, ainda é visível nos dias de hoje, como também o são os comportamentos coerentes com esses sentimentos.
-      Robert Paxton. A anatomia do fascismo . São Paulo: Paz e Terra, 2007.
+      Robert Paxton. A anatomia do fascismo. São Paulo: Paz e Terra, 2007.
       O cientista político e historiador estadunidense Robert Paxton lista nove características do pensamento fascista, denominadas por ele de “paixões mobilizadoras”. Considerando tais características, é correto afirmar:
   alternativas:
     A:
@@ -233,14 +216,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 5
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Pois cumpre notar que o principal efeito de todas as paixões nos homens é que incitam e dispõem a sua alma a querer as coisas para as quais elas lhe preparam os corpos; de sorte que o sentimento de medo incita a fugir, o da audácia a querer e assim por diante.
-      Descartes. As paixões da alma .
+      Descartes. As paixões da alma.
       Ao longo da História da Filosofia, muito tem sido discutido sobre a relação entre as paixões e a alma.
       Com base no trecho citado, e seguindo a relação nele proposta, qual proposição seria verdadeira e coerente com o pensamento cartesiano?
   alternativas:
@@ -258,13 +241,13 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 6
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: seculo-xx
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Em 1936, tropas italianas, sob as ordens de Benito Mussolini, invadiram a Etiópia e a mantiveram
-      sob o domínio da Itália até 1941.Tal episódio
+      sob o domínio da Itália até 1941. Tal episódio
   alternativas:
     A:
       texto: fez parte das operações militares que antecederam a Segunda Guerra Mundial e envolvia também
@@ -285,8 +268,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 7
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -309,13 +292,10 @@ questoes:
         âmbito da ironia e da crítica.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈435: conferir o texto'
-  - 'Texto-base tb01: Índice/expoente em fonte pequena na página 4, y≈390: conferir o texto'
-  - 'Texto-base tb01: Possível figura vetorial (tabela/gráfico) na página 4, y≈213–388'
+  pendencias: []
 - numero: 8
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: tb01
   enunciado:
@@ -334,18 +314,17 @@ questoes:
       texto: oscila entre subordinação e coordenação para subverter a perspectiva do leitor.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 4, y≈795: conferir o texto'
+  pendencias: []
 - numero: 9
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: brasil-imperio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       A querela sobre a natureza da escravidão e sobre sua inserção na sociedade moderna tem passado por grandes transformações. A posição dominante até uns 15 anos atrás era a de que o trabalho escravo, comparado ao trabalho livre das sociedades de mercado, era improdutivo. Daí constituir a escravidão um sistema produtivo condenado a desaparecer por obsoleto frente às forças do mercado. Pesquisas mais recentes têm colocado em séria dúvida a posição desses autores. Estudos empíricos, tanto nos Estados Unidos, como no Brasil e no Caribe, têm demonstrado que até seus anos finais o sistema escravista se mostrava lucrativo, que o comportamento dos proprietários de escravos era perfeitamente racional e que certo avanço tecnológico era compatível com o trabalho escravo.
       Conclui-se que o fim da escravidão nos vários países não se deveu apenas ao avanço da sociedade de mercado. O fim da escravidão foi essencialmente um fenômeno político.
-      José Murilo Carvalho. Pontos e bordados: escritos de história e política . Belo Horizonte: UFMG, 1998. Adaptado.
+      José Murilo Carvalho. Pontos e bordados: escritos de história e política. Belo Horizonte: UFMG, 1998. Adaptado.
       O texto faz um balanço dos debates historiográficos que mudaram a forma de se explicar as razões para o fim da escravidão moderna. A “nova historiografia” defende que a escravidão
   alternativas:
     A:
@@ -362,8 +341,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 10
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: populacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -387,11 +366,10 @@ questoes:
         da população negra e branca acima da média nacional.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈360, 379: conferir o texto'
+  pendencias: []
 - numero: 11
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: populacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -417,11 +395,10 @@ questoes:
         de idade e entre aquelas com 75 anos de idade ou mais.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 5, y≈576, 793: conferir o texto'
+  pendencias: []
 - numero: 12
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -444,8 +421,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 13
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: termodinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -469,8 +446,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 14
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -481,14 +458,11 @@ questoes:
   - figura: q014-1.webp
   - texto: |-
       Tempo de viagem nas megacidades e composição dos principais meios de transporte.
-      Paul Knox. Atlas das cidades . São Paulo: Sesc. 2016.
+      Paul Knox. Atlas das cidades. São Paulo: Sesc. 2016.
       Densidade Populacional Urbana
-      Mumbai
-      24.073 pessoas por km²
-      São Paulo
-      5.888 pessoas por km²
-      Cidade do México
-      8.657 pessoas por km²
+      Mumbai – 24.073 pessoas por km²
+      São Paulo – 5.888 pessoas por km²
+      Cidade do México – 8.657 pessoas por km²
       Demographia World Urban Areas - 19th Annual Edition: August 2023.
       Sobre a mobilidade urbana nas megacidades, é correto afirmar:
   alternativas:
@@ -504,13 +478,10 @@ questoes:
       texto: O elevado nível econômico da população leva à utilização de veículos particulares.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 6, y≈226: conferir o texto'
-  - 'Texto sublinhado na página 6, y≈296, 310, 324, 338: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 6, y≈282–339
+  pendencias: []
 - numero: 15
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: espaco-urbano
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -531,8 +502,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 16
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: clima
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -553,9 +524,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 17
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: espaco-urbano
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
@@ -582,9 +554,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 18
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: populacao
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
@@ -612,6 +585,7 @@ questoes:
       Das terra civilizada
       Sem rádio e sem notícia
       Das terra civilizada
+
       A canção “Riacho do Navio” foi composta por Zé Dantas e Luiz Gonzaga em 1955. Ajudou a popularizar o gênero Baião em um contexto de migrações de populações nordestinas e de acelerada urbanização da sociedade brasileira. A letra da música
   alternativas:
     A:
@@ -628,20 +602,20 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 19
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Constituída como um campo de expressão artística e de criação em contexto urbano, fortemente marcado por uma dinâmica de exclusão social, entre os anos de 1960 e 1970 em Nova Iorque, o break , dança da cultura Hip Hop , chegou às Olimpíadas da Era Moderna em Paris 2024.
+      Constituída como um campo de expressão artística e de criação em contexto urbano, fortemente marcado por uma dinâmica de exclusão social, entre os anos de 1960 e 1970 em Nova Iorque, o break, dança da cultura Hip Hop, chegou às Olimpíadas da Era Moderna em Paris 2024.
       O gesto cênico coreografado no break remete a indícios de sentidos e carrega significados, na medida em que o corpo representa uma atitude interior de seus praticantes e, ao mesmo tempo, uma atitude exterior de determinados grupos sociais. A cada tempo-espaço, novos sentidos e novos significados poderão ser vivenciados e manifestados.
       A corporalidade, expressada pelo break ou por qualquer outra prática corporal, abarca um “conceito que se encontra carregado de intencionalidade como toda ação humana o é, em sua dimensão política. Tem, portanto, um conteúdo de denúncia e de anúncio”.
-      Ana Marcia Silva. Entre o Corpo e as práticas corporais . In: Rev. ARQUIVOS em MOVIMENTO, Rio de Janeiro, Edição Especial, v.10, n.1, p.5-20, jan/jun 2014. Adaptado.
+      Ana Marcia Silva. Entre o Corpo e as práticas corporais. In: Rev. ARQUIVOS em MOVIMENTO, Rio de Janeiro, Edição Especial, v.10, n.1, p.5-20, jan/jun 2014. Adaptado.
       A partir das considerações apresentadas, é correto afirmar:
   alternativas:
     A:
-      texto: A dança break , ao adentrar o universo olímpico, precisou se despir de sua manifestação cultural
+      texto: A dança break, ao adentrar o universo olímpico, precisou se despir de sua manifestação cultural
         para se pautar nas normativas e regras da modalidade esportivizada, definindo uma nova estrutura
         do estilo, que deixou de ter características de denúncia social.
     B:
@@ -649,7 +623,7 @@ questoes:
         sua inserção nos Jogos Olímpicos, a ganhar visibilidade e reconhecimento mundial, possibilitando
         novos contornos sociais para a modalidade.
     C:
-      texto: O break , ao adentrar o universo olímpico, passou a ser vivenciado por um grupo seleto de
+      texto: O break, ao adentrar o universo olímpico, passou a ser vivenciado por um grupo seleto de
         praticantes e carregou novas denúncias sociais em sua realidade, como o fato de o esporte de alto
         rendimento ser segregador, impedindo sua manifestação espontânea em contexto urbano.
     D:
@@ -662,17 +636,16 @@ questoes:
         essência.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 7, y≈795: conferir o texto'
+  pendencias: []
 - numero: 20
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: revolucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Todos davam ao corpo uma variedade de movimentos adaptados às necessidades do novo mundo urbano; mas o esporte não tardou a tomar outros significados, em termos de raça, de nação e de império. Encarnou literalmente as novas virtudes masculinas da era industrial: o culto do esforço e do mérito, o valor da competição por si mesma, a desconfiança em relação a tudo o que era puramente intelectual, a crença absoluta na diferença de gêneros, vista como natural e justa, e uma adesão igualmente forte à ideia de superioridade do homem branco sobre todas as outras raças.
-      Georges Vigarello e Richard Holt. O corpo trabalhado: ginastas e esportistas no século XIX . In: Alain Corbin, Jean-Jacques Courtine e Georges Vigarello (orgs.) História do Corpo. Petrópolis: Vozes, 2008. Adaptado.
+      Georges Vigarello e Richard Holt. O corpo trabalhado: ginastas e esportistas no século XIX. In: Alain Corbin, Jean-Jacques Courtine e Georges Vigarello (orgs.) História do Corpo. Petrópolis: Vozes, 2008. Adaptado.
       No final do século XIX, os esportes
   alternativas:
     A:
@@ -694,9 +667,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 21
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: sociologia
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: 'Brincar: verbo associado ao entretenimento e à diversão. A brincadeira é a ação do brincar.
@@ -704,7 +678,7 @@ questoes:
       de outras atividades cotidianas é o seu aspecto pautado pela diversão e pela criatividade, ao se
       opor a uma ação realizada em prol da sobrevivência ou da necessidade.'
   - figura: q021-1.webp
-  - texto: Pieter Bruegel. Jogos Infantis , 1560.
+  - texto: Pieter Bruegel. Jogos Infantis, 1560.
   - figura: q021-2.webp
   - texto: |-
       Candido Portinari. Meninos soltando pipas, 1938.
@@ -729,19 +703,17 @@ questoes:
         ou papéis sociais, razão pela qual essa atividade é atribuída somente à categoria social da infância.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 8, y≈92, 200: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 8, y≈91–134
+  pendencias: []
 - numero: 22
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       O filósofo Blaise Pascal apresenta a seguinte reflexão sobre a felicidade:
       “Como a natureza nos torna sempre infelizes em todos os estados, os nossos desejos nos figuram um estado feliz porque juntam ao estado em que estamos os prazeres do estado em que não estamos e, ainda quando chegássemos a esses prazeres, nem por isso seríamos felizes, porque teríamos outros desejos conformes a esse novo estado”.
-      Pensamentos . São Paulo: Martins Fontes, 2001.
+      Pensamentos. São Paulo: Martins Fontes, 2001.
       Qual afirmação explicita a posição defendida pelo autor?
   alternativas:
     A:
@@ -759,8 +731,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 23
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -786,8 +758,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 24
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -803,29 +775,30 @@ questoes:
     C:
       texto: difundir métodos alternativos de investigação no campo da psicologia aplicada.
     D:
-      texto: incentivar a contratação de historiadores da arte pelas companhias de marketing .
+      texto: incentivar a contratação de historiadores da arte pelas companhias de marketing.
     E:
       texto: investir em pesquisas acadêmicas sobre o intercâmbio entre arte e economia.
   resposta: A
   anulada: false
   pendencias: []
 - numero: 25
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Embora sob perspectivas de diferentes, todos os autores referenciados a seguir sublinham o significado e a importância da arte na experiência humana.
-      I- “para poder ser criativa, a imaginação necessita identificarse com uma materialidade. Criará em afinidade e empatia com ela, na linguagem específica de cada fazer. Mas sempre conta a visão global de um indivíduo, a perspectiva que ele tenha do amplo fenômeno que é o humano, o seu humanismo. São seus valores de vida que dão a medida para seu pensar e fazer.”
-      Fayga Ostrower. Materialidade e imaginação criativa . In: Criatividade e processos de criação. Petrópolis: Vozes, 2014.
+      I- “para poder ser criativa, a imaginação necessita identificar-se com uma materialidade. Criará em afinidade e empatia com ela, na linguagem específica de cada fazer. Mas sempre conta a visão global de um indivíduo, a perspectiva que ele tenha do amplo fenômeno que é o humano, o seu humanismo. São seus valores de vida que dão a medida para seu pensar e fazer.”
+      Fayga Ostrower. Materialidade e imaginação criativa. In: Criatividade e processos de criação. Petrópolis: Vozes, 2014.
       II- “A primeira forma de relação entre imaginação e realidade consiste em que toda obra da imaginação constrói-se sempre de elementos tomados da realidade e presentes na experiência anterior da pessoa.”
-      Lev Semionovitch Vygotsky. Imaginação e realidade . In: Imaginação e criação na infância. São Paulo: Expressão Popular, 2018.
+      Lev Semionovitch Vygotsky. Imaginação e realidade. In: Imaginação e criação na infância. São Paulo: Expressão Popular, 2018.
       III- “O artista não somente cristaliza na sua criação uma dada realidade social, mas responde ativamente às solicitações de seu meio, às exigências de sua classe, aos problemas morais, sociais e políticos de sua época. Individualmente criada e socialmente condicionada, a obra de arte une, em si mesma, na unidade da forma e do conteúdo que a singulariza, a experiência individual e a social.”
-      Benedito Nunes. As condições sociais da Arte . In: Introdução à filosofia da arte. São Paulo: Ática, 1989. IV- “Arte não é apenas básico, mas fundamental na educação de um país que se desenvolve. Arte não é enfeite. Arte é cognição, é profissão, é uma forma diferente da palavra para interpretar o mundo, a realidade, o imaginário, e é conteúdo. Como conteúdo, arte representa o melhor trabalho do ser humano. Arte é qualidade e exercita nossa capacidade de julgar e de formular significados que excedem nossa capacidade de dizer em palavras. E o limite da nossa consciência excede o limite das palavras.”
-      Ana Mae Tavares Bastos Barbosa. Situação política do ensino da Arte no Brasil no fim dos anos oitenta . In: A imagem no ensino da arte: anos oitenta e novos tempos. São Paulo: Perspectiva, 2005.
+      Benedito Nunes. As condições sociais da Arte. In: Introdução à filosofia da arte. São Paulo: Ática, 1989.
+      IV- “Arte não é apenas básico, mas fundamental na educação de um país que se desenvolve. Arte não é enfeite. Arte é cognição, é profissão, é uma forma diferente da palavra para interpretar o mundo, a realidade, o imaginário, e é conteúdo. Como conteúdo, arte representa o melhor trabalho do ser humano. Arte é qualidade e exercita nossa capacidade de julgar e de formular significados que excedem nossa capacidade de dizer em palavras. E o limite da nossa consciência excede o limite das palavras.”
+      Ana Mae Tavares Bastos Barbosa. Situação política do ensino da Arte no Brasil no fim dos anos oitenta. In: A imagem no ensino da arte: anos oitenta e novos tempos. São Paulo: Perspectiva, 2005.
       V- “Falando muito do nosso ambiente, do nosso meio, onde nós estamos trabalhando e vivemos, eu começaria pensando um pouco sobre o que é a arte e a obra de arte. Eu veria a arte como um fenômeno humano e, como tal, uma decorrência natural de uma manifestação poética. Seria também um anseio de totalidade que nos levaria a uma questão que entendo como de um projeto pessoal. Por outro lado, nesse mesmo ato, nesse mesmo acontecimento ou realidade, concentram-se também as energias das civilizações.”
-      Evandro Carlos Jardim. Arte como manifestação poética . In: Seminário Ações singulares 2: História do Ensino da Arte: Experiências. São Paulo: Instituto Tomie Ohtake, 2009.
+      Evandro Carlos Jardim. Arte como manifestação poética. In: Seminário Ações singulares 2: História do Ensino da Arte: Experiências. São Paulo: Instituto Tomie Ohtake, 2009.
       Com base em sua compreensão dos textos, assinale a alternativa que expressa corretamente a relação entre arte, imaginação e sociedade, conforme o autor referenciado.
   alternativas:
     A:
@@ -851,8 +824,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 26
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
@@ -870,15 +843,17 @@ questoes:
       texto: '72'
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 10, y≈331, 343, 354, 366: formatação perdida no texto puro'
+  pendencias: []
 - numero: 27
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: geometria-espacial
   disciplinas_secundarias: []
   texto_base: tb02
   enunciado:
   - texto: Qual é a medida mais aproximada das arestas do cubo truncado?
+  - texto: |-
+      Note e adote:
+      Considere √2 = 1,4
   alternativas:
     A:
       texto: 0,4
@@ -889,45 +864,40 @@ questoes:
     D:
       texto: 1,0
     E:
-      texto: |-
-        1,4
-        Note e adote:
-        Considere √ 2 = 1,4
+      texto: 1,4
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 10, y≈555, 585: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 10, y≈555–585
+  pendencias: []
 - numero: 28
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: trigonometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: "Uma folha de papel retangular é vincada de modo que o vinco ℓ incide sobre os lados maiores,
-      dividindo-os em segmentos de comprimentos \U0001D465 e \U0001D466 , de modo alternado, conforme
-      mostra a figura a seguir."
+      dividindo-os em segmentos de comprimentos \U0001D465 e \U0001D466, de modo alternado, conforme mostra
+      a figura a seguir."
   - figura: q028-1.webp
   - texto: "A folha tem dimensões de 20 cm por 30 cm. Seja \U0001D703 o menor ângulo formado entre ℓ e
       qualquer dos lados maiores do papel. Qual o valor de sen \U0001D703 se ℓ for a diagonal do retângulo,
       isto é, quando \U0001D465 = 0?"
   alternativas:
     A:
-      texto: 2 / √ 13
+      texto: 2/√13
     B:
-      texto: 3 / √ 13
+      texto: 3/√13
     C:
-      texto: √ 13 / 2
+      texto: √13/2
     D:
-      texto: √ 50 / 3
+      texto: √50/3
     E:
-      texto: 2 √ 50
+      texto: 2√50
   resposta: A
   anulada: false
   pendencias: []
 - numero: 29
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -950,8 +920,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 30
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: movimentos-literarios
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -961,8 +931,8 @@ questoes:
       de maneira peculiar.
   - figura: q030-1.webp
   - texto: |-
-      Tarsila do Amaral. Palmeiras . 1925. Óleo sobre tela. 87 x 74,5 cm. Coleção Particular. Foto: Romulo Fialdini. Reprodução: 300 dpi 22,1 x 30 cm. Fonte: https://www.tarsiladoamaral.com.br/.
-      Considerando que a tela de Tarsila do Amaral foi a capa da terceira edição (2018) de Água Funda , depreende-se, da relação entre as duas obras, que Ruth Guimarães
+      Tarsila do Amaral. Palmeiras. 1925. Óleo sobre tela. 87 x 74,5 cm. Coleção Particular. Foto: Romulo Fialdini. Reprodução: 300 dpi 22,1 x 30 cm. Fonte: https://www.tarsiladoamaral.com.br/.
+      Considerando que a tela de Tarsila do Amaral foi a capa da terceira edição (2018) de Água Funda, depreende-se, da relação entre as duas obras, que Ruth Guimarães
   alternativas:
     A:
       texto: introduz um novo ponto de vista narrativo, a partir de personagens escravizados, ao passo
@@ -985,15 +955,14 @@ questoes:
         nacionalidade brasileira, de acordo com os pressupostos do movimento modernista brasileiro.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 11, y≈136, 366, 791: conferir o texto'
+  pendencias: []
 - numero: 31
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
-  - texto: Segundo o texto, para os primeiros Homo Sapiens , a fofoca
+  - texto: Segundo o texto, para os primeiros Homo Sapiens, a fofoca
   alternativas:
     A:
       texto: exerceu papel auxiliar na constituição de grupos maiores e mais equilibrados.
@@ -1009,8 +978,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 32
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1029,11 +998,10 @@ questoes:
       texto: à estratégia de autoproteção construída pelo indivíduo frente aos mexericos.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈93: conferir o texto'
+  pendencias: []
 - numero: 33
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb03
   enunciado:
@@ -1051,11 +1019,10 @@ questoes:
       texto: poder avaliar pessoas com atitudes cooperativas ou egoístas.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈257: conferir o texto'
+  pendencias: []
 - numero: 34
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1075,12 +1042,10 @@ questoes:
       texto: uma tentativa de continuar o sucesso no cinema.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈608: conferir o texto'
-  - 'Texto-base tb04: Índice/expoente em fonte pequena na página 12, y≈530: conferir o texto'
+  pendencias: []
 - numero: 35
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: semantica
   disciplinas_secundarias: []
   texto_base: tb04
   enunciado:
@@ -1096,21 +1061,15 @@ questoes:
     D:
       texto: a ligação de Elvis ao movimento astronômico, sugerindo algo grandioso e distante.
     E:
-      texto: |-
-        o sucesso duradouro e gradual de Elvis, que foi consolidado ao longo do tempo.
-        Textos para as questões 36 e 37
-        A seguir, são apresentados dois trechos de Balada de amor ao vento , de Paulina Chiziane.
-        “Foi nessa manhã que se realizou o último conselho da Corte do Rei Zucula. Ditadas as últimas vontades, o rei foi acocorarse na raiz da figueira secular falando com os antepassados remotos e recentes. Diz-se que nesse momento apareceu uma cobra enorme que se enrolou no tronco da figueira, lançando línguas de fogo. Foi nesse momento que a sua vida se esfumou. O rei morreu de cócoras, e de cócoras foi enterrado, com a lança do guerreiro à direita, e o escudo à esquerda, pois se outra coisa fizessem não choveria.”
-        “Ela teve uma morte repentina, quase igual à do seu defunto rei. Foi no oitavo dia da morte do marido que ela se aproximou da figueira para fazer as oferendas. Apareceu a mesma cobra que lançou línguas de fogo, levando consigo a vida da rainha. Ela morreu de joelhos, e de joelhos foi enterrada, com uma faca encravada na palma da mão direita, uma moeda de ouro e grãos de mapira [sorgo; milho-zaburro] na outra, pois se outra coisa se fizesse, não haveria paz para todos os seus descendentes.”
+      texto: o sucesso duradouro e gradual de Elvis, que foi consolidado ao longo do tempo.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 12, y≈751, 785, 792: conferir o texto'
+  pendencias: []
 - numero: 36
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb08
   enunciado:
   - texto: Os mitos da figueira ancestral e da cobra que lança línguas de fogo são comuns nas descrições
       dos dois falecimentos. Os sepultamentos do rei e da rainha, no entanto, trazem tanto elementos comuns
@@ -1132,10 +1091,10 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 37
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
-  texto_base: null
+  texto_base: tb08
   enunciado:
   - texto: A busca pela paz entre todos os descendentes da rainha é uma possível alusão às disputas
   alternativas:
@@ -1153,8 +1112,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 38
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: interpretacao
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1176,13 +1135,10 @@ questoes:
       texto: “Mas como falar do assunto para quem só está ali porque quer ver as tretas sobre o BBB?”
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈426–578
-  - 'Texto-base tb05: Índice/expoente em fonte pequena na página 13, y≈237: conferir o texto'
-  - 'Texto-base tb05: Possível figura vetorial (tabela/gráfico) na página 13, y≈62–388'
+  pendencias: []
 - numero: 39
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: gramatica
   disciplinas_secundarias: []
   texto_base: tb05
   enunciado:
@@ -1203,17 +1159,16 @@ questoes:
       texto: apresenta caráter genérico, reforçando o alcance da mensagem que se pretende expressar.
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈626–745
+  pendencias: []
 - numero: 40
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Tenho uma filha crescida que ainda estuda embora já tenha estudado muito. Um dia disse-me (...) Que a terra é a mãe da natureza e tudo suporta para parir a vida. Como a mulher. Os golpes da vida a mulher suporta no silêncio da terra. Na amargura suave segrega um líquido triste e viscoso como o melão. Quem já viajou no mundo da mulher? Quem ainda não foi, que vá. Basta dar um golpe profundo, profundo, que do centro vermelho explodirá um fogo mesmo igual à erupção de um vulcão.
-      Paulina Chiziane . Balada de amor ao vento.
+      Paulina Chiziane. Balada de amor ao vento.
       A citação apresentada estabelece argumentos que serão desenvolvidos ao longo do romance de Paulina Chiziane. Considerando a comparação que constitui esse argumento, é correto afirmar:
   alternativas:
     A:
@@ -1238,14 +1193,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 41
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: linguagem-figurada
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       No quadro a seguir, são reproduzidos três trocadilhos, frases que possuem a função de serem engraçadas.
-      I don’t trust stairs because they’re always up to something. I was wondering why the ball was getting bigger. Then it hit me.
+      I don’t trust stairs because they’re always up to something.
+      I was wondering why the ball was getting bigger. Then it hit me.
       I can’t believe I got fired from the calendar factory. All I did was take a day off!
       Disponível em https://parade.com/1024249/marynliles/.
       O efeito de humor dos trocadilhos decorre da compreensão da
@@ -1264,26 +1220,24 @@ questoes:
         absurdas.
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 13, y≈556–620
+  pendencias: []
 - numero: 42
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: sociologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Um self social deste tipo pode ser chamado de self refletido ou self espelho. Ao ver nossa face, imagem e vestimenta no espelho, e ao estarmos interessados neles por serem nossos, e satisfeitos ou não com eles dependendo de corresponderem ou não ao que gostaríamos que fossem; então, na imaginação, nós percebemos na mente do outro algum pensamento sobre nossa aparência, nosso jeito, nossos objetivos, atos, caráter, amigos etc., e somos afetados por isso. Uma ideia de self deste tipo parece ter três elementos principais: a imaginação da nossa aparência para a outra pessoa; a imaginação do julgamento que o outro faz dessa aparência, e algum tipo de sentimento sobre si, tal como orgulho ou mortificação. O que nos move para o orgulho ou vergonha não é o mero reflexo mecânico de nós, mas um sentimento imputado, o efeito imaginado deste reflexo na mente do outro.
-      Charles Horton Cooley. Human nature and public order . ( Revised edition ) . New York: Charles Scribner's Sons, 1922. Adaptado.
-      De que maneira é possível compreender os efeitos de redes sociais como o Instagram na saúde mental e vida dos jovens a partir da noção de “ self -refletido” / “ self -espelho” desenvolvida pelo sociólogo Charles Cooley?
+      Charles Horton Cooley. Human nature and public order. (Revised edition). New York: Charles Scribner's Sons, 1922. Adaptado.
+      De que maneira é possível compreender os efeitos de redes sociais como o Instagram na saúde mental e vida dos jovens a partir da noção de “self-refletido” / “self-espelho” desenvolvida pelo sociólogo Charles Cooley?
   alternativas:
     A:
       texto: Ao compartilhar fotos nas redes sociais, os jovens conseguem acessar os julgamentos objetivos
         dos outros sobre si que definem o seu self e, com isso, tornam-se inseguros.
     B:
       texto: O compartilhamento de fotos nas redes sociais permite que os jovens julguem com maior precisão
-        a imagem dos outros e, com isso, tornem-se menos confiantes para apresentar o seu verdadeiro self
-        .
+        a imagem dos outros e, com isso, tornem-se menos confiantes para apresentar o seu verdadeiro self.
     C:
       texto: Nas redes sociais, os jovens criam um self dissociado da avaliação que os outros fazem dele
         e, por isso, tornam-se ansiosos e inseguros com a sua própria imagem.
@@ -1295,17 +1249,17 @@ questoes:
         irreais os parâmetros de julgamento de si imaginados pelos jovens, gerando baixa autoestima.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 14, y≈256, 305: conferir o texto'
+  pendencias: []
 - numero: 43
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: textos-multimodais
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q043-1.webp
-  - texto: Disponível em https://cultura.estadao.com.br/. Contribui para o efeito de humor da tirinha
-      a fala final de Calvin, no quarto quadrinho, em que ele se mostra
+  - texto: |-
+      Disponível em https://cultura.estadao.com.br/.
+      Contribui para o efeito de humor da tirinha a fala final de Calvin, no quarto quadrinho, em que ele se mostra
   alternativas:
     A:
       texto: orgulhoso de ter culpado o pai pelo seu comportamento inconsequente.
@@ -1321,38 +1275,45 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 44
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: leituras-obrigatorias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       viii. Canção de matar
+
       Do dia nada sei
+
       O teu amor em mim
       Está como o gume
       De uma faca nua
       Ele me atravessa
       E atravessa os dias
       Ele me divide
+
       Tudo o que em mim vive
       Traz dentro uma faca
       O teu amor em mim
       Que por dentro me corta
-      Com uma faca limpa
-      Me libertarei
-      Do teu sangue que põe
-      Na minha alma nódoas
+
+        Com uma faca limpa
+        Me libertarei
+        Do teu sangue que põe
+        Na minha alma nódoas
+
       O teu amor em mim
       De tudo me separa
       No gume de uma faca
       O meu viver se corta
+
       Do dia nada sei
       E a própria noite azul
       Me fecha a sua porta
-      Do dia nada sei
-      Com uma faca limpa
-      Me libertarei.
+
+        Do dia nada sei
+        Com uma faca limpa
+        Me libertarei.
       Sophia de Mello Breyner Andresen. O Cristo cigano (Grifos nossos).
       O Cristo cigano é um poema narrativo, dividido em onze poemas numerados e um prefácio. A palavra faca é repetida diversas vezes, assumindo diferentes possibilidades de significação. No texto, a palavra faca indica a separação
   alternativas:
@@ -1370,8 +1331,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 45
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -1389,12 +1350,10 @@ questoes:
       texto: manutenção de um sentido de coletivo em meio a um mundo fragmentado.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 15, y≈512: conferir o texto'
-  - 'Texto-base tb06: Índice/expoente em fonte pequena na página 15, y≈455: conferir o texto'
+  pendencias: []
 - numero: 46
-  disciplina: null
-  assunto: null
+  disciplina: ingles
+  assunto: compreensao
   disciplinas_secundarias: []
   texto_base: tb06
   enunciado:
@@ -1412,11 +1371,10 @@ questoes:
       texto: poderá ser apreciada apenas nas regiões polares do planeta.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 15, y≈699: conferir o texto'
+  pendencias: []
 - numero: 47
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: gravitacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1451,53 +1409,42 @@ questoes:
         se encontrar com a ISS.
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 15, y≈162–322
+  pendencias: []
 - numero: 48
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Aurora polar é um fenômeno conhecido nos hemisférios norte e sul do planeta Terra e caracteriza-se por um brilho observado no céu em decorrência do impacto entre as partículas carregadas lançadas pela erupção solar (predominantemente elétrons) que são canalizadas pelo campo magnético terrestre e os átomos da atmosfera, predominantemente oxigênio e nitrogênio.
-      Considerando que os elétrons lançados pela erupção solar possuem energia cinética da ordem de 2×10 J e supondo que eles descrevem órbitas circulares sob ação do campo magnético terrestre da ordem de 10 T (suposto uniforme), a ordem de grandeza do raio da órbita desses elétrons é:
+      Considerando que os elétrons lançados pela erupção solar possuem energia cinética da ordem de 2×10⁻¹⁶ J e supondo que eles descrevem órbitas circulares sob ação do campo magnético terrestre da ordem de 10⁻⁴ T (suposto uniforme), a ordem de grandeza do raio da órbita desses elétrons é:
+  - figura: q048-1.webp
   alternativas:
     A:
-      texto: 10 m
+      texto: 10³ m
     B:
-      texto: 10 m
+      texto: 10⁰ m
     C:
-      texto: 10 m
+      texto: 10⁻³ m
     D:
-      texto: 10 m
+      texto: 10⁻⁶ m
     E:
-      texto: |-
-        10 m
-        Note e adote:
-        Módulo da força magnética de uma partícula de carga q e velocidade v na presença de um campo magnético uniforme B perpendicular à velocidade: F = q.v.B.
-        Módulo da força centrípeta de uma partícula de massa m em movimento circular uniforme de raio R com velocidade escalar v: F = mv /R.
-        Massa do elétron: m = 10 kg.
-        Carga do elétron e = 1,6×10 C.
+      texto: 10⁻⁹ m
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 16, y≈158, 180, 212, 223, 234, 245, 256, 312, 341, 344,
-    351, 359: conferir o texto'
-  - 'Texto sublinhado na página 16, y≈275, 366: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 16, y≈275–372
+  pendencias: []
 - numero: 49
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: eletrostatica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Considere um anel de raio R carregado uniformemente com carga positiva de sua circunferência,
-      conforme ilustrado na figura. Uma carga elétrica puntiforme +Q, em repouso, situase no ponto P,
+      conforme ilustrado na figura. Uma carga elétrica puntiforme +Q, em repouso, situa-se no ponto P,
       em um eixo perpendicular do plano do anel e passando pelo centro O.
   - figura: q049-1.webp
-  - texto: Nessas condições, a força eletrostática resultante F atuando sobre a carga puntiforme no ponto
-      P
+  - figura: q049-2.webp
   alternativas:
     A:
       texto: tem magnitude nula.
@@ -1511,11 +1458,10 @@ questoes:
       texto: tem componentes não nulas nas direções x, y e z.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 16, y≈597: conferir o texto'
+  pendencias: []
 - numero: 50
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1538,12 +1484,12 @@ questoes:
       figura: q050-e.webp
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 16, y≈366–548
+  pendencias: []
 - numero: 51
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: ambiental
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
@@ -1556,11 +1502,12 @@ questoes:
       No esquema a seguir, está representada uma das reações que ocorrem entre espécies químicas presentes no oceano e na atmosfera do continente gelado.
   - figura: q051-2.webp
   - texto: |-
-      Sergio J. Gonçalves Jr et al. Photochemical reactions on aerosols at West Antarctica: A molecular case-study of nitrate formation among sea salt aerosols. Science of The Total Environment , 2021.
+      Sergio J. Gonçalves Jr et al. Photochemical reactions on aerosols at West Antarctica: A molecular case-study of nitrate formation among sea salt aerosols. Science of The Total Environment, 2021.
       A partir das informações apresentadas, considere as seguintes afirmações:
       I. Com a diminuição da espessura da camada de ozônio, aumenta a incidência da radiação solar sobre a atmosfera terrestre e a superfície do planeta, acelerando ou incrementando reações de natureza fotoquímica sobre os mantos de gelo polares.
-      II. Em processos químicos envolvendo cloretos, estes podem ser oxidados a C , O pelo O , sob a ação de raios UV. Em razão de sua propriedade anticongelante, os percloratos contribuem para manter a água no estado líquido mesmo a temperaturas abaixo de 0 ºC.
-      III. Mesmo em condições extremas de frio, a presença de água líquida no manto congelado flutuante na Antártica é condição suficiente para garantir a sobrevivência do ser humano e de outros mamíferos sobre a camada de gelo. É correto apenas o que se afirma em:
+      II. Em processos químicos envolvendo cloretos, estes podem ser oxidados a CℓO₄⁻ pelo O₃, sob a ação de raios UV. Em razão de sua propriedade anticongelante, os percloratos contribuem para manter a água no estado líquido mesmo a temperaturas abaixo de 0 ºC.
+      III. Mesmo em condições extremas de frio, a presença de água líquida no manto congelado flutuante na Antártica é condição suficiente para garantir a sobrevivência do ser humano e de outros mamíferos sobre a camada de gelo.
+      É correto apenas o que se afirma em:
   alternativas:
     A:
       texto: I.
@@ -1574,12 +1521,10 @@ questoes:
       texto: II e III.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 17, y≈610: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 17, y≈700, 703: conferir o texto'
+  pendencias: []
 - numero: 52
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: ondulatoria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1592,13 +1537,15 @@ questoes:
   - texto: "Disponível em https://commons.wikimedia.org/.\nA figura mostra o padrão de intensidade luminosa
       produzido pela incidência de luz sobre um fio de cabelo, exibindo uma alternância de máximos e mínimos
       de intensidade. No caso de uma detecção distante da fenda, a espessura \U0001D43F do fio de cabelo
-      pode ser calculada a partir da largura do máximo central de intensidade, dada por \U0001D466 =2
-      \U0001D706\U0001D437 / \U0001D43F , sendo \U0001D706 e \U0001D437 o comprimento de onda da luz incidente
-      e a distância entre o fio de cabelo e o anteparo, respectivamente.\nConsidere que luz incida sobre
-      um fio de cabelo, de espessura da ordem de 50 \U0001D707 m, e que a imagem seja projetada sobre
-      um anteparo a uma distância de 1 m.\nEntre os comprimentos de onda indicados a seguir, qual permitiria
-      uma melhor precisão relativa na medida da espessura do fio de cabelo realizada com auxílio de uma
-      régua de precisão 1 mm?"
+      pode ser calculada a partir da largura do máximo central de intensidade, dada por \U0001D466 = 2\U0001D706\U0001D437/\U0001D43F,
+      sendo \U0001D706 e \U0001D437 o comprimento de onda da luz incidente e a distância entre o fio de
+      cabelo e o anteparo, respectivamente.\nConsidere que luz incida sobre um fio de cabelo, de espessura
+      da ordem de 50 \U0001D707m, e que a imagem seja projetada sobre um anteparo a uma distância de 1
+      m.\nEntre os comprimentos de onda indicados a seguir, qual permitiria uma melhor precisão relativa
+      na medida da espessura do fio de cabelo realizada com auxílio de uma régua de precisão 1 mm?"
+  - texto: |-
+      Note e adote:
+      A precisão relativa é definida como a razão entre o erro intrínseco à medida e o valor da própria medida.
   alternativas:
     A:
       texto: 200 nm
@@ -1609,17 +1556,13 @@ questoes:
     D:
       texto: 500 nm
     E:
-      texto: |-
-        600 nm
-        Note e adote:
-        A precisão relativa é definida como a razão entre o erro intrínseco à medida e o valor da própria medida.
+      texto: 600 nm
   resposta: E
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 17, y≈610–649
+  pendencias: []
 - numero: 53
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: substancias-e-misturas
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1647,29 +1590,20 @@ questoes:
         a areia e formando a massa de vidro para derretê-la.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 18, y≈115, 147, 180, 201, 327, 343, 416, 448, 451: conferir
-    o texto'
-  - 'Texto sublinhado na página 18, y≈296: formatação perdida no texto puro'
+  pendencias: []
 - numero: 54
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: eletroquimica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Para armazenar uma solução de sulfato de cobre dispõem-se ,
-      de frascos dos metais A , Zn, Pb, e Ag, cujos potenciais padrão de redução são apresentados a seguir.
-      A , + 3e → A ,
-      E° = − 1,66 V
-      Zn + 2e → Zn
-      E° = − 0,76 V
-      Pb + 2e → Pb
-      E° = − 0,13 V
-      Cu + 2e → Cu
-      E° = + 0,34 V
-      Ag + e → Ag
-      E° = + 0,80 V
+      Para armazenar uma solução de sulfato de cobre dispõem-se de frascos dos metais Aℓ, Zn, Pb, e Ag, cujos potenciais padrão de redução são apresentados a seguir.
+      Aℓ³⁺ + 3e⁻ → Aℓ: E° = −1,66 V
+      Zn²⁺ + 2e⁻ → Zn: E° = −0,76 V
+      Pb²⁺ + 2e⁻ → Pb: E° = −0,13 V
+      Cu²⁺ + 2e⁻ → Cu: E° = +0,34 V
+      Ag⁺ + e⁻ → Ag: E° = +0,80 V
       Considerando os dados fornecidos, em qual ou quais frascos a solução poderá ser armazenada sem que ocorra corrosão do frasco?
   alternativas:
     A:
@@ -1684,24 +1618,27 @@ questoes:
       texto: Em nenhum dos frascos disponíveis.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 18, y≈524, 595, 609, 621, 636, 650: conferir o texto'
-  - 'Texto sublinhado na página 18, y≈582, 650: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 18, y≈553–666
+  pendencias: []
 - numero: 55
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: estequiometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: Diversos vídeos disponibilizados na internet mostram a vigorosa reação resultante da adição
       de balas mentos em garrafas de refrigerantes de cola, formando uma “erupção” de refrigerante. A
       rugosidade das pastilhas da bala forma pontos de nucleação que aceleram a formação de bolhas de
-      CO , antes dissolvido no refrigerante, que se expandem rapidamente arrastando o líquido pela boca
-      da garrafa. Sabese que uma garrafa de refrigerante contém 7,15 g de CO dissolvido por litro, enquanto
+      CO₂, antes dissolvido no refrigerante, que se expandem rapidamente arrastando o líquido pela boca
+      da garrafa. Sabe-se que uma garrafa de refrigerante contém 7,15 g de CO₂ dissolvido por litro, enquanto
       fechada. Considerando a abertura de uma garrafa de 2 L de refrigerante seguida da adição de bala
-      mentos, caso todo CO (aq) passe imediatamente para a fase gasosa, quantas vezes o volume do CO liberado
-      é maior que o da garrafa no qual ele estava dissolvido?
+      mentos, caso todo CO₂(aq) passe imediatamente para a fase gasosa, quantas vezes o volume do CO₂
+      liberado é maior que o da garrafa no qual ele estava dissolvido?
+  - texto: |-
+      Note e adote:
+      Considere a abertura da garrafa em ambiente com 1 atm e a 27°C.
+      Massa molar (g/mol): CO₂ = 44
+      T(K) = T(°C) + 273
+      Constante dos gases ideais: R = 0,082 atm.L.K⁻¹.mol⁻¹
   alternativas:
     A:
       texto: 1 vez.
@@ -1712,77 +1649,50 @@ questoes:
     D:
       texto: 8 vezes.
     E:
-      texto: |-
-        16 vezes.
-        Note e adote:
-        Considere a abertura da garrafa em ambiente com 1 atm e a 27°C. Massa molar (g/mol): CO = 44
-        T(K) = T(°C) + 273
-        Constante dos gases ideais: R = 0,082 atm.L.K .mol
+      texto: 16 vezes.
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 18, y≈296–354
+  pendencias: []
 - numero: 56
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: equilibrio
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
-      Considere dois frascos contendo o mesmo volume de (I) água e (II) solução com mesma concentração de H CO e NaHCO . No frasco (II), observa-se o seguinte equilíbrio:
-      H CO (aq) ⇌ HCO (aq) + H (aq)
-      Ao acrescentar quantidades iguais de um mesmo suco de limão em (I) e (II), notou-se uma variação de pH em ambos. Como o limão possui ácido cítrico em sua composição, isso lhe confere um caráter ___1___ , de forma que o pH ___2___ nos dois frascos após adição do suco de limão. Porém, essa variação de pH foi ___3___ no frasco (II), pois o H proveniente do ácido cítrico deslocou o equilíbrio da reação para ___4___.
+      Considere dois frascos contendo o mesmo volume de (I) água e (II) solução com mesma concentração de H₂CO₃ e NaHCO₃. No frasco (II), observa-se o seguinte equilíbrio:
+      H₂CO₃(aq) ⇌ HCO₃⁻(aq) + H⁺(aq)
+      Ao acrescentar quantidades iguais de um mesmo suco de limão em (I) e (II), notou-se uma variação de pH em ambos. Como o limão possui ácido cítrico em sua composição, isso lhe confere um caráter ___1___, de forma que o pH ___2___ nos dois frascos após adição do suco de limão. Porém, essa variação de pH foi ___3___ no frasco (II), pois o H⁺ proveniente do ácido cítrico deslocou o equilíbrio da reação para ___4___.
       Com base no experimento realizado, as lacunas podem ser preenchidas corretamente por:
-      1
-      2
-      3
-      4
   alternativas:
     A:
-      texto: |-
-        ácido
-        diminuiu
-        menor
-        esquerda
+      texto: 1 – ácido; 2 – diminuiu; 3 – menor; 4 – esquerda
     B:
-      texto: |-
-        básico
-        diminuiu
-        maior
-        direita
+      texto: 1 – básico; 2 – diminuiu; 3 – maior; 4 – direita
     C:
-      texto: |-
-        ácido
-        aumentou
-        maior
-        esquerda
+      texto: 1 – ácido; 2 – aumentou; 3 – maior; 4 – esquerda
     D:
-      texto: |-
-        básico
-        aumentou
-        maior
-        direita
+      texto: 1 – básico; 2 – aumentou; 3 – maior; 4 – direita
     E:
-      texto: |-
-        ácido
-        diminuiu
-        menor
-        direita
+      texto: 1 – ácido; 2 – diminuiu; 3 – menor; 4 – direita
   resposta: A
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 18, y≈510–650
+  pendencias: []
 - numero: 57
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: estequiometria
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: Os antiácidos estomacais são consumidos para neutralizar o excesso de HC , do suco gástrico
+  - texto: Os antiácidos estomacais são consumidos para neutralizar o excesso de HCℓ do suco gástrico
       presente em nosso estômago e, consequentemente, aliviar sintomas como dores ou desconforto abdominal,
       chamado de azia. Supondo que o volume do estômago seja de 400mL, que seu conteúdo tenha pH igual
-      a 2 e que todo H do suco gástrico seja oriundo do HC , , qual volume mínimo de leite de magnésia
-      (Mg(OH) ), em mL, seria necessário para neutralizar totalmente o ácido do estômago?
+      a 2 e que todo H⁺ do suco gástrico seja oriundo do HCℓ, qual volume mínimo de leite de magnésia
+      (Mg(OH)₂), em mL, seria necessário para neutralizar totalmente o ácido do estômago?
+  - texto: |-
+      Note e adote:
+      Massa molar (g/mol): Mg(OH)₂ = 58.
+      Considere que o leite de magnésia é uma suspensão de hidróxido de magnésio de concentração 58 mg/mL.
   alternativas:
     A:
       texto: '1'
@@ -1793,51 +1703,40 @@ questoes:
     D:
       texto: '4'
     E:
-      texto: |-
-        5
-        Note e adote:
-        Massa molar (g/mol): Mg(OH) = 58.
-        Considere que o leite de magnésia é uma suspensão de hidróxido de magnésio de concentração 58 mg/mL.
+      texto: '5'
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈126, 139, 223, 260: conferir o texto'
-  - 'Texto sublinhado na página 19, y≈242: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈69–290
+  pendencias: []
 - numero: 58
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: fisica-moderna
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Nas últimas décadas, diferentes descobertas na área da tecnologia médica têm permitido diagnósticos mais precisos para muitas doenças. Muitos deles são obtidos em exames radiológicos e se baseiam nas interações entre as células do corpo humano e a radiação, por meio de colisões entre elétrons e fótons de raios-X. A frequência dos fótons após a colisão é diferente daquela antes da colisão.
-      Um fóton de frequência f transporta energia dada por hf , sendo h a constante de Planck. Considere que a frequência de um fóton de raios-X varia de 5×10 s para 2,5×10 s devido à colisão com um elétron e que a energia perdida pelo fóton é totalmente transferida para o elétron.
+      Um fóton de frequência f transporta energia dada por hf, sendo h a constante de Planck. Considere que a frequência de um fóton de raios-X varia de 5×10¹⁶ s⁻¹ para 2,5×10¹⁶ s⁻¹ devido à colisão com um elétron e que a energia perdida pelo fóton é totalmente transferida para o elétron.
       Nessas condições, a variação da energia do elétron devido à colisão é
+  - texto: |-
+      Note e adote:
+      Constante de Planck: ℎ ≅ 6×10⁻³⁴ J⋅s
   alternativas:
     A:
-      texto: − 4,5×10 J
+      texto: −4,5×10⁻¹⁷ J
     B:
-      texto: − 1,5×10 J
+      texto: −1,5×10⁻¹⁷ J
     C:
       texto: 0 J
     D:
-      texto: 1,5×10 J
+      texto: 1,5×10⁻¹⁷ J
     E:
-      texto: |-
-        4,5×10 J
-        Note e adote:
-        Constante de Planck: ℎ≅ 6×10 J ⋅ s
+      texto: 4,5×10⁻¹⁷ J
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 19, y≈429, 486, 494, 505, 527, 539, 577, 587: conferir
-    o texto'
-  - 'Texto sublinhado na página 19, y≈558, 588: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 19, y≈558–588
+  pendencias: []
 - numero: 59
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: fisiologia-humana
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1862,15 +1761,15 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 60
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: argumentacao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       No trecho a seguir, o personagem Quincas Borba pretende criticar uma opinião bastante comum sobre as doenças infecciosas letais. Para tanto, ele apresenta um argumento:
       “Aparentemente, há nada mais contristador que uma dessas terríveis pestes que devastam um ponto do globo? E, todavia, esse suposto mal é um benefício, não só porque elimina os organismos fracos, incapazes de resistência, como porque dá lugar à observação, à descoberta da droga curativa.”
-      Machado de Assis. Quincas Borba .
+      Machado de Assis. Quincas Borba.
       Qual das sentenças a seguir enfraquece o argumento desenvolvido no texto?
   alternativas:
     A:
@@ -1887,8 +1786,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 61
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: idade-media
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -1897,7 +1796,7 @@ questoes:
       Outras pessoas declaravam que, para tão imenso mal, eram remédios eficazes o beber abundantemente, o gozar com intensidade, o divertir-se de todas as maneiras.
       Inúmeras pessoas preferiam o caminho do meio. Usavam todas as coisas, com suficiência e moderação. Vagavam de um lugar a outro.
       Tão grande era o número de mortos que, escasseando os caixões, os cadáveres eram postos em cima de simples tábuas. Não foi um só o caixão a receber dois ou três mortos simultaneamente.
-      Giovanni Boccaccio. Decamerão . São Paulo: Abril Cultural, 1970. Adaptado.
+      Giovanni Boccaccio. Decamerão. São Paulo: Abril Cultural, 1970. Adaptado.
       O texto (c. 1350) refere-se à Peste Negra e às suas consequências em Florença no século XIV.
       Acerca dessa epidemia e de seus efeitos, é correto afirmar:
   alternativas:
@@ -1918,27 +1817,28 @@ questoes:
         nas práticas culturais.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈235, 275: conferir o texto'
+  pendencias: []
 - numero: 62
-  disciplina: null
-  assunto: null
+  disciplina: portugues
+  assunto: figuras-de-linguagem
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Consoada
+
       Quando a Indesejada das gentes chegar
       (Não sei se dura ou caroável),
       Talvez eu tenha medo.
       Talvez sorria, ou diga:
-      - Alô, iniludível!
+          - Alô, iniludível!
       O meu dia foi bom, pode a noite descer.
       (A noite com os seus sortilégios.)
       Encontrará lavrado o campo, a casa limpa,
       A mesa posta,
       Com cada coisa em seu lugar.
-      Manuel Bandeira . Opus 10.
+
+      Manuel Bandeira. Opus 10.
       Nos versos “Quando a Indesejada das gentes chegar” e “O meu dia foi bom, pode a noite descer”, destacam-se as seguintes figuras de linguagem:
   alternativas:
     A:
@@ -1953,17 +1853,17 @@ questoes:
       texto: Catacrese e hipérbole.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 20, y≈782, 790: conferir o texto'
+  pendencias: []
 - numero: 63
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: biologia
+  assunto: saude
+  disciplinas_secundarias:
+  - portugues
   texto_base: null
   enunciado:
   - texto: |-
       Um sistema de inteligência artificial formulou o seguinte texto para explicar a relação entre a febre maculosa e os fatores bióticos e abióticos a ela relacionados:
-      “A febre maculosa, uma doença infecciosa transmitida por carrapatos, está intrinsecamente ligada a fatores bióticos e abióticos presentes em seu ambiente. Os fatores bióticos incluem a presença do carrapato estrela, vetor da bactéria Rickettsia rickettsii , e dos hospedeiros necessários para a alimentação do carrapato, como roedores e outros animais. Além disso, os fatores abióticos desempenham um papel significativo na disseminação da doença. A umidade é um fator-chave, uma vez que carrapatos preferem ambientes úmidos para se desenvolverem e sobreviverem. A temperatura também desempenha um papel importante, afetando tanto a atividade dos carrapatos quanto a sobrevivência da bactéria. Outros fatores abióticos, como o clima, a vegetação e a disponibilidade de água, podem influenciar a abundância e a distribuição dos carrapatos e, consequentemente, a propagação da febre maculosa.
+      “A febre maculosa, uma doença infecciosa transmitida por carrapatos, está intrinsecamente ligada a fatores bióticos e abióticos presentes em seu ambiente. Os fatores bióticos incluem a presença do carrapato estrela, vetor da bactéria Rickettsia rickettsii, e dos hospedeiros necessários para a alimentação do carrapato, como roedores e outros animais. Além disso, os fatores abióticos desempenham um papel significativo na disseminação da doença. A umidade é um fator-chave, uma vez que carrapatos preferem ambientes úmidos para se desenvolverem e sobreviverem. A temperatura também desempenha um papel importante, afetando tanto a atividade dos carrapatos quanto a sobrevivência da bactéria. Outros fatores abióticos, como o clima, a vegetação e a disponibilidade de água, podem influenciar a abundância e a distribuição dos carrapatos e, consequentemente, a propagação da febre maculosa.
       Portanto, compreender e monitorar esses fatores bióticos e abióticos é fundamental para prevenir e controlar a febre maculosa. Estratégias de controle de carrapatos, conscientização pública e medidas de proteção pessoal são essenciais para reduzir a incidência da doença.”
       Assinale a alternativa que corrige, adequadamente, uma informação incorreta do texto gerado pelo sistema.
   alternativas:
@@ -1981,18 +1881,19 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 64
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: historia
+  assunto: idade-moderna
+  disciplinas_secundarias:
+  - geografia
   texto_base: null
   enunciado:
   - texto: |-
-      Embora historiadores frequentemente se refiram à chamada “revolução impressa” atribuída a Johannes Gutenberg, em Mogúncia (Mainz), nos meados do século XV, não se pode duvidar do impacto, sobre a leitura, da revolução informatizada que se observa neste século. Tampouco podemos duvidar da velocidade da revolução eletrônica. “Creio que há um mercado mundial para uns cinco computadores”, disse Thomas J. Watson, então presidente da IBM em 1943, demonstrando o nível de astúcia empresarial que costumamos associar a essa grande empresa. Em 1949, a revista Popular Mechanics , prevendo o incansável avanço das descobertas científicas, previu que “computadores, no futuro, pesarão não mais que quinze toneladas”. Essa previsão, no mínimo, teve a virtude de estar correta. Mais recentemente, em 1977, Ken Olsen, então presidente da Digital Corporation, garantiu ao mundo que “não há razão para qualquer indivíduo ter um computador em casa”.
-      Martyn Lyons. A palavra impressa : histórias da leitura no século XIX. Rio de Janeiro: Casa da Palavra, 1999.
+      Embora historiadores frequentemente se refiram à chamada “revolução impressa” atribuída a Johannes Gutenberg, em Mogúncia (Mainz), nos meados do século XV, não se pode duvidar do impacto, sobre a leitura, da revolução informatizada que se observa neste século. Tampouco podemos duvidar da velocidade da revolução eletrônica. “Creio que há um mercado mundial para uns cinco computadores”, disse Thomas J. Watson, então presidente da IBM em 1943, demonstrando o nível de astúcia empresarial que costumamos associar a essa grande empresa. Em 1949, a revista Popular Mechanics, prevendo o incansável avanço das descobertas científicas, previu que “computadores, no futuro, pesarão não mais que quinze toneladas”. Essa previsão, no mínimo, teve a virtude de estar correta. Mais recentemente, em 1977, Ken Olsen, então presidente da Digital Corporation, garantiu ao mundo que “não há razão para qualquer indivíduo ter um computador em casa”.
+      Martyn Lyons. A palavra impressa: histórias da leitura no século XIX. Rio de Janeiro: Casa da Palavra, 1999.
       A analogia entre a “revolução impressa” e a “revolução técnico-científico-informacional”, às quais o texto se refere, diz respeito
   alternativas:
     A:
-      texto: ao diminuto impacto que as revoluções científicotecnológicas trouxeram às relações interpessoais.
+      texto: ao diminuto impacto que as revoluções científico-tecnológicas trouxeram às relações interpessoais.
     B:
       texto: ao espírito empreendedor e visionário de personagens históricos como Gutenberg e Ken Olsen.
     C:
@@ -2003,17 +1904,16 @@ questoes:
       texto: à ampliação do acesso à informação como decorrência de transformações tecnológicas.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈318: conferir o texto'
+  pendencias: []
 - numero: 65
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: filosofia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: |-
       Há um princípio da dúvida que consiste na máxima de tratar os conhecimentos no intuito de torná-los incertos e mostrar que é impossível alcançar a certeza. Esse método de filosofar é o modo de pensar cético ou ceticismo, que se opõe ao modo de pensar dogmático ou dogmatismo, que é uma confiança cega no poder de a razão sem crítica ampliar-se a priori somente por conceitos, em virtude apenas de um êxito aparente.
-      Kant. Manual dos cursos de lógica geral . Campinas: Ed. da Unicamp, 2014.
+      Kant. Manual dos cursos de lógica geral. Campinas: Ed. da Unicamp, 2014.
       Considerando as definições apresentadas no texto, qual alternativa apresenta afirmações que correspondem, respectivamente, a uma tese cética e a uma tese dogmática?
   alternativas:
     A:
@@ -2033,11 +1933,10 @@ questoes:
         o conceito de quantidade de coleções diversas de objetos.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 21, y≈582, 622: conferir o texto'
+  pendencias: []
 - numero: 66
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: combinatoria-e-probabilidade
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2045,21 +1944,21 @@ questoes:
       6) somarem 10 ou mais é
   alternativas:
     A:
-      texto: 1/9 .
+      texto: 1/9.
     B:
-      texto: 1/6 .
+      texto: 1/6.
     C:
-      texto: 1/5 .
+      texto: 1/5.
     D:
-      texto: 1/4 .
+      texto: 1/4.
     E:
-      texto: 1/2 .
+      texto: 1/2.
   resposta: B
   anulada: false
   pendencias: []
 - numero: 67
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: aritmetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2081,8 +1980,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 68
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: razao-e-proporcao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2103,11 +2002,10 @@ questoes:
       texto: enche 5 mas não enche 6 colheres.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 22, y≈42: conferir o texto'
+  pendencias: []
 - numero: 69
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: america-colonial
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2116,7 +2014,7 @@ questoes:
       O início da aclimatação da cultura do cacau deu-se entre os olmecas, a complexa cultura da costa do Golfo do México, por volta de 1500 a.C.. Os maias trouxeram a palavra cacao desses ancestrais.
       Ao que tudo indica, os astecas bebiam o chocolate – chamado por eles de cacahuatl – frio e preparado à moda maia. As sementes de cacau eram trituradas, pulverizadas e deixadas de molho. Adicionava-se, então, pouca água, e o preparado era ventilado, filtrado e coado. Em seguida, o líquido era entornado repetidamente de uma vasilha a outra, para que se formasse uma espuma pequena.
       Ao final do século XVII, o encontro de conquistado e conquistador, também expresso na culinária, já havia modificado o uso da bebida até então consumida amarga e fria. Nessa época, o cacau encontraria um outro produto também proveniente de cultivo adaptado. O açúcar chegava às Américas por meio de um longo processo de transplantação continental e oceânica: a cana de açúcar saiu da Ásia, atravessou o Mediterrâneo e as ilhas atlânticas, para desembarcar em Santo Domingo e, por fim, nos Estados controlados pela família de Hernán Cortez, no México. A combinação permitiu o preparo do chocolate quente e doce.
-      Kenneth Maxwell. A verdadeira história do chocolate . In: Chocolates, piratas e outros malandros: ensaios tropicais. Rio de Janeiro: Paz e Terra, 1999. Adaptado.
+      Kenneth Maxwell. A verdadeira história do chocolate. In: Chocolates, piratas e outros malandros: ensaios tropicais. Rio de Janeiro: Paz e Terra, 1999. Adaptado.
       O texto recupera, desde longínquos séculos passados, etapas da história do que, no século XVII, passou a se chamar de chocolate. A leitura permite reconhecer
   alternativas:
     A:
@@ -2131,11 +2029,10 @@ questoes:
       texto: o protagonismo do conquistador Hernán Cortez na fusão do açúcar e do chocolate.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 22, y≈50, 160: formatação perdida no texto puro'
+  pendencias: []
 - numero: 70
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
   texto_base: tb07
   enunciado:
@@ -2157,37 +2054,36 @@ questoes:
       texto: A quantidade absoluta de ácidos graxos saturados é menor no leite das vacas do grupo 1.
   resposta: A
   anulada: false
-  pendencias:
-  - 'Texto-base tb07: Índice/expoente em fonte pequena na página 22, y≈787, 794: conferir o texto'
-  - 'Texto-base tb07: Possível figura vetorial (tabela/gráfico) na página 22, y≈50–160'
+  pendencias: []
 - numero: 71
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: organica
   disciplinas_secundarias: []
   texto_base: tb07
   enunciado:
   - texto: Os resultados apresentados permitem concluir que, após a dieta de óleo de linhaça,
   alternativas:
     A:
-      texto: a quantidade de Ω -6 no leite das vacas foi 7,92 vezes maior do que a quantidade de Ω -3.
+      texto: a quantidade de Ω-6 no leite das vacas foi 7,92 vezes maior do que a quantidade de Ω-3.
     B:
-      texto: a quantidade de Ω -6 no leite das vacas foi 2,72 vezes maior do que a quantidade de Ω -3.
+      texto: a quantidade de Ω-6 no leite das vacas foi 2,72 vezes maior do que a quantidade de Ω-3.
     C:
-      texto: a quantidade de Ω -6 no leite das vacas foi 5 a 10 vezes maior do que a quantidade de Ω -6
+      texto: a quantidade de Ω-6 no leite das vacas foi 5 a 10 vezes maior do que a quantidade de Ω-6
         encontrada no leite sem o uso da dieta.
     D:
-      texto: a quantidade de Ω -3 no leite das vacas foi 2,72 vezes maior do que a quantidade de Ω -3
-        encontrada no leite sem o uso da dieta.
+      texto: a quantidade de Ω-3 no leite das vacas foi 2,72 vezes maior do que a quantidade de Ω-3 encontrada
+        no leite sem o uso da dieta.
     E:
-      texto: a quantidade de Ω -6 no leite das vacas aumentou em 5 vezes, ao mesmo tempo em que a quantidade
-        de Ω -3 diminuiu em 10 vezes.
+      texto: a quantidade de Ω-6 no leite das vacas aumentou em 5 vezes, ao mesmo tempo em que a quantidade
+        de Ω-3 diminuiu em 10 vezes.
   resposta: B
   anulada: false
   pendencias: []
 - numero: 72
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: quimica
+  assunto: substancias-e-misturas
+  disciplinas_secundarias:
+  - fisica
   texto_base: null
   enunciado:
   - texto: O diagrama a seguir apresenta os estados físicos da água em diferentes pressões e temperaturas.
@@ -2214,11 +2110,10 @@ questoes:
         com a diminuição da pressão.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 23, y≈169, 181, 205: formatação perdida no texto puro'
+  pendencias: []
 - numero: 73
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: citologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2237,11 +2132,10 @@ questoes:
       texto: sexuada por autofecundação.
   resposta: D
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 23, y≈787, 794: conferir o texto'
+  pendencias: []
 - numero: 74
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: sequencias
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2252,21 +2146,21 @@ questoes:
       utilizar?
   alternativas:
     A:
-      texto: √ 2
+      texto: √2
     B:
-      texto: √ 8
+      texto: √8
     C:
-      texto: √ 12
+      texto: √12
     D:
-      texto: 12 √ 2
+      texto: 12 √2
     E:
-      texto: 8 √ 2
+      texto: 8 √2
   resposta: A
   anulada: false
   pendencias: []
 - numero: 75
-  disciplina: null
-  assunto: null
+  disciplina: historia
+  assunto: revolucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2293,14 +2187,14 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 76
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: porcentagem
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - texto: No mercado de agronegócio, a razão entre o custo total de produção por hectare e a produção
-      esperada (também por hectare) é denominada preço equilíbrio . Um agricultor teve um custo total
-      de R$ 4.300,00 por hectare para produção de milho, e espera produzir 99 sacas por hectare. O valor
+      esperada (também por hectare) é denominada preço equilíbrio. Um agricultor teve um custo total de
+      R$ 4.300,00 por hectare para produção de milho, e espera produzir 99 sacas por hectare. O valor
       mínimo aproximado de venda, por saca, para obter lucro de 40% sobre o preço equilíbrio é
   alternativas:
     A:
@@ -2317,42 +2211,42 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 77
-  disciplina: null
-  assunto: null
-  disciplinas_secundarias: []
+  disciplina: geografia
+  assunto: questoes-ambientais
+  disciplinas_secundarias:
+  - biologia
   texto_base: null
   enunciado:
   - texto: |-
       Um aumento no consumo de água e produtos agropecuários pela população humana, direta ou indiretamente, geralmente vem atrelado a um aumento na pressão exercida sobre o meio ambiente. Por outro lado, há uma crescente preocupação com a preservação dos biomas brasileiros, de forma a garantir o suprimento de recursos ambientais e evitar a extinção de espécies.
       Assinale a alternativa que apresenta duas soluções de amplo alcance geográfico e sustentáveis (dos pontos de vista ambiental e econômico) para diminuir o impacto da expansão da lavoura sobre a vegetação nativa (I) e para o melhor aproveitamento de recursos hídricos (II).
-      I - Diminuição da produção agrícola.
   alternativas:
     A:
       texto: |-
+        I - Diminuição da produção agrícola.
         II - Instalação de condensadores de umidade do ar nas áreas rurais.
-        I - Aumento da produtividade nas lavouras sem aumento da área cultivada.
     B:
       texto: |-
+        I - Aumento da produtividade nas lavouras sem aumento da área cultivada.
         II - Preservação e recuperação de nascentes e matas ciliares.
-        I - Uso extensivo de sementes transgênicas.
     C:
       texto: |-
+        I - Uso extensivo de sementes transgênicas.
         II - Instalação de um maior número de poços artesianos nas cidades e no campo.
-        I - Diminuição da produção agrícola.
     D:
       texto: |-
+        I - Diminuição da produção agrícola.
         II - Criação de novas represas para o armazenamento de água dos rios.
-        I - Aumento da carga tributária sobre os alimentos.
     E:
-      texto: II - Aumento da eficiência dos sistemas de distribuição de água e irrigação.
+      texto: |-
+        I - Aumento da carga tributária sobre os alimentos.
+        II - Aumento da eficiência dos sistemas de distribuição de água e irrigação.
   resposta: B
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 24, y≈210: formatação perdida no texto puro'
-  - Possível figura vetorial (tabela/gráfico) na página 24, y≈210–411
+  pendencias: []
 - numero: 78
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2364,20 +2258,19 @@ questoes:
     A:
       texto: Todas as plantas absorvem o nitrogênio diretamente da atmosfera.
     B:
-      texto: A transformação de NO em N é uma reação de oxidação dependente do metabolismo da planta.
+      texto: A transformação de NO₃⁻ em N₂ é uma reação de oxidação dependente do metabolismo da planta.
     C:
-      texto: A transformação de N em NH depende essencialmente da fixação por bactérias.
+      texto: A transformação de N₂ em NH₄⁺ depende essencialmente da fixação por bactérias.
     D:
-      texto: Todo o NH produzido no ciclo do nitrogênio tem origem na atividade de organismos produtores.
+      texto: Todo o NH₄⁺ produzido no ciclo do nitrogênio tem origem na atividade de organismos produtores.
     E:
       texto: Os compostos orgânicos nitrogenados são produzidos exclusivamente por animais.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Índice/expoente em fonte pequena na página 24, y≈706, 709, 726, 728, 730, 748, 749: conferir o texto'
+  pendencias: []
 - numero: 79
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2402,8 +2295,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 80
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: ecologia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2411,7 +2304,7 @@ questoes:
       recursos alimentares para diversas espécies de aves. A teia trófica a seguir representa essa relação
       e inclui alguns predadores dessas aves.
   - figura: q080-1.webp
-  - texto: 'Duas espécies de aves que competem com o periquito-decabeça-preta por alimento são:'
+  - texto: 'Duas espécies de aves que competem com o periquito-de-cabeça-preta por alimento são:'
   alternativas:
     A:
       texto: Sabiá e sanhaço.
@@ -2427,8 +2320,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 81
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: evolucao
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2452,8 +2345,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 82
-  disciplina: null
-  assunto: null
+  disciplina: geografia
+  assunto: industria-e-energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2488,12 +2381,12 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 83
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: cinetica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: No início do século XX, motores conhecidos como “ hot-bulb ” tornaram-se muito populares, sendo
+  - texto: No início do século XX, motores conhecidos como “hot-bulb” tornaram-se muito populares, sendo
       utilizados em tratores e outros maquinários. Diferentemente dos motores a diesel, em que a compressão
       do combustível causa sua ignição, esses motores funcionam por meio de uma superfície metálica aquecida
       a alta temperatura, que é responsável por vaporizar e permitir a detonação do combustível. Para
@@ -2519,8 +2412,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 84
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: dinamica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2531,6 +2424,11 @@ questoes:
   - figura: q084-1.webp
   - texto: Para que a caixa permaneça sem deslizar, a distância mínima que o caminhão percorre entre o
       instante de início da frenagem e a parada total do veículo é de
+  - texto: |-
+      Note e adote:
+      Considere que a força exercida pelos freios do caminhão seja feita de modo que a aceleração do caminhão seja constante durante a frenagem.
+      Despreze eventuais inclinações da carroceria do caminhão durante a frenagem.
+      Aceleração da gravidade: g = 10 m/s².
   alternativas:
     A:
       texto: 1 m.
@@ -2541,21 +2439,13 @@ questoes:
     D:
       texto: 50 m.
     E:
-      texto: |-
-        100 m.
-        Note e adote:
-        Considere que a força exercida pelos freios do caminhão seja feita de modo que a aceleração do caminhão seja constante durante a frenagem.
-        Despreze eventuais inclinações da carroceria do caminhão durante a frenagem.
-        Aceleração da gravidade: g = 10 m/s .
+      texto: 100 m.
   resposta: C
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 26, y≈389: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 26, y≈455: conferir o texto'
-  - Possível figura vetorial (tabela/gráfico) na página 26, y≈389–466
+  pendencias: []
 - numero: 85
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: ligacoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2581,47 +2471,38 @@ questoes:
       texto: o carvão ativado retém melhor os PFAs menos polares e, portanto, menos solúveis em água.
   resposta: E
   anulada: false
-  pendencias:
-  - 'Texto sublinhado na página 26, y≈594, 716: formatação perdida no texto puro'
-  - 'Índice/expoente em fonte pequena na página 26, y≈792: conferir o texto'
+  pendencias: []
 - numero: 86
-  disciplina: null
-  assunto: null
+  disciplina: biologia
+  assunto: botanica
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
   - figura: q086-1.webp
-  - texto: |-
-      O bioma indicado em cinza no mapa encontra-se sob um clima tropical estacional, com inverno seco e ausência de chuva por alguns meses. Suas árvores e arbustos típicos possuem adaptações para lidar com esse período seco, como raízes I , que buscam o solo mais úmido. Para evitar perder água, as folhas geralmente são_II . Nas horas mais quentes do dia, especialmente na estação seca do ano, essas árvores tendem a III seus estômatos, a fim de IV_ a transpiração, a qual ocorre principalmente na fase clara da fotossíntese. As lacunas de I a IV são corretamente preenchidas por:
-      I
-      II
-      III
-      IV
+  - texto: 'O bioma indicado em cinza no mapa encontra-se sob um clima tropical estacional, com inverno
+      seco e ausência de chuva por alguns meses. Suas árvores e arbustos típicos possuem adaptações para
+      lidar com esse período seco, como raízes ___I___, que buscam o solo mais úmido. Para evitar perder
+      água, as folhas geralmente são ___II___. Nas horas mais quentes do dia, especialmente na estação
+      seca do ano, essas árvores tendem a ___III___ seus estômatos, a fim de ___IV___ a transpiração,
+      a qual ocorre principalmente na fase clara da fotossíntese. As lacunas de I a IV são corretamente
+      preenchidas por:'
   alternativas:
     A:
-      texto: |-
-        adventícias pilosas e sem
-        abrir
-        cessar cutícula
+      texto: I – adventícias; II – pilosas e sem cutícula; III – abrir; IV – cessar
     B:
-      texto: |-
-        profundas pilosas ou com fechar
-        reduzir cutícula espessa
+      texto: I – profundas; II – pilosas ou com cutícula espessa; III – fechar; IV – reduzir
     C:
-      texto: respiratórias sem pelos e com perder aumentar cutícula espessa
+      texto: I – respiratórias; II – sem pelos e com cutícula espessa; III – perder; IV – aumentar
     D:
-      texto: |-
-        retorcidas sem pelos ou sem abrir
-        reduzir cutícula
+      texto: I – retorcidas; II – sem pelos ou sem cutícula; III – abrir; IV – reduzir
     E:
-      texto: superficiais compostas e sem fechar aumentar pelos
+      texto: I – superficiais; II – compostas e sem pelos; III – fechar; IV – aumentar
   resposta: B
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 26, y≈528–716
+  pendencias: []
 - numero: 87
-  disciplina: null
-  assunto: null
+  disciplina: quimica
+  assunto: solucoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2645,18 +2526,15 @@ questoes:
       texto: 9,04 mg/mL
   resposta: D
   anulada: false
-  pendencias:
-  - 'Texto com símbolos não extraídos (fórmula?) na página 27, y≈72: recortar como figura'
-  - 'Índice/expoente em fonte pequena na página 27, y≈792: conferir o texto'
+  pendencias: []
 - numero: 88
-  disciplina: null
-  assunto: null
+  disciplina: matematica
+  assunto: funcoes
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
-  - texto: "Se \U0001D453 : ℝ⟶ℝ for a função dada por \U0001D453\U0001D465 = \U0001D465 ( \U0001D465 +|
-      \U0001D465 |) , para todo \U0001D465∈ ℝ , então sua representação gráfica no intervalo [ − 1,1]
-      será:"
+  - texto: "Se \U0001D453: ℝ → ℝ for a função dada por \U0001D453(\U0001D465) = \U0001D465(\U0001D465
+      + |\U0001D465|), para todo \U0001D465 ∈ ℝ, então sua representação gráfica no intervalo [−1,1] será:"
   alternativas:
     A:
       figura: q088-a.webp
@@ -2672,8 +2550,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 89
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: energia
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2696,8 +2574,8 @@ questoes:
   anulada: false
   pendencias: []
 - numero: 90
-  disciplina: null
-  assunto: null
+  disciplina: fisica
+  assunto: magnetismo
   disciplinas_secundarias: []
   texto_base: null
   enunciado:
@@ -2712,7 +2590,8 @@ questoes:
   - texto: |-
       A respeito dessa situação, considere seguintes afirmações:
       I. A corrente elétrica induzida no anel pelo movimento do ímã tem intensidade variável e percorre o anel sempre no mesmo sentido.
-      II. Uma vez iniciadas as oscilações, a intensidade com que a lâmpada brilha atinge um máximo e, em seguida, diminui um pouco, permanecendo constante a partir de então. III. Se a estudante reiniciar o experimento, agora duplicando a deformação inicial da mola, a energia total irradiada pela lâmpada quadruplicará.
+      II. Uma vez iniciadas as oscilações, a intensidade com que a lâmpada brilha atinge um máximo e, em seguida, diminui um pouco, permanecendo constante a partir de então.
+      III. Se a estudante reiniciar o experimento, agora duplicando a deformação inicial da mola, a energia total irradiada pela lâmpada quadruplicará.
       É correto apenas o que se afirma em:
   alternativas:
     A:
@@ -2727,5 +2606,4 @@ questoes:
       texto: II e III.
   resposta: C
   anulada: false
-  pendencias:
-  - Possível figura vetorial (tabela/gráfico) na página 29, y≈223–628
+  pendencias: []
