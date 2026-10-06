@@ -22,8 +22,9 @@ def _gabarito(ano: int) -> list[str]:
     return (FIXTURES / "gabaritos" / f"fuvest{ano}_gabarito.txt").read_text(encoding="utf-8").splitlines()
 
 
-def test_registry_cobre_2020_e_2022_a_2025_e_os_simulados_de_2027():
-    assert sorted(FAMILIAS) == ["2020", "2022", "2023", "2024", "2025", "2027s1", "2027s2"]
+def test_registry_cobre_2020_a_2026_e_os_simulados_oficiais():
+    assert sorted(FAMILIAS) == ["2020", "2022", "2023", "2024", "2025", "2026", "2026s1", "2027s1", "2027s2"]
+    assert familia_da_prova("2026") == familia_da_prova("2026s1") == "familia_2026"  # CR-012
     assert familia_da_prova("2027s2") == "familia_2027"
     with pytest.raises(FamiliaNaoRegistrada):
         familia_da_prova("2021")
