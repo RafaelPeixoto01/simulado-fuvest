@@ -39,7 +39,7 @@ describe('Início (RF-008)', () => {
     expect(screen.getByRole('link', { name: 'Montar simulado' })).toHaveAttribute('href', '/novo/personalizado')
     expect(screen.getByRole('link', { name: 'Treinar' })).toHaveAttribute('href', '/treino')
     expect(screen.getByText(/178 questões de 2 provas/)).toBeInTheDocument()
-    // FT-028 (CR-015): Prova completa, Personalizado e Treino; a Prova de um ano é a prova inteira
+    // UT-078 (CR-015): Prova completa, Personalizado e Treino; a Prova de um ano é a prova inteira
     expect(screen.getAllByText(/As questões que você ainda não fez vêm primeiro\.$/)).toHaveLength(3)
     expect(screen.getByText(/^Refaça a prova original/).textContent).not.toMatch(/ainda não fez/)
     // P2.6 (CR-003): o link diz que abre o PDF oficial em outra aba
@@ -120,7 +120,7 @@ describe('Início (RF-008)', () => {
     expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).descricao).toBe('Prova completa')
   })
 
-  it('a prova completa leva as questões do histórico, as inéditas vêm primeiro (FT-028, CR-015)', async () => {
+  it('a prova completa leva as questões do histórico, as inéditas vêm primeiro (UT-078, CR-015)', async () => {
     localStorage.setItem(
       CHAVE_HISTORICO,
       JSON.stringify([

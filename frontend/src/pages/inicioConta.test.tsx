@@ -209,7 +209,7 @@ describe('"Seu último simulado" (UT-050, CR-008)', () => {
   })
 })
 
-describe('Inéditas primeiro com conta (FT-028, CR-015)', () => {
+describe('Inéditas primeiro com conta (UT-078, CR-015)', () => {
   const doOutroAparelho = { ...entradaFalsa('outro-aparelho', 1000), questaoIds: ['2024-001', '2024-002'] }
 
   function apiDeGeracao(historico: () => Promise<Response>) {

@@ -7,7 +7,7 @@ function feito(id: string, finalizadoEm: number, questaoIds: string[]) {
   return { ...entradaFalsa(id, finalizadoEm), questaoIds }
 }
 
-describe('questoesVistas (FT-027, CR-015)', () => {
+describe('questoesVistas (UT-077, CR-015)', () => {
   it('da vista mais recentemente para a mais antiga, sem repetição', () => {
     const historico = [
       feito('antigo', 1000, ['2098-001', '2098-002', '2099-005']),

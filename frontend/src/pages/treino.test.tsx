@@ -82,7 +82,7 @@ describe('Treino por questão (RF-012)', () => {
     expect(pedidos[1].excluir).toEqual(['2099-001', '2099-002', '2099-003', '2099-004'])
   })
 
-  it('manda as questões do histórico em todos os lotes (FT-028, CR-015)', async () => {
+  it('manda as questões do histórico em todos os lotes (UT-078, CR-015)', async () => {
     localStorage.setItem(
       CHAVE_HISTORICO,
       JSON.stringify([{ ...entradaFalsa('feito', 1000), questaoIds: ['2099-003', '2099-001'] }]),
