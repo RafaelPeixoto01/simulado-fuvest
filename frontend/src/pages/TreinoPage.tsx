@@ -9,6 +9,8 @@ import { useAtalhos } from '../hooks/useAtalhos'
 import { useCatalogo } from '../hooks/useCatalogo'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { api, type ApiError } from '../services/api'
+import { questoesVistas } from '../simulado/novoSimulado'
+import { listarHistorico } from '../storage/historicoStorage'
 import type { Catalogo, Disciplina, ItemCorrigido, Letra, TextoBase } from '../types'
 import { anosDasProvas } from '../utils/formatoProva'
 
@@ -92,7 +94,10 @@ function Sessao({
   onMudarFiltros: () => void
   onRecomecar: () => void
 }) {
-  // Lotes de 20 como páginas: o parâmetro de cada página é a lista de questões já vistas.
+  // As questões dos simulados do histórico vão para o fim da fila (CR-015). O Treino não entra
+  // no histórico, então a lista não muda durante a sessão
+  const [vistas] = useState(() => questoesVistas(listarHistorico()))
+  // Lotes de 20 como páginas: o parâmetro de cada página é a lista de questões já mostradas.
   // Lote vazio = acabaram as questões do filtro.
   const lotes = useInfiniteQuery({
     queryKey: ['treino', filtros, rodada], // rodada nova = recomeçar do zero
@@ -104,6 +109,7 @@ function Sessao({
         ano_inicio: filtros.anoInicio,
         ano_fim: filtros.anoFim,
         excluir: pageParam,
+        vistas,
       }),
     getNextPageParam: (ultimo, todos) =>
       ultimo.questoes.length === 0 ? undefined : todos.flatMap((l) => l.questoes.map((q) => q.id)),

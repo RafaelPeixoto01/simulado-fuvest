@@ -21,6 +21,9 @@ import { primeiroNomeOuNada } from '../utils/format'
 import { QUESTOES_PROVA_COMPLETA } from '../utils/formatoProva'
 import { formatarRestante, restanteMs } from '../utils/tempo'
 
+// O sorteio da Prova completa, do Personalizado e do Treino começa pelas inéditas (CR-015, D4)
+const INEDITAS_PRIMEIRO = 'As questões que você ainda não fez vêm primeiro.'
+
 /** Prova completa em destaque (CR-008, I6.3), com as marcas de sincronismo da folha (I5). Desde o
  *  CR-009 (E4): sobretítulo, etiquetas e, a partir de 640 px, a miniatura da folha à direita. */
 function ProvaCompleta({ descricao, disciplinas, acao }: { descricao: string; disciplinas: number; acao: ReactNode }) {
@@ -247,7 +250,7 @@ export function HomePage() {
               <ProvaCompleta
                 descricao={
                   catalogo.data.completa_disponivel
-                    ? `${QUESTOES_PROVA_COMPLETA} questões na distribuição da prova real, com 5 horas.`
+                    ? `${QUESTOES_PROVA_COMPLETA} questões na distribuição da prova real, com 5 horas. ${INEDITAS_PRIMEIRO}`
                     : `${QUESTOES_PROVA_COMPLETA} questões com 5 horas. Disponível quando a base tiver ${QUESTOES_PROVA_COMPLETA} questões válidas.`
                 }
                 disciplinas={Object.values(catalogo.data.distribuicao_completa).filter((n) => (n ?? 0) > 0).length}
@@ -273,14 +276,14 @@ export function HomePage() {
                 <Modo
                   letra="C"
                   titulo="Personalizado"
-                  descricao="Escolha disciplinas, anos e quantidade de questões."
+                  descricao={`Escolha disciplinas, anos e quantidade de questões. ${INEDITAS_PRIMEIRO}`}
                   para="/novo/personalizado"
                   acao="Montar simulado"
                 />
                 <Modo
                   letra="D"
                   titulo="Treino por questão"
-                  descricao="Uma questão por vez, sem cronômetro, com a resposta na hora."
+                  descricao={`Uma questão por vez, sem cronômetro, com a resposta na hora. ${INEDITAS_PRIMEIRO}`}
                   para="/treino"
                   acao="Treinar"
                 />
