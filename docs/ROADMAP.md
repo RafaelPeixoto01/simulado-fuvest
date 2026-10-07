@@ -1,6 +1,6 @@
 # Roadmap de Produto — Simulado Fuvest
 
-**Versão:** 1.0
+**Versão:** 1.1
 **Data:** 2026-10-07
 **PRD Ref:** 01-PRD v7.0 (Apêndice: Roadmap Futuro)
 
@@ -26,7 +26,7 @@ Esforço: **P** pequeno, **M** médio, **G** grande. Status: Pendente · Em anda
 
 | # | Funcionalidade | Problema | Valor | Esforço | Status | Observação |
 |---|----------------|----------|-------|---------|--------|------------|
-| 1 | **Questões inéditas primeiro** no sorteio (Prova completa, Personalizado, Treino) | Repetição de questões para quem faz vários simulados | Alto | P–M | Em andamento (CR-015) | Garante ~9 Provas completas sem repetir |
+| 1 | **Questões inéditas primeiro** no sorteio (Prova completa, Personalizado, Treino) | Repetição de questões para quem faz vários simulados | Alto | P–M | Concluído (CR-015) | Garante ~9 Provas completas sem repetir (conferido na base real: a 10ª repete 20, todas da 1ª) |
 | 2 | **Caderno de erros**: refazer só as questões erradas ou em branco | A revisão é por simulado; não há como juntar os erros de vários | Alto | M | Pendente | Cobre os últimos 50 simulados (RN-016) |
 | 3 | **"Treinar este assunto"** a partir do "Meu desempenho" | O painel diagnostica mas não leva à ação | Alto | P | Pendente | **Desfaz decisão do CR-004** (filtro por assunto fora de escopo). ~7 questões por assunto em média: melhor junto com o item 2 |
 | 4 | **Riscar alternativas** durante a prova | Eliminação de alternativas é técnica central na prova em papel | Médio | P | Pendente | Combina com a identidade "Papel & Caneta". Sugestão: mesmo CR do item 5 |
@@ -68,7 +68,7 @@ Esforço: **P** pequeno, **M** médio, **G** grande. Status: Pendente · Em anda
 
 ## 4. Sequência recomendada (até 01/11)
 
-1. Item 1 — questões inéditas (CR-015)
+1. ~~Item 1 — questões inéditas (CR-015)~~ — no ar em 07/10/2026
 2. Itens 2 + 3 num CR: "treinar meus erros e assuntos"
 3. Itens 4 + 5 num CR: ferramentas de prova
 4. Item 8 — corretor, pronto até ~25/10
@@ -94,4 +94,5 @@ Depois de 01/11: publicar a prova de 2027 e decidir a 2ª fase (D3).
 
 | Versão | Data | Alteração |
 |--------|------|-----------|
+| 1.1 | 2026-10-07 | Item 1 concluído (CR-015), no ar em produção |
 | 1.0 | 2026-10-07 | Criação, a partir da análise de produto de 07/10/2026; item 1 em andamento (CR-015) |

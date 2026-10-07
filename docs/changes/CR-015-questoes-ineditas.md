@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-07  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Alta
 
@@ -164,7 +164,7 @@ A Prova completa, o Personalizado e o Treino passam a sortear **primeiro as ques
 - [x] Revisão de código pré-merge (`/code-review` no diff da branch) executada — registrar findings corrigidos/justificados
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md) executada — o contrato de `POST /api/simulados` muda
 - [x] Documentos afetados foram atualizados
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` (runs 37692813029 e 37693029654: backend com migrations no Postgres, imagem Docker e frontend)
 
 ### 8.1 Validação em runtime (07/10/2026)
 
@@ -270,3 +270,4 @@ App local na porta 8001 com o build do SPA e a base real (9 provas, 786 questõe
 | 2026-10-07 | Rafael Peixoto (com Claude) | Implementação: backend (`vistas`, `priorizar_ineditas`, BT-112 a BT-116) e frontend (`questoesVistas`, frases do início, UT-077 e UT-078) |
 | 2026-10-07 | Rafael Peixoto (com Claude) | Validação em runtime (HTTP, Playwright sem e com conta — FT-027) e revisão de código: 6 corrigidos e 3 justificados (§8.2), entre eles esperar a sincronização da conta (`historicoParaSorteio`) |
 | 2026-10-07 | Rafael Peixoto (com Claude) | Documentos atualizados (PRD v7.1, Arquitetura v1.15, SPEC v1.14, specs 02 v1.4 e 03 v1.12, plano, INDEX, CLAUDE.md, ROADMAP). Falta o CI verde para concluir |
+| 2026-10-07 | Rafael Peixoto (com Claude) | CI verde na branch e em `master`; merge `--no-ff` e deploy na Railway (bundle novo no ar, `/api/health` com 9 provas). Validação ✅ — status: Concluído |
