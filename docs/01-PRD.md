@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 7.0
-**Data:** 2026-10-06
+**Versão:** 7.1
+**Data:** 2026-10-07
 **Status:** Aprovado
-**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010) + formato de 80 questões e simulados oficiais da FUVEST (CR-011) + área de gestão (CR-013)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011, CR-012, CR-013
+**Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010) + formato de 80 questões e simulados oficiais da FUVEST (CR-011) + área de gestão (CR-013) + inéditas primeiro no sorteio (CR-015)
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011, CR-012, CR-013, CR-015
 
 ---
 
@@ -136,11 +136,12 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 **RF-009 — Detalhamento:**
 - Distribuição por disciplina conforme RN-003; sem repetição (RN-004); sem anuladas (RN-002)
 - Cronômetro de 5 h, sem pausa (RN-009)
+- As questões que o estudante ainda não fez vêm primeiro em cada disciplina (RN-023, CR-015)
 
 **RF-010 — Detalhamento:**
 - Campos obrigatórios: pelo menos uma disciplina; quantidade de questões (1 a 90)
 - Campos opcionais: intervalo de anos (padrão: todos); cronômetro ligado/desligado (padrão: ligado, com tempo proporcional — RN-009)
-- Regras específicas: se não houver questões suficientes para os filtros, informa quantas existem e oferece gerar com esse total
+- Regras específicas: se não houver questões suficientes para os filtros, informa quantas existem e oferece gerar com esse total. Entre as que atendem aos filtros, as que o estudante ainda não fez vêm primeiro (RN-023, CR-015)
 
 **RF-011 — Detalhamento:**
 - Lista os anos publicados e, à parte, os simulados oficiais da FUVEST (CR-011); o estudante escolhe um
@@ -151,6 +152,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - Filtros opcionais: disciplinas e intervalo de anos
 - Ao responder, mostra na hora se acertou e qual é a alternativa correta; botão "próxima" sorteia outra questão
 - Placar da sessão (acertos/respondidas), sem histórico permanente
+- Não repete questão na sessão, e as que o estudante ainda não fez em simulados vêm primeiro (RN-023, CR-015)
 
 ### Módulo: Resolução do Simulado
 
@@ -484,6 +486,13 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
     - [ ] Encontro a conta pelo nome ou pelo e-mail e vejo cadastro, último acesso e quantos simulados ela tem
     - [ ] Só eu vejo essa lista; para qualquer outra pessoa a página não existe
 
+- **US-025:** Como estudante que faz vários simulados, quero que o site comece pelas questões que eu ainda não fiz, para não gastar o treino com questões repetidas (CR-015)
+  - Critérios de aceite:
+    - [ ] Na Prova completa, no Personalizado e no Treino, nenhuma questão do meu histórico aparece enquanto houver inéditas que atendam ao simulado
+    - [ ] Quando as inéditas acabam, voltam primeiro as que fiz há mais tempo
+    - [ ] Com conta, vale o que fiz em qualquer aparelho
+    - [ ] O início avisa que as questões que ainda não fiz vêm primeiro
+
 ---
 
 ## 7. Regras de Negócio
@@ -512,6 +521,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | RN-020 | Administrador (CR-013): a conta Google cujo identificador está na configuração do servidor (`ADMIN_GOOGLE_SUBS`), nunca reconhecida pelo e-mail. Sem a configuração, ninguém é administrador. Para quem não é administrador, inclusive sem login, a área e a API dela respondem "não encontrada" | Gestão |
 | RN-021 | Contagens anônimas (CR-013): por dia de Brasília, sem guardar quem: logins; usuários ativos (a conta conta uma vez no dia, no primeiro acesso); contas excluídas; simulados concluídos por modo, com acertos, questões, tempo (limitado a 24 h) e "finalizado por tempo", contados quando chegam à conta (o reenvio não conta de novo); a prova de cada Prova de um ano; e quantas vezes cada alternativa de cada questão foi marcada ou deixada em branco. Desde o CR-013, o contador de simulados gerados também usa o dia de Brasília (antes, o dia UTC). O acerto de uma questão é calculado com o gabarito atual | Gestão |
 | RN-022 | Questão suspeita (CR-013): não anulada, com pelo menos 20 respostas, e acerto abaixo de 15% ou uma alternativa errada mais marcada que a correta. É sinal para o curador conferir, não correção automática | Gestão |
+| RN-023 | Inéditas primeiro (CR-015): na Prova completa, no Personalizado e no Treino, o sorteio começa pelas questões que o estudante ainda não fez, ou seja, as que não estão em nenhum simulado concluído do histórico (Prova completa, Personalizado ou Prova de um ano, inclusive as deixadas em branco; o Treino não conta). Se as inéditas não bastam (numa disciplina da Prova completa, ou nos filtros), completa com as vistas há mais tempo. A prioridade não muda a distribuição da RN-003 nem o que pode ser sorteado, e não se desliga. A memória é a do histórico (os 50 simulados mais recentes, RN-016) | Geração |
 
 ---
 
@@ -592,11 +602,14 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Administrador | A conta Google do dono do produto, definida na configuração do servidor, que vê a área de gestão (RN-020) |
 | Usuário ativo | Conta que usou o site num dia (de Brasília), contada uma vez por dia sem guardar quem (RN-021) |
 | Questão suspeita | Questão com acerto muito baixo ou uma alternativa errada mais marcada que a correta, que o curador deve conferir (RN-022) |
+| Questão inédita | Para um estudante, questão que não aparece em nenhum simulado concluído do histórico dele; o sorteio começa por elas (RN-023, CR-015) |
 | Papel & Caneta | Identidade visual do site (CR-008): papel creme, tinta azul-marinho, a bolinha rosa da folha óptica e títulos em Fraunces; a marca é uma bolinha preenchida |
 
 ---
 
 ## Apêndice: Roadmap Futuro
+
+> Desde 07/10/2026, as próximas funcionalidades, priorizadas, ficam em [`docs/ROADMAP.md`](ROADMAP.md); este apêndice guarda as fases já planejadas no PRD.
 
 ### Fase 2 — 2ª fase
 - Questões dissertativas da 2ª fase por dia de prova
@@ -621,4 +634,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte). v6.1 (2026-10-05, CR-012): dependências — o simulado oficial da FUVEST 2026 no acervo de 2026. v7.0 (2026-10-06, CR-013): área de gestão — visão geral, métricas, persona do curador, módulo Gestão (RF-030 a RF-034), RF-007, RNF-004, RNF-005, US-022 a US-024, RN-020 a RN-022, fora de escopo, glossário e roadmap.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte). v6.1 (2026-10-05, CR-012): dependências — o simulado oficial da FUVEST 2026 no acervo de 2026. v7.0 (2026-10-06, CR-013): área de gestão — visão geral, métricas, persona do curador, módulo Gestão (RF-030 a RF-034), RF-007, RNF-004, RNF-005, US-022 a US-024, RN-020 a RN-022, fora de escopo, glossário e roadmap. v7.1 (2026-10-07, CR-015): inéditas primeiro no sorteio — RF-009, RF-010, RF-012, US-025, RN-023, glossário e o apêndice aponta para `docs/ROADMAP.md`.*
