@@ -1,4 +1,5 @@
-"""BT-010 / BT-011 / BT-090 / BT-091 e regras RN-002 a RN-005, RN-009 do servico de geracao."""
+"""BT-010 / BT-011 / BT-090 / BT-091 / BT-112 a BT-115 e regras RN-002 a RN-005, RN-009 e
+RN-023 do servico de geracao."""
 
 import random
 from collections import Counter
@@ -11,6 +12,8 @@ from app.services.geracao import (
     ProvaNaoEncontrada,
     QuestoesInsuficientes,
     gerar_simulado,
+    idade_das_vistas,
+    priorizar_ineditas,
     sortear_completa,
 )
 
@@ -191,6 +194,97 @@ def test_completa_mistura_vestibulares_e_simulado(sessao, base_com_simulado):
         codigos |= {q.prova_codigo for q in sim.questoes}
 
     assert codigos == {"2098", "2099", "2099s1"}
+
+
+# --- Ineditas primeiro (CR-015, RN-023) ---
+
+
+def test_completa_comeca_pelas_ineditas(sessao, base_sintetica):
+    """BT-112: com ineditas bastantes numa disciplina, nenhuma vista entra nela."""
+    vistas = [q.id for q in gerar_simulado(sessao, GerarCompleta(modo="completa", semente=1)).questoes]
+
+    sim = gerar_simulado(sessao, GerarCompleta(modo="completa", vistas=vistas, semente=2))
+
+    alvo = distribuicao_completa(contagens_por_prova(sessao))
+    assert Counter(q.disciplina for q in sim.questoes) == Counter(alvo)
+    validas = [q for q in base_questoes(sessao) if not q.anulada]
+    for disciplina, n in alvo.items():
+        ineditas = sum(1 for q in validas if q.disciplina == disciplina and q.id not in vistas)
+        repetidas = sum(1 for q in sim.questoes if q.disciplina == disciplina and q.id in vistas)
+        assert repetidas == max(0, n - ineditas), disciplina
+
+
+def test_completa_sem_ineditas_bastantes_repete_as_vistas_ha_mais_tempo(sessao, base_sintetica):
+    """BT-113 (D2): todas as ineditas entram, e o resto vem das vistas mais antigas."""
+    antiga = [q.id for q in gerar_simulado(sessao, GerarCompleta(modo="completa", semente=1)).questoes]
+    recente = [q.id for q in gerar_simulado(
+        sessao, GerarCompleta(modo="completa", vistas=antiga, semente=2)).questoes]
+    vistas = recente + antiga  # da vista mais recentemente para a mais antiga
+
+    sim = gerar_simulado(sessao, GerarCompleta(modo="completa", vistas=vistas, semente=3))
+
+    alvo = distribuicao_completa(contagens_por_prova(sessao))
+    assert Counter(q.disciplina for q in sim.questoes) == Counter(alvo)
+    escolhidas = {q.id for q in sim.questoes}
+    validas = [q for q in base_questoes(sessao) if not q.anulada]
+    repetiu = False
+    for disciplina in alvo:
+        ids = {q.id for q in validas if q.disciplina == disciplina}
+        assert ids - set(vistas) <= escolhidas, disciplina
+        posicoes_repetidas = [vistas.index(i) for i in ids & escolhidas & set(vistas)]
+        posicoes_fora = [vistas.index(i) for i in (ids & set(vistas)) - escolhidas]
+        if posicoes_repetidas and posicoes_fora:
+            repetiu = True
+            assert min(posicoes_repetidas) > max(posicoes_fora), disciplina
+    assert repetiu  # a base sintetica nao tem ineditas para uma terceira Prova completa
+
+
+def test_personalizado_comeca_pelas_ineditas(sessao, base_sintetica):
+    """BT-114: as ineditas entram todas, e o resto e das vistas mais antigas."""
+    def pedido(quantidade, vistas=(), semente=1):
+        return GerarPersonalizado(modo="personalizado", disciplinas=["fisica"],
+                                  quantidade=quantidade, vistas=list(vistas), semente=semente)
+
+    disponiveis = gerar_simulado(sessao, pedido(1)).disponiveis
+    vistas = [q.id for q in gerar_simulado(sessao, pedido(disponiveis - 5)).questoes]
+    todas = {q.id for q in gerar_simulado(sessao, pedido(disponiveis)).questoes}
+
+    sim = gerar_simulado(sessao, pedido(8, vistas, semente=9))
+
+    assert {q.id for q in sim.questoes} == (todas - set(vistas)) | set(vistas[-3:])
+
+
+def test_treino_comeca_pelas_ineditas_e_respeita_excluir(sessao, base_sintetica):
+    """BT-114: `excluir` continua tirando as da sessao; as vistas vao para o fim da fila."""
+    todas = [q.id for q in base_questoes(sessao)
+             if not q.anulada and "historia" in (q.disciplina, *q.disciplinas_secundarias)]
+    ineditas, vistas = todas[:3], todas[3:]
+    excluir = ineditas[:1]
+    assert len(vistas) > 18  # o lote de 20 precisa escolher entre as vistas
+
+    sim = gerar_simulado(sessao, GerarTreino(modo="treino", disciplinas=["historia"],
+                                             excluir=excluir, vistas=vistas, semente=4))
+
+    ids = {q.id for q in sim.questoes}
+    assert len(ids) == 20
+    assert set(ineditas[1:]) <= ids and not ids & set(excluir)
+    assert ids - set(ineditas) == set(vistas[-18:])
+
+
+def test_sem_vistas_o_sorteio_e_o_de_antes():
+    """BT-115 (P4): sem vistas, a mesma semente sorteia as mesmas questoes que antes do CR."""
+    candidatas = [f"q{i:02d}" for i in range(50)]
+
+    assert priorizar_ineditas(candidatas, 10, random.Random(7)) == random.Random(7).sample(candidatas, 10)
+
+
+def test_idade_e_a_primeira_posicao_em_vistas():
+    """Ids repetidos valem pela primeira ocorrencia (a vista mais recente)."""
+    from types import SimpleNamespace
+
+    idade = idade_das_vistas(["2099-002", "2099-001", "2099-002"])
+
+    assert [idade(SimpleNamespace(id=i)) for i in ("2099-002", "2099-001", "2099-003")] == [0, 1, None]
 
 
 DISCIPLINAS = ["biologia", "fisica", "geografia", "historia", "ingles", "matematica", "portugues", "quimica"]
