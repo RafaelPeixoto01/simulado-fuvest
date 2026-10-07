@@ -23,7 +23,10 @@ describe('questoesVistas (FT-027, CR-015)', () => {
   })
 
   it('deixa de fora id fora do formato, que faria o servidor recusar o pedido', () => {
-    expect(questoesVistas([feito('a', 1, ['2099-001', 'lixo', '2099-1'])])).toEqual(['2099-001'])
+    // Um array com um id válido passaria no regex (String(['2099-002']) === '2099-002')
+    const adulterados = ['2099-001', 'lixo', '2099-1', ['2099-002'], 7] as unknown as string[]
+
+    expect(questoesVistas([feito('a', 1, adulterados)])).toEqual(['2099-001'])
   })
 
   it('para no limite do servidor', () => {

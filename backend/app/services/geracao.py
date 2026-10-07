@@ -57,12 +57,18 @@ def priorizar_ineditas(candidatas: Sequence[T], k: int, rng: random.Random,
     """RN-023 (CR-015): sorteia k entre as questoes que o estudante ainda nao fez (idade None)
     e, se elas nao bastarem, completa com as vistas ha mais tempo (maior idade). Sem vistas,
     e o mesmo `rng.sample` de antes do CR: a mesma semente gera o mesmo simulado."""
-    ineditas = [c for c in candidatas if idade(c) is None]
+    ineditas: list[T] = []
+    vistas: list[tuple[int, T]] = []
+    for c in candidatas:
+        idade_c = idade(c)
+        if idade_c is None:
+            ineditas.append(c)
+        else:
+            vistas.append((idade_c, c))
     if len(ineditas) >= k:
         return rng.sample(ineditas, k)
-    vistas = sorted((c for c in candidatas if idade(c) is not None),
-                    key=lambda c: idade(c) or 0, reverse=True)
-    return ineditas + vistas[: k - len(ineditas)]
+    vistas.sort(key=lambda par: par[0], reverse=True)  # a vista ha mais tempo primeiro
+    return ineditas + [c for _, c in vistas[: k - len(ineditas)]]
 
 
 def idade_das_vistas(vistas: Sequence[str]) -> Callable[[Questao], int | None]:
@@ -167,11 +173,11 @@ def _ano(sessao: Session, pedido: GerarAno, semente: int) -> SimuladoGerado:
 
 def _treino(sessao: Session, pedido: GerarTreino, rng: random.Random,
             semente: int) -> SimuladoGerado:
-    vistas = set(pedido.excluir)
+    mostradas = set(pedido.excluir)
     candidatas = [
         q for q in _da_disciplina(_validas(sessao, pedido.ano_inicio, pedido.ano_fim),
                                   pedido.disciplinas)
-        if q.id not in vistas
+        if q.id not in mostradas
     ]
     # `excluir` tira as ja mostradas nesta sessao; `vistas`, as feitas em simulados, so vao
     # para o fim da fila (CR-015)
