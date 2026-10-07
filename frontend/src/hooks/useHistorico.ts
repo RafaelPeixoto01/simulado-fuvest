@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, type QueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { ApiError, api } from '../services/api'
@@ -39,6 +39,25 @@ export function useHistorico() {
     sincronizando: sessao.isPending || consulta.isFetching,
     erroSincronizacao: consulta.isError,
   }
+}
+
+/** O histórico para o sorteio das inéditas (CR-015). Com conta, espera a sincronização em andamento
+ *  (ou faz uma, se nunca houve): num aparelho novo, o navegador ainda não tem o que foi feito em
+ *  outro. Depois vale o navegador, que tem o espelho da conta e as pendentes. Se a sincronização
+ *  falhar, vale o que já está nele: a prioridade nunca impede gerar o simulado. */
+export async function historicoParaSorteio(queryClient: QueryClient, usuarioId: number | undefined) {
+  if (usuarioId !== undefined) {
+    try {
+      await queryClient.ensureQueryData({
+        queryKey: chave(usuarioId),
+        queryFn: () => sincronizarHistorico(usuarioId),
+        retry: false,
+      })
+    } catch {
+      // sem a conta agora: segue com o navegador
+    }
+  }
+  return listarHistorico()
 }
 
 /** "Limpar histórico": com conta, apaga na conta (todos os dispositivos — RN-016). */

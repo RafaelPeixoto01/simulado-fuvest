@@ -115,6 +115,23 @@ def test_validacoes_422(client, base_sintetica):
         assert client.post("/api/simulados", json=corpo).status_code == 422, corpo
 
 
+def test_vistas_validadas_no_pedido(client, base_sintetica):
+    """BT-116 (CR-015): ate 4.500 ids no formato; repetidos e fora da base sao aceitos."""
+    demais = [f"{2000 + i // 1000}-{i % 1000:03d}" for i in range(4501)]
+    for corpo in (
+        {"modo": "completa", "vistas": demais},
+        {"modo": "personalizado", "disciplinas": ["fisica"], "quantidade": 5, "vistas": ["2098-1"]},
+        {"modo": "treino", "vistas": ["nao-e-id"]},
+    ):
+        assert _gerar(client, **corpo).status_code == 422, corpo["modo"]
+
+    assert _gerar(client, modo="completa", vistas=demais[:4500]).status_code == 200
+    resposta = _gerar(client, modo="treino", vistas=["2098-001", "2098-001", "1999-001"])
+    assert resposta.status_code == 200 and len(resposta.json()["questoes"]) == 20
+    # A Prova de um ano nao tem `vistas`: o campo e ignorado, como qualquer campo extra
+    assert len(_gerar(client, modo="ano", prova="2098", vistas=["2098-001"]).json()["questoes"]) == 90
+
+
 def test_contador_de_geracao_por_modo(client, sessao, base_sintetica):
     """BT-016: treino so conta no inicio da sessao (excluir vazio)."""
     _gerar(client, modo="completa")

@@ -15,6 +15,11 @@ IdQuestao = Annotated[str, Field(pattern=PADRAO_ID_QUESTAO)]
 CodigoProva = Annotated[str, Field(pattern=PADRAO_CODIGO_PROVA)]
 Ano = Annotated[int, Field(ge=1977, le=2100)]
 
+# Questoes que o estudante ja fez, da vista mais recentemente para a mais antiga (CR-015):
+# o historico guarda 50 simulados de ate 90 questoes (RN-016)
+LIMITE_VISTAS = 50 * 90
+Vistas = Annotated[list[IdQuestao], Field(max_length=LIMITE_VISTAS)]
+
 
 def _sem_duplicatas(valores: list) -> list:
     if len(set(valores)) != len(valores):
@@ -35,6 +40,7 @@ class _Intervalo(BaseModel):
 
 class GerarCompleta(BaseModel):
     modo: Literal["completa"]
+    vistas: Vistas = []
     semente: int | None = None
 
 
@@ -45,6 +51,7 @@ class GerarPersonalizado(_Intervalo):
     ]
     quantidade: Annotated[int, Field(ge=1, le=90)]
     cronometro: bool = True
+    vistas: Vistas = []
     semente: int | None = None
 
 
@@ -69,6 +76,7 @@ class GerarTreino(_Intervalo):
     modo: Literal["treino"]
     disciplinas: Annotated[list[Disciplina], AfterValidator(_sem_duplicatas)] = []
     excluir: Annotated[list[IdQuestao], Field(max_length=1000)] = []
+    vistas: Vistas = []
     semente: int | None = None
 
 

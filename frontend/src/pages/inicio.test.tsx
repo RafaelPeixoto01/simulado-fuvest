@@ -4,8 +4,9 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { vi } from 'vitest'
 
 import App from '../App'
+import { CHAVE_HISTORICO } from '../storage/historicoStorage'
 import { CHAVE_SIMULADO } from '../storage/simuladoStorage'
-import { CATALOGO, instalarApiFalsa, json, provaFalsa, simuladoFalso } from '../test/apiFalsa'
+import { CATALOGO, entradaFalsa, instalarApiFalsa, json, provaFalsa, simuladoFalso } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 
 const EM_ANDAMENTO = {
@@ -38,6 +39,9 @@ describe('Início (RF-008)', () => {
     expect(screen.getByRole('link', { name: 'Montar simulado' })).toHaveAttribute('href', '/novo/personalizado')
     expect(screen.getByRole('link', { name: 'Treinar' })).toHaveAttribute('href', '/treino')
     expect(screen.getByText(/178 questões de 2 provas/)).toBeInTheDocument()
+    // UT-078 (CR-015): Prova completa, Personalizado e Treino; a Prova de um ano é a prova inteira
+    expect(screen.getAllByText(/As questões que você ainda não fez vêm primeiro\.$/)).toHaveLength(3)
+    expect(screen.getByText(/^Refaça a prova original/).textContent).not.toMatch(/ainda não fez/)
     // P2.6 (CR-003): o link diz que abre o PDF oficial em outra aba
     const pdf = screen.getByRole('link', { name: 'FUVEST 2025 · PDF oficial (abre em nova aba)' })
     expect(pdf).toHaveAttribute('href', 'https://www.fuvest.br/p2025.pdf')
@@ -112,8 +116,29 @@ describe('Início (RF-008)', () => {
 
     await waitFor(() => expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).questaoIds).toEqual(['2025-010', '2024-003']))
     const pedido = api.mock.calls.find(([, init]) => init?.method === 'POST')!
-    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'completa' })
+    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'completa', vistas: [] })
     expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).descricao).toBe('Prova completa')
+  })
+
+  it('a prova completa leva as questões do histórico, as inéditas vêm primeiro (UT-078, CR-015)', async () => {
+    localStorage.setItem(
+      CHAVE_HISTORICO,
+      JSON.stringify([
+        { ...entradaFalsa('recente', 2000), questaoIds: ['2025-010', '2025-011'] },
+        { ...entradaFalsa('antigo', 1000), questaoIds: ['2024-003', '2025-010'] },
+      ]),
+    )
+    const api = instalarApiFalsa({
+      'GET /api/catalogo': () => json(200, CATALOGO),
+      'POST /api/simulados': () => json(200, simuladoFalso(['2025-001'])),
+    })
+
+    renderizar(<App />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Começar prova completa' }))
+
+    await waitFor(() => expect(localStorage.getItem(CHAVE_SIMULADO)).not.toBeNull())
+    const pedido = api.mock.calls.find(([, init]) => init?.method === 'POST')!
+    expect(JSON.parse(String(pedido[1]!.body))).toEqual({ modo: 'completa', vistas: ['2025-010', '2025-011', '2024-003'] })
   })
 
   it('com simulado em andamento oferece retomar e pede confirmação para descartar (RN-011)', async () => {
@@ -284,7 +309,7 @@ describe('Personalizado (FT-003)', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Gerar com 12 questões' }))
 
     await waitFor(() => expect(localStorage.getItem(CHAVE_SIMULADO)).not.toBeNull())
-    expect(pedidos[0]).toMatchObject({ modo: 'personalizado', disciplinas: ['fisica'], quantidade: 20, cronometro: true })
+    expect(pedidos[0]).toMatchObject({ modo: 'personalizado', disciplinas: ['fisica'], quantidade: 20, cronometro: true, vistas: [] })
     expect(pedidos[1]).toMatchObject({ quantidade: 12 })
     expect(JSON.parse(localStorage.getItem(CHAVE_SIMULADO)!).descricao).toBe('Personalizado: Física, 12 questões')
   })

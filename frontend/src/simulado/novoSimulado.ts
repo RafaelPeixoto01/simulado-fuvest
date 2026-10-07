@@ -1,8 +1,29 @@
+import { LIMITE_HISTORICO } from '../storage/historicoStorage'
 import { NOMES_DISCIPLINAS, type Disciplina, type Simulado } from '../types'
-import type { SimuladoEmAndamento } from './tipos'
+import type { HistoricoEntry, SimuladoEmAndamento } from './tipos'
 
 export function chaveQuestoes(ids: string[]): [string, string] {
   return ['questoes', ids.join(',')]
+}
+
+// Espelham o servidor (`LIMITE_VISTAS` e `PADRAO_ID_QUESTAO` em backend/app/schemas.py): 50
+// simulados de até 90 questões (RN-016) e o id `CODIGO-NNN` (ADR-006, ADR-015)
+export const LIMITE_VISTAS = LIMITE_HISTORICO * 90
+const ID_QUESTAO = /^\d{4}(s[1-9])?-\d{3}$/
+
+/** Questões dos simulados do histórico, da vista mais recentemente para a mais antiga, sem repetição
+ *  (CR-015, RN-023): vão no pedido de geração para o sorteio começar pelas inéditas. Um id fora do
+ *  formato (histórico local adulterado) faria o servidor recusar o pedido inteiro, então fica de fora.
+ *  A ordem vem de `finalizadoEm`, e não da posição na lista, que é de quem chama. */
+export function questoesVistas(historico: HistoricoEntry[]): string[] {
+  const vistas = new Set<string>()
+  const recentesPrimeiro = [...historico].sort((a, b) => b.finalizadoEm - a.finalizadoEm)
+  for (const entrada of recentesPrimeiro) {
+    for (const id of entrada.questaoIds) {
+      if (typeof id === 'string' && ID_QUESTAO.test(id)) vistas.add(id)
+    }
+  }
+  return [...vistas].slice(0, LIMITE_VISTAS)
 }
 
 export function montarSimuladoEmAndamento(

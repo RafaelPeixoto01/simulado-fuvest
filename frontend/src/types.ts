@@ -80,8 +80,10 @@ export interface Vitrine {
   anos: number[] // dos vestibulares, em ordem crescente; o número de provas é anos.length (CR-011)
 }
 
+// `vistas` (CR-015, RN-023): questões do histórico, da vista mais recentemente para a mais antiga;
+// o sorteio começa pelas que não estão nela
 export type PedidoSimulado =
-  | { modo: 'completa'; semente?: number }
+  | { modo: 'completa'; vistas?: string[]; semente?: number }
   | {
       modo: 'personalizado'
       disciplinas: Disciplina[]
@@ -89,6 +91,7 @@ export type PedidoSimulado =
       ano_inicio?: number
       ano_fim?: number
       cronometro: boolean
+      vistas?: string[]
       semente?: number
     }
   | { modo: 'ano'; prova: string } // código da prova (CR-011)
@@ -98,6 +101,7 @@ export type PedidoSimulado =
       ano_inicio?: number
       ano_fim?: number
       excluir?: string[]
+      vistas?: string[]
       semente?: number
     }
 

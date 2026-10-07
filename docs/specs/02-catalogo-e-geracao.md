@@ -1,16 +1,16 @@
 # Especificação Técnica — Catálogo e Geração de Simulados
 
-**Versão:** 1.3
-**Data:** 2026-10-03
-**PRD Ref:** 01-PRD v4.0 (RF-008 a RF-012, US-001 a US-004, RN-002 a RN-005, RN-009, RN-013, RN-014)
-**Arquitetura Ref:** 02-ARCHITECTURE v1.4 (ADR-004, ADR-006, ADR-009)
-**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`), CR-006 (os três endpoints exigem sessão), CR-011 (formato de 80 questões, simulados oficiais e código da prova)
+**Versão:** 1.4
+**Data:** 2026-10-07
+**PRD Ref:** 01-PRD v7.1 (RF-008 a RF-012, US-001 a US-004, US-025, RN-002 a RN-005, RN-009, RN-013, RN-014, RN-023)
+**Arquitetura Ref:** 02-ARCHITECTURE v1.15 (ADR-004, ADR-006, ADR-009)
+**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`), CR-006 (os três endpoints exigem sessão), CR-011 (formato de 80 questões, simulados oficiais e código da prova), CR-015 (inéditas primeiro: `vistas` no pedido)
 
 ---
 
 ## 1. Resumo das Mudanças
 
-Endpoints públicos que expõem o catálogo da base e geram simulados nos quatro modos, além da consulta de questões por ID (usada para retomar um simulado). A geração não guarda estado: devolve as questões **sem gabarito** e só incrementa o contador anônimo.
+Endpoints públicos que expõem o catálogo da base e geram simulados nos quatro modos, além da consulta de questões por ID (usada para retomar um simulado). A geração não guarda estado: devolve as questões **sem gabarito** e só incrementa o contador anônimo. Desde o CR-015, o pedido traz as questões que o estudante já fez (`vistas`), e o sorteio começa pelas outras (RN-023).
 
 ### Escopo desta Iteração
 - `GET /api/catalogo`
@@ -94,8 +94,14 @@ class CatalogoResponse(BaseModel):
     completa_disponivel: bool              # total_questoes >= 80
 
 # Request — união discriminada por "modo"
+# `vistas` (CR-015, RN-023): ids das questões que o estudante já fez, da vista mais recentemente
+# para a mais antiga; até LIMITE_VISTAS = 4500 (50 simulados × 90, RN-016). Ids repetidos valem
+# pela 1ª ocorrência; ids fora da base são ignorados. O servidor não grava nem registra a lista
+Vistas = Annotated[list[IdQuestao], Field(max_length=LIMITE_VISTAS)]
+
 class GerarCompleta(BaseModel):
     modo: Literal["completa"]
+    vistas: Vistas = []                    # CR-015
     semente: int | None = None
 
 class GerarPersonalizado(BaseModel):
@@ -105,6 +111,7 @@ class GerarPersonalizado(BaseModel):
     ano_fim: int | None = None
     quantidade: int                        # 1..90 (não muda com o CR-011)
     cronometro: bool = True
+    vistas: Vistas = []                    # CR-015
     semente: int | None = None
 
 class GerarAno(BaseModel):
@@ -117,7 +124,8 @@ class GerarTreino(BaseModel):
     disciplinas: list[Disciplina] = []     # vazio = todas
     ano_inicio: int | None = None
     ano_fim: int | None = None
-    excluir: list[str] = []                # ids já vistos na sessão (max 1000)
+    excluir: list[str] = []                # ids já mostrados na sessão (max 1000): saem do sorteio
+    vistas: Vistas = []                    # CR-015: feitas em simulados; só vão para o fim da fila
     semente: int | None = None
 
 class SimuladoResponse(BaseModel):
@@ -144,6 +152,12 @@ class QuestoesResponse(BaseModel):
 
 **Sorteio (`services/geracao.py`)** — `rng = random.Random(semente)`; semente ausente → `secrets.randbelow(2**31)`. Toda consulta ao banco é ordenada por `id` antes do sorteio (determinismo).
 
+**Inéditas primeiro (RN-023, CR-015)** — todo "sortear k" abaixo é `priorizar_ineditas(candidatas, k, rng, idade)`:
+1. `idade(q)` = posição da 1ª ocorrência de `q.id` em `vistas` (0 = vista mais recentemente); `None` = inédita (`idade_das_vistas`).
+2. Se as inéditas bastam (`≥ k`): `rng.sample(ineditas, k)`.
+3. Senão: todas as inéditas e, para completar, as vistas em ordem de idade **decrescente** (a vista há mais tempo primeiro; D2 do CR-015).
+4. Sem `vistas`, o passo 2 é o `rng.sample(candidatas, k)` de antes do CR: a mesma semente gera o mesmo simulado (P4). A prioridade nunca muda `disponiveis`, o 409 nem o alvo por disciplina (P3).
+
 - **completa:**
   1. Se `total não anuladas < 80` → 409 `questoes_insuficientes`.
   2. Para cada disciplina, sortear `min(alvo[d], disponíveis[d])` questões não anuladas.
@@ -154,8 +168,10 @@ class QuestoesResponse(BaseModel):
   2. Filtro: não anulada; `disciplina ∈ disciplinas` **ou** alguma secundária ∈ disciplinas; ano de referência da prova no intervalo (limites inclusivos, ausentes = sem limite; os simulados oficiais de 2027 entram em 2027 — CR-011, P4).
   3. Se `disponiveis < quantidade` → 409 `questoes_insuficientes` com `disponiveis`.
   4. Sortear `quantidade`; ordenar (RN-005). `cronometro=true` → `tempo_limite_s = quantidade × 225` e `pausavel=true`; senão `null`.
-- **ano:** prova publicada com o código pedido (vestibular ou simulado oficial), senão 404. Todas as questões dela (90 de 2020 a 2026, 80 nos simulados e desde 2027 — D2 do CR-011) na ordem de `numero`, **inclusive as anuladas** (RN-002). Tempo 18000 s, `pausavel=false`. Não há sorteio (a semente é ecoada).
-- **treino:** filtro igual ao personalizado (`disciplinas` vazio = todas), excluindo os ids de `excluir`. Devolve até 20 questões na ordem de RN-005; `disponiveis = 0` → lista vazia (não é erro). `tempo_limite_s=null`.
+- **ano:** prova publicada com o código pedido (vestibular ou simulado oficial), senão 404. Todas as questões dela (90 de 2020 a 2026, 80 nos simulados e desde 2027 — D2 do CR-011) na ordem de `numero`, **inclusive as anuladas** (RN-002). Tempo 18000 s, `pausavel=false`. Não há sorteio (a semente é ecoada) nem `vistas` (o campo, se vier, é ignorado como qualquer extra).
+- **treino:** filtro igual ao personalizado (`disciplinas` vazio = todas), excluindo os ids de `excluir`. Devolve até 20 questões, sorteadas com as inéditas primeiro, na ordem de RN-005; `disponiveis = 0` → lista vazia (não é erro). `tempo_limite_s=null`.
+
+Validado na base real (786 questões, 07/10/2026): 9 Provas completas seguidas sem repetir; na 10ª, as repetidas vêm todas da 1ª. Como o alvo por disciplina manda, uma disciplina pode repetir enquanto outra ainda tem inéditas sobrando.
 
 **Ordenação RN-005:** agrupar as questões escolhidas por `texto_base_id` (cada grupo em ordem de `(código da prova, numero)`); cada questão sem texto-base é um grupo unitário; embaralhar os grupos com o `rng` e concatenar.
 
@@ -203,6 +219,7 @@ Erros:
 | quantidade | 1–90 | "Quantidade deve estar entre 1 e 90" |
 | ano_inicio/ano_fim | 1977–2100; início ≤ fim | "Intervalo de anos inválido" |
 | excluir | ≤ 1000 ids no formato | "Lista de exclusão inválida" |
+| vistas (CR-015) | ≤ 4500 ids no formato; repetidos e fora da base aceitos | (422 padrão) |
 | ids (GET) | 1–90, formato `CODIGO-NNN` (`2025-037`, `2027s1-037`) | "Informe de 1 a 90 ids válidos" |
 | prova (modo ano) | `^\d{4}(s[1-9])?$` (CR-011) | (422 padrão) |
 
@@ -236,6 +253,10 @@ Ver o diagrama "Fluxo de um simulado" em `02-ARCHITECTURE.md` §2.
 | 10 | Campo extra no body | Ignorado |
 | 11 | Simulado oficial e vestibular do mesmo ano (CR-011) | Códigos distintos (`2027s1`, `2027`); o filtro de anos do Personalizado/Treino inclui os dois |
 | 12 | Pedido antigo `{"modo": "ano", "ano": 2025}` | Tratado como `prova: "2025"` |
+| 13 | `vistas` cobre todas as questões de uma disciplina (CR-015) | A disciplina repete as vistas há mais tempo; o total por disciplina continua o da RN-003 |
+| 14 | `vistas` com a base inteira | Mesmo sorteio que "sem inéditas": as vistas há mais tempo; nada de 409 por causa da prioridade |
+| 15 | Treino com o mesmo id em `excluir` e `vistas` | `excluir` vence: a questão sai do sorteio |
+| 16 | SPA antigo sem `vistas` / servidor antigo com `vistas` (deploy) | Sorteio de antes / campo ignorado (caso 10) |
 
 ---
 
@@ -266,6 +287,11 @@ Ver o diagrama "Fluxo de um simulado" em `02-ARCHITECTURE.md` §2.
 | BT-090 | Completa com 80 (CR-011) | `geracao` | 80 únicas, sem anuladas, na distribuição; mistura vestibulares e simulado |
 | BT-091 | Modo ano pelo código (CR-011) | `geracao` / POST /api/simulados | Simulado com 80, vestibular com 90; código inválido → 422; inexistente → 404; pedido antigo com `ano` aceito |
 | BT-092 | Ids `CODIGO-NNN` (CR-011) | questões, correção, reportes, treino, histórico | Aceitos; outros formatos → 422 |
+| BT-112 | Completa com `vistas` e inéditas bastantes (CR-015) | `geracao` | Em cada disciplina, repetidas = max(0, alvo − inéditas); distribuição da RN-003 |
+| BT-113 | Completa sem inéditas bastantes (CR-015) | `geracao` | Todas as inéditas entram; as repetidas são as vistas há mais tempo |
+| BT-114 | Personalizado e Treino com `vistas` (CR-015) | `geracao` | Inéditas primeiro, depois as mais antigas; o Treino respeita `excluir` |
+| BT-115 | Sem `vistas` (CR-015, P4) | `priorizar_ineditas` (unit) | Igual a `rng.sample` com a mesma semente; id repetido vale pela 1ª posição |
+| BT-116 | Validação de `vistas` (CR-015) | POST /api/simulados | > 4500 ou fora do formato → 422; repetidos e fora da base → 200; modo ano ignora o campo |
 
 ---
 

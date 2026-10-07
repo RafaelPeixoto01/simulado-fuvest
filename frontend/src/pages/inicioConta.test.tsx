@@ -1,10 +1,11 @@
-import { screen, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../App'
 import type { HistoricoEntry } from '../simulado/tipos'
 import { CHAVE_HISTORICO } from '../storage/historicoStorage'
-import { CATALOGO, entradaFalsa, instalarApiFalsa, json } from '../test/apiFalsa'
+import { CATALOGO, entradaFalsa, instalarApiFalsa, json, simuladoFalso } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 import type { Catalogo, DesempenhoDisciplina, Sessao } from '../types'
 
@@ -205,5 +206,52 @@ describe('"Seu último simulado" (UT-050, CR-008)', () => {
 
     await screen.findByRole('button', { name: 'Começar prova completa' })
     expect(screen.queryByRole('region', { name: 'Seu último simulado' })).toBeNull()
+  })
+})
+
+describe('Inéditas primeiro com conta (UT-078, CR-015)', () => {
+  const doOutroAparelho = { ...entradaFalsa('outro-aparelho', 1000), questaoIds: ['2024-001', '2024-002'] }
+
+  function apiDeGeracao(historico: () => Promise<Response>) {
+    const pedidos: unknown[] = []
+    instalarApiFalsa({
+      'GET /api/sessao': () => json(200, COM_LOGIN),
+      'GET /api/catalogo': () => json(200, CATALOGO),
+      'GET /api/historico': historico,
+      'POST /api/simulados': (corpo) => {
+        pedidos.push(corpo)
+        return json(200, simuladoFalso(['2025-001']))
+      },
+    })
+    return pedidos
+  }
+
+  it('espera a sincronização: num aparelho novo, o navegador ainda não tem o histórico da conta', async () => {
+    let liberar!: () => void
+    const sincronizou = new Promise<void>((resolver) => (liberar = resolver))
+    const pedidos = apiDeGeracao(async () => {
+      await sincronizou
+      return json(200, { entradas: [doOutroAparelho], rejeitadas: [] })
+    })
+
+    renderizar(<App />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Começar prova completa' }))
+    await new Promise((r) => setTimeout(r, 50))
+    expect(pedidos).toHaveLength(0)
+
+    liberar()
+    await waitFor(() => expect(pedidos).toHaveLength(1))
+    expect(pedidos[0]).toEqual({ modo: 'completa', vistas: ['2024-001', '2024-002'] })
+  })
+
+  it('se a sincronização falhar, gera com o que está no navegador', async () => {
+    localStorage.setItem(CHAVE_HISTORICO, JSON.stringify([{ ...entradaFalsa('local', 2000), questaoIds: ['2023-005'] }]))
+    const pedidos = apiDeGeracao(async () => json(500, { detail: 'Erro interno' }))
+
+    renderizar(<App />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Começar prova completa' }))
+
+    await waitFor(() => expect(pedidos).toHaveLength(1), { timeout: 5000 })
+    expect(pedidos[0]).toEqual({ modo: 'completa', vistas: ['2023-005'] })
   })
 })

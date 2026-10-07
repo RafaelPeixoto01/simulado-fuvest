@@ -1,13 +1,14 @@
 """Geracao de simulados nos 4 modos (specs/02 §2.3; RN-002 a RN-005, RN-009).
 
-Sem estado: devolve as questoes sorteadas; quem chama serializa (sem gabarito).
+Sem estado: devolve as questoes sorteadas; quem chama serializa (sem gabarito). As questoes
+que o estudante ja fez chegam no pedido (`vistas`) e so vao para o fim da fila (RN-023, CR-015).
 Toda consulta e ordenada por id antes do sorteio, entao a mesma semente com a
 mesma base gera o mesmo simulado.
 """
 
 import random
 import secrets
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import TypeVar
 
@@ -47,20 +48,53 @@ class SimuladoGerado:
     semente: int
 
 
+def _sem_idade(_: object) -> int | None:
+    return None
+
+
+def priorizar_ineditas(candidatas: Sequence[T], k: int, rng: random.Random,
+                       idade: Callable[[T], int | None] = _sem_idade) -> list[T]:
+    """RN-023 (CR-015): sorteia k entre as questoes que o estudante ainda nao fez (idade None)
+    e, se elas nao bastarem, completa com as vistas ha mais tempo (maior idade). Sem vistas,
+    e o mesmo `rng.sample` de antes do CR: a mesma semente gera o mesmo simulado."""
+    ineditas: list[T] = []
+    vistas: list[tuple[int, T]] = []
+    for c in candidatas:
+        idade_c = idade(c)
+        if idade_c is None:
+            ineditas.append(c)
+        else:
+            vistas.append((idade_c, c))
+    if len(ineditas) >= k:
+        return rng.sample(ineditas, k)
+    vistas.sort(key=lambda par: par[0], reverse=True)  # a vista ha mais tempo primeiro
+    return ineditas + [c for _, c in vistas[: k - len(ineditas)]]
+
+
+def idade_das_vistas(vistas: Sequence[str]) -> Callable[[Questao], int | None]:
+    """Posicao da questao em `vistas`, que vem da vista mais recentemente para a mais antiga:
+    0 e a mais recente, e None, a inedita. Vale a primeira ocorrencia de um id repetido."""
+    idades: dict[str, int] = {}
+    for posicao, questao_id in enumerate(vistas):
+        idades.setdefault(questao_id, posicao)
+    return lambda q: idades.get(q.id)
+
+
 def sortear_completa(por_disciplina: dict[str, Sequence[T]], alvo: dict[str, int],
-                     rng: random.Random) -> list[T]:
+                     rng: random.Random,
+                     idade: Callable[[T], int | None] = _sem_idade) -> list[T]:
     """RN-003: sorteia o alvo de cada disciplina; o deficit de uma disciplina sem
-    questoes suficientes e coberto sorteando do restante."""
+    questoes suficientes e coberto sorteando do restante. Nos dois, ineditas primeiro (RN-023)."""
     escolhidas: list[T] = []
     sobras: list[T] = []
     for disciplina in sorted(por_disciplina):
         candidatas = list(por_disciplina[disciplina])
         k = min(alvo.get(disciplina, 0), len(candidatas))
-        sorteadas = rng.sample(candidatas, k)
+        sorteadas = priorizar_ineditas(candidatas, k, rng, idade)
         escolhidas += sorteadas
         sobras += [c for c in candidatas if c not in sorteadas]
     deficit = sum(alvo.values()) - len(escolhidas)
-    return escolhidas + rng.sample(sobras, min(deficit, len(sobras)))
+    return escolhidas + priorizar_ineditas(sobras, min(deficit, len(sobras)), rng, idade)
 
 
 def _ordenar(questoes: list[Questao], rng: random.Random) -> list[Questao]:
@@ -97,7 +131,8 @@ def _da_disciplina(questoes: list[Questao], disciplinas: list[str]) -> list[Ques
     return [q for q in questoes if alvo & {q.disciplina, *q.disciplinas_secundarias}]
 
 
-def _completa(sessao: Session, rng: random.Random, semente: int) -> SimuladoGerado:
+def _completa(sessao: Session, pedido: GerarCompleta, rng: random.Random,
+              semente: int) -> SimuladoGerado:
     validas = _validas(sessao)
     if len(validas) < TOTAL_PROVA_COMPLETA:
         raise QuestoesInsuficientes(len(validas))
@@ -105,7 +140,7 @@ def _completa(sessao: Session, rng: random.Random, semente: int) -> SimuladoGera
     for q in validas:
         por_disciplina.setdefault(q.disciplina, []).append(q)
     alvo = distribuicao_completa(contagens_por_prova(sessao))
-    escolhidas = sortear_completa(por_disciplina, alvo, rng)
+    escolhidas = sortear_completa(por_disciplina, alvo, rng, idade_das_vistas(pedido.vistas))
     return SimuladoGerado("completa", _ordenar(escolhidas, rng), TEMPO_PROVA_S, False,
                           len(validas), semente)
 
@@ -117,7 +152,8 @@ def _personalizado(sessao: Session, pedido: GerarPersonalizado, rng: random.Rand
     )
     if len(candidatas) < pedido.quantidade:
         raise QuestoesInsuficientes(len(candidatas))
-    escolhidas = rng.sample(candidatas, pedido.quantidade)
+    escolhidas = priorizar_ineditas(candidatas, pedido.quantidade, rng,
+                                    idade_das_vistas(pedido.vistas))
     tempo = pedido.quantidade * TEMPO_POR_QUESTAO_S if pedido.cronometro else None
     return SimuladoGerado("personalizado", _ordenar(escolhidas, rng), tempo, True,
                           len(candidatas), semente)
@@ -137,13 +173,16 @@ def _ano(sessao: Session, pedido: GerarAno, semente: int) -> SimuladoGerado:
 
 def _treino(sessao: Session, pedido: GerarTreino, rng: random.Random,
             semente: int) -> SimuladoGerado:
-    vistas = set(pedido.excluir)
+    mostradas = set(pedido.excluir)
     candidatas = [
         q for q in _da_disciplina(_validas(sessao, pedido.ano_inicio, pedido.ano_fim),
                                   pedido.disciplinas)
-        if q.id not in vistas
+        if q.id not in mostradas
     ]
-    lote = rng.sample(candidatas, min(LOTE_TREINO, len(candidatas)))
+    # `excluir` tira as ja mostradas nesta sessao; `vistas`, as feitas em simulados, so vao
+    # para o fim da fila (CR-015)
+    lote = priorizar_ineditas(candidatas, min(LOTE_TREINO, len(candidatas)), rng,
+                              idade_das_vistas(pedido.vistas))
     return SimuladoGerado("treino", _ordenar(lote, rng), None, False, len(candidatas), semente)
 
 
@@ -156,7 +195,7 @@ def gerar_simulado(
     rng = random.Random(semente)
     match pedido:
         case GerarCompleta():
-            return _completa(sessao, rng, semente)
+            return _completa(sessao, pedido, rng, semente)
         case GerarPersonalizado():
             return _personalizado(sessao, pedido, rng, semente)
         case GerarAno():

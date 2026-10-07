@@ -3,10 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../App'
-import { CATALOGO, instalarApiFalsa, json, questaoFalsa } from '../test/apiFalsa'
+import { CHAVE_HISTORICO } from '../storage/historicoStorage'
+import { CATALOGO, entradaFalsa, instalarApiFalsa, json, questaoFalsa } from '../test/apiFalsa'
 import { renderizar } from '../test/renderizar'
 
-type PedidoTreino = { modo: 'treino'; disciplinas?: string[]; excluir?: string[] }
+type PedidoTreino = { modo: 'treino'; disciplinas?: string[]; excluir?: string[]; vistas?: string[] }
 
 function lote(ids: string[]) {
   return json(200, {
@@ -79,6 +80,19 @@ describe('Treino por questão (RF-012)', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Pular questão' }))
     await waitFor(() => expect(pedidos).toHaveLength(2))
     expect(pedidos[1].excluir).toEqual(['2099-001', '2099-002', '2099-003', '2099-004'])
+  })
+
+  it('manda as questões do histórico em todos os lotes (UT-078, CR-015)', async () => {
+    localStorage.setItem(
+      CHAVE_HISTORICO,
+      JSON.stringify([{ ...entradaFalsa('feito', 1000), questaoIds: ['2099-003', '2099-001'] }]),
+    )
+    await comecar()
+    expect(pedidos[0]).toMatchObject({ excluir: [], vistas: ['2099-003', '2099-001'] })
+
+    await userEvent.click(screen.getByRole('button', { name: 'Pular questão' }))
+    await waitFor(() => expect(pedidos).toHaveLength(2))
+    expect(pedidos[1].vistas).toEqual(['2099-003', '2099-001'])
   })
 
   it('quando acabam as questões oferece recomeçar', async () => {
