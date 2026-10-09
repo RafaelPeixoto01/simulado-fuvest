@@ -1,16 +1,16 @@
 # Especificação Técnica — Catálogo e Geração de Simulados
 
-**Versão:** 1.4
-**Data:** 2026-10-07
-**PRD Ref:** 01-PRD v7.1 (RF-008 a RF-012, US-001 a US-004, US-025, RN-002 a RN-005, RN-009, RN-013, RN-014, RN-023)
+**Versão:** 1.5
+**Data:** 2026-10-09
+**PRD Ref:** 01-PRD v7.2 (RF-008 a RF-012, US-001 a US-004, US-025, RN-002 a RN-005, RN-009, RN-013, RN-014, RN-023)
 **Arquitetura Ref:** 02-ARCHITECTURE v1.15 (ADR-004, ADR-006, ADR-009)
-**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`), CR-006 (os três endpoints exigem sessão), CR-011 (formato de 80 questões, simulados oficiais e código da prova), CR-015 (inéditas primeiro: `vistas` no pedido)
+**CR Ref:** CR-004 (assuntos no catálogo; a geração não muda — `specs/06-assuntos-desempenho.md`), CR-006 (os três endpoints exigem sessão), CR-011 (formato de 80 questões, simulados oficiais e código da prova), CR-015 (inéditas primeiro: `vistas` no pedido), CR-016 (o Treino filtra pela disciplina principal)
 
 ---
 
 ## 1. Resumo das Mudanças
 
-Endpoints públicos que expõem o catálogo da base e geram simulados nos quatro modos, além da consulta de questões por ID (usada para retomar um simulado). A geração não guarda estado: devolve as questões **sem gabarito** e só incrementa o contador anônimo. Desde o CR-015, o pedido traz as questões que o estudante já fez (`vistas`), e o sorteio começa pelas outras (RN-023).
+Endpoints públicos que expõem o catálogo da base e geram simulados nos quatro modos, além da consulta de questões por ID (usada para retomar um simulado). A geração não guarda estado: devolve as questões **sem gabarito** e só incrementa o contador anônimo. Desde o CR-015, o pedido traz as questões que o estudante já fez (`vistas`), e o sorteio começa pelas outras (RN-023). Desde o CR-016, o filtro de disciplinas do Treino conta só a disciplina principal; o do Personalizado continua aceitando também as secundárias.
 
 ### Escopo desta Iteração
 - `GET /api/catalogo`
@@ -169,7 +169,7 @@ class QuestoesResponse(BaseModel):
   3. Se `disponiveis < quantidade` → 409 `questoes_insuficientes` com `disponiveis`.
   4. Sortear `quantidade`; ordenar (RN-005). `cronometro=true` → `tempo_limite_s = quantidade × 225` e `pausavel=true`; senão `null`.
 - **ano:** prova publicada com o código pedido (vestibular ou simulado oficial), senão 404. Todas as questões dela (90 de 2020 a 2026, 80 nos simulados e desde 2027 — D2 do CR-011) na ordem de `numero`, **inclusive as anuladas** (RN-002). Tempo 18000 s, `pausavel=false`. Não há sorteio (a semente é ecoada) nem `vistas` (o campo, se vier, é ignorado como qualquer extra).
-- **treino:** filtro igual ao personalizado (`disciplinas` vazio = todas), excluindo os ids de `excluir`. Devolve até 20 questões, sorteadas com as inéditas primeiro, na ordem de RN-005; `disponiveis = 0` → lista vazia (não é erro). `tempo_limite_s=null`.
+- **treino:** filtro de anos igual ao personalizado; o de disciplinas conta **só a principal** (`disciplina ∈ disciplinas`; `disciplinas` vazio = todas): uma interdisciplinar não entra no treino de uma secundária (CR-016). Exclui os ids de `excluir`. Devolve até 20 questões, sorteadas com as inéditas primeiro, na ordem de RN-005; `disponiveis = 0` → lista vazia (não é erro). `tempo_limite_s=null`.
 
 Validado na base real (786 questões, 07/10/2026): 9 Provas completas seguidas sem repetir; na 10ª, as repetidas vêm todas da 1ª. Como o alvo por disciplina manda, uma disciplina pode repetir enquanto outra ainda tem inéditas sobrando.
 
@@ -244,7 +244,7 @@ Ver o diagrama "Fluxo de um simulado" em `02-ARCHITECTURE.md` §2.
 | 1 | Base vazia | Catálogo com listas vazias, `distribuicao_completa={}`, `completa_disponivel=false`; completa → 409 |
 | 2 | Base com 79 questões válidas | `completa_disponivel=false`; completa → 409 com `disponiveis=79` |
 | 3 | Disciplina com menos questões que o alvo da completa | Déficit coberto por outras disciplinas; total sempre 80 |
-| 4 | Questão interdisciplinar (principal Geografia, secundária História) | Aparece no personalizado de História; conta como Geografia no catálogo e na distribuição |
+| 4 | Questão interdisciplinar (principal Geografia, secundária História) | Aparece no personalizado de História, mas não no treino de História, só no de Geografia (CR-016); conta como Geografia no catálogo e na distribuição |
 | 5 | Personalizado pede 30, existem 12 | 409 com `disponiveis=12` |
 | 6 | Treino com todas as questões do filtro já em `excluir` | 200 com lista vazia e `disponiveis=0` |
 | 7 | Mesma semente, mesmos filtros e mesma base | Mesmo simulado (mesma ordem) |
@@ -292,6 +292,7 @@ Ver o diagrama "Fluxo de um simulado" em `02-ARCHITECTURE.md` §2.
 | BT-114 | Personalizado e Treino com `vistas` (CR-015) | `geracao` | Inéditas primeiro, depois as mais antigas; o Treino respeita `excluir` |
 | BT-115 | Sem `vistas` (CR-015, P4) | `priorizar_ineditas` (unit) | Igual a `rng.sample` com a mesma semente; id repetido vale pela 1ª posição |
 | BT-116 | Validação de `vistas` (CR-015) | POST /api/simulados | > 4500 ou fora do formato → 422; repetidos e fora da base → 200; modo ano ignora o campo |
+| BT-117 | Treino pela disciplina principal (CR-016) | `geracao` | Treino de uma disciplina: `disponiveis` = só as de principal dela, e com elas em `excluir` não sobra nenhuma; o personalizado da mesma disciplina continua com as interdisciplinares |
 
 ---
 

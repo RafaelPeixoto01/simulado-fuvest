@@ -95,7 +95,7 @@ No **Treino por questão**, o filtro de disciplinas passa a considerar **só a d
 |---------------------------------|------------|------------------------------|-----------------------|
 | `/docs/01-PRD.md`               | Sim | Cabeçalho, RF-010 e RF-012 (detalhamento), US-004, glossário (disciplina principal), histórico de versões | Filtro do Treino pela principal; v7.2 |
 | `/docs/02-ARCHITECTURE.md`      | Não | — | Nenhuma decisão de arquitetura: a geração continua sem estado (ADR-004) e o modelo não muda |
-| `/docs/03-SPEC.md`              | Sim | Cabeçalho, resumo, linha da spec 02; `specs/02-catalogo-e-geracao.md` (§2.3 treino, casos de borda, testes) | Regra do treino, caso 4 e BT-117 |
+| `/docs/03-SPEC.md`              | Sim | Cabeçalho, resumo, linha da spec 02; `specs/02-catalogo-e-geracao.md` (§2.3 treino, casos de borda, testes) | Regra do treino, caso 4 e BT-117. A spec 03 (telas do Treino) não muda: os filtros da tela e o pedido são os mesmos |
 | `/docs/04-IMPLEMENTATION-PLAN.md` | Sim | Cabeçalho e tabela de CRs | Linha do CR-016 |
 | `/docs/05-DEPLOY-GUIDE.md`      | Não | — | Sem migration, variável ou procedimento novo |
 | `CLAUDE.md`                     | Sim | Change Requests, Última Tarefa | CR-016; CR-011 vai para o INDEX.md (já está lá) |
@@ -133,15 +133,15 @@ No **Treino por questão**, o filtro de disciplinas passa a considerar **só a d
 
 ## 8. Critérios de Aceite
 
-- [ ] O Treino com Biologia não traz questão de outra principal (a Q80 da FUVEST 2023 não entra) e `disponiveis` é 86 na base real
-- [ ] O Personalizado com Biologia continua trazendo as interdisciplinares (`disponiveis` 110 na base real)
-- [ ] O Treino sem disciplina marcada continua usando todas as questões válidas
-- [ ] Testes existentes continuam passando (regressão)
-- [ ] Novos testes cobrem a mudança (BT-117)
-- [ ] Fluxo afetado exercitado em runtime antes do merge — chamada HTTP real ao `POST /api/simulados` na base real
-- [ ] ~~Revisão de código pré-merge~~ — N/A, complexidade Baixa (CR-040)
-- [ ] Revisão de segurança (checklist OWASP do CLAUDE.md)
-- [ ] Documentos afetados foram atualizados
+- [x] O Treino com Biologia não traz questão de outra principal (a Q80 da FUVEST 2023 não entra) e `disponiveis` é 86 na base real
+- [x] O Personalizado com Biologia continua trazendo as interdisciplinares (`disponiveis` 110 na base real)
+- [x] O Treino sem disciplina marcada continua usando todas as questões válidas (786 na base real)
+- [x] Testes existentes continuam passando (regressão): pytest e ruff, e o hook do commit `ce43c8a` (pytest, ruff, tsc, eslint, vitest) verde
+- [x] Novos testes cobrem a mudança: BT-117 (`test_treino_filtra_so_pela_disciplina_principal`), que falhou antes da correção (33 candidatas em vez de 24) e passa depois; BT-114 monta as candidatas pela principal
+- [x] Fluxo afetado exercitado em runtime antes do merge: backend na porta 8002 sobre uma cópia SQLite da base real (9 provas, 786 questões) e 14 chamadas HTTP ao `POST /api/simulados`. Treino de Biologia percorrido até o fim com `excluir`: 86 questões, todas de Biologia, sem a `2023-080`. Personalizado de Biologia: `disponiveis` 110. Treino sem filtro: 786. Treino de Química: 91 questões, com a `2023-080`. Sem erro no log. A UI não muda (validação com Playwright N/A; o Playwright MCP também estava fora do ar nesta sessão)
+- [x] ~~Revisão de código pré-merge~~ — N/A, complexidade Baixa (CR-040)
+- [x] Revisão de segurança (checklist OWASP do CLAUDE.md), por mudar o comportamento de um endpoint existente: sem segredos; entrada validada pelo mesmo Pydantic (`GerarTreino`, sem campo novo); nenhum token, cookie ou sessão tocado; a geração não lê dados de usuário (sem ownership); a consulta continua pelo ORM, e o filtro novo roda em Python sobre o resultado; CORS e headers inalterados; nenhuma dependência nova
+- [x] Documentos afetados foram atualizados: PRD v7.2 (RF-010, RF-012, US-004, glossário), spec 02 v1.5 (§1, §2.3, caso 4, BT-117), índice 03-SPEC v1.15, plano, INDEX.md e CLAUDE.md
 - [ ] CI verde na branch e em `master`
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
@@ -195,3 +195,4 @@ No **Treino por questão**, o filtro de disciplinas passa a considerar **só a d
 | Data       | Autor  | Descrição                    |
 |------------|--------|------------------------------|
 | 2026-10-09 | Rafael Peixoto (com Claude) | CR criado a partir do reporte de um estudante (Treino de Biologia com a Q80 da FUVEST 2023); D1 = solução B |
+| 2026-10-09 | Rafael Peixoto (com Claude) | Implementação (CR-T-01), validação por HTTP na base real (CR-T-02) e documentos (CR-T-03). Falta o CI verde |

@@ -4,6 +4,7 @@ Histórico completo dos CRs do projeto. O `CLAUDE.md` mantém apenas os 5 mais r
 
 | CR | Titulo | Status | Data |
 |----|--------|--------|------|
+| [CR-016](CR-016-treino-disciplina-principal.md) | Treino filtra pela disciplina principal | Em Implementação | 2026-10-09 |
 | [CR-015](CR-015-questoes-ineditas.md) | Questões inéditas primeiro no sorteio (roadmap item 1) | Concluído | 2026-10-07 |
 | [CR-014](CR-014-backup-e-dependencia.md) | Backup do banco sem URL pública e correção do `source-map-js` | Concluído | 2026-10-06 |
 | [CR-013](CR-013-area-gestao.md) | Área de gestão (indicadores do site para o administrador) | Concluído | 2026-10-06 |
