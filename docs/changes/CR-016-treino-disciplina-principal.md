@@ -2,7 +2,7 @@
 
 **Versão:** 1.0  
 **Data:** 2026-10-09  
-**Status:** Em Implementação  
+**Status:** Concluído  
 **Autor:** Rafael Peixoto (com Claude)  
 **Prioridade:** Média
 
@@ -142,7 +142,7 @@ No **Treino por questão**, o filtro de disciplinas passa a considerar **só a d
 - [x] ~~Revisão de código pré-merge~~ — N/A, complexidade Baixa (CR-040)
 - [x] Revisão de segurança (checklist OWASP do CLAUDE.md), por mudar o comportamento de um endpoint existente: sem segredos; entrada validada pelo mesmo Pydantic (`GerarTreino`, sem campo novo); nenhum token, cookie ou sessão tocado; a geração não lê dados de usuário (sem ownership); a consulta continua pelo ORM, e o filtro novo roda em Python sobre o resultado; CORS e headers inalterados; nenhuma dependência nova
 - [x] Documentos afetados foram atualizados: PRD v7.2 (RF-010, RF-012, US-004, glossário), spec 02 v1.5 (§1, §2.3, caso 4, BT-117), índice 03-SPEC v1.15, plano, INDEX.md e CLAUDE.md
-- [ ] CI verde na branch e em `master`
+- [x] CI verde na branch e em `master` (os três jobs), deploy `13a01f0` no ar na Railway. Conferido em produção, dentro do container e só leitura (Deploy Guide §8.3): Treino de Biologia com 86 questões, todas de Biologia e sem a `2023-080`; Personalizado de Biologia com 110
 
 > **Regra de conclusão (CR-037):** o Status deste CR só pode ser "Concluído" quando todos os critérios acima estiverem `[x]` ou riscados com justificativa. Critério pendente de evento posterior (ex: CI verde após push) mantém o CR "Em Implementação" até o follow-up.
 
@@ -196,3 +196,4 @@ No **Treino por questão**, o filtro de disciplinas passa a considerar **só a d
 |------------|--------|------------------------------|
 | 2026-10-09 | Rafael Peixoto (com Claude) | CR criado a partir do reporte de um estudante (Treino de Biologia com a Q80 da FUVEST 2023); D1 = solução B |
 | 2026-10-09 | Rafael Peixoto (com Claude) | Implementação (CR-T-01), validação por HTTP na base real (CR-T-02) e documentos (CR-T-03). Falta o CI verde |
+| 2026-10-09 | Rafael Peixoto (com Claude) | CI verde (branch e `master`), no ar na Railway e conferido em produção — status: ✅ |

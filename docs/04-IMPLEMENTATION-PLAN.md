@@ -34,7 +34,7 @@
 | CR-013 | Área de gestão: indicadores do site para o administrador ([CR](changes/CR-013-area-gestao.md); ADR-016; spec 09 e notas nas specs 03, 05 e 07) | CR-T-01 a CR-T-06 | Concluído |
 | CR-014 | Backup do banco sem URL pública (script pelo `railway ssh`, com ensaio de restauração), `source-map-js` 1.2.2 e CI no Postgres 18 ([CR](changes/CR-014-backup-e-dependencia.md); Deploy Guide §6) | CR-T-01 a CR-T-06 | Concluído |
 | CR-015 | Questões inéditas primeiro no sorteio, item 1 do [roadmap de produto](ROADMAP.md) ([CR](changes/CR-015-questoes-ineditas.md); specs 02 e 03) | CR-T-01 a CR-T-05 | Concluído |
-| CR-016 | Treino filtra pela disciplina principal: a interdisciplinar não entra no treino de uma secundária ([CR](changes/CR-016-treino-disciplina-principal.md); spec 02) | CR-T-01 a CR-T-03 | Em andamento |
+| CR-016 | Treino filtra pela disciplina principal: a interdisciplinar não entra no treino de uma secundária ([CR](changes/CR-016-treino-disciplina-principal.md); spec 02) | CR-T-01 a CR-T-03 | Concluído |
 
 > **Status:** Pendente / Em andamento / Concluído
 
