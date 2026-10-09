@@ -1,5 +1,5 @@
-"""BT-010 / BT-011 / BT-090 / BT-091 / BT-112 a BT-115 e regras RN-002 a RN-005, RN-009 e
-RN-023 do servico de geracao."""
+"""BT-010 / BT-011 / BT-090 / BT-091 / BT-112 a BT-115 / BT-117 e regras RN-002 a RN-005,
+RN-009 e RN-023 do servico de geracao."""
 
 import random
 from collections import Counter
@@ -151,6 +151,28 @@ def test_treino_sem_questoes_restantes(sessao, base_sintetica):
     assert sim.questoes == [] and sim.disponiveis == 0
 
 
+def test_treino_filtra_so_pela_disciplina_principal(sessao, base_sintetica):
+    """BT-117 (CR-016): no Treino, a interdisciplinar entra so na disciplina principal; no
+    Personalizado, continua entrando tambem nas secundarias."""
+    interdisciplinar = next(q for q in base_questoes(sessao)
+                            if q.disciplinas_secundarias and not q.anulada)
+    alvo = interdisciplinar.disciplinas_secundarias[0]
+    principais = [q.id for q in base_questoes(sessao) if q.disciplina == alvo and not q.anulada]
+
+    treino = gerar_simulado(sessao, GerarTreino(modo="treino", disciplinas=[alvo], semente=1))
+    assert treino.disponiveis == len(principais)
+    assert all(q.disciplina == alvo for q in treino.questoes)
+    # sem as de principal escolhida, nao sobra nenhuma: a secundaria nao conta
+    resto = gerar_simulado(sessao, GerarTreino(modo="treino", disciplinas=[alvo],
+                                               excluir=principais))
+    assert resto.questoes == [] and resto.disponiveis == 0
+
+    personalizado = gerar_simulado(sessao, GerarPersonalizado(
+        modo="personalizado", disciplinas=[alvo], quantidade=1, semente=1,
+    ))
+    assert personalizado.disponiveis > len(principais)
+
+
 def test_questoes_do_mesmo_texto_base_ficam_em_sequencia(sessao, base_sintetica):
     """BT-011 / RN-005."""
     disponiveis = sum(1 for q in base_questoes(sessao) if q.prova_codigo == "2099" and not q.anulada)
@@ -257,7 +279,7 @@ def test_personalizado_comeca_pelas_ineditas(sessao, base_sintetica):
 def test_treino_comeca_pelas_ineditas_e_respeita_excluir(sessao, base_sintetica):
     """BT-114: `excluir` continua tirando as da sessao; as vistas vao para o fim da fila."""
     todas = [q.id for q in base_questoes(sessao)
-             if not q.anulada and "historia" in (q.disciplina, *q.disciplinas_secundarias)]
+             if not q.anulada and q.disciplina == "historia"]  # Treino: so a principal (CR-016)
     ineditas, vistas = todas[:3], todas[3:]
     excluir = ineditas[:1]
     assert len(vistas) > 18  # o lote de 20 precisa escolher entre as vistas
