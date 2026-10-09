@@ -1,10 +1,10 @@
 # Especificação Técnica — Simulado Fuvest (Índice)
 
-**Versão:** 1.14
-**Data:** 2026-10-07
-**PRD Ref:** 01-PRD v7.1
+**Versão:** 1.15
+**Data:** 2026-10-09
+**PRD Ref:** 01-PRD v7.2
 **Arquitetura Ref:** 02-ARCHITECTURE v1.15
-**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013, CR-015
+**CR Ref:** CR-001, CR-002, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-009, CR-010, CR-011, CR-012, CR-013, CR-015, CR-016
 
 > Este arquivo é o **índice**. O detalhe de cada feature fica em `/docs/specs/`. Para trabalhar numa feature, abra só a spec dela.
 
@@ -12,14 +12,14 @@
 
 ## 1. Resumo
 
-MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca. CR-008: identidade visual "Papel & Caneta" (tokens, Fraunces, marca, motivos) e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque. CR-009: rolagem ao topo a cada mudança de página e extras do início (sobretítulo, etiquetas e miniatura da folha na Prova completa, lateral de 340 px, modos em linhas no celular). CR-010 (Fase 4): notas de corte da 1ª fase por carreira, página `/notas-de-corte` e carreira-alvo na conta, com a comparação no resultado e no início. CR-011: formato de 80 questões da FUVEST 2027 (Prova completa com 80, 225 s por questão no Personalizado) e simulados oficiais da FUVEST como provas próprias, identificadas pelo código (`2027s1`), com a comparação com o corte proporcional à escala da lista. CR-013: área de gestão só para o administrador (`ADMIN_GOOGLE_SUBS`), com uso, aprendizado, qualidade da base e lista de contas, sobre contagens anônimas por dia. CR-015: o pedido de geração leva as questões que o estudante já fez (`vistas`), e a Prova completa, o Personalizado e o Treino começam pelas inéditas, completando com as vistas há mais tempo (RN-023).
+MVP do Simulado Fuvest: ingestão de provas da 1ª fase a partir dos PDFs oficiais, catálogo e geração de simulados em 4 modos, resolução com cronômetro e persistência local, correção com desempenho por disciplina, histórico local e reporte de erros. Fase 3A (CR-004): assunto por questão, desempenho por assunto no resultado e painel "Meu desempenho". Fase 3B (CR-005): login com Google e histórico sincronizado com a conta; obrigatório para usar o site desde o CR-006. CR-007: apresentação com os números da base (vitrine pública) e prévia do simulado, menu do cabeçalho no celular e barra da resolução opaca. CR-008: identidade visual "Papel & Caneta" (tokens, Fraunces, marca, motivos) e, no início com conta, saudação, "Seu último simulado" e Prova completa em destaque. CR-009: rolagem ao topo a cada mudança de página e extras do início (sobretítulo, etiquetas e miniatura da folha na Prova completa, lateral de 340 px, modos em linhas no celular). CR-010 (Fase 4): notas de corte da 1ª fase por carreira, página `/notas-de-corte` e carreira-alvo na conta, com a comparação no resultado e no início. CR-011: formato de 80 questões da FUVEST 2027 (Prova completa com 80, 225 s por questão no Personalizado) e simulados oficiais da FUVEST como provas próprias, identificadas pelo código (`2027s1`), com a comparação com o corte proporcional à escala da lista. CR-013: área de gestão só para o administrador (`ADMIN_GOOGLE_SUBS`), com uso, aprendizado, qualidade da base e lista de contas, sobre contagens anônimas por dia. CR-015: o pedido de geração leva as questões que o estudante já fez (`vistas`), e a Prova completa, o Personalizado e o Treino começam pelas inéditas, completando com as vistas há mais tempo (RN-023). CR-016: o filtro de disciplinas do Treino conta só a disciplina principal (o Personalizado continua com as interdisciplinares).
 
 ### Specs por feature
 
 | # | Spec | RFs | Resumo |
 |---|------|-----|--------|
 | 01 | [Ingestão de Provas](specs/01-ingestao.md) | RF-001–RF-006 | CLI do curador, pacote `prova.yaml` (código da prova, tipo, edição e total — CR-011), validação V01–V10, sincronização repo → banco, famílias de layout 2025, 2026 (CR-012) e 2027 |
-| 02 | [Catálogo e Geração](specs/02-catalogo-e-geracao.md) | RF-008–RF-012 | `GET /api/catalogo`, `POST /api/simulados` (4 modos; Prova completa com 80 e Prova de um ano pelo código — CR-011; inéditas primeiro com `vistas` — CR-015), `GET /api/questoes` |
+| 02 | [Catálogo e Geração](specs/02-catalogo-e-geracao.md) | RF-008–RF-012 | `GET /api/catalogo`, `POST /api/simulados` (4 modos; Prova completa com 80 e Prova de um ano pelo código — CR-011; inéditas primeiro com `vistas` — CR-015; Treino pela disciplina principal — CR-016), `GET /api/questoes` |
 | 03 | [Início, Configuração e Resolução](specs/03-resolucao.md) | RF-008–RF-016 | SPA: identidade visual e tokens (CR-002, CR-008), rotas, cabeçalho (menu do celular — CR-007), início com conta (CR-008, CR-009), rolagem ao trocar de página (CR-009), Home, configuração, resolução (modo foco, barra inferior, folha, pausa — CR-001), cronômetro, Treino, storage |
 | 04 | [Correção, Resultado e Histórico](specs/04-correcao-resultado.md) | RF-017–RF-020 | `POST /api/correcoes`, resultado por disciplina, folha corrigida clicável e revisão uma questão por vez (CR-003), histórico local |
 | 05 | [Reporte de Erro](specs/05-reportes.md) | RF-007, RF-021 | `POST /api/reportes`, modal, CLI de reportes |

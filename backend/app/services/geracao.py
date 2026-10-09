@@ -123,12 +123,16 @@ def _validas(sessao: Session, ano_inicio: int | None = None,
     return list(sessao.scalars(consulta))
 
 
-def _da_disciplina(questoes: list[Questao], disciplinas: list[str]) -> list[Questao]:
-    """Principal ou secundaria (questoes interdisciplinares)."""
+def _da_disciplina(questoes: list[Questao], disciplinas: list[str], *,
+                   secundarias: bool) -> list[Questao]:
+    """Pela principal; com `secundarias`, tambem as interdisciplinares que tocam uma das
+    escolhidas (Personalizado). O Treino conta so a principal (CR-016)."""
     if not disciplinas:
         return questoes
     alvo = set(disciplinas)
-    return [q for q in questoes if alvo & {q.disciplina, *q.disciplinas_secundarias}]
+    if secundarias:
+        return [q for q in questoes if alvo & {q.disciplina, *q.disciplinas_secundarias}]
+    return [q for q in questoes if q.disciplina in alvo]
 
 
 def _completa(sessao: Session, pedido: GerarCompleta, rng: random.Random,
@@ -148,7 +152,7 @@ def _completa(sessao: Session, pedido: GerarCompleta, rng: random.Random,
 def _personalizado(sessao: Session, pedido: GerarPersonalizado, rng: random.Random,
                    semente: int) -> SimuladoGerado:
     candidatas = _da_disciplina(
-        _validas(sessao, pedido.ano_inicio, pedido.ano_fim), pedido.disciplinas
+        _validas(sessao, pedido.ano_inicio, pedido.ano_fim), pedido.disciplinas, secundarias=True
     )
     if len(candidatas) < pedido.quantidade:
         raise QuestoesInsuficientes(len(candidatas))
@@ -176,7 +180,7 @@ def _treino(sessao: Session, pedido: GerarTreino, rng: random.Random,
     mostradas = set(pedido.excluir)
     candidatas = [
         q for q in _da_disciplina(_validas(sessao, pedido.ano_inicio, pedido.ano_fim),
-                                  pedido.disciplinas)
+                                  pedido.disciplinas, secundarias=False)
         if q.id not in mostradas
     ]
     # `excluir` tira as ja mostradas nesta sessao; `vistas`, as feitas em simulados, so vao

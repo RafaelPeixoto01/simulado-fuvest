@@ -1,10 +1,10 @@
 # PRD — Simulado Fuvest
 
-**Versão:** 7.1
-**Data:** 2026-10-07
+**Versão:** 7.2
+**Data:** 2026-10-09
 **Status:** Aprovado
 **Fase:** MVP — Simulados da 1ª fase + Fase 3 — Assuntos e desempenho (3A) e Contas (3B), com login obrigatório (CR-006) + Fase 4 — Notas de corte (CR-010) + formato de 80 questões e simulados oficiais da FUVEST (CR-011) + área de gestão (CR-013) + inéditas primeiro no sorteio (CR-015)
-**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011, CR-012, CR-013, CR-015
+**CR Ref:** CR-001, CR-003, CR-004, CR-005, CR-006, CR-007, CR-008, CR-010, CR-011, CR-012, CR-013, CR-015, CR-016
 
 ---
 
@@ -141,6 +141,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 **RF-010 — Detalhamento:**
 - Campos obrigatórios: pelo menos uma disciplina; quantidade de questões (1 a 90)
 - Campos opcionais: intervalo de anos (padrão: todos); cronômetro ligado/desligado (padrão: ligado, com tempo proporcional — RN-009)
+- Disciplinas: a questão entra quando a principal ou alguma secundária está entre as escolhidas, então as interdisciplinares entram quando tocam uma delas (no Treino é diferente: RF-012, CR-016)
 - Regras específicas: se não houver questões suficientes para os filtros, informa quantas existem e oferece gerar com esse total. Entre as que atendem aos filtros, as que o estudante ainda não fez vêm primeiro (RN-023, CR-015)
 
 **RF-011 — Detalhamento:**
@@ -150,6 +151,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 
 **RF-012 — Detalhamento:**
 - Filtros opcionais: disciplinas e intervalo de anos
+- O filtro de disciplinas conta só a disciplina principal: uma questão interdisciplinar entra apenas no treino da principal dela, nunca no de uma secundária (CR-016)
 - Ao responder, mostra na hora se acertou e qual é a alternativa correta; botão "próxima" sorteia outra questão
 - Placar da sessão (acertos/respondidas), sem histórico permanente
 - Não repete questão na sessão, e as que o estudante ainda não fez em simulados vêm primeiro (RN-023, CR-015)
@@ -368,7 +370,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 - **US-004:** Como estudante, quero treinar questão por questão vendo a resposta na hora, para estudar sem pressão de tempo
   - Critérios de aceite:
     - [ ] Ao escolher uma alternativa, vejo se acertei e qual é a correta
-    - [ ] Posso filtrar por disciplina e anos
+    - [ ] Posso filtrar por disciplina e anos, e o treino de uma disciplina só traz questões que são dela (pela disciplina principal — CR-016)
     - [ ] Vejo o placar da sessão
 
 - **US-005:** Como estudante, quero que meu simulado não se perca se eu fechar a aba, para poder fazer uma prova de 5 h com tranquilidade
@@ -582,7 +584,7 @@ O **Simulado Fuvest** é um site público e gratuito que gera simulados da **1ª
 | Gabarito | Tabela oficial com a alternativa correta de cada questão, por versão |
 | Questão anulada | Questão cancelada pela FUVEST; o ponto é atribuído a todos |
 | Texto-base | Texto ou figura compartilhado por duas ou mais questões ("Texto para as questões 10 e 11") |
-| Disciplina principal | A disciplina oficial em que a questão é contada nas estatísticas e na distribuição (RN-003) |
+| Disciplina principal | A disciplina oficial em que a questão é contada nas estatísticas, na distribuição (RN-003) e no filtro do Treino (RF-012, CR-016) |
 | Família de layout | Conjunto de anos com a mesma diagramação de PDF, tratados pela mesma lógica do parser |
 | Pacote de revisão | Saída do parser por prova (arquivo editável + figuras + relatório) que o curador revisa antes de importar |
 | Curador | Quem roda a ingestão, revisa, classifica e publica as provas |
@@ -634,4 +636,4 @@ Dividida em duas partes independentes; os assuntos vieram primeiro porque não c
 
 ---
 
-*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte). v6.1 (2026-10-05, CR-012): dependências — o simulado oficial da FUVEST 2026 no acervo de 2026. v7.0 (2026-10-06, CR-013): área de gestão — visão geral, métricas, persona do curador, módulo Gestão (RF-030 a RF-034), RF-007, RNF-004, RNF-005, US-022 a US-024, RN-020 a RN-022, fora de escopo, glossário e roadmap. v7.1 (2026-10-07, CR-015): inéditas primeiro no sorteio — RF-009, RF-010, RF-012, US-025, RN-023, glossário e o apêndice aponta para `docs/ROADMAP.md`.*
+*Documento criado em 2026-09-29. v1.1 (2026-09-30, CR-001): detalhamento de RF-014, RF-015 e RF-016 (folha, barra de navegação, pausa, finalizar e modo foco). v1.2 (2026-09-30, CR-003): detalhamento de RF-008, RF-013 e RF-019 (banner do início, figura ampliada, revisão e folha corrigida). v2.0 (2026-09-30, CR-004): Fase 3A — assunto por questão (RF-005, RF-023, RN-007, RN-014), desempenho por assunto no resultado (RF-018) e painel "Meu desempenho" (RF-022, RN-015), US-011 e US-012, métrica de classificação, fora de escopo, glossário e roadmap dividido em 3A/3B. v3.0 (2026-10-01, CR-005): Fase 3B — módulo Conta (RF-024 a RF-026, RN-016), histórico com conta (RF-020, RF-022, RN-012), US-013 e US-014, RNF-004 e RNF-005 com conta, dependência do Google, risco de dados pessoais, fora de escopo, glossário e roadmap. v4.0 (2026-10-01, CR-006): login obrigatório — visão geral, persona, RF-008 (apresentação), RF-024, RN-012, RN-016, RN-017, RNF-004, RNF-005, US-015, dependência, riscos, glossário e roadmap. v4.1 (2026-10-01, CR-007): apresentação com os números da base e a prévia do simulado — RF-008, RN-017 e RNF-004 (vitrine pública), US-016, riscos e glossário. v4.2 (2026-10-01, CR-008): identidade "Papel & Caneta" — RF-008 (saudação, último simulado e Prova completa em destaque), US-017, RNF-003 e glossário. v5.0 (2026-10-02, CR-010): Fase 4, notas de corte — visão geral, persona, módulo Notas de Corte (RF-027 a RF-029), RNF-005 (carreira-alvo), US-018 a US-020, RN-018 e RN-019, fora de escopo, dependências, glossário e roadmap. v6.0 (2026-10-03, CR-011): formato de 80 questões da FUVEST 2027 e simulados oficiais da FUVEST — visão geral, RF-001, RF-002, RF-004, RF-009, RF-011, RF-028, RF-029, US-001, US-003, US-021, RN-001, RN-003, RN-007, RN-009, RN-013, RN-018, dependências, premissas e glossário (1ª fase, simulado oficial, código da prova, versão, nota de corte). v6.1 (2026-10-05, CR-012): dependências — o simulado oficial da FUVEST 2026 no acervo de 2026. v7.0 (2026-10-06, CR-013): área de gestão — visão geral, métricas, persona do curador, módulo Gestão (RF-030 a RF-034), RF-007, RNF-004, RNF-005, US-022 a US-024, RN-020 a RN-022, fora de escopo, glossário e roadmap. v7.1 (2026-10-07, CR-015): inéditas primeiro no sorteio — RF-009, RF-010, RF-012, US-025, RN-023, glossário e o apêndice aponta para `docs/ROADMAP.md`. v7.2 (2026-10-09, CR-016): o Treino filtra pela disciplina principal — RF-010, RF-012, US-004 e glossário.*
