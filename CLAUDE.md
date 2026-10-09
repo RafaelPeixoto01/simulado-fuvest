@@ -362,7 +362,7 @@ Referência rápida de problemas encontrados e suas soluções. Consulte esta se
 
 | Problema | Causa | Solução |
 |----------|-------|---------|
-| `alembic upgrade`, `alembic downgrade` ou `uvicorn` local atingem **produção** | `backend/.env` com `DATABASE_URL` apontando para o PostgreSQL da Railway (aconteceu no Meu Controle) | **Sempre sobrescrever a variável** para trabalho local: `DATABASE_URL="sqlite:///./local.db" python -m alembic upgrade head` e o mesmo prefixo no `uvicorn`. Conferir com `python -c "from app.database import engine; print(engine.url)"` antes de qualquer escrita. A suíte `pytest` deve usar SQLite in-memory via fixtures, ignorando o `.env` |
+| `alembic upgrade`, `alembic downgrade`, `ingestao importar` ou `uvicorn` local atingem **produção** | Aqui não existe `.env` (ADR-008): sem `DATABASE_URL`, tudo usa o SQLite `local.db`. O risco é um `DATABASE_URL` exportado na sessão do terminal (no Meu Controle, a mesma lição veio de um `.env`) | Antes de qualquer escrita, conferir o banco efetivo: `cd backend && .venv/Scripts/python -c "from app.config import Settings; print(Settings.from_env().database_url)"` (deve mostrar `sqlite:///./local.db`, ou o banco temporário escolhido). Para outro banco local, prefixar o comando: `DATABASE_URL="sqlite:///<caminho>.db" .venv/Scripts/python -m alembic upgrade head`, e o mesmo prefixo no `ingestao` e no `uvicorn`. A suíte `pytest` usa SQLite em memória (`database_url="sqlite://"` no `conftest.py`) |
 
 ### Alembic / Migrations
 
